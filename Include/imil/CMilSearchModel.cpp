@@ -156,10 +156,10 @@ bool CMilSearchModel::IsValid() const
 void CMilSearchModel::ResetModel()
 {
 	if (m_milSearchContextId != M_NULL){
-		double numberOfModels = 0;
+		double modelsCount = 0;
 
-		MmodInquire(m_milSearchContextId, M_CONTEXT, M_NUMBER_MODELS, &numberOfModels);
-		for (int modelIndex = 0; modelIndex < numberOfModels; ++modelIndex){
+		MmodInquire(m_milSearchContextId, M_CONTEXT, M_NUMBER_MODELS, &modelsCount);
+		for (int modelIndex = 0; modelIndex < modelsCount; ++modelIndex){
 			MmodDefine(m_milSearchContextId, M_DELETE, modelIndex, M_DEFAULT, M_DEFAULT, M_DEFAULT, M_DEFAULT);
 		}
 	}
