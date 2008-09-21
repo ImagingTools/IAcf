@@ -51,6 +51,6 @@ private:
 } // namespace imil
 
 
-#endif //!imil_CMilSearchParamsGuiComp_h
+#endif // !imil_CMilSearchParamsGuiComp_h
 
 
