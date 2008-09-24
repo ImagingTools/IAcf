@@ -26,9 +26,9 @@ void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 
 	if (operatorImplPtr != NULL && hierarhicalLogPtr != NULL){
 		operatorImplPtr->SetParentPtr(this);
-		ibase::IHierarchicalMessageContainer* logPtr = dynamic_cast<ibase::IHierarchicalMessageContainer*>(operatorImplPtr->GetLogPtr());
+		ibase::IMessageConsumer* logPtr = dynamic_cast<ibase::IMessageConsumer*>(GetLogPtr());
 		if (logPtr != NULL){
-			hierarhicalLogPtr->AddChildContainer(logPtr);
+			operatorImplPtr->SetLogPtr(logPtr);
 		}
 	}
 

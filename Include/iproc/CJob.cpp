@@ -55,6 +55,8 @@ iproc::IOperator* CJob::CreateElement(const std::string& itemKey)
 		basePtr->SetParentPtr(this);
 	}
 
+	AddChild(operatorPtr);
+
 	return operatorPtr;
 }
 
