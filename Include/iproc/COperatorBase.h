@@ -38,8 +38,8 @@ public :
 
 	virtual bool IsAborted() const;
 	virtual void SetProcessingState(int processingState);
-	virtual void AddError(const istd::CString& description);
-	virtual void AddWarning(const istd::CString& description);
+	virtual void AddError(const istd::CString& description) const;
+	virtual void AddWarning(const istd::CString& description) const;
 	virtual void SetLogPtr(ibase::IMessageConsumer* logPtr);
 	virtual ibase::IMessageConsumer* GetLogPtr() const;
 
@@ -55,7 +55,7 @@ public :
 protected:
 	double m_progress;
 
-	ibase::IMessageConsumer* m_logPtr;
+	mutable ibase::IMessageConsumer* m_logPtr;
 
 private:
 	StateInfo m_state;

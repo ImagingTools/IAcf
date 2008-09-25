@@ -39,7 +39,7 @@ void COperatorBase::SetProcessingState(int processingState)
 }
 
 
-void COperatorBase::AddError(const istd::CString& description)
+void COperatorBase::AddError(const istd::CString& description) const
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
@@ -49,7 +49,7 @@ void COperatorBase::AddError(const istd::CString& description)
 }
 
 
-void COperatorBase::AddWarning(const istd::CString& description)
+void COperatorBase::AddWarning(const istd::CString& description) const
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
