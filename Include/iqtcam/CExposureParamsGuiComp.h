@@ -4,7 +4,7 @@
 
 #include "icam/IExposureParams.h"
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtcam/Generated/ui_CExposureParamsGuiComp.h"
 
@@ -13,21 +13,21 @@ namespace iqtcam
 {
 
 
-class CExposureParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CExposureParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CExposureParamsGuiComp,
 			icam::IExposureParams>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CExposureParamsGuiComp,
 				icam::IExposureParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CExposureParamsGuiComp)
 	I_END_COMPONENT
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 

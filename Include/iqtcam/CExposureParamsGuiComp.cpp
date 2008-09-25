@@ -10,7 +10,7 @@ namespace iqtcam
 {
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CExposureParamsGuiComp::OnGuiModelAttached()
 {

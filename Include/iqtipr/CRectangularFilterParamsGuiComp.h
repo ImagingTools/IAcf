@@ -4,7 +4,7 @@
 
 #include "iipr/IMultidimensionalFilterParams.h"
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtipr/Generated/ui_CRectangularFilterParamsGuiComp.h"
 
@@ -13,14 +13,14 @@ namespace iqtipr
 {
 
 
-class CRectangularFilterParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CRectangularFilterParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CRectangularFilterParamsGuiComp,
 			iipr::IMultidimensionalFilterParams>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CRectangularFilterParamsGuiComp,
 				iipr::IMultidimensionalFilterParams> BaseClass;
 

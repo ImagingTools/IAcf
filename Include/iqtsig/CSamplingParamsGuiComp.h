@@ -4,7 +4,7 @@
 
 #include "isig/ISamplingParams.h"
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtsig/iqtsig.h"
 
@@ -15,14 +15,14 @@ namespace iqtsig
 {
 
 
-class CSamplingParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CSamplingParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CSamplingParamsGuiComp,
 			isig::ISamplingParams>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CSamplingParamsGuiComp,
 				isig::ISamplingParams> BaseClass;
 
@@ -33,7 +33,7 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor();
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 
 protected slots:

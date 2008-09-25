@@ -4,7 +4,7 @@
 
 #include "iipr/ICaliperParams.h"
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtipr/Generated/ui_CCaliperParamsGuiComp.h"
 
@@ -13,14 +13,14 @@ namespace iqtipr
 {
 
 
-class CCaliperParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CCaliperParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CCaliperParamsGuiComp,
 			iipr::ICaliperParams>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CCaliperParamsGuiComp,
 				iipr::ICaliperParams> BaseClass;
 

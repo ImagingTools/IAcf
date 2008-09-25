@@ -27,7 +27,7 @@ void CSamplingParamsGuiComp::UpdateEditor()
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSamplingParamsGuiComp::OnGuiModelAttached()
 {

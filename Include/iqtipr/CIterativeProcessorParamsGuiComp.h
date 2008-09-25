@@ -4,7 +4,7 @@
 
 #include "iipr/CIterativeProcessorParams.h"
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtipr/Generated/ui_CIterativeProcessorParamsGuiComp.h"
 
@@ -13,13 +13,13 @@ namespace iqtipr
 {
 
 
-class CIterativeProcessorParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CIterativeProcessorParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CIterativeProcessorParamsGuiComp,
 			iipr::CIterativeProcessorParams>
 {
 	Q_OBJECT
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CIterativeProcessorParamsGuiComp,
 				iipr::CIterativeProcessorParams> BaseClass;
 

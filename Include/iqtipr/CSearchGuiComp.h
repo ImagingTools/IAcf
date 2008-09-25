@@ -17,7 +17,7 @@
 
 #include "iqt2d/TSceneExtenderCompBase.h"
 
-#include "iqt/TDesignerGuiCompBase.h"
+#include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "iqtipr/Generated/ui_CSearchGuiComp.h"
 
@@ -26,11 +26,11 @@ namespace iqtipr
 {
 
 
-class CSearchGuiComp: public iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiCompBase<Ui::CSearchGuiComp, QWidget> >
+class CSearchGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSearchGuiComp, QWidget> >
 {
 	Q_OBJECT
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiCompBase<Ui::CSearchGuiComp, QWidget> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSearchGuiComp, QWidget> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSearchGuiComp)
 		I_ASSIGN(m_searchResultsModelCompPtr, "SearchResults", "Search results model", true, "SearchResults");
@@ -66,7 +66,7 @@ private:
 	I_REF(iipr::IFeaturesConsumer, m_searchResultsCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);

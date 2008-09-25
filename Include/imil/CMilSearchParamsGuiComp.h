@@ -2,7 +2,7 @@
 #define imil_CMilSearchParamsGuiComp_h
 
 
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "imil/CMilSearchParams.h"
 #include "imil/Generated/ui_CMilSearchParamsGuiComp.h"
@@ -16,11 +16,11 @@ namespace imil
 {
 
 
-class CMilSearchParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams>
+class CMilSearchParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams>
 {
     Q_OBJECT
 public:
-	typedef  iqt::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams> BaseClass;
+	typedef  iqtgui::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CMilSearchParamsGuiComp)
 	I_END_COMPONENT

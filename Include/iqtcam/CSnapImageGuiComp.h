@@ -16,8 +16,8 @@
 
 #include "icam/IBitmapAcquisition.h"
 
-#include "iqt/IGuiObject.h"
-#include "iqt/TDesignerGuiCompBase.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "iqt2d/TSceneExtenderCompBase.h"
 
@@ -30,12 +30,12 @@ namespace iqtcam
 {
 
 
-class CSnapImageGuiComp: public iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> >
+class CSnapImageGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> >
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapImageGuiComp)
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap will be shown", true, "Bitmap");
@@ -88,7 +88,7 @@ private:
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 	I_REF(iqt2d::ISceneExtender, m_paramsSetExtenderCompPtr);
 

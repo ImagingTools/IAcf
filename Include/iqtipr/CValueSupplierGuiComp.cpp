@@ -92,7 +92,7 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/,
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CValueSupplierGuiComp::OnGuiModelAttached()
 {

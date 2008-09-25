@@ -174,7 +174,7 @@ void CSnapBitmapSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOn
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSnapBitmapSupplierGuiComp::OnGuiModelAttached()
 {

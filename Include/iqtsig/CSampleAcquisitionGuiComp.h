@@ -17,8 +17,8 @@
 
 #include "isig/CSamplesContainer.h"
 
-#include "iqt/IGuiObject.h"
-#include "iqt/TDesignerGuiCompBase.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "iqtsig/CSampleContainerView.h"
 
@@ -29,12 +29,12 @@ namespace iqtsig
 {
 
 
-class CSampleAcquisitionGuiComp: public iqt::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget>
+class CSampleAcquisitionGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget> BaseClass;
+	typedef iqtgui::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CSampleAcquisitionGuiComp)
 		I_ASSIGN(m_sampleAcquisitionCompPtr, "SampleAcquisition", "Sample acquisiotion object used to fill sample container", true, "SampleAcquisition");
@@ -78,7 +78,7 @@ private:
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 
 	I_ATTR(double, m_minDisplayedValueAttrPtr);

@@ -549,7 +549,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iqt::IGuiObject
+        class iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         SearchGui

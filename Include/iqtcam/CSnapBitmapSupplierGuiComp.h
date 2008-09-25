@@ -10,8 +10,8 @@
 
 #include "icam/CSnapBitmapSupplierComp.h"
 
-#include "iqt/IGuiObject.h"
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtproc/TSupplierGuiCompBase.h"
 
@@ -61,7 +61,7 @@ protected:
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 
 private:

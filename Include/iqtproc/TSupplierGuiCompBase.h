@@ -10,8 +10,8 @@
 
 #include "iproc/IIdManager.h"
 
-#include "iqt/IGuiObject.h"
-#include "iqt/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqt2d/TSceneExtenderCompBase.h"
 
@@ -23,10 +23,10 @@ namespace iqtproc
 
 
 template <class UI, class Model, class WidgetType = QWidget>
-class TSupplierGuiCompBase: public iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiObserverCompBase<UI, Model> >
+class TSupplierGuiCompBase: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, Model> >
 {
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiObserverCompBase<UI, Model> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, Model> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
@@ -78,7 +78,7 @@ protected:
 	*/
 	iproc::IIdManager* GetIdManager() const;
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 
@@ -94,7 +94,7 @@ private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 
-	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 	I_REF(iqt2d::ISceneExtender, m_paramsSetExtenderCompPtr);
 	I_REF(iproc::IIdManager, m_idManagerCompPtr);
@@ -250,7 +250,7 @@ iproc::IIdManager* TSupplierGuiCompBase<UI, Model, WidgetType>::GetIdManager() c
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 template <class UI, class Model, class WidgetType>
 void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
