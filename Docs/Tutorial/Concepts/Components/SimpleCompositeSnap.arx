@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         BitmapAcquisition
@@ -22,10 +22,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              NameFilters
+              BitmapLoader
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              class icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -34,16 +34,29 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-              </Values>
+              <Value>
+                BitmapLoader
+              </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        BitmapLoader
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

@@ -4,7 +4,25 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="10">
+    <Element>
+      <Id>
+        BitmapLoader
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         FileCamera
@@ -22,10 +40,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              NameFilters
+              BitmapLoader
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              class icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -34,17 +52,9 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-              </Values>
+              <Value>
+                BitmapLoader
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

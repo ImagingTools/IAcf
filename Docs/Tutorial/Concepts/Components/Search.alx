@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
+  <PositionMap count="13">
     <Element>
       <ComponentName>
         Bitmap
@@ -18,10 +18,21 @@
     </Element>
     <Element>
       <ComponentName>
+        BitmapLoader
+      </ComponentName>
+      <X>
+        -225
+      </X>
+      <X>
+        -112
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         FileCamera
       </ComponentName>
       <X>
-        25
+        -12
       </X>
       <X>
         -112
@@ -87,7 +98,7 @@
         ParamsGuis
       </ComponentName>
       <X>
-        -150
+        -137
       </X>
       <X>
         112
@@ -109,7 +120,7 @@
         SearchParams
       </ComponentName>
       <X>
-        125
+        137
       </X>
       <X>
         262
@@ -120,7 +131,7 @@
         SearchParamsGui
       </ComponentName>
       <X>
-        -62
+        -50
       </X>
       <X>
         237
@@ -131,7 +142,7 @@
         SearchProcessor
       </ComponentName>
       <X>
-        187
+        250
       </X>
       <X>
         -112

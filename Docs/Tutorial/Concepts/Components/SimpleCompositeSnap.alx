@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        300
+        350
       </X>
       <X>
-        -137
+        -112
       </X>
     </Element>
     <Element>
@@ -230,7 +230,7 @@
         SnapApplication
       </ComponentName>
       <X>
-        -375
+        -362
       </X>
       <X>
         -112
@@ -285,7 +285,7 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -175
+        -162
       </X>
       <X>
         37

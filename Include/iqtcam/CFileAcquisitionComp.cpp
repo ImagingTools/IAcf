@@ -24,85 +24,6 @@ CFileAcquisitionComp::CFileAcquisitionComp()
 }
 
 
-// reimplemented (iser::IFileLoader)
-
-bool CFileAcquisitionComp::IsOperationSupported(
-			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
-			bool forLoading,
-			bool forSaving) const
-{
-	if ((dataObjectPtr != NULL) && (dynamic_cast<const iqt::IQImageProvider*>(dataObjectPtr) == NULL)){
-		return false;
-	}
-
-	if (filePathPtr != NULL){
-		QFileInfo info(iqt::GetQString(*filePathPtr));
-		if (forLoading && !forSaving){
-			if (!info.exists()){
-				return false;
-			}
-
-			QByteArray format = QImageReader::imageFormat(info.filePath());
-
-			return !format.isEmpty();
-		}
-	}
-
-	return true;
-}
-
-
-int CFileAcquisitionComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
-{
-	iqt::IQImageProvider* bitmapPtr = dynamic_cast<iqt::IQImageProvider*>(&data);
-
-	if (bitmapPtr != NULL){
-		istd::CChangeNotifier notifier(&data);
-
-		QImage image;
-		if (image.load(iqt::GetQString(filePath))){
-			const_cast<CFileAcquisitionComp*>(this)->SetLastLoadFileName(filePath);
-
-			bitmapPtr->CopyImageFrom(image);
-
-			return StateOk;
-		}
-	}
-
-	return StateFailed;
-}
-
-
-int CFileAcquisitionComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
-{
-	const iqt::IQImageProvider* bitmapPtr = dynamic_cast<const iqt::IQImageProvider*>(&data);
-
-	if (bitmapPtr != NULL){
-		const QImage& image = bitmapPtr->GetQImage();
-		if (image.save(iqt::GetQString(filePath))){
-			const_cast<CFileAcquisitionComp*>(this)->SetLastSaveFileName(filePath);
-
-			return StateOk;
-		}
-	}
-
-	return StateFailed;
-}
-
-
-const istd::CString& CFileAcquisitionComp::GetLastLoadFileName() const
-{
-	return m_lastLoadFileName;
-}
-
-
-const istd::CString& CFileAcquisitionComp::GetLastSaveFileName() const
-{
-	return m_lastSaveFileName;
-}
-
-
 // reimplemented (iproc::IProcessor)
 
 int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const istd::IPolymorphic* /*inputPtr*/, istd::IChangeable* outputPtr)
@@ -110,6 +31,10 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_parameterIdAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_maxCachedDirectoriesAttrPtr.IsValid());	// obligatory attribute
+
+	if (!m_bitmapLoaderCompPtr.IsValid()){
+		return TS_INVALID;
+	}
 
 	istd::CString filesPath = *m_defaultDirAttrPtr;
 	const iprm::IFileNameParam* loaderParamsPtr = NULL;
@@ -121,14 +46,18 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 	}
 	QDir directory(iqt::GetQString(filesPath));
 
+	istd::CStringList extensions;
+	m_bitmapLoaderCompPtr->GetFileExtensions(extensions);
+
 	ParamsInfo& info = m_dirInfos[filesPath];
 	if (info.filesIter == info.files.end()){
 		QStringList nameFilters;
 
-		if (m_nameFiltersAttrPtr.IsValid()){
-			int filtersCount = m_nameFiltersAttrPtr.GetCount();
-			for (int i = 0; i < filtersCount; ++i){
-				nameFilters << iqt::GetQString(m_nameFiltersAttrPtr[i]);
+		if (!extensions.empty()){
+			for (		istd::CStringList::iterator iter = extensions.begin();
+						iter != extensions.end();
+						++iter){
+				nameFilters << (QString("*.") + iqt::GetQString(*iter));
 			}
 		}
 		else{
@@ -149,8 +78,8 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 		info.filesIter++;
 
 		if (outputPtr != NULL){
-			int loadState = LoadFromFile(*outputPtr, fileName);
-			retVal = (loadState == StateOk)? TS_OK: TS_INVALID;
+			int loadState = m_bitmapLoaderCompPtr->LoadFromFile(*outputPtr, fileName);
+			retVal = (loadState == iser::IFileLoader::StateOk)? TS_OK: TS_INVALID;
 		}
 		else{
 			retVal = TS_OK;

@@ -26,36 +26,20 @@ namespace iqtcam
 	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
 */
 class CFileAcquisitionComp: public icomp::CComponentBase,
-			virtual public iser::IFileLoader,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileAcquisitionComp)
-		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
+		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".")
 		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition")
-		I_ASSIGN_MULTI_3(m_nameFiltersAttrPtr, "NameFilters", "List of image file filter names", false, "*.png", "*.bmp", "*.jpg")
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10)
 	I_END_COMPONENT
 
 	CFileAcquisitionComp();
-
-	virtual void SetLastLoadFileName(const istd::CString& fileName);
-	virtual void SetLastSaveFileName(const istd::CString& fileName);
-
-	// reimplemented (iser::IFileLoader)
-	virtual bool IsOperationSupported(
-				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr = NULL,
-				bool forLoading = true,
-				bool forSaving = true) const;
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const;
-	virtual const istd::CString& GetLastLoadFileName() const;
-	virtual const istd::CString& GetLastSaveFileName() const;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
@@ -82,28 +66,11 @@ private:
 
 	I_DWORD m_lastIdStamp;
 
-	istd::CString m_lastLoadFileName;
-	istd::CString m_lastSaveFileName;
-
+	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_ATTR(istd::CString, m_defaultDirAttrPtr);
 	I_ATTR(istd::CString, m_parameterIdAttrPtr);
-	I_MULTIATTR(istd::CString, m_nameFiltersAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 };
-
-
-// inline methods
-
-inline void CFileAcquisitionComp::SetLastLoadFileName(const istd::CString& fileName)
-{
-	m_lastLoadFileName = fileName;
-}
-
-
-inline void CFileAcquisitionComp::SetLastSaveFileName(const istd::CString& fileName)
-{
-	m_lastSaveFileName = fileName;
-}
 
 
 } // namespace iqtcam
