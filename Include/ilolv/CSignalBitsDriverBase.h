@@ -17,6 +17,8 @@ class CSignalBitsDriverBase: public IDriver
 public:
 	CSignalBitsDriverBase();
 
+	const CSignalBitsMessages::SignalParams& GetSignalParams() const;
+
 	// reimplemented (ilolv::IDriver)
 	virtual bool OnInstruction(
 				I_DWORD instructionCode,
@@ -26,7 +28,7 @@ public:
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPulse();
+	virtual void OnPeriodicPulse();
 
 protected:
 	enum{
@@ -54,6 +56,14 @@ private:
 	__int64 m_lastHeartbeatTime;
 	bool m_doHeartbeatPullDown;
 };
+
+
+// inline methods
+
+inline const CSignalBitsMessages::SignalParams& CSignalBitsDriverBase::GetSignalParams() const
+{
+	return m_params;
+}
 
 
 } // namespace ilolv

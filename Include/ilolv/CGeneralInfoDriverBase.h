@@ -18,6 +18,8 @@ class CGeneralInfoDriverBase: virtual public IDriver
 public:
 	CGeneralInfoDriverBase();
 
+	const CGeneralInfoMessages::GeneralInfoParams& GetGeneralInfoParams() const;
+
 	// reimplemented (ilolv::IDriver)
 	virtual bool OnInstruction(
 				I_DWORD instructionCode,
@@ -27,13 +29,13 @@ public:
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPulse();
+	virtual void OnPeriodicPulse();
 
 protected:
-	struct Message
+	struct InfoMessage
 	{
 		/**
-			Message category \sa MessageCategory.
+			InfoMessage category \sa MessageCategory.
 		*/
 		int category;
 		/**
@@ -41,7 +43,7 @@ protected:
 		*/
 		int id;
 		/**
-			Message flags.
+			InfoMessage flags.
 		*/
 		int flags;
 		/**
@@ -64,14 +66,22 @@ protected:
 
 private:
 	void OnPopMessageInstruction(CGeneralInfoMessages::PopMessage::Result& result);
-	void OnAliveSignal();
+	void OnKeepAlive();
 
-	mutable Message m_message;
+	mutable InfoMessage m_message;
 
 	CGeneralInfoMessages::GeneralInfoParams m_params;
 
 	__int64 m_nextMinKeepAliveTime;
 };
+
+
+// inline methods
+
+inline const CGeneralInfoMessages::GeneralInfoParams& CGeneralInfoDriverBase::GetGeneralInfoParams() const
+{
+	return m_params;
+}
 
 
 } // namespace ilolv

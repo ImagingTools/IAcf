@@ -19,7 +19,7 @@ CTracerDriverBase::CTracerDriverBase()
 	m_params.positionTolerance = 10;
 	m_params.ioBitDuration = 10000;
 	m_params.isEjectionControlEnabled = false;
-	m_params.ejectionControlOffset = 1000;
+	m_params.ejectionControlPosition = 1000;
 
 	for (int unitIndex = 0; unitIndex < MAX_STATIONS; ++unitIndex){
 		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
@@ -39,8 +39,8 @@ CTracerDriverBase::CTracerDriverBase()
 		EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
 		ejector.isEnabled = false;
-		ejector.ejectorOffset = 0;
-		ejector.ejectorOnDistance = 200;
+		ejector.position = 0;
+		ejector.onDistance = 200;
 		ejector.maxEjectorOnTime = 10000;
 
 		ejector.ejectorOnCount = 0;
@@ -101,12 +101,12 @@ void CTracerDriverBase::ResetQueue()
 		ejector.ejectorOnCount = 0;
 		ejector.lastEjectorTime = 0;
 
-		if (ejector.isEnabled && (ejector.ejectorOffset >= 0)){
-			if ((minEjectorOnDistance < 0) || (ejector.ejectorOffset < minEjectorOnDistance)){
-				minEjectorOnDistance = ejector.ejectorOffset;
+		if (ejector.isEnabled && (ejector.position >= 0)){
+			if ((minEjectorOnDistance < 0) || (ejector.position < minEjectorOnDistance)){
+				minEjectorOnDistance = ejector.position;
 			}
 
-			int ejectorOffDistance = ejector.ejectorOffset + ejector.ejectorOnDistance;
+			int ejectorOffDistance = ejector.position + ejector.onDistance;
 			if (ejectorOffDistance > maxPopFifoDistance){
 				maxPopFifoDistance = ejectorOffDistance;
 			}
@@ -116,8 +116,8 @@ void CTracerDriverBase::ResetQueue()
 	}
 
 	if (m_params.isEjectionControlEnabled){
-		if (m_params.ejectionControlOffset > maxPopFifoDistance){
-			maxPopFifoDistance = m_params.ejectionControlOffset;
+		if (m_params.ejectionControlPosition > maxPopFifoDistance){
+			maxPopFifoDistance = m_params.ejectionControlPosition;
 		}
 	}
 
@@ -150,60 +150,12 @@ void CTracerDriverBase::SetLineIndex(int index)
 }
 
 
-int CTracerDriverBase::GetStationsCount() const
-{
-	return m_params.unitsCount;
-}
-
-
-bool CTracerDriverBase::IsEjectionControlEnabled() const
-{
-	return m_params.isEjectionControlEnabled;
-}
-
-
-I_DWORD CTracerDriverBase::GetEjectionControlOffset() const
-{
-	return m_params.ejectionControlOffset;
-}
-
-
 const CInspectionUnitMessages::UnitParams& CTracerDriverBase::GetUnitParams(int unitIndex) const
 {
 	I_ASSERT(unitIndex >= 0);
 	I_ASSERT(unitIndex < m_params.unitsCount);
 
 	return m_inspectionUnits[unitIndex];
-}
-
-
-int CTracerDriverBase::GetEjectorsCount() const
-{
-	return m_params.ejectorsCount;
-}
-
-
-int CTracerDriverBase::GetAutonomeEjectorIndex() const
-{
-	return m_params.autonomeEjectorIndex;
-}
-
-
-I_DWORD CTracerDriverBase::GetMinObjectsDistance() const
-{
-	return m_params.minObjectsDistance;
-}
-
-
-I_DWORD CTracerDriverBase::GetPositionTolerance() const
-{
-	return m_params.positionTolerance;
-}
-
-
-int CTracerDriverBase::GetIoBitDuration() const
-{
-	return m_params.ioBitDuration;
 }
 
 
@@ -311,7 +263,7 @@ void CTracerDriverBase::OnLightBarrierEdge(I_DWORD edgeBits)
 							if (m_params.isEjectionControlEnabled){
 								InsertPositionToQueue(PE_POINT_CONTROL,
 												basePosition +
-												m_params.ejectionControlOffset);
+												m_params.ejectionControlPosition);
 							}
 						}
 
@@ -512,7 +464,7 @@ bool CTracerDriverBase::OnInstruction(
 }
 
 
-void CTracerDriverBase::OnPulse()
+void CTracerDriverBase::OnPeriodicPulse()
 {
 	__int64 actualTime = GetCurrentTimer();
 
@@ -732,13 +684,13 @@ void CTracerDriverBase::OnPositionEjectionDecision()
 
 			const CTracerMessages::EjectorParams& ejector = m_ejectors[ejectorIndex];
 
-			I_DWORD ejectorPosition = element.basePosition + ejector.ejectorOffset;
+			I_DWORD ejectorPosition = element.basePosition + ejector.position;
 			InsertPositionToQueue(
 							m_firstEjectorOnEvent + ejectorIndex,
 							ejectorPosition);
 			InsertPositionToQueue(
 							m_firstEjectorOffEvent + ejectorIndex,
-							ejectorPosition + ejector.ejectorOnDistance);
+							ejectorPosition + ejector.onDistance);
 		}
 	}
 

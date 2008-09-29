@@ -43,7 +43,7 @@ public:
 	/**
 		Called in regular period to provide time controlled events.
 	*/
-	virtual void OnPulse() = 0;
+	virtual void OnPeriodicPulse() = 0;
 
 protected:
 	/**

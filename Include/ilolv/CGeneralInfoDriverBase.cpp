@@ -44,7 +44,7 @@ bool CGeneralInfoDriverBase::OnInstruction(
 		break;
 
 	case CGeneralInfoMessages::KeepAlive::Id:
-		OnAliveSignal();
+		OnKeepAlive();
 		break;
 
 	default:
@@ -60,7 +60,7 @@ void CGeneralInfoDriverBase::OnHardwareInterrupt(I_DWORD /*interruptFlags*/)
 }
 
 
-void CGeneralInfoDriverBase::OnPulse()
+void CGeneralInfoDriverBase::OnPeriodicPulse()
 {
 	__int64 currentTimer = GetCurrentTimer();
 	if (		(m_nextMinKeepAliveTime > 0) &&
@@ -112,19 +112,18 @@ void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMe
 	result.category = m_message.category;
 
 	if (m_message.category >= 0){
+		m_message.category = -1;
+
 		result.id = m_message.id;
 		const char* errPtr = m_message.text;
 		I_ASSERT(errPtr != NULL);
 
-		for (int i = 0; i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE; ++i){
-			char c = errPtr[i];
-
-			result.message[i] = c;
-
-			if (c == '\0'){
-				break;
-			}
+		int i = 0;
+		for (; (i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE - 1) && (errPtr[i] != '\0'); ++i){
+			result.message[i] = errPtr[i];
 		}
+
+		result.message[i] = '\0';
 
 		int paramsCount = m_message.paramsCount;
 		I_ASSERT(paramsCount <= CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT);
@@ -138,13 +137,11 @@ void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMe
 		}
 
 		result.paramsCount = I_SDWORD(paramsCount);
-
-		m_message.category = -1;
 	}
 }
 
 
-void CGeneralInfoDriverBase::OnAliveSignal()
+void CGeneralInfoDriverBase::OnKeepAlive()
 {
 	if (m_params.maxKeepAliveTime > 0){
 		m_nextMinKeepAliveTime = GetCurrentTimer() + m_params.maxKeepAliveTime;

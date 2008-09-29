@@ -76,7 +76,7 @@ void CSignalBitsDriverBase::OnHardwareInterrupt(I_DWORD /*interruptFlags*/)
 }
 
 
-void CSignalBitsDriverBase::OnPulse()
+void CSignalBitsDriverBase::OnPeriodicPulse()
 {
 	__int64 currentTimer = GetCurrentTimer();
 

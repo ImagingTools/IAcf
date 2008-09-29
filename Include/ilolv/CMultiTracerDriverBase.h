@@ -20,6 +20,8 @@ public:
 
 	CMultiTracerDriverBase();
 
+	const CMultiTracerMessages::MultiTracerParams& GetMultiTracerParams() const;
+
 	// reimplemented (ilolv::IDriver)
 	virtual bool OnInstruction(
 				I_DWORD instructionCode,
@@ -29,7 +31,7 @@ public:
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPulse();
+	virtual void OnPeriodicPulse();
 
 protected:
 	enum{
@@ -94,17 +96,13 @@ protected:
 	 *		The "keep alive" signal indicate, that application works correctly.
 	 *		If this signal doesn't come regulary, application is set to be in critical mode.
 	 */
-	void OnAliveSignal();
+	void OnKeepAlive();
 
 	void ReadHardwareValues(__int64 microsecsTimer, SingleLine::NativeTimer internalTimer);
 	void WriteHardwareValues();
 
 	void SetOutputBits(I_DWORD value, I_DWORD mask);
 
-	/**	Get message and remove it from messages queue.
-	 *		@return	true, if there was message to taken.
-	 */
-	bool PopMessage(Message& message) const;
 	void CalcInterruptsMask();
 	void ResetQueueLine(int lineIndex);
 
@@ -131,6 +129,14 @@ private:
 	__int64 m_microsecsTimer;
 	IDriver::NativeTimer m_nativeTimer;
 };
+
+
+// inline methods
+
+const CMultiTracerMessages::MultiTracerParams& CMultiTracerDriverBase::GetMultiTracerParams() const
+{
+	return m_params;
+}
 
 
 } // namespace ilolv

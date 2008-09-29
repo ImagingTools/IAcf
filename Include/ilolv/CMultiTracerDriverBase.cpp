@@ -178,8 +178,10 @@ bool CMultiTracerDriverBase::OnInstruction(
 							responseBufferSize,
 							responseSize);
 
-				int stationsCount = line.GetStationsCount();
-				I_DWORD sensorBitsMask = I_DWORD((1 << stationsCount) - 1);
+
+				const CTracerMessages::TracerParams& params = line.GetTracerParams();
+
+				I_DWORD sensorBitsMask = I_DWORD((1 << params.unitsCount) - 1);
 				I_DWORD sensorBits = (m_inputBits >> line.m_lightBarrierBitsIndex) & sensorBitsMask;
 				bool ejectionControlBit = ((m_inputBits >> line.m_ejectionControlBitIndex) & 1) != 0;
 
@@ -251,11 +253,11 @@ void CMultiTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
 
-		int stationsCount = line.GetStationsCount();
+		const CTracerMessages::TracerParams& params = line.GetTracerParams();
 
 		I_DWORD maskedInputBits = m_inputBits & m_interruptsMask;
 
-		I_DWORD barrierBitsMask = I_DWORD((1 << stationsCount) - 1);
+		I_DWORD barrierBitsMask = I_DWORD((1 << params.unitsCount) - 1);
 		I_DWORD barrierBits = (maskedInputBits >> line.m_lightBarrierBitsIndex) & barrierBitsMask;
 
 		I_DWORD barrierEdgeBits = (barrierBits ^ line.m_lastLightBarrierBits) & barrierBits;
@@ -277,12 +279,12 @@ void CMultiTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 }
 
 
-void CMultiTracerDriverBase::OnPulse()
+void CMultiTracerDriverBase::OnPeriodicPulse()
 {
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
 
-		line.OnPulse();
+		line.OnPeriodicPulse();
 	}
 }
 
@@ -374,8 +376,9 @@ void CMultiTracerDriverBase::CalcInterruptsMask()
 		SingleLine& line = m_lines[lineIndex];
 
 		if (line.m_lightBarrierBitsIndex >= 0){
-			int stationsCount = line.GetStationsCount();
-			I_DWORD mask = ((1 << stationsCount) - 1) << line.m_lightBarrierBitsIndex;
+			const CTracerMessages::TracerParams& params = line.GetTracerParams();
+
+			I_DWORD mask = ((1 << params.unitsCount) - 1) << line.m_lightBarrierBitsIndex;
 			newInterruptsMask |= mask;
 		}
 
@@ -447,7 +450,7 @@ void CMultiTracerDriverBase::SingleLine::SetTriggerBit(int bit, bool state)
 	I_ASSERT(m_parentPtr != NULL);
 
 	if ((m_parentPtr != NULL) && (m_triggersBitIndex != -1)){
-		I_ASSERT(bit < GetStationsCount());
+		I_ASSERT(bit < GetTracerParams().ejectorsCount);
 
 		I_DWORD mask = I_DWORD(1 << (m_triggersBitIndex + bit));
 
@@ -460,7 +463,7 @@ void CMultiTracerDriverBase::SingleLine::SetEjectorBit(int ejectorIndex, bool st
 {
 	I_ASSERT(m_parentPtr != NULL);
 	I_ASSERT(ejectorIndex >= 0);
-	I_ASSERT(ejectorIndex < GetEjectorsCount());
+	I_ASSERT(ejectorIndex < GetTracerParams().ejectorsCount);
 
 	if ((m_parentPtr != NULL) && (m_ejectorsBitIndex != -1)){
 		I_DWORD mask = I_DWORD(1 << (m_ejectorsBitIndex + ejectorIndex));

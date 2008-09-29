@@ -45,6 +45,8 @@ public:
 
 	CTracerDriverBase();
 
+	const CTracerMessages::TracerParams& GetTracerParams() const;
+
 	/**	ResetQueue all stations.
 	 */
 	virtual void ResetQueue();
@@ -58,42 +60,11 @@ public:
 	 */
 	void SetLineIndex(int index);
 
-	/**	Gets number of stations.
-	 */
-	int GetStationsCount() const;
-	/**
-		Return true if ejection control is enabled.
-	*/
-	bool IsEjectionControlEnabled() const;
-	/**	Get offset point ejection control to light barrier.
-	 *		It is important if both ejection control are enabled, else it should be 0.
-	 *		This offset use encoder ticks as unit.
-	 */
-	I_DWORD GetEjectionControlOffset() const;
 	/**
 		Get single inspection unit parameters.
 	*/
 	virtual const CInspectionUnitMessages::UnitParams& GetUnitParams(int unitIndex) const;
-	/**
-		Get number of ejectors for this line.
-	*/
-	int GetEjectorsCount() const;
-	/**
-		Get index of ejector used if no ejector was specified by application.
-		This ejector will be used for not processed object.
-		If it negative, no ejection will be done.
-	*/
-	int GetAutonomeEjectorIndex() const;
-	/**	Get minimal objects distance in encoder ticks.
-	 */
-	I_DWORD GetMinObjectsDistance() const;
-	/**	Get tolerance of light barrier position.
-	 *		This tolerance is used to assign ligt barrier event to object.
-	 */
-	I_DWORD GetPositionTolerance() const;
-	/**	Get duration time of I/O bit for customer PLC.
-	 */
-	int GetIoBitDuration() const;
+	const CTracerMessages::TracerParams& GetTracerParams();
 	/**
 		Get parameters of single ejector.
 	*/
@@ -133,7 +104,7 @@ public:
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
-	virtual void OnPulse();
+	virtual void OnPeriodicPulse();
 
 protected:
 	enum TriggerType{
@@ -224,13 +195,9 @@ protected:
 		After this first element will be removed from queue.
 	*/
 	virtual bool SetCounterQueuesCount(int count) = 0;
-	/**	Set position of new position event.
-	 *		This position will be pushed to event list.
-	 *		Events for one index must be ordered by position.
-	 *		When this position is reached, OnPostionEvent() should be called.
-	 *		@params	index	index of event, it cannot be bigger than set using
-	 *		SetCounterQueuesCount(int). For each index will be separated queue used.
-	 */
+	/**
+		Insert new position to specified counter queue.
+	*/
 	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition) = 0;
 	/**	Set trigger bit to specified state.
 	 */
@@ -280,7 +247,7 @@ private:
 		PE_FIRST_TRIGGER
 	};
 
-		CTracerMessages::TracerParams m_params;
+	CTracerMessages::TracerParams m_params;
 
 	int m_lineIndex;
 
@@ -311,6 +278,12 @@ private:
 
 
 // inline methods
+
+inline const CTracerMessages::TracerParams& CTracerDriverBase::GetTracerParams() const
+{
+	return m_params;
+}
+
 
 inline int CTracerDriverBase::GetControllerMode() const
 {

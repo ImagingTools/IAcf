@@ -44,12 +44,17 @@ public:
 		/**
 			Number of encoder clocks between ejector and imaginated base position.
 		*/
-		int ejectorOffset;
+		int position;
 
 		/**
 			Distance ejector is on.
 		*/
-		int ejectorOnDistance;
+		int onDistance;
+		/**
+			Reaction delay of this ejector (in microseconds).
+			To ensure correct behaviour, ejector signal will be send earlier according to this value.
+		*/
+		int reactionDelay;
 	};
 
 	struct TracerParams
@@ -61,14 +66,46 @@ public:
 
 		typedef void Result;
 
+		/**
+			Number of inspection units.
+		*/
 		int unitsCount;
+		/**
+			Number of ejectors.
+		*/
 		int ejectorsCount;
+		/**
+			Index of ejector used if no ejector was specified by application.
+			This ejector will be used for not processed object.
+			If it negative, no ejection will be done.
+		*/
 		int autonomeEjectorIndex;
+		/**
+			Minimal size of an object (in encoder ticks).
+		*/
+		int minObjectSize;
+		/**
+			Minimal distance between two objects (in encoder ticks) needed to treat it as two objects.
+		*/
 		int minObjectsDistance;
+		/**
+			Tolerance of light barrier position used to assign object in queue to the next light barriers.
+		*/
 		int positionTolerance;
+		/**
+			Duration time (in microseconds) for output signals.
+			If signaling event occure, output bit is immedietly set to 1.
+			After this time it will be reset.
+		*/
 		int ioBitDuration;
+		/**
+			If true ejection control is enabled.
+		*/
 		bool isEjectionControlEnabled;
-		int ejectionControlOffset;
+		/**
+			Distance between base position and ejection control (in encoder ticks).
+		*/
+		int ejectionControlPosition;
 	};
 
 	struct SetParams: public TracerParams

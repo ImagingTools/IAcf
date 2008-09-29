@@ -2,7 +2,7 @@
 #define ilolv_CIoCardTracerDriverBase_included
 
 
-#include "ilolv/CTracerDriverBase.h"
+#include "ilolv/CSingleCountTracerDriverBase.h"
 
 
 namespace ilolv
@@ -12,10 +12,10 @@ namespace ilolv
 /**
 	Implementation of line controller based on simple standard I/O card hardware.
  */
-class CIoCardTracerDriverBase: public CTracerDriverBase
+class CIoCardTracerDriverBase: public CSingleCountTracerDriverBase
 {
 public:
-	typedef CTracerDriverBase BaseClass;
+	typedef CSingleCountTracerDriverBase BaseClass;
 
 	enum InterruptFlags
 	{
@@ -25,22 +25,16 @@ public:
 	CIoCardTracerDriverBase();
 
 	// reimplemented (ilolv::CTracerDriverBase)
-	virtual void ResetQueue();
-	virtual bool SetCounterQueuesCount(int count);
-	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition);
 	virtual I_DWORD GetLinePosition() const;
 
 	// reimplemented (ilolv::IDriver)
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
 
 protected:
-	void SetNextEventPosition(I_DWORD eventPosition);
-	void SetIdleEventPosition();
-
 	bool TrySetNextEventFromFifo();
 	/**	Updates line position to new counter value.
 	 *		It should be called before any hardware event
-	 *		(OnCounterReady, OnLightBarrierEdge or OnPulse) is called.
+	 *		(OnCounterReady, OnLightBarrierEdge or OnPeriodicPulse) is called.
 	 */
 	void UpdateLinePosition(I_WORD counterValue);
 	/**	Set position of event counter.
@@ -49,8 +43,8 @@ protected:
 
 	void OnCounterReady();
 
-	// static methods
-	static int CalcNextEventsFifoIndex(int fifoIndex);
+	// reimplemented (ilolv::CSingleCountTracerDriverBase)
+	virtual void SetNextSinglePositionEvent(const I_DWORD* eventPositionPtr);
 
 	// abstract methods
 	/**
@@ -61,37 +55,16 @@ protected:
 	virtual void SetEncoderCounter(I_WORD value) = 0;
 
 private:
-	enum{
-		MAX_POSITION_EVENTS_COUNT = 100,
-		EVENTS_FIFO_SIZE = 256,
-		EVENTS_FIFO_INDEX_MASK = EVENTS_FIFO_SIZE - 1,
-		MAX_EVENTS_COUNT = 32,
-		IDLE_COUNT = 0x7ff0
+	enum
+	{
+		MAX_COUNTER_VALUE = 0x7ff8
 	};
-
-	struct EventsFifo{
-		I_DWORD positions[EVENTS_FIFO_SIZE];
-		int nextIndex;
-		int lastIndex;
-	};
-
-	EventsFifo eventsFifos[MAX_EVENTS_COUNT];
-	int m_positionEventsCount;
 
 	I_DWORD m_counterPosition;
 
 	I_DWORD m_nextEventPosition;
-
-	int m_idleCyclesCount;
+	bool m_isPositionEventActive;
 };
-
-
-// static methods of embedded class SingleLine
-
-inline int CIoCardTracerDriverBase::CalcNextEventsFifoIndex(int fifoIndex)
-{
-	return (fifoIndex + 1) % EVENTS_FIFO_INDEX_MASK;
-}
 
 
 } // namespace ilolv

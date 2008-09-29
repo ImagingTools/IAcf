@@ -192,11 +192,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTracerDriverBase.cpp"
+				RelativePath="..\CSignalBitsDriverBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSignalBitsDriverBase.cpp"
+				RelativePath="..\CSingleCountTracerDriverBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTracerDriverBase.cpp"
 				>
 			</File>
 		</Filter>
@@ -229,11 +233,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTracerDriverBase.h"
+				RelativePath="..\COrderedPositionsQueue.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CTracerMessages.h"
+				RelativePath="..\CSignalBitsDriverBase.h"
 				>
 			</File>
 			<File
@@ -241,7 +245,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSignalBitsDriverBase.h"
+				RelativePath="..\CSingleCountTracerDriverBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTracerDriverBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTracerMessages.h"
 				>
 			</File>
 			<File
