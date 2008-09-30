@@ -37,8 +37,7 @@ public:
 
 	enum
 	{
-		MAX_ERROR_MESSAGE_SIZE = 256,
-		MAX_MESSAGE_PARAMS_COUNT = 16
+		MAX_ERROR_MESSAGE_SIZE = 256
 	};
 
 	struct GeneralInfoParams
@@ -88,27 +87,23 @@ public:
 			/**
 				Message category \sa MessageCategory.
 			*/
-			I_SDWORD category;	// value of qstd::IResult::Category, -1 if no message
+			int category;	// value of qstd::IResult::Category, -1 if no message
 			/**
 				Unique message Id used to automatical message processing.
 			*/
-			I_DWORD id;
+			int id;
 			/**
 				Message flags.
 			*/
-			I_DWORD flags;
+			int flags;
 			/**
 				Number of parameters.
 			*/
-			I_SDWORD paramsCount;
+			int paramsCount;
 			/**
 				Human readable message text.
 			*/
-			I_BYTE message[MAX_ERROR_MESSAGE_SIZE];
-			/**
-				List of parameter (as number).
-			*/
-			I_SDWORD params[MAX_MESSAGE_PARAMS_COUNT];
+			char text[MAX_ERROR_MESSAGE_SIZE];
 		};
 	};
 };

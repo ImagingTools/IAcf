@@ -73,13 +73,10 @@ void CSingleCountTracerDriverBase::InsertPositionToQueue(int queueIndex, I_DWORD
 		}
 	}
 	else{
-		int lineIndex = GetLineIndex() + 1;
-
-		SendMessage(CGeneralInfoMessages::MC_CRITICAL,
+		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
 					CTracerMessages::MI_QUEUE_ERROR,
-					"Line%1:CannotInsertPosition",
-					&lineIndex,
-					1);
+					"Cannot insert position to event queue",
+					true);
 
 		return;
 	}

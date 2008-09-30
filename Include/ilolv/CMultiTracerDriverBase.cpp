@@ -18,8 +18,7 @@ CMultiTracerDriverBase::CMultiTracerDriverBase()
 	m_params.linesCount = 0;
 
 	for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
-		m_lines[lineIndex].Init(this);
-		m_lines[lineIndex].SetLineIndex(lineIndex);
+		m_lines[lineIndex].Init(lineIndex, this);
 	}
 }
 
@@ -235,13 +234,7 @@ bool CMultiTracerDriverBase::OnInstruction(
 		break;
 
 	default:
-		return BaseClass::OnInstruction(
-					instructionCode,
-					instructionBuffer,
-					instructionBufferSize,
-					responseBuffer,
-					responseBufferSize,
-					responseSize);
+		return false;
 	}
 
 	return true;
@@ -429,12 +422,13 @@ CMultiTracerDriverBase::SingleLine::SingleLine()
 	m_ejectorsBitIndex = -1;
 	m_iosBitIndex = -1;
 
-	Init(NULL);
+	Init(-1, NULL);
 }
 
 
-void CMultiTracerDriverBase::SingleLine::Init(CMultiTracerDriverBase* parentPtr)
+void CMultiTracerDriverBase::SingleLine::Init(int lineNumber, CMultiTracerDriverBase* parentPtr)
 {
+	m_lineNumber = lineNumber;
 	m_parentPtr = parentPtr;
 
 	m_lastLightBarrierBits = 0;
@@ -519,10 +513,18 @@ bool CMultiTracerDriverBase::SingleLine::GetEjectionControlBit() const
 }
 
 
-void CMultiTracerDriverBase::SingleLine::SendMessage(int category, int id, const char* errorTxt, int* valuesPtr, int paramsCount)
+void CMultiTracerDriverBase::SingleLine::AppendMessage(int category, int id, const char* text, bool doSend)
 {
 	if (m_parentPtr != NULL){
-		m_parentPtr->SendMessage(category, id, errorTxt, valuesPtr, paramsCount);
+		m_parentPtr->AppendMessage(category, id, text, false);
+
+		if (doSend){
+			m_parentPtr->AppendMessage(category, id, ": Line ", false);
+			char numberText[2];
+			numberText[0] = '1' + char(m_lineNumber);
+			numberText[1] = '\0';
+			m_parentPtr->AppendMessage(category, id, numberText, true);
+		}
 	}
 }
 

@@ -2,7 +2,7 @@
 #define ilolv_CMultiTracerDriverBase_included
 
 
-#include "ilolv/CGeneralInfoDriverBase.h"
+#include "ilolv/IDriver.h"
 #include "ilolv/CMultiTracerMessages.h"
 #include "ilolv/CIoCardTracerDriverBase.h"
 
@@ -13,11 +13,9 @@ namespace ilolv
 
 /**	Base class for implementation of production driver on the driver side.
  */
-class CMultiTracerDriverBase: public CGeneralInfoDriverBase
+class CMultiTracerDriverBase: virtual public IDriver
 {
 public:
-	typedef CGeneralInfoDriverBase BaseClass;
-
 	CMultiTracerDriverBase();
 
 	const CMultiTracerMessages::MultiTracerParams& GetMultiTracerParams() const;
@@ -48,7 +46,7 @@ protected:
 
 		SingleLine();
 
-		void Init(CMultiTracerDriverBase* parentPtr);
+		void Init(int lineNumber, CMultiTracerDriverBase* parentPtr);
 
 		// reimplemented (ilolv::CTracerDriverBase)
 		virtual void SetTriggerBit(int bit, bool state);
@@ -57,11 +55,13 @@ protected:
 		virtual __int64 GetCurrentTimer() const;
 		virtual NativeTimer GetCurrentNativeTimer() const;
 		virtual bool GetEjectionControlBit() const;
-		virtual void SendMessage(int category, int id, const char* errorTxt, int* valuesPtr = NULL, int paramsCount = 0);
 
 	protected:
 		// reimplemented (ilolv::CIoCardTracerDriverBase)
 		virtual void SetEncoderCounter(I_WORD value);
+
+		// reimplemented (ilolv::IDriver)
+		virtual void AppendMessage(int category, int id, const char* text, bool doSend = true);
 
 	private:
 		// indices of input bits
@@ -85,13 +85,13 @@ protected:
 		I_WORD m_sendCounterValue;
 		bool m_isCounterReady;
 
+		// number of this line
+		int m_lineNumber;
+
 		// parent object
 		CMultiTracerDriverBase* m_parentPtr;
 	};
 
-	/**	Set message text.
-	 */
-	void SendMessage(int category, int id, const char* errorTxt, int* valuesPtr = NULL, int paramsCount = 0);
 	/**	Called if application sent "keep alive" signal.
 	 *		The "keep alive" signal indicate, that application works correctly.
 	 *		If this signal doesn't come regulary, application is set to be in critical mode.

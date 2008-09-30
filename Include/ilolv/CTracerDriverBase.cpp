@@ -9,8 +9,7 @@ namespace ilolv
 
 
 CTracerDriverBase::CTracerDriverBase()
-:	m_lineIndex(-1),
-	m_popFifoOffset(-1)
+:	m_popFifoOffset(-1)
 {
 	m_params.unitsCount = 0;
 	m_params.ejectorsCount = 0;
@@ -128,25 +127,11 @@ void CTracerDriverBase::ResetQueue()
 	m_popFifoOffset = maxPopFifoDistance;
 
 	if (!SetCounterQueuesCount(m_firstEjectorOffEvent + m_params.ejectorsCount)){
-		int lineIndex = GetLineIndex() + 1;
-		SendMessage(CGeneralInfoMessages::MC_CRITICAL,
+		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
 					CGeneralInfoMessages::MI_INTERNAL_ERROR,
-					"Line%1:TooManyEventsAllocated",
-					&lineIndex,
-					1);
+					"More queues needer than supported",
+					true);
 	}
-}
-
-
-int CTracerDriverBase::GetLineIndex() const
-{
-	return m_lineIndex;
-}
-
-
-void CTracerDriverBase::SetLineIndex(int index)
-{
-	m_lineIndex = index;
 }
 
 
@@ -539,12 +524,10 @@ bool CTracerDriverBase::AddObjectToFifo(I_DWORD basePosition)
 
 	int newFifoBegin = CalcNextFifoIndex(m_fifoNextIndex);
 	if (newFifoBegin == m_fifoLastIndex){
-		int lineIndex = GetLineIndex() + 1;
-		SendMessage(	CGeneralInfoMessages::MC_CRITICAL,
+		AppendMessage(	CGeneralInfoMessages::MC_CRITICAL,
 					CTracerMessages::MI_QUEUE_ERROR,
-					"Line%1:ObjectsFifoFull",
-					&lineIndex,
-					1);
+					"Objects queue is full",
+					true);
 
 		PopFifoLast();
 
@@ -649,12 +632,23 @@ void CTracerDriverBase::OnPositionTrigger(int unitIndex)
 		}
 	}
 	else{
-		int params[2] = {GetLineIndex() + 1, unitIndex + 1};
-		SendMessage(CGeneralInfoMessages::MC_ERROR,
+		AppendMessage(CGeneralInfoMessages::MC_ERROR,
 					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
-					"Line%1Station%2:GhostObjectFound",
-					params,
-					2);
+					"Unidentfied object presented",
+					false);
+		AppendMessage(
+					CGeneralInfoMessages::MC_ERROR,
+					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+					": Unit ",
+					false);
+			char numberText[2];
+			numberText[0] = '1' + char(unitIndex);
+			numberText[1] = '\0';
+		AppendMessage(
+					CGeneralInfoMessages::MC_ERROR,
+					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+					numberText,
+					true);
 	}
 }
 
@@ -710,22 +704,20 @@ void CTracerDriverBase::OnPointControl()
 	bool shouldBeEjected = ((element.okCount < m_params.unitsCount) && (element.ejectorIndex >= 0));
 	if (shouldBeEjected){
 		if (objectPresent){
-			int lineIndex = GetLineIndex() + 1;
-			SendMessage(	CGeneralInfoMessages::MC_ERROR,
+			AppendMessage(
+						CGeneralInfoMessages::MC_ERROR,
 						CTracerMessages::MI_OBJECT_UNEJECTED,
-						"Line%1:ObjectUnjected",
-						&lineIndex,
-						1);
+						"Object unejected",
+						true);
 		}
 	}
 	else{
 		if (!objectPresent){
-			int lineIndex = GetLineIndex() + 1;
-			SendMessage(	CGeneralInfoMessages::MC_ERROR,
+			AppendMessage(
+						CGeneralInfoMessages::MC_ERROR,
 						CTracerMessages::MI_OBJECT_EJECTED,
-						"Line%1:ObjectEjected",
-						&lineIndex,
-						1);
+						"Object ejected",
+						false);
 		}
 	}
 
@@ -801,12 +793,32 @@ void CTracerDriverBase::OnSingleTriggerInstruction(
 		}
 	}
 
-	int params[2] = {GetLineIndex() + 1, instruction.unitIndex + 1};
-	SendMessage(CGeneralInfoMessages::MC_ERROR,
-			CGeneralInfoMessages::MI_INTERNAL_ERROR,
-			"Line%1Station%2:IllegalManualTrigger",
-			params,
-			2);
+	if (m_controllerMode == CM_AUTOMATIC){
+		AppendMessage(CGeneralInfoMessages::MC_ERROR,
+					CGeneralInfoMessages::MI_INTERNAL_ERROR,
+					"Manual trigger in automatic mode",
+					false);
+	}
+	else{
+		AppendMessage(CGeneralInfoMessages::MC_ERROR,
+					CGeneralInfoMessages::MI_INTERNAL_ERROR,
+					"Bad unit index",
+					false);
+	}
+
+	AppendMessage(
+				CGeneralInfoMessages::MC_ERROR,
+				CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+				": Unit ",
+				false);
+		char numberText[2];
+		numberText[0] = '1' + char(instruction.unitIndex);
+		numberText[1] = '\0';
+	AppendMessage(
+				CGeneralInfoMessages::MC_ERROR,
+				CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+				numberText,
+				true);
 }
 
 

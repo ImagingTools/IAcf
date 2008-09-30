@@ -8,6 +8,8 @@ namespace ilolv
 CGeneralInfoDriverBase::CGeneralInfoDriverBase()
 :	m_nextMinKeepAliveTime(0)
 {
+	m_messagePosition = 0;
+
 	m_params.maxKeepAliveTime = 0;
 	m_message.category = -1;
 }
@@ -65,9 +67,10 @@ void CGeneralInfoDriverBase::OnPeriodicPulse()
 	__int64 currentTimer = GetCurrentTimer();
 	if (		(m_nextMinKeepAliveTime > 0) &&
 				(currentTimer > m_nextMinKeepAliveTime)){
-		SendMessage(CGeneralInfoMessages::MC_CRITICAL,
+		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
 					CGeneralInfoMessages::MI_NO_RESPONSE,
-					"Application doesn't response");
+					"Application doesn't response",
+					true);
 
 		m_nextMinKeepAliveTime = 0;
 	}
@@ -76,31 +79,30 @@ void CGeneralInfoDriverBase::OnPeriodicPulse()
 
 // protected methods
 
-void CGeneralInfoDriverBase::SendMessage(int category, int id, const char* errorTxt, int* valuesPtr, int paramsCount)
-{
-	if (category > m_message.category){
-		m_message.category = category;
-		m_message.id = id;
+// reimplemented (ilolv::IDriver)
 
-		for (int i = 0; i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE; ++i){
-			char c = errorTxt[i];
-			m_message.text[i] = c;
+void CGeneralInfoDriverBase::AppendMessage(int category, int id, const char* text, bool doSend)
+{
+	if ((m_messagePosition > 0) || (category > m_message.category)){
+		if (m_messagePosition <= 0){
+			m_message.category = category;
+			m_message.id = id;
+		}
+
+		while (m_messagePosition < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE){
+			char c = *(text++);
+			m_message.text[m_messagePosition] = c;
 
 			if (c == '\0'){
 				break;
 			}
-		}
 
-		I_ASSERT(paramsCount <= CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT);
-		if (paramsCount > CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT){
-			paramsCount = CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT;
+			m_messagePosition++;
 		}
+	}
 
-		for (int i = 0; i < paramsCount; ++i){
-			m_message.params[i] = valuesPtr[i];
-		}
-
-		m_message.paramsCount = paramsCount;
+	if (doSend){
+		m_messagePosition = 0;
 	}
 }
 
@@ -113,30 +115,18 @@ void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMe
 
 	if (m_message.category >= 0){
 		m_message.category = -1;
+		m_messagePosition = 0;
 
 		result.id = m_message.id;
-		const char* errPtr = m_message.text;
-		I_ASSERT(errPtr != NULL);
+		const char* text = m_message.text;
+		I_ASSERT(text != NULL);
 
 		int i = 0;
-		for (; (i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE - 1) && (errPtr[i] != '\0'); ++i){
-			result.message[i] = errPtr[i];
+		for (; (i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE - 1) && (text[i] != '\0'); ++i){
+			result.text[i] = text[i];
 		}
 
-		result.message[i] = '\0';
-
-		int paramsCount = m_message.paramsCount;
-		I_ASSERT(paramsCount <= CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT);
-
-		if (paramsCount > CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT){
-			paramsCount = CGeneralInfoMessages::MAX_MESSAGE_PARAMS_COUNT;
-		}
-
-		for (int i = 0; i < paramsCount; ++i){
-			result.params[i] = I_SDWORD(m_message.params[i]);
-		}
-
-		result.paramsCount = I_SDWORD(paramsCount);
+		result.text[i] = '\0';
 	}
 }
 

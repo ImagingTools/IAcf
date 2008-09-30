@@ -40,7 +40,7 @@ void CIoCardTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 void CIoCardTracerDriverBase::OnCounterReady()
 {
 	if (m_isPositionEventActive){
-		I_SDWORD difference = I_SDWORD(m_nextEventPosition - m_counterPosition);
+		I_SDWORD difference = I_SDWORD(m_nextEventPosition - GetLinePosition());
 		if (difference <= 0){
 			m_isPositionEventActive = false;
 

@@ -55,6 +55,15 @@ protected:
 		Native timer is needed to exchange absolute timer value between driver and application.
 	*/
 	virtual NativeTimer GetCurrentNativeTimer() const = 0;
+
+	/**
+		Append message or send complete message to application.
+		\param	category	category of message, \sa CGeneralInfoMessages::MessageCategory.
+		\param	id			ID of message.
+		\param	text		message text.
+		\param	doSend		if it is true, completed message will be send to application.
+	*/
+	virtual void AppendMessage(int category, int id, const char* text, bool doSend = true) = 0;
 };
 
 

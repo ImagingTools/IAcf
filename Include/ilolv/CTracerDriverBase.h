@@ -51,15 +51,6 @@ public:
 	 */
 	virtual void ResetQueue();
 
-	/**	Get actual line index.
-	 *		@return	line index or negative value if this line index is unknown.
-	 */
-	int GetLineIndex() const;
-	/**	Set actual line index.
-	 *		@param	index	line index or negative value if this line index is unknown.
-	 */
-	void SetLineIndex(int index);
-
 	/**
 		Get single inspection unit parameters.
 	*/
@@ -215,13 +206,6 @@ protected:
 	/**	Get state of ejection control light barrier bit state.
 	 */
 	virtual bool GetEjectionControlBit() const = 0;
-	/**	Sets message.
-	 *		@param	category	message category, like in CMultiLineObjectTracerMessage::Category.
-	 *							If it is -1, there is no message.
-	 *		@param	id			Id of this message.
-	 *		@param	errorTxt	pointer to C message string.
-	 */
-	virtual void SendMessage(int category, int id, const char* text, int* valuesPtr = NULL, int paramsCount = 0) = 0;
 
 	// static methods
 	static int CalcNextFifoIndex(int prevIndex);
@@ -248,8 +232,6 @@ private:
 	};
 
 	CTracerMessages::TracerParams m_params;
-
-	int m_lineIndex;
 
 	int m_controllerMode;
 

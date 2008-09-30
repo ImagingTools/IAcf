@@ -2,6 +2,9 @@
 #define ilolv_COrderedPositionsQueue_included
 
 
+#include "ilolv/ilolv.h"
+
+
 namespace ilolv
 {
 
@@ -49,6 +52,7 @@ public:
 
 protected:
 	// static methods
+	static int GetPrevIndex(int fifoIndex);
 	static int GetNextIndex(int fifoIndex);
 
 private:
@@ -74,22 +78,6 @@ inline void COrderedPositionsQueue::Reset()
 }
 
 
-inline bool COrderedPositionsQueue::Insert(I_DWORD position)
-{
-	int nextIndex = GetNextIndex(m_nextBackIndex);
-
-	if (nextIndex != m_frontIndex){
-		m_elements[m_nextBackIndex] = position;
-
-		m_nextBackIndex = nextIndex;
-
-		return true;
-	}
-
-	return false;
-}
-
-
 inline I_DWORD COrderedPositionsQueue::GetFront() const
 {
 	I_ASSERT(!IsEmpty());
@@ -106,25 +94,15 @@ inline void COrderedPositionsQueue::PopFront()
 }
 
 
-inline bool COrderedPositionsQueue::PopFrontTill(I_DWORD position)
-{
-	if (!IsEmpty() && (I_SDWORD(GetFront() - position) <= 0)){
-		PopFront();
-
-		while (!IsEmpty() && (I_SDWORD(GetFront() - position) <= 0)){
-			PopFront();
-		}
-
-		return true;
-	}
-
-	return false;
-}
-
-
 // protected inline methods
 
 // static methods
+
+inline int COrderedPositionsQueue::GetPrevIndex(int fifoIndex)
+{
+	return (fifoIndex - 1) & INDEX_MASK;
+}
+
 
 inline int COrderedPositionsQueue::GetNextIndex(int fifoIndex)
 {
