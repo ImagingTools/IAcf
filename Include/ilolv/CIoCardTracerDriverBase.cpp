@@ -11,9 +11,34 @@ namespace ilolv
 CIoCardTracerDriverBase::CIoCardTracerDriverBase()
 {
 	m_nextEventPosition = 0x10000;
-	m_counterPosition = 0;
+	m_linePosition = 0;
+
+	m_ioParams.lightBarriersBitIndex = 1;
+	m_ioParams.ejectorsBitIndex = 1;
+	m_ioParams.triggersBitIndex = 1;
+	m_ioParams.iosBitIndex = 1;
 
 	m_isPositionEventActive = false;
+}
+
+
+I_DWORD CIoCardTracerDriverBase::GetInterruptsMask() const
+{
+	I_DWORD retVal = 0;
+
+	if (m_ioParams.lightBarriersBitIndex >= 0){
+		int unitsCount = GetTracerParams().lightBarriersCount;
+
+		for (int i = 0; i < unitsCount; ++i){
+			const CInspectionUnitMessages::UnitParams& unitParams = GetUnitParams(i);
+
+			I_DWORD unitMask = (1 << (m_ioParams.lightBarriersBitIndex + unitParams.lightBarrier.index));
+
+			retVal |= unitMask;
+		}
+	}
+
+	return retVal;
 }
 
 
@@ -21,11 +46,114 @@ CIoCardTracerDriverBase::CIoCardTracerDriverBase()
 
 I_DWORD CIoCardTracerDriverBase::GetLinePosition() const
 {
-	return m_counterPosition;
+	return m_linePosition;
+}
+
+
+bool CIoCardTracerDriverBase::GetLightBarrierBit(int lightBarrierIndex) const
+{
+	I_ASSERT(lightBarrierIndex >= 0);
+	I_ASSERT(lightBarrierIndex < GetTracerParams().lightBarriersCount);
+
+	int bitIndex = m_ioParams.lightBarriersBitIndex + lightBarrierIndex;
+
+	return ((m_inputBits >> bitIndex) & 1) != 0;
+}
+
+
+void CIoCardTracerDriverBase::SetTriggerBit(int bit, bool state)
+{
+	I_ASSERT(bit >= 0);
+	I_ASSERT(bit < GetTracerParams().ejectorsCount);
+
+	if (m_ioParams.triggersBitIndex != -1){
+		I_DWORD mask = I_DWORD(1 << (m_ioParams.triggersBitIndex + bit));
+
+		SetOutputBits((state? mask: 0), mask);
+	}
+}
+
+
+void CIoCardTracerDriverBase::SetEjectorBit(int ejectorIndex, bool state)
+{
+	I_ASSERT(ejectorIndex >= 0);
+	I_ASSERT(ejectorIndex < GetTracerParams().ejectorsCount);
+
+	if (m_ioParams.ejectorsBitIndex != -1){
+		I_DWORD mask = I_DWORD(1 << (m_ioParams.ejectorsBitIndex + ejectorIndex));
+
+		SetOutputBits(state? mask: 0, mask);
+	}
+}
+
+
+void CIoCardTracerDriverBase::SetIoBit(int bitIndex, bool state)
+{
+	I_ASSERT(bitIndex >= 0);
+	I_ASSERT(bitIndex <= IB_LAST);
+
+	if (m_ioParams.iosBitIndex != -1){
+		I_DWORD mask = I_DWORD(1 << (m_ioParams.iosBitIndex + bitIndex));
+
+		SetOutputBits(state? mask: 0, mask);
+	}
+}
+
+
+__int64 CIoCardTracerDriverBase::GetCurrentTimer() const
+{
+	return m_currentTimer;
+}
+
+
+IDriver::NativeTimer CIoCardTracerDriverBase::GetCurrentNativeTimer() const
+{
+	return m_currentNativeTimer;
 }
 
 
 // reimplemented (ilolv::IDriver)
+
+bool CIoCardTracerDriverBase::OnInstruction(
+			I_DWORD instructionCode,
+			const void* instructionBuffer,
+			int instructionBufferSize,
+			void* responseBuffer,
+			int responseBufferSize,
+			I_DWORD& responseSize)
+{
+	responseSize = 0;
+
+	switch (instructionCode){
+	case CIoCardTracerMessages::SetIoParams::Id:
+		if (instructionBufferSize >= sizeof(CIoCardTracerMessages::SetIoParams)){
+			m_ioParams = *(const CIoCardTracerMessages::SetIoParams*)instructionBuffer;
+		}
+		break;
+
+	case CIoCardTracerMessages::GetLightBarrierInfo::Id:
+		if (		(instructionBufferSize >= sizeof(CIoCardTracerMessages::GetLightBarrierInfo)) &&
+					(responseBufferSize >= sizeof(CIoCardTracerMessages::GetLightBarrierInfo::Result))){
+			const CIoCardTracerMessages::GetLightBarrierInfo& instruction = *(const CIoCardTracerMessages::GetLightBarrierInfo*)instructionBuffer;
+			CIoCardTracerMessages::GetLightBarrierInfo::Result& result = *(CIoCardTracerMessages::GetLightBarrierInfo::Result*)responseBuffer;
+
+			result.state = GetLightBarrierBit(instruction.lightBarrierIndex);
+
+			responseSize = sizeof(CIoCardTracerMessages::GetLightBarrierInfo::Result);
+		}
+		break;
+
+	default:
+		return BaseClass::OnInstruction(
+					instructionCode,
+					instructionBuffer, instructionBufferSize,
+					responseBuffer, responseBufferSize,
+					responseSize);
+	}
+
+	return true;
+}
+
 
 void CIoCardTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
@@ -35,7 +163,24 @@ void CIoCardTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 }
 
 
+// reimplemented (ilolv::IDigitalIo)
+
+I_DWORD CIoCardTracerDriverBase::GetInputBits() const
+{
+	return m_inputBits;
+}
+
+
 // protected methods
+
+void CIoCardTracerDriverBase::UpdateHardwareValues(I_DWORD inputBits, I_DWORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer)
+{
+	m_inputBits = inputBits;
+	m_linePosition = m_nextEventPosition - counterValue;
+	m_currentTimer = microsecsTimer;
+	m_currentNativeTimer = nativeTimer;
+}
+
 
 void CIoCardTracerDriverBase::OnCounterReady()
 {
@@ -56,16 +201,6 @@ void CIoCardTracerDriverBase::OnCounterReady()
 	}
 
 	SetEncoderCounter(MAX_COUNTER_VALUE);
-}
-
-
-void CIoCardTracerDriverBase::UpdateLinePosition(I_WORD counterValue)
-{
-	I_DWORD newLinePosition = I_DWORD(m_nextEventPosition - I_SDWORD(I_SWORD(counterValue)));
-
-	I_ASSERT(I_SDWORD(newLinePosition - m_counterPosition) >= 0);
-
-	m_counterPosition = newLinePosition;
 }
 
 

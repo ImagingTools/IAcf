@@ -3,6 +3,7 @@
 
 
 #include "ilolv/IDriver.h"
+#include "ilolv/IDigitalIo.h"
 #include "ilolv/CSignalBitsMessages.h"
 
 
@@ -12,7 +13,7 @@ namespace ilolv
 
 /**	Base class for implementation of production driver on the driver side.
  */
-class CSignalBitsDriverBase: public IDriver
+class CSignalBitsDriverBase: virtual public IDriver, virtual public IDigitalIo
 {
 public:
 	CSignalBitsDriverBase();
@@ -39,9 +40,6 @@ protected:
 		Set signal bit to specified state.
 	*/
 	void SetSignalBit(int signal, bool state);
-
-	// abstract methods
-	virtual void SetOutputBits(I_DWORD value, I_DWORD mask) = 0;
 
 private:
 	CSignalBitsMessages::SignalParams m_params;

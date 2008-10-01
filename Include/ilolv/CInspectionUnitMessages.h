@@ -2,7 +2,7 @@
 #define ilolv_CInspectionUnitMessages_included
 
 
-#include "ilolv/ilolv.h"
+#include "ilolv/IDriver.h"
 
 
 namespace ilolv
@@ -20,27 +20,49 @@ public:
 		MI_UNIDENTIFIED_OBJECT_FOUND,
 	};
 
+	struct LightBarrierParams
+	{
+		/**
+			Index of used light barrier.
+			If this value is negative, this function is disabled.
+		*/
+		int index;
+		/**
+			Number of encoder clocks between light barrier and imaginated base position.
+		*/
+		int offset;
+	};
+
 	struct UnitParams
 	{
+		enum
+		{
+			FALLING_EDGE = 0x100
+		};
+		LightBarrierParams lightBarrier;
+
+		/**
+			Position inside of edge when trigger should be done.
+			If this value is 0, rising edge is mean, if this is equal to FALLING_EDGE falling edge.
+			Other values mean some proportion between.
+		*/
+		int edgePosition;
+
 		/**
 			Number of microseconds should be trigger active.
 		*/
-		I_DWORD triggerDuration;
+		int triggerDuration;
 		/**
 			Relaxation time needed to send next trigger.
 			This can usefull for example to block new camera trigger before complete acquision of previos image is done.
 			Please note, that in this case object will be processed with incomplete number of acquisions.
 			This value is in microseconds.
 		*/
-		I_DWORD triggerRelaxationTime;
-		/**
-			Number of encoder clocks between light barrier and imaginated base position.
-		*/
-		I_DWORD stationOffset;
+		int triggerRelaxationTime;
 		/**
 			Number of encoder clocks between trigger position and light barrier.
 		*/
-		I_DWORD triggerOffset;
+		int triggerOffset;
 	};
 
 	struct SetParams: public UnitParams

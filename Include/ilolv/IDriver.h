@@ -2,16 +2,24 @@
 #define ilolv_IDriver_included
 
 
-#include "ilolv.h"
+#include "istd/IPolymorphic.h"
+
+#include "ilolv/ilolv.h"
 
 
 namespace ilolv
 {
 
 
-class IDriver
+class IDriver: virtual public istd::IPolymorphic
 {
 public:
+	enum InterruptFlags
+	{
+		IF_DIGITAL_INPUT = 0x100,
+		IF_ENCODER_INTERRUPT = 0x200
+	};
+
 	typedef __int64 NativeTimer;
 
 	virtual ~IDriver(){}

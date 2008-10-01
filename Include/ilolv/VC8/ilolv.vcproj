@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CIoCardTracerMessages.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiTracerDriverBase.h"
 				>
 			</File>
@@ -258,6 +262,10 @@
 			</File>
 			<File
 				RelativePath="..\CTracerMessages.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDigitalIo.h"
 				>
 			</File>
 			<File

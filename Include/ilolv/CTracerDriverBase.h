@@ -78,10 +78,6 @@ public:
 	 */
 	int GetControllerMode() const;
 
-	/**	Called when input was changed.
-	 *		@param	edgeBits	edge bits.
-	 */
-	void OnLightBarrierEdge(I_DWORD edgeBits);
 	/**	Called if line position defined in SetNextEventPosition was reached.
 	 *		@param	eventIndex	index of event used by InsertPositionToQueue().
 	 */
@@ -95,6 +91,7 @@ public:
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
+	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
 	virtual void OnPeriodicPulse();
 
 protected:
@@ -129,6 +126,10 @@ protected:
 		/**	Last position of accepted edge.
 		 */
 		I_DWORD lastEdgePosition;
+		/**
+			Last read barrier state.
+		*/
+		bool lastBarrierState;
 	};
 
 	struct FifoElement{
@@ -151,6 +152,13 @@ protected:
 		__int64 lastEjectorTime;
 	};
 
+	/**
+		Called when light barrier edge was detected.
+		\param	basePosition	base line position.
+								This position can differ from current position.
+		\param	unit			inspection unit associated with this light barrier.
+	*/
+	void OnLightBarrierEdge(I_DWORD basePosition, int unitIndex);
 	/**	Add object to fifo list.
 	 */
 	bool AddObjectToFifo(I_DWORD basePosition);
@@ -180,6 +188,9 @@ protected:
 				CTracerMessages::SingleTrigger::Result& result);
 
 	// abstract methods
+	/**	Get actual base position of production line.
+	 */
+	virtual I_DWORD GetLinePosition() const = 0;
 	/**
 		Set number of needed counter queues.
 		Single queue generate interrupt if first in queue counter value is reached.
@@ -190,6 +201,10 @@ protected:
 		Insert new position to specified counter queue.
 	*/
 	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition) = 0;
+	/**
+		Get state of specified light barrier bit.
+	*/
+	virtual bool GetLightBarrierBit(int lightBarrierIndex) const = 0;
 	/**	Set trigger bit to specified state.
 	 */
 	virtual void SetTriggerBit(int triggerIndex, bool state) = 0;
@@ -200,12 +215,6 @@ protected:
 	 *		@sa IoBit
 	 */
 	virtual void SetIoBit(int bitIndex, bool state) = 0;
-	/**	Get actual base position of production line.
-	 */
-	virtual I_DWORD GetLinePosition() const = 0;
-	/**	Get state of ejection control light barrier bit state.
-	 */
-	virtual bool GetEjectionControlBit() const = 0;
 
 	// static methods
 	static int CalcNextFifoIndex(int prevIndex);
@@ -227,7 +236,7 @@ private:
 		/**	Indicate position where ejection decision must be taken.
 		 */
 		PE_EJECTION_DECISION,
-		PE_POINT_CONTROL,
+		PE_EJECTION_CONTROL,
 		PE_FIRST_TRIGGER
 	};
 

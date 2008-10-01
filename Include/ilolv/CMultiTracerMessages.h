@@ -3,6 +3,7 @@
 
 
 #include "ilolv/CTracerMessages.h"
+#include "ilolv/CIoCardTracerMessages.h"
 
 
 namespace ilolv
@@ -17,6 +18,7 @@ public:
 		int linesCount;
 	};
 
+	// commands
 	struct SetParams: public MultiTracerParams
 	{
 		enum
@@ -38,21 +40,30 @@ public:
 
 		I_DWORD lineIndex;
 
-		I_DWORD lightBarriersBitIndex;
-		I_DWORD ejectionControlBitIndex;
-		I_DWORD ejectorsBitIndex;
-		I_DWORD triggersBitIndex;
-		I_DWORD readyBitIndex;
-		I_DWORD iosBitIndex;
-
 		CTracerMessages::SetParams line;
+	};
+
+	struct SetLineIoParams
+	{
+		enum
+		{
+			Id = SetLineParams::Id + 1
+		};
+
+		typedef CTracerMessages::SetParams::Result Result;
+
+		I_DWORD lineIndex;
+
+		I_DWORD readyBitIndex;
+
+		CIoCardTracerMessages::SetIoParams line;
 	};
 
 	struct SetUnitParams
 	{
 		enum
 		{
-			Id = SetLineParams::Id + 1
+			Id = SetLineIoParams::Id + 1
 		};
 
 		typedef CTracerMessages::SetUnitParams::Result Result;
@@ -109,20 +120,32 @@ public:
 			Id = SingleTrigger::Id + 1
 		};
 
-		struct Result: public CTracerMessages::GetLineInfo::Result
-		{
-			I_DWORD sensorBits;
-			I_BYTE ejectionControlBit;
-		};
+		typedef CTracerMessages::GetLineInfo::Result Result;
 
 		I_DWORD lineIndex;
+
+		CTracerMessages::GetLineInfo line;
+	};
+
+	struct GetLineLightBarrierInfo
+	{
+		enum
+		{
+			Id = GetLineInfo::Id + 1
+		};
+
+		typedef CIoCardTracerMessages::GetLightBarrierInfo::Result Result;
+
+		I_DWORD lineIndex;
+
+		CIoCardTracerMessages::GetLightBarrierInfo line;
 	};
 
 	struct PopId
 	{
 		enum
 		{
-			Id = GetLineInfo::Id + 1
+			Id = GetLineLightBarrierInfo::Id + 1
 		};
 
 		typedef CTracerMessages::PopId::Result Result;

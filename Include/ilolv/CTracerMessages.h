@@ -75,6 +75,10 @@ public:
 		*/
 		int ejectorsCount;
 		/**
+			Number of light barriers.
+		*/
+		int lightBarriersCount;
+		/**
 			Index of ejector used if no ejector was specified by application.
 			This ejector will be used for not processed object.
 			If it negative, no ejection will be done.
@@ -101,13 +105,14 @@ public:
 		/**
 			If true ejection control is enabled.
 		*/
-		bool isEjectionControlEnabled;
+		bool isEcEnabled;
 		/**
-			Distance between base position and ejection control (in encoder ticks).
+			Parameter of ejection control light barrier.
 		*/
-		int ejectionControlPosition;
+		CInspectionUnitMessages::LightBarrierParams ecLightBarrier;
 	};
 
+	// commands
 	struct SetParams: public TracerParams
 	{
 		enum

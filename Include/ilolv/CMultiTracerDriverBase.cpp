@@ -57,15 +57,31 @@ bool CMultiTracerDriverBase::OnInstruction(
 			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
 				SingleLine& line = m_lines[lineIndex];
 
-				line.m_lightBarrierBitsIndex = instruction.lightBarriersBitIndex;
-				line.m_ejectionControlBitIndex = instruction.ejectionControlBitIndex;
-				line.m_counterReadyBitIndex = instruction.readyBitIndex;
-				line.m_triggersBitIndex = instruction.triggersBitIndex;
-				line.m_ejectorsBitIndex = instruction.ejectorsBitIndex;
-				line.m_iosBitIndex = instruction.iosBitIndex;
-
 				line.OnInstruction(
 							CTracerMessages::SetParams::Id,
+							&instruction.line,
+							sizeof(CMultiTracerMessages::SetLineParams),
+							responseBuffer,
+							responseBufferSize,
+							responseSize);
+
+				CalcInterruptsMask();
+			}
+		}
+		break;
+
+	case CMultiTracerMessages::SetLineIoParams::Id:
+		if (instructionBufferSize >= sizeof(CMultiTracerMessages::SetLineIoParams)){
+			const CMultiTracerMessages::SetLineIoParams& instruction = *(const CMultiTracerMessages::SetLineIoParams*)instructionBuffer;
+
+			int lineIndex = int(instruction.lineIndex);
+			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
+				SingleLine& line = m_lines[lineIndex];
+
+				line.m_counterReadyBitIndex = instruction.readyBitIndex;
+
+				line.OnInstruction(
+							CIoCardTracerMessages::SetIoParams::Id,
 							&instruction.line,
 							sizeof(CMultiTracerMessages::SetLineParams),
 							responseBuffer,
@@ -124,7 +140,6 @@ bool CMultiTracerDriverBase::OnInstruction(
 			line.m_isCounterUnknown = true;
 			line.m_isCounterReadyUnknown = true;
 			line.m_isCounterReady = false;
-			line.m_lastLightBarrierBits = 0;
 			line.m_lastEjectionControlBit = true;
 			line.m_sendCounterValue = 0;
 
@@ -160,10 +175,8 @@ bool CMultiTracerDriverBase::OnInstruction(
 		break;
 
 	case CMultiTracerMessages::GetLineInfo::Id:
-		if (		(instructionBufferSize >= sizeof(CMultiTracerMessages::GetLineInfo)) &&
-					(responseBufferSize >= sizeof(CMultiTracerMessages::GetLineInfo::Result))){
+		if (instructionBufferSize >= sizeof(CMultiTracerMessages::GetLineInfo)){
 			const CMultiTracerMessages::GetLineInfo& instruction = *(const CMultiTracerMessages::GetLineInfo*)instructionBuffer;
-			CMultiTracerMessages::GetLineInfo::Result& result = *(CMultiTracerMessages::GetLineInfo::Result*)responseBuffer;
 
 			int lineIndex = int(instruction.lineIndex);
 			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
@@ -176,18 +189,26 @@ bool CMultiTracerDriverBase::OnInstruction(
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
+			}
+		}
 
+		break;
 
-				const CTracerMessages::TracerParams& params = line.GetTracerParams();
+	case CMultiTracerMessages::GetLineLightBarrierInfo::Id:
+		if (instructionBufferSize >= sizeof(CMultiTracerMessages::GetLineLightBarrierInfo)){
+			const CMultiTracerMessages::GetLineLightBarrierInfo& instruction = *(const CMultiTracerMessages::GetLineLightBarrierInfo*)instructionBuffer;
 
-				I_DWORD sensorBitsMask = I_DWORD((1 << params.unitsCount) - 1);
-				I_DWORD sensorBits = (m_inputBits >> line.m_lightBarrierBitsIndex) & sensorBitsMask;
-				bool ejectionControlBit = ((m_inputBits >> line.m_ejectionControlBitIndex) & 1) != 0;
+			int lineIndex = int(instruction.lineIndex);
+			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
+				SingleLine& line = m_lines[lineIndex];
 
-				result.sensorBits = sensorBits;
-				result.ejectionControlBit = ejectionControlBit? 1: 0;
-
-				responseSize = sizeof(CMultiTracerMessages::GetLineInfo::Result);
+				return line.OnInstruction(
+							CIoCardTracerMessages::GetLightBarrierInfo::Id,
+							NULL,
+							0,
+							responseBuffer,
+							responseBufferSize,
+							responseSize);
 			}
 		}
 
@@ -246,25 +267,8 @@ void CMultiTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
 
-		const CTracerMessages::TracerParams& params = line.GetTracerParams();
-
-		I_DWORD maskedInputBits = m_inputBits & m_interruptsMask;
-
-		I_DWORD barrierBitsMask = I_DWORD((1 << params.unitsCount) - 1);
-		I_DWORD barrierBits = (maskedInputBits >> line.m_lightBarrierBitsIndex) & barrierBitsMask;
-
-		I_DWORD barrierEdgeBits = (barrierBits ^ line.m_lastLightBarrierBits) & barrierBits;
-		line.m_lastLightBarrierBits = barrierBits;
-
-		if (barrierEdgeBits != 0){
-			line.OnLightBarrierEdge(barrierEdgeBits);
-		}
-
-		bool ejectionControlBit = ((maskedInputBits >> line.m_ejectionControlBitIndex) & 1) != 0;
-
-		line.m_lastEjectionControlBit = ejectionControlBit;
-
-		line.OnHardwareInterrupt(line.m_isCounterReady?
+		line.OnHardwareInterrupt(
+					line.m_isCounterReady?
 					interruptFlags | CIoCardTracerDriverBase::IF_ENCODER_INTERRUPT:
 					interruptFlags);
 		I_ASSERT(!line.m_isCounterReady || (line.m_sendCounterValue > 0));	// if counter was ready, new value should be set
@@ -282,9 +286,19 @@ void CMultiTracerDriverBase::OnPeriodicPulse()
 }
 
 
+// reimplemented (ilolv::IDigitalIo)
+
+void CMultiTracerDriverBase::SetOutputBits(I_DWORD value, I_DWORD mask)
+{
+	I_ASSERT((value & (~mask)) == 0);	// no bits outside mask are set
+
+	m_outputBits = (m_outputBits & ~mask) | value;
+}
+
+
 // protected methods
 
-void CMultiTracerDriverBase::ReadHardwareValues(__int64 microsecsTimer, SingleLine::NativeTimer internalTimer)
+void CMultiTracerDriverBase::ReadHardwareValues(__int64 microsecsTimer, IDriver::NativeTimer internalTimer)
 {
 	I_ASSERT(internalTimer != 0);
 	I_ASSERT(m_nativeTimer == 0);
@@ -320,7 +334,7 @@ void CMultiTracerDriverBase::ReadHardwareValues(__int64 microsecsTimer, SingleLi
 			line.m_isCounterReadyUnknown = false;
 			line.m_isCounterReady = isCounterReadyBit;
 
-			line.UpdateLinePosition(counterValue);
+			line.UpdateHardwareValues(m_inputBits, I_DWORD(I_SDWORD(I_SWORD(counterValue))), m_microsecsTimer, m_nativeTimer);
 		}
 	}
 }
@@ -353,14 +367,6 @@ void CMultiTracerDriverBase::WriteHardwareValues()
 }
 
 
-void CMultiTracerDriverBase::SetOutputBits(I_DWORD value, I_DWORD mask)
-{
-	I_ASSERT((value & (~mask)) == 0);	// no bits outside mask are set
-
-	m_outputBits = (m_outputBits & ~mask) | value;
-}
-
-
 void CMultiTracerDriverBase::CalcInterruptsMask()
 {
 	I_DWORD newInterruptsMask = 0;
@@ -368,22 +374,7 @@ void CMultiTracerDriverBase::CalcInterruptsMask()
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
 
-		if (line.m_lightBarrierBitsIndex >= 0){
-			const CTracerMessages::TracerParams& params = line.GetTracerParams();
-
-			I_DWORD mask = ((1 << params.unitsCount) - 1) << line.m_lightBarrierBitsIndex;
-			newInterruptsMask |= mask;
-		}
-
-		if (line.m_ejectionControlBitIndex >= 0){
-			I_DWORD mask = 1 << line.m_ejectionControlBitIndex;
-			newInterruptsMask |= mask;
-		}
-
-		if (line.m_counterReadyBitIndex >= 0){
-			I_DWORD mask = (1 << line.m_counterReadyBitIndex);
-			newInterruptsMask |= mask;
-		}
+		newInterruptsMask |= line.GetInterruptsMask();
 	}
 
 	if (newInterruptsMask != m_interruptsMask){
@@ -403,8 +394,6 @@ void CMultiTracerDriverBase::ResetQueueLine(int lineIndex)
 	line.m_isCounterUnknown = true;
 	line.m_isCounterReadyUnknown = true;
 	line.m_isCounterReady = false;
-	line.m_lastLightBarrierBits = 0;
-	line.m_lastEjectionControlBit = true;
 	line.m_sendCounterValue = 0;
 
 	line.ResetQueue();
@@ -415,12 +404,7 @@ void CMultiTracerDriverBase::ResetQueueLine(int lineIndex)
 
 CMultiTracerDriverBase::SingleLine::SingleLine()
 {
-	m_lightBarrierBitsIndex = 1;
-	m_ejectionControlBitIndex = -1;
 	m_counterReadyBitIndex = -1;
-	m_triggersBitIndex = -1;
-	m_ejectorsBitIndex = -1;
-	m_iosBitIndex = -1;
 
 	Init(-1, NULL);
 }
@@ -431,87 +415,47 @@ void CMultiTracerDriverBase::SingleLine::Init(int lineNumber, CMultiTracerDriver
 	m_lineNumber = lineNumber;
 	m_parentPtr = parentPtr;
 
-	m_lastLightBarrierBits = 0;
-	m_lastEjectionControlBit = true;
 	m_sendCounterValue = 0;
 }
 
 
-// reimplemented (ilolv::CTracerDriverBase)
-
-void CMultiTracerDriverBase::SingleLine::SetTriggerBit(int bit, bool state)
+I_DWORD CMultiTracerDriverBase::SingleLine::GetInterruptsMask() const
 {
-	I_ASSERT(m_parentPtr != NULL);
+	I_DWORD retVal = BaseClass::GetInterruptsMask();
 
-	if ((m_parentPtr != NULL) && (m_triggersBitIndex != -1)){
-		I_ASSERT(bit < GetTracerParams().ejectorsCount);
+	if (m_counterReadyBitIndex >= 0){
+		I_DWORD mask = (1 << m_counterReadyBitIndex);
 
-		I_DWORD mask = I_DWORD(1 << (m_triggersBitIndex + bit));
-
-		m_parentPtr->SetOutputBits((state? mask: 0), mask);
+		retVal |= mask;
 	}
+
+	return retVal;
 }
 
 
-void CMultiTracerDriverBase::SingleLine::SetEjectorBit(int ejectorIndex, bool state)
+// reimplemented (ilolv::IDigitalIo)
+
+void CMultiTracerDriverBase::SingleLine::SetOutputBits(I_DWORD value, I_DWORD mask)
 {
-	I_ASSERT(m_parentPtr != NULL);
-	I_ASSERT(ejectorIndex >= 0);
-	I_ASSERT(ejectorIndex < GetTracerParams().ejectorsCount);
-
-	if ((m_parentPtr != NULL) && (m_ejectorsBitIndex != -1)){
-		I_DWORD mask = I_DWORD(1 << (m_ejectorsBitIndex + ejectorIndex));
-
-		m_parentPtr->SetOutputBits(state? mask: 0, mask);
-	}
-}
-
-
-void CMultiTracerDriverBase::SingleLine::SetIoBit(int bitIndex, bool state)
-{
-	I_ASSERT(m_parentPtr != NULL);
-	I_ASSERT(bitIndex >= 0);
-	I_ASSERT(bitIndex <= IB_LAST);
-
-	if ((m_parentPtr != NULL) && (m_iosBitIndex != -1)){
-		I_DWORD mask = I_DWORD(1 << (m_iosBitIndex + bitIndex));
-
-		m_parentPtr->SetOutputBits(state? mask: 0, mask);
-	}
-}
-
-
-__int64 CMultiTracerDriverBase::SingleLine::GetCurrentTimer() const
-{
-	I_ASSERT(m_parentPtr != NULL);
-
 	if (m_parentPtr != NULL){
-		return m_parentPtr->GetCurrentTimer();
-	}
-	else{
-		return 0;
+		m_parentPtr->SetOutputBits(value, mask);
 	}
 }
 
 
-CMultiTracerDriverBase::SingleLine::NativeTimer CMultiTracerDriverBase::SingleLine::GetCurrentNativeTimer() const
+// protected methods of embedded class SingleLine
+
+// reimplemented (ilolv::CIoCardTracerDriverBase)
+
+void CMultiTracerDriverBase::SingleLine::SetEncoderCounter(I_WORD value)
 {
-	I_ASSERT(m_parentPtr != NULL);
-
-	if (m_parentPtr != NULL){
-		return m_parentPtr->GetCurrentNativeTimer();
-	}
-	else{
-		return 0;
-	}
+	I_ASSERT(I_SWORD(value) > 0);
+	
+	m_sendCounterValue = value;
 }
 
 
-bool CMultiTracerDriverBase::SingleLine::GetEjectionControlBit() const
-{
-	return m_lastEjectionControlBit;
-}
-
+// reimplemented (ilolv::IDriver)
 
 void CMultiTracerDriverBase::SingleLine::AppendMessage(int category, int id, const char* text, bool doSend)
 {
@@ -526,18 +470,6 @@ void CMultiTracerDriverBase::SingleLine::AppendMessage(int category, int id, con
 			m_parentPtr->AppendMessage(category, id, numberText, true);
 		}
 	}
-}
-
-
-// protected methods of embedded class SingleLine
-
-// reimplemented (ilolv::CIoCardTracerDriverBase)
-
-void CMultiTracerDriverBase::SingleLine::SetEncoderCounter(I_WORD value)
-{
-	I_ASSERT(I_SWORD(value) > 0);
-	
-	m_sendCounterValue = value;
 }
 
 

@@ -31,6 +31,9 @@ public:
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
 	virtual void OnPeriodicPulse();
 
+	// reimplemented (ilolv::IDigitalIo)
+	void SetOutputBits(I_DWORD value, I_DWORD mask);
+
 protected:
 	enum{
 		MAX_LINES = 3,
@@ -48,13 +51,10 @@ protected:
 
 		void Init(int lineNumber, CMultiTracerDriverBase* parentPtr);
 
-		// reimplemented (ilolv::CTracerDriverBase)
-		virtual void SetTriggerBit(int bit, bool state);
-		virtual void SetEjectorBit(int ejectorIndex, bool state);
-		virtual void SetIoBit(int bitIndex, bool state);
-		virtual __int64 GetCurrentTimer() const;
-		virtual NativeTimer GetCurrentNativeTimer() const;
-		virtual bool GetEjectionControlBit() const;
+		I_DWORD GetInterruptsMask() const;
+
+		// reimplemented (ilolv::IDigitalIo)
+		virtual void SetOutputBits(I_DWORD value, I_DWORD mask);
 
 	protected:
 		// reimplemented (ilolv::CIoCardTracerDriverBase)
@@ -64,18 +64,7 @@ protected:
 		virtual void AppendMessage(int category, int id, const char* text, bool doSend = true);
 
 	private:
-		// indices of input bits
-		int m_lightBarrierBitsIndex;
-		int m_ejectionControlBitIndex;
-		int m_counterReadyBitIndex;
-
-		// indices of output bits
-		int m_triggersBitIndex;
-		int m_ejectorsBitIndex;
-		int m_iosBitIndex;
-
 		// temporaly stored I/O hardware values
-		I_DWORD m_lastLightBarrierBits;
 		bool m_lastEjectionControlBit;
 
 		// temporaly stored counter hardware values
@@ -85,11 +74,10 @@ protected:
 		I_WORD m_sendCounterValue;
 		bool m_isCounterReady;
 
-		// number of this line
-		int m_lineNumber;
+		int m_counterReadyBitIndex;
 
-		// parent object
-		CMultiTracerDriverBase* m_parentPtr;
+		int m_lineNumber;						// number of this line
+		CMultiTracerDriverBase* m_parentPtr;	// parent object
 	};
 
 	/**	Called if application sent "keep alive" signal.
@@ -98,10 +86,8 @@ protected:
 	 */
 	void OnKeepAlive();
 
-	void ReadHardwareValues(__int64 microsecsTimer, SingleLine::NativeTimer internalTimer);
+	void ReadHardwareValues(__int64 microsecsTimer, IDriver::NativeTimer internalTimer);
 	void WriteHardwareValues();
-
-	void SetOutputBits(I_DWORD value, I_DWORD mask);
 
 	void CalcInterruptsMask();
 	void ResetQueueLine(int lineIndex);
