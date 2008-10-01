@@ -42,7 +42,8 @@ void CProcessingControllerBase::AddProgressHandler(iproc::IProgressEventHandler*
 
 void CProcessingControllerBase::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	if (updateFlags == iproc::IOperator::ProgressChanged){
+	bool doUpdate = ((updateFlags & iproc::IOperator::ProgressChanged) != 0);
+	if (doUpdate){
 		iproc::IOperator* operatorPtr = GetObjectPtr();
 		I_ASSERT(operatorPtr != NULL);
 	
