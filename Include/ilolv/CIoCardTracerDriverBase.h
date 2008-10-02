@@ -28,7 +28,6 @@ public:
 	virtual bool GetLightBarrierBit(int lightBarrierIndex) const;
 	virtual void SetTriggerBit(int bit, bool state);
 	virtual void SetEjectorBit(int ejectorIndex, bool state);
-	virtual void SetIoBit(int bitIndex, bool state);
 	virtual __int64 GetCurrentTimer() const;
 	virtual NativeTimer GetCurrentNativeTimer() const;
 

@@ -192,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\COrderedPositionsQueue.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSignalBitsDriverBase.cpp"
 				>
 			</File>
@@ -241,7 +237,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\COrderedPositionsQueue.h"
+				RelativePath="..\TOrderedPositionsQueue.h"
 				>
 			</File>
 			<File

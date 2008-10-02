@@ -9,7 +9,7 @@ namespace ilolv
 
 
 CTracerDriverBase::CTracerDriverBase()
-:	m_popFifoOffset(-1)
+:	m_queueEndPosition(-1)
 {
 	m_params.unitsCount = 0;
 	m_params.ejectorsCount = 0;
@@ -17,25 +17,22 @@ CTracerDriverBase::CTracerDriverBase()
 	m_params.minObjectSize = 200;
 	m_params.minObjectsDistance = 300;
 	m_params.positionTolerance = 10;
-	m_params.ioBitDuration = 10000;
 	m_params.isEcEnabled = false;
 	m_params.ecLightBarrier.offset = 1000;
 
-	for (int unitIndex = 0; unitIndex < MAX_STATIONS; ++unitIndex){
-		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
+	for (int unitIndex = 0; unitIndex < MAX_UNITS_COUNT; ++unitIndex){
+		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-		station.lightBarrier.index = unitIndex;
-		station.lightBarrier.offset = 0;
-		station.triggerOffset = 0;
-		station.triggerDuration = 10000;
-		station.triggerRelaxationTime = 20000;
+		unit.lightBarrier.index = unitIndex;
+		unit.lightBarrier.offset = 0;
+		unit.triggerOffset = 0;
+		unit.triggerDuration = 10000;
+		unit.triggerRelaxationTime = 20000;
 
-		station.lastTriggerTime = 0;
-		station.pullTriggerDown = false;
-		station.lastTriggeredIndex = 0;
-		station.toInspectFifoIndex = 0;
-		station.lastEdgePosition = 0;
-		station.lastBarrierState = true;
+		unit.triggerOnTime = 0;
+		unit.isTriggerBitSet = false;
+		unit.edgeOnPosition = 0;
+		unit.lastBarrierState = true;
 	}
 
 	for (int ejectorIndex = 0; ejectorIndex < MAX_EJECTORS; ++ejectorIndex){
@@ -46,51 +43,39 @@ CTracerDriverBase::CTracerDriverBase()
 		ejector.onDistance = 200;
 		ejector.maxEjectorOnTime = 10000;
 
-		ejector.ejectorOnCount = 0;
-		ejector.lastEjectorTime = 0;
+		ejector.overloadCounter = 0;
+		ejector.ejectionOnTime = 0;
 	}
 
-	m_fifoLastIndex = 0;
-	m_fifoNextIndex = 0;
-	m_nextTriggerOffsetIndex = 0;
-	m_ejectionDecisionIndex = 0;
-	m_pointControlIndex = 0;
 	m_lastInspectedObjectIndex = 0;
-	m_lastFoundObjectIndex = 0;
 
-	m_controllerMode = CM_MANUAL;
+	m_controllerMode = CTracerMessages::TM_DISABLED;
 
-	m_firstEjectorOnEvent = PE_FIRST_TRIGGER;
-	m_firstEjectorOffEvent = PE_FIRST_TRIGGER;
+	m_ejectorOnEventIndex = EI_TRIGGER;
+	m_ejectorOffEventIndex = EI_TRIGGER;
 	m_firstStationIndex = 0;
 }
 
 
 void CTracerDriverBase::ResetQueue()
 {
-	m_fifoLastIndex = 0;
-	m_fifoNextIndex = 0;
-	m_nextTriggerOffsetIndex = 0;
-	m_ejectionDecisionIndex = 0;
-	m_pointControlIndex = 0;
+	m_objectsFifo.Reset();
 
 	I_DWORD linePosition = GetLinePosition();
 
 	int maxPopFifoDistance = 0;
 	for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
-		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
+		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-		station.lastTriggerTime = 0;
-		station.pullTriggerDown = 0;
-		station.lastTriggeredIndex = 0;
-		station.toInspectFifoIndex = 0;
-		station.lastEdgePosition =
+		unit.triggerOnTime = 0;
+		unit.isTriggerBitSet = 0;
+		unit.edgeOnPosition =
 						linePosition +
-						station.lightBarrier.offset -
+						unit.lightBarrier.offset -
 						m_params.minObjectsDistance;
-		station.lastBarrierState = true;
+		unit.lastBarrierState = true;
 
-		int triggerOffset = station.lightBarrier.offset + station.triggerOffset + 1;
+		int triggerOffset = unit.lightBarrier.offset + unit.triggerOffset + 1;
 		if (triggerOffset > maxPopFifoDistance){
 			maxPopFifoDistance = triggerOffset;
 		}
@@ -102,8 +87,8 @@ void CTracerDriverBase::ResetQueue()
 	for (int ejectorIndex = 0; ejectorIndex < m_params.ejectorsCount; ++ejectorIndex){
 		EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
-		ejector.ejectorOnCount = 0;
-		ejector.lastEjectorTime = 0;
+		ejector.overloadCounter = 0;
+		ejector.ejectionOnTime = 0;
 
 		if (ejector.isEnabled && (ejector.position >= 0)){
 			if ((minEjectorOnDistance < 0) || (ejector.position < minEjectorOnDistance)){
@@ -125,13 +110,13 @@ void CTracerDriverBase::ResetQueue()
 		}
 	}
 
-	m_firstEjectorOnEvent = PE_FIRST_TRIGGER + m_params.unitsCount;
-	m_firstEjectorOffEvent = m_firstEjectorOnEvent + m_params.ejectorsCount;
+	m_ejectorOnEventIndex = EI_TRIGGER + m_params.unitsCount;
+	m_ejectorOffEventIndex = m_ejectorOnEventIndex + m_params.ejectorsCount;
 
-	m_ejectionDecisionOffset = minEjectorOnDistance;
-	m_popFifoOffset = maxPopFifoDistance;
+	m_decisionEventPosition = minEjectorOnDistance;
+	m_queueEndPosition = maxPopFifoDistance;
 
-	if (!SetCounterQueuesCount(m_firstEjectorOffEvent + m_params.ejectorsCount)){
+	if (!SetCounterQueuesCount(m_ejectorOffEventIndex + m_params.ejectorsCount)){
 		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
 					CGeneralInfoMessages::MI_INTERNAL_ERROR,
 					"More queues needed than supported",
@@ -159,22 +144,28 @@ const CTracerMessages::EjectorParams& CTracerDriverBase::GetEjectorParams(int ej
 }
 
 
-int CTracerDriverBase::PopInspectionId(int unitIndex)
+int CTracerDriverBase::OnPopInspectionCommand(int unitIndex)
 {
-	if (unitIndex < m_params.unitsCount){
-		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
-		while (station.toInspectFifoIndex != m_fifoNextIndex){
-			int fifoIndex = station.toInspectFifoIndex;
+	if ((m_controllerMode == CTracerMessages::TM_AUTOMATIC) && (unitIndex < m_params.unitsCount)){
+		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-			TriggerType triggerType = m_fifo[fifoIndex].usedTriggers[unitIndex];
-			if ((triggerType == TT_UNKNOWN) && (m_controllerMode == CM_AUTOMATIC)){
-				return -1;
-			}
+		if (unit.isEnabled){
+			for (		int inspectionId = m_objectsFifo.GetBackIndex();
+						inspectionId != m_objectsFifo.GetNextFrontIndex();
+						inspectionId = m_objectsFifo.GetNextIndex(inspectionId)){
+				ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionId);
+				InspectionInfo& inspectionInfo = objectInfo.units[unitIndex];
 
-			station.toInspectFifoIndex = CalcNextFifoIndex(fifoIndex);
+				InspectionState state = inspectionInfo.inspectionState;
+				if (state <= IS_INIT){
+					break;
+				}
 
-			if ((triggerType == TT_TRIGGER) || (m_controllerMode != CM_AUTOMATIC)){
-				return fifoIndex;
+				if (state == IS_TRIGGERED){
+					inspectionInfo.inspectionState = IS_INSPECTION;
+
+					return inspectionId;
+				}
 			}
 		}
 	}
@@ -183,90 +174,65 @@ int CTracerDriverBase::PopInspectionId(int unitIndex)
 }
 
 
-I_DWORD CTracerDriverBase::GetObjectPosition(int inspectionId) const
-{
-	I_ASSERT(inspectionId >= 0);
-	I_ASSERT(inspectionId < FIFO_COUNT);
-
-	return m_fifo[inspectionId].basePosition;
-}
-
-
-I_DWORD CTracerDriverBase::GetObjectIndex(int inspectionId) const
-{
-	I_ASSERT(inspectionId >= 0);
-	I_ASSERT(inspectionId < FIFO_COUNT);
-
-	return m_fifo[inspectionId].objectIndex;
-}
-
-
-bool CTracerDriverBase::SetInspectionResult(int /*unitIndex*/, int inspectionId, int ejectorIndex)
+bool CTracerDriverBase::OnSetResultCommand(int unitIndex, int inspectionId, int ejectorIndex)
 {
 	I_ASSERT(inspectionId >= 0);
 	I_ASSERT(inspectionId < FIFO_COUNT);
 	I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
 	if ((inspectionId >= 0) && (inspectionId < FIFO_COUNT)){
-		FifoElement& element = m_fifo[inspectionId];
-		if (element.objectState >= OS_DECIDED){		// ejection decision was made, it is too late
+		ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionId);
+		if (objectInfo.objectState >= OS_EJECTION_DECIDED){		// ejection decision was made, it is too late
 			return false;
 		}
 
-		if (ejectorIndex >= 0){
-			EjectorInfo& ejector = m_ejectors[ejectorIndex];
-
-			if ((ejectorIndex > element.ejectorIndex) && ejector.isEnabled){
-				element.ejectorIndex = ejectorIndex;
-			}
-		}
-		else{
-			element.okCount++;
-		}
+		InspectionInfo& inspectionInfo = objectInfo.units[unitIndex];
+		inspectionInfo.inspectionState = IS_RESULT;
+		inspectionInfo.ejectorIndex = ejectorIndex;
 	}
 
 	return true;
 }
 
 
-void CTracerDriverBase::OnPositionEvent(int eventIndex)
+void CTracerDriverBase::ProcessPositionEvent(int eventIndex, void* userContext)
 {
-	if (eventIndex < PE_FIRST_TRIGGER){
+	if (eventIndex < EI_TRIGGER){
 		switch (eventIndex){
-		case PE_POP_FIFO:
-			OnPositionPopFifo();
+		case EI_DECISION:
+			OnDecisionEvent(int(userContext));
 			break;
 
-		case PE_EJECTION_DECISION:
-			OnPositionEjectionDecision();
+		case EI_EJECTION_CONTROL:
+			OnEjectionControlEvent(int(userContext));
 			break;
 
-		case PE_EJECTION_CONTROL:
-			OnPointControl();
+		case EI_REMOVE_FROM_QUEUE:
+			OnPopFifoEvent();
 			break;
 		}
 	}
 	else{
-		if (eventIndex < m_firstEjectorOnEvent){
+		if (eventIndex < m_ejectorOnEventIndex){
 			// trigger event, called at position where object should be triggered
-			int unitIndex = eventIndex - PE_FIRST_TRIGGER;
+			int unitIndex = eventIndex - EI_TRIGGER;
 			I_ASSERT(unitIndex < m_params.unitsCount);
 
-			OnPositionTrigger(unitIndex);
+			OnTriggerEvent(unitIndex, int(userContext));
 		}
-		else if (eventIndex < m_firstEjectorOffEvent){
+		else if (eventIndex < m_ejectorOffEventIndex){
 			// "ejector on" event, called at position where ejector should be turned on
-			int ejectorIndex = eventIndex - m_firstEjectorOnEvent;
+			int ejectorIndex = eventIndex - m_ejectorOnEventIndex;
 			I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
-			OnPositionEjectorOn(ejectorIndex);
+			OnEjectorOnEvent(ejectorIndex);
 		}
-		else if (eventIndex < m_firstEjectorOffEvent + m_params.ejectorsCount){
+		else if (eventIndex < m_ejectorOffEventIndex + m_params.ejectorsCount){
 			// "ejector off" event, called at position where ejector should be turned off
-			int ejectorIndex = eventIndex - m_firstEjectorOffEvent;
+			int ejectorIndex = eventIndex - m_ejectorOffEventIndex;
 			I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
-			OnPositionEjectorOff(ejectorIndex);
+			OnEjectorOffEvent(ejectorIndex);
 		}
 	}
 }
@@ -289,8 +255,8 @@ bool CTracerDriverBase::OnInstruction(
 		if (instructionBufferSize >= sizeof(CTracerMessages::SetParams)){
 			m_params = *(const CTracerMessages::SetParams*)instructionBuffer;
 
-			if (m_params.unitsCount > MAX_STATIONS){
-				m_params.unitsCount = MAX_STATIONS;
+			if (m_params.unitsCount > MAX_UNITS_COUNT){
+				m_params.unitsCount = MAX_UNITS_COUNT;
 			}
 
 			if (m_params.ejectorsCount > MAX_EJECTORS){
@@ -361,7 +327,7 @@ bool CTracerDriverBase::OnInstruction(
 			CTracerMessages::GetLineInfo::Result& result = *(CTracerMessages::GetLineInfo::Result*)responseBuffer;
 
 			result.linePos = GetLinePosition();
-			result.lastDetectedObjectIndex = m_lastFoundObjectIndex;
+			result.lastDetectedObjectIndex = m_lastInspectedObjectIndex;
 
 			responseSize = sizeof(CTracerMessages::GetLineInfo::Result);
 		}
@@ -373,13 +339,15 @@ bool CTracerDriverBase::OnInstruction(
 			const CTracerMessages::PopId& instruction = *(const CTracerMessages::PopId*)instructionBuffer;
 			CTracerMessages::PopId::Result& result = *(CTracerMessages::PopId::Result*)responseBuffer;
 
-			int inspectionId = PopInspectionId(instruction.unitIndex);
+			int inspectionId = OnPopInspectionCommand(instruction.unitIndex);
 
 			result.inspectionId = inspectionId;
 			if (inspectionId >= 0){
-				result.nativeTimestamp = m_fifo[inspectionId].nativeTimeStamps[instruction.unitIndex];
-				result.objectIndex = GetObjectIndex(inspectionId);
-				result.objectPosition = GetObjectPosition(inspectionId);
+				const ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionId);
+
+				result.nativeTimestamp = objectInfo.units[instruction.unitIndex].nativeTimeStamp;
+				result.objectIndex = objectInfo.objectIndex;
+				result.objectPosition = m_objectsFifo.GetPositionAt(inspectionId);
 			}
 
 			responseSize = sizeof(CTracerMessages::PopId::Result);
@@ -401,7 +369,7 @@ bool CTracerDriverBase::OnInstruction(
 					ejectorIndex = instruction.unit.ejectorIndex;
 				}
 
-				result.wasSet = SetInspectionResult(
+				result.wasSet = OnSetResultCommand(
 								instruction.unitIndex,
 								instruction.unit.inspectionId,
 								ejectorIndex);
@@ -434,20 +402,20 @@ void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 			bool lightBarrierBit = GetLightBarrierBit(lightBarrierIndex);
 			if (lightBarrierBit && !unit.lastBarrierState){
 				if (unit.edgePosition == 0){
-					if (I_SDWORD(linePosition - unit.lastEdgePosition - m_params.minObjectsDistance) > 0){
+					if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectsDistance) > 0){
 						OnLightBarrierEdge(linePosition - unit.lightBarrier.offset, i);
 					}
 				}
 
-				unit.lastEdgePosition = linePosition;
+				unit.edgeOnPosition = linePosition;
 			}
 			else if (!lightBarrierBit && unit.lastBarrierState){
 				if (unit.edgePosition != 0){
-					I_DWORD objectSize = linePosition - unit.lastEdgePosition;
+					I_DWORD objectSize = linePosition - unit.edgeOnPosition;
 					if (int(objectSize) < m_params.minObjectSize){
 						I_DWORD objectOffset = objectSize * unit.edgePosition / CInspectionUnitMessages::UnitParams::FALLING_EDGE;
 
-						OnLightBarrierEdge(unit.lastEdgePosition + objectOffset - unit.lightBarrier.offset, i);
+						OnLightBarrierEdge(unit.edgeOnPosition + objectOffset - unit.lightBarrier.offset, i);
 					}
 				}
 			}
@@ -465,30 +433,20 @@ void CTracerDriverBase::OnPeriodicPulse()
 	for (int ejectorIndex = 0; ejectorIndex < m_params.ejectorsCount; ++ejectorIndex){
 		EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
-		if ((ejector.ejectorOnCount > 0) && (actualTime > ejector.lastEjectorTime + ejector.maxEjectorOnTime)){
-			ejector.ejectorOnCount = 0;
+		if ((ejector.overloadCounter > 0) && (actualTime > ejector.ejectionOnTime + ejector.maxEjectorOnTime)){
+			ejector.overloadCounter = 0;
 
 			SetEjectorBit(ejectorIndex, false);
 		}
 	}
 
 	for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
-		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
+		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-		if (station.pullTriggerDown && (actualTime > station.lastTriggerTime + station.triggerDuration)){
-			station.pullTriggerDown = false;
+		if (unit.isTriggerBitSet && (actualTime > unit.triggerOnTime + unit.triggerDuration)){
+			unit.isTriggerBitSet = false;
 
 			SetTriggerBit(unitIndex, false);
-		}
-	}
-
-	for (int ioBitIndex = 0; ioBitIndex <= IB_LAST; ++ioBitIndex){
-		__int64& lastIoBitTime = m_lastIoBitTimes[ioBitIndex];
-
-		if ((lastIoBitTime != 0) && (actualTime > lastIoBitTime + m_params.ioBitDuration)){
-			lastIoBitTime = 0;
-
-			SetIoBit(ioBitIndex, false);
 		}
 	}
 }
@@ -496,253 +454,167 @@ void CTracerDriverBase::OnPeriodicPulse()
 
 // protected methods
 
-void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
+int CTracerDriverBase::PushNewObject(I_DWORD basePosition)
 {
-	InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
+	int inspectionIndex = m_objectsFifo.Insert(basePosition);
 
-	if (unitIndex == m_firstStationIndex){
-		if (AddObjectToFifo(basePosition)){
-			if (m_controllerMode == CM_AUTOMATIC){
-				++m_lastInspectedObjectIndex;
+	if (inspectionIndex >= 0){
+		ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionIndex);
 
-				if (m_ejectionDecisionOffset >= 0){
-					InsertPositionToQueue(PE_EJECTION_DECISION, basePosition + m_ejectionDecisionOffset);
-				}
+		objectInfo.objectIndex = m_lastInspectedObjectIndex;
+		objectInfo.decidedEjectorIndex = -1;
+		objectInfo.objectState = OS_INIT;
 
-				if (m_params.isEcEnabled){
-					InsertPositionToQueue(PE_EJECTION_CONTROL, basePosition + m_params.ecLightBarrier.offset);
-				}
+		if (m_params.autonomeEjectorIndex >= 0){
+			CTracerMessages::EjectorParams& ejector = m_ejectors[m_params.autonomeEjectorIndex];
+			if (ejector.isEnabled){	// Default ejector will be used, if it is enabled
+				objectInfo.decidedEjectorIndex = m_params.autonomeEjectorIndex;
 			}
-
-			I_ASSERT(m_popFifoOffset >= 0);
-			InsertPositionToQueue(PE_POP_FIFO, basePosition + m_popFifoOffset);
 		}
-	}
 
-	if ((m_controllerMode == CM_AUTOMATIC) && (unit.triggerOffset >= 0)){
-		I_DWORD triggerPosition = basePosition + unit.lightBarrier.offset + unit.triggerOffset;
-		InsertPositionToQueue(PE_FIRST_TRIGGER + unitIndex, triggerPosition);
-	}
-}
+		for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
+			InspectionInfo& inspectionInfo = objectInfo.units[unitIndex];
 
-
-bool CTracerDriverBase::AddObjectToFifo(I_DWORD basePosition)
-{
-	if (m_popFifoOffset <= 0){
-		return false;	// FIFO is not initialized
-	}
-
-	bool retVal = true;
-
-	++m_lastFoundObjectIndex;
-
-	FifoElement& element = m_fifo[m_fifoNextIndex];
-	element.okCount = 0;
-	element.basePosition = basePosition;
-	element.objectIndex = m_lastInspectedObjectIndex;
-	element.ejectorIndex = -1;
-
-	if (m_params.autonomeEjectorIndex >= 0){
-		CTracerMessages::EjectorParams& ejector = m_ejectors[m_params.autonomeEjectorIndex];
-		if (ejector.isEnabled){	// Default ejector will be used, if it is enabled
-			element.ejectorIndex = m_params.autonomeEjectorIndex;
+			inspectionInfo.inspectionState = IS_INIT;
+			inspectionInfo.ejectorIndex = -1;
+			inspectionInfo.nativeTimeStamp = 0;
 		}
-	}
-
-	if (m_controllerMode == CM_AUTOMATIC){
-		element.objectState = OS_INIT;
 	}
 	else{
-		element.objectState = OS_DIAGNOSTIC;
-	}
-
-	for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
-		element.usedTriggers[unitIndex] = TT_UNKNOWN;
-		element.nativeTimeStamps[unitIndex] = 0;
-	}
-
-	int newFifoBegin = CalcNextFifoIndex(m_fifoNextIndex);
-	if (newFifoBegin == m_fifoLastIndex){
 		AppendMessage(	CGeneralInfoMessages::MC_CRITICAL,
 					CTracerMessages::MI_QUEUE_ERROR,
 					"Objects queue is full",
 					true);
-
-		PopFifoLast();
-
-		retVal = false;
+		return -1;
 	}
 
+	++m_lastInspectedObjectIndex;
 
-	I_ASSERT(newFifoBegin != m_fifoLastIndex);
-	m_fifoNextIndex = newFifoBegin;
-
-	return retVal;
+	return inspectionIndex;
 }
 
 
-int CTracerDriverBase::FindInFifo(I_DWORD basePosition)
+void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
 {
-	int fifoIndex = m_fifoLastIndex;
-	while (fifoIndex != m_fifoNextIndex){
-		I_SDWORD posDiff = I_SDWORD(basePosition - m_fifo[fifoIndex].basePosition);
-		if ((posDiff > -I_SDWORD(m_params.positionTolerance)) && (posDiff < I_SDWORD(m_params.positionTolerance))){
-			return fifoIndex;
+	if ((m_queueEndPosition <= 0) || (m_controllerMode != CTracerMessages::TM_AUTOMATIC)){
+		return;
+	}
+
+	int inspectionIndex;
+	if (unitIndex == m_firstStationIndex){
+		inspectionIndex = PushNewObject(basePosition);
+		if (inspectionIndex < 0){
+			return;
 		}
 
-		fifoIndex = CalcNextFifoIndex(fifoIndex);
+		if (m_decisionEventPosition >= 0){
+			InsertPositionToQueue(EI_DECISION, basePosition + m_decisionEventPosition, (void*)inspectionIndex);
+		}
+
+		if (m_params.isEcEnabled){
+			InsertPositionToQueue(EI_EJECTION_CONTROL, basePosition + m_params.ecLightBarrier.offset, (void*)inspectionIndex);
+		}
+
+		I_ASSERT(m_queueEndPosition >= 0);
+		I_ASSERT(m_queueEndPosition >= m_decisionEventPosition);
+		I_ASSERT(m_queueEndPosition >= m_params.ecLightBarrier.offset);
+		InsertPositionToQueue(EI_REMOVE_FROM_QUEUE, basePosition + m_queueEndPosition, NULL);
 	}
+	else{
+		inspectionIndex = m_objectsFifo.FindByPosition(basePosition, m_params.positionTolerance);
 
-	return -1;
-}
+		if (inspectionIndex < 0){
+			AppendMessage(CGeneralInfoMessages::MC_ERROR,
+						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+						"Unidentfied object presented",
+						false);
+			AppendMessage(
+						CGeneralInfoMessages::MC_ERROR,
+						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+						": Unit ",
+						false);
+				char numberText[2];
+				numberText[0] = '1' + char(unitIndex);
+				numberText[1] = '\0';
+			AppendMessage(
+						CGeneralInfoMessages::MC_ERROR,
+						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+						numberText,
+						true);
 
-
-const CTracerDriverBase::FifoElement& CTracerDriverBase::PopFifoLast()
-{
-	int newFifoLast = CalcNextFifoIndex(m_fifoLastIndex);
-
-	for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
-		InspectionUnitElement& station = m_inspectionUnits[unitIndex];
-		if (station.toInspectFifoIndex == m_fifoLastIndex){
-			station.toInspectFifoIndex = newFifoLast;
+			return;
 		}
 	}
 
-	if (m_nextTriggerOffsetIndex == m_fifoLastIndex){
-		m_nextTriggerOffsetIndex = newFifoLast;
-	}
-	if (m_ejectionDecisionIndex == m_fifoLastIndex){
-		m_ejectionDecisionIndex = newFifoLast;
-	}
-	if (m_pointControlIndex == m_fifoLastIndex){
-		m_pointControlIndex = newFifoLast;
-	}
+	I_ASSERT(inspectionIndex >= 0);
 
-	const FifoElement& retVal = m_fifo[m_fifoLastIndex];
+	InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-	m_fifoLastIndex = newFifoLast;
-
-	return retVal;
+	if (unit.isEnabled){
+		I_DWORD triggerPosition = basePosition + unit.lightBarrier.offset + unit.triggerOffset;
+		InsertPositionToQueue(EI_TRIGGER + unitIndex, triggerPosition, (void*)inspectionIndex);
+	}
 }
 
 
 // position events
 
-void CTracerDriverBase::OnPositionTrigger(int unitIndex)
+void CTracerDriverBase::OnDecisionEvent(int inspectionIndex)
 {
-	I_ASSERT(unitIndex >= 0);
-	I_ASSERT(unitIndex < m_params.unitsCount);
+	ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionIndex);
 
-	InspectionUnitElement& station = m_inspectionUnits[unitIndex];
-
-	int fifoIndex = -1;
-
-	if (unitIndex == m_firstStationIndex){
-		fifoIndex = m_nextTriggerOffsetIndex;
-		m_nextTriggerOffsetIndex = CalcNextFifoIndex(fifoIndex);
-	}
-	else{
-		I_DWORD linePosition = GetLinePosition();
-
-		I_DWORD basePosition = linePosition - station.lightBarrier.offset - station.triggerOffset;
-
-		fifoIndex = FindInFifo(basePosition);
-	}
-
-	if (fifoIndex >= 0){
-		FifoElement& element = m_fifo[fifoIndex];
-
-		__int64 actualTime = GetCurrentTimer();
-		bool useTrigger =
-						!station.pullTriggerDown &&
-						(m_controllerMode == CM_AUTOMATIC) &&
-						(actualTime > station.lastTriggerTime + station.triggerRelaxationTime);
-
-		element.usedTriggers[unitIndex] = useTrigger? TT_TRIGGER: TT_LOST;
-
-		if (useTrigger){
-			NativeTimer internalTimer = GetCurrentNativeTimer();
-			element.nativeTimeStamps[unitIndex] = internalTimer;
-
-			station.lastTriggerTime = actualTime;
-			station.pullTriggerDown = true;
-
-			SetTriggerBit(unitIndex, true);
-		}
-	}
-	else{
-		AppendMessage(CGeneralInfoMessages::MC_ERROR,
-					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
-					"Unidentfied object presented",
-					false);
-		AppendMessage(
-					CGeneralInfoMessages::MC_ERROR,
-					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
-					": Unit ",
-					false);
-			char numberText[2];
-			numberText[0] = '1' + char(unitIndex);
-			numberText[1] = '\0';
-		AppendMessage(
-					CGeneralInfoMessages::MC_ERROR,
-					CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
-					numberText,
-					true);
-	}
-}
-
-
-void CTracerDriverBase::OnPositionEjectionDecision()
-{
-	FifoElement& element = m_fifo[m_ejectionDecisionIndex];
-
-	int newDecisionIndex = CalcNextFifoIndex(m_ejectionDecisionIndex);
+	int ejectorIndex = -1;
 
 	for (int i = 0; i < m_params.unitsCount; ++i){	// the objects for which ejection decision is made should not be taken to inspection
-		InspectionUnitElement& station = m_inspectionUnits[i];
+		InspectionUnitElement& unit = m_inspectionUnits[i];
 
-		if (station.toInspectFifoIndex == m_ejectionDecisionIndex){
-			station.toInspectFifoIndex = newDecisionIndex;
-		}
-	}
+		if (unit.isEnabled){
+			InspectionInfo& inspectionInfo = objectInfo.units[i];
 
-	if (element.okCount < m_params.unitsCount){
-		int ejectorIndex = element.ejectorIndex;
-		if (ejectorIndex >= 0){
-			if (element.objectState < OS_EJECTED){
-				element.objectState = OS_EJECTED;
+			int inspectionEjectorIndex = (inspectionInfo.inspectionState >= IS_RESULT)?
+						inspectionInfo.ejectorIndex:
+						objectInfo.decidedEjectorIndex;
+
+			if (inspectionEjectorIndex >= 0){
+				EjectorInfo& ejector = m_ejectors[inspectionEjectorIndex];
+
+				if (ejector.isEnabled && (inspectionEjectorIndex > ejectorIndex)){
+					ejectorIndex = inspectionEjectorIndex;
+				}
 			}
-
-			I_ASSERT(ejectorIndex < m_params.ejectorsCount);
-
-			const CTracerMessages::EjectorParams& ejector = m_ejectors[ejectorIndex];
-
-			I_DWORD ejectorPosition = element.basePosition + ejector.position;
-			InsertPositionToQueue(
-							m_firstEjectorOnEvent + ejectorIndex,
-							ejectorPosition);
-			InsertPositionToQueue(
-							m_firstEjectorOffEvent + ejectorIndex,
-							ejectorPosition + ejector.onDistance);
 		}
 	}
+	I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
-	if (element.objectState < OS_DECIDED){
-		element.objectState = OS_DECIDED;
+	objectInfo.decidedEjectorIndex = ejectorIndex;
+
+	if (ejectorIndex >= 0){
+		const CTracerMessages::EjectorParams& ejector = m_ejectors[ejectorIndex];
+
+		I_DWORD basePosition = m_objectsFifo.GetPositionAt(inspectionIndex);
+		I_DWORD ejectorPosition = basePosition + ejector.position;
+		InsertPositionToQueue(
+						m_ejectorOnEventIndex + ejectorIndex,
+						ejectorPosition,
+						NULL);
+		InsertPositionToQueue(
+						m_ejectorOffEventIndex + ejectorIndex,
+						ejectorPosition + ejector.onDistance,
+						NULL);
 	}
 
-	m_ejectionDecisionIndex = newDecisionIndex;
+	objectInfo.objectState = OS_EJECTION_DECIDED;
 }
 
 
-void CTracerDriverBase::OnPointControl()
+void CTracerDriverBase::OnEjectionControlEvent(int inspectionIndex)
 {
-	FifoElement& element = m_fifo[m_pointControlIndex];
+	ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionIndex);
 
 	I_ASSERT(m_params.ecLightBarrier.index >= 0);
 	bool objectPresent = GetLightBarrierBit(m_params.ecLightBarrier.index);
-	bool shouldBeEjected = ((element.okCount < m_params.unitsCount) && (element.ejectorIndex >= 0));
-	if (shouldBeEjected){
+
+	if (objectInfo.decidedEjectorIndex >= 0){
 		if (objectPresent){
 			AppendMessage(
 						CGeneralInfoMessages::MC_ERROR,
@@ -760,55 +632,71 @@ void CTracerDriverBase::OnPointControl()
 						false);
 		}
 	}
-
-	m_pointControlIndex = CalcNextFifoIndex(m_pointControlIndex);
 }
 
 
-void CTracerDriverBase::OnPositionEjectorOn(int ejectorIndex)
+void CTracerDriverBase::OnPopFifoEvent()
+{
+	m_objectsFifo.PopBack();
+}
+
+
+void CTracerDriverBase::OnTriggerEvent(int unitIndex, int inspectionIndex)
+{
+	I_ASSERT(unitIndex >= 0);
+	I_ASSERT(unitIndex < m_params.unitsCount);
+
+	ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionIndex);
+
+	InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
+	InspectionInfo& inspectionInfo = objectInfo.units[unitIndex];
+
+	__int64 actualTime = GetCurrentTimer();
+
+	if (		!unit.isTriggerBitSet &&
+				(m_controllerMode == CTracerMessages::TM_AUTOMATIC) &&
+				(actualTime > unit.triggerOnTime + unit.triggerRelaxationTime)){
+		SetTriggerBit(unitIndex, true);
+
+		unit.triggerOnTime = actualTime;
+		unit.isTriggerBitSet = true;
+
+		inspectionInfo.nativeTimeStamp = GetCurrentNativeTimer();
+		inspectionInfo.inspectionState = IS_TRIGGERED;
+	}
+	else{
+		inspectionInfo.inspectionState = IS_UNTRIGGERED;
+	}
+}
+
+
+void CTracerDriverBase::OnEjectorOnEvent(int ejectorIndex)
 {
 	I_ASSERT(ejectorIndex >= 0);
 	I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
 	EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
-	if (ejector.ejectorOnCount++ == 0){
-		__int64 actualTime = GetCurrentTimer();
-
-		ejector.lastEjectorTime = actualTime;
+	if (ejector.overloadCounter++ == 0){
+		ejector.ejectionOnTime = GetCurrentTimer();
 
 		SetEjectorBit(ejectorIndex, true);
 	}
 }
 
 
-void CTracerDriverBase::OnPositionEjectorOff(int ejectorIndex)
+void CTracerDriverBase::OnEjectorOffEvent(int ejectorIndex)
 {
 	I_ASSERT(ejectorIndex >= 0);
 	I_ASSERT(ejectorIndex < m_params.ejectorsCount);
 
 	EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
-	if (ejector.ejectorOnCount > 0){
-		--ejector.ejectorOnCount;
-
+	if (ejector.overloadCounter > 0){
 		SetEjectorBit(ejectorIndex, false);
+
+		--ejector.overloadCounter;
 	}
-}
-
-
-void CTracerDriverBase::OnPositionPopFifo()
-{
-	const FifoElement& element = PopFifoLast();
-
-	bool shouldBeEjected = ((element.okCount < m_params.unitsCount) && (element.ejectorIndex >= 0));
-
-	int signalIndex = shouldBeEjected? IB_NOK_SIGNAL: IB_OK_SIGNAL;
-
-	__int64 actualTime = GetCurrentTimer();
-	m_lastIoBitTimes[signalIndex] = actualTime;
-
-	SetIoBit(signalIndex, true);
 }
 
 
@@ -817,26 +705,29 @@ void CTracerDriverBase::OnSingleTriggerInstruction(
 			CTracerMessages::SingleTrigger::Result& result)
 {
 	if (		(instruction.unitIndex < m_params.unitsCount) &&
-				(m_controllerMode != CM_AUTOMATIC)){
-		InspectionUnitElement& station = m_inspectionUnits[instruction.unitIndex];
-		if (!station.pullTriggerDown){
+				(m_controllerMode == CTracerMessages::TM_MANUAL)){
+		InspectionUnitElement& unit = m_inspectionUnits[instruction.unitIndex];
+		if (!unit.isTriggerBitSet){
 			__int64 actualTime = GetCurrentTimer();
 
-			station.lastTriggerTime = actualTime;
-			station.pullTriggerDown = true;
+			unit.triggerOnTime = actualTime;
+			unit.isTriggerBitSet = true;
 
 			SetTriggerBit(instruction.unitIndex, true);
 
+			result.isDone = true;
 			result.nativeTimestamp = GetCurrentNativeTimer();
 
 			return;
 		}
+
+		result.isDone = false;
 	}
 
-	if (m_controllerMode == CM_AUTOMATIC){
+	if (m_controllerMode != CTracerMessages::TM_MANUAL){
 		AppendMessage(CGeneralInfoMessages::MC_ERROR,
 					CGeneralInfoMessages::MI_INTERNAL_ERROR,
-					"Manual trigger in automatic mode",
+					"Manual trigger can be done only in manual mode",
 					false);
 	}
 	else{

@@ -39,6 +39,12 @@ public:
 		{
 			FALLING_EDGE = 0x100
 		};
+
+		bool isEnabled;
+
+		/**
+			Parameter of light barrier used in this inspection unit.
+		*/
 		LightBarrierParams lightBarrier;
 
 		/**

@@ -87,19 +87,6 @@ void CIoCardTracerDriverBase::SetEjectorBit(int ejectorIndex, bool state)
 }
 
 
-void CIoCardTracerDriverBase::SetIoBit(int bitIndex, bool state)
-{
-	I_ASSERT(bitIndex >= 0);
-	I_ASSERT(bitIndex <= IB_LAST);
-
-	if (m_ioParams.iosBitIndex != -1){
-		I_DWORD mask = I_DWORD(1 << (m_ioParams.iosBitIndex + bitIndex));
-
-		SetOutputBits(state? mask: 0, mask);
-	}
-}
-
-
 __int64 CIoCardTracerDriverBase::GetCurrentTimer() const
 {
 	return m_currentTimer;

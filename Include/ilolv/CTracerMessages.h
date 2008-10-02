@@ -28,6 +28,30 @@ public:
 		MI_OBJECT_EJECTED,
 	};
 
+	/**
+		Working mode of object tracer.
+	*/
+	enum TracerMode
+	{
+		/**
+			No action is supported. Whole actions of object tracer are disabled.
+		*/
+		TM_DISABLED,
+		/**
+			Manual mode. Some actions like manual trigger can be made.
+		*/
+		TM_MANUAL,
+		/**
+			Automatic mode.
+			Objects will be traced, if there is no response from application they will be autonomic ejected.
+		*/
+		TM_AUTOMATIC,
+		/**
+			Diagnostic mode. Some special actions are possible.
+		*/
+		TM_DIAGNOSTIC
+	};
+
 	struct EjectorParams
 	{
 		/**
@@ -97,12 +121,6 @@ public:
 		*/
 		int positionTolerance;
 		/**
-			Duration time (in microseconds) for output signals.
-			If signaling event occure, output bit is immedietly set to 1.
-			After this time it will be reset.
-		*/
-		int ioBitDuration;
-		/**
 			If true ejection control is enabled.
 		*/
 		bool isEcEnabled;
@@ -168,6 +186,13 @@ public:
 
 		struct Result
 		{
+			/**
+				If manual trigger could be done, it wil be set to true.
+			*/
+			bool isDone;
+			/**
+				Timestamp of manual trigger.
+			*/
 			IDriver::NativeTimer nativeTimestamp;
 		};
 

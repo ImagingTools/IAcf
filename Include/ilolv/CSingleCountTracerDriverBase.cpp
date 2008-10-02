@@ -13,9 +13,9 @@ CSingleCountTracerDriverBase::CSingleCountTracerDriverBase()
 	m_positionEventsCount = 0;
 
 	for (int fifoIndex = 0; fifoIndex < MAX_EVENTS_COUNT; ++fifoIndex){
-		COrderedPositionsQueue& fifo = eventsFifos[fifoIndex];
+		EventQueue& eventQueue = m_positionEventQueues[fifoIndex];
 
-		fifo.Reset();
+		eventQueue.Reset();
 	}
 }
 
@@ -25,9 +25,9 @@ CSingleCountTracerDriverBase::CSingleCountTracerDriverBase()
 void CSingleCountTracerDriverBase::ResetQueue()
 {
 	for (int fifoIndex = 0; fifoIndex < m_positionEventsCount; ++fifoIndex){
-		COrderedPositionsQueue& fifo = eventsFifos[fifoIndex];
+		EventQueue& eventQueue = m_positionEventQueues[fifoIndex];
 
-		fifo.Reset();
+		eventQueue.Reset();
 	}
 
 	BaseClass::ResetQueue();
@@ -51,23 +51,23 @@ bool CSingleCountTracerDriverBase::SetCounterQueuesCount(int count)
 }
 
 
-void CSingleCountTracerDriverBase::InsertPositionToQueue(int queueIndex, I_DWORD counterPosition)
+void CSingleCountTracerDriverBase::InsertPositionToQueue(int queueIndex, I_DWORD counterPosition, void* userContext)
 {
 	I_ASSERT(queueIndex >= 0);
 	I_ASSERT(queueIndex < m_positionEventsCount);
 
 	I_DWORD currentLinePosition = GetLinePosition();
 	if (I_SWORD(counterPosition - currentLinePosition) <= 0){
-		OnPositionEvent(queueIndex);
+		ProcessPositionEvent(queueIndex, userContext);
 
 		return;
 	}
 
-	COrderedPositionsQueue& fifo = eventsFifos[queueIndex];
+	EventQueue& eventQueue = m_positionEventQueues[queueIndex];
 
-	bool wasFifoEmpty = fifo.IsEmpty();
+	bool wasFifoEmpty = eventQueue.IsEmpty();
 
-	if (fifo.Insert(counterPosition)){
+	if (eventQueue.Insert(counterPosition, &userContext) >= 0){
 		if (wasFifoEmpty){	// if was empty, check if event should be redirected
 			CalculateNextSinglePositionEvent();
 		}
@@ -92,9 +92,9 @@ bool CSingleCountTracerDriverBase::CalculateNextSinglePositionEvent()
 	int nextFifoIndex = -1;
 	I_SDWORD bestPosDiff = 0x7fffffff;
 	for (int index = 0; index < m_positionEventsCount; ++index){
-		const COrderedPositionsQueue& fifo = eventsFifos[index];
-		if (!fifo.IsEmpty()){
-			I_DWORD position = fifo.GetFront();
+		const EventQueue& eventQueue = m_positionEventQueues[index];
+		if (!eventQueue.IsEmpty()){
+			I_DWORD position = eventQueue.GetBackPosition();
 			I_SDWORD posDiff = position - currentLinePosition;
 
 			if (posDiff < bestPosDiff){
@@ -105,10 +105,10 @@ bool CSingleCountTracerDriverBase::CalculateNextSinglePositionEvent()
 	}
 
 	if (nextFifoIndex >= 0){
-		const COrderedPositionsQueue& fifo = eventsFifos[nextFifoIndex];
+		const EventQueue& eventQueue = m_positionEventQueues[nextFifoIndex];
 
-		I_ASSERT(!fifo.IsEmpty());
-		I_DWORD position = fifo.GetFront();
+		I_ASSERT(!eventQueue.IsEmpty());
+		I_DWORD position = eventQueue.GetBackPosition();
 
 		SetNextSinglePositionEvent(&position);
 
@@ -127,10 +127,14 @@ void CSingleCountTracerDriverBase::OnSinglePositionEvent()
 	I_DWORD currentLinePosition = GetLinePosition();
 
 	for (int eventIndex = m_positionEventsCount - 1; eventIndex >= 0; --eventIndex){
-		COrderedPositionsQueue& fifo = eventsFifos[eventIndex];
+		EventQueue& eventQueue = m_positionEventQueues[eventIndex];
 
-		if (fifo.PopFrontTill(currentLinePosition)){
-			OnPositionEvent(eventIndex);
+		while (!eventQueue.IsEmpty() && (I_SDWORD(eventQueue.GetBackPosition() - currentLinePosition) <= 0)){
+			void* userContext = eventQueue.GetBackObject();
+
+			ProcessPositionEvent(eventIndex, userContext);
+
+			eventQueue.PopBack();
 		}
 	}
 

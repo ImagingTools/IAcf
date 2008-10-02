@@ -3,7 +3,7 @@
 
 
 #include "ilolv/CTracerDriverBase.h"
-#include "ilolv/COrderedPositionsQueue.h"
+#include "ilolv/TOrderedPositionsQueue.h"
 
 
 namespace ilolv
@@ -24,7 +24,7 @@ public:
 	// reimplemented (ilolv::CTracerDriverBase)
 	virtual void ResetQueue();
 	virtual bool SetCounterQueuesCount(int count);
-	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition);
+	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition, void* userContext);
 
 protected:
 	/**
@@ -51,7 +51,9 @@ private:
 		MAX_EVENTS_COUNT = 50,
 	};
 
-	COrderedPositionsQueue eventsFifos[MAX_EVENTS_COUNT];
+	typedef TOrderedPositionsQueue<void*> EventQueue;
+	EventQueue m_positionEventQueues[MAX_EVENTS_COUNT];
+
 	int m_positionEventsCount;
 };
 

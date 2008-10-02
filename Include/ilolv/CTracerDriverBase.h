@@ -3,6 +3,7 @@
 
 
 #include "ilolv/IDriver.h"
+#include "ilolv/TOrderedPositionsQueue.h"
 #include "ilolv/CTracerMessages.h"
 
 
@@ -18,29 +19,8 @@ class CTracerDriverBase: virtual public IDriver
 public:
 	enum
 	{
-		MAX_STATIONS = 4,
+		MAX_UNITS_COUNT = 4,
 		MAX_EJECTORS = 4
-	};
-
-	enum InspectionResult
-	{
-		IR_OK,
-		IR_WARNING,
-		IR_ERROR
-	};
-
-	enum ControllerMode
-	{
-		CM_MANUAL,
-		CM_AUTOMATIC,
-		CM_MEASUREMENT
-	};
-
-	enum IoBit
-	{
-		IB_OK_SIGNAL,
-		IB_NOK_SIGNAL,
-		IB_LAST = IB_NOK_SIGNAL
 	};
 
 	CTracerDriverBase();
@@ -55,33 +35,31 @@ public:
 		Get single inspection unit parameters.
 	*/
 	virtual const CInspectionUnitMessages::UnitParams& GetUnitParams(int unitIndex) const;
+	/**
+		Get single inspection unit parameters.
+	*/
 	const CTracerMessages::TracerParams& GetTracerParams();
+
 	/**
 		Get parameters of single ejector.
 	*/
 	const CTracerMessages::EjectorParams& GetEjectorParams(int unitIndex) const;
 
-	/**	Pop new id of object.
-	 */
-	int PopInspectionId(int unitIndex);
-	/**	Gets base position of specified fifo object.
-	 */
-	I_DWORD GetObjectPosition(int inspectionId) const;
-	/**	Gets object index counted since InitAllStations() was called.
-	 */
-	I_DWORD GetObjectIndex(int inspectionId) const;
-	/**	Sets result of inspection.
-	 */
-	bool SetInspectionResult(int unitIndex, int inspectionId, int ejectorIndex);
-	/**	Checks production line mode.
-	 *		@sa	ControllerMode
-	 */
-	int GetControllerMode() const;
+	/**
+		Processing of pop inspection command.
+	*/
+	int OnPopInspectionCommand(int unitIndex);
+	/**
+		Processing of set result command.
+	*/
+	bool OnSetResultCommand(int unitIndex, int inspectionId, int ejectorIndex);
 
-	/**	Called if line position defined in SetNextEventPosition was reached.
-	 *		@param	eventIndex	index of event used by InsertPositionToQueue().
-	 */
-	void OnPositionEvent(int eventIndex);
+	/**
+		Process of position event.
+		\param	eventIndex	index of event.
+		\param	userContext	user context used by event adding.
+	*/
+	void ProcessPositionEvent(int eventIndex, void* userContext);
 
 	// reimplemented (ilolv::IDriver)
 	virtual bool OnInstruction(
@@ -95,62 +73,128 @@ public:
 	virtual void OnPeriodicPulse();
 
 protected:
-	enum TriggerType{
-		TT_UNKNOWN,
-		TT_LOST,
-		TT_TRIGGER
+	enum InspectionState
+	{
+		/**
+			Initialized.
+		*/
+		IS_INIT,
+		/**
+			Trigger yould not be done.
+		*/
+		IS_UNTRIGGERED,
+		/**
+			Triggered, waiting to be get to inspect.
+		*/
+		IS_TRIGGERED,
+		/**
+			During inspection.
+		*/
+		IS_INSPECTION,
+		/**
+			Inspection is done and result is set.
+		*/
+		IS_RESULT
 	};
 
-	enum ObjectState{
+	/**
+		Describe state of traced object during processing in objects queue.
+	*/
+	enum ObjectState
+	{
+		/**
+			Object initialized (the state after adding to queue).
+		*/
 		OS_INIT,
-		OS_DECIDED,
-		OS_EJECTED,
-		OS_CONTROLLED,
-		OS_DIAGNOSTIC
+		/**
+			Ejection decision was made.
+			The value of ejectorIndex was calculated and it is valid.
+		*/
+		OS_EJECTION_DECIDED,
+		/**
+			Controlling of ejection is made.
+		*/
+		OS_CONTROLLED
 	};
 
 	struct InspectionUnitElement: public CInspectionUnitMessages::UnitParams
 	{
-		/**	Timestamp of last trigger.
-		 */
-		__int64 lastTriggerTime;
-		/**	If true, trigger bit should be pulled down on time out.
-		 */
-		bool pullTriggerDown;
-		/**	Index in FIFO of last triggered element.
-		 */
-		int lastTriggeredIndex;
-		/** Index of next object can be inspected.
-		 */
-		int toInspectFifoIndex;
-		/**	Last position of accepted edge.
-		 */
-		I_DWORD lastEdgePosition;
+		/**
+			Time of last trigger on.
+		*/
+		__int64 triggerOnTime;
+		/**
+			Indicate that trigger bit is on.
+		*/
+		bool isTriggerBitSet;
+		/**
+			Position of rising light barier edge.
+		*/
+		I_DWORD edgeOnPosition;
 		/**
 			Last read barrier state.
 		*/
 		bool lastBarrierState;
 	};
 
-	struct FifoElement{
-		NativeTimer nativeTimeStamps[MAX_STATIONS];
+	/**
+		Describe single inspection for each unit in objects queue.
+	*/
+	struct InspectionInfo
+	{
+		/**
+			State inspection.
+		*/
+		InspectionState inspectionState;
+		/**
+			Ejector index set by application as inspection result.
+		*/
+		int ejectorIndex;
+		/**
+			Trigger time stamp.
+		*/
+		NativeTimer nativeTimeStamp;
+	};
+
+	struct ObjectInfo
+	{
+		/**
+			State of this object.
+		*/
+		ObjectState objectState;
+
+		/**
+			State of inspection for each inspection unit.
+		*/
+		InspectionInfo units[MAX_UNITS_COUNT];
+
+		/**
+			Global object ID.
+		*/
 		I_DWORD objectIndex;
-		TriggerType usedTriggers[MAX_STATIONS];
-		/**	Position of the base point before first station.
-		 */
-		I_DWORD basePosition;
-		int okCount;				// number of OK objects, or -1 if this ejection decision was made
-		int ejectorIndex;			// Id of ejector will be used if object should be ejected.
-		ObjectState objectState;	// State of object.
+
+		/**
+			Index of ejector used to eject this object.
+		*/
+		int decidedEjectorIndex;
 	};
 
 	struct EjectorInfo: public CTracerMessages::EjectorParams
 	{
-		/**	Counts ejector on sets.
-		 */
-		int ejectorOnCount;
-		__int64 lastEjectorTime;
+		/**
+			Time when ejector was on.
+		*/
+		__int64 ejectionOnTime;
+		/**
+			Counter used to ensure that overlapped ejection will be done once.
+		*/
+		int overloadCounter;
 	};
+
+	/**
+		Add object to fifo list.
+	*/
+	int PushNewObject(I_DWORD basePosition);
 
 	/**
 		Called when light barrier edge was detected.
@@ -159,25 +203,14 @@ protected:
 		\param	unit			inspection unit associated with this light barrier.
 	*/
 	void OnLightBarrierEdge(I_DWORD basePosition, int unitIndex);
-	/**	Add object to fifo list.
-	 */
-	bool AddObjectToFifo(I_DWORD basePosition);
-	/**	Find object index for specified position using tolerances.
-	 *		@param	basePosition	position of the base.
-	 *		@return					object FIFO index or -1.
-	 */
-	int FindInFifo(I_DWORD basePosition);
-	/**	Remove last object from FIFO.
-	 */
-	const FifoElement& PopFifoLast();
 
 	// position events
-	void OnPositionTrigger(int unitIndex);
-	void OnPositionEjectionDecision();
-	void OnPointControl();
-	void OnPositionEjectorOn(int ejectorIndex);
-	void OnPositionEjectorOff(int ejectorIndex);
-	void OnPositionPopFifo();
+	void OnDecisionEvent(int inspectionIndex);
+	void OnEjectionControlEvent(int inspectionIndex);
+	void OnPopFifoEvent();
+	void OnTriggerEvent(int unitIndex, int inspectionIndex);
+	void OnEjectorOnEvent(int ejectorIndex);
+	void OnEjectorOffEvent(int ejectorIndex);
 
 	// instruction processing
 	/**
@@ -200,7 +233,7 @@ protected:
 	/**
 		Insert new position to specified counter queue.
 	*/
-	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition) = 0;
+	virtual void InsertPositionToQueue(int queueIndex, I_DWORD counterPosition, void* userContext) = 0;
 	/**
 		Get state of specified light barrier bit.
 	*/
@@ -211,10 +244,6 @@ protected:
 	/**	Set state of ejector bit.
 	 */
 	virtual void SetEjectorBit(int ejectorIndex, bool state) = 0;
-	/**	Set I/O bit to specified state.
-	 *		@sa IoBit
-	 */
-	virtual void SetIoBit(int bitIndex, bool state) = 0;
 
 	// static methods
 	static int CalcNextFifoIndex(int prevIndex);
@@ -226,45 +255,45 @@ private:
 		FIFO_COUNT = FIFO_INDEX_MASK + 1
 	};
 
-	/** Position event Id's.
-	 *		The bigger number means bigger priority.
-	 */
-	enum PositionEvent{
-		/**	Indicate position where elements will be removed from FIFO.
-		 */
-		PE_POP_FIFO,
-		/**	Indicate position where ejection decision must be taken.
-		 */
-		PE_EJECTION_DECISION,
-		PE_EJECTION_CONTROL,
-		PE_FIRST_TRIGGER
+	/**
+		Indices of position events.
+	*/
+	enum EventIndex
+	{
+		/**
+			Indicate position where ejection decision must be taken.
+		*/
+		EI_DECISION,
+		EI_EJECTION_CONTROL,
+		/**
+			Indicate position where elements will be removed from FIFO.
+		*/
+		EI_REMOVE_FROM_QUEUE,
+		/**
+			Begin of trigger indices.
+		*/
+		EI_TRIGGER
 	};
 
 	CTracerMessages::TracerParams m_params;
 
 	int m_controllerMode;
 
-	int m_fifoLastIndex;	// inclusive
-	int m_fifoNextIndex;	// exclusive
-	int m_nextTriggerOffsetIndex;
-	int m_ejectionDecisionIndex;
-	int m_pointControlIndex;
 	I_DWORD m_lastInspectedObjectIndex;
-	I_DWORD m_lastFoundObjectIndex;
 
-	int m_ejectionDecisionOffset;	// distance between base position and position where decision is made which (if any) ejector will be used.
-	int m_popFifoOffset;			// distance between base position and end position, where objects are removed from fifo.
+	typedef TOrderedPositionsQueue<ObjectInfo> ObjectsFifo;
+	ObjectsFifo m_objectsFifo;
 
-	InspectionUnitElement m_inspectionUnits[MAX_STATIONS];
+	InspectionUnitElement m_inspectionUnits[MAX_UNITS_COUNT];
 	EjectorInfo m_ejectors[MAX_EJECTORS];
-	FifoElement m_fifo[FIFO_COUNT];
 
-	int m_firstEjectorOnEvent;
-	int m_firstEjectorOffEvent;
+	int m_decisionEventPosition;
+	int m_queueEndPosition;
+
+	int m_ejectorOnEventIndex;
+	int m_ejectorOffEventIndex;
 
 	int m_firstStationIndex;
-
-	__int64 m_lastIoBitTimes[IB_LAST + 1];
 };
 
 
@@ -273,12 +302,6 @@ private:
 inline const CTracerMessages::TracerParams& CTracerDriverBase::GetTracerParams() const
 {
 	return m_params;
-}
-
-
-inline int CTracerDriverBase::GetControllerMode() const
-{
-	return m_controllerMode;
 }
 
 
