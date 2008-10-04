@@ -1,5 +1,5 @@
-#ifndef ilolv_CSignalBitsMessages_included
-#define ilolv_CSignalBitsMessages_included
+#ifndef ilolv_CSignalBitsCommands_included
+#define ilolv_CSignalBitsCommands_included
 
 
 #include "ilolv/ilolv.h"
@@ -9,7 +9,7 @@ namespace ilolv
 {
 
 
-class CSignalBitsMessages
+class CSignalBitsCommands
 {
 public:
 	enum SignalBit
@@ -69,6 +69,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CSignalBitsMessages_included
+#endif // !ilolv_CSignalBitsCommands_included
 
 

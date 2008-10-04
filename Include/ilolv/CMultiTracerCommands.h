@@ -1,16 +1,16 @@
-#ifndef ilolv_CMultiTracerMessages_included
-#define ilolv_CMultiTracerMessages_included
+#ifndef ilolv_CMultiTracerCommands_included
+#define ilolv_CMultiTracerCommands_included
 
 
-#include "ilolv/CTracerMessages.h"
-#include "ilolv/CIoCardTracerMessages.h"
+#include "ilolv/CTracerCommands.h"
+#include "ilolv/CIoCardTracerCommands.h"
 
 
 namespace ilolv
 {
 
 
-class CMultiTracerMessages
+class CMultiTracerCommands
 {
 public:
 	struct MultiTracerParams
@@ -36,11 +36,11 @@ public:
 			Id = SetParams::Id + 1
 		};
 
-		typedef CTracerMessages::SetParams::Result Result;
+		typedef CTracerCommands::SetParams::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::SetParams line;
+		CTracerCommands::SetParams line;
 	};
 
 	struct SetLineIoParams
@@ -50,13 +50,13 @@ public:
 			Id = SetLineParams::Id + 1
 		};
 
-		typedef CTracerMessages::SetParams::Result Result;
+		typedef CTracerCommands::SetParams::Result Result;
 
 		I_DWORD lineIndex;
 
 		I_DWORD readyBitIndex;
 
-		CIoCardTracerMessages::SetIoParams line;
+		CIoCardTracerCommands::SetIoParams line;
 	};
 
 	struct SetUnitParams
@@ -66,11 +66,11 @@ public:
 			Id = SetLineIoParams::Id + 1
 		};
 
-		typedef CTracerMessages::SetUnitParams::Result Result;
+		typedef CTracerCommands::SetUnitParams::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::SetUnitParams line;
+		CTracerCommands::SetUnitParams line;
 	};
 
 	struct SetEjectorParams
@@ -80,11 +80,11 @@ public:
 			Id = SetUnitParams::Id + 1
 		};
 
-		typedef CTracerMessages::SetEjectorParams::Result Result;
+		typedef CTracerCommands::SetEjectorParams::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::SetEjectorParams line;
+		CTracerCommands::SetEjectorParams line;
 	};
 
 	struct SetMode
@@ -106,11 +106,11 @@ public:
 			Id = SetMode::Id + 1
 		};
 
-		typedef CTracerMessages::SingleTrigger::Result Result;
+		typedef CTracerCommands::SingleTrigger::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::SingleTrigger line;
+		CTracerCommands::SingleTrigger line;
 	};
 
 	struct GetLineInfo
@@ -120,11 +120,11 @@ public:
 			Id = SingleTrigger::Id + 1
 		};
 
-		typedef CTracerMessages::GetLineInfo::Result Result;
+		typedef CTracerCommands::GetLineInfo::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::GetLineInfo line;
+		CTracerCommands::GetLineInfo line;
 	};
 
 	struct GetLineLightBarrierInfo
@@ -134,11 +134,11 @@ public:
 			Id = GetLineInfo::Id + 1
 		};
 
-		typedef CIoCardTracerMessages::GetLightBarrierInfo::Result Result;
+		typedef CIoCardTracerCommands::GetLightBarrierInfo::Result Result;
 
 		I_DWORD lineIndex;
 
-		CIoCardTracerMessages::GetLightBarrierInfo line;
+		CIoCardTracerCommands::GetLightBarrierInfo line;
 	};
 
 	struct PopId
@@ -148,11 +148,11 @@ public:
 			Id = GetLineLightBarrierInfo::Id + 1
 		};
 
-		typedef CTracerMessages::PopId::Result Result;
+		typedef CTracerCommands::PopId::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::PopId line;
+		CTracerCommands::PopId line;
 	};
 
 	struct SetResult
@@ -162,11 +162,11 @@ public:
 			Id = PopId::Id + 1
 		};
 
-		typedef CTracerMessages::SetResult::Result Result;
+		typedef CTracerCommands::SetResult::Result Result;
 
 		I_DWORD lineIndex;
 
-		CTracerMessages::SetResult line;
+		CTracerCommands::SetResult line;
 	};
 };
 
@@ -174,6 +174,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CMultiTracerMessages_included
+#endif // !ilolv_CMultiTracerCommands_included
 
 

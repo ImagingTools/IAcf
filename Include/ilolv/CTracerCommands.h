@@ -1,15 +1,15 @@
-#ifndef ilolv_CTracerMessages_included
-#define ilolv_CTracerMessages_included
+#ifndef ilolv_CTracerCommands_included
+#define ilolv_CTracerCommands_included
 
 
-#include "ilolv/CInspectionUnitMessages.h"
+#include "ilolv/CInspectionUnitCommands.h"
 
 
 namespace ilolv
 {
 
 
-class CTracerMessages
+class CTracerCommands
 {
 public:
 	enum MessageId
@@ -127,7 +127,7 @@ public:
 		/**
 			Parameter of ejection control light barrier.
 		*/
-		CInspectionUnitMessages::LightBarrierParams ecLightBarrier;
+		CInspectionUnitCommands::LightBarrierParams ecLightBarrier;
 	};
 
 	// commands
@@ -152,7 +152,7 @@ public:
 
 		int unitIndex;
 
-		CInspectionUnitMessages::SetParams unit;
+		CInspectionUnitCommands::SetParams unit;
 	};
 
 	struct SetEjectorParams
@@ -169,7 +169,7 @@ public:
 		EjectorParams ejector;
 	};
 
-	struct SetMode: public CInspectionUnitMessages::SetMode
+	struct SetMode: public CInspectionUnitCommands::SetMode
 	{
 		enum
 		{
@@ -198,7 +198,7 @@ public:
 
 		int unitIndex;
 
-		CInspectionUnitMessages::SingleTrigger unit;
+		CInspectionUnitCommands::SingleTrigger unit;
 	};
 
 	struct GetLineInfo
@@ -222,7 +222,7 @@ public:
 			Id = GetLineInfo::Id + 1
 		};
 
-		typedef CInspectionUnitMessages::PopId::Result Result;
+		typedef CInspectionUnitCommands::PopId::Result Result;
 
 		int unitIndex;
 	};
@@ -234,11 +234,11 @@ public:
 			Id = PopId::Id + 1
 		};
 
-		typedef CInspectionUnitMessages::SetResult::Result Result;
+		typedef CInspectionUnitCommands::SetResult::Result Result;
 
 		int unitIndex;
 
-		CInspectionUnitMessages::SetResult unit;
+		CInspectionUnitCommands::SetResult unit;
 	};
 };
 
@@ -246,6 +246,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CTracerMessages_included
+#endif // !ilolv_CTracerCommands_included
 
 

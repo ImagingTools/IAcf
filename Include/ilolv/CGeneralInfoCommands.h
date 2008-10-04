@@ -1,5 +1,5 @@
-#ifndef ilolv_CGeneralInfoMessages_included
-#define ilolv_CGeneralInfoMessages_included
+#ifndef ilolv_CGeneralInfoCommands_included
+#define ilolv_CGeneralInfoCommands_included
 
 
 #include "ilolv/ilolv.h"
@@ -9,7 +9,7 @@ namespace ilolv
 {
 
 
-class CGeneralInfoMessages
+class CGeneralInfoCommands
 {
 public:
 	/**
@@ -112,6 +112,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CGeneralInfoMessages_included
+#endif // !ilolv_CGeneralInfoCommands_included
 
 

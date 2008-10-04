@@ -1,7 +1,7 @@
 #include "ilolv/CSingleCountTracerDriverBase.h"
 
 
-#include "ilolv/CGeneralInfoMessages.h"
+#include "ilolv/CGeneralInfoCommands.h"
 
 
 namespace ilolv
@@ -73,8 +73,8 @@ void CSingleCountTracerDriverBase::InsertPositionToQueue(int queueIndex, I_DWORD
 		}
 	}
 	else{
-		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
-					CTracerMessages::MI_QUEUE_ERROR,
+		AppendMessage(CGeneralInfoCommands::MC_CRITICAL,
+					CTracerCommands::MI_QUEUE_ERROR,
 					"Cannot insert position to event queue",
 					true);
 

@@ -209,15 +209,19 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CGeneralInfoCommands.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CGeneralInfoDriverBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CGeneralInfoMessages.h"
+				RelativePath="..\CInspectionUnitCommands.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionUnitMessages.h"
+				RelativePath="..\CIoCardTracerCommands.h"
 				>
 			</File>
 			<File
@@ -225,7 +229,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CIoCardTracerMessages.h"
+				RelativePath="..\CMultiTracerCommands.h"
 				>
 			</File>
 			<File
@@ -233,11 +237,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiTracerMessages.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TOrderedPositionsQueue.h"
+				RelativePath="..\CSignalBitsCommands.h"
 				>
 			</File>
 			<File
@@ -245,11 +245,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSignalBitsMessages.h"
+				RelativePath="..\CSingleCountTracerDriverBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSingleCountTracerDriverBase.h"
+				RelativePath="..\CTracerCommands.h"
 				>
 			</File>
 			<File
@@ -257,7 +257,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTracerMessages.h"
+				RelativePath="..\ICommandCaller.h"
 				>
 			</File>
 			<File
@@ -270,6 +270,10 @@
 			</File>
 			<File
 				RelativePath="..\ilolv.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TOrderedPositionsQueue.h"
 				>
 			</File>
 		</Filter>

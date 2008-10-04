@@ -17,36 +17,36 @@ CGeneralInfoDriverBase::CGeneralInfoDriverBase()
 
 // reimplemented (ilolv::IDriver)
 
-bool CGeneralInfoDriverBase::OnInstruction(
-			I_DWORD instructionCode,
-			const void* instructionBuffer,
-			int instructionBufferSize,
+bool CGeneralInfoDriverBase::OnCommand(
+			I_DWORD commandCode,
+			const void* commandBuffer,
+			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
 			I_DWORD& responseSize)
 {
-	I_ASSERT((instructionBuffer != NULL) || (instructionBufferSize == 0));
+	I_ASSERT((commandBuffer != NULL) || (commandBufferSize == 0));
 
 	responseSize = 0;
 
-	switch (instructionCode){
-	case CGeneralInfoMessages::SetParams::Id:
-		if (instructionBufferSize >= sizeof(CGeneralInfoMessages::SetParams)){
-			m_params = *(const CGeneralInfoMessages::SetParams*)instructionBuffer;
+	switch (commandCode){
+	case CGeneralInfoCommands::SetParams::Id:
+		if (commandBufferSize >= sizeof(CGeneralInfoCommands::SetParams)){
+			m_params = *(const CGeneralInfoCommands::SetParams*)commandBuffer;
 		}
 		break;
 
-	case CGeneralInfoMessages::PopMessage::Id:
-		if (		(instructionBufferSize >= sizeof(CGeneralInfoMessages::PopMessage)) &&
-					(responseBufferSize >= sizeof(CGeneralInfoMessages::PopMessage::Result))){
-			OnPopMessageInstruction(*(CGeneralInfoMessages::PopMessage::Result*)responseBuffer);
+	case CGeneralInfoCommands::PopMessage::Id:
+		if (		(commandBufferSize >= sizeof(CGeneralInfoCommands::PopMessage)) &&
+					(responseBufferSize >= sizeof(CGeneralInfoCommands::PopMessage::Result))){
+			OnPopMessageCommand(*(CGeneralInfoCommands::PopMessage::Result*)responseBuffer);
 
-			responseSize = sizeof(CGeneralInfoMessages::PopMessage::Result);
+			responseSize = sizeof(CGeneralInfoCommands::PopMessage::Result);
 		}
 		break;
 
-	case CGeneralInfoMessages::KeepAlive::Id:
-		OnKeepAlive();
+	case CGeneralInfoCommands::KeepAlive::Id:
+		OnKeepAliveCommand();
 		break;
 
 	default:
@@ -57,22 +57,19 @@ bool CGeneralInfoDriverBase::OnInstruction(
 }
 
 
-void CGeneralInfoDriverBase::OnHardwareInterrupt(I_DWORD /*interruptFlags*/)
+void CGeneralInfoDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
-}
+	if ((interruptFlags & IF_PULSE_TIMER) != 0){
+		__int64 currentTimer = GetCurrentTimer();
+		if (		(m_nextMinKeepAliveTime > 0) &&
+					(currentTimer > m_nextMinKeepAliveTime)){
+			AppendMessage(CGeneralInfoCommands::MC_CRITICAL,
+						CGeneralInfoCommands::MI_NO_RESPONSE,
+						"Application doesn't response",
+						true);
 
-
-void CGeneralInfoDriverBase::OnPeriodicPulse()
-{
-	__int64 currentTimer = GetCurrentTimer();
-	if (		(m_nextMinKeepAliveTime > 0) &&
-				(currentTimer > m_nextMinKeepAliveTime)){
-		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
-					CGeneralInfoMessages::MI_NO_RESPONSE,
-					"Application doesn't response",
-					true);
-
-		m_nextMinKeepAliveTime = 0;
+			m_nextMinKeepAliveTime = 0;
+		}
 	}
 }
 
@@ -89,7 +86,7 @@ void CGeneralInfoDriverBase::AppendMessage(int category, int id, const char* tex
 			m_message.id = id;
 		}
 
-		while (m_messagePosition < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE){
+		while (m_messagePosition < CGeneralInfoCommands::MAX_ERROR_MESSAGE_SIZE){
 			char c = *(text++);
 			m_message.text[m_messagePosition] = c;
 
@@ -109,7 +106,7 @@ void CGeneralInfoDriverBase::AppendMessage(int category, int id, const char* tex
 
 // private methods
 
-void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMessage::Result& result)
+void CGeneralInfoDriverBase::OnPopMessageCommand(CGeneralInfoCommands::PopMessage::Result& result)
 {
 	result.category = m_message.category;
 
@@ -122,7 +119,7 @@ void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMe
 		I_ASSERT(text != NULL);
 
 		int i = 0;
-		for (; (i < CGeneralInfoMessages::MAX_ERROR_MESSAGE_SIZE - 1) && (text[i] != '\0'); ++i){
+		for (; (i < CGeneralInfoCommands::MAX_ERROR_MESSAGE_SIZE - 1) && (text[i] != '\0'); ++i){
 			result.text[i] = text[i];
 		}
 
@@ -131,7 +128,7 @@ void CGeneralInfoDriverBase::OnPopMessageInstruction(CGeneralInfoMessages::PopMe
 }
 
 
-void CGeneralInfoDriverBase::OnKeepAlive()
+void CGeneralInfoDriverBase::OnKeepAliveCommand()
 {
 	if (m_params.maxKeepAliveTime > 0){
 		m_nextMinKeepAliveTime = GetCurrentTimer() + m_params.maxKeepAliveTime;

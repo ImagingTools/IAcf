@@ -17,7 +17,8 @@ public:
 	enum InterruptFlags
 	{
 		IF_DIGITAL_INPUT = 0x100,
-		IF_ENCODER_INTERRUPT = 0x200
+		IF_ENCODER_INTERRUPT = 0x200,
+		IF_PULSE_TIMER = 0x400
 	};
 
 	typedef __int64 NativeTimer;
@@ -25,19 +26,19 @@ public:
 	virtual ~IDriver(){}
 
 	/**
-		Called if user instruction should be executed.
-		\param	instructionCode		code of instruction.
-		\param	instructionBuffer	pointer to instruction buffer.
-		\param	instructionBufferSize		size of instruction buffer in bytes.
+		Called if user command should be executed.
+		\param	commandCode			code of command.
+		\param	commandBuffer		pointer to command buffer.
+		\param	commandBufferSize	size of command buffer in bytes.
 		\param	responseBuffer		pointer to response buffer.
 		\param	responseSize		size of response buffer in bytes.
 									It is in/out value, should be set to real size of response.
-		\return	true if this instruction was consumed.
+		\return	true if this command was consumed.
 	*/
-	virtual bool OnInstruction(
-				I_DWORD instructionCode,
-				const void* instructionBuffer,
-				int instructionBufferSize,
+	virtual bool OnCommand(
+				I_DWORD commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize) = 0;
@@ -47,11 +48,6 @@ public:
 		\param	interruptFlags	interrupt source flags.
 	*/
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags) = 0;
-
-	/**
-		Called in regular period to provide time controlled events.
-	*/
-	virtual void OnPeriodicPulse() = 0;
 
 protected:
 	/**
@@ -66,7 +62,7 @@ protected:
 
 	/**
 		Append message or send complete message to application.
-		\param	category	category of message, \sa CGeneralInfoMessages::MessageCategory.
+		\param	category	category of message, \sa CGeneralInfoCommands::MessageCategory.
 		\param	id			ID of message.
 		\param	text		message text.
 		\param	doSend		if it is true, completed message will be send to application.

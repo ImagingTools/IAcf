@@ -1,7 +1,7 @@
 #include "ilolv/CTracerDriverBase.h"
 
 
-#include "ilolv/CGeneralInfoMessages.h"
+#include "ilolv/CGeneralInfoCommands.h"
 
 
 namespace ilolv
@@ -49,7 +49,7 @@ CTracerDriverBase::CTracerDriverBase()
 
 	m_lastInspectedObjectIndex = 0;
 
-	m_controllerMode = CTracerMessages::TM_DISABLED;
+	m_controllerMode = CTracerCommands::TM_DISABLED;
 
 	m_ejectorOnEventIndex = EI_TRIGGER;
 	m_ejectorOffEventIndex = EI_TRIGGER;
@@ -117,15 +117,15 @@ void CTracerDriverBase::ResetQueue()
 	m_queueEndPosition = maxPopFifoDistance;
 
 	if (!SetCounterQueuesCount(m_ejectorOffEventIndex + m_params.ejectorsCount)){
-		AppendMessage(CGeneralInfoMessages::MC_CRITICAL,
-					CGeneralInfoMessages::MI_INTERNAL_ERROR,
+		AppendMessage(CGeneralInfoCommands::MC_CRITICAL,
+					CGeneralInfoCommands::MI_INTERNAL_ERROR,
 					"More queues needed than supported",
 					true);
 	}
 }
 
 
-const CInspectionUnitMessages::UnitParams& CTracerDriverBase::GetUnitParams(int unitIndex) const
+const CInspectionUnitCommands::UnitParams& CTracerDriverBase::GetUnitParams(int unitIndex) const
 {
 	I_ASSERT(unitIndex >= 0);
 	I_ASSERT(unitIndex < m_params.unitsCount);
@@ -134,7 +134,7 @@ const CInspectionUnitMessages::UnitParams& CTracerDriverBase::GetUnitParams(int 
 }
 
 
-const CTracerMessages::EjectorParams& CTracerDriverBase::GetEjectorParams(int ejectorIndex) const
+const CTracerCommands::EjectorParams& CTracerDriverBase::GetEjectorParams(int ejectorIndex) const
 {
 	I_ASSERT(ejectorIndex >= 0);
 	I_ASSERT(ejectorIndex < m_params.ejectorsCount);
@@ -146,7 +146,7 @@ const CTracerMessages::EjectorParams& CTracerDriverBase::GetEjectorParams(int ej
 
 int CTracerDriverBase::OnPopInspectionCommand(int unitIndex)
 {
-	if ((m_controllerMode == CTracerMessages::TM_AUTOMATIC) && (unitIndex < m_params.unitsCount)){
+	if ((m_controllerMode == CTracerCommands::TM_AUTOMATIC) && (unitIndex < m_params.unitsCount)){
 		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
 		if (unit.isEnabled){
@@ -240,20 +240,20 @@ void CTracerDriverBase::ProcessPositionEvent(int eventIndex, void* userContext)
 
 // reimplemented (ilolv::IDriver)
 
-bool CTracerDriverBase::OnInstruction(
-			I_DWORD instructionCode,
-			const void* instructionBuffer,
-			int instructionBufferSize,
+bool CTracerDriverBase::OnCommand(
+			I_DWORD commandCode,
+			const void* commandBuffer,
+			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
 			I_DWORD& responseSize)
 {
 	responseSize = 0;
 
-	switch (instructionCode){
-	case CTracerMessages::SetParams::Id:
-		if (instructionBufferSize >= sizeof(CTracerMessages::SetParams)){
-			m_params = *(const CTracerMessages::SetParams*)instructionBuffer;
+	switch (commandCode){
+	case CTracerCommands::SetParams::Id:
+		if (commandBufferSize >= sizeof(CTracerCommands::SetParams)){
+			m_params = *(const CTracerCommands::SetParams*)commandBuffer;
 
 			if (m_params.unitsCount > MAX_UNITS_COUNT){
 				m_params.unitsCount = MAX_UNITS_COUNT;
@@ -273,14 +273,14 @@ bool CTracerDriverBase::OnInstruction(
 		}
 		break;
 
-	case CTracerMessages::SetUnitParams::Id:
-		if (instructionBufferSize >= sizeof(CTracerMessages::SetUnitParams)){
-			const CTracerMessages::SetUnitParams& instruction = *(const CTracerMessages::SetUnitParams*)instructionBuffer;
+	case CTracerCommands::SetUnitParams::Id:
+		if (commandBufferSize >= sizeof(CTracerCommands::SetUnitParams)){
+			const CTracerCommands::SetUnitParams& command = *(const CTracerCommands::SetUnitParams*)commandBuffer;
 
-			if ((instruction.unitIndex >= 0) && (instruction.unitIndex < m_params.unitsCount)){
-				CInspectionUnitMessages::UnitParams& params = m_inspectionUnits[instruction.unitIndex];
+			if ((command.unitIndex >= 0) && (command.unitIndex < m_params.unitsCount)){
+				CInspectionUnitCommands::UnitParams& params = m_inspectionUnits[command.unitIndex];
 
-				params = instruction.unit;
+				params = command.unit;
 
 				if (params.lightBarrier.index >= m_params.lightBarriersCount){
 					params.lightBarrier.index = 1;
@@ -289,92 +289,92 @@ bool CTracerDriverBase::OnInstruction(
 		}
 		break;
 
-	case CTracerMessages::SetEjectorParams::Id:
-		if (instructionBufferSize >= sizeof(CTracerMessages::SetEjectorParams)){
-			const CTracerMessages::SetEjectorParams& instruction = *(const CTracerMessages::SetEjectorParams*)instructionBuffer;
+	case CTracerCommands::SetEjectorParams::Id:
+		if (commandBufferSize >= sizeof(CTracerCommands::SetEjectorParams)){
+			const CTracerCommands::SetEjectorParams& command = *(const CTracerCommands::SetEjectorParams*)commandBuffer;
 
-			int ejectorIndex = int(instruction.ejectorIndex);
+			int ejectorIndex = int(command.ejectorIndex);
 			if ((ejectorIndex >= 0) && (ejectorIndex < m_params.ejectorsCount)){
-				CTracerMessages::EjectorParams& params = m_ejectors[ejectorIndex];
+				CTracerCommands::EjectorParams& params = m_ejectors[ejectorIndex];
 
-				params = instruction.ejector;
+				params = command.ejector;
 			}
 		}
 		break;
 
-	case CTracerMessages::SetMode::Id:
-		if (instructionBufferSize >= sizeof(CTracerMessages::SetMode)){
-			const CTracerMessages::SetMode& instruction = *(const CTracerMessages::SetMode*)instructionBuffer;
+	case CTracerCommands::SetMode::Id:
+		if (commandBufferSize >= sizeof(CTracerCommands::SetMode)){
+			const CTracerCommands::SetMode& command = *(const CTracerCommands::SetMode*)commandBuffer;
 
-			m_controllerMode = instruction.mode;
+			m_controllerMode = command.mode;
 
 			ResetQueue();
 		}
 		break;
 
-	case CTracerMessages::SingleTrigger::Id:
-		if (		(instructionBufferSize >= sizeof(CTracerMessages::SingleTrigger)) &&
-					(responseBufferSize >= sizeof(CTracerMessages::SingleTrigger::Result))){
-			OnSingleTriggerInstruction(
-						*(const CTracerMessages::SingleTrigger*)instructionBuffer,
-						*(CTracerMessages::SingleTrigger::Result*)responseBuffer);
-			responseSize = sizeof(CTracerMessages::SingleTrigger::Result);
+	case CTracerCommands::SingleTrigger::Id:
+		if (		(commandBufferSize >= sizeof(CTracerCommands::SingleTrigger)) &&
+					(responseBufferSize >= sizeof(CTracerCommands::SingleTrigger::Result))){
+			OnSingleTriggerCommand(
+						*(const CTracerCommands::SingleTrigger*)commandBuffer,
+						*(CTracerCommands::SingleTrigger::Result*)responseBuffer);
+			responseSize = sizeof(CTracerCommands::SingleTrigger::Result);
 		}
 		break;
 
-	case CTracerMessages::GetLineInfo::Id:
-		if (responseBufferSize >= sizeof(CTracerMessages::GetLineInfo::Result)){
-			CTracerMessages::GetLineInfo::Result& result = *(CTracerMessages::GetLineInfo::Result*)responseBuffer;
+	case CTracerCommands::GetLineInfo::Id:
+		if (responseBufferSize >= sizeof(CTracerCommands::GetLineInfo::Result)){
+			CTracerCommands::GetLineInfo::Result& result = *(CTracerCommands::GetLineInfo::Result*)responseBuffer;
 
 			result.linePos = GetLinePosition();
 			result.lastDetectedObjectIndex = m_lastInspectedObjectIndex;
 
-			responseSize = sizeof(CTracerMessages::GetLineInfo::Result);
+			responseSize = sizeof(CTracerCommands::GetLineInfo::Result);
 		}
 		break;
 
-	case CTracerMessages::PopId::Id:
-		if (		(instructionBufferSize >= sizeof(CTracerMessages::PopId)) &&
-					(responseBufferSize >= sizeof(CTracerMessages::PopId::Result))){
-			const CTracerMessages::PopId& instruction = *(const CTracerMessages::PopId*)instructionBuffer;
-			CTracerMessages::PopId::Result& result = *(CTracerMessages::PopId::Result*)responseBuffer;
+	case CTracerCommands::PopId::Id:
+		if (		(commandBufferSize >= sizeof(CTracerCommands::PopId)) &&
+					(responseBufferSize >= sizeof(CTracerCommands::PopId::Result))){
+			const CTracerCommands::PopId& command = *(const CTracerCommands::PopId*)commandBuffer;
+			CTracerCommands::PopId::Result& result = *(CTracerCommands::PopId::Result*)responseBuffer;
 
-			int inspectionId = OnPopInspectionCommand(instruction.unitIndex);
+			int inspectionId = OnPopInspectionCommand(command.unitIndex);
 
 			result.inspectionId = inspectionId;
 			if (inspectionId >= 0){
 				const ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionId);
 
-				result.nativeTimestamp = objectInfo.units[instruction.unitIndex].nativeTimeStamp;
+				result.nativeTimestamp = objectInfo.units[command.unitIndex].nativeTimeStamp;
 				result.objectIndex = objectInfo.objectIndex;
 				result.objectPosition = m_objectsFifo.GetPositionAt(inspectionId);
 			}
 
-			responseSize = sizeof(CTracerMessages::PopId::Result);
+			responseSize = sizeof(CTracerCommands::PopId::Result);
 		}
 		break;
 
-	case CTracerMessages::SetResult::Id:
-		if (		(instructionBufferSize >= sizeof(CTracerMessages::SetResult)) &&
-					(responseBufferSize >= sizeof(CTracerMessages::SetResult::Result))){
-			const CTracerMessages::SetResult& instruction = *(const CTracerMessages::SetResult*)instructionBuffer;
-			CTracerMessages::SetResult::Result& result = *(CTracerMessages::SetResult::Result*)responseBuffer;
+	case CTracerCommands::SetResult::Id:
+		if (		(commandBufferSize >= sizeof(CTracerCommands::SetResult)) &&
+					(responseBufferSize >= sizeof(CTracerCommands::SetResult::Result))){
+			const CTracerCommands::SetResult& command = *(const CTracerCommands::SetResult*)commandBuffer;
+			CTracerCommands::SetResult::Result& result = *(CTracerCommands::SetResult::Result*)responseBuffer;
 
-			if ((instruction.unitIndex >= 0) && (instruction.unitIndex < m_params.unitsCount)){
+			if ((command.unitIndex >= 0) && (command.unitIndex < m_params.unitsCount)){
 				int ejectorIndex;
-				if (instruction.unit.result != 0){
+				if (command.unit.result != 0){
 					ejectorIndex = -1;
 				}
 				else{
-					ejectorIndex = instruction.unit.ejectorIndex;
+					ejectorIndex = command.unit.ejectorIndex;
 				}
 
 				result.wasSet = OnSetResultCommand(
-								instruction.unitIndex,
-								instruction.unit.inspectionId,
+								command.unitIndex,
+								command.unit.inspectionId,
 								ejectorIndex);
 
-				responseSize = sizeof(CTracerMessages::SetResult::Result);
+				responseSize = sizeof(CTracerCommands::SetResult::Result);
 			}
 		}
 		break;
@@ -389,64 +389,60 @@ bool CTracerDriverBase::OnInstruction(
 
 void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
-	if ((interruptFlags & IF_ENCODER_INTERRUPT) == 0){
-		return;
-	}
+	if ((interruptFlags & IF_ENCODER_INTERRUPT) != 0){
+		I_DWORD linePosition = GetLinePosition();
 
-	I_DWORD linePosition = GetLinePosition();
+		for (int i = 0; i < m_params.unitsCount; ++i){
+			InspectionUnitElement& unit = m_inspectionUnits[i];
+			int lightBarrierIndex = unit.lightBarrier.index;
+			if (lightBarrierIndex >= 0){
+				bool lightBarrierBit = GetLightBarrierBit(lightBarrierIndex);
+				if (lightBarrierBit && !unit.lastBarrierState){
+					if (unit.edgePosition == 0){
+						if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectsDistance) > 0){
+							OnLightBarrierEdge(linePosition - unit.lightBarrier.offset, i);
+						}
+					}
 
-	for (int i = 0; i < m_params.unitsCount; ++i){
-		InspectionUnitElement& unit = m_inspectionUnits[i];
-		int lightBarrierIndex = unit.lightBarrier.index;
-		if (lightBarrierIndex >= 0){
-			bool lightBarrierBit = GetLightBarrierBit(lightBarrierIndex);
-			if (lightBarrierBit && !unit.lastBarrierState){
-				if (unit.edgePosition == 0){
-					if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectsDistance) > 0){
-						OnLightBarrierEdge(linePosition - unit.lightBarrier.offset, i);
+					unit.edgeOnPosition = linePosition;
+				}
+				else if (!lightBarrierBit && unit.lastBarrierState){
+					if (unit.edgePosition != 0){
+						I_DWORD objectSize = linePosition - unit.edgeOnPosition;
+						if (int(objectSize) < m_params.minObjectSize){
+							I_DWORD objectOffset = objectSize * unit.edgePosition / CInspectionUnitCommands::UnitParams::FALLING_EDGE;
+
+							OnLightBarrierEdge(unit.edgeOnPosition + objectOffset - unit.lightBarrier.offset, i);
+						}
 					}
 				}
 
-				unit.edgeOnPosition = linePosition;
+				unit.lastBarrierState = lightBarrierBit;
 			}
-			else if (!lightBarrierBit && unit.lastBarrierState){
-				if (unit.edgePosition != 0){
-					I_DWORD objectSize = linePosition - unit.edgeOnPosition;
-					if (int(objectSize) < m_params.minObjectSize){
-						I_DWORD objectOffset = objectSize * unit.edgePosition / CInspectionUnitMessages::UnitParams::FALLING_EDGE;
-
-						OnLightBarrierEdge(unit.edgeOnPosition + objectOffset - unit.lightBarrier.offset, i);
-					}
-				}
-			}
-
-			unit.lastBarrierState = lightBarrierBit;
-		}
-	}
-}
-
-
-void CTracerDriverBase::OnPeriodicPulse()
-{
-	__int64 actualTime = GetCurrentTimer();
-
-	for (int ejectorIndex = 0; ejectorIndex < m_params.ejectorsCount; ++ejectorIndex){
-		EjectorInfo& ejector = m_ejectors[ejectorIndex];
-
-		if ((ejector.overloadCounter > 0) && (actualTime > ejector.ejectionOnTime + ejector.maxEjectorOnTime)){
-			ejector.overloadCounter = 0;
-
-			SetEjectorBit(ejectorIndex, false);
 		}
 	}
 
-	for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
-		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
+	if ((interruptFlags & IF_PULSE_TIMER) != 0){
+		__int64 actualTime = GetCurrentTimer();
 
-		if (unit.isTriggerBitSet && (actualTime > unit.triggerOnTime + unit.triggerDuration)){
-			unit.isTriggerBitSet = false;
+		for (int ejectorIndex = 0; ejectorIndex < m_params.ejectorsCount; ++ejectorIndex){
+			EjectorInfo& ejector = m_ejectors[ejectorIndex];
 
-			SetTriggerBit(unitIndex, false);
+			if ((ejector.overloadCounter > 0) && (actualTime > ejector.ejectionOnTime + ejector.maxEjectorOnTime)){
+				ejector.overloadCounter = 0;
+
+				SetEjectorBit(ejectorIndex, false);
+			}
+		}
+
+		for (int unitIndex = 0; unitIndex < m_params.unitsCount; ++unitIndex){
+			InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
+
+			if (unit.isTriggerBitSet && (actualTime > unit.triggerOnTime + unit.triggerDuration)){
+				unit.isTriggerBitSet = false;
+
+				SetTriggerBit(unitIndex, false);
+			}
 		}
 	}
 }
@@ -466,7 +462,7 @@ int CTracerDriverBase::PushNewObject(I_DWORD basePosition)
 		objectInfo.objectState = OS_INIT;
 
 		if (m_params.autonomeEjectorIndex >= 0){
-			CTracerMessages::EjectorParams& ejector = m_ejectors[m_params.autonomeEjectorIndex];
+			CTracerCommands::EjectorParams& ejector = m_ejectors[m_params.autonomeEjectorIndex];
 			if (ejector.isEnabled){	// Default ejector will be used, if it is enabled
 				objectInfo.decidedEjectorIndex = m_params.autonomeEjectorIndex;
 			}
@@ -481,8 +477,8 @@ int CTracerDriverBase::PushNewObject(I_DWORD basePosition)
 		}
 	}
 	else{
-		AppendMessage(	CGeneralInfoMessages::MC_CRITICAL,
-					CTracerMessages::MI_QUEUE_ERROR,
+		AppendMessage(	CGeneralInfoCommands::MC_CRITICAL,
+					CTracerCommands::MI_QUEUE_ERROR,
 					"Objects queue is full",
 					true);
 		return -1;
@@ -496,7 +492,7 @@ int CTracerDriverBase::PushNewObject(I_DWORD basePosition)
 
 void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
 {
-	if ((m_queueEndPosition <= 0) || (m_controllerMode != CTracerMessages::TM_AUTOMATIC)){
+	if ((m_queueEndPosition <= 0) || (m_controllerMode != CTracerCommands::TM_AUTOMATIC)){
 		return;
 	}
 
@@ -524,21 +520,21 @@ void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
 		inspectionIndex = m_objectsFifo.FindByPosition(basePosition, m_params.positionTolerance);
 
 		if (inspectionIndex < 0){
-			AppendMessage(CGeneralInfoMessages::MC_ERROR,
-						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+			AppendMessage(CGeneralInfoCommands::MC_ERROR,
+						CInspectionUnitCommands::MI_UNIDENTIFIED_OBJECT_FOUND,
 						"Unidentfied object presented",
 						false);
 			AppendMessage(
-						CGeneralInfoMessages::MC_ERROR,
-						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+						CGeneralInfoCommands::MC_ERROR,
+						CInspectionUnitCommands::MI_UNIDENTIFIED_OBJECT_FOUND,
 						": Unit ",
 						false);
 				char numberText[2];
 				numberText[0] = '1' + char(unitIndex);
 				numberText[1] = '\0';
 			AppendMessage(
-						CGeneralInfoMessages::MC_ERROR,
-						CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+						CGeneralInfoCommands::MC_ERROR,
+						CInspectionUnitCommands::MI_UNIDENTIFIED_OBJECT_FOUND,
 						numberText,
 						true);
 
@@ -589,7 +585,7 @@ void CTracerDriverBase::OnDecisionEvent(int inspectionIndex)
 	objectInfo.decidedEjectorIndex = ejectorIndex;
 
 	if (ejectorIndex >= 0){
-		const CTracerMessages::EjectorParams& ejector = m_ejectors[ejectorIndex];
+		const CTracerCommands::EjectorParams& ejector = m_ejectors[ejectorIndex];
 
 		I_DWORD basePosition = m_objectsFifo.GetPositionAt(inspectionIndex);
 		I_DWORD ejectorPosition = basePosition + ejector.position;
@@ -617,8 +613,8 @@ void CTracerDriverBase::OnEjectionControlEvent(int inspectionIndex)
 	if (objectInfo.decidedEjectorIndex >= 0){
 		if (objectPresent){
 			AppendMessage(
-						CGeneralInfoMessages::MC_ERROR,
-						CTracerMessages::MI_OBJECT_UNEJECTED,
+						CGeneralInfoCommands::MC_ERROR,
+						CTracerCommands::MI_OBJECT_UNEJECTED,
 						"Object unejected",
 						true);
 		}
@@ -626,8 +622,8 @@ void CTracerDriverBase::OnEjectionControlEvent(int inspectionIndex)
 	else{
 		if (!objectPresent){
 			AppendMessage(
-						CGeneralInfoMessages::MC_ERROR,
-						CTracerMessages::MI_OBJECT_EJECTED,
+						CGeneralInfoCommands::MC_ERROR,
+						CTracerCommands::MI_OBJECT_EJECTED,
 						"Object ejected",
 						false);
 		}
@@ -654,7 +650,7 @@ void CTracerDriverBase::OnTriggerEvent(int unitIndex, int inspectionIndex)
 	__int64 actualTime = GetCurrentTimer();
 
 	if (		!unit.isTriggerBitSet &&
-				(m_controllerMode == CTracerMessages::TM_AUTOMATIC) &&
+				(m_controllerMode == CTracerCommands::TM_AUTOMATIC) &&
 				(actualTime > unit.triggerOnTime + unit.triggerRelaxationTime)){
 		SetTriggerBit(unitIndex, true);
 
@@ -700,20 +696,20 @@ void CTracerDriverBase::OnEjectorOffEvent(int ejectorIndex)
 }
 
 
-void CTracerDriverBase::OnSingleTriggerInstruction(
-			const CTracerMessages::SingleTrigger& instruction,
-			CTracerMessages::SingleTrigger::Result& result)
+void CTracerDriverBase::OnSingleTriggerCommand(
+			const CTracerCommands::SingleTrigger& command,
+			CTracerCommands::SingleTrigger::Result& result)
 {
-	if (		(instruction.unitIndex < m_params.unitsCount) &&
-				(m_controllerMode == CTracerMessages::TM_MANUAL)){
-		InspectionUnitElement& unit = m_inspectionUnits[instruction.unitIndex];
+	if (		(command.unitIndex < m_params.unitsCount) &&
+				(m_controllerMode == CTracerCommands::TM_MANUAL)){
+		InspectionUnitElement& unit = m_inspectionUnits[command.unitIndex];
 		if (!unit.isTriggerBitSet){
 			__int64 actualTime = GetCurrentTimer();
 
 			unit.triggerOnTime = actualTime;
 			unit.isTriggerBitSet = true;
 
-			SetTriggerBit(instruction.unitIndex, true);
+			SetTriggerBit(command.unitIndex, true);
 
 			result.isDone = true;
 			result.nativeTimestamp = GetCurrentNativeTimer();
@@ -724,30 +720,30 @@ void CTracerDriverBase::OnSingleTriggerInstruction(
 		result.isDone = false;
 	}
 
-	if (m_controllerMode != CTracerMessages::TM_MANUAL){
-		AppendMessage(CGeneralInfoMessages::MC_ERROR,
-					CGeneralInfoMessages::MI_INTERNAL_ERROR,
+	if (m_controllerMode != CTracerCommands::TM_MANUAL){
+		AppendMessage(CGeneralInfoCommands::MC_ERROR,
+					CGeneralInfoCommands::MI_INTERNAL_ERROR,
 					"Manual trigger can be done only in manual mode",
 					false);
 	}
 	else{
-		AppendMessage(CGeneralInfoMessages::MC_ERROR,
-					CGeneralInfoMessages::MI_INTERNAL_ERROR,
+		AppendMessage(CGeneralInfoCommands::MC_ERROR,
+					CGeneralInfoCommands::MI_INTERNAL_ERROR,
 					"Bad unit index",
 					false);
 	}
 
 	AppendMessage(
-				CGeneralInfoMessages::MC_ERROR,
-				CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+				CGeneralInfoCommands::MC_ERROR,
+				CInspectionUnitCommands::MI_UNIDENTIFIED_OBJECT_FOUND,
 				": Unit ",
 				false);
 		char numberText[2];
-		numberText[0] = '1' + char(instruction.unitIndex);
+		numberText[0] = '1' + char(command.unitIndex);
 		numberText[1] = '\0';
 	AppendMessage(
-				CGeneralInfoMessages::MC_ERROR,
-				CInspectionUnitMessages::MI_UNIDENTIFIED_OBJECT_FOUND,
+				CGeneralInfoCommands::MC_ERROR,
+				CInspectionUnitCommands::MI_UNIDENTIFIED_OBJECT_FOUND,
 				numberText,
 				true);
 }

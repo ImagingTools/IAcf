@@ -1,7 +1,7 @@
 #include "ilolv/CIoCardTracerDriverBase.h"
 
 
-#include "ilolv/CGeneralInfoMessages.h"
+#include "ilolv/CGeneralInfoCommands.h"
 
 
 namespace ilolv
@@ -30,7 +30,7 @@ I_DWORD CIoCardTracerDriverBase::GetInterruptsMask() const
 		int unitsCount = GetTracerParams().lightBarriersCount;
 
 		for (int i = 0; i < unitsCount; ++i){
-			const CInspectionUnitMessages::UnitParams& unitParams = GetUnitParams(i);
+			const CInspectionUnitCommands::UnitParams& unitParams = GetUnitParams(i);
 
 			I_DWORD unitMask = (1 << (m_ioParams.lightBarriersBitIndex + unitParams.lightBarrier.index));
 
@@ -101,39 +101,39 @@ IDriver::NativeTimer CIoCardTracerDriverBase::GetCurrentNativeTimer() const
 
 // reimplemented (ilolv::IDriver)
 
-bool CIoCardTracerDriverBase::OnInstruction(
-			I_DWORD instructionCode,
-			const void* instructionBuffer,
-			int instructionBufferSize,
+bool CIoCardTracerDriverBase::OnCommand(
+			I_DWORD commandCode,
+			const void* commandBuffer,
+			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
 			I_DWORD& responseSize)
 {
 	responseSize = 0;
 
-	switch (instructionCode){
-	case CIoCardTracerMessages::SetIoParams::Id:
-		if (instructionBufferSize >= sizeof(CIoCardTracerMessages::SetIoParams)){
-			m_ioParams = *(const CIoCardTracerMessages::SetIoParams*)instructionBuffer;
+	switch (commandCode){
+	case CIoCardTracerCommands::SetIoParams::Id:
+		if (commandBufferSize >= sizeof(CIoCardTracerCommands::SetIoParams)){
+			m_ioParams = *(const CIoCardTracerCommands::SetIoParams*)commandBuffer;
 		}
 		break;
 
-	case CIoCardTracerMessages::GetLightBarrierInfo::Id:
-		if (		(instructionBufferSize >= sizeof(CIoCardTracerMessages::GetLightBarrierInfo)) &&
-					(responseBufferSize >= sizeof(CIoCardTracerMessages::GetLightBarrierInfo::Result))){
-			const CIoCardTracerMessages::GetLightBarrierInfo& instruction = *(const CIoCardTracerMessages::GetLightBarrierInfo*)instructionBuffer;
-			CIoCardTracerMessages::GetLightBarrierInfo::Result& result = *(CIoCardTracerMessages::GetLightBarrierInfo::Result*)responseBuffer;
+	case CIoCardTracerCommands::GetLightBarrierInfo::Id:
+		if (		(commandBufferSize >= sizeof(CIoCardTracerCommands::GetLightBarrierInfo)) &&
+					(responseBufferSize >= sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result))){
+			const CIoCardTracerCommands::GetLightBarrierInfo& command = *(const CIoCardTracerCommands::GetLightBarrierInfo*)commandBuffer;
+			CIoCardTracerCommands::GetLightBarrierInfo::Result& result = *(CIoCardTracerCommands::GetLightBarrierInfo::Result*)responseBuffer;
 
-			result.state = GetLightBarrierBit(instruction.lightBarrierIndex);
+			result.state = GetLightBarrierBit(command.lightBarrierIndex);
 
-			responseSize = sizeof(CIoCardTracerMessages::GetLightBarrierInfo::Result);
+			responseSize = sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result);
 		}
 		break;
 
 	default:
-		return BaseClass::OnInstruction(
-					instructionCode,
-					instructionBuffer, instructionBufferSize,
+		return BaseClass::OnCommand(
+					commandCode,
+					commandBuffer, commandBufferSize,
 					responseBuffer, responseBufferSize,
 					responseSize);
 	}

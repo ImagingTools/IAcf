@@ -1,15 +1,15 @@
-#ifndef ilolv_CIoCardTracerMessages_included
-#define ilolv_CIoCardTracerMessages_included
+#ifndef ilolv_CIoCardTracerCommands_included
+#define ilolv_CIoCardTracerCommands_included
 
 
-#include "ilolv/CTracerMessages.h"
+#include "ilolv/CTracerCommands.h"
 
 
 namespace ilolv
 {
 
 
-class CIoCardTracerMessages
+class CIoCardTracerCommands
 {
 public:
 	struct IoParams
@@ -28,7 +28,7 @@ public:
 			Id = 310
 		};
 
-		typedef CTracerMessages::SetParams::Result Result;
+		typedef CTracerCommands::SetParams::Result Result;
 	};
 
 	struct GetLightBarrierInfo
@@ -51,6 +51,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CIoCardTracerMessages_included
+#endif // !ilolv_CIoCardTracerCommands_included
 
 

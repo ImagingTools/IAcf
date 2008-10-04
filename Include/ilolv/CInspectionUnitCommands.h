@@ -1,5 +1,5 @@
-#ifndef ilolv_CInspectionUnitMessages_included
-#define ilolv_CInspectionUnitMessages_included
+#ifndef ilolv_CInspectionUnitCommands_included
+#define ilolv_CInspectionUnitCommands_included
 
 
 #include "ilolv/IDriver.h"
@@ -9,7 +9,7 @@ namespace ilolv
 {
 
 
-class CInspectionUnitMessages
+class CInspectionUnitCommands
 {
 public:
 	enum MessageId
@@ -143,6 +143,6 @@ public:
 } // namespace ilolv
 
 
-#endif // !ilolv_CInspectionUnitMessages_included
+#endif // !ilolv_CInspectionUnitCommands_included
 
 

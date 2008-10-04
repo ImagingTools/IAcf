@@ -1,7 +1,7 @@
 #include "ilolv/CSignalBitsDriverBase.h"
 
 
-#include "ilolv/CGeneralInfoMessages.h"
+#include "ilolv/CGeneralInfoCommands.h"
 
 
 namespace ilolv
@@ -11,8 +11,8 @@ namespace ilolv
 CSignalBitsDriverBase::CSignalBitsDriverBase()
 :	m_lastHeartbeatTime(0),
 	m_doHeartbeatPullDown(false),
-	m_applicationStatus(CGeneralInfoMessages::MC_CRITICAL),
-	m_shownStatus(CGeneralInfoMessages::MC_CRITICAL)
+	m_applicationStatus(CGeneralInfoCommands::MC_CRITICAL),
+	m_shownStatus(CGeneralInfoCommands::MC_CRITICAL)
 {
 	m_params.heartbeatPeriod = 10000;
 	m_params.signalBitsCount = 0;
@@ -25,43 +25,43 @@ CSignalBitsDriverBase::CSignalBitsDriverBase()
 
 // reimplemented (ilolv::IDriver)
 
-bool CSignalBitsDriverBase::OnInstruction(
-			I_DWORD instructionCode,
-			const void* instructionBuffer,
-			int instructionBufferSize,
+bool CSignalBitsDriverBase::OnCommand(
+			I_DWORD commandCode,
+			const void* commandBuffer,
+			int commandBufferSize,
 			void* /*responseBuffer*/,
 			int /*responseBufferSize*/,
 			I_DWORD& responseSize)
 {
-	I_ASSERT((instructionBuffer != NULL) || (instructionBufferSize == 0));
+	I_ASSERT((commandBuffer != NULL) || (commandBufferSize == 0));
 
 	responseSize = 0;
 
-	switch (instructionCode){
-	case CSignalBitsMessages::SetParams::Id:
-		if (instructionBufferSize >= sizeof(CSignalBitsMessages::SetParams)){
-			m_params = *(const CSignalBitsMessages::SetParams*)instructionBuffer;
+	switch (commandCode){
+	case CSignalBitsCommands::SetParams::Id:
+		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetParams)){
+			m_params = *(const CSignalBitsCommands::SetParams*)commandBuffer;
 			if (m_params.signalBitsCount > MAX_SIGNALS){
 				m_params.signalBitsCount = MAX_SIGNALS;
 			}
 		}
 		break;
 
-	case CSignalBitsMessages::SetSignalBitIndex::Id:
-		if (instructionBufferSize >= sizeof(CSignalBitsMessages::SetSignalBitIndex)){
-			const CSignalBitsMessages::SetSignalBitIndex& instruction = *(const CSignalBitsMessages::SetSignalBitIndex*)instructionBuffer;
+	case CSignalBitsCommands::SetSignalBitIndex::Id:
+		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetSignalBitIndex)){
+			const CSignalBitsCommands::SetSignalBitIndex& command = *(const CSignalBitsCommands::SetSignalBitIndex*)commandBuffer;
 
-			if ((instruction.signalIndex >= 0) && (instruction.signalIndex < MAX_SIGNALS)){
-				m_signalBitIndices[instruction.signalIndex] = instruction.bitIndex;
+			if ((command.signalIndex >= 0) && (command.signalIndex < MAX_SIGNALS)){
+				m_signalBitIndices[command.signalIndex] = command.bitIndex;
 			}
 		}
 		break;
 
-	case CSignalBitsMessages::SetApplicationStatus::Id:
-		if (instructionBufferSize >= sizeof(CSignalBitsMessages::SetApplicationStatus)){
-			const CSignalBitsMessages::SetApplicationStatus& instruction = *(const CSignalBitsMessages::SetApplicationStatus*)instructionBuffer;
+	case CSignalBitsCommands::SetApplicationStatus::Id:
+		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetApplicationStatus)){
+			const CSignalBitsCommands::SetApplicationStatus& command = *(const CSignalBitsCommands::SetApplicationStatus*)commandBuffer;
 
-			m_applicationStatus = instruction.status;
+			m_applicationStatus = command.status;
 		}
 
 		break;
@@ -71,43 +71,40 @@ bool CSignalBitsDriverBase::OnInstruction(
 }
 
 
-void CSignalBitsDriverBase::OnHardwareInterrupt(I_DWORD /*interruptFlags*/)
+void CSignalBitsDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
-}
+	if ((interruptFlags & IF_PULSE_TIMER) != 0){
+		__int64 currentTimer = GetCurrentTimer();
 
-
-void CSignalBitsDriverBase::OnPeriodicPulse()
-{
-	__int64 currentTimer = GetCurrentTimer();
-
-	if (m_applicationStatus < CGeneralInfoMessages::MC_CRITICAL){
-		if (m_doHeartbeatPullDown){
-			if (currentTimer > m_lastHeartbeatTime + (m_params.heartbeatPeriod / 2)){
-				m_doHeartbeatPullDown = false;
-				SetSignalBit(CSignalBitsMessages::SB_HEARTBEAT, false);
+		if (m_applicationStatus < CGeneralInfoCommands::MC_CRITICAL){
+			if (m_doHeartbeatPullDown){
+				if (currentTimer > m_lastHeartbeatTime + (m_params.heartbeatPeriod / 2)){
+					m_doHeartbeatPullDown = false;
+					SetSignalBit(CSignalBitsCommands::SB_HEARTBEAT, false);
+				}
+			}
+			else if (currentTimer > m_lastHeartbeatTime + m_params.heartbeatPeriod){
+				m_lastHeartbeatTime = currentTimer;
+				m_doHeartbeatPullDown = true;
+				SetSignalBit(CSignalBitsCommands::SB_HEARTBEAT, true);
 			}
 		}
-		else if (currentTimer > m_lastHeartbeatTime + m_params.heartbeatPeriod){
-			m_lastHeartbeatTime = currentTimer;
-			m_doHeartbeatPullDown = true;
-			SetSignalBit(CSignalBitsMessages::SB_HEARTBEAT, true);
-		}
-	}
 
-	if (m_applicationStatus != m_shownStatus){
-		bool wasErrorBit = (m_shownStatus >= CGeneralInfoMessages::MC_ERROR);
-		bool isErrorBit = (m_applicationStatus >= CGeneralInfoMessages::MC_ERROR);
-		if (wasErrorBit != isErrorBit){
-			SetSignalBit(CSignalBitsMessages::SB_ERROR, isErrorBit);
-		}
+		if (m_applicationStatus != m_shownStatus){
+			bool wasErrorBit = (m_shownStatus >= CGeneralInfoCommands::MC_ERROR);
+			bool isErrorBit = (m_applicationStatus >= CGeneralInfoCommands::MC_ERROR);
+			if (wasErrorBit != isErrorBit){
+				SetSignalBit(CSignalBitsCommands::SB_ERROR, isErrorBit);
+			}
 
-		bool wasWarningBit = (m_shownStatus >= CGeneralInfoMessages::MC_WARNING);
-		bool isWarningBit = (m_applicationStatus >= CGeneralInfoMessages::MC_WARNING);
-		if (wasWarningBit != isWarningBit){
-			SetSignalBit(CSignalBitsMessages::SB_WARNING, isWarningBit);
-		}
+			bool wasWarningBit = (m_shownStatus >= CGeneralInfoCommands::MC_WARNING);
+			bool isWarningBit = (m_applicationStatus >= CGeneralInfoCommands::MC_WARNING);
+			if (wasWarningBit != isWarningBit){
+				SetSignalBit(CSignalBitsCommands::SB_WARNING, isWarningBit);
+			}
 
-		m_shownStatus = m_applicationStatus;
+			m_shownStatus = m_applicationStatus;
+		}
 	}
 }
 
@@ -116,7 +113,7 @@ void CSignalBitsDriverBase::OnPeriodicPulse()
 
 void CSignalBitsDriverBase::SetSignalBit(int signal, bool state)
 {
-	if (		(signal >= CSignalBitsMessages::SB_HEARTBEAT) &&
+	if (		(signal >= CSignalBitsCommands::SB_HEARTBEAT) &&
 				(signal <= m_params.signalBitsCount)){
 		int index = m_signalBitIndices[signal];
 		if (index >= 0){

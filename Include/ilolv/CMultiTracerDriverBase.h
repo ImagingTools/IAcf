@@ -3,7 +3,8 @@
 
 
 #include "ilolv/IDriver.h"
-#include "ilolv/CMultiTracerMessages.h"
+#include "ilolv/IDigitalIo.h"
+#include "ilolv/CMultiTracerCommands.h"
 #include "ilolv/CIoCardTracerDriverBase.h"
 
 
@@ -11,25 +12,25 @@ namespace ilolv
 {
 
 
-/**	Base class for implementation of production driver on the driver side.
- */
-class CMultiTracerDriverBase: virtual public IDriver
+/**
+	Implementation of object tracer supporting many independent production lines for driver.
+*/
+class CMultiTracerDriverBase: virtual public IDriver, virtual public IDigitalIo
 {
 public:
 	CMultiTracerDriverBase();
 
-	const CMultiTracerMessages::MultiTracerParams& GetMultiTracerParams() const;
+	const CMultiTracerCommands::MultiTracerParams& GetMultiTracerParams() const;
 
 	// reimplemented (ilolv::IDriver)
-	virtual bool OnInstruction(
-				I_DWORD instructionCode,
-				const void* instructionBuffer,
-				int instructionBufferSize,
+	virtual bool OnCommand(
+				I_DWORD commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPeriodicPulse();
 
 	// reimplemented (ilolv::IDigitalIo)
 	void SetOutputBits(I_DWORD value, I_DWORD mask);
@@ -80,12 +81,6 @@ protected:
 		CMultiTracerDriverBase* m_parentPtr;	// parent object
 	};
 
-	/**	Called if application sent "keep alive" signal.
-	 *		The "keep alive" signal indicate, that application works correctly.
-	 *		If this signal doesn't come regulary, application is set to be in critical mode.
-	 */
-	void OnKeepAlive();
-
 	void ReadHardwareValues(__int64 microsecsTimer, IDriver::NativeTimer internalTimer);
 	void WriteHardwareValues();
 
@@ -100,7 +95,7 @@ protected:
 	virtual void WriteInterruptsMask(I_DWORD value) = 0;
 
 private:
-	CMultiTracerMessages::MultiTracerParams m_params;
+	CMultiTracerCommands::MultiTracerParams m_params;
 
 	SingleLine m_lines[MAX_LINES];
 
@@ -119,7 +114,7 @@ private:
 
 // inline methods
 
-const CMultiTracerMessages::MultiTracerParams& CMultiTracerDriverBase::GetMultiTracerParams() const
+const CMultiTracerCommands::MultiTracerParams& CMultiTracerDriverBase::GetMultiTracerParams() const
 {
 	return m_params;
 }

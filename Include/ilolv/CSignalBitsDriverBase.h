@@ -4,32 +4,32 @@
 
 #include "ilolv/IDriver.h"
 #include "ilolv/IDigitalIo.h"
-#include "ilolv/CSignalBitsMessages.h"
+#include "ilolv/CSignalBitsCommands.h"
 
 
 namespace ilolv
 {
 
 
-/**	Base class for implementation of production driver on the driver side.
- */
+/**
+	Implementation of standard bits signalizing (like error, warning and heartbeat output bits) for drivers.
+*/
 class CSignalBitsDriverBase: virtual public IDriver, virtual public IDigitalIo
 {
 public:
 	CSignalBitsDriverBase();
 
-	const CSignalBitsMessages::SignalParams& GetSignalParams() const;
+	const CSignalBitsCommands::SignalParams& GetSignalParams() const;
 
 	// reimplemented (ilolv::IDriver)
-	virtual bool OnInstruction(
-				I_DWORD instructionCode,
-				const void* instructionBuffer,
-				int instructionBufferSize,
+	virtual bool OnCommand(
+				I_DWORD commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPeriodicPulse();
 
 protected:
 	enum{
@@ -42,7 +42,7 @@ protected:
 	void SetSignalBit(int signal, bool state);
 
 private:
-	CSignalBitsMessages::SignalParams m_params;
+	CSignalBitsCommands::SignalParams m_params;
 
 	// indices of output bits
 	int m_signalBitIndices[MAX_SIGNALS];
@@ -58,7 +58,7 @@ private:
 
 // inline methods
 
-inline const CSignalBitsMessages::SignalParams& CSignalBitsDriverBase::GetSignalParams() const
+inline const CSignalBitsCommands::SignalParams& CSignalBitsDriverBase::GetSignalParams() const
 {
 	return m_params;
 }

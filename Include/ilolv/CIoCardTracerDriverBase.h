@@ -3,7 +3,7 @@
 
 
 #include "ilolv/IDigitalIo.h"
-#include "ilolv/CIoCardTracerMessages.h"
+#include "ilolv/CIoCardTracerCommands.h"
 #include "ilolv/CSingleCountTracerDriverBase.h"
 
 
@@ -32,10 +32,10 @@ public:
 	virtual NativeTimer GetCurrentNativeTimer() const;
 
 	// reimplemented (ilolv::IDriver)
-	virtual bool OnInstruction(
-				I_DWORD instructionCode,
-				const void* instructionBuffer,
-				int instructionBufferSize,
+	virtual bool OnCommand(
+				I_DWORD commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
@@ -72,7 +72,7 @@ private:
 		MAX_COUNTER_VALUE = 0x7ff8
 	};
 
-	CIoCardTracerMessages::IoParams m_ioParams;
+	CIoCardTracerCommands::IoParams m_ioParams;
 
 	I_DWORD m_nextEventPosition;
 	bool m_isPositionEventActive;

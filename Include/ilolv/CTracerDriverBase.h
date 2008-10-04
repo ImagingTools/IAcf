@@ -4,7 +4,7 @@
 
 #include "ilolv/IDriver.h"
 #include "ilolv/TOrderedPositionsQueue.h"
-#include "ilolv/CTracerMessages.h"
+#include "ilolv/CTracerCommands.h"
 
 
 namespace ilolv
@@ -25,25 +25,26 @@ public:
 
 	CTracerDriverBase();
 
-	const CTracerMessages::TracerParams& GetTracerParams() const;
+	const CTracerCommands::TracerParams& GetTracerParams() const;
 
-	/**	ResetQueue all stations.
-	 */
+	/**
+		Reset traced object queue.
+	*/
 	virtual void ResetQueue();
 
 	/**
 		Get single inspection unit parameters.
 	*/
-	virtual const CInspectionUnitMessages::UnitParams& GetUnitParams(int unitIndex) const;
+	virtual const CInspectionUnitCommands::UnitParams& GetUnitParams(int unitIndex) const;
 	/**
 		Get single inspection unit parameters.
 	*/
-	const CTracerMessages::TracerParams& GetTracerParams();
+	const CTracerCommands::TracerParams& GetTracerParams();
 
 	/**
 		Get parameters of single ejector.
 	*/
-	const CTracerMessages::EjectorParams& GetEjectorParams(int unitIndex) const;
+	const CTracerCommands::EjectorParams& GetEjectorParams(int unitIndex) const;
 
 	/**
 		Processing of pop inspection command.
@@ -62,15 +63,14 @@ public:
 	void ProcessPositionEvent(int eventIndex, void* userContext);
 
 	// reimplemented (ilolv::IDriver)
-	virtual bool OnInstruction(
-				I_DWORD instructionCode,
-				const void* instructionBuffer,
-				int instructionBufferSize,
+	virtual bool OnCommand(
+				I_DWORD commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
 				I_DWORD& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual void OnPeriodicPulse();
 
 protected:
 	enum InspectionState
@@ -117,7 +117,7 @@ protected:
 		OS_CONTROLLED
 	};
 
-	struct InspectionUnitElement: public CInspectionUnitMessages::UnitParams
+	struct InspectionUnitElement: public CInspectionUnitCommands::UnitParams
 	{
 		/**
 			Time of last trigger on.
@@ -179,7 +179,7 @@ protected:
 		int decidedEjectorIndex;
 	};
 
-	struct EjectorInfo: public CTracerMessages::EjectorParams
+	struct EjectorInfo: public CTracerCommands::EjectorParams
 	{
 		/**
 			Time when ejector was on.
@@ -212,17 +212,18 @@ protected:
 	void OnEjectorOnEvent(int ejectorIndex);
 	void OnEjectorOffEvent(int ejectorIndex);
 
-	// instruction processing
+	// command processing
 	/**
-		Process single trigger instruction.
+		Process single trigger command.
 	*/
-	void OnSingleTriggerInstruction(
-				const CTracerMessages::SingleTrigger& instruction,
-				CTracerMessages::SingleTrigger::Result& result);
+	void OnSingleTriggerCommand(
+				const CTracerCommands::SingleTrigger& command,
+				CTracerCommands::SingleTrigger::Result& result);
 
 	// abstract methods
-	/**	Get actual base position of production line.
-	 */
+	/**
+		Get current position of production line read from encoder.
+	*/
 	virtual I_DWORD GetLinePosition() const = 0;
 	/**
 		Set number of needed counter queues.
@@ -238,11 +239,13 @@ protected:
 		Get state of specified light barrier bit.
 	*/
 	virtual bool GetLightBarrierBit(int lightBarrierIndex) const = 0;
-	/**	Set trigger bit to specified state.
-	 */
+	/**
+		Turn specified trigger bit on or off.
+	*/
 	virtual void SetTriggerBit(int triggerIndex, bool state) = 0;
-	/**	Set state of ejector bit.
-	 */
+	/**
+		Turn specified ejector bit on or off.
+	*/
 	virtual void SetEjectorBit(int ejectorIndex, bool state) = 0;
 
 	// static methods
@@ -275,7 +278,7 @@ private:
 		EI_TRIGGER
 	};
 
-	CTracerMessages::TracerParams m_params;
+	CTracerCommands::TracerParams m_params;
 
 	int m_controllerMode;
 
@@ -299,7 +302,7 @@ private:
 
 // inline methods
 
-inline const CTracerMessages::TracerParams& CTracerDriverBase::GetTracerParams() const
+inline const CTracerCommands::TracerParams& CTracerDriverBase::GetTracerParams() const
 {
 	return m_params;
 }
