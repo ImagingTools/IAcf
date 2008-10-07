@@ -9,11 +9,7 @@ namespace ilolv
 
 
 CMultiTracerDriverBase::CMultiTracerDriverBase()
-:	m_interruptsMask(0),
-	m_outputBits(0),
-	m_lastOutputBits(0),
-	m_microsecsTimer(0),
-	m_nativeTimer(0)
+:	m_interruptsMask(0)
 {
 	m_params.linesCount = 0;
 
@@ -78,8 +74,6 @@ bool CMultiTracerDriverBase::OnCommand(
 			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
 				SingleLine& line = m_lines[lineIndex];
 
-				line.m_counterReadyBitIndex = command.readyBitIndex;
-
 				line.OnCommand(
 							CIoCardTracerCommands::SetIoParams::Id,
 							&command.line,
@@ -134,14 +128,6 @@ bool CMultiTracerDriverBase::OnCommand(
 	case CMultiTracerCommands::SetMode::Id:
 		for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
 			SingleLine& line = m_lines[lineIndex];
-
-			WriteCounter(lineIndex, 0);
-			line.m_lastCounterReadValue = ReadCounter(lineIndex);
-			line.m_isCounterUnknown = true;
-			line.m_isCounterReadyUnknown = true;
-			line.m_isCounterReady = false;
-			line.m_lastEjectionControlBit = true;
-			line.m_sendCounterValue = 0;
 
 			line.OnCommand(
 						CTracerCommands::SetMode::Id,
@@ -267,93 +253,24 @@ void CMultiTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
 
-		line.OnHardwareInterrupt(
-					line.m_isCounterReady?
-					interruptFlags | CIoCardTracerDriverBase::IF_ENCODER_INTERRUPT:
-					interruptFlags);
-		I_ASSERT(!line.m_isCounterReady || (line.m_sendCounterValue > 0));	// if counter was ready, new value should be set
+		line.OnHardwareInterrupt(interruptFlags);
 	}
-}
-
-
-// reimplemented (ilolv::IDigitalIo)
-
-void CMultiTracerDriverBase::SetOutputBits(I_DWORD value, I_DWORD mask)
-{
-	I_ASSERT((value & (~mask)) == 0);	// no bits outside mask are set
-
-	m_outputBits = (m_outputBits & ~mask) | value;
 }
 
 
 // protected methods
 
-void CMultiTracerDriverBase::ReadHardwareValues(__int64 microsecsTimer, IDriver::NativeTimer internalTimer)
+void CMultiTracerDriverBase::CopyFromHardware()
 {
-	I_ASSERT(internalTimer != 0);
-	I_ASSERT(m_nativeTimer == 0);
-
-	m_microsecsTimer = microsecsTimer;
-	m_nativeTimer = internalTimer;
-
-	m_inputBits = ReadPort();
+	I_DWORD inputBits = GetInputBits();
 
 	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
 		SingleLine& line = m_lines[lineIndex];
-
-		I_ASSERT(line.m_sendCounterValue == 0);
 
 		I_WORD counterValue = ReadCounter(lineIndex);
-		bool isCounterReadyBit = (((m_inputBits >> line.m_counterReadyBitIndex) & 1) != 0);
-		line.m_isCounterReady = isCounterReadyBit;
 
-		// correction of counter value
-		if (line.m_isCounterReadyUnknown){
-			if (line.m_isCounterReady){
-				line.m_isCounterReady = false;
-			}
-			else{
-				line.m_isCounterReadyUnknown = false;
-			}
-		}
-
-		I_WORD counterDiff = line.m_lastCounterReadValue - counterValue;
-
-		if (!line.m_isCounterUnknown || (counterDiff >= 2) || line.m_isCounterReady){
-			line.m_isCounterUnknown = false;
-			line.m_isCounterReadyUnknown = false;
-			line.m_isCounterReady = isCounterReadyBit;
-
-			line.UpdateHardwareValues(m_inputBits, I_DWORD(I_SDWORD(I_SWORD(counterValue))), m_microsecsTimer, m_nativeTimer);
-		}
+		line.UpdateHardwareValues(inputBits, I_DWORD(I_SDWORD(I_SWORD(counterValue))), GetCurrentTimer(), GetCurrentNativeTimer());
 	}
-}
-
-
-void CMultiTracerDriverBase::WriteHardwareValues()
-{
-	for (int lineIndex = 0; lineIndex < m_params.linesCount; ++lineIndex){
-		SingleLine& line = m_lines[lineIndex];
-
-		if (line.m_sendCounterValue > 0){
-			WriteCounter(lineIndex, line.m_sendCounterValue);
-
-			line.m_lastCounterReadValue = ReadCounter(lineIndex);
-			line.m_isCounterUnknown = true;
-			line.m_isCounterReadyUnknown = true;
-			line.m_isCounterReady = false;
-
-			line.m_sendCounterValue = 0;
-		}
-	}
-
-	if (m_outputBits != m_lastOutputBits){
-		WritePort(m_outputBits);
-
-		m_lastOutputBits = m_outputBits;
-	}
-
-	m_nativeTimer = 0;
 }
 
 
@@ -375,27 +292,10 @@ void CMultiTracerDriverBase::CalcInterruptsMask()
 }
 
 
-void CMultiTracerDriverBase::ResetQueueLine(int lineIndex)
-{
-	SingleLine& line = m_lines[lineIndex];
-
-	WriteCounter(lineIndex, 0);
-	line.m_lastCounterReadValue = ReadCounter(lineIndex);
-	line.m_isCounterUnknown = true;
-	line.m_isCounterReadyUnknown = true;
-	line.m_isCounterReady = false;
-	line.m_sendCounterValue = 0;
-
-	line.ResetQueue();
-}
-
-
 // public methods of embedded class SingleLine
 
 CMultiTracerDriverBase::SingleLine::SingleLine()
 {
-	m_counterReadyBitIndex = -1;
-
 	Init(-1, NULL);
 }
 
@@ -404,22 +304,6 @@ void CMultiTracerDriverBase::SingleLine::Init(int lineNumber, CMultiTracerDriver
 {
 	m_lineNumber = lineNumber;
 	m_parentPtr = parentPtr;
-
-	m_sendCounterValue = 0;
-}
-
-
-I_DWORD CMultiTracerDriverBase::SingleLine::GetInterruptsMask() const
-{
-	I_DWORD retVal = BaseClass::GetInterruptsMask();
-
-	if (m_counterReadyBitIndex >= 0){
-		I_DWORD mask = (1 << m_counterReadyBitIndex);
-
-		retVal |= mask;
-	}
-
-	return retVal;
 }
 
 
@@ -440,8 +324,20 @@ void CMultiTracerDriverBase::SingleLine::SetOutputBits(I_DWORD value, I_DWORD ma
 void CMultiTracerDriverBase::SingleLine::SetEncoderCounter(I_WORD value)
 {
 	I_ASSERT(I_SWORD(value) > 0);
-	
-	m_sendCounterValue = value;
+
+	if (m_parentPtr != NULL){
+		m_parentPtr->WriteCounter(m_lineNumber, value);
+	}
+}
+
+
+// reimplemented (ilolv::CTracerDriverBase)
+
+void CMultiTracerDriverBase::SingleLine::ResetQueue()
+{
+	SetEncoderCounter(0);
+
+	BaseClass::ResetQueue();
 }
 
 

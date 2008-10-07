@@ -48,7 +48,7 @@ protected:
 	/**
 		Update hardware input values.
 	*/
-	void UpdateHardwareValues(I_DWORD inputBits, I_DWORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer);
+	virtual void UpdateHardwareValues(I_DWORD inputBits, I_DWORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer);
 
 	/**
 		Called internal when counter is ready.
