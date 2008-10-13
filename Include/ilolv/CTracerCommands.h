@@ -52,35 +52,6 @@ public:
 		TM_DIAGNOSTIC
 	};
 
-	struct EjectorParams
-	{
-		/**
-			Flag saying this exector is enabled.
-		*/
-		bool isEnabled;
-
-		/**
-			Time ejector is on.
-			This time is in microseconds.
-		*/
-		int maxEjectorOnTime;
-
-		/**
-			Number of encoder clocks between ejector and imaginated base position.
-		*/
-		int position;
-
-		/**
-			Distance ejector is on.
-		*/
-		int onDistance;
-		/**
-			Reaction delay of this ejector (in microseconds).
-			To ensure correct behaviour, ejector signal will be send earlier according to this value.
-		*/
-		int reactionDelay;
-	};
-
 	struct TracerParams
 	{
 		enum
@@ -121,13 +92,39 @@ public:
 		*/
 		int positionTolerance;
 		/**
-			If true ejection control is enabled.
+			Index of used light barrier.
+			If this value is negative, this function is disabled.
 		*/
-		bool isEcEnabled;
+		int ecLightBarrierIndex;
+	};
+
+	struct EjectorParams
+	{
 		/**
-			Parameter of ejection control light barrier.
+			Flag saying this exector is enabled.
 		*/
-		CInspectionUnitCommands::LightBarrierParams ecLightBarrier;
+		bool isEnabled;
+
+		/**
+			Time ejector is on.
+			This time is in microseconds.
+		*/
+		int maxEjectorOnTime;
+
+		/**
+			Number of encoder clocks between ejector and imaginated base position.
+		*/
+		int position;
+
+		/**
+			Distance ejector is on.
+		*/
+		int onDistance;
+		/**
+			Reaction delay of this ejector (in microseconds).
+			To ensure correct behaviour, ejector signal will be send earlier according to this value.
+		*/
+		int reactionDelay;
 	};
 
 	// commands
@@ -169,11 +166,31 @@ public:
 		EjectorParams ejector;
 	};
 
-	struct SetMode: public CInspectionUnitCommands::SetMode
+	/**
+		Command for setting parameter of light barrier.
+	*/
+	struct SetLightBarrierParams
 	{
 		enum
 		{
 			Id = SetEjectorParams::Id + 1
+		};
+
+		typedef void Result;
+
+		int barrierIndex;
+
+		/**
+			Number of encoder clocks between light barrier and imaginated base position.
+		*/
+		int offset;
+	};
+
+	struct SetMode: public CInspectionUnitCommands::SetMode
+	{
+		enum
+		{
+			Id = SetLightBarrierParams::Id + 1
 		};
 	};
 

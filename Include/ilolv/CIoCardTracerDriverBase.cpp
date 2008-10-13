@@ -32,9 +32,11 @@ I_DWORD CIoCardTracerDriverBase::GetInterruptsMask() const
 		for (int i = 0; i < unitsCount; ++i){
 			const CInspectionUnitCommands::UnitParams& unitParams = GetUnitParams(i);
 
-			I_DWORD unitMask = (1 << (m_ioParams.lightBarriersBitIndex + unitParams.lightBarrier.index));
+			if (unitParams.lightBarrierIndex >= 0){
+				I_DWORD unitMask = (1 << (m_ioParams.lightBarriersBitIndex + unitParams.lightBarrierIndex));
 
-			retVal |= unitMask;
+				retVal |= unitMask;
+			}
 		}
 	}
 

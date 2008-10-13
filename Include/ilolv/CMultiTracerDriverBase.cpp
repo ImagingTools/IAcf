@@ -125,6 +125,25 @@ bool CMultiTracerDriverBase::OnCommand(
 		}
 		break;
 
+	case CMultiTracerCommands::SetLightBarrierParams::Id:
+		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetLightBarrierParams)){
+			const CMultiTracerCommands::SetLightBarrierParams& command = *(const CMultiTracerCommands::SetLightBarrierParams*)commandBuffer;
+
+			int lineIndex = int(command.lineIndex);
+			if ((lineIndex >= 0) && (lineIndex < m_params.linesCount)){
+				SingleLine& line = m_lines[lineIndex];
+
+				line.OnCommand(
+							CTracerCommands::SetLightBarrierParams::Id,
+							&command.line,
+							sizeof(CMultiTracerCommands::SetLightBarrierParams),
+							responseBuffer,
+							responseBufferSize,
+							responseSize);
+			}
+		}
+		break;
+
 	case CMultiTracerCommands::SetMode::Id:
 		for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
 			SingleLine& line = m_lines[lineIndex];

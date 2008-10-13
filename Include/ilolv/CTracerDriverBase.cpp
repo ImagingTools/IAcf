@@ -17,14 +17,12 @@ CTracerDriverBase::CTracerDriverBase()
 	m_params.minObjectSize = 200;
 	m_params.minObjectsDistance = 300;
 	m_params.positionTolerance = 10;
-	m_params.isEcEnabled = false;
-	m_params.ecLightBarrier.offset = 1000;
+	m_params.ecLightBarrierIndex = -1;
 
 	for (int unitIndex = 0; unitIndex < MAX_UNITS_COUNT; ++unitIndex){
 		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-		unit.lightBarrier.index = unitIndex;
-		unit.lightBarrier.offset = 0;
+		unit.lightBarrierIndex = -1;
 		unit.triggerOffset = 0;
 		unit.triggerDuration = 10000;
 		unit.triggerRelaxationTime = 20000;
@@ -45,6 +43,10 @@ CTracerDriverBase::CTracerDriverBase()
 
 		ejector.overloadCounter = 0;
 		ejector.ejectionOnTime = 0;
+	}
+
+	for (int barrierIndex = 0; barrierIndex < MAX_LIGHT_BARRIERS; ++barrierIndex){
+		m_lightBarriersOffset[barrierIndex] = 1000;
 	}
 
 	m_lastInspectedObjectIndex = 0;
@@ -69,15 +71,22 @@ void CTracerDriverBase::ResetQueue()
 
 		unit.triggerOnTime = 0;
 		unit.isTriggerBitSet = 0;
-		unit.edgeOnPosition =
-						linePosition +
-						unit.lightBarrier.offset -
-						m_params.minObjectsDistance;
 		unit.lastBarrierState = true;
 
-		int triggerOffset = unit.lightBarrier.offset + unit.triggerOffset + 1;
-		if (triggerOffset > maxPopFifoDistance){
-			maxPopFifoDistance = triggerOffset;
+		if (unit.lightBarrierIndex >= 0){
+			int lightBarrierOffset = m_lightBarriersOffset[unit.lightBarrierIndex] + unit.triggerOffset;
+
+			unit.edgeOnPosition =
+							linePosition +
+							lightBarrierOffset -
+							m_params.minObjectsDistance;
+
+			if (lightBarrierOffset >= maxPopFifoDistance){
+				maxPopFifoDistance = lightBarrierOffset + 1;
+			}
+		}
+		else{
+			unit.edgeOnPosition = 0;
 		}
 
 		SetTriggerBit(unitIndex, false);
@@ -104,9 +113,10 @@ void CTracerDriverBase::ResetQueue()
 		SetEjectorBit(ejectorIndex, false);
 	}
 
-	if (m_params.isEcEnabled){
-		if (m_params.ecLightBarrier.offset > maxPopFifoDistance){
-			maxPopFifoDistance = m_params.ecLightBarrier.offset;
+	if (m_params.ecLightBarrierIndex >= 0){
+		int lightBarrierOffset = m_lightBarriersOffset[m_params.ecLightBarrierIndex];
+		if (lightBarrierOffset > maxPopFifoDistance){
+			maxPopFifoDistance = lightBarrierOffset;
 		}
 	}
 
@@ -149,7 +159,7 @@ int CTracerDriverBase::OnPopInspectionCommand(int unitIndex)
 	if ((m_controllerMode == CTracerCommands::TM_AUTOMATIC) && (unitIndex < m_params.unitsCount)){
 		InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-		if (unit.isEnabled){
+		if (unit.lightBarrierIndex >= 0){
 			for (		int inspectionId = m_objectsFifo.GetBackIndex();
 						inspectionId != m_objectsFifo.GetNextFrontIndex();
 						inspectionId = m_objectsFifo.GetNextIndex(inspectionId)){
@@ -263,12 +273,16 @@ bool CTracerDriverBase::OnCommand(
 				m_params.ejectorsCount = MAX_EJECTORS;
 			}
 
+			if (m_params.lightBarriersCount > MAX_LIGHT_BARRIERS){
+				m_params.lightBarriersCount = MAX_LIGHT_BARRIERS;
+			}
+
 			if (m_params.autonomeEjectorIndex >= m_params.ejectorsCount){
 				m_params.autonomeEjectorIndex = m_params.ejectorsCount - 1;
 			}
 
-			if (m_params.ecLightBarrier.index >= m_params.lightBarriersCount){
-				m_params.ecLightBarrier.index = -1;
+			if (m_params.ecLightBarrierIndex >= m_params.lightBarriersCount){
+				m_params.ecLightBarrierIndex = -1;
 			}
 		}
 		break;
@@ -282,8 +296,8 @@ bool CTracerDriverBase::OnCommand(
 
 				params = command.unit;
 
-				if (params.lightBarrier.index >= m_params.lightBarriersCount){
-					params.lightBarrier.index = 1;
+				if (params.lightBarrierIndex >= m_params.lightBarriersCount){
+					params.lightBarrierIndex = -1;
 				}
 			}
 		}
@@ -298,6 +312,17 @@ bool CTracerDriverBase::OnCommand(
 				CTracerCommands::EjectorParams& params = m_ejectors[ejectorIndex];
 
 				params = command.ejector;
+			}
+		}
+		break;
+
+	case CTracerCommands::SetLightBarrierParams::Id:
+		if (commandBufferSize >= sizeof(CTracerCommands::SetLightBarrierParams)){
+			const CTracerCommands::SetLightBarrierParams& command = *(const CTracerCommands::SetLightBarrierParams*)commandBuffer;
+
+			int lightbarrierIndex = int(command.barrierIndex);
+			if ((lightbarrierIndex >= 0) && (lightbarrierIndex < m_params.lightBarriersCount)){
+				m_lightBarriersOffset[lightbarrierIndex] = command.offset;
 			}
 		}
 		break;
@@ -394,13 +419,15 @@ void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 
 		for (int i = 0; i < m_params.unitsCount; ++i){
 			InspectionUnitElement& unit = m_inspectionUnits[i];
-			int lightBarrierIndex = unit.lightBarrier.index;
+			int lightBarrierIndex = unit.lightBarrierIndex;
 			if (lightBarrierIndex >= 0){
 				bool lightBarrierBit = GetLightBarrierBit(lightBarrierIndex);
 				if (lightBarrierBit && !unit.lastBarrierState){
 					if (unit.edgePosition == 0){
 						if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectsDistance) > 0){
-							OnLightBarrierEdge(linePosition - unit.lightBarrier.offset, i);
+							int lightBarrierOffset = m_lightBarriersOffset[lightBarrierIndex];
+
+							OnLightBarrierEdge(linePosition - lightBarrierOffset, i);
 						}
 					}
 
@@ -410,9 +437,10 @@ void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 					if (unit.edgePosition != 0){
 						I_DWORD objectSize = linePosition - unit.edgeOnPosition;
 						if (int(objectSize) < m_params.minObjectSize){
-							I_DWORD objectOffset = objectSize * unit.edgePosition / CInspectionUnitCommands::UnitParams::FALLING_EDGE;
+							int objectOffset = objectSize * unit.edgePosition / CInspectionUnitCommands::UnitParams::FALLING_EDGE;
+							int lightBarrierOffset = m_lightBarriersOffset[lightBarrierIndex];
 
-							OnLightBarrierEdge(unit.edgeOnPosition + objectOffset - unit.lightBarrier.offset, i);
+							OnLightBarrierEdge(unit.edgeOnPosition + objectOffset - lightBarrierOffset, i);
 						}
 					}
 				}
@@ -507,13 +535,15 @@ void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
 			InsertPositionToQueue(EI_DECISION, basePosition + m_decisionEventPosition, (void*)inspectionIndex);
 		}
 
-		if (m_params.isEcEnabled){
-			InsertPositionToQueue(EI_EJECTION_CONTROL, basePosition + m_params.ecLightBarrier.offset, (void*)inspectionIndex);
+		if (m_params.ecLightBarrierIndex >= 0){
+			int lightBarrierOffset = m_lightBarriersOffset[m_params.ecLightBarrierIndex];
+			I_ASSERT(m_queueEndPosition >= lightBarrierOffset);
+
+			InsertPositionToQueue(EI_EJECTION_CONTROL, basePosition + lightBarrierOffset, (void*)inspectionIndex);
 		}
 
 		I_ASSERT(m_queueEndPosition >= 0);
 		I_ASSERT(m_queueEndPosition >= m_decisionEventPosition);
-		I_ASSERT(m_queueEndPosition >= m_params.ecLightBarrier.offset);
 		InsertPositionToQueue(EI_REMOVE_FROM_QUEUE, basePosition + m_queueEndPosition, NULL);
 	}
 	else{
@@ -546,8 +576,9 @@ void CTracerDriverBase::OnLightBarrierEdge(I_DWORD basePosition, int unitIndex)
 
 	InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 
-	if (unit.isEnabled){
-		I_DWORD triggerPosition = basePosition + unit.lightBarrier.offset + unit.triggerOffset;
+	if (unit.lightBarrierIndex >= 0){
+		int triggerPosition = basePosition + m_lightBarriersOffset[unit.lightBarrierIndex] + unit.triggerOffset;
+
 		InsertPositionToQueue(EI_TRIGGER + unitIndex, triggerPosition, (void*)inspectionIndex);
 	}
 }
@@ -564,7 +595,7 @@ void CTracerDriverBase::OnDecisionEvent(int inspectionIndex)
 	for (int i = 0; i < m_params.unitsCount; ++i){	// the objects for which ejection decision is made should not be taken to inspection
 		InspectionUnitElement& unit = m_inspectionUnits[i];
 
-		if (unit.isEnabled){
+		if (unit.lightBarrierIndex >= 0){
 			InspectionInfo& inspectionInfo = objectInfo.units[i];
 
 			int inspectionEjectorIndex = (inspectionInfo.inspectionState >= IS_RESULT)?
@@ -607,8 +638,8 @@ void CTracerDriverBase::OnEjectionControlEvent(int inspectionIndex)
 {
 	ObjectInfo& objectInfo = m_objectsFifo.GetObjectAt(inspectionIndex);
 
-	I_ASSERT(m_params.ecLightBarrier.index >= 0);
-	bool objectPresent = GetLightBarrierBit(m_params.ecLightBarrier.index);
+	I_ASSERT(m_params.ecLightBarrierIndex >= 0);
+	bool objectPresent = GetLightBarrierBit(m_params.ecLightBarrierIndex);
 
 	if (objectInfo.decidedEjectorIndex >= 0){
 		if (objectPresent){

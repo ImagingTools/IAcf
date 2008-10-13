@@ -40,16 +40,15 @@ public:
 			FALLING_EDGE = 0x100
 		};
 
-		bool isEnabled;
-
 		/**
-			Parameter of light barrier used in this inspection unit.
+			Index of used light barrier.
+			If this value is negative, this function is disabled.
 		*/
-		LightBarrierParams lightBarrier;
+		int lightBarrierIndex;
 
 		/**
 			Position inside of edge when trigger should be done.
-			If this value is 0, rising edge is mean, if this is equal to FALLING_EDGE falling edge.
+			If this value is 0, rising edge is mean, if this is equal to FALLING_EDGE than position of falling edge is mean.
 			Other values mean some proportion between.
 		*/
 		int edgePosition;

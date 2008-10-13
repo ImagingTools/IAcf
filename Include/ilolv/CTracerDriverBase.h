@@ -20,7 +20,8 @@ public:
 	enum
 	{
 		MAX_UNITS_COUNT = 4,
-		MAX_EJECTORS = 4
+		MAX_EJECTORS = 4,
+		MAX_LIGHT_BARRIERS = MAX_UNITS_COUNT * 2
 	};
 
 	CTracerDriverBase();
@@ -289,6 +290,7 @@ private:
 
 	InspectionUnitElement m_inspectionUnits[MAX_UNITS_COUNT];
 	EjectorInfo m_ejectors[MAX_EJECTORS];
+	int m_lightBarriersOffset[MAX_LIGHT_BARRIERS];
 
 	int m_decisionEventPosition;
 	int m_queueEndPosition;

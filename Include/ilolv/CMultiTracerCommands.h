@@ -87,11 +87,28 @@ public:
 		CTracerCommands::SetEjectorParams line;
 	};
 
-	struct SetMode
+	/**
+		Command for setting parameter of light barrier for specified line.
+	*/
+	struct SetLightBarrierParams
 	{
 		enum
 		{
 			Id = SetEjectorParams::Id + 1
+		};
+
+		typedef CTracerCommands::SetLightBarrierParams::Result Result;
+
+		I_DWORD lineIndex;
+
+		CTracerCommands::SetLightBarrierParams line;
+	};
+
+	struct SetMode
+	{
+		enum
+		{
+			Id = SetLightBarrierParams::Id + 1
 		};
 
 		typedef void Result;
