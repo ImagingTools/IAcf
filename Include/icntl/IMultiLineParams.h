@@ -18,7 +18,7 @@ class ILineParams;
 
 class IMultiLineParams:
 			virtual public iser::ISerializable,
-			virtual public istd::INamed,
+			virtual public istd::INamed
 {
 public:
 	/**

@@ -26,7 +26,7 @@ public:
 	/**
 		Get access to parameter of single inspection unit.
 	*/
-	virtual IInspectionUnitParams& GetInspectionUnitParams() const = 0;
+	virtual IInspectionUnitParams& GetInspectionUnitParams(int unitIndex) const = 0;
 	/**
 		Get number of ejectors.
 	*/
@@ -34,17 +34,25 @@ public:
 	/**
 		Get access to parameter of single ejector.
 	*/
-	virtual IEjectorParams& GetEjectorParams() const = 0;
+	virtual IEjectorParams& GetEjectorParams(int ejectorIndex) const = 0;
 	/**
-		Get minimal objects distance.
+		Get proportion between encoder ticks and physical units.
+	*/
+	virtual double GetTicksPerDistanceUnit() const = 0;
+	/**
+		Set proportion between encoder ticks and physical units.
+	*/
+	virtual void SetTicksPerDistanceUnit(double value) = 0;
+	/**
+		Get minimal object size.
 		This value is in physical units.
 	*/
-	virtual double GetMinObjectsDistance() const = 0;
+	virtual double GetMinObjectSize() const = 0;
 	/**
-		Set minimal objects distance.
+		Set minimal object size.
 		This value is in physical units.
 	*/
-	virtual void SetMinObjectsDistance(double value) = 0;
+	virtual void SetMinObjectSize(double value) = 0;
 	/**
 		Get tolerance of position used to associate signals from few light barriers to single object.
 		This value is in physical units.
@@ -71,12 +79,12 @@ public:
 		Get position of light barrier.
 		This value is in physical units relative to abstract base position.
 	*/
-	virtual double GetLightBarrierPosition() const = 0;
+	virtual double GetLightBarrierPosition(int barrierIndex) const = 0;
 	/**
 		Set position of light barrier.
 		This value is in physical units relative to abstract base position.
 	*/
-	virtual void SetLightBarrierPosition(double position) = 0;
+	virtual void SetLightBarrierPosition(int barrierIndex, double position) = 0;
 };
 
 

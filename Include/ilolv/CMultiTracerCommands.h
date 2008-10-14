@@ -54,8 +54,6 @@ public:
 
 		I_DWORD lineIndex;
 
-		I_DWORD readyBitIndex;
-
 		CIoCardTracerCommands::SetIoParams line;
 	};
 

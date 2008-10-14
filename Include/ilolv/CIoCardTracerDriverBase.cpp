@@ -16,7 +16,6 @@ CIoCardTracerDriverBase::CIoCardTracerDriverBase()
 	m_ioParams.lightBarriersBitIndex = 1;
 	m_ioParams.ejectorsBitIndex = 1;
 	m_ioParams.triggersBitIndex = 1;
-	m_ioParams.iosBitIndex = 1;
 
 	m_isPositionEventActive = false;
 }
@@ -104,12 +103,12 @@ IDriver::NativeTimer CIoCardTracerDriverBase::GetCurrentNativeTimer() const
 // reimplemented (ilolv::IDriver)
 
 bool CIoCardTracerDriverBase::OnCommand(
-			I_DWORD commandCode,
+			int commandCode,
 			const void* commandBuffer,
 			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
-			I_DWORD& responseSize)
+			int& responseSize)
 {
 	responseSize = 0;
 

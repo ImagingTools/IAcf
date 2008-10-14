@@ -84,10 +84,6 @@ public:
 		*/
 		int minObjectSize;
 		/**
-			Minimal distance between two objects (in encoder ticks) needed to treat it as two objects.
-		*/
-		int minObjectsDistance;
-		/**
 			Tolerance of light barrier position used to assign object in queue to the next light barriers.
 		*/
 		int positionTolerance;

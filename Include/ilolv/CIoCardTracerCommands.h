@@ -17,7 +17,6 @@ public:
 		int lightBarriersBitIndex;
 		int ejectorsBitIndex;
 		int triggersBitIndex;
-		int iosBitIndex;
 	};
 
 	// commands

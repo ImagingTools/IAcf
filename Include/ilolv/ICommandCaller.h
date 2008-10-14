@@ -24,12 +24,12 @@ public:
 		\return	true if this command was called correctly.
 	*/
 	virtual bool CallCommand(
-				I_DWORD commandCode,
+				int commandCode,
 				const void* commandBuffer,
 				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
-				I_DWORD& responseSize) = 0;
+				int& responseSize) = 0;
 };
 
 

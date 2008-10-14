@@ -33,12 +33,12 @@ public:
 
 	// reimplemented (ilolv::IDriver)
 	virtual bool OnCommand(
-				I_DWORD commandCode,
+				int commandCode,
 				const void* commandBuffer,
 				int commandBufferSize,
 				void* responseBuffer,
 				int responseBufferSize,
-				I_DWORD& responseSize);
+				int& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
 
 	// reimplemented (ilolv::IDigitalIo)

@@ -26,12 +26,12 @@ CSignalBitsDriverBase::CSignalBitsDriverBase()
 // reimplemented (ilolv::IDriver)
 
 bool CSignalBitsDriverBase::OnCommand(
-			I_DWORD commandCode,
+			int commandCode,
 			const void* commandBuffer,
 			int commandBufferSize,
 			void* /*responseBuffer*/,
 			int /*responseBufferSize*/,
-			I_DWORD& responseSize)
+			int& responseSize)
 {
 	I_ASSERT((commandBuffer != NULL) || (commandBufferSize == 0));
 

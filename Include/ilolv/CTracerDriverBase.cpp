@@ -15,7 +15,6 @@ CTracerDriverBase::CTracerDriverBase()
 	m_params.ejectorsCount = 0;
 	m_params.autonomeEjectorIndex = -1;
 	m_params.minObjectSize = 200;
-	m_params.minObjectsDistance = 300;
 	m_params.positionTolerance = 10;
 	m_params.ecLightBarrierIndex = -1;
 
@@ -79,7 +78,7 @@ void CTracerDriverBase::ResetQueue()
 			unit.edgeOnPosition =
 							linePosition +
 							lightBarrierOffset -
-							m_params.minObjectsDistance;
+							m_params.minObjectSize;
 
 			if (lightBarrierOffset >= maxPopFifoDistance){
 				maxPopFifoDistance = lightBarrierOffset + 1;
@@ -251,12 +250,12 @@ void CTracerDriverBase::ProcessPositionEvent(int eventIndex, void* userContext)
 // reimplemented (ilolv::IDriver)
 
 bool CTracerDriverBase::OnCommand(
-			I_DWORD commandCode,
+			int commandCode,
 			const void* commandBuffer,
 			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
-			I_DWORD& responseSize)
+			int& responseSize)
 {
 	responseSize = 0;
 
@@ -424,7 +423,7 @@ void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 				bool lightBarrierBit = GetLightBarrierBit(lightBarrierIndex);
 				if (lightBarrierBit && !unit.lastBarrierState){
 					if (unit.edgePosition == 0){
-						if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectsDistance) > 0){
+						if (I_SDWORD(linePosition - unit.edgeOnPosition - m_params.minObjectSize) > 0){
 							int lightBarrierOffset = m_lightBarriersOffset[lightBarrierIndex];
 
 							OnLightBarrierEdge(linePosition - lightBarrierOffset, i);

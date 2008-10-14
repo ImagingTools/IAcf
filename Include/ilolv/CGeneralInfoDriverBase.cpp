@@ -18,12 +18,12 @@ CGeneralInfoDriverBase::CGeneralInfoDriverBase()
 // reimplemented (ilolv::IDriver)
 
 bool CGeneralInfoDriverBase::OnCommand(
-			I_DWORD commandCode,
+			int commandCode,
 			const void* commandBuffer,
 			int commandBufferSize,
 			void* responseBuffer,
 			int responseBufferSize,
-			I_DWORD& responseSize)
+			int& responseSize)
 {
 	I_ASSERT((commandBuffer != NULL) || (commandBufferSize == 0));
 
