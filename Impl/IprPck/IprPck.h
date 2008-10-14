@@ -35,8 +35,6 @@
 namespace IprPck
 {
 
-typedef iipr::TFeaturesContainerWrap<iipr::IFeaturesContainer, iipr::CSearchFeature> CSearchFeatures;
-
 
 typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
 typedef iipr::CMovingAverageProcessorComp MovingAverageProcessor;
@@ -54,7 +52,7 @@ typedef icomp::TModelCompWrap<iipr::CCaliperParamsComp> CaliperParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
 typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<CSearchFeatures>,
+			imod::TModelWrap<iipr::CSearchFeatures>,
 			iipr::IFeaturesConsumer,
 			iipr::IFeaturesContainer,
 			iser::ISerializable,
