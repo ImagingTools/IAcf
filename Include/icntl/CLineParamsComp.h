@@ -31,7 +31,7 @@ public:
 
 		I_ASSIGN(m_nameAttrPtr, "Name", "Name", true, "");
 		I_ASSIGN_MULTI_0(m_inspectionUnitsCompPtr, "InspectionUnits", "List of parameter for inspection units", true);
-		I_ASSIGN_MULTI_0(m_ejectorsCompPtr, "TriggerOffset", "List of parameter for ejectors", true);
+		I_ASSIGN_MULTI_0(m_ejectorsCompPtr, "Ejectors", "List of parameter for ejectors", true);
 		I_ASSIGN(m_ticksPerDistanceUnitAttrPtr, "TicksPerUnit", "Encoder ticks per logical unit", true, 1);
 		I_ASSIGN(m_minObjectsSizeAttrPtr, "MinObjectSize", "Minimal object size in logical unit", true, 50);
 		I_ASSIGN(m_positionToleranceAttrPtr, "PositionTolerance", "Tolerance of position used by association of light barrier pulse to object", true, 10);
