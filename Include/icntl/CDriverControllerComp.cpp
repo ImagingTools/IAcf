@@ -181,8 +181,8 @@ bool CDriverControllerComp::SetLineParamsToDriver(int lineIndex, const ILinePara
 				0;
 	setLineParamsCommand.line.minObjectSize = int(lineParams.GetMinObjectSize() * ticksPerDistUnit + 0.5);
 	setLineParamsCommand.line.positionTolerance = int(lineParams.GetPositionTolerance() * ticksPerDistUnit + 0.5);
-	setLineParamsCommand.line.ecLightBarrierIndex = lineParams.IsEjectionControlEnabled()?
-				lightBarriersCount - 1:
+	setLineParamsCommand.line.ecLightBarrierIndex = (lineIndex < m_ejectionControlIndicesAttrPtr.GetCount())?
+				m_ejectionControlIndicesAttrPtr[lineIndex]:
 				-1;
 	if (!m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetLineParams::Id,

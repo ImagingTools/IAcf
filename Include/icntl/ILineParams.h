@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/INamed.h"
 #include "iser/ISerializable.h"
 
 #include "icntl/icntl.h"
@@ -16,7 +17,9 @@ class IInspectionUnitParams;
 class IEjectorParams;
 
 
-class ILineParams: public iser::ISerializable
+class ILineParams:
+			virtual public iser::ISerializable,
+			virtual public istd::INamed
 {
 public:
 	/**
@@ -63,14 +66,6 @@ public:
 		This value is in physical units.
 	*/
 	virtual void SetPositionTolerance(double value) = 0;
-	/**
-		Check if ejection control is enabled.
-	*/
-	virtual bool IsEjectionControlEnabled() const = 0;
-	/**
-		Set ejection control to be enabled or disabled.
-	*/
-	virtual void SetEjectionControlEnabled(bool state = true) = 0;
 	/**
 		Get number of light barriers.
 	*/

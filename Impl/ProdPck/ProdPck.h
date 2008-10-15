@@ -8,6 +8,10 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "icntl/CDriverControllerComp.h"
+#include "icntl/CMultiLineParamsComp.h"
+#include "icntl/CLineParamsComp.h"
+#include "icntl/CInspectionUnitParamsComp.h"
+#include "icntl/CEjectorParamsComp.h"
 
 
 /**
@@ -17,6 +21,10 @@ namespace ProdPck
 {
 
 typedef icntl::CDriverControllerComp DriverController;
+typedef icomp::TModelCompWrap<icntl::CMultiLineParamsComp> MultiLineParams;
+typedef icomp::TModelCompWrap<icntl::CLineParamsComp> LineParams;
+typedef icomp::TModelCompWrap<icntl::CInspectionUnitParamsComp> InspectionUnitParams;
+typedef icomp::TModelCompWrap<icntl::CEjectorParamsComp> EjectorParams;
 
 
 } // namespace ProdPck

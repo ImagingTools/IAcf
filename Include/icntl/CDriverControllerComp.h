@@ -38,6 +38,7 @@ public:
 		I_ASSIGN(m_multiLineModelCompPtr, "MultiLineParams", "Description of parameters for all production lines", true, "MultiLineParams");
 		I_ASSIGN(m_commandCallerCompPtr, "CommandCaller", "Send low level commands to driver", true, "CommandCaller");
 		I_ASSIGN_MULTI_0(m_autonomeEjectorIndicesAttrPtr, "AutonomeEjectorIndices", "Indices of autonome ejectors for each line", false);
+		I_ASSIGN_MULTI_0(m_ejectionControlIndicesAttrPtr, "EjectionControlIndices", "Indices of ejection control light barrier or -1 if disabled (for each line)", false);
 		I_ASSIGN_MULTI_0(m_lightBarriersBitsAttrPtr, "LightBarrierFirstBits", "Indices of first light barrier input bit for each line", true);
 		I_ASSIGN_MULTI_0(m_ejectorsBitsAttrPtr, "EjectorFirstBits", "Indices of first ejector output bit for each line", true);
 		I_ASSIGN_MULTI_0(m_triggersBitsAttrPtr, "TriggerFirstBits", "Indices of first trigger output bit for each line", true);
@@ -81,6 +82,7 @@ private:
 	I_REF(imod::IModel, m_multiLineModelCompPtr);
 	I_REF(ilolv::ICommandCaller, m_commandCallerCompPtr);
 	I_MULTIATTR(int, m_autonomeEjectorIndicesAttrPtr);
+	I_MULTIATTR(int, m_ejectionControlIndicesAttrPtr);
 	I_MULTIATTR(int, m_lightBarriersBitsAttrPtr);
 	I_MULTIATTR(int, m_ejectorsBitsAttrPtr);
 	I_MULTIATTR(int, m_triggersBitsAttrPtr);
