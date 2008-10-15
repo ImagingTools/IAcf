@@ -2,16 +2,15 @@
 #define iqtcam_CSnapBitmapSupplierGuiComp_included
 
 
+// ACF includes
 #include "iser/IFileLoader.h"
-
 #include "imod/IObserver.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iproc/IIdManager.h"
 
 #include "icam/CSnapBitmapSupplierComp.h"
-
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqtproc/TSupplierGuiCompBase.h"
 
@@ -52,7 +51,7 @@ protected slots:
 protected:
 	const iimg::IBitmap* GetCurrentBitmap() const;
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 	// reimplemented (iqtproc::TSupplierGuiCompBase)

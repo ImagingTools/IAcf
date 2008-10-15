@@ -66,7 +66,7 @@ protected slots:
 protected:
 	bool AcquireSample();
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 

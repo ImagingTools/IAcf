@@ -38,7 +38,7 @@ void CSearchGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes
 
 // protected methods
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSearchGuiComp::OnGuiCreated()
 {

@@ -6,14 +6,14 @@
 #include <QDir>
 #include <QStringList>
 
+// ACF includes
 #include "iser/IFileLoader.h"
+#include "icomp/CComponentBase.h"
+#include "iprm/IFileNameParam.h"
 
 #include "iproc/TSyncProcessorWrap.h"
 
 #include "icam/IBitmapAcquisition.h"
-#include "iprm/IFileNameParam.h"
-
-#include "icomp/CComponentBase.h"
 
 #include "iqtcam/iqtcam.h"
 

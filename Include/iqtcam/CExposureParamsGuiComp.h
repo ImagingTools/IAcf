@@ -2,9 +2,10 @@
 #define iqtcam_CExposureParamsGuiComp_included
 
 
-#include "icam/IExposureParams.h"
-
+// ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+#include "icam/IExposureParams.h"
 
 #include "iqtcam/Generated/ui_CExposureParamsGuiComp.h"
 

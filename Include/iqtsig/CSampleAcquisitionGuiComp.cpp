@@ -102,7 +102,7 @@ bool CSampleAcquisitionGuiComp::AcquireSample()
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSampleAcquisitionGuiComp::OnGuiCreated()
 {

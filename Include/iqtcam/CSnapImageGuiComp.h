@@ -5,21 +5,17 @@
 // Qt includes
 #include <QTimer>
 
+// ACF includes
 #include "iser/IFileLoader.h"
-
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
-
 #include "iimg/IBitmap.h"
-
 #include "iprm/IParamsSet.h"
-
-#include "icam/IBitmapAcquisition.h"
-
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
-
 #include "iqt2d/TSceneExtenderCompBase.h"
+
+#include "icam/IBitmapAcquisition.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -74,7 +70,7 @@ protected:
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 

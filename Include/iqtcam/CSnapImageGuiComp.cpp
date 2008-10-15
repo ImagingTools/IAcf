@@ -146,7 +146,7 @@ void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Sha
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSnapImageGuiComp::OnGuiCreated()
 {

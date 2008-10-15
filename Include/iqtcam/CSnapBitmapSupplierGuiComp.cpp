@@ -134,7 +134,7 @@ const iimg::IBitmap* CSnapBitmapSupplierGuiComp::GetCurrentBitmap() const
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSnapBitmapSupplierGuiComp::OnGuiCreated()
 {
