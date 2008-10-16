@@ -1,0 +1,16 @@
+#include "icomp/export.h"
+
+#include "QtProdPck.h"
+
+
+namespace QtProdPck
+{
+
+I_EXPORT_DEFAULT_SERVICES
+
+I_EXPORT_PACKAGE("QtProd", "Qt-based Production and control package", "Qt Production Automatic Controller");
+
+I_EXPORT_COMPONENT(AutomaticControllerGui, "GUI for automatic controller implemented as observer", "Production Line Automatic Driver Controller Observer");
+
+
+} // namespace QtProdPck

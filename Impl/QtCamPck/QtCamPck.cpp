@@ -1,5 +1,3 @@
-#include <QDir>
-
 #include "icomp/export.h"
 
 #include "QtCamPck.h"
