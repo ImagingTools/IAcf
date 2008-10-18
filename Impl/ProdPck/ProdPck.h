@@ -7,7 +7,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "icntl/CDriverControllerComp.h"
 #include "icntl/CMultiLineParamsComp.h"
 #include "icntl/CLineParamsComp.h"
 #include "icntl/CInspectionUnitParamsComp.h"
@@ -20,7 +19,6 @@
 namespace ProdPck
 {
 
-typedef icntl::CDriverControllerComp DriverController;
 typedef icomp::TModelCompWrap<icntl::CMultiLineParamsComp> MultiLineParams;
 typedef icomp::TModelCompWrap<icntl::CLineParamsComp> LineParams;
 typedef icomp::TModelCompWrap<icntl::CInspectionUnitParamsComp> InspectionUnitParams;

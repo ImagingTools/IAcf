@@ -1,17 +1,15 @@
-#include "icntl/CDriverControllerComp.h"
+#include "iqtcntl/CDriverControllerComp.h"
 
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
-#include "ilolv/CMultiTracerCommands.h"
 
 #include "icntl/ILineParams.h"
 #include "icntl/IInspectionUnitParams.h"
 #include "icntl/IEjectorParams.h"
 
 
-namespace icntl
+namespace iqtcntl
 {
 
 
@@ -73,6 +71,20 @@ bool CDriverControllerComp::IsModeSupported(int mode) const
 }
 
 
+// reimplemented (icntl::IMultiLineController)
+
+int CDriverControllerComp::GetLinesCount() const
+{
+	return int(m_lineControllers.size());
+}
+
+
+icntl::ILineController& CDriverControllerComp::GetLineController(int lineIndex) const
+{
+	return m_lineControllers[lineIndex];
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CDriverControllerComp::OnComponentCreated()
@@ -86,8 +98,9 @@ void CDriverControllerComp::OnComponentCreated()
 	}
 
 	int linesCount = m_multiLineParamsCompPtr->GetLinesCount();
+	m_lineControllers.resize(linesCount);
 	for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-		ILineParams& lineParams = m_multiLineParamsCompPtr->GetLineParams(lineIndex);
+		icntl::ILineParams& lineParams = m_multiLineParamsCompPtr->GetLineParams(lineIndex);
 
 		imod::IModel* lineModelPtr = dynamic_cast<imod::IModel*>(&lineParams);
 		if (lineModelPtr != NULL){
@@ -96,7 +109,7 @@ void CDriverControllerComp::OnComponentCreated()
 
 		int unitsCount = lineParams.GetInspectionUnitsCount();
 		for (int unitIndex = 0; unitIndex < unitsCount; ++unitIndex){
-			IInspectionUnitParams& unitParams = lineParams.GetInspectionUnitParams(unitIndex);
+			icntl::IInspectionUnitParams& unitParams = lineParams.GetInspectionUnitParams(unitIndex);
 
 			imod::IModel* unitModelPtr = dynamic_cast<imod::IModel*>(&unitParams);
 			if (unitModelPtr != NULL){
@@ -106,7 +119,7 @@ void CDriverControllerComp::OnComponentCreated()
 
 		int ejectorsCount = lineParams.GetEjectorsCount();
 		for (int ejectorIndex = 0; ejectorIndex < ejectorsCount; ++ejectorIndex){
-			IEjectorParams& ejectorParams = lineParams.GetEjectorParams(ejectorIndex);
+			icntl::IEjectorParams& ejectorParams = lineParams.GetEjectorParams(ejectorIndex);
 
 			imod::IModel* ejectorModelPtr = dynamic_cast<imod::IModel*>(&ejectorParams);
 			if (ejectorModelPtr != NULL){
@@ -146,10 +159,13 @@ bool CDriverControllerComp::SetParamsToDriver()
 		return false;
 	}
 
-	for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-		const ILineParams& lineParams = m_multiLineParamsCompPtr->GetLineParams(lineIndex);
+	m_lineControllers.resize(linesCount);
 
-		if (!SetLineParamsToDriver(lineIndex, lineParams)){
+	for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
+		const icntl::ILineParams& lineParams = m_multiLineParamsCompPtr->GetLineParams(lineIndex);
+		LineController& lineController = m_lineControllers[lineIndex];
+
+		if (!SetLineParamsToDriver(lineIndex, lineParams, lineController)){
 			return false;
 		}
 	}
@@ -158,7 +174,10 @@ bool CDriverControllerComp::SetParamsToDriver()
 }
 
 
-bool CDriverControllerComp::SetLineParamsToDriver(int lineIndex, const ILineParams& lineParams)
+bool CDriverControllerComp::SetLineParamsToDriver(
+			int lineIndex,
+			const icntl::ILineParams& lineParams,
+			LineController& controller)
 {
 	I_ASSERT(lineIndex >= 0);
 	I_ASSERT(m_commandCallerCompPtr.IsValid());
@@ -168,6 +187,10 @@ bool CDriverControllerComp::SetLineParamsToDriver(int lineIndex, const ILinePara
 	int ejectorsCount = lineParams.GetEjectorsCount();
 	int lightBarriersCount = lineParams.GetLightBarriersCount();
 	double ticksPerDistUnit = lineParams.GetTicksPerDistanceUnit();
+
+	controller.lineIndex = lineIndex;
+	controller.parentPtr = this;
+	controller.ticksPerDistanceUnit = ticksPerDistUnit;
 
 	int responseSize = 0;
 
@@ -225,18 +248,22 @@ bool CDriverControllerComp::SetLineParamsToDriver(int lineIndex, const ILinePara
 		}
 	}
 
+	controller.unitControllers.resize(unitsCount);
 	for (int unitIndex = 0; unitIndex < unitsCount; ++unitIndex){
-		const IInspectionUnitParams& unitParams = lineParams.GetInspectionUnitParams(unitIndex);
+		const icntl::IInspectionUnitParams& unitParams = lineParams.GetInspectionUnitParams(unitIndex);
+		UnitController& unitController = controller.unitControllers[unitIndex];
 
-		if (!SetUnitParamsToDriver(lineIndex, unitIndex, unitParams, ticksPerDistUnit)){
+		if (!SetUnitParamsToDriver(lineIndex, unitIndex, unitParams, ticksPerDistUnit, unitController)){
 			return false;
 		}
 	}
 
+	controller.ejectorControllers.resize(ejectorsCount);
 	for (int ejectorIndex = 0; ejectorIndex < ejectorsCount; ++ejectorIndex){
-		const IEjectorParams& ejectorParams = lineParams.GetEjectorParams(ejectorIndex);
+		const icntl::IEjectorParams& ejectorParams = lineParams.GetEjectorParams(ejectorIndex);
+		EjectorController& ejectorController = controller.ejectorControllers[ejectorIndex];
 
-		if (!SetEjectorParamsToDriver(lineIndex, ejectorIndex, ejectorParams, ticksPerDistUnit)){
+		if (!SetEjectorParamsToDriver(lineIndex, ejectorIndex, ejectorParams, ticksPerDistUnit, ejectorController)){
 			return false;
 		}
 	}
@@ -248,13 +275,18 @@ bool CDriverControllerComp::SetLineParamsToDriver(int lineIndex, const ILinePara
 bool CDriverControllerComp::SetUnitParamsToDriver(
 			int lineIndex,
 			int unitIndex,
-			const IInspectionUnitParams& unitParams,
-			double ticksPerDistUnit)
+			const icntl::IInspectionUnitParams& unitParams,
+			double ticksPerDistUnit,
+			UnitController& controller)
 {
 	I_ASSERT(lineIndex >= 0);
 	I_ASSERT(unitIndex >= 0);
 	I_ASSERT(m_commandCallerCompPtr.IsValid());
 	I_ASSERT(m_workMode != WM_AUTOMATIC);
+
+	controller.lineIndex = lineIndex;
+	controller.unitIndex = unitIndex;
+	controller.parentPtr = this;
 
 	ilolv::CMultiTracerCommands::SetUnitParams command;
 	command.lineIndex = lineIndex;
@@ -277,13 +309,18 @@ bool CDriverControllerComp::SetUnitParamsToDriver(
 bool CDriverControllerComp::SetEjectorParamsToDriver(
 			int lineIndex,
 			int ejectorIndex,
-			const IEjectorParams& ejectorParams,
-			double ticksPerDistUnit)
+			const icntl::IEjectorParams& ejectorParams,
+			double ticksPerDistUnit,
+			EjectorController& controller)
 {
 	I_ASSERT(lineIndex >= 0);
 	I_ASSERT(ejectorIndex >= 0);
 	I_ASSERT(m_commandCallerCompPtr.IsValid());
 	I_ASSERT(m_workMode != WM_AUTOMATIC);
+
+	controller.lineIndex = lineIndex;
+	controller.ejectorIndex = ejectorIndex;
+	controller.parentPtr = this;
 
 	ilolv::CMultiTracerCommands::SetEjectorParams command;
 	command.lineIndex = lineIndex;
@@ -313,6 +350,235 @@ void CDriverControllerComp::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFla
 }
 
 
-} // namespace icntl
+// public methods of private embedded class ObjectInspection
+
+CDriverControllerComp::ObjectInspection::ObjectInspection(
+			ilolv::ICommandCaller* commandCallerPtr,
+			int lineIndex,
+			int stationIndex,
+			const ilolv::CMultiTracerCommands::PopId::Result& objectParams)
+:	m_commandCaller(*commandCallerPtr),
+	m_lineIndex(lineIndex),
+	m_unitIndex(stationIndex),
+	m_objectId(objectParams.objectIndex),
+	m_inspectionId(objectParams.inspectionId)
+{
+	I_ASSERT(commandCallerPtr != NULL);
+
+	m_timestamp.SetNativeRepresentation(objectParams.nativeTimestamp);
+}
+
+
+// reimplemented (icntl::IObjectInspection)
+
+I_DWORD CDriverControllerComp::ObjectInspection::GetObjectId() const
+{
+	return m_objectId;
+}
+
+
+const isys::ITimer& CDriverControllerComp::ObjectInspection::GetTimestamp() const
+{
+	return m_timestamp;
+}
+
+
+bool CDriverControllerComp::ObjectInspection::SetEjector(int ejectorIndex)
+{
+	ilolv::CMultiTracerCommands::SetResult command;
+	command.lineIndex = m_lineIndex;
+	command.line.unitIndex = m_unitIndex;
+	command.line.unit.inspectionId = m_inspectionId;
+	command.line.unit.ejectorIndex = ejectorIndex;
+
+	ilolv::CMultiTracerCommands::SetResult::Result commandResult;
+
+	int resultSize;
+	if (m_commandCaller.CallCommand(
+				ilolv::CMultiTracerCommands::SetResult::Id,
+				&command, sizeof(command),
+				&commandResult, sizeof(commandResult),
+				resultSize) && (resultSize >= sizeof(commandResult))){
+		return commandResult.wasSet;
+	}
+
+	return false;
+}
+
+
+// public methods of private embedded class UnitController
+
+// reimplemented (icntl::ILineController)
+
+icntl::IObjectInspection* CDriverControllerComp::UnitController::PopObjectInspection()
+{
+	I_ASSERT(parentPtr != NULL);
+
+	if (parentPtr->m_commandCallerCompPtr.IsValid()){
+		ilolv::CMultiTracerCommands::PopId command;
+		command.lineIndex = lineIndex;
+		command.line.unitIndex = unitIndex;
+
+		ilolv::CMultiTracerCommands::PopId::Result commandResult;
+
+		int resultSize;
+		if (parentPtr->m_commandCallerCompPtr->CallCommand(
+					ilolv::CMultiTracerCommands::PopId::Id,
+					&command, sizeof(command),
+					&commandResult, sizeof(commandResult),
+					resultSize) && (resultSize >= sizeof(commandResult))){
+			return new ObjectInspection(
+						parentPtr->m_commandCallerCompPtr.GetPtr(),
+						lineIndex,
+						unitIndex,
+						commandResult);
+		}
+	}
+
+	return NULL;
+}
+
+
+isys::ITimer* CDriverControllerComp::UnitController::DoCameraTrigger()
+{
+	I_ASSERT(parentPtr != NULL);
+
+	if (parentPtr->m_commandCallerCompPtr.IsValid()){
+		ilolv::CMultiTracerCommands::SingleTrigger command;
+		command.lineIndex = lineIndex;
+		command.line.unitIndex = unitIndex;
+
+		ilolv::CMultiTracerCommands::SingleTrigger::Result commandResult;
+
+		int resultSize;
+		if (parentPtr->m_commandCallerCompPtr->CallCommand(
+					ilolv::CMultiTracerCommands::SingleTrigger::Id,
+					&command, sizeof(command),
+					&commandResult, sizeof(commandResult),
+					resultSize) && (resultSize >= sizeof(commandResult))){
+			iwin::CTimer* timerPtr = new iwin::CTimer;
+			if (timerPtr != NULL){
+				timerPtr->SetNativeRepresentation(commandResult.nativeTimestamp);
+
+				return timerPtr;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+// public methods of private embedded class EjectorController
+
+// reimplemented (icntl::IEjectorController)
+
+int CDriverControllerComp::EjectorController::GetEjectedCounter() const
+{
+	return 0;
+}
+
+
+bool CDriverControllerComp::EjectorController::DoTestEjection()
+{
+	return false;
+}
+
+
+// public methods of private embedded class LineController
+
+// reimplemented (icntl::ILineController)
+
+int CDriverControllerComp::LineController::GetInspectionUnitsCount() const
+{
+	return int(unitControllers.size());
+}
+
+
+icntl::IInspectionUnitController& CDriverControllerComp::LineController::GetInspectionUnitController(int unitIndex) const
+{
+	I_ASSERT(unitIndex >= 0);
+	I_ASSERT(unitIndex < int(unitControllers.size()));
+
+	return unitControllers[unitIndex];
+}
+
+
+int CDriverControllerComp::LineController::GetEjectorsCount() const
+{
+	return int(ejectorControllers.size());
+}
+
+
+icntl::IEjectorController& CDriverControllerComp::LineController::GetEjectorController(int ejectorIndex) const
+{
+	I_ASSERT(ejectorIndex >= 0);
+	I_ASSERT(ejectorIndex < int(ejectorControllers.size()));
+
+	return ejectorControllers[ejectorIndex];
+}
+
+
+bool CDriverControllerComp::LineController::GetTransmissionPosition(double& result) const
+{
+	I_ASSERT(parentPtr != NULL);
+
+	if (parentPtr->m_commandCallerCompPtr.IsValid()){
+		ilolv::CMultiTracerCommands::GetLineInfo command;
+		command.lineIndex = lineIndex;
+
+		ilolv::CMultiTracerCommands::GetLineInfo::Result commandResult;
+
+		int resultSize;
+		if (parentPtr->m_commandCallerCompPtr->CallCommand(
+					ilolv::CMultiTracerCommands::GetLineInfo::Id,
+					&command, sizeof(command),
+					&commandResult, sizeof(commandResult),
+					resultSize) && (resultSize >= sizeof(commandResult))){
+
+			result = ticksPerDistanceUnit * commandResult.linePos;
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CDriverControllerComp::LineController::GetObjectPosition(I_DWORD /*objectId*/, double& /*result*/) const
+{
+	return false;
+}
+
+
+bool CDriverControllerComp::LineController::GetLastObjectId(I_DWORD& result) const
+{
+	I_ASSERT(parentPtr != NULL);
+
+	if (parentPtr->m_commandCallerCompPtr.IsValid()){
+		ilolv::CMultiTracerCommands::GetLineInfo command;
+		command.lineIndex = lineIndex;
+
+		ilolv::CMultiTracerCommands::GetLineInfo::Result commandResult;
+
+		int resultSize;
+		if (parentPtr->m_commandCallerCompPtr->CallCommand(
+					ilolv::CMultiTracerCommands::GetLineInfo::Id,
+					&command, sizeof(command),
+					&commandResult, sizeof(commandResult),
+					resultSize) && (resultSize >= sizeof(commandResult))){
+
+			result = commandResult.lastDetectedObjectIndex;
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+} // namespace iqtcntl
 
 

@@ -116,8 +116,8 @@ public:
 		{
 			I_DWORD inspectionId;
 			IDriver::NativeTimer nativeTimestamp;
-			I_DWORD objectIndex;		// only inspected objects are used
-			I_DWORD objectPosition;	// line base position (in counter ticks) of this object
+			I_DWORD objectIndex;
+			I_DWORD objectPosition;
 		};
 	};
 
@@ -133,7 +133,6 @@ public:
 		};
 
 		I_DWORD inspectionId;
-		I_DWORD result;
 		I_SDWORD ejectorIndex;
 	};
 };

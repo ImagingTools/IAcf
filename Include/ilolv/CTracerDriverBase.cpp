@@ -385,18 +385,10 @@ bool CTracerDriverBase::OnCommand(
 			CTracerCommands::SetResult::Result& result = *(CTracerCommands::SetResult::Result*)responseBuffer;
 
 			if ((command.unitIndex >= 0) && (command.unitIndex < m_params.unitsCount)){
-				int ejectorIndex;
-				if (command.unit.result != 0){
-					ejectorIndex = -1;
-				}
-				else{
-					ejectorIndex = command.unit.ejectorIndex;
-				}
-
 				result.wasSet = OnSetResultCommand(
 								command.unitIndex,
 								command.unit.inspectionId,
-								ejectorIndex);
+								command.unit.ejectorIndex);
 
 				responseSize = sizeof(CTracerCommands::SetResult::Result);
 			}

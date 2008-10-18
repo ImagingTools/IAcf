@@ -2,6 +2,7 @@
 #define QtProdPck_included
 
 
+#include "iqtcntl/CDriverControllerComp.h"
 #include "iqtcntl/CAutomaticControllerGuiComp.h"
 
 
@@ -12,6 +13,9 @@ namespace QtProdPck
 {
 
 
+typedef iqtcntl::CDriverControllerComp DriverController;
+
+// GUI components
 typedef iqtcntl::CAutomaticControllerGuiComp AutomaticControllerGui;
 
 

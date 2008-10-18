@@ -180,10 +180,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CDriverControllerComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CEjectorParamsComp.cpp"
 				>
 			</File>
@@ -204,10 +200,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CDriverControllerComp.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CEjectorParamsComp.h"
 				>
@@ -233,7 +225,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IEjectorController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IEjectorParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IInspectionUnitController.h"
 				>
 			</File>
 			<File
@@ -241,11 +241,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ILineController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ILineParams.h"
 				>
 			</File>
 			<File
+				RelativePath="..\IMultiLineController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IMultiLineParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IObjectInspection.h"
 				>
 			</File>
 		</Filter>
