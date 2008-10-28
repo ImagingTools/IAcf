@@ -171,6 +171,10 @@
 				RelativePath="..\CDriverControllerComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSimulatedMultiTracerGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -208,6 +212,32 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSimulatedMultiTracerGuiComp.h"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\iqtcntl.h"
 				>
 			</File>
@@ -229,7 +259,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSimulatedMultiTracerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CAutomaticControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSimulatedMultiTracerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -238,6 +276,10 @@
 			>
 			<File
 				RelativePath="..\CAutomaticControllerGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimulatedMultiTracerGuiComp.ui"
 				>
 			</File>
 		</Filter>

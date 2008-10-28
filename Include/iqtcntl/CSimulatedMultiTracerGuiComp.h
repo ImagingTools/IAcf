@@ -1,0 +1,120 @@
+#ifndef iqtcntl_CSimulatedMultiTracerGuiComp_included
+#define iqtcntl_CSimulatedMultiTracerGuiComp_included
+
+
+// Qt includes
+#include <QTimer>
+
+// ACF includes
+#include "iwin/CTimer.h"
+#include "iqt/CCriticalSection.h"
+#include "iqtgui/TDesignerGuiCompBase.h"
+
+#include "ilolv/ICommandCaller.h"
+#include "ilolv/CGeneralInfoDriverBase.h"
+#include "ilolv/CMultiTracerDriverBase.h"
+#include "ilolv/CSignalBitsDriverBase.h"
+
+#include "iqtcntl/iqtcntl.h"
+
+#include "iqtcntl/Generated/ui_CSimulatedMultiTracerGuiComp.h"
+
+
+namespace iqtcntl
+{
+
+
+class CSimulatedMultiTracerGuiComp:
+			public iqtgui::TDesignerGuiCompBase<Ui::CSimulatedMultiTracerGuiComp>,
+			virtual public ilolv::ICommandCaller,
+			protected ilolv::CGeneralInfoDriverBase,
+			protected ilolv::CMultiTracerDriverBase,
+			protected ilolv::CSignalBitsDriverBase
+{
+	Q_OBJECT
+
+public:
+	typedef iqtgui::TDesignerGuiCompBase<Ui::CSimulatedMultiTracerGuiComp> BaseClass;
+
+	I_BEGIN_COMPONENT(CSimulatedMultiTracerGuiComp);
+		I_REGISTER_INTERFACE(ilolv::ICommandCaller);
+	I_END_COMPONENT;
+
+	CSimulatedMultiTracerGuiComp();
+
+	// reimplemented (ilolv::ICommandCaller)
+	virtual bool CallCommand(
+				int commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
+				void* responseBuffer,
+				int responseBufferSize,
+				int& responseSize);
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
+
+protected:
+	// reimplemented (ilolv::CMultiTracerDriverBase)
+	virtual I_WORD ReadCounter(int counterIndex);
+	virtual void WriteCounter(int counterIndex, I_WORD value);
+	virtual void WriteInterruptsMask(I_DWORD value);
+
+	// reimplemented (ilolv::IDriver)
+	virtual bool OnCommand(
+				int commandCode,
+				const void* commandBuffer,
+				int commandBufferSize,
+				void* responseBuffer,
+				int responseBufferSize,
+				int& responseSize);
+	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
+	virtual __int64 GetCurrentTimer() const;
+	virtual NativeTimer GetCurrentNativeTimer() const;
+
+	// reimplemented (ilolv::IDigitalIo)
+	virtual I_DWORD GetInputBits() const;
+	virtual void SetOutputBits(I_DWORD value, I_DWORD mask);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
+signals:
+	void OutputChanged();
+
+protected slots:
+	void OnPeriodicTimer();
+	void OnInputChanged();
+	void OnOutputChanged();
+	void on_EncoderDial_valueChanged(int value);
+
+private:
+	enum
+	{
+		OUTPUT_BITS_COUNT = 32
+	};
+
+	I_DWORD m_inputBits;
+	I_DWORD m_outputBits;
+	bool m_isCounterReady;
+	I_WORD m_counterValue;
+	I_DWORD m_interruptMask;
+	int m_outputCounters[OUTPUT_BITS_COUNT];
+	int m_lastEncoderValue;
+
+	mutable iwin::CTimer m_timer;
+	__int64 m_currentTimer;
+
+	iqt::CCriticalSection m_globalSection;
+
+	QTimer m_periodicTimer;
+};
+
+
+} // namespace iqtcntl
+
+
+#endif // !iqtcntl_CSimulatedMultiTracerGuiComp_included
+
+

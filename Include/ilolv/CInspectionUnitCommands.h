@@ -114,7 +114,7 @@ public:
 
 		struct Result
 		{
-			I_DWORD inspectionId;
+			int inspectionId;
 			IDriver::NativeTimer nativeTimestamp;
 			I_DWORD objectIndex;
 			I_DWORD objectPosition;
@@ -132,8 +132,8 @@ public:
 			bool wasSet;
 		};
 
-		I_DWORD inspectionId;
-		I_SDWORD ejectorIndex;
+		int inspectionId;
+		int ejectorIndex;
 	};
 };
 

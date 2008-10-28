@@ -4,6 +4,7 @@
 
 #include "iqtcntl/CDriverControllerComp.h"
 #include "iqtcntl/CAutomaticControllerGuiComp.h"
+#include "iqtcntl/CSimulatedMultiTracerGuiComp.h"
 
 
 /**
@@ -17,6 +18,7 @@ typedef iqtcntl::CDriverControllerComp DriverController;
 
 // GUI components
 typedef iqtcntl::CAutomaticControllerGuiComp AutomaticControllerGui;
+typedef iqtcntl::CSimulatedMultiTracerGuiComp SimulatedMultiTracerGui;
 
 
 } // namespace QtProdPck
