@@ -426,12 +426,14 @@ icntl::IObjectInspection* CDriverControllerComp::UnitController::PopObjectInspec
 					ilolv::CMultiTracerCommands::PopId::Id,
 					&command, sizeof(command),
 					&commandResult, sizeof(commandResult),
-					resultSize) && (resultSize >= sizeof(commandResult))){
-			return new ObjectInspection(
-						parentPtr->m_commandCallerCompPtr.GetPtr(),
-						lineIndex,
-						unitIndex,
-						commandResult);
+					resultSize)){
+			if  ((resultSize >= sizeof(commandResult)) && (commandResult.inspectionId >= 0)){
+				return new ObjectInspection(
+							parentPtr->m_commandCallerCompPtr.GetPtr(),
+							lineIndex,
+							unitIndex,
+							commandResult);
+			}
 		}
 	}
 
