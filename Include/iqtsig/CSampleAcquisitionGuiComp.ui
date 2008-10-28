@@ -247,8 +247,6 @@
   <tabstop>LoadParamsButton</tabstop>
   <tabstop>SaveParamsButton</tabstop>
  </tabstops>
- <resources>
-  <include location="../iqtdoc/iqtdoc.qrc" />
- </resources>
+ <resources/>
  <connections/>
 </ui>

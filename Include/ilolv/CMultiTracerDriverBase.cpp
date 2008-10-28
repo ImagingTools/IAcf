@@ -342,7 +342,7 @@ void CMultiTracerDriverBase::SingleLine::SetOutputBits(I_DWORD value, I_DWORD ma
 
 void CMultiTracerDriverBase::SingleLine::SetEncoderCounter(I_WORD value)
 {
-	I_ASSERT(I_SWORD(value) > 0);
+	I_ASSERT(I_SWORD(value) >= 0);
 
 	if (m_parentPtr != NULL){
 		m_parentPtr->WriteCounter(m_lineNumber, value);
