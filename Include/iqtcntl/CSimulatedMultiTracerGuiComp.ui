@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>344</width>
-    <height>633</height>
+    <height>721</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -14,41 +14,82 @@
   </property>
   <layout class="QVBoxLayout" >
    <item>
-    <layout class="QGridLayout" >
-     <item row="0" column="0" >
-      <widget class="QLabel" name="label" >
-       <property name="text" >
-        <string>Encoder</string>
-       </property>
-      </widget>
-     </item>
-     <item rowspan="2" row="0" column="1" >
-      <widget class="QDial" name="EncoderDial" >
-       <property name="maximum" >
-        <number>4095</number>
-       </property>
-       <property name="pageStep" >
-        <number>256</number>
-       </property>
-       <property name="wrapping" >
-        <bool>true</bool>
-       </property>
-       <property name="notchTarget" >
-        <double>128.000000000000000</double>
-       </property>
-       <property name="notchesVisible" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QSpinBox" name="EncoderSB" >
-       <property name="maximum" >
-        <number>4095</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Encoder</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QDial" name="EncoderDial" >
+        <property name="maximum" >
+         <number>4095</number>
+        </property>
+        <property name="singleStep" >
+         <number>16</number>
+        </property>
+        <property name="pageStep" >
+         <number>256</number>
+        </property>
+        <property name="wrapping" >
+         <bool>true</bool>
+        </property>
+        <property name="notchTarget" >
+         <double>128.000000000000000</double>
+        </property>
+        <property name="notchesVisible" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QPushButton" name="RunButton" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>Run</string>
+        </property>
+        <property name="checkable" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Speed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QSpinBox" name="EncoderSB" >
+        <property name="maximum" >
+         <number>4095</number>
+        </property>
+        <property name="singleStep" >
+         <number>16</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QSpinBox" name="SpeedSB" >
+        <property name="maximum" >
+         <number>4095</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QTableWidget" name="BitsTable" >
@@ -140,17 +181,17 @@
      </row>
      <column>
       <property name="text" >
-       <string>Inputs</string>
+       <string>Input</string>
       </property>
      </column>
      <column>
       <property name="text" >
-       <string>Outputs</string>
+       <string>Output</string>
       </property>
      </column>
      <column>
       <property name="text" >
-       <string>Output Counter</string>
+       <string>Counter</string>
       </property>
      </column>
     </widget>

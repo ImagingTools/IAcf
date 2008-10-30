@@ -145,6 +145,8 @@ bool CIoCardTracerDriverBase::OnCommand(
 
 void CIoCardTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
+	BaseClass::OnHardwareInterrupt(interruptFlags);
+
 	if ((interruptFlags & IF_ENCODER_INTERRUPT) != 0){
 		OnCounterReady();
 	}
@@ -161,12 +163,13 @@ I_DWORD CIoCardTracerDriverBase::GetInputBits() const
 
 // protected methods
 
-void CIoCardTracerDriverBase::UpdateHardwareValues(I_DWORD inputBits, I_DWORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer)
+void CIoCardTracerDriverBase::UpdateHardwareValues(I_DWORD inputBits, I_WORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer)
 {
 	m_inputBits = inputBits;
-	m_linePosition = m_nextEventPosition - counterValue;
+	m_linePosition += I_SWORD(m_lastCounterValue - counterValue);
 	m_currentTimer = microsecsTimer;
 	m_currentNativeTimer = nativeTimer;
+	m_lastCounterValue = counterValue;
 }
 
 

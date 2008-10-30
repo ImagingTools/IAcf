@@ -29,7 +29,7 @@ CTracerDriverBase::CTracerDriverBase()
 		unit.triggerOnTime = 0;
 		unit.isTriggerBitSet = false;
 		unit.edgeOnPosition = 0;
-		unit.lastBarrierState = true;
+		unit.lastBarrierState = false;
 	}
 
 	for (int ejectorIndex = 0; ejectorIndex < MAX_EJECTORS; ++ejectorIndex){
@@ -70,7 +70,6 @@ void CTracerDriverBase::ResetQueue()
 
 		unit.triggerOnTime = 0;
 		unit.isTriggerBitSet = 0;
-		unit.lastBarrierState = true;
 
 		if (unit.lightBarrierIndex >= 0){
 			int lightBarrierOffset = m_lightBarriersOffset[unit.lightBarrierIndex] + unit.triggerOffset;
@@ -405,7 +404,7 @@ bool CTracerDriverBase::OnCommand(
 
 void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
-	if ((interruptFlags & IF_ENCODER_INTERRUPT) != 0){
+	if ((interruptFlags & IF_DIGITAL_INPUT) != 0){
 		I_DWORD linePosition = GetLinePosition();
 
 		for (int i = 0; i < m_params.unitsCount; ++i){

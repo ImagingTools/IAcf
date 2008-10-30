@@ -132,9 +132,9 @@ void CSingleCountTracerDriverBase::OnSinglePositionEvent()
 		while (!eventQueue.IsEmpty() && (I_SDWORD(eventQueue.GetBackPosition() - currentLinePosition) <= 0)){
 			void* userContext = eventQueue.GetBackObject();
 
-			ProcessPositionEvent(eventIndex, userContext);
-
 			eventQueue.PopBack();
+
+			ProcessPositionEvent(eventIndex, userContext);
 		}
 	}
 

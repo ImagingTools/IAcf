@@ -102,6 +102,8 @@ bool CMultiTracerDriverBase::OnCommand(
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
+
+				CalcInterruptsMask();
 			}
 		}
 		break;
@@ -140,6 +142,8 @@ bool CMultiTracerDriverBase::OnCommand(
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
+
+				CalcInterruptsMask();
 			}
 		}
 		break;
@@ -155,6 +159,8 @@ bool CMultiTracerDriverBase::OnCommand(
 						responseBuffer,
 						responseBufferSize,
 						responseSize);
+
+			CalcInterruptsMask();
 		}
 
 		break;
@@ -250,7 +256,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetResult::Id,
 							&command.line,
-							sizeof(CTracerCommands::PopId),
+							sizeof(CTracerCommands::SetResult),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -288,7 +294,7 @@ void CMultiTracerDriverBase::CopyFromHardware()
 
 		I_WORD counterValue = ReadCounter(lineIndex);
 
-		line.UpdateHardwareValues(inputBits, I_DWORD(I_SDWORD(I_SWORD(counterValue))), GetCurrentTimer(), GetCurrentNativeTimer());
+		line.UpdateHardwareValues(inputBits, counterValue, GetCurrentTimer(), GetCurrentNativeTimer());
 	}
 }
 

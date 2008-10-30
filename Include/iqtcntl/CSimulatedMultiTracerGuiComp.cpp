@@ -25,6 +25,10 @@ CSimulatedMultiTracerGuiComp::CSimulatedMultiTracerGuiComp()
 	for (int i = 0; i < OUTPUT_BITS_COUNT; ++i){
 		m_outputCounters[i] = 0;
 	}
+
+	QObject::connect(this, SIGNAL(OutputChanged()), this, SLOT(OnOutputChanged()), Qt::QueuedConnection);
+	QObject::connect(&m_periodicTimer, SIGNAL(timeout()), this, SLOT(OnPeriodicTimer()));
+	QObject::connect(&m_runTimer, SIGNAL(timeout()), this, SLOT(OnRunTimer()));
 }
 
 
@@ -39,9 +43,6 @@ bool CSimulatedMultiTracerGuiComp::CallCommand(
 			int& responseSize)
 {
 	return OnCommand(commandCode, commandBuffer, commandBufferSize, responseBuffer, responseBufferSize, responseSize);
-
-	QObject::connect(this, SIGNAL(OutputChanged()), this, SLOT(OnOutputChanged()), Qt::QueuedConnection);
-	QObject::connect(&m_periodicTimer, SIGNAL(timeout()), this, SLOT(OnPeriodicTimer()));
 }
 
 
@@ -58,6 +59,7 @@ void CSimulatedMultiTracerGuiComp::OnComponentCreated()
 void CSimulatedMultiTracerGuiComp::OnComponentDestroyed()
 {
 	m_periodicTimer.stop();
+	m_runTimer.stop();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -105,6 +107,8 @@ bool CSimulatedMultiTracerGuiComp::OnCommand(
 {
 	isys::CSectionBlocker blocker(&m_globalSection);
 
+	CopyFromHardware();
+
 	return		ilolv::CGeneralInfoDriverBase::OnCommand(commandCode, commandBuffer, commandBufferSize, responseBuffer, responseBufferSize, responseSize) ||
 				ilolv::CMultiTracerDriverBase::OnCommand(commandCode, commandBuffer, commandBufferSize, responseBuffer, responseBufferSize, responseSize) ||
 				ilolv::CSignalBitsDriverBase::OnCommand(commandCode, commandBuffer, commandBufferSize, responseBuffer, responseBufferSize, responseSize);
@@ -114,6 +118,8 @@ bool CSimulatedMultiTracerGuiComp::OnCommand(
 void CSimulatedMultiTracerGuiComp::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
 	isys::CSectionBlocker blocker(&m_globalSection);
+
+	CopyFromHardware();
 
 	ilolv::CGeneralInfoDriverBase::OnHardwareInterrupt(interruptFlags);
 	ilolv::CMultiTracerDriverBase::OnHardwareInterrupt(
@@ -178,9 +184,16 @@ void CSimulatedMultiTracerGuiComp::OnGuiCreated()
 
 	int bitsCount = BitsTable->rowCount();
 	for (int i = 0; i < bitsCount; ++i){
-		QCheckBox* widgetPtr = new QCheckBox("");
+		QCheckBox* inputWidgetPtr = new QCheckBox("");
+		QObject::connect(inputWidgetPtr, SIGNAL(toggled(bool)), this, SLOT(OnInputChanged()));
+		BitsTable->setCellWidget(i, 0, inputWidgetPtr);
 
-		BitsTable->setCellWidget(i, 0, widgetPtr);
+		QCheckBox* outputWidgetPtr = new QCheckBox("");
+		outputWidgetPtr->setEnabled(false);
+		BitsTable->setCellWidget(i, 1, outputWidgetPtr);
+
+		QLabel* counterWidgetPtr = new QLabel("-");
+		BitsTable->setCellWidget(i, 2, counterWidgetPtr);
 	}
 }
 
@@ -193,13 +206,19 @@ void CSimulatedMultiTracerGuiComp::OnPeriodicTimer()
 }
 
 
+void CSimulatedMultiTracerGuiComp::OnRunTimer()
+{
+	EncoderDial->setValue((EncoderSB->value() + SpeedSB->value()) % EncoderDial->maximum());
+}
+
+
 void CSimulatedMultiTracerGuiComp::OnInputChanged()
 {
 	if (IsGuiCreated()){
 		I_DWORD newInputBits = 0;
 
 		int bitsCount = BitsTable->rowCount();
-		for (int i = 0; i < bitsCount; ++i){
+		for (int i = bitsCount - 1; i >= 0; --i){
 			newInputBits <<= 1;
 
 			const QCheckBox* widgetPtr = dynamic_cast<QCheckBox*>(BitsTable->cellWidget(i, 0));
@@ -225,15 +244,15 @@ void CSimulatedMultiTracerGuiComp::OnOutputChanged()
 	if (IsGuiCreated()){
 		int bitsCount = BitsTable->rowCount();
 		for (int i = 0; i < bitsCount; ++i){
-			QTableWidgetItem* outputItemPtr = BitsTable->item(i, 1);
+			QCheckBox* outputItemPtr = dynamic_cast<QCheckBox*>(BitsTable->cellWidget(i, 1));
 			if (outputItemPtr != NULL){
 				bool state = (((m_outputBits >> i) & 1) != 0);
 
-				outputItemPtr->setBackground(state? Qt::red: Qt::yellow);
+				outputItemPtr->setChecked(state);
 			}
 
 			if (i < OUTPUT_BITS_COUNT){
-				QTableWidgetItem* countItemPtr = BitsTable->item(i, 1);
+				QLabel* countItemPtr = dynamic_cast<QLabel*>(BitsTable->cellWidget(i, 2));
 				if (countItemPtr != NULL){
 					countItemPtr->setText(QString::number(m_outputCounters[i]));
 				}
@@ -250,10 +269,23 @@ void CSimulatedMultiTracerGuiComp::on_EncoderDial_valueChanged(int value)
 		m_counterValue -= diff;
 		if (m_counterValue > 0x7fff){
 			m_isCounterReady = true;
+
+			OnHardwareInterrupt(IF_ENCODER_INTERRUPT);
 		}
 	}
 
 	m_lastEncoderValue = value;
+}
+
+
+void CSimulatedMultiTracerGuiComp::on_RunButton_toggled(bool checked)
+{
+	if (checked){
+		m_runTimer.start(200);
+	}
+	else{
+		m_runTimer.stop();
+	}
 }
 
 

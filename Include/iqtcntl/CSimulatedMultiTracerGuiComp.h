@@ -85,9 +85,11 @@ signals:
 
 protected slots:
 	void OnPeriodicTimer();
+	void OnRunTimer();
 	void OnInputChanged();
 	void OnOutputChanged();
 	void on_EncoderDial_valueChanged(int value);
+	void on_RunButton_toggled(bool checked);
 
 private:
 	enum
@@ -109,6 +111,7 @@ private:
 	iqt::CCriticalSection m_globalSection;
 
 	QTimer m_periodicTimer;
+	QTimer m_runTimer;
 };
 
 
