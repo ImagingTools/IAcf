@@ -9,7 +9,8 @@ namespace ilolv
 
 
 CMultiTracerDriverBase::CMultiTracerDriverBase()
-:	m_interruptsMask(0)
+:	m_interruptsMask(0),
+	m_automaticSignalId(-1)
 {
 	m_params.linesCount = 0;
 
@@ -149,16 +150,32 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetMode::Id:
-		for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
-			SingleLine& line = m_lines[lineIndex];
+		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetMode)){
+			const CMultiTracerCommands::SetMode& command = *(const CMultiTracerCommands::SetMode*)commandBuffer;
 
-			line.OnCommand(
-						CTracerCommands::SetMode::Id,
-						commandBuffer,
-						commandBufferSize,
-						responseBuffer,
-						responseBufferSize,
-						responseSize);
+			for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
+				SingleLine& line = m_lines[lineIndex];
+
+				line.OnCommand(
+							CTracerCommands::SetMode::Id,
+							commandBuffer,
+							commandBufferSize,
+							responseBuffer,
+							responseBufferSize,
+							responseSize);
+
+			}
+
+			if (m_automaticSignalId < 0){
+				m_automaticSignalId = CreateSignalId();
+			}
+
+			if (m_automaticSignalId >= 0){
+				int state = (command.mode == CTracerCommands::TM_AUTOMATIC)?
+							SS_OK:
+							SS_ERROR;
+				SetSignalState(m_automaticSignalId, state);
+			}
 
 			CalcInterruptsMask();
 		}
@@ -381,6 +398,26 @@ void CMultiTracerDriverBase::SingleLine::AppendMessage(int category, int id, con
 			m_parentPtr->AppendMessage(category, id, numberText, true);
 		}
 	}
+}
+
+
+int CMultiTracerDriverBase::SingleLine::CreateSignalId()
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->CreateSignalId();
+	}
+
+	return -1;
+}
+
+
+bool CMultiTracerDriverBase::SingleLine::SetSignalState(int signalId, int state)
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->SetSignalState(signalId, state);
+	}
+
+	return false;
 }
 
 

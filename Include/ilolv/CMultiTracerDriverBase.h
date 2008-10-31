@@ -61,6 +61,9 @@ protected:
 
 		// reimplemented (ilolv::IDriver)
 		virtual void AppendMessage(int category, int id, const char* text, bool doSend = true);
+		virtual int CreateSignalId();
+		virtual bool SetSignalState(int signalId, int state);
+
 
 	private:
 		int m_lineNumber;						// number of this line
@@ -82,6 +85,8 @@ private:
 	SingleLine m_lines[MAX_LINES];
 
 	I_DWORD m_interruptsMask;
+
+	int m_automaticSignalId;
 };
 
 

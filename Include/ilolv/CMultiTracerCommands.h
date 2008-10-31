@@ -102,16 +102,12 @@ public:
 		CTracerCommands::SetLightBarrierParams line;
 	};
 
-	struct SetMode
+	struct SetMode: public CTracerCommands::SetMode
 	{
 		enum
 		{
 			Id = SetLightBarrierParams::Id + 1
 		};
-
-		typedef void Result;
-
-		I_DWORD mode;
 	};
 
 	struct SingleTrigger

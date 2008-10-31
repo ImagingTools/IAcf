@@ -4,6 +4,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "ilolv/CSignalBitsCommands.h"
 #include "icntl/ILineParams.h"
 #include "icntl/IInspectionUnitParams.h"
 #include "icntl/IEjectorParams.h"
@@ -124,6 +125,35 @@ void CDriverControllerComp::OnComponentCreated()
 			imod::IModel* ejectorModelPtr = dynamic_cast<imod::IModel*>(&ejectorParams);
 			if (ejectorModelPtr != NULL){
 				ejectorModelPtr->AttachObserver(this);
+			}
+		}
+	}
+
+	if (m_commandCallerCompPtr.IsValid()){
+		int signalBitsCount = m_signalBitsAttrPtr.GetCount();
+
+		ilolv::CSignalBitsCommands::SetParams setSignalParamsCommand;
+		setSignalParamsCommand.heartbeatPeriod = I_DWORD(*m_heartbeatPeriodAttrPtr * 1e6);
+		setSignalParamsCommand.signalBitsCount = signalBitsCount;
+
+		int responseSize;
+		m_commandCallerCompPtr->CallCommand(
+					ilolv::CSignalBitsCommands::SetParams::Id,
+					&setSignalParamsCommand, sizeof(setSignalParamsCommand),
+					NULL, 0,
+					responseSize);
+
+		for (int signalIndex = 0; signalIndex < signalBitsCount; ++signalIndex){
+			if (m_signalBitsAttrPtr[signalIndex] >= 0){
+				ilolv::CSignalBitsCommands::SetSignalBitIndex setSignalBitIndexCommand;
+				setSignalBitIndexCommand.signalIndex = signalIndex;
+				setSignalBitIndexCommand.bitIndex = m_signalBitsAttrPtr[signalIndex];
+
+				m_commandCallerCompPtr->CallCommand(
+							ilolv::CSignalBitsCommands::SetSignalBitIndex::Id,
+							&setSignalBitIndexCommand, sizeof(setSignalBitIndexCommand),
+							NULL, 0,
+							responseSize);
 			}
 		}
 	}

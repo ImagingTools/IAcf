@@ -185,13 +185,15 @@ void CIoCardTracerDriverBase::OnCounterReady()
 			return;
 		}
 		else if (difference < MAX_COUNTER_VALUE){
-			SetEncoderCounter(I_WORD(difference));
+			m_lastCounterValue = I_WORD(difference);
+			SetEncoderCounter(m_lastCounterValue);
 
 			return;
 		}
 	}
 
-	SetEncoderCounter(MAX_COUNTER_VALUE);
+	m_lastCounterValue = MAX_COUNTER_VALUE;
+	SetEncoderCounter(m_lastCounterValue);
 }
 
 

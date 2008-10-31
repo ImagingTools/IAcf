@@ -78,6 +78,7 @@ void CTracerDriverBase::ResetQueue()
 							linePosition +
 							lightBarrierOffset -
 							m_params.minObjectSize;
+			unit.lastBarrierState = GetLightBarrierBit(unit.lightBarrierIndex);
 
 			if (lightBarrierOffset >= maxPopFifoDistance){
 				maxPopFifoDistance = lightBarrierOffset + 1;

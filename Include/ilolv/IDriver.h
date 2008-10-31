@@ -14,6 +14,17 @@ namespace ilolv
 class IDriver: virtual public istd::IPolymorphic
 {
 public:
+	/**
+		Possible states of signal.
+	*/
+	enum SignalState
+	{
+		SS_OK,
+		SS_WARNING,
+		SS_ERROR,
+		SS_CRITICAL
+	};
+
 	enum InterruptFlags
 	{
 		IF_DIGITAL_INPUT = 0x100,
@@ -68,6 +79,17 @@ protected:
 		\param	doSend		if it is true, completed message will be send to application.
 	*/
 	virtual void AppendMessage(int category, int id, const char* text, bool doSend = true) = 0;
+
+	/**
+		Create new signal ID.
+		\return	new ID or negative value, if it was not possible to create new signal.
+	*/
+	virtual int CreateSignalId() = 0;
+	/**	Set signal to specified state.
+		\param	signalId	ID returned by method CreateSignalId().
+		\param	state		state of signal.
+	*/
+	virtual bool SetSignalState(int signalId, int state) = 0;
 };
 
 

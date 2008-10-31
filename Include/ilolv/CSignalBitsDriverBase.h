@@ -33,7 +33,8 @@ public:
 
 protected:
 	enum{
-		MAX_SIGNALS = 16
+		MAX_SIGNALS = 16,
+		MAX_SIGNAL_BITS = 16
 	};
 
 	/**
@@ -41,14 +42,21 @@ protected:
 	*/
 	void SetSignalBit(int signal, bool state);
 
+	// reimplemented (ilolv::IDriver)
+	virtual int CreateSignalId();
+	virtual bool SetSignalState(int signalId, int state);
+
 private:
 	CSignalBitsCommands::SignalParams m_params;
 
 	// indices of output bits
-	int m_signalBitIndices[MAX_SIGNALS];
+	int m_signalBitIndices[MAX_SIGNAL_BITS];
 
-	int m_shownStatus;
-	int m_applicationStatus;
+	int m_signalStates[MAX_SIGNALS];
+	int m_nextFreeSignalId;
+
+	int m_globalStatus;
+	int m_shownGlobalStatus;
 
 	// internal counters
 	__int64 m_lastHeartbeatTime;

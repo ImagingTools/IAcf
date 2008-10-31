@@ -51,9 +51,11 @@ public:
 		I_ASSIGN_MULTI_0(m_lightBarriersBitsAttrPtr, "LightBarrierFirstBits", "Indices of first light barrier input bit for each line", true);
 		I_ASSIGN_MULTI_0(m_ejectorsBitsAttrPtr, "EjectorFirstBits", "Indices of first ejector output bit for each line", true);
 		I_ASSIGN_MULTI_0(m_triggersBitsAttrPtr, "TriggerFirstBits", "Indices of first trigger output bit for each line", true);
+		I_ASSIGN_MULTI_0(m_signalBitsAttrPtr, "SignaBits", "Indices of each signal bit, first 3 bits are reserved for heartbeat, error and warning bit", false);
 		I_ASSIGN(m_triggerDurationAttrPtr, "TriggerDuration", "Duration of trigger pulse in seconds", true, 0.001);
 		I_ASSIGN(m_triggerRelaxationAttrPtr, "TriggerRelaxationTime", "Minimal distance between two triggers (in seconds)", true, 0.04);
 		I_ASSIGN(m_maxEjectorOnTimeAttrPtr, "MaxEjectionTime", "Maximal time ejection signal is on (in seconds)", true, 0.5);
+		I_ASSIGN(m_heartbeatPeriodAttrPtr, "HeartbeatPeriod", "Heartbeat signal period in seconds", true, 0.1);
 	I_END_COMPONENT;
 
 	CDriverControllerComp();
@@ -180,9 +182,11 @@ private:
 	I_MULTIATTR(int, m_lightBarriersBitsAttrPtr);
 	I_MULTIATTR(int, m_ejectorsBitsAttrPtr);
 	I_MULTIATTR(int, m_triggersBitsAttrPtr);
+	I_MULTIATTR(int, m_signalBitsAttrPtr);
 	I_ATTR(double, m_triggerDurationAttrPtr);
 	I_ATTR(double, m_triggerRelaxationAttrPtr);
 	I_ATTR(double, m_maxEjectorOnTimeAttrPtr);
+	I_ATTR(double, m_heartbeatPeriodAttrPtr);
 
 	int m_workMode;
 };
