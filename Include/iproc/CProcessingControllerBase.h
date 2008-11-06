@@ -12,11 +12,12 @@ namespace iproc
 {
 
 
-class CProcessingControllerBase:	virtual public iproc::IProcessingController,
-									public imod::TSingleModelObserverBase<iproc::IOperator>
+class CProcessingControllerBase:
+			public imod::TSingleModelObserverBase<iproc::IOperator>,
+			virtual public iproc::IProcessingController
 {
 public:
-	typedef imod::TSingleModelObserverBase<iproc::IOperator> BaseClass2;
+	typedef imod::TSingleModelObserverBase<iproc::IOperator> BaseClass;
 
 	// reimplemented (iproc::IProcessingController)
 	virtual void SetLogPtr(ibase::IMessageConsumer* logPtr); 

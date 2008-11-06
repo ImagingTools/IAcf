@@ -11,16 +11,11 @@
 namespace iproc
 {		
 
-	
+
 COperatorBase::COperatorBase()
 	:m_state(StateUnknown),
 	m_progress(0.0),
 	m_logPtr(NULL)
-{
-}
-
-
-COperatorBase::~COperatorBase()
 {
 }
 
@@ -117,4 +112,5 @@ double COperatorBase::GetProgress() const
 
 
 } // namespace iproc
+
 

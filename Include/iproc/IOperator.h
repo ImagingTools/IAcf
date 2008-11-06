@@ -25,16 +25,17 @@ class IOperator:	virtual public istd::INamed,
 public:
 	enum ChangeFlags
 	{
-		ProgressChanged = 1
+		ProgressChanged = 0x10000,
+		StateChanged = 0x20000
 	};
 
 	enum StateInfo
 	{
-		StateError = 1,
-		StateFinished = 2,
-		StateAborted = 4,
-		StateProcessing = 8,
-		StatePaused = 16,
+		StateFinished = 1,
+		StateAborted,
+		StateBeforeProcessing,
+		StateProcessing,
+		StatePaused,
 		StateUnknown = 0xffffffff
 	};
 
@@ -50,7 +51,6 @@ public:
 
 	/**
 		Executes the operator. 
-		Bevor the execution you should check the operator state with IsValid().
 	*/
 	virtual bool Execute() = 0;
 

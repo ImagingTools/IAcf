@@ -25,11 +25,10 @@ namespace iproc
 	It is advisable to use this implementation by programming of the own operators. 
 */
 
-class COperatorBase: public ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedWrap<iproc::IOperator> > >
+class COperatorBase: public ibase::TEnableableWrap<ibase::THierarchicalBase<ibase::TNamedWrap<iproc::IOperator> > >
 {
 public :
 	COperatorBase();
-	virtual ~COperatorBase();
 
 	enum MessageId
 	{

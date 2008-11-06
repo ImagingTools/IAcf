@@ -14,9 +14,6 @@ class CHierarchicalOperator: public iproc::COperatorBase
 public:
 	typedef iproc::COperatorBase BaseClass;
 
-	CHierarchicalOperator();
-	virtual ~CHierarchicalOperator();
-
 	virtual void AddChild(iproc::IOperator* operatorPtr);
 
 	// reimplemented (iproc::IOperator)

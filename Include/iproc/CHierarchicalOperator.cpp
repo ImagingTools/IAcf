@@ -8,17 +8,6 @@ namespace iproc
 {		
 
 
-CHierarchicalOperator::CHierarchicalOperator()
-	:BaseClass()
-{
-}
-	
-
-CHierarchicalOperator::~CHierarchicalOperator()
-{
-}
-
-
 void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 {
 	iproc::COperatorBase* operatorImplPtr = dynamic_cast<iproc::COperatorBase*>(operatorPtr);
@@ -58,7 +47,7 @@ bool CHierarchicalOperator::BeforeProcessing()
 bool CHierarchicalOperator::Execute()
 {
 	if (IsAborted()){
-		return false;
+		return true;
 	}
 
 	bool retVal = true;
@@ -72,7 +61,7 @@ bool CHierarchicalOperator::Execute()
 		if (operatorPtr != NULL && operatorPtr->IsEnabled()){
 			retVal = operatorPtr->Execute() && retVal;
 			if (IsAborted()){
-				return false;
+				return true;
 			}
 		}
 	}
