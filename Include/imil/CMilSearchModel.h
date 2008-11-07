@@ -4,7 +4,7 @@
 
 #include "i2d/CRectangle.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iimg/CGeneralBitmap.h"
 

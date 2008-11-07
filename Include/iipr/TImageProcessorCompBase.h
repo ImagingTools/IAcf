@@ -2,7 +2,7 @@
 #define iipr_TImageProcessorCompBase_included
 
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iproc/TSyncProcessorCompBase.h"
 

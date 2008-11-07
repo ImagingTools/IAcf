@@ -2,7 +2,7 @@
 #define imil_CMilSearchProcessorComp_included
 
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iipr/IFeaturesConsumer.h"
 
@@ -19,10 +19,10 @@ namespace imil
 {
 
 
-class CMilSearchProcessorComp: public ibase::TMessageProducerWrap<iproc::CSyncProcessorCompBase>
+class CMilSearchProcessorComp: public ibase::TLoggerCompWrap<iproc::CSyncProcessorCompBase>
 {
 public:
-	typedef ibase::TMessageProducerWrap<iproc::CSyncProcessorCompBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<iproc::CSyncProcessorCompBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CMilSearchProcessorComp)
 	I_END_COMPONENT

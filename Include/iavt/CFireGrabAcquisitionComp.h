@@ -6,7 +6,7 @@
 #include <basetype.h>
 #include <fgcamera.h>
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "i2d/CRectangle.h"
 
@@ -29,13 +29,13 @@ namespace iavt
 	AVT based camera component implementing interfaces \c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CFireGrabAcquisitionComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			virtual public icam::IExposureConstraints,
 			virtual public icam::ITriggerConstraints,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CFireGrabAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);

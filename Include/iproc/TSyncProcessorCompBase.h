@@ -2,7 +2,7 @@
 #define iproc_TSyncProcessorCompBase_included
 
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -20,11 +20,11 @@ namespace iproc
 */
 template <class Base>
 class TSyncProcessorCompBase:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public iproc::TSyncProcessorWrap<Base>
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 	typedef iproc::TSyncProcessorWrap<Base> BaseClass2;
 
 	I_BEGIN_BASE_COMPONENT(TSyncProcessorCompBase)
