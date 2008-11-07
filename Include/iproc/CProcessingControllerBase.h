@@ -20,8 +20,6 @@ public:
 	typedef imod::TSingleModelObserverBase<iproc::IOperator> BaseClass;
 
 	// reimplemented (iproc::IProcessingController)
-	virtual void SetLogPtr(ibase::IMessageConsumer* logPtr); 
-	virtual ibase::IMessageConsumer* GetLogPtr() const; 
 	virtual void AddProgressHandler(iproc::IProgressEventHandler* progressHandlerPtr);
 
 protected:

@@ -11,14 +11,12 @@ namespace iproc
 void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 {
 	iproc::COperatorBase* operatorImplPtr = dynamic_cast<iproc::COperatorBase*>(operatorPtr);
-	ibase::CMessageContainer* hierarhicalLogPtr = dynamic_cast<ibase::CMessageContainer*>(m_logPtr);
+	ibase::CMessageContainer* hierarhicalLogPtr = dynamic_cast<ibase::CMessageContainer*>(GetLogPtr());
 
 	if (operatorImplPtr != NULL && hierarhicalLogPtr != NULL){
 		operatorImplPtr->SetParentPtr(this);
-		ibase::IMessageConsumer* logPtr = dynamic_cast<ibase::IMessageConsumer*>(GetLogPtr());
-		if (logPtr != NULL){
-			operatorImplPtr->SetLogPtr(logPtr);
-		}
+
+		operatorImplPtr->SetLogPtr(hierarhicalLogPtr);
 	}
 
 	m_childs.push_back(operatorPtr);
@@ -149,4 +147,5 @@ istd::IPolymorphic* CHierarchicalOperator::GetChild(int index) const
 
 
 } // namespace iproc
+
 

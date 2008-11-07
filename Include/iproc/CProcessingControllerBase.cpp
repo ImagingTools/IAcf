@@ -10,26 +10,6 @@ namespace iproc
 
 // reimplemented (iproc::IProcessingController)
 
-void CProcessingControllerBase::SetLogPtr(ibase::IMessageConsumer* logPtr)
-{
-	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
-	if (operatorPtr != NULL){
-		operatorPtr->SetLogPtr(logPtr);
-	}
-}
-
-
-ibase::IMessageConsumer* CProcessingControllerBase::GetLogPtr() const
-{
-	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
-	if (operatorPtr != NULL){
-		return operatorPtr->GetLogPtr();
-	}
-
-	return NULL;
-}
-
-
 void CProcessingControllerBase::AddProgressHandler(iproc::IProgressEventHandler* progressHandlerPtr)
 {
 	m_progressHandlers.insert(progressHandlerPtr);
@@ -57,4 +37,5 @@ void CProcessingControllerBase::OnUpdate(int updateFlags, istd::IPolymorphic* up
 
 
 } // namespace iproc
+
 

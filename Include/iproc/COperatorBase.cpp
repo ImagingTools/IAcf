@@ -1,6 +1,8 @@
 #include "iproc/COperatorBase.h"
 
 
+#include "istd/CStaticServicesProvider.h"
+
 #include "iser/IArchive.h"
 
 #include "ibase/CMessage.h"
@@ -14,9 +16,11 @@ namespace iproc
 
 COperatorBase::COperatorBase()
 	:m_state(StateUnknown),
-	m_progress(0.0),
-	m_logPtr(NULL)
+	m_progress(0.0)
 {
+	m_mutex = istd::GetService<isys::ICriticalSection>();
+
+	I_ASSERT(m_mutex != NULL);
 }
 
 
@@ -28,43 +32,9 @@ bool COperatorBase::IsAborted() const
 
 void COperatorBase::SetProcessingState(int processingState)
 {
-	isys::CSectionBlocker lock(&m_mutex);
+	isys::CSectionBlocker lock(m_mutex);
 
 	m_state = (StateInfo)processingState;
-}
-
-
-void COperatorBase::AddError(const istd::CString& description) const
-{
-	isys::CSectionBlocker lock(&m_mutex);
-
-	if (m_logPtr != NULL){
-		m_logPtr->AddMessage(new ibase::CMessage(ibase::IMessage::MC_ERROR, MI_GENERAL, description, GetName()));
-	}
-}
-
-
-void COperatorBase::AddWarning(const istd::CString& description) const
-{
-	isys::CSectionBlocker lock(&m_mutex);
-
-	if (m_logPtr != NULL){
-		m_logPtr->AddMessage(new ibase::CMessage(ibase::IMessage::MC_WARNING, MI_GENERAL, description, GetName()));
-	}
-}
-
-
-void COperatorBase::SetLogPtr(ibase::IMessageConsumer* logPtr)
-{
-	isys::CSectionBlocker lock(&m_mutex);
-
-	m_logPtr = logPtr;
-}
-
-
-ibase::IMessageConsumer* COperatorBase::GetLogPtr() const
-{
-	return m_logPtr;
 }
 
 
@@ -74,7 +44,7 @@ IOperator::StateInfo COperatorBase::GetProcessingState() const
 {
 	IOperator::StateInfo state = StateUnknown;
 	
-	isys::CSectionBlocker lock(&m_mutex);
+	isys::CSectionBlocker lock(m_mutex);
 
 	state = m_state;
 
@@ -108,6 +78,16 @@ void COperatorBase::Cancel()
 double COperatorBase::GetProgress() const
 {
 	return m_progress;
+}
+
+
+// protected methods
+
+// reimplemented (ibase::TLoggableWrap)
+
+bool COperatorBase::SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
+{
+	return BaseClass::SendLogMessage(category, id, message, GetName());
 }
 
 

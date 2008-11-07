@@ -1,17 +1,19 @@
-#ifndef COperatorBase_included
-#define COperatorBase_included
+#ifndef iproc_COperatorBase_included
+#define iproc_COperatorBase_included
 
 
 
 #include "iproc/IOperator.h"
 #include "iproc/IProcessingEventHandler.h"
 
-#include "iwin/CCriticalSection.h"
+#include "isys/ICriticalSection.h"
 
 #include "ibase/IMessageConsumer.h"
 #include "ibase/THierarchicalBase.h"
 #include "ibase/TEnableableWrap.h"
 #include "ibase/TNamedWrap.h"
+#include "ibase/TLoggableWrap.h"
+#include "ibase/CMessage.h"
 
 
 namespace iproc
@@ -25,9 +27,18 @@ namespace iproc
 	It is advisable to use this implementation by programming of the own operators. 
 */
 
-class COperatorBase: public ibase::TEnableableWrap<ibase::THierarchicalBase<ibase::TNamedWrap<iproc::IOperator> > >
+class COperatorBase: public ibase::TLoggableWrap<
+								ibase::TEnableableWrap<
+									ibase::THierarchicalBase<
+										ibase::TNamedWrap<iproc::IOperator> > > >
 {
-public :
+public:
+
+	typedef ibase::TLoggableWrap<
+				ibase::TEnableableWrap<
+					ibase::THierarchicalBase<
+						ibase::TNamedWrap<iproc::IOperator> > > > BaseClass;
+
 	COperatorBase();
 
 	enum MessageId
@@ -37,10 +48,6 @@ public :
 
 	virtual bool IsAborted() const;
 	virtual void SetProcessingState(int processingState);
-	virtual void AddError(const istd::CString& description) const;
-	virtual void AddWarning(const istd::CString& description) const;
-	virtual void SetLogPtr(ibase::IMessageConsumer* logPtr);
-	virtual ibase::IMessageConsumer* GetLogPtr() const;
 
 	// reimplemented (iproc::IOperator)
 	virtual StateInfo GetProcessingState() const;
@@ -52,20 +59,22 @@ public :
 	virtual double GetProgress() const;
 
 protected:
-	double m_progress;
+	// reimplemented (ibase::TLoggableWrap)
+	virtual bool SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
-	mutable ibase::IMessageConsumer* m_logPtr;
+protected:
+	double m_progress;
 
 private:
 	StateInfo m_state;
 
-	// TODO: replace by system independent service
-	mutable iwin::CCriticalSection m_mutex; 
+	mutable isys::ICriticalSection* m_mutex; 
 };
 
 
 } // namespace iproc
 
 
-#endif // COperatorBase_included
+#endif // !iproc_COperatorBase_included
+
 
