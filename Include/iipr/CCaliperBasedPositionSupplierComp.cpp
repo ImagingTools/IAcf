@@ -43,13 +43,13 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, imath::CV
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_featuresMapperCompPtr.IsValid() &&
-				m_caliperProcessorCompPtr.IsValid()){
+				m_caliperToolCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap(objectId);
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
 			CHeaviestFeatureConsumer consumer;
-			int caliperState = m_caliperProcessorCompPtr->DoProcessing(
+			int caliperState = m_caliperToolCompPtr->DoProcessing(
 							paramsSetPtr,
 							bitmapPtr,
 							&consumer);

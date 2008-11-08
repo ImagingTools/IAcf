@@ -28,7 +28,7 @@ public:
 		I_REGISTER_INTERFACE(CCaliperBasedPositionSupplierComp);
 		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
 		I_ASSIGN(m_featuresMapperCompPtr, "FeaturesMapper", "Calculate position from caliper extracted features", true, "FeaturesMapper");
-		I_ASSIGN(m_caliperProcessorCompPtr, "CaliperProcessor", "Calculate position from projection", true, "CaliperProcessor");
+		I_ASSIGN(m_caliperToolCompPtr, "CaliperTool", "Calculate position from projection", true, "CaliperTool");
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IValueSupplier)
@@ -45,7 +45,7 @@ private:
 	I_REF(icam::IBitmapSupplier, m_bitmapSupplierCompPtr);
 
 	I_REF(iipr::IFeaturesMapper, m_featuresMapperCompPtr);
-	I_REF(iproc::IProcessor, m_caliperProcessorCompPtr);
+	I_REF(iproc::IProcessor, m_caliperToolCompPtr);
 };
 
 
