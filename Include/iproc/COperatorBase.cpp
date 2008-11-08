@@ -83,7 +83,7 @@ double COperatorBase::GetProgress() const
 
 // protected methods
 
-// reimplemented (ibase::TLoggableWrap)
+// reimplemented (ibase::TLoggerWrap)
 
 bool COperatorBase::SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
 {

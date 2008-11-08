@@ -12,7 +12,7 @@
 #include "ibase/THierarchicalBase.h"
 #include "ibase/TEnableableWrap.h"
 #include "ibase/TNamedWrap.h"
-#include "ibase/TLoggableWrap.h"
+#include "ibase/TLoggerWrap.h"
 #include "ibase/CMessage.h"
 
 
@@ -27,14 +27,14 @@ namespace iproc
 	It is advisable to use this implementation by programming of the own operators. 
 */
 
-class COperatorBase: public ibase::TLoggableWrap<
+class COperatorBase: public ibase::TLoggerWrap<
 								ibase::TEnableableWrap<
 									ibase::THierarchicalBase<
 										ibase::TNamedWrap<iproc::IOperator> > > >
 {
 public:
 
-	typedef ibase::TLoggableWrap<
+	typedef ibase::TLoggerWrap<
 				ibase::TEnableableWrap<
 					ibase::THierarchicalBase<
 						ibase::TNamedWrap<iproc::IOperator> > > > BaseClass;
@@ -59,7 +59,7 @@ public:
 	virtual double GetProgress() const;
 
 protected:
-	// reimplemented (ibase::TLoggableWrap)
+	// reimplemented (ibase::TLoggerWrap)
 	virtual bool SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
 protected:
