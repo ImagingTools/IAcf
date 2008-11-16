@@ -12,7 +12,7 @@ namespace iipr
 
 
 /**
-	Calculate extremum of projection data.
+	Calculate extremum of projection data (iipr::CProjectionData).
 	Using this tool together with derivative calculation it is possible to create caliper tool (extremums of first derivative).
 */
 class CExtremumCaliperProcessor: public iproc::TSyncProcessorWrap<ICaliperProcessor>
