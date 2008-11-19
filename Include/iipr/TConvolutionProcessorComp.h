@@ -59,11 +59,11 @@ bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ProcessImage(
 	i2d::CRectangle kernelBoundingBox = filterKernelPtr->GetBoundingBox();
 	i2d::CRectangle bitmapRegion = i2d::CRectangle(inputImage.GetImageSize());
 	
-	bitmapRegion.Expand(
-				-kernelBoundingBox.GetWidth() / 2, 
-				-kernelBoundingBox.GetWidth() / 2,
-				-kernelBoundingBox.GetHeight() / 2,
-				-kernelBoundingBox.GetHeight() / 2);
+	bitmapRegion.Expand(i2d::CRectangle(
+				-kernelBoundingBox.GetWidth() * 0.5, 
+				-kernelBoundingBox.GetHeight() * 0.5,
+				kernelBoundingBox.GetWidth(),
+				kernelBoundingBox.GetHeight()));
 
 	iimg::TBitmapIterator<PixelType> inputIterator(&inputImage, &bitmapRegion);
 	iimg::TBitmapIterator<PixelType> outputIterator(&outputImage, &bitmapRegion);

@@ -4,6 +4,8 @@
 // Qt includes
 #include <QMessageBox>
 
+// ACF includes
+#include "imath/TVarVector.h"
 #include "iqt2d/CPosition2dShape.h"
 
 
