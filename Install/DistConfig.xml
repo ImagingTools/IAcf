@@ -5,10 +5,10 @@
     </VersionInfos>
   </AcfHeader>
   <License>
-    ../License.txt
+    ../Header.txt
   </License>
 
-  <Copy count="9">
+  <Copy count="10">
     <Rule>
       <SourceDir>
         ..
@@ -93,9 +93,12 @@
           *.txt
         </Filter>
       </Filters>
-      <Excludes count ="1">
+      <Excludes count ="2">
         <Filter>
           Install
+        </Filter>
+        <Filter>
+          Header.txt
         </Filter>
       </Excludes>
       <Mode>
@@ -250,6 +253,27 @@
       </Mode>
       <Depth>
         10
+      </Depth>
+    </Rule>
+    <Rule>
+      <SourceDir>
+        .
+      </SourceDir>
+      <DestDir>
+        TempExcl
+      </DestDir>
+      <Filters count="1">
+        <Filter>
+          *.iss
+        </Filter>
+      </Filters>
+      <Excludes count ="0">
+      </Excludes>
+      <Mode>
+        2
+      </Mode>
+      <Depth>
+        0
       </Depth>
     </Rule>
   </Copy>
