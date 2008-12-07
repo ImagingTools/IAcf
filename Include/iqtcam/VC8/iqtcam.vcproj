@@ -285,27 +285,27 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CExposureParamsGuiComp.cpp"
+				RelativePath="..\Generated\moc_CExposureParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSnapBitmapSupplierGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSnapBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSnapImageGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CExposureParamsGuiComp.h"
+				RelativePath="..\Generated\ui_CExposureParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSnapBitmapSupplierGuiComp.h"
+				RelativePath="..\Generated\ui_CSnapBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSnapImageGuiComp.h"
+				RelativePath="..\Generated\ui_CSnapImageGuiComp.h"
 				>
 			</File>
 		</Filter>

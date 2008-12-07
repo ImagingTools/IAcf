@@ -74,7 +74,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtMain.lib QtCore4.lib QtGui4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
+				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(IACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;"
 				SubSystem="2"
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtMaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
+				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(IACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;"
 				GenerateDebugInformation="true"

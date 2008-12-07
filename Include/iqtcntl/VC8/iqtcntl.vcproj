@@ -255,19 +255,19 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CAutomaticControllerGuiComp.cpp"
+				RelativePath="..\Generated\moc_CAutomaticControllerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSimulatedMultiTracerGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSimulatedMultiTracerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CAutomaticControllerGuiComp.h"
+				RelativePath="..\Generated\ui_CAutomaticControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSimulatedMultiTracerGuiComp.h"
+				RelativePath="..\Generated\ui_CSimulatedMultiTracerGuiComp.h"
 				>
 			</File>
 		</Filter>
