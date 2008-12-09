@@ -19,8 +19,8 @@ CSimulatedMultiTracerGuiComp::CSimulatedMultiTracerGuiComp()
 	m_isCounterReady(false),
 	m_counterValue(0),
 	m_interruptMask(0),
-	m_currentTimer(0),
-	m_lastEncoderValue(0)
+	m_lastEncoderValue(0),
+	m_currentTimer(0)
 {
 	for (int i = 0; i < OUTPUT_BITS_COUNT; ++i){
 		m_outputCounters[i] = 0;
@@ -130,7 +130,7 @@ void CSimulatedMultiTracerGuiComp::OnHardwareInterrupt(I_DWORD interruptFlags)
 }
 
 
-__int64 CSimulatedMultiTracerGuiComp::GetCurrentTimer() const
+I_SQWORD CSimulatedMultiTracerGuiComp::GetCurrentTimer() const
 {
 	static iwin::CTimer referenceTimer;
 

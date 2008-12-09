@@ -31,8 +31,8 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	i2d::CVector2d m_scale;
 	i2d::CVector2d m_position;
+	i2d::CVector2d m_scale;
 	double m_angle;
 	double m_score;
 };

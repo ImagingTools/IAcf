@@ -2,6 +2,9 @@
 #define iqtproc_TSupplierGuiCompBase_included
 
 
+// Qt includes
+#include <QMessageBox>
+
 #include "iser/IFileLoader.h"
 
 #include "imod/IObserver.h"
@@ -148,7 +151,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::AreParamsEditable() const
 template <class UI, class Model, class WidgetType>
 bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 {
-	const Model* supplierPtr = GetObjectPtr();
+	const Model* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -165,7 +168,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 template <class UI, class Model, class WidgetType>
 bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 {
-	const Model* supplierPtr = GetObjectPtr();
+	const Model* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -182,7 +185,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 template <class UI, class Model, class WidgetType>
 bool TSupplierGuiCompBase<UI, Model, WidgetType>::LoadParams()
 {
-	Model* supplierPtr = GetObjectPtr();
+	Model* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -205,7 +208,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::LoadParams()
 template <class UI, class Model, class WidgetType>
 bool TSupplierGuiCompBase<UI, Model, WidgetType>::SaveParams()
 {
-	const Model* supplierPtr = GetObjectPtr();
+	const Model* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -228,7 +231,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::SaveParams()
 template <class UI, class Model, class WidgetType>
 bool TSupplierGuiCompBase<UI, Model, WidgetType>::DoTest()
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	I_DWORD objectId;
 	if (		(supplierPtr != NULL) &&
 				m_idManagerCompPtr.IsValid() &&
@@ -257,7 +260,7 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	Model* supplierPtr = GetObjectPtr();
+	Model* supplierPtr = BaseClass::GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
@@ -281,7 +284,7 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
 template <class UI, class Model, class WidgetType>
 void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelDetached()
 {
-	Model* supplierPtr = GetObjectPtr();
+	Model* supplierPtr = BaseClass::GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());

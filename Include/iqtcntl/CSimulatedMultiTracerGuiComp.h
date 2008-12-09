@@ -70,7 +70,7 @@ protected:
 				int responseBufferSize,
 				int& responseSize);
 	virtual void OnHardwareInterrupt(I_DWORD interruptFlags);
-	virtual __int64 GetCurrentTimer() const;
+	virtual I_SQWORD GetCurrentTimer() const;
 	virtual NativeTimer GetCurrentNativeTimer() const;
 
 	// reimplemented (ilolv::IDigitalIo)
@@ -106,7 +106,7 @@ private:
 	int m_lastEncoderValue;
 
 	mutable iwin::CTimer m_timer;
-	__int64 m_currentTimer;
+	I_SQWORD m_currentTimer;
 
 	iqt::CCriticalSection m_globalSection;
 

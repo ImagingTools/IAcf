@@ -16,9 +16,9 @@ namespace iproc
 
 
 /**
-	Simple definition macro for a syncronious processor.
+	Simple definition macro for a synchronous processor.
 */
-template <class Base>
+template <class Base, class Interface = Base>
 class TSyncProcessorCompBase:
 			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public iproc::TSyncProcessorWrap<Base>
@@ -26,17 +26,18 @@ class TSyncProcessorCompBase:
 public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 	typedef iproc::TSyncProcessorWrap<Base> BaseClass2;
+	typedef Interface InterfaceType;
 
 	I_BEGIN_BASE_COMPONENT(TSyncProcessorCompBase)
 		I_REGISTER_INTERFACE(Base)
 		I_REGISTER_INTERFACE(iproc::IProcessor)
 		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
-		I_ASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
+		I_TASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
 	I_END_COMPONENT
 
 protected:
 	I_ATTR(istd::CString, m_paramsIdAttrPtr);
-	I_TREF(Base, m_preprocessorCompPtr);
+	I_TREF(InterfaceType, m_preprocessorCompPtr);
 };
 
 

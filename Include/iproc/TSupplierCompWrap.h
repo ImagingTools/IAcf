@@ -16,6 +16,8 @@
 
 #include "isys/ITimer.h"
 
+#include "iproc/ISupplier.h"
+
 
 namespace iproc
 {
@@ -123,12 +125,12 @@ iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetModelParamet
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::BeginNextObject(I_DWORD objectId)
 {
-	StoredInfoMap::const_iterator foundIter = m_storedInfoMap.find(objectId);
+	typename StoredInfoMap::const_iterator foundIter = m_storedInfoMap.find(objectId);
 	if (foundIter == m_storedInfoMap.end()){
 		m_recentIdList.push_back(objectId);
 		WorkInfo& workInfo = m_storedInfoMap[objectId];
 
-		workInfo.status = WS_NONE;
+		workInfo.status = ISupplier::WS_NONE;
 		workInfo.durationTime = -1;
 		workInfo.isDone = false;
 	}
@@ -171,7 +173,7 @@ int TSupplierCompWrap<SupplierInterface, Product>::GetWorkStatus(I_DWORD objectI
 		return infoPtr->status;
 	}
 
-	return WS_NONE;
+	return ISupplier::WS_NONE;
 }
 
 
@@ -249,7 +251,7 @@ const typename TSupplierCompWrap<SupplierInterface, Product>::WorkInfo* TSupplie
 			I_DWORD objectId,
 			bool ensureFinished) const
 {
-	StoredInfoMap::iterator foundIter = m_storedInfoMap.find(objectId);
+	typename StoredInfoMap::iterator foundIter = m_storedInfoMap.find(objectId);
 	if (foundIter != m_storedInfoMap.end()){
 		WorkInfo& workInfo = foundIter->second;
 
@@ -261,7 +263,7 @@ const typename TSupplierCompWrap<SupplierInterface, Product>::WorkInfo* TSupplie
 				beforeTime = timerPtr->GetElapsed();
 			}
 
-			istd::CChangeNotifier notifier(const_cast<TSupplierCompWrap<SupplierInterface, Product>*>(this), CF_SUPPLIER_RESULTS);
+			istd::CChangeNotifier notifier(const_cast<TSupplierCompWrap<SupplierInterface, Product>*>(this), ISupplier::CF_SUPPLIER_RESULTS);
 
 			workInfo.status = ProduceObject(objectId, workInfo.product);
 
@@ -303,7 +305,7 @@ void TSupplierCompWrap<SupplierInterface, Product>::OnUpdate(int updateFlags, is
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
-	if ((changeFlags & CF_MODEL) != 0){
+	if ((changeFlags & istd::IChangeable::CF_MODEL) != 0){
 		ResetProducedObjects();
 	}
 

@@ -11,12 +11,12 @@
 
 
 namespace iproc
-{		
+{
 
 
 COperatorBase::COperatorBase()
-	:m_state(StateUnknown),
-	m_progress(0.0)
+:	m_progress(0.0),
+	m_state(StateUnknown)
 {
 	m_mutex = istd::GetService<isys::ICriticalSection>();
 
@@ -43,7 +43,7 @@ void COperatorBase::SetProcessingState(int processingState)
 IOperator::StateInfo COperatorBase::GetProcessingState() const
 {
 	IOperator::StateInfo state = StateUnknown;
-	
+
 	isys::CSectionBlocker lock(m_mutex);
 
 	state = m_state;

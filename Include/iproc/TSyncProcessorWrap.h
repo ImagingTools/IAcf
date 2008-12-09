@@ -68,7 +68,7 @@ TSyncProcessorWrap<Base>::TSyncProcessorWrap()
 template <class Base>
 int TSyncProcessorWrap<Base>::GetProcessorState(const iprm::IParamsSet* /*paramsPtr*/) const
 {
-	return PS_READY;
+	return IProcessor::PS_READY;
 }
 
 
@@ -96,7 +96,7 @@ int TSyncProcessorWrap<Base>::BeginTask(
 			istd::IChangeable* outputPtr)
 {
 	int retVal = m_nextTaskId;
-	m_taskToStateMap[retVal] = DoProcessing(paramsPtr, inputPtr, outputPtr);
+	m_taskToStateMap[retVal] = this->DoProcessing(paramsPtr, inputPtr, outputPtr);
 
 	m_nextTaskId = (m_nextTaskId + 1) & 0x7fff;
 
@@ -110,7 +110,7 @@ int TSyncProcessorWrap<Base>::WaitTaskFinished(
 			double /*timeoutTime*/,
 			bool /*killOnTimeout*/)
 {
-	int retVal = TS_NONE;
+	int retVal = IProcessor::TS_NONE;
 
 	if (taskId >= 0){
 		TaskToStateMap::iterator foundIter = m_taskToStateMap.find(taskId);
@@ -130,7 +130,7 @@ int TSyncProcessorWrap<Base>::WaitTaskFinished(
 			}
 		}
 
-		ResetAllTasks();
+		this->ResetAllTasks();
 	}
 
 	return retVal;
@@ -152,7 +152,7 @@ int TSyncProcessorWrap<Base>::GetReadyTask()
 template <class Base>
 int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 {
-	int retVal = TS_NONE;
+	int retVal = IProcessor::TS_NONE;
 
 	if (taskId >= 0){
 		TaskToStateMap::const_iterator foundIter = m_taskToStateMap.find(taskId);

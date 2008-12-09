@@ -44,13 +44,13 @@ bool FeaturesExtraction(
 	int risedCount = -1;
 	int droppedCount = -1;
 
-	PixelConversion::CalcPixelType prevPixel(0);
-	PixelConversion::CalcPixelType pixel(0);
+	typename PixelConversion::CalcPixelType prevPixel(0);
+	typename PixelConversion::CalcPixelType pixel(0);
 
-	const PixelConversion::SourcePixelType* derivativeElementsPtr = (const PixelConversion::SourcePixelType*)bitmap.GetLinePtr(0);
+	const typename PixelConversion::SourcePixelType* derivativeElementsPtr = (const typename PixelConversion::SourcePixelType*)bitmap.GetLinePtr(0);
 
 	for (; nextIndex != endIndex; nextIndex += indexDiff){
-		PixelConversion::CalcPixelType nextPixel = conversion.GetCalc(derivativeElementsPtr[nextIndex]);
+		typename PixelConversion::CalcPixelType nextPixel = conversion.GetCalc(derivativeElementsPtr[nextIndex]);
 
 		if (conversion.GetWeight(nextPixel) > I_BIG_EPSILON){
 			double pixelIntensity = conversion.GetIntensity(pixel);

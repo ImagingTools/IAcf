@@ -31,17 +31,17 @@ bool CGeneralInfoDriverBase::OnCommand(
 
 	switch (commandCode){
 	case CGeneralInfoCommands::SetParams::Id:
-		if (commandBufferSize >= sizeof(CGeneralInfoCommands::SetParams)){
+		if (commandBufferSize >= int(sizeof(CGeneralInfoCommands::SetParams))){
 			m_params = *(const CGeneralInfoCommands::SetParams*)commandBuffer;
 		}
 		break;
 
 	case CGeneralInfoCommands::PopMessage::Id:
-		if (		(commandBufferSize >= sizeof(CGeneralInfoCommands::PopMessage)) &&
-					(responseBufferSize >= sizeof(CGeneralInfoCommands::PopMessage::Result))){
+		if (		(commandBufferSize >= int(sizeof(CGeneralInfoCommands::PopMessage))) &&
+					(responseBufferSize >= int(sizeof(CGeneralInfoCommands::PopMessage::Result)))){
 			OnPopMessageCommand(*(CGeneralInfoCommands::PopMessage::Result*)responseBuffer);
 
-			responseSize = sizeof(CGeneralInfoCommands::PopMessage::Result);
+			responseSize = int(sizeof(CGeneralInfoCommands::PopMessage::Result));
 		}
 		break;
 
@@ -60,7 +60,7 @@ bool CGeneralInfoDriverBase::OnCommand(
 void CGeneralInfoDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
 	if ((interruptFlags & IF_PULSE_TIMER) != 0){
-		__int64 currentTimer = GetCurrentTimer();
+		I_SQWORD currentTimer = GetCurrentTimer();
 		if (		(m_nextMinKeepAliveTime > 0) &&
 					(currentTimer > m_nextMinKeepAliveTime)){
 			AppendMessage(CGeneralInfoCommands::MC_CRITICAL,

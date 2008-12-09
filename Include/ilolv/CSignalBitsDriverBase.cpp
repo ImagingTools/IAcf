@@ -9,11 +9,11 @@ namespace ilolv
 
 
 CSignalBitsDriverBase::CSignalBitsDriverBase()
-:	m_lastHeartbeatTime(0),
-	m_doHeartbeatPullDown(false),
+:	m_nextFreeSignalId(1),
 	m_globalStatus(CGeneralInfoCommands::MC_INFO),
 	m_shownGlobalStatus(-1),
-	m_nextFreeSignalId(1)
+	m_lastHeartbeatTime(0),
+	m_doHeartbeatPullDown(false)
 {
 	m_signalStates[0] = CGeneralInfoCommands::MC_INFO;
 
@@ -42,7 +42,7 @@ bool CSignalBitsDriverBase::OnCommand(
 
 	switch (commandCode){
 	case CSignalBitsCommands::SetParams::Id:
-		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetParams)){
+		if (commandBufferSize >= int(sizeof(CSignalBitsCommands::SetParams))){
 			m_params = *(const CSignalBitsCommands::SetParams*)commandBuffer;
 			if (m_params.signalBitsCount > MAX_SIGNAL_BITS){
 				m_params.signalBitsCount = MAX_SIGNAL_BITS;
@@ -51,7 +51,7 @@ bool CSignalBitsDriverBase::OnCommand(
 		break;
 
 	case CSignalBitsCommands::SetSignalBitIndex::Id:
-		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetSignalBitIndex)){
+		if (commandBufferSize >= int(sizeof(CSignalBitsCommands::SetSignalBitIndex))){
 			const CSignalBitsCommands::SetSignalBitIndex& command = *(const CSignalBitsCommands::SetSignalBitIndex*)commandBuffer;
 
 			if ((command.signalIndex >= 0) && (command.signalIndex < MAX_SIGNAL_BITS)){
@@ -61,7 +61,7 @@ bool CSignalBitsDriverBase::OnCommand(
 		break;
 
 	case CSignalBitsCommands::SetApplicationStatus::Id:
-		if (commandBufferSize >= sizeof(CSignalBitsCommands::SetApplicationStatus)){
+		if (commandBufferSize >= int(sizeof(CSignalBitsCommands::SetApplicationStatus))){
 			const CSignalBitsCommands::SetApplicationStatus& command = *(const CSignalBitsCommands::SetApplicationStatus*)commandBuffer;
 
 			m_signalStates[0] = command.status;
@@ -77,7 +77,7 @@ bool CSignalBitsDriverBase::OnCommand(
 void CSignalBitsDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 {
 	if ((interruptFlags & IF_PULSE_TIMER) != 0){
-		__int64 currentTimer = GetCurrentTimer();
+		I_SQWORD currentTimer = GetCurrentTimer();
 
 		if (m_globalStatus < CGeneralInfoCommands::MC_CRITICAL){
 			if (m_doHeartbeatPullDown){

@@ -12,10 +12,10 @@ namespace iipr
 // public methods
 
 CSearchFeature::CSearchFeature(const i2d::CVector2d& position, const i2d::CVector2d& scale, double angle, double score)
-:	m_score(score),
-	m_position(position),
+:	m_position(position),
 	m_scale(scale),
-	m_angle(angle)
+	m_angle(angle),
+	m_score(score)
 {
 }
 

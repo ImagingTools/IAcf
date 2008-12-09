@@ -81,8 +81,8 @@ void CSearchResultShape::CModelPointShape::paint(QPainter* p, const QStyleOption
 
 	p->rotate(m_angle);
 
-	p->drawLine(x - radius, y, x + radius, y);
-	p->drawLine(x, y - radius, x, y - radius);
+	p->drawLine(QPointF(x - radius, y), QPointF(x + radius, y));
+	p->drawLine(QPointF(x, y - radius), QPointF(x, y - radius));
 }
 
 

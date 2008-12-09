@@ -261,7 +261,7 @@ bool CTracerDriverBase::OnCommand(
 
 	switch (commandCode){
 	case CTracerCommands::SetParams::Id:
-		if (commandBufferSize >= sizeof(CTracerCommands::SetParams)){
+		if (commandBufferSize >= int(sizeof(CTracerCommands::SetParams))){
 			m_params = *(const CTracerCommands::SetParams*)commandBuffer;
 
 			if (m_params.unitsCount > MAX_UNITS_COUNT){
@@ -287,7 +287,7 @@ bool CTracerDriverBase::OnCommand(
 		break;
 
 	case CTracerCommands::SetUnitParams::Id:
-		if (commandBufferSize >= sizeof(CTracerCommands::SetUnitParams)){
+		if (commandBufferSize >= int(sizeof(CTracerCommands::SetUnitParams))){
 			const CTracerCommands::SetUnitParams& command = *(const CTracerCommands::SetUnitParams*)commandBuffer;
 
 			if ((command.unitIndex >= 0) && (command.unitIndex < m_params.unitsCount)){
@@ -303,7 +303,7 @@ bool CTracerDriverBase::OnCommand(
 		break;
 
 	case CTracerCommands::SetEjectorParams::Id:
-		if (commandBufferSize >= sizeof(CTracerCommands::SetEjectorParams)){
+		if (commandBufferSize >= int(sizeof(CTracerCommands::SetEjectorParams))){
 			const CTracerCommands::SetEjectorParams& command = *(const CTracerCommands::SetEjectorParams*)commandBuffer;
 
 			int ejectorIndex = int(command.ejectorIndex);
@@ -316,7 +316,7 @@ bool CTracerDriverBase::OnCommand(
 		break;
 
 	case CTracerCommands::SetLightBarrierParams::Id:
-		if (commandBufferSize >= sizeof(CTracerCommands::SetLightBarrierParams)){
+		if (commandBufferSize >= int(sizeof(CTracerCommands::SetLightBarrierParams))){
 			const CTracerCommands::SetLightBarrierParams& command = *(const CTracerCommands::SetLightBarrierParams*)commandBuffer;
 
 			int lightbarrierIndex = int(command.barrierIndex);
@@ -327,7 +327,7 @@ bool CTracerDriverBase::OnCommand(
 		break;
 
 	case CTracerCommands::SetMode::Id:
-		if (commandBufferSize >= sizeof(CTracerCommands::SetMode)){
+		if (commandBufferSize >= int(sizeof(CTracerCommands::SetMode))){
 			const CTracerCommands::SetMode& command = *(const CTracerCommands::SetMode*)commandBuffer;
 
 			m_controllerMode = command.mode;
@@ -337,29 +337,29 @@ bool CTracerDriverBase::OnCommand(
 		break;
 
 	case CTracerCommands::SingleTrigger::Id:
-		if (		(commandBufferSize >= sizeof(CTracerCommands::SingleTrigger)) &&
-					(responseBufferSize >= sizeof(CTracerCommands::SingleTrigger::Result))){
+		if (		(commandBufferSize >= int(sizeof(CTracerCommands::SingleTrigger))) &&
+					(responseBufferSize >= int(sizeof(CTracerCommands::SingleTrigger::Result)))){
 			OnSingleTriggerCommand(
 						*(const CTracerCommands::SingleTrigger*)commandBuffer,
 						*(CTracerCommands::SingleTrigger::Result*)responseBuffer);
-			responseSize = sizeof(CTracerCommands::SingleTrigger::Result);
+			responseSize = int(sizeof(CTracerCommands::SingleTrigger::Result));
 		}
 		break;
 
 	case CTracerCommands::GetLineInfo::Id:
-		if (responseBufferSize >= sizeof(CTracerCommands::GetLineInfo::Result)){
+		if (responseBufferSize >= int(sizeof(CTracerCommands::GetLineInfo::Result))){
 			CTracerCommands::GetLineInfo::Result& result = *(CTracerCommands::GetLineInfo::Result*)responseBuffer;
 
 			result.linePos = GetLinePosition();
 			result.lastDetectedObjectIndex = m_lastInspectedObjectIndex;
 
-			responseSize = sizeof(CTracerCommands::GetLineInfo::Result);
+			responseSize = int(sizeof(CTracerCommands::GetLineInfo::Result));
 		}
 		break;
 
 	case CTracerCommands::PopId::Id:
-		if (		(commandBufferSize >= sizeof(CTracerCommands::PopId)) &&
-					(responseBufferSize >= sizeof(CTracerCommands::PopId::Result))){
+		if (		(commandBufferSize >= int(sizeof(CTracerCommands::PopId))) &&
+					(responseBufferSize >= int(sizeof(CTracerCommands::PopId::Result)))){
 			const CTracerCommands::PopId& command = *(const CTracerCommands::PopId*)commandBuffer;
 			CTracerCommands::PopId::Result& result = *(CTracerCommands::PopId::Result*)responseBuffer;
 
@@ -374,13 +374,13 @@ bool CTracerDriverBase::OnCommand(
 				result.objectPosition = m_objectsFifo.GetPositionAt(inspectionId);
 			}
 
-			responseSize = sizeof(CTracerCommands::PopId::Result);
+			responseSize = int(sizeof(CTracerCommands::PopId::Result));
 		}
 		break;
 
 	case CTracerCommands::SetResult::Id:
-		if (		(commandBufferSize >= sizeof(CTracerCommands::SetResult)) &&
-					(responseBufferSize >= sizeof(CTracerCommands::SetResult::Result))){
+		if (		(commandBufferSize >= int(sizeof(CTracerCommands::SetResult))) &&
+					(responseBufferSize >= int(sizeof(CTracerCommands::SetResult::Result)))){
 			const CTracerCommands::SetResult& command = *(const CTracerCommands::SetResult*)commandBuffer;
 			CTracerCommands::SetResult::Result& result = *(CTracerCommands::SetResult::Result*)responseBuffer;
 
@@ -390,7 +390,7 @@ bool CTracerDriverBase::OnCommand(
 								command.unit.inspectionId,
 								command.unit.ejectorIndex);
 
-				responseSize = sizeof(CTracerCommands::SetResult::Result);
+				responseSize = int(sizeof(CTracerCommands::SetResult::Result));
 			}
 		}
 		break;
@@ -442,7 +442,7 @@ void CTracerDriverBase::OnHardwareInterrupt(I_DWORD interruptFlags)
 	}
 
 	if ((interruptFlags & IF_PULSE_TIMER) != 0){
-		__int64 actualTime = GetCurrentTimer();
+		I_SQWORD actualTime = GetCurrentTimer();
 
 		for (int ejectorIndex = 0; ejectorIndex < m_params.ejectorsCount; ++ejectorIndex){
 			EjectorInfo& ejector = m_ejectors[ejectorIndex];
@@ -669,7 +669,7 @@ void CTracerDriverBase::OnTriggerEvent(int unitIndex, int inspectionIndex)
 	InspectionUnitElement& unit = m_inspectionUnits[unitIndex];
 	InspectionInfo& inspectionInfo = objectInfo.units[unitIndex];
 
-	__int64 actualTime = GetCurrentTimer();
+	I_SQWORD actualTime = GetCurrentTimer();
 
 	if (		!unit.isTriggerBitSet &&
 				(m_controllerMode == CTracerCommands::TM_AUTOMATIC) &&
@@ -726,7 +726,7 @@ void CTracerDriverBase::OnSingleTriggerCommand(
 				(m_controllerMode == CTracerCommands::TM_MANUAL)){
 		InspectionUnitElement& unit = m_inspectionUnits[command.unitIndex];
 		if (!unit.isTriggerBitSet){
-			__int64 actualTime = GetCurrentTimer();
+			I_SQWORD actualTime = GetCurrentTimer();
 
 			unit.triggerOnTime = actualTime;
 			unit.isTriggerBitSet = true;

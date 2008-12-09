@@ -17,11 +17,11 @@ void CSearchParamsGuiComp::UpdateEditor()
 		return;
 	}
 
-	m_spinMinimumAngle->setValue(paramsPtr->GetRotationRange().GetMinValue());
-	m_spinMaximumAngle->setValue(paramsPtr->GetRotationRange().GetMaxValue());
-	m_spinMinimumScale->setValue(paramsPtr->GetScaleRange().GetMinValue());
-	m_spinMaximumScale->setValue(paramsPtr->GetScaleRange().GetMaxValue());
-	m_spinMinimumScore->setValue(paramsPtr->GetMinScore());
+	m_spinMinimumAngle->setValue(int(paramsPtr->GetRotationRange().GetMinValue()));
+	m_spinMaximumAngle->setValue(int(paramsPtr->GetRotationRange().GetMaxValue()));
+	m_spinMinimumScale->setValue(int(paramsPtr->GetScaleRange().GetMinValue()));
+	m_spinMaximumScale->setValue(int(paramsPtr->GetScaleRange().GetMaxValue()));
+	m_spinMinimumScore->setValue(int(paramsPtr->GetMinScore()));
 	m_spinModelNumber->setValue(paramsPtr->GetNominalModelsCount());
 
 	m_checkEnableRotation->setChecked(paramsPtr->IsRotationEnabled());

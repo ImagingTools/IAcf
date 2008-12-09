@@ -43,7 +43,7 @@ private:
 
 	CGeneralInfoCommands::GeneralInfoParams m_params;
 
-	__int64 m_nextMinKeepAliveTime;
+	I_SQWORD m_nextMinKeepAliveTime;
 };
 
 

@@ -28,7 +28,7 @@ public:
 	virtual bool GetLightBarrierBit(int lightBarrierIndex) const;
 	virtual void SetTriggerBit(int bit, bool state);
 	virtual void SetEjectorBit(int ejectorIndex, bool state);
-	virtual __int64 GetCurrentTimer() const;
+	virtual I_SQWORD GetCurrentTimer() const;
 	virtual NativeTimer GetCurrentNativeTimer() const;
 
 	// reimplemented (ilolv::IDriver)
@@ -48,7 +48,7 @@ protected:
 	/**
 		Update hardware input values.
 	*/
-	virtual void UpdateHardwareValues(I_DWORD inputBits, I_WORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer);
+	virtual void UpdateHardwareValues(I_DWORD inputBits, I_WORD counterValue, I_SQWORD microsecsTimer, IDriver::NativeTimer nativeTimer);
 
 	/**
 		Called internal when counter is ready.
@@ -82,7 +82,7 @@ private:
 	// Shadows of hardware
 	I_DWORD m_inputBits;
 	I_DWORD m_linePosition;
-	__int64 m_currentTimer;
+	I_SQWORD m_currentTimer;
 	IDriver::NativeTimer m_currentNativeTimer;
 };
 

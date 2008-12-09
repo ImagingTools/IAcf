@@ -50,7 +50,7 @@ bool CDriverControllerComp::SetWorkMode(int mode)
 			int responseSize;
 			if (!m_commandCallerCompPtr->CallCommand(
 						ilolv::CMultiTracerCommands::SetMode::Id,
-						&command, sizeof(command),
+						&command, int(sizeof(command)),
 						NULL, 0,
 						responseSize)){
 				return false;
@@ -139,7 +139,7 @@ void CDriverControllerComp::OnComponentCreated()
 		int responseSize;
 		m_commandCallerCompPtr->CallCommand(
 					ilolv::CSignalBitsCommands::SetParams::Id,
-					&setSignalParamsCommand, sizeof(setSignalParamsCommand),
+					&setSignalParamsCommand, int(sizeof(setSignalParamsCommand)),
 					NULL, 0,
 					responseSize);
 
@@ -151,7 +151,7 @@ void CDriverControllerComp::OnComponentCreated()
 
 				m_commandCallerCompPtr->CallCommand(
 							ilolv::CSignalBitsCommands::SetSignalBitIndex::Id,
-							&setSignalBitIndexCommand, sizeof(setSignalBitIndexCommand),
+							&setSignalBitIndexCommand, int(sizeof(setSignalBitIndexCommand)),
 							NULL, 0,
 							responseSize);
 			}
@@ -183,7 +183,7 @@ bool CDriverControllerComp::SetParamsToDriver()
 
 	if (!m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetParams::Id,
-				&setParamsCommand, sizeof(setParamsCommand),
+				&setParamsCommand, int(sizeof(setParamsCommand)),
 				NULL, 0,
 				responseSize)){
 		return false;
@@ -239,7 +239,7 @@ bool CDriverControllerComp::SetLineParamsToDriver(
 				-1;
 	if (!m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetLineParams::Id,
-				&setLineParamsCommand, sizeof(setLineParamsCommand),
+				&setLineParamsCommand, int(sizeof(setLineParamsCommand)),
 				NULL, 0,
 				responseSize)){
 		return false;
@@ -258,7 +258,7 @@ bool CDriverControllerComp::SetLineParamsToDriver(
 				-1;
 	if (!m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetLineIoParams::Id,
-				&setLineIoParamsCommand, sizeof(setLineIoParamsCommand),
+				&setLineIoParamsCommand, int(sizeof(setLineIoParamsCommand)),
 				NULL, 0,
 				responseSize)){
 		return false;
@@ -271,7 +271,7 @@ bool CDriverControllerComp::SetLineParamsToDriver(
 		setBarrierParamsCommand.line.offset = int(lineParams.GetLightBarrierPosition(barrierIndex) * ticksPerDistUnit + 0.5);
 		if (!m_commandCallerCompPtr->CallCommand(
 					ilolv::CMultiTracerCommands::SetLightBarrierParams::Id,
-					&setBarrierParamsCommand, sizeof(setBarrierParamsCommand),
+					&setBarrierParamsCommand, int(sizeof(setBarrierParamsCommand)),
 					NULL, 0,
 					responseSize)){
 			return false;
@@ -330,7 +330,7 @@ bool CDriverControllerComp::SetUnitParamsToDriver(
 	int responseSize = 0;
 	return m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetUnitParams::Id,
-				&command, sizeof(command),
+				&command, int(sizeof(command)),
 				NULL, 0,
 				responseSize);
 }
@@ -364,7 +364,7 @@ bool CDriverControllerComp::SetEjectorParamsToDriver(
 	int responseSize = 0;
 	return m_commandCallerCompPtr->CallCommand(
 				ilolv::CMultiTracerCommands::SetEjectorParams::Id,
-				&command, sizeof(command),
+				&command, int(sizeof(command)),
 				NULL, 0,
 				responseSize);
 }
@@ -426,9 +426,9 @@ bool CDriverControllerComp::ObjectInspection::SetEjector(int ejectorIndex)
 	int resultSize;
 	if (m_commandCaller.CallCommand(
 				ilolv::CMultiTracerCommands::SetResult::Id,
-				&command, sizeof(command),
-				&commandResult, sizeof(commandResult),
-				resultSize) && (resultSize >= sizeof(commandResult))){
+				&command, int(sizeof(command)),
+				&commandResult, int(sizeof(commandResult)),
+				resultSize) && (resultSize >= int(sizeof(commandResult)))){
 		return commandResult.wasSet;
 	}
 
@@ -454,10 +454,10 @@ icntl::IObjectInspection* CDriverControllerComp::UnitController::PopObjectInspec
 		int resultSize;
 		if (parentPtr->m_commandCallerCompPtr->CallCommand(
 					ilolv::CMultiTracerCommands::PopId::Id,
-					&command, sizeof(command),
-					&commandResult, sizeof(commandResult),
+					&command, int(sizeof(command)),
+					&commandResult, int(sizeof(commandResult)),
 					resultSize)){
-			if  ((resultSize >= sizeof(commandResult)) && (commandResult.inspectionId >= 0)){
+			if  ((resultSize >= int(sizeof(commandResult))) && (commandResult.inspectionId >= 0)){
 				return new ObjectInspection(
 							parentPtr->m_commandCallerCompPtr.GetPtr(),
 							lineIndex,
@@ -485,9 +485,9 @@ isys::ITimer* CDriverControllerComp::UnitController::DoCameraTrigger()
 		int resultSize;
 		if (parentPtr->m_commandCallerCompPtr->CallCommand(
 					ilolv::CMultiTracerCommands::SingleTrigger::Id,
-					&command, sizeof(command),
-					&commandResult, sizeof(commandResult),
-					resultSize) && (resultSize >= sizeof(commandResult))){
+					&command, int(sizeof(command)),
+					&commandResult, int(sizeof(commandResult)),
+					resultSize) && (resultSize >= int(sizeof(commandResult)))){
 			iwin::CTimer* timerPtr = new iwin::CTimer;
 			if (timerPtr != NULL){
 				timerPtr->SetNativeRepresentation(commandResult.nativeTimestamp);
@@ -564,9 +564,9 @@ bool CDriverControllerComp::LineController::GetTransmissionPosition(double& resu
 		int resultSize;
 		if (parentPtr->m_commandCallerCompPtr->CallCommand(
 					ilolv::CMultiTracerCommands::GetLineInfo::Id,
-					&command, sizeof(command),
-					&commandResult, sizeof(commandResult),
-					resultSize) && (resultSize >= sizeof(commandResult))){
+					&command, int(sizeof(command)),
+					&commandResult, int(sizeof(commandResult)),
+					resultSize) && (resultSize >= int(sizeof(commandResult)))){
 
 			result = ticksPerDistanceUnit * commandResult.linePos;
 
@@ -597,9 +597,9 @@ bool CDriverControllerComp::LineController::GetLastObjectId(I_DWORD& result) con
 		int resultSize;
 		if (parentPtr->m_commandCallerCompPtr->CallCommand(
 					ilolv::CMultiTracerCommands::GetLineInfo::Id,
-					&command, sizeof(command),
-					&commandResult, sizeof(commandResult),
-					resultSize) && (resultSize >= sizeof(commandResult))){
+					&command, int(sizeof(command)),
+					&commandResult, int(sizeof(commandResult)),
+					resultSize) && (resultSize >= int(sizeof(commandResult)))){
 
 			result = commandResult.lastDetectedObjectIndex;
 

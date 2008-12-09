@@ -59,7 +59,7 @@ private:
 	int m_shownGlobalStatus;
 
 	// internal counters
-	__int64 m_lastHeartbeatTime;
+	I_SQWORD m_lastHeartbeatTime;
 	bool m_doHeartbeatPullDown;
 };
 

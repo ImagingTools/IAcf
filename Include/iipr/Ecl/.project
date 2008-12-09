@@ -1,430 +1,432 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>iipr</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/iipr/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CCaliperBasedPositionSupplierComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperBasedPositionSupplierComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCaliperFeature.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperFeature.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCaliperParams.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperParams.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCaliperParamsComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperParamsComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CExtremumCaliperProcessor.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessor.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CExtremumCaliperProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CGaussian2dFilterParams.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CGaussian2dFilterParams.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CHeaviestFeatureConsumer.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CHeaviestFeatureConsumer.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CImageProjection.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CImageProjection.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CIterativeProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CIterativeProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CIterativeProcessorParams.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CIterativeProcessorParams.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLineProjectionProcessor.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLineProjectionProcessor.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLineProjectionProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLineProjectionProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLocalDifferenceFilterParams.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLocalDifferenceFilterParams.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLocalDifferenceProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLocalDifferenceProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CMovingAverageProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CMovingAverageProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CMultidimensionalFilterParamsComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CMultidimensionalFilterParamsComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CProcessedAcquisitionComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CProcessedAcquisitionComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CProjectionData.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CProjectionData.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRectDerivativeProcessor.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessor.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRectDerivativeProcessorComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSearchBasedFeaturesSupplierComp.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchBasedFeaturesSupplierComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSearchFeature.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchFeature.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSearchParams.cpp</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchParams.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CCaliperBasedPositionSupplierComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperBasedPositionSupplierComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CCaliperFeature.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperFeature.h</locationURI>
-</link>
-<link>
-<name>Headers/CCaliperParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperParams.h</locationURI>
-</link>
-<link>
-<name>Headers/CCaliperParamsComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CCaliperParamsComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CExtremumCaliperProcessor.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessor.h</locationURI>
-</link>
-<link>
-<name>Headers/CExtremumCaliperProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CGaussian2dFilterParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CGaussian2dFilterParams.h</locationURI>
-</link>
-<link>
-<name>Headers/CHeaviestFeatureConsumer.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CHeaviestFeatureConsumer.h</locationURI>
-</link>
-<link>
-<name>Headers/CImageProjection.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CImageProjection.h</locationURI>
-</link>
-<link>
-<name>Headers/CIterativeProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CIterativeProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CIterativeProcessorParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CIterativeProcessorParams.h</locationURI>
-</link>
-<link>
-<name>Headers/CLineProjectionProcessor.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLineProjectionProcessor.h</locationURI>
-</link>
-<link>
-<name>Headers/CLineProjectionProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLineProjectionProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CLocalDifferenceFilterParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLocalDifferenceFilterParams.h</locationURI>
-</link>
-<link>
-<name>Headers/CLocalDifferenceProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CLocalDifferenceProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CMovingAverageProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CMovingAverageProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CMultidimensionalFilterParamsComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CMultidimensionalFilterParamsComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CProcessedAcquisitionComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CProcessedAcquisitionComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CProjectionData.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CProjectionData.h</locationURI>
-</link>
-<link>
-<name>Headers/CRectDerivativeProcessor.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessor.h</locationURI>
-</link>
-<link>
-<name>Headers/CRectDerivativeProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CSearchBasedFeaturesSupplierComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchBasedFeaturesSupplierComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CSearchFeature.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchFeature.h</locationURI>
-</link>
-<link>
-<name>Headers/CSearchParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/CSearchParams.h</locationURI>
-</link>
-<link>
-<name>Headers/ICaliperParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/ICaliperParams.h</locationURI>
-</link>
-<link>
-<name>Headers/ICaliperProcessor.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/ICaliperProcessor.h</locationURI>
-</link>
-<link>
-<name>Headers/IFeature.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IFeature.h</locationURI>
-</link>
-<link>
-<name>Headers/IFeaturesConsumer.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IFeaturesConsumer.h</locationURI>
-</link>
-<link>
-<name>Headers/IFeaturesContainer.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IFeaturesContainer.h</locationURI>
-</link>
-<link>
-<name>Headers/IFeaturesMapper.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IFeaturesMapper.h</locationURI>
-</link>
-<link>
-<name>Headers/IFeaturesSupplier.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IFeaturesSupplier.h</locationURI>
-</link>
-<link>
-<name>Headers/iipr.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/iipr.h</locationURI>
-</link>
-<link>
-<name>Headers/ILineProjectionProcessor.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/ILineProjectionProcessor.h</locationURI>
-</link>
-<link>
-<name>Headers/IMultidimensionalFilterConstraints.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IMultidimensionalFilterConstraints.h</locationURI>
-</link>
-<link>
-<name>Headers/IMultidimensionalFilterParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IMultidimensionalFilterParams.h</locationURI>
-</link>
-<link>
-<name>Headers/IProjectionConstraints.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IProjectionConstraints.h</locationURI>
-</link>
-<link>
-<name>Headers/IProjectionParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/IProjectionParams.h</locationURI>
-</link>
-<link>
-<name>Headers/ISearchModel.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/ISearchModel.h</locationURI>
-</link>
-<link>
-<name>Headers/ISearchParams.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/ISearchParams.h</locationURI>
-</link>
-<link>
-<name>Headers/TConvolutionProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TConvolutionProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/TFeaturesContainerWrap.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TFeaturesContainerWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TGaussianKernel2d.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TGaussianKernel2d.h</locationURI>
-</link>
-<link>
-<name>Headers/TGaussianProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TGaussianProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/TImageProcessorCompBase.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TImageProcessorCompBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TKernel2d.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TKernel2d.h</locationURI>
-</link>
-<link>
-<name>Headers/TLocalNeighborhood.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TLocalNeighborhood.h</locationURI>
-</link>
-<link>
-<name>Headers/TMorphoProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TMorphoProcessorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/TUnaryTransformProcessorComp.h</name>
-<type>1</type>
-<locationURI>IACFPath/Include/iipr/TUnaryTransformProcessorComp.h</locationURI>
-</link>
-</linkedResources>
+	<name>iipr</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/iipr/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CCaliperBasedPositionSupplierComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperBasedPositionSupplierComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCaliperFeature.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperFeature.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCaliperParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCaliperParamsComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperParamsComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CExtremumCaliperProcessor.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CExtremumCaliperProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CGaussian2dFilterParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CGaussian2dFilterParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CHeaviestFeatureConsumer.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CHeaviestFeatureConsumer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CImageProjection.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CImageProjection.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CIterativeProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CIterativeProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CIterativeProcessorParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CIterativeProcessorParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLineProjectionProcessor.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLineProjectionProcessor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLineProjectionProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLineProjectionProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLocalDifferenceFilterParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLocalDifferenceFilterParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLocalDifferenceProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLocalDifferenceProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CMovingAverageProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CMovingAverageProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CMultidimensionalFilterParamsComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CMultidimensionalFilterParamsComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CProcessedAcquisitionComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CProcessedAcquisitionComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CProjectionData.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CProjectionData.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRectDerivativeProcessor.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRectDerivativeProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSearchBasedFeaturesSupplierComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchBasedFeaturesSupplierComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSearchFeature.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchFeature.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSearchParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ICaliperParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/ICaliperParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ICaliperProcessor.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/ICaliperProcessor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFeature.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IFeature.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFeaturesConsumer.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IFeaturesConsumer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFeaturesContainer.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IFeaturesContainer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFeaturesMapper.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IFeaturesMapper.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFeaturesSupplier.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IFeaturesSupplier.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ILineProjectionProcessor.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/ILineProjectionProcessor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMultidimensionalFilterConstraints.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IMultidimensionalFilterConstraints.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMultidimensionalFilterParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IMultidimensionalFilterParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IProjectionConstraints.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IProjectionConstraints.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IProjectionParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/IProjectionParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ISearchModel.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/ISearchModel.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ISearchParams.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/ISearchParams.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TConvolutionProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TConvolutionProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TFeaturesContainerWrap.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TFeaturesContainerWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TGaussianKernel2d.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TGaussianKernel2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TGaussianProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TGaussianProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TImageProcessorCompBase.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TImageProcessorCompBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TKernel2d.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TKernel2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TLocalNeighborhood.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TLocalNeighborhood.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMorphoProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TMorphoProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TUnaryTransformProcessorComp.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/TUnaryTransformProcessorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/iipr.h</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/iipr.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCaliperBasedPositionSupplierComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperBasedPositionSupplierComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCaliperFeature.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperFeature.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCaliperParams.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperParams.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCaliperParamsComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CCaliperParamsComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CExtremumCaliperProcessor.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessor.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CExtremumCaliperProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CExtremumCaliperProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CGaussian2dFilterParams.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CGaussian2dFilterParams.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CHeaviestFeatureConsumer.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CHeaviestFeatureConsumer.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CImageProjection.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CImageProjection.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CIterativeProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CIterativeProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CIterativeProcessorParams.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CIterativeProcessorParams.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLineProjectionProcessor.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLineProjectionProcessor.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLineProjectionProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLineProjectionProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLocalDifferenceFilterParams.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLocalDifferenceFilterParams.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLocalDifferenceProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CLocalDifferenceProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CMovingAverageProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CMovingAverageProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CMultidimensionalFilterParamsComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CMultidimensionalFilterParamsComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CProcessedAcquisitionComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CProcessedAcquisitionComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CProjectionData.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CProjectionData.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRectDerivativeProcessor.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessor.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRectDerivativeProcessorComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CRectDerivativeProcessorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSearchBasedFeaturesSupplierComp.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchBasedFeaturesSupplierComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSearchFeature.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchFeature.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSearchParams.cpp</name>
+			<type>1</type>
+			<locationURI>IACFPath/Include/iipr/CSearchParams.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

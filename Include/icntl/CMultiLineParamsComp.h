@@ -6,6 +6,7 @@
 #include "icomp/CComponentBase.h"
 #include "ibase/TNamedWrap.h"
 
+#include "icntl/ILineParams.h"
 #include "icntl/IMultiLineParams.h"
 
 

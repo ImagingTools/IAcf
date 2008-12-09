@@ -1,6 +1,10 @@
 #include "isig/CSamplingParamsComp.h"
 
 
+// STL incldues
+#include <math.h>
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "isig/ISamplingConstraints.h"
@@ -30,7 +34,7 @@ void CSamplingParamsComp::OnComponentCreated()
 			}
 		}
 		istd::CRange intervalRange = m_samplingConstraintsCompPtr->GetIntervalRange();
-		m_interval = sqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
+		m_interval = std::sqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
 	}
 }
 

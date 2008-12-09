@@ -88,7 +88,7 @@ void CIoCardTracerDriverBase::SetEjectorBit(int ejectorIndex, bool state)
 }
 
 
-__int64 CIoCardTracerDriverBase::GetCurrentTimer() const
+I_SQWORD CIoCardTracerDriverBase::GetCurrentTimer() const
 {
 	return m_currentTimer;
 }
@@ -114,20 +114,20 @@ bool CIoCardTracerDriverBase::OnCommand(
 
 	switch (commandCode){
 	case CIoCardTracerCommands::SetIoParams::Id:
-		if (commandBufferSize >= sizeof(CIoCardTracerCommands::SetIoParams)){
+		if (commandBufferSize >= int(sizeof(CIoCardTracerCommands::SetIoParams))){
 			m_ioParams = *(const CIoCardTracerCommands::SetIoParams*)commandBuffer;
 		}
 		break;
 
 	case CIoCardTracerCommands::GetLightBarrierInfo::Id:
-		if (		(commandBufferSize >= sizeof(CIoCardTracerCommands::GetLightBarrierInfo)) &&
-					(responseBufferSize >= sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result))){
+		if (		(commandBufferSize >= int(sizeof(CIoCardTracerCommands::GetLightBarrierInfo))) &&
+					(responseBufferSize >= int(sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result)))){
 			const CIoCardTracerCommands::GetLightBarrierInfo& command = *(const CIoCardTracerCommands::GetLightBarrierInfo*)commandBuffer;
 			CIoCardTracerCommands::GetLightBarrierInfo::Result& result = *(CIoCardTracerCommands::GetLightBarrierInfo::Result*)responseBuffer;
 
 			result.state = GetLightBarrierBit(command.lightBarrierIndex);
 
-			responseSize = sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result);
+			responseSize = int(sizeof(CIoCardTracerCommands::GetLightBarrierInfo::Result));
 		}
 		break;
 
@@ -163,7 +163,7 @@ I_DWORD CIoCardTracerDriverBase::GetInputBits() const
 
 // protected methods
 
-void CIoCardTracerDriverBase::UpdateHardwareValues(I_DWORD inputBits, I_WORD counterValue, __int64 microsecsTimer, IDriver::NativeTimer nativeTimer)
+void CIoCardTracerDriverBase::UpdateHardwareValues(I_DWORD inputBits, I_WORD counterValue, I_SQWORD microsecsTimer, IDriver::NativeTimer nativeTimer)
 {
 	m_inputBits = inputBits;
 	m_linePosition += I_SWORD(m_lastCounterValue - counterValue);

@@ -122,7 +122,7 @@ protected:
 		/**
 			Time of last trigger on.
 		*/
-		__int64 triggerOnTime;
+		I_SQWORD triggerOnTime;
 		/**
 			Indicate that trigger bit is on.
 		*/
@@ -184,7 +184,7 @@ protected:
 		/**
 			Time when ejector was on.
 		*/
-		__int64 ejectionOnTime;
+		I_SQWORD ejectionOnTime;
 		/**
 			Counter used to ensure that overlapped ejection will be done once.
 		*/

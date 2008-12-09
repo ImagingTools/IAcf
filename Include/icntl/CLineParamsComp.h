@@ -7,6 +7,8 @@
 #include "ibase/TNamedWrap.h"
 
 #include "icntl/ILineParams.h"
+#include "icntl/IInspectionUnitParams.h"
+#include "icntl/IEjectorParams.h"
 
 
 namespace icntl

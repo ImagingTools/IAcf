@@ -2,8 +2,10 @@
 #define isig_CSamplingParamsComp_included
 
 
+// ACF includes
 #include "icomp/CComponentBase.h"
 
+#include "isig/ISamplingConstraints.h"
 #include "isig/ISamplingParams.h"
 
 

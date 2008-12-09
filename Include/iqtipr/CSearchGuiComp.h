@@ -2,22 +2,18 @@
 #define iqtipr_CSearchGuiComp_included
 
 
-
+// ACF includes
 #include "imod/IModel.h"
-
+#include "imod/IObserver.h"
 #include "icomp/CComponentBase.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iproc/IProcessor.h"
-
 #include "iipr/IFeaturesConsumer.h"
-
 #include "icam/IBitmapAcquisition.h"
-
 #include "iqt2d/TSceneExtenderCompBase.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
+
+#include "iqtipr/iqtipr.h"
 
 #include "iqtipr/Generated/ui_CSearchGuiComp.h"
 

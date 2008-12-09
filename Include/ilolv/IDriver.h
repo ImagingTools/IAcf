@@ -32,7 +32,7 @@ public:
 		IF_PULSE_TIMER = 0x400
 	};
 
-	typedef __int64 NativeTimer;
+	typedef I_SQWORD NativeTimer;
 
 	virtual ~IDriver(){}
 
@@ -64,7 +64,7 @@ protected:
 	/**
 		Get value of timer in microseconds.
 	*/
-	virtual __int64 GetCurrentTimer() const = 0;
+	virtual I_SQWORD GetCurrentTimer() const = 0;
 	/**
 		Get native timer.
 		Native timer is needed to exchange absolute timer value between driver and application.

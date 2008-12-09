@@ -36,7 +36,7 @@ bool CMultiTracerDriverBase::OnCommand(
 
 	switch (commandCode){
 	case CMultiTracerCommands::SetParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetParams))){
 			m_params = *(const CMultiTracerCommands::SetParams*)commandBuffer;
 			if (m_params.linesCount > MAX_LINES){
 				m_params.linesCount = MAX_LINES;
@@ -47,7 +47,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetLineParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetLineParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetLineParams))){
 			const CMultiTracerCommands::SetLineParams& command = *(const CMultiTracerCommands::SetLineParams*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -57,7 +57,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetParams::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SetLineParams),
+							int(sizeof(CMultiTracerCommands::SetLineParams)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -68,7 +68,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetLineIoParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetLineIoParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetLineIoParams))){
 			const CMultiTracerCommands::SetLineIoParams& command = *(const CMultiTracerCommands::SetLineIoParams*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -78,7 +78,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CIoCardTracerCommands::SetIoParams::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SetLineParams),
+							int(sizeof(CMultiTracerCommands::SetLineParams)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -89,7 +89,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetUnitParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetUnitParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetUnitParams))){
 			const CMultiTracerCommands::SetUnitParams& command = *(const CMultiTracerCommands::SetUnitParams*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -99,7 +99,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetUnitParams::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SetUnitParams),
+							int(sizeof(CMultiTracerCommands::SetUnitParams)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -110,7 +110,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetEjectorParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetEjectorParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetEjectorParams))){
 			const CMultiTracerCommands::SetEjectorParams& command = *(const CMultiTracerCommands::SetEjectorParams*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -120,7 +120,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetEjectorParams::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SetEjectorParams),
+							int(sizeof(CMultiTracerCommands::SetEjectorParams)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -129,7 +129,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetLightBarrierParams::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetLightBarrierParams)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetLightBarrierParams))){
 			const CMultiTracerCommands::SetLightBarrierParams& command = *(const CMultiTracerCommands::SetLightBarrierParams*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -139,7 +139,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetLightBarrierParams::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SetLightBarrierParams),
+							int(sizeof(CMultiTracerCommands::SetLightBarrierParams)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -150,7 +150,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetMode::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetMode)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetMode))){
 			const CMultiTracerCommands::SetMode& command = *(const CMultiTracerCommands::SetMode*)commandBuffer;
 
 			for (int lineIndex = 0; lineIndex < MAX_LINES; ++lineIndex){
@@ -183,8 +183,8 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SingleTrigger::Id:
-		if (		(commandBufferSize >= sizeof(CMultiTracerCommands::SingleTrigger)) &&
-					(responseBufferSize >= sizeof(CMultiTracerCommands::SingleTrigger::Result))){
+		if (		(commandBufferSize >= int(sizeof(CMultiTracerCommands::SingleTrigger))) &&
+					(responseBufferSize >= int(sizeof(CMultiTracerCommands::SingleTrigger::Result)))){
 			const CMultiTracerCommands::SingleTrigger& command = *(const CMultiTracerCommands::SingleTrigger*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -194,7 +194,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SingleTrigger::Id,
 							&command.line,
-							sizeof(CMultiTracerCommands::SingleTrigger::Result),
+							int(sizeof(CMultiTracerCommands::SingleTrigger::Result)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -203,7 +203,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::GetLineInfo::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::GetLineInfo)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::GetLineInfo))){
 			const CMultiTracerCommands::GetLineInfo& command = *(const CMultiTracerCommands::GetLineInfo*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -223,7 +223,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::GetLineLightBarrierInfo::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::GetLineLightBarrierInfo)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::GetLineLightBarrierInfo))){
 			const CMultiTracerCommands::GetLineLightBarrierInfo& command = *(const CMultiTracerCommands::GetLineLightBarrierInfo*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -243,7 +243,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::PopId::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::PopId)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::PopId))){
 			const CMultiTracerCommands::PopId& command = *(const CMultiTracerCommands::PopId*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -253,7 +253,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::PopId::Id,
 							&command.line,
-							sizeof(CTracerCommands::PopId),
+							int(sizeof(CTracerCommands::PopId)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);
@@ -263,7 +263,7 @@ bool CMultiTracerDriverBase::OnCommand(
 		break;
 
 	case CMultiTracerCommands::SetResult::Id:
-		if (commandBufferSize >= sizeof(CMultiTracerCommands::SetResult)){
+		if (commandBufferSize >= int(sizeof(CMultiTracerCommands::SetResult))){
 			const CMultiTracerCommands::SetResult& command = *(const CMultiTracerCommands::SetResult*)commandBuffer;
 
 			int lineIndex = int(command.lineIndex);
@@ -273,7 +273,7 @@ bool CMultiTracerDriverBase::OnCommand(
 				line.OnCommand(
 							CTracerCommands::SetResult::Id,
 							&command.line,
-							sizeof(CTracerCommands::SetResult),
+							int(sizeof(CTracerCommands::SetResult)),
 							responseBuffer,
 							responseBufferSize,
 							responseSize);

@@ -4,7 +4,8 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "icam/ITriggerParams.h" 
+#include "icam/ITriggerConstraints.h"
+#include "icam/ITriggerParams.h"
 
 
 namespace icam
@@ -35,7 +36,7 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
-	
+
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 

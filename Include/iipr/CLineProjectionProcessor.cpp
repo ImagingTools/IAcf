@@ -49,8 +49,8 @@ bool ProjectionFunction(
 
 	iimg::IBitmap& projectionImage = results.GetProjectionImage();
 
-	if (projectionImage.CreateBitmap(istd::CIndex2d(axis1End - axis1Begin, 1), sizeof(PixelConversion::DestPixelType) * 8)){
-		PixelConversion::DestPixelType* projectionPtr = (I_BYTE*)projectionImage.GetLinePtr(0);
+	if (projectionImage.CreateBitmap(istd::CIndex2d(axis1End - axis1Begin, 1), int(sizeof(typename PixelConversion::DestPixelType)) * 8)){
+		typename PixelConversion::DestPixelType* projectionPtr = (I_BYTE*)projectionImage.GetLinePtr(0);
 
 		double axis2Delta = delta.GetY() / delta.GetX();
 		double axis2Position = axis2Delta * (axis1Begin - beginPoint.GetX() + 0.5) + beginPoint.GetY() + 0.5;
@@ -59,14 +59,14 @@ bool ProjectionFunction(
 			const I_BYTE* firstLinePixelAddress = firstPixelAddress + (axis1Index * addressDiffs[0]);
 
 			int axis2Index = int(axis2Position);
-			PixelConversion::CalcPixelType value;
+			typename PixelConversion::CalcPixelType value;
 			if (axis2Index <= 0){
-				value = conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(firstLinePixelAddress));
+				value = conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(firstLinePixelAddress));
 			}
 			else{
 				if (axis2Index >= axisSizes[1]){
 					int axis2Offset = (axisSizes[1] - 1) * addressDiffs[1];
-					value = conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(firstLinePixelAddress + axis2Offset));
+					value = conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(firstLinePixelAddress + axis2Offset));
 				}
 				else{
 					double alpha = axis2Position - axis2Index;
@@ -75,9 +75,9 @@ bool ProjectionFunction(
 
 					int axis2Offset = axis2Index * addressDiffs[1];
 					const I_BYTE* pixelPtr = (firstLinePixelAddress + axis2Offset);
-					value =	PixelConversion::CalcPixelType(
-								conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(pixelPtr)) * alpha +
-								conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(pixelPtr - addressDiffs[1])) * (1 - alpha));
+					value =	typename PixelConversion::CalcPixelType(
+								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr)) * alpha +
+								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr - addressDiffs[1])) * (1 - alpha));
 				}
 			}
 
