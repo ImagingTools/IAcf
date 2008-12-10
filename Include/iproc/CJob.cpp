@@ -32,7 +32,7 @@ iproc::IOperator* CJob::AddProcessingElement(const std::string elementFactoryKey
 
 int CJob::GetChildsCount() const
 {
-	return GetItemCount();
+	return GetItemsCount();
 }
 
 
