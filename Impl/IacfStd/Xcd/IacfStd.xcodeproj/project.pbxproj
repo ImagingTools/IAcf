@@ -7,16 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		223456790ED2E572006EC826 /* CFireGrabAcquisitionComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* CFireGrabAcquisitionComp.cpp */; };
-		223456800ED2E572006EC826 /* CFireGrabAcquisitionComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CFireGrabAcquisitionComp.h */; };
-		223456810ED2E572006EC826 /* iavt.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* iavt.h */; };
+		223456790ED2E572006EC826 /* Empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Empty.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		123456790ED2E572006EC826 /* CFireGrabAcquisitionComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFireGrabAcquisitionComp.cpp; path = ../CFireGrabAcquisitionComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456800ED2E572006EC826 /* CFireGrabAcquisitionComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFireGrabAcquisitionComp.h; path = ../CFireGrabAcquisitionComp.h; sourceTree = SOURCE_ROOT; };
-		123456810ED2E572006EC826 /* iavt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iavt.h; path = ../iavt.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* libiavt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiavt.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		123456790ED2E572006EC826 /* Empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Empty.cpp; path = ../Empty.cpp; sourceTree = SOURCE_ROOT; };
+		D2AAC046055464E500DB518D /* libiacfstd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiacfstd.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,7 +26,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08FB7794FE84155DC02AAC07 /* iavt */ = {
+		08FB7794FE84155DC02AAC07 /* iacfstd */ = {
 			isa = PBXGroup;
 			children = (
 				EAB5AC950ED2E587006EC826 /* Header */,
@@ -41,14 +37,12 @@
 				EA9856A60EEABE5300C738EF /* Garbages */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
-			name = iavt;
+			name = iacfstd;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				123456800ED2E572006EC826 /* CFireGrabAcquisitionComp.h */,
-				123456810ED2E572006EC826 /* iavt.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -56,7 +50,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				123456790ED2E572006EC826 /* CFireGrabAcquisitionComp.cpp */,
+				123456790ED2E572006EC826 /* Empty.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -92,7 +86,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libiavt.a */,
+				D2AAC046055464E500DB518D /* libiacfstd.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,17 +98,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456800ED2E572006EC826 /* CFireGrabAcquisitionComp.h in Headers */,
-				223456810ED2E572006EC826 /* iavt.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* iavt */ = {
+		D2AAC045055464E500DB518D /* iacfstd */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "iavt" */;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "iacfstd" */;
 			buildPhases = (
 				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
@@ -125,9 +117,9 @@
 			);
 			dependencies = (
 			);
-			name = iavt;
-			productName = iavt;
-			productReference = D2AAC046055464E500DB518D /* libiavt.a */;
+			name = iacfstd;
+			productName = iacfstd;
+			productReference = D2AAC046055464E500DB518D /* libiacfstd.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -135,14 +127,14 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "iavt" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "iacfstd" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
-			mainGroup = 08FB7794FE84155DC02AAC07 /* iavt */;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* iacfstd */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* iavt */,
+				D2AAC045055464E500DB518D /* iacfstd */,
 			);
 		};
 /* End PBXProject section */
@@ -169,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456790ED2E572006EC826 /* CFireGrabAcquisitionComp.cpp in Sources */,
+				223456790ED2E572006EC826 /* Empty.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +182,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = iavt;
+				PRODUCT_NAME = iacfstd;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -206,7 +198,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = iavt;
+				PRODUCT_NAME = iacfstd;
 			};
 			name = Release;
 		};
@@ -218,14 +210,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					../../../Include,
 					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
 					/Library/Frameworks/QtScript.framework/Headers,
 					/Library/Frameworks/QtXml.framework/Headers,
-					"${ACFDIR}/Include",
-					"${AVTDIR}/FireGrab",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -244,14 +235,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					../../../Include,
 					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
 					/Library/Frameworks/QtScript.framework/Headers,
 					/Library/Frameworks/QtXml.framework/Headers,
-					"${ACFDIR}/Include",
-					"${AVTDIR}/FireGrab",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -261,7 +251,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "iavt" */ = {
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "iacfstd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91EC08733DB70010E9CD /* Debug */,
@@ -270,7 +260,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "iavt" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "iacfstd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
