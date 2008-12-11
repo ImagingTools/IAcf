@@ -43,7 +43,7 @@
               Editors
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -64,7 +64,7 @@
               Ids
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -87,7 +87,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        class imod::IModelEditor
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
         SnapParamsGui
@@ -95,7 +95,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class imod::IObserver
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
         SnapParamsGui
@@ -103,7 +103,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iqtgui::IGuiObject
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         SnapParamsGui

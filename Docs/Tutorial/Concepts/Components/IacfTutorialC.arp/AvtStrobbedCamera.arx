@@ -25,7 +25,7 @@
               DefaultExposureParams
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -44,7 +44,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -78,7 +78,7 @@
               DefaultShutterTime
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -99,7 +99,7 @@
   <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Framework
@@ -107,7 +107,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         Framework
@@ -115,7 +115,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class icam::IBitmapAcquisition
+        icam::IBitmapAcquisition
       </InterfaceId>
       <ComponentId>
         Camera
@@ -123,7 +123,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class icam::IExposureConstraints
+        icam::IExposureConstraints
       </InterfaceId>
       <ComponentId>
         Camera
@@ -131,7 +131,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         Framework

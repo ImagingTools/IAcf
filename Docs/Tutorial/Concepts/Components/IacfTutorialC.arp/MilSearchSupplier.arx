@@ -97,7 +97,7 @@
               DesignType
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;int&gt;
+              icomp::TSingleAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -116,7 +116,7 @@
               Editors
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -137,7 +137,7 @@
               Ids
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -158,7 +158,7 @@
               Names
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -200,7 +200,7 @@
               BitmapSupplier
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               BitmapSupplier
@@ -219,7 +219,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -238,7 +238,7 @@
               SearchProcessor
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -275,7 +275,7 @@
               Bitmap
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -294,7 +294,7 @@
               BitmapAcquisition
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               BitmapSupplier
@@ -313,7 +313,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -332,7 +332,7 @@
               ParamsSetGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -351,7 +351,7 @@
               SearchProcessor
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -370,7 +370,7 @@
               SearchResults
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -407,7 +407,7 @@
               Parameters
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -428,7 +428,7 @@
               ParametersId
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -469,7 +469,7 @@
   <ExportedInterfaces count="14">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Framework
@@ -477,7 +477,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         Framework
@@ -485,7 +485,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IMessageConsumer
+        ibase::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         Framework
@@ -493,7 +493,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IMessageContainer
+        ibase::IMessageContainer
       </InterfaceId>
       <ComponentId>
         Framework
@@ -501,7 +501,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iipr::CSearchBasedFeaturesSupplierComp
+        iipr::CSearchBasedFeaturesSupplierComp
       </InterfaceId>
       <ComponentId>
         SearchBasedTask
@@ -509,7 +509,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iipr::IFeaturesSupplier
+        iipr::IFeaturesSupplier
       </InterfaceId>
       <ComponentId>
         SearchBasedTask
@@ -517,7 +517,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class imod::IModel
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         SearchParamsSet
@@ -525,7 +525,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iprm::IParamsSet
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
         SearchParamsSet
@@ -533,7 +533,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iproc::ISupplier
+        iproc::ISupplier
       </InterfaceId>
       <ComponentId>
         SearchBasedTask
@@ -541,7 +541,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iqt2d::ISceneExtender
+        iqt2d::ISceneExtender
       </InterfaceId>
       <ComponentId>
         SearchGui
@@ -549,7 +549,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iqtgui::IGuiObject
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         SearchGui
@@ -557,7 +557,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::ISerializable
+        iser::ISerializable
       </InterfaceId>
       <ComponentId>
         SearchBasedTask
@@ -565,7 +565,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         Framework
@@ -573,7 +573,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class istd::IChangeable
+        istd::IChangeable
       </InterfaceId>
       <ComponentId>
         SearchParamsSet

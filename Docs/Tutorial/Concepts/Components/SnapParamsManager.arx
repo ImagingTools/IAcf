@@ -25,7 +25,7 @@
               BitmapLoader
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -80,7 +80,7 @@
               FixedParamSets
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -104,7 +104,7 @@
               FixedSetNames
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -146,7 +146,7 @@
               ParamsGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -165,7 +165,7 @@
               ParamsManager
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -202,7 +202,7 @@
               ParamsManager
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -239,7 +239,7 @@
               BitmapAcquisition
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               ParamsLoader
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -277,7 +277,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -296,7 +296,7 @@
               ParamsSetGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -333,7 +333,7 @@
               AcquisitionDir
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -370,7 +370,7 @@
               AcquisitionDir
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -409,7 +409,7 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         SnapApplication

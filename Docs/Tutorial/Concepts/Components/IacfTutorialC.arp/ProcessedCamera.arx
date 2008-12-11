@@ -25,7 +25,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -41,7 +41,7 @@
               ParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -78,7 +78,7 @@
               FilterParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -115,7 +115,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -131,7 +131,7 @@
               ParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -168,7 +168,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -202,7 +202,7 @@
               ParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -221,7 +221,7 @@
               SlaveProcessor
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -274,7 +274,7 @@
               ParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -311,7 +311,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               Log
@@ -327,7 +327,7 @@
               ParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -364,7 +364,7 @@
               ImageProcessor
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -383,7 +383,7 @@
               SlaveCamera
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               SlaveCamera
@@ -401,7 +401,7 @@
   <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Framework
@@ -409,7 +409,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         Framework
@@ -417,7 +417,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class icam::IBitmapAcquisition
+        icam::IBitmapAcquisition
       </InterfaceId>
       <ComponentId>
         ProcessedCamera
@@ -425,7 +425,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iproc::IProcessor
+        iproc::IProcessor
       </InterfaceId>
       <ComponentId>
         ProcessedCamera
@@ -433,7 +433,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         Framework

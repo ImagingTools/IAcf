@@ -25,7 +25,7 @@
               ExposureParamsId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -44,7 +44,7 @@
               ImageRegionParams
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -63,7 +63,7 @@
               Log
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -82,7 +82,7 @@
               TriggerParams
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -101,7 +101,7 @@
               UseSingleShoot
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -138,7 +138,7 @@
               Parameters
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -159,7 +159,7 @@
               ParametersId
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -198,7 +198,7 @@
               Editors
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -219,7 +219,7 @@
               Ids
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               ExposureConstraints
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -313,7 +313,7 @@
               BitmapAcquisition
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -332,7 +332,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -351,7 +351,7 @@
               ParamsSetGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -388,7 +388,7 @@
               Height
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -407,7 +407,7 @@
               Width
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -426,7 +426,7 @@
               X
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -445,7 +445,7 @@
               Y
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -482,7 +482,7 @@
               ExternalTriggerEnabled
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -503,7 +503,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Framework
@@ -511,7 +511,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         Framework
@@ -519,7 +519,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         Framework

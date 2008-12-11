@@ -25,7 +25,7 @@
               DefaultDir
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               AcquisitionDir
@@ -59,7 +59,7 @@
               Parameters
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -80,7 +80,7 @@
               ParametersId
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -101,7 +101,7 @@
               SlaveSets
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -121,7 +121,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        class imod::IModel
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         ParamsSet
@@ -129,7 +129,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iprm::IParamsSet
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
         ParamsSet
@@ -137,7 +137,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class istd::IChangeable
+        istd::IChangeable
       </InterfaceId>
       <ComponentId>
         ParamsSet

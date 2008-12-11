@@ -25,7 +25,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -44,7 +44,7 @@
               MainGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -63,7 +63,7 @@
               SplashScreen
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -82,7 +82,7 @@
               SplashTime
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -137,7 +137,7 @@
               LiveInterval
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -156,7 +156,7 @@
               MaxDispValue
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               MaxDispValue
@@ -172,7 +172,7 @@
               MinDispValue
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               MinDispValue
@@ -188,7 +188,7 @@
               ParamsLoader
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -207,7 +207,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               ParamsSet
@@ -223,7 +223,7 @@
               ParamsSetGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               ParamsSetGui
@@ -239,7 +239,7 @@
               SampleAcquisition
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               SampleAcquisition
@@ -255,7 +255,7 @@
               SampleLoader
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -292,7 +292,7 @@
               FileFilters
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -313,7 +313,7 @@
               Serializers
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -352,7 +352,7 @@
               FileFilters
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -373,7 +373,7 @@
               Serializers
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -412,7 +412,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -431,7 +431,7 @@
               CopyrightText
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -470,7 +470,7 @@ All rights reseved
               VersionInfo
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -491,7 +491,7 @@ All rights reseved
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Application
@@ -499,7 +499,7 @@ All rights reseved
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         ApplicationInfo
@@ -507,7 +507,7 @@ All rights reseved
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         ApplicationInfo

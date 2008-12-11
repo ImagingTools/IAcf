@@ -25,7 +25,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -44,7 +44,7 @@
               MainGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -81,7 +81,7 @@
               ApplicationName
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -100,7 +100,7 @@
               CompanyName
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -155,7 +155,7 @@
               Model
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -174,7 +174,7 @@
               SlaveEditorGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -211,7 +211,7 @@
               Parameters
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               Parameters
@@ -227,7 +227,7 @@
               ParametersId
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               Ids
@@ -261,7 +261,7 @@
               DesignType
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;int&gt;
+              icomp::TSingleAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -280,7 +280,7 @@
               Editors
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               Editors
@@ -296,7 +296,7 @@
               Ids
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               Ids
@@ -312,7 +312,7 @@
               Names
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               Names
@@ -346,7 +346,7 @@
               ExtenderGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -365,7 +365,7 @@
               SceneGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -402,7 +402,7 @@
               UseAntialiasing
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -439,7 +439,7 @@
               SlaveWidgets
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -463,7 +463,7 @@
               TabTitles
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -489,7 +489,7 @@
   <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Application
@@ -497,7 +497,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         ApplicationInfo
@@ -505,7 +505,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IMessageConsumer
+        ibase::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         LogTab
@@ -513,7 +513,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IMessageContainer
+        ibase::IMessageContainer
       </InterfaceId>
       <ComponentId>
         LogTab
@@ -521,7 +521,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class imod::IModel
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         LogTab
@@ -529,7 +529,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iqtgui::IGuiObject
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         LogTab
@@ -537,7 +537,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         ApplicationInfo

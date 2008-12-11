@@ -25,7 +25,7 @@
               MeilhausAccess
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -80,7 +80,7 @@
               AddressParamId
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+              icomp::TSingleAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -99,7 +99,7 @@
               IsOutput
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -136,7 +136,7 @@
               Parameters
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -160,7 +160,7 @@
               ParametersId
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -202,7 +202,7 @@
               Editors
             </Id>
             <Type>
-              class icomp::CMultiReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -226,7 +226,7 @@
               Ids
             </Id>
             <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -268,7 +268,7 @@
               MaxDispValue
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -287,7 +287,7 @@
               MinDispValue
             </Id>
             <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
+              icomp::TSingleAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -306,7 +306,7 @@
               ParamsSet
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -325,7 +325,7 @@
               ParamsSetGui
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -344,7 +344,7 @@
               SampleAcquisition
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -381,7 +381,7 @@
               SamplingConstraints
             </Id>
             <Type>
-              class icomp::CReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -420,7 +420,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        class ibase::IApplication
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
         SamplingFramework
@@ -428,7 +428,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class ibase::IApplicationInfo
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
         SamplingFramework
@@ -436,7 +436,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        class iser::IVersionInfo
+        iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
         SamplingFramework
