@@ -134,7 +134,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* iacfstd */ = {
+		D2AAC045055464E500DB518D /* IacfBasePck */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "IacfBasePck" */;
 			buildPhases = (
@@ -170,7 +170,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* iacfstd */,
+				D2AAC045055464E500DB518D /* IacfBasePck */,
 			);
 		};
 /* End PBXProject section */

@@ -9,12 +9,83 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* QtCamPck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* QtCamPck.cpp */; };
 		223456800ED2E572006EC826 /* QtCamPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* QtCamPck.h */; };
+		EA6A8EAE0EF1F6D1002C1F58 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */; };
+		EA6A8EAF0EF1F6D1002C1F58 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */; };
+		EA6A8EB10EF1F6DA002C1F58 /* libiqtcam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E780EF1F650002C1F58 /* libiqtcam.a */; };
+		EA6A8EB20EF1F6DA002C1F58 /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAB0EF1F6AE002C1F58 /* libiacfstd.a */; };
+		EA6A8EB30EF1F6DB002C1F58 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E6F0EF1F634002C1F58 /* libacfstd.a */; };
+		EA6A8EB40EF1F6DC002C1F58 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E690EF1F625002C1F58 /* libacfqt.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA6A8E680EF1F625002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfqt.a */;
+			remoteInfo = acfqt;
+		};
+		EA6A8E6E0EF1F634002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfstd.a */;
+			remoteInfo = acfstd;
+		};
+		EA6A8E770EF1F650002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libiqtcam.a */;
+			remoteInfo = iqtcam;
+		};
+		EA6A8EAA0EF1F6AE002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libiacfstd.a */;
+			remoteInfo = iacfstd;
+		};
+		EA6A8EB50EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfqt */;
+			remoteInfo = acfqt;
+		};
+		EA6A8EB70EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtcam */;
+			remoteInfo = iqtcam;
+		};
+		EA6A8EBB0EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteInfo = iacfstd;
+		};
+		EA6A8EBD0EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteInfo = acfstd;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* QtCamPck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QtCamPck.cpp; path = ../QtCamPck.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* QtCamPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QtCamPck.h; path = ../QtCamPck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* QtCamPck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = QtCamPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* QtCamPck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = QtCamPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = ../../../../ACF/Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtcam.xcodeproj; path = ../../../Include/iqtcam/Xcd/iqtcam.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
+		EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Library/Frameworks/QtGui.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6A8EAE0EF1F6D1002C1F58 /* QtCore.framework in Frameworks */,
+				EA6A8EAF0EF1F6D1002C1F58 /* QtGui.framework in Frameworks */,
+				EA6A8EB10EF1F6DA002C1F58 /* libiqtcam.a in Frameworks */,
+				EA6A8EB20EF1F6DA002C1F58 /* libiacfstd.a in Frameworks */,
+				EA6A8EB30EF1F6DB002C1F58 /* libacfstd.a in Frameworks */,
+				EA6A8EB40EF1F6DC002C1F58 /* libacfqt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +108,12 @@
 		08FB7794FE84155DC02AAC07 /* QtCamPck */ = {
 			isa = PBXGroup;
 			children = (
+				EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */,
+				EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */,
+				EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */,
+				EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */,
+				EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */,
+				EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,20 +125,20 @@
 			name = QtCamPck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* QtCamPck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* QtCamPck.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* QtCamPck.arp */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
@@ -65,11 +148,36 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		EA6A8E650EF1F625002C1F58 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				EA6A8E690EF1F625002C1F58 /* libacfqt.a */,
 			);
-			name = Resources;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6A8E6B0EF1F634002C1F58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6A8E6F0EF1F634002C1F58 /* libacfstd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6A8E710EF1F650002C1F58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6A8E780EF1F650002C1F58 /* libiqtcam.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6A8E8C0EF1F6AE002C1F58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6A8EAB0EF1F6AE002C1F58 /* libiacfstd.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,12 +194,19 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* QtCamPck.arp */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* QtCamPck.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +235,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA6A8EB60EF1F6FB002C1F58 /* PBXTargetDependency */,
+				EA6A8EB80EF1F6FB002C1F58 /* PBXTargetDependency */,
+				EA6A8EBC0EF1F6FB002C1F58 /* PBXTargetDependency */,
+				EA6A8EBE0EF1F6FB002C1F58 /* PBXTargetDependency */,
 			);
 			name = QtCamPck;
 			productName = QtCamPck;
@@ -136,12 +255,61 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* QtCamPck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA6A8E650EF1F625002C1F58 /* Products */;
+					ProjectRef = EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */;
+				},
+				{
+					ProductGroup = EA6A8E6B0EF1F634002C1F58 /* Products */;
+					ProjectRef = EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA6A8E8C0EF1F6AE002C1F58 /* Products */;
+					ProjectRef = EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA6A8E710EF1F650002C1F58 /* Products */;
+					ProjectRef = EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* QtCamPck */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA6A8E690EF1F625002C1F58 /* libacfqt.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfqt.a;
+			remoteRef = EA6A8E680EF1F625002C1F58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA6A8E6F0EF1F634002C1F58 /* libacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfstd.a;
+			remoteRef = EA6A8E6E0EF1F634002C1F58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA6A8E780EF1F650002C1F58 /* libiqtcam.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqtcam.a;
+			remoteRef = EA6A8E770EF1F650002C1F58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA6A8EAB0EF1F6AE002C1F58 /* libiacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiacfstd.a;
+			remoteRef = EA6A8EAA0EF1F6AE002C1F58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -171,20 +339,43 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EA6A8EB60EF1F6FB002C1F58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfqt;
+			targetProxy = EA6A8EB50EF1F6FB002C1F58 /* PBXContainerItemProxy */;
+		};
+		EA6A8EB80EF1F6FB002C1F58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqtcam;
+			targetProxy = EA6A8EB70EF1F6FB002C1F58 /* PBXContainerItemProxy */;
+		};
+		EA6A8EBC0EF1F6FB002C1F58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iacfstd;
+			targetProxy = EA6A8EBB0EF1F6FB002C1F58 /* PBXContainerItemProxy */;
+		};
+		EA6A8EBE0EF1F6FB002C1F58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EA6A8EBD0EF1F6FB002C1F58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtCamPck;
 				ZERO_LINK = YES;
@@ -194,13 +385,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtCamPck;
 			};
