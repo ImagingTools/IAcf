@@ -5,7 +5,7 @@
 // ACF includes
 #include "imod/CMultiModelObserverBase.h"
 #include "icomp/CComponentBase.h"
-#include "iwin/CTimer.h"
+#include "inat/CTimer.h"
 
 #include "ilolv/ICommandCaller.h"
 #include "ilolv/CMultiTracerCommands.h"
@@ -94,7 +94,7 @@ protected:
 		int m_unitIndex;
 		I_DWORD m_objectId;
 		I_DWORD m_inspectionId;
-		iwin::CTimer m_timestamp;
+		inat::CTimer m_timestamp;
 	};
 
 	class UnitController: virtual public icntl::IInspectionUnitController

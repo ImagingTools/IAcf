@@ -8,8 +8,6 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "iwin/CTimer.h"
-
 
 namespace iproc
 {

@@ -6,7 +6,7 @@
 #include <QTimer>
 
 // ACF includes
-#include "iwin/CTimer.h"
+#include "inat/CTimer.h"
 #include "iqt/CCriticalSection.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
@@ -105,7 +105,7 @@ private:
 	int m_outputCounters[OUTPUT_BITS_COUNT];
 	int m_lastEncoderValue;
 
-	mutable iwin::CTimer m_timer;
+	mutable inat::CTimer m_timer;
 	I_SQWORD m_currentTimer;
 
 	iqt::CCriticalSection m_globalSection;

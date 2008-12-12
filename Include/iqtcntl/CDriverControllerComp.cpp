@@ -488,7 +488,7 @@ isys::ITimer* CDriverControllerComp::UnitController::DoCameraTrigger()
 					&command, int(sizeof(command)),
 					&commandResult, int(sizeof(commandResult)),
 					resultSize) && (resultSize >= int(sizeof(commandResult)))){
-			iwin::CTimer* timerPtr = new iwin::CTimer;
+			inat::CTimer* timerPtr = new inat::CTimer;
 			if (timerPtr != NULL){
 				timerPtr->SetNativeRepresentation(commandResult.nativeTimestamp);
 

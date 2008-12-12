@@ -132,7 +132,7 @@ void CSimulatedMultiTracerGuiComp::OnHardwareInterrupt(I_DWORD interruptFlags)
 
 I_SQWORD CSimulatedMultiTracerGuiComp::GetCurrentTimer() const
 {
-	static iwin::CTimer referenceTimer;
+	static inat::CTimer referenceTimer;
 
 	m_timer.Start();
 
