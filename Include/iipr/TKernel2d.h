@@ -61,7 +61,7 @@ void TKernel2d<PixelType, KernelType>::InitForBitmap(const iimg::IBitmap& bitmap
 
 	I_ASSERT((m_kernelSize.GetX() * m_kernelSize.GetY()) == int(m_values.size()));
 
-	KernelValues::const_iterator elementIter = m_values.begin(); 
+	typename KernelValues::const_iterator elementIter = m_values.begin(); 
 
 	for (int y = -halfHeight; y <= halfHeight; y++){
 		for (int x = -halfWidth; x <= halfWidth; x++){

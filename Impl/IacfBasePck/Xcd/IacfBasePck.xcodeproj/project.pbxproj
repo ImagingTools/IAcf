@@ -9,12 +9,26 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* IacfBasePck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* IacfBasePck.cpp */; };
 		223456800ED2E572006EC826 /* IacfBasePck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* IacfBasePck.h */; };
+		EA28444D0EF0997F0044F226 /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA28444C0EF0996F0044F226 /* libiacfstd.a */; };
+		EA2844540EF09A790044F226 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2844530EF09A790044F226 /* libacfstd.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA28444B0EF0996F0044F226 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = iacfstd;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* IacfBasePck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IacfBasePck.cpp; path = ../IacfBasePck.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* IacfBasePck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IacfBasePck.h; path = ../IacfBasePck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* IacfBasePck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = IacfBasePck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* IacfBasePck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = IacfBasePck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA2844530EF09A790044F226 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../../ACF/Lib/DebugXcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA28444D0EF0997F0044F226 /* libiacfstd.a in Frameworks */,
+				EA2844540EF09A790044F226 /* libacfstd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +47,8 @@
 		08FB7794FE84155DC02AAC07 /* IacfBasePck */ = {
 			isa = PBXGroup;
 			children = (
+				EA2844530EF09A790044F226 /* libacfstd.a */,
+				EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,20 +60,20 @@
 			name = IacfBasePck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* IacfBasePck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* IacfBasePck.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* IacfBasePck.arp */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
@@ -65,11 +83,12 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		EA2844480EF0996F0044F226 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				EA28444C0EF0996F0044F226 /* libiacfstd.a */,
 			);
-			name = Resources;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,12 +105,19 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* IacfBasePck.arp */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* IacfBasePck.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,7 +134,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* IacfBasePck */ = {
+		D2AAC045055464E500DB518D /* iacfstd */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "IacfBasePck" */;
 			buildPhases = (
@@ -136,12 +162,28 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* IacfBasePck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA2844480EF0996F0044F226 /* Products */;
+					ProjectRef = EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* IacfBasePck */,
+				D2AAC045055464E500DB518D /* iacfstd */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA28444C0EF0996F0044F226 /* libiacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiacfstd.a;
+			remoteRef = EA28444B0EF0996F0044F226 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -175,17 +217,21 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../ACF/Lib/DebugXcd\"",
+				);
 				PRODUCT_NAME = IacfBasePck;
 				ZERO_LINK = YES;
 			};
@@ -194,14 +240,18 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../ACF/Lib/DebugXcd\"",
+				);
 				PRODUCT_NAME = IacfBasePck;
 			};
 			name = Release;

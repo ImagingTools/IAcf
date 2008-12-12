@@ -9,12 +9,44 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Main.cpp */; };
 		223456800ED2E572006EC826 /* IprPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* IprPck.h */; };
+		EA47E5E90EF1EA7300BE56DB /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5C00EF1EA0800BE56DB /* libacfqt.a */; };
+		EA47E5EA0EF1EA7500BE56DB /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5E10EF1EA3D00BE56DB /* libiacfstd.a */; };
+		EA47E5EB0EF1EA7500BE56DB /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5A30EF1E9FB00BE56DB /* libacfstd.a */; };
+		EA47E6880EF1EF5D00BE56DB /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E6870EF1EF5D00BE56DB /* QtCore.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA47E5A20EF1E9FB00BE56DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfstd;
+		};
+		EA47E5BF0EF1EA0800BE56DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfqt;
+		};
+		EA47E5E00EF1EA3D00BE56DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = iacfstd;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Main.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* IprPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IprPck.h; path = ../IprPck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* IprPck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = IprPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* IprPck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = IprPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = ../../../../ACF/Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA47E6870EF1EF5D00BE56DB /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +54,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA47E5E90EF1EA7300BE56DB /* libacfqt.a in Frameworks */,
+				EA47E5EA0EF1EA7500BE56DB /* libiacfstd.a in Frameworks */,
+				EA47E5EB0EF1EA7500BE56DB /* libacfstd.a in Frameworks */,
+				EA47E6880EF1EF5D00BE56DB /* QtCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +67,10 @@
 		08FB7794FE84155DC02AAC07 /* IprPck */ = {
 			isa = PBXGroup;
 			children = (
+				EA47E6870EF1EF5D00BE56DB /* QtCore.framework */,
+				EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */,
+				EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */,
+				EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,20 +82,20 @@
 			name = IprPck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* IprPck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* Main.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* IprPck.arp */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
@@ -65,11 +105,28 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		EA47E5660EF1E9FA00BE56DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				EA47E5A30EF1E9FB00BE56DB /* libacfstd.a */,
 			);
-			name = Resources;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA47E5A50EF1EA0800BE56DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA47E5C00EF1EA0800BE56DB /* libacfqt.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA47E5C20EF1EA3D00BE56DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA47E5E10EF1EA3D00BE56DB /* libiacfstd.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,12 +143,19 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* IprPck.arp */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* IprPck.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,12 +200,50 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* IprPck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA47E5A50EF1EA0800BE56DB /* Products */;
+					ProjectRef = EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */;
+				},
+				{
+					ProductGroup = EA47E5660EF1E9FA00BE56DB /* Products */;
+					ProjectRef = EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA47E5C20EF1EA3D00BE56DB /* Products */;
+					ProjectRef = EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* IprPck */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA47E5A30EF1E9FB00BE56DB /* libacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfstd.a;
+			remoteRef = EA47E5A20EF1E9FB00BE56DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA47E5C00EF1EA0800BE56DB /* libacfqt.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfqt.a;
+			remoteRef = EA47E5BF0EF1EA0800BE56DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA47E5E10EF1EA3D00BE56DB /* libiacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiacfstd.a;
+			remoteRef = EA47E5E00EF1EA3D00BE56DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -175,16 +277,16 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IprPck;
 				ZERO_LINK = YES;
@@ -194,13 +296,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IprPck;
 			};

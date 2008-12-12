@@ -10,7 +10,7 @@
 
 #include "iimg/CGeneralBitmap.h"
 
-#include "iwin/CTimer.h"
+#include "inat/CTimer.h"
 
 
 namespace iipr
@@ -65,7 +65,7 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 		return TS_INVALID;
 	}
 
-	iwin::CTimer timer;
+	inat::CTimer timer;
 
 	iimg::CGeneralBitmap bufferBitmap;
 

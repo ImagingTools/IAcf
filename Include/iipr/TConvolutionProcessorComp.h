@@ -72,9 +72,9 @@ bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ProcessImage(
 		double outputValue = 0.0;
 
 		Neighborhood neighborhood(inputIterator, *filterKernelPtr); 
-		Neighborhood::Iterator neighIter = neighborhood.Begin();
+		typename Neighborhood::Iterator neighIter = neighborhood.Begin();
 
-		for (		Kernel::Iterator kernelIter = filterKernelPtr->Begin();
+		for (		typename Kernel::Iterator kernelIter = filterKernelPtr->Begin();
 					kernelIter != filterKernelPtr->End();
 					++kernelIter){
 					
