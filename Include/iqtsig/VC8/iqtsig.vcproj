@@ -29,10 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -97,10 +103,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -211,6 +223,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\CSampleAcquisitionGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSampleContainerView.h"
 				>
 			</File>
@@ -239,6 +255,10 @@
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CSamplingParamsGuiComp.moc"
+				>
 			</File>
 			<File
 				RelativePath="..\CScriptSampleAcquisitionComp.h"

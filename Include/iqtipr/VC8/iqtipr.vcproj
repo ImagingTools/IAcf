@@ -29,10 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -97,10 +103,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -374,6 +386,30 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\CCaliperParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CIterativeProcessorParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\Generated\moc_CCaliperParamsGuiComp.cpp"
 				>

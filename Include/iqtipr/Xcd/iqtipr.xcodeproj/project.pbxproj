@@ -22,24 +22,30 @@
 		223456910ED2E572006EC826 /* CSearchResultShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CSearchResultShape.h */; };
 		223456920ED2E572006EC826 /* CValueSupplierGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* CValueSupplierGuiComp.h */; };
 		223456930ED2E572006EC826 /* iqtipr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* iqtipr.h */; };
-		223456940ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */; };
-		223456950ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */; };
-		223456960ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */; };
-		223456970ED2E572006EC826 /* moc_CSearchGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* moc_CSearchGuiComp.cpp */; };
-		223456980ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */; };
-		223456990ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */; };
-		223457000ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */; };
-		223457010ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */; };
-		223457020ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */; };
-		223457030ED2E572006EC826 /* ui_CSearchGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* ui_CSearchGuiComp.h */; };
-		223457040ED2E572006EC826 /* ui_CSearchParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */; };
-		223457050ED2E572006EC826 /* ui_CValueSupplierGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */; };
-		223457060ED2E572006EC826 /* CCaliperParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* CCaliperParamsGuiComp.ui */; };
-		223457070ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */; };
-		223457080ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */; };
-		223457090ED2E572006EC826 /* CSearchGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* CSearchGuiComp.ui */; };
-		223457100ED2E572006EC826 /* CSearchParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* CSearchParamsGuiComp.ui */; };
-		223457110ED2E572006EC826 /* CValueSupplierGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* CValueSupplierGuiComp.ui */; };
+		223456940ED2E572006EC826 /* CCaliperParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CCaliperParamsGuiComp.moc */; };
+		223456950ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.moc */; };
+		223456960ED2E572006EC826 /* CRectangularFilterParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* CRectangularFilterParamsGuiComp.moc */; };
+		223456970ED2E572006EC826 /* CSearchGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* CSearchGuiComp.moc */; };
+		223456980ED2E572006EC826 /* CSearchParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* CSearchParamsGuiComp.moc */; };
+		223456990ED2E572006EC826 /* CValueSupplierGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* CValueSupplierGuiComp.moc */; };
+		223457000ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */; };
+		223457010ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */; };
+		223457020ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */; };
+		223457030ED2E572006EC826 /* moc_CSearchGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* moc_CSearchGuiComp.cpp */; };
+		223457040ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */; };
+		223457050ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */; };
+		223457060ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */; };
+		223457070ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */; };
+		223457080ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */; };
+		223457090ED2E572006EC826 /* ui_CSearchGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* ui_CSearchGuiComp.h */; };
+		223457100ED2E572006EC826 /* ui_CSearchParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */; };
+		223457110ED2E572006EC826 /* ui_CValueSupplierGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */; };
+		223457120ED2E572006EC826 /* CCaliperParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* CCaliperParamsGuiComp.ui */; };
+		223457130ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */; };
+		223457140ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457140ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */; };
+		223457150ED2E572006EC826 /* CSearchGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457150ED2E572006EC826 /* CSearchGuiComp.ui */; };
+		223457160ED2E572006EC826 /* CSearchParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457160ED2E572006EC826 /* CSearchParamsGuiComp.ui */; };
+		223457170ED2E572006EC826 /* CValueSupplierGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457170ED2E572006EC826 /* CValueSupplierGuiComp.ui */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,24 +64,30 @@
 		123456910ED2E572006EC826 /* CSearchResultShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchResultShape.h; path = ../CSearchResultShape.h; sourceTree = SOURCE_ROOT; };
 		123456920ED2E572006EC826 /* CValueSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CValueSupplierGuiComp.h; path = ../CValueSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
 		123456930ED2E572006EC826 /* iqtipr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtipr.h; path = ../iqtipr.h; sourceTree = SOURCE_ROOT; };
-		123456940ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CCaliperParamsGuiComp.cpp; path = ../Generated/moc_CCaliperParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456950ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CIterativeProcessorParamsGuiComp.cpp; path = ../Generated/moc_CIterativeProcessorParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456960ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CRectangularFilterParamsGuiComp.cpp; path = ../Generated/moc_CRectangularFilterParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456970ED2E572006EC826 /* moc_CSearchGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSearchGuiComp.cpp; path = ../Generated/moc_CSearchGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456980ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSearchParamsGuiComp.cpp; path = ../Generated/moc_CSearchParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456990ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CValueSupplierGuiComp.cpp; path = ../Generated/moc_CValueSupplierGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123457000ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CCaliperParamsGuiComp.h; path = ../Generated/ui_CCaliperParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457010ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CIterativeProcessorParamsGuiComp.h; path = ../Generated/ui_CIterativeProcessorParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457020ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CRectangularFilterParamsGuiComp.h; path = ../Generated/ui_CRectangularFilterParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457030ED2E572006EC826 /* ui_CSearchGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSearchGuiComp.h; path = ../Generated/ui_CSearchGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457040ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSearchParamsGuiComp.h; path = ../Generated/ui_CSearchParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457050ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CValueSupplierGuiComp.h; path = ../Generated/ui_CValueSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123457060ED2E572006EC826 /* CCaliperParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCaliperParamsGuiComp.ui; path = ../CCaliperParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123457070ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIterativeProcessorParamsGuiComp.ui; path = ../CIterativeProcessorParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123457080ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangularFilterParamsGuiComp.ui; path = ../CRectangularFilterParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123457090ED2E572006EC826 /* CSearchGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchGuiComp.ui; path = ../CSearchGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123457100ED2E572006EC826 /* CSearchParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchParamsGuiComp.ui; path = ../CSearchParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123457110ED2E572006EC826 /* CValueSupplierGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CValueSupplierGuiComp.ui; path = ../CValueSupplierGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456940ED2E572006EC826 /* CCaliperParamsGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCaliperParamsGuiComp.moc; path = ../CCaliperParamsGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456950ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIterativeProcessorParamsGuiComp.moc; path = ../CIterativeProcessorParamsGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456960ED2E572006EC826 /* CRectangularFilterParamsGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangularFilterParamsGuiComp.moc; path = ../CRectangularFilterParamsGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456970ED2E572006EC826 /* CSearchGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchGuiComp.moc; path = ../CSearchGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456980ED2E572006EC826 /* CSearchParamsGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchParamsGuiComp.moc; path = ../CSearchParamsGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456990ED2E572006EC826 /* CValueSupplierGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CValueSupplierGuiComp.moc; path = ../CValueSupplierGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123457000ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CCaliperParamsGuiComp.cpp; path = ../Generated/moc_CCaliperParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457010ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CIterativeProcessorParamsGuiComp.cpp; path = ../Generated/moc_CIterativeProcessorParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457020ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CRectangularFilterParamsGuiComp.cpp; path = ../Generated/moc_CRectangularFilterParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457030ED2E572006EC826 /* moc_CSearchGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSearchGuiComp.cpp; path = ../Generated/moc_CSearchGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457040ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSearchParamsGuiComp.cpp; path = ../Generated/moc_CSearchParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457050ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CValueSupplierGuiComp.cpp; path = ../Generated/moc_CValueSupplierGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123457060ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CCaliperParamsGuiComp.h; path = ../Generated/ui_CCaliperParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457070ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CIterativeProcessorParamsGuiComp.h; path = ../Generated/ui_CIterativeProcessorParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457080ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CRectangularFilterParamsGuiComp.h; path = ../Generated/ui_CRectangularFilterParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457090ED2E572006EC826 /* ui_CSearchGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSearchGuiComp.h; path = ../Generated/ui_CSearchGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457100ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSearchParamsGuiComp.h; path = ../Generated/ui_CSearchParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457110ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CValueSupplierGuiComp.h; path = ../Generated/ui_CValueSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123457120ED2E572006EC826 /* CCaliperParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCaliperParamsGuiComp.ui; path = ../CCaliperParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123457130ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIterativeProcessorParamsGuiComp.ui; path = ../CIterativeProcessorParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123457140ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangularFilterParamsGuiComp.ui; path = ../CRectangularFilterParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123457150ED2E572006EC826 /* CSearchGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchGuiComp.ui; path = ../CSearchGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123457160ED2E572006EC826 /* CSearchParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSearchParamsGuiComp.ui; path = ../CSearchParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123457170ED2E572006EC826 /* CValueSupplierGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CValueSupplierGuiComp.ui; path = ../CValueSupplierGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiqtipr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtipr.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -136,12 +148,12 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				123457060ED2E572006EC826 /* CCaliperParamsGuiComp.ui */,
-				123457070ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */,
-				123457080ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */,
-				123457090ED2E572006EC826 /* CSearchGuiComp.ui */,
-				123457100ED2E572006EC826 /* CSearchParamsGuiComp.ui */,
-				123457110ED2E572006EC826 /* CValueSupplierGuiComp.ui */,
+				123457120ED2E572006EC826 /* CCaliperParamsGuiComp.ui */,
+				123457130ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.ui */,
+				123457140ED2E572006EC826 /* CRectangularFilterParamsGuiComp.ui */,
+				123457150ED2E572006EC826 /* CSearchGuiComp.ui */,
+				123457160ED2E572006EC826 /* CSearchParamsGuiComp.ui */,
+				123457170ED2E572006EC826 /* CValueSupplierGuiComp.ui */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -156,18 +168,18 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				123456940ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */,
-				123456950ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */,
-				123456960ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */,
-				123456970ED2E572006EC826 /* moc_CSearchGuiComp.cpp */,
-				123456980ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */,
-				123456990ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */,
-				123457000ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */,
-				123457010ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */,
-				123457020ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */,
-				123457030ED2E572006EC826 /* ui_CSearchGuiComp.h */,
-				123457040ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */,
-				123457050ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */,
+				123457000ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp */,
+				123457010ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp */,
+				123457020ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp */,
+				123457030ED2E572006EC826 /* moc_CSearchGuiComp.cpp */,
+				123457040ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp */,
+				123457050ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp */,
+				123457060ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h */,
+				123457070ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h */,
+				123457080ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h */,
+				123457090ED2E572006EC826 /* ui_CSearchGuiComp.h */,
+				123457100ED2E572006EC826 /* ui_CSearchParamsGuiComp.h */,
+				123457110ED2E572006EC826 /* ui_CValueSupplierGuiComp.h */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -175,6 +187,12 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
+				123456940ED2E572006EC826 /* CCaliperParamsGuiComp.moc */,
+				123456950ED2E572006EC826 /* CIterativeProcessorParamsGuiComp.moc */,
+				123456960ED2E572006EC826 /* CRectangularFilterParamsGuiComp.moc */,
+				123456970ED2E572006EC826 /* CSearchGuiComp.moc */,
+				123456980ED2E572006EC826 /* CSearchParamsGuiComp.moc */,
+				123456990ED2E572006EC826 /* CValueSupplierGuiComp.moc */,
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -202,12 +220,12 @@
 				223456910ED2E572006EC826 /* CSearchResultShape.h in Headers */,
 				223456920ED2E572006EC826 /* CValueSupplierGuiComp.h in Headers */,
 				223456930ED2E572006EC826 /* iqtipr.h in Headers */,
-				223457000ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h in Headers */,
-				223457010ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h in Headers */,
-				223457020ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h in Headers */,
-				223457030ED2E572006EC826 /* ui_CSearchGuiComp.h in Headers */,
-				223457040ED2E572006EC826 /* ui_CSearchParamsGuiComp.h in Headers */,
-				223457050ED2E572006EC826 /* ui_CValueSupplierGuiComp.h in Headers */,
+				223457060ED2E572006EC826 /* ui_CCaliperParamsGuiComp.h in Headers */,
+				223457070ED2E572006EC826 /* ui_CIterativeProcessorParamsGuiComp.h in Headers */,
+				223457080ED2E572006EC826 /* ui_CRectangularFilterParamsGuiComp.h in Headers */,
+				223457090ED2E572006EC826 /* ui_CSearchGuiComp.h in Headers */,
+				223457100ED2E572006EC826 /* ui_CSearchParamsGuiComp.h in Headers */,
+				223457110ED2E572006EC826 /* ui_CValueSupplierGuiComp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +275,12 @@
 			files = (
 			);
 			inputPaths = (
+				../CCaliperParamsGuiComp.h,
+				../CIterativeProcessorParamsGuiComp.h,
+				../CRectangularFilterParamsGuiComp.h,
+				../CSearchGuiComp.h,
+				../CSearchParamsGuiComp.h,
+				../CValueSupplierGuiComp.h,
 				../CCaliperParamsGuiComp.ui,
 				../CIterativeProcessorParamsGuiComp.ui,
 				../CRectangularFilterParamsGuiComp.ui,
@@ -265,6 +289,12 @@
 				../CValueSupplierGuiComp.ui,
 			);
 			outputPaths = (
+				../Generated/moc_CCaliperParamsGuiComp.cpp,
+				../Generated/moc_CIterativeProcessorParamsGuiComp.cpp,
+				../Generated/moc_CRectangularFilterParamsGuiComp.cpp,
+				../Generated/moc_CSearchGuiComp.cpp,
+				../Generated/moc_CSearchParamsGuiComp.cpp,
+				../Generated/moc_CValueSupplierGuiComp.cpp,
 				../Generated/ui_CCaliperParamsGuiComp.h,
 				../Generated/ui_CIterativeProcessorParamsGuiComp.h,
 				../Generated/ui_CRectangularFilterParamsGuiComp.h,
@@ -274,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "uic -o ../Generated/ui_CCaliperParamsGuiComp.h ../CCaliperParamsGuiComp.ui\nuic -o ../Generated/ui_CIterativeProcessorParamsGuiComp.h ../CIterativeProcessorParamsGuiComp.ui\nuic -o ../Generated/ui_CRectangularFilterParamsGuiComp.h ../CRectangularFilterParamsGuiComp.ui\nuic -o ../Generated/ui_CSearchGuiComp.h ../CSearchGuiComp.ui\nuic -o ../Generated/ui_CSearchParamsGuiComp.h ../CSearchParamsGuiComp.ui\nuic -o ../Generated/ui_CValueSupplierGuiComp.h ../CValueSupplierGuiComp.ui\n";
+			shellScript = "moc -o ../Generated/moc_CCaliperParamsGuiComp.cpp ../CCaliperParamsGuiComp.h\nmoc -o ../Generated/moc_CIterativeProcessorParamsGuiComp.cpp ../CIterativeProcessorParamsGuiComp.h\nmoc -o ../Generated/moc_CRectangularFilterParamsGuiComp.cpp ../CRectangularFilterParamsGuiComp.h\nmoc -o ../Generated/moc_CSearchGuiComp.cpp ../CSearchGuiComp.h\nmoc -o ../Generated/moc_CSearchParamsGuiComp.cpp ../CSearchParamsGuiComp.h\nmoc -o ../Generated/moc_CValueSupplierGuiComp.cpp ../CValueSupplierGuiComp.h\nuic -o ../Generated/ui_CCaliperParamsGuiComp.h ../CCaliperParamsGuiComp.ui\nuic -o ../Generated/ui_CIterativeProcessorParamsGuiComp.h ../CIterativeProcessorParamsGuiComp.ui\nuic -o ../Generated/ui_CRectangularFilterParamsGuiComp.h ../CRectangularFilterParamsGuiComp.ui\nuic -o ../Generated/ui_CSearchGuiComp.h ../CSearchGuiComp.ui\nuic -o ../Generated/ui_CSearchParamsGuiComp.h ../CSearchParamsGuiComp.ui\nuic -o ../Generated/ui_CValueSupplierGuiComp.h ../CValueSupplierGuiComp.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -290,12 +320,12 @@
 				223456830ED2E572006EC826 /* CSearchParamsGuiComp.cpp in Sources */,
 				223456840ED2E572006EC826 /* CSearchResultShape.cpp in Sources */,
 				223456850ED2E572006EC826 /* CValueSupplierGuiComp.cpp in Sources */,
-				223456940ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp in Sources */,
-				223456950ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp in Sources */,
-				223456960ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp in Sources */,
-				223456970ED2E572006EC826 /* moc_CSearchGuiComp.cpp in Sources */,
-				223456980ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp in Sources */,
-				223456990ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp in Sources */,
+				223457000ED2E572006EC826 /* moc_CCaliperParamsGuiComp.cpp in Sources */,
+				223457010ED2E572006EC826 /* moc_CIterativeProcessorParamsGuiComp.cpp in Sources */,
+				223457020ED2E572006EC826 /* moc_CRectangularFilterParamsGuiComp.cpp in Sources */,
+				223457030ED2E572006EC826 /* moc_CSearchGuiComp.cpp in Sources */,
+				223457040ED2E572006EC826 /* moc_CSearchParamsGuiComp.cpp in Sources */,
+				223457050ED2E572006EC826 /* moc_CValueSupplierGuiComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

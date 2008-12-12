@@ -11,15 +11,17 @@
 		223456800ED2E572006EC826 /* CDriverControllerComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CDriverControllerComp.cpp */; };
 		223456810ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.cpp */; };
 		223456820ED2E572006EC826 /* CAutomaticControllerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CAutomaticControllerGuiComp.h */; };
-		223456830ED2E572006EC826 /* CDriverControllerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CDriverControllerComp.h */; };
-		223456840ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */; };
-		223456850ED2E572006EC826 /* iqtcntl.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* iqtcntl.h */; };
-		223456860ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */; };
-		223456870ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */; };
-		223456880ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */; };
-		223456890ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */; };
-		223456900ED2E572006EC826 /* CAutomaticControllerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */; };
-		223456910ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */; };
+		223456830ED2E572006EC826 /* CAutomaticControllerGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CAutomaticControllerGuiComp.moc */; };
+		223456840ED2E572006EC826 /* CDriverControllerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CDriverControllerComp.h */; };
+		223456850ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */; };
+		223456860ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.moc */; };
+		223456870ED2E572006EC826 /* iqtcntl.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* iqtcntl.h */; };
+		223456880ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */; };
+		223456890ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */; };
+		223456900ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */; };
+		223456910ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */; };
+		223456920ED2E572006EC826 /* CAutomaticControllerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */; };
+		223456930ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,15 +29,17 @@
 		123456800ED2E572006EC826 /* CDriverControllerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDriverControllerComp.cpp; path = ../CDriverControllerComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.cpp; path = ../CSimulatedMultiTracerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* CAutomaticControllerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAutomaticControllerGuiComp.h; path = ../CAutomaticControllerGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456830ED2E572006EC826 /* CDriverControllerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDriverControllerComp.h; path = ../CDriverControllerComp.h; sourceTree = SOURCE_ROOT; };
-		123456840ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.h; path = ../CSimulatedMultiTracerGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* iqtcntl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtcntl.h; path = ../iqtcntl.h; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CAutomaticControllerGuiComp.cpp; path = ../Generated/moc_CAutomaticControllerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456870ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSimulatedMultiTracerGuiComp.cpp; path = ../Generated/moc_CSimulatedMultiTracerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456880ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CAutomaticControllerGuiComp.h; path = ../Generated/ui_CAutomaticControllerGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456890ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSimulatedMultiTracerGuiComp.h; path = ../Generated/ui_CSimulatedMultiTracerGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAutomaticControllerGuiComp.ui; path = ../CAutomaticControllerGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.ui; path = ../CSimulatedMultiTracerGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456830ED2E572006EC826 /* CAutomaticControllerGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAutomaticControllerGuiComp.moc; path = ../CAutomaticControllerGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456840ED2E572006EC826 /* CDriverControllerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDriverControllerComp.h; path = ../CDriverControllerComp.h; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.h; path = ../CSimulatedMultiTracerGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.moc; path = ../CSimulatedMultiTracerGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* iqtcntl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtcntl.h; path = ../iqtcntl.h; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CAutomaticControllerGuiComp.cpp; path = ../Generated/moc_CAutomaticControllerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSimulatedMultiTracerGuiComp.cpp; path = ../Generated/moc_CSimulatedMultiTracerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CAutomaticControllerGuiComp.h; path = ../Generated/ui_CAutomaticControllerGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSimulatedMultiTracerGuiComp.h; path = ../Generated/ui_CSimulatedMultiTracerGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAutomaticControllerGuiComp.ui; path = ../CAutomaticControllerGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSimulatedMultiTracerGuiComp.ui; path = ../CSimulatedMultiTracerGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiqtcntl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtcntl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,9 +72,9 @@
 			isa = PBXGroup;
 			children = (
 				123456820ED2E572006EC826 /* CAutomaticControllerGuiComp.h */,
-				123456830ED2E572006EC826 /* CDriverControllerComp.h */,
-				123456840ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */,
-				123456850ED2E572006EC826 /* iqtcntl.h */,
+				123456840ED2E572006EC826 /* CDriverControllerComp.h */,
+				123456850ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h */,
+				123456870ED2E572006EC826 /* iqtcntl.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -88,8 +92,8 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				123456900ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */,
-				123456910ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */,
+				123456920ED2E572006EC826 /* CAutomaticControllerGuiComp.ui */,
+				123456930ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.ui */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -104,10 +108,10 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				123456860ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */,
-				123456870ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */,
-				123456880ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */,
-				123456890ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */,
+				123456880ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp */,
+				123456890ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp */,
+				123456900ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h */,
+				123456910ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -115,6 +119,8 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
+				123456830ED2E572006EC826 /* CAutomaticControllerGuiComp.moc */,
+				123456860ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.moc */,
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -135,11 +141,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456820ED2E572006EC826 /* CAutomaticControllerGuiComp.h in Headers */,
-				223456830ED2E572006EC826 /* CDriverControllerComp.h in Headers */,
-				223456840ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h in Headers */,
-				223456850ED2E572006EC826 /* iqtcntl.h in Headers */,
-				223456880ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h in Headers */,
-				223456890ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h in Headers */,
+				223456840ED2E572006EC826 /* CDriverControllerComp.h in Headers */,
+				223456850ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.h in Headers */,
+				223456870ED2E572006EC826 /* iqtcntl.h in Headers */,
+				223456900ED2E572006EC826 /* ui_CAutomaticControllerGuiComp.h in Headers */,
+				223456910ED2E572006EC826 /* ui_CSimulatedMultiTracerGuiComp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,16 +195,20 @@
 			files = (
 			);
 			inputPaths = (
+				../CAutomaticControllerGuiComp.h,
+				../CSimulatedMultiTracerGuiComp.h,
 				../CAutomaticControllerGuiComp.ui,
 				../CSimulatedMultiTracerGuiComp.ui,
 			);
 			outputPaths = (
+				../Generated/moc_CAutomaticControllerGuiComp.cpp,
+				../Generated/moc_CSimulatedMultiTracerGuiComp.cpp,
 				../Generated/ui_CAutomaticControllerGuiComp.h,
 				../Generated/ui_CSimulatedMultiTracerGuiComp.h,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "uic -o ../Generated/ui_CAutomaticControllerGuiComp.h ../CAutomaticControllerGuiComp.ui\nuic -o ../Generated/ui_CSimulatedMultiTracerGuiComp.h ../CSimulatedMultiTracerGuiComp.ui\n";
+			shellScript = "moc -o ../Generated/moc_CAutomaticControllerGuiComp.cpp ../CAutomaticControllerGuiComp.h\nmoc -o ../Generated/moc_CSimulatedMultiTracerGuiComp.cpp ../CSimulatedMultiTracerGuiComp.h\nuic -o ../Generated/ui_CAutomaticControllerGuiComp.h ../CAutomaticControllerGuiComp.ui\nuic -o ../Generated/ui_CSimulatedMultiTracerGuiComp.h ../CSimulatedMultiTracerGuiComp.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -210,8 +220,8 @@
 				223456790ED2E572006EC826 /* CAutomaticControllerGuiComp.cpp in Sources */,
 				223456800ED2E572006EC826 /* CDriverControllerComp.cpp in Sources */,
 				223456810ED2E572006EC826 /* CSimulatedMultiTracerGuiComp.cpp in Sources */,
-				223456860ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp in Sources */,
-				223456870ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp in Sources */,
+				223456880ED2E572006EC826 /* moc_CAutomaticControllerGuiComp.cpp in Sources */,
+				223456890ED2E572006EC826 /* moc_CSimulatedMultiTracerGuiComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

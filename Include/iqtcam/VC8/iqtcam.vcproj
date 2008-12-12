@@ -29,10 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -97,10 +103,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -212,6 +224,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\CExposureParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileAcquisitionComp.h"
 				>
 			</File>
@@ -242,6 +258,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\CSnapBitmapSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSnapImageGuiComp.h"
 				>
 				<FileConfiguration
@@ -266,6 +286,10 @@
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CSnapImageGuiComp.moc"
+				>
 			</File>
 			<File
 				RelativePath="..\iqtcam.h"

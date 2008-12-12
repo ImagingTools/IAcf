@@ -12,19 +12,22 @@
 		223456810ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.cpp */; };
 		223456820ED2E572006EC826 /* CSnapImageGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CSnapImageGuiComp.cpp */; };
 		223456830ED2E572006EC826 /* CExposureParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CExposureParamsGuiComp.h */; };
-		223456840ED2E572006EC826 /* CFileAcquisitionComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CFileAcquisitionComp.h */; };
-		223456850ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */; };
-		223456860ED2E572006EC826 /* CSnapImageGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CSnapImageGuiComp.h */; };
-		223456870ED2E572006EC826 /* iqtcam.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* iqtcam.h */; };
-		223456880ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */; };
-		223456890ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */; };
-		223456900ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */; };
-		223456910ED2E572006EC826 /* ui_CExposureParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */; };
-		223456920ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */; };
-		223456930ED2E572006EC826 /* ui_CSnapImageGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* ui_CSnapImageGuiComp.h */; };
-		223456940ED2E572006EC826 /* CExposureParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CExposureParamsGuiComp.ui */; };
-		223456950ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */; };
-		223456960ED2E572006EC826 /* CSnapImageGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* CSnapImageGuiComp.ui */; };
+		223456840ED2E572006EC826 /* CExposureParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CExposureParamsGuiComp.moc */; };
+		223456850ED2E572006EC826 /* CFileAcquisitionComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CFileAcquisitionComp.h */; };
+		223456860ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */; };
+		223456870ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.moc */; };
+		223456880ED2E572006EC826 /* CSnapImageGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CSnapImageGuiComp.h */; };
+		223456890ED2E572006EC826 /* CSnapImageGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CSnapImageGuiComp.moc */; };
+		223456900ED2E572006EC826 /* iqtcam.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* iqtcam.h */; };
+		223456910ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */; };
+		223456920ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */; };
+		223456930ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */; };
+		223456940ED2E572006EC826 /* ui_CExposureParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */; };
+		223456950ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */; };
+		223456960ED2E572006EC826 /* ui_CSnapImageGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* ui_CSnapImageGuiComp.h */; };
+		223456970ED2E572006EC826 /* CExposureParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* CExposureParamsGuiComp.ui */; };
+		223456980ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */; };
+		223456990ED2E572006EC826 /* CSnapImageGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* CSnapImageGuiComp.ui */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,19 +36,22 @@
 		123456810ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.cpp; path = ../CSnapBitmapSupplierGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* CSnapImageGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.cpp; path = ../CSnapImageGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456830ED2E572006EC826 /* CExposureParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CExposureParamsGuiComp.h; path = ../CExposureParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456840ED2E572006EC826 /* CFileAcquisitionComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileAcquisitionComp.h; path = ../CFileAcquisitionComp.h; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.h; path = ../CSnapBitmapSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* CSnapImageGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.h; path = ../CSnapImageGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456870ED2E572006EC826 /* iqtcam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtcam.h; path = ../iqtcam.h; sourceTree = SOURCE_ROOT; };
-		123456880ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CExposureParamsGuiComp.cpp; path = ../Generated/moc_CExposureParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456890ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSnapBitmapSupplierGuiComp.cpp; path = ../Generated/moc_CSnapBitmapSupplierGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSnapImageGuiComp.cpp; path = ../Generated/moc_CSnapImageGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CExposureParamsGuiComp.h; path = ../Generated/ui_CExposureParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456920ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSnapBitmapSupplierGuiComp.h; path = ../Generated/ui_CSnapBitmapSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456930ED2E572006EC826 /* ui_CSnapImageGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSnapImageGuiComp.h; path = ../Generated/ui_CSnapImageGuiComp.h; sourceTree = SOURCE_ROOT; };
-		123456940ED2E572006EC826 /* CExposureParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CExposureParamsGuiComp.ui; path = ../CExposureParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123456950ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.ui; path = ../CSnapBitmapSupplierGuiComp.ui; sourceTree = SOURCE_ROOT; };
-		123456960ED2E572006EC826 /* CSnapImageGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.ui; path = ../CSnapImageGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456840ED2E572006EC826 /* CExposureParamsGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CExposureParamsGuiComp.moc; path = ../CExposureParamsGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* CFileAcquisitionComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileAcquisitionComp.h; path = ../CFileAcquisitionComp.h; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.h; path = ../CSnapBitmapSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.moc; path = ../CSnapBitmapSupplierGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* CSnapImageGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.h; path = ../CSnapImageGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* CSnapImageGuiComp.moc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.moc; path = ../CSnapImageGuiComp.moc; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* iqtcam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtcam.h; path = ../iqtcam.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CExposureParamsGuiComp.cpp; path = ../Generated/moc_CExposureParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSnapBitmapSupplierGuiComp.cpp; path = ../Generated/moc_CSnapBitmapSupplierGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CSnapImageGuiComp.cpp; path = ../Generated/moc_CSnapImageGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456940ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CExposureParamsGuiComp.h; path = ../Generated/ui_CExposureParamsGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456950ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSnapBitmapSupplierGuiComp.h; path = ../Generated/ui_CSnapBitmapSupplierGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456960ED2E572006EC826 /* ui_CSnapImageGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CSnapImageGuiComp.h; path = ../Generated/ui_CSnapImageGuiComp.h; sourceTree = SOURCE_ROOT; };
+		123456970ED2E572006EC826 /* CExposureParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CExposureParamsGuiComp.ui; path = ../CExposureParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456980ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapBitmapSupplierGuiComp.ui; path = ../CSnapBitmapSupplierGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		123456990ED2E572006EC826 /* CSnapImageGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSnapImageGuiComp.ui; path = ../CSnapImageGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiqtcam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtcam.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,10 +84,10 @@
 			isa = PBXGroup;
 			children = (
 				123456830ED2E572006EC826 /* CExposureParamsGuiComp.h */,
-				123456840ED2E572006EC826 /* CFileAcquisitionComp.h */,
-				123456850ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */,
-				123456860ED2E572006EC826 /* CSnapImageGuiComp.h */,
-				123456870ED2E572006EC826 /* iqtcam.h */,
+				123456850ED2E572006EC826 /* CFileAcquisitionComp.h */,
+				123456860ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h */,
+				123456880ED2E572006EC826 /* CSnapImageGuiComp.h */,
+				123456900ED2E572006EC826 /* iqtcam.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -100,9 +106,9 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				123456940ED2E572006EC826 /* CExposureParamsGuiComp.ui */,
-				123456950ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */,
-				123456960ED2E572006EC826 /* CSnapImageGuiComp.ui */,
+				123456970ED2E572006EC826 /* CExposureParamsGuiComp.ui */,
+				123456980ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.ui */,
+				123456990ED2E572006EC826 /* CSnapImageGuiComp.ui */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -117,12 +123,12 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				123456880ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */,
-				123456890ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */,
-				123456900ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */,
-				123456910ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */,
-				123456920ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */,
-				123456930ED2E572006EC826 /* ui_CSnapImageGuiComp.h */,
+				123456910ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp */,
+				123456920ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp */,
+				123456930ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp */,
+				123456940ED2E572006EC826 /* ui_CExposureParamsGuiComp.h */,
+				123456950ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h */,
+				123456960ED2E572006EC826 /* ui_CSnapImageGuiComp.h */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -130,6 +136,9 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
+				123456840ED2E572006EC826 /* CExposureParamsGuiComp.moc */,
+				123456870ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.moc */,
+				123456890ED2E572006EC826 /* CSnapImageGuiComp.moc */,
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -150,13 +159,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456830ED2E572006EC826 /* CExposureParamsGuiComp.h in Headers */,
-				223456840ED2E572006EC826 /* CFileAcquisitionComp.h in Headers */,
-				223456850ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h in Headers */,
-				223456860ED2E572006EC826 /* CSnapImageGuiComp.h in Headers */,
-				223456870ED2E572006EC826 /* iqtcam.h in Headers */,
-				223456910ED2E572006EC826 /* ui_CExposureParamsGuiComp.h in Headers */,
-				223456920ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h in Headers */,
-				223456930ED2E572006EC826 /* ui_CSnapImageGuiComp.h in Headers */,
+				223456850ED2E572006EC826 /* CFileAcquisitionComp.h in Headers */,
+				223456860ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.h in Headers */,
+				223456880ED2E572006EC826 /* CSnapImageGuiComp.h in Headers */,
+				223456900ED2E572006EC826 /* iqtcam.h in Headers */,
+				223456940ED2E572006EC826 /* ui_CExposureParamsGuiComp.h in Headers */,
+				223456950ED2E572006EC826 /* ui_CSnapBitmapSupplierGuiComp.h in Headers */,
+				223456960ED2E572006EC826 /* ui_CSnapImageGuiComp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,18 +215,24 @@
 			files = (
 			);
 			inputPaths = (
+				../CExposureParamsGuiComp.h,
+				../CSnapBitmapSupplierGuiComp.h,
+				../CSnapImageGuiComp.h,
 				../CExposureParamsGuiComp.ui,
 				../CSnapBitmapSupplierGuiComp.ui,
 				../CSnapImageGuiComp.ui,
 			);
 			outputPaths = (
+				../Generated/moc_CExposureParamsGuiComp.cpp,
+				../Generated/moc_CSnapBitmapSupplierGuiComp.cpp,
+				../Generated/moc_CSnapImageGuiComp.cpp,
 				../Generated/ui_CExposureParamsGuiComp.h,
 				../Generated/ui_CSnapBitmapSupplierGuiComp.h,
 				../Generated/ui_CSnapImageGuiComp.h,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "uic -o ../Generated/ui_CExposureParamsGuiComp.h ../CExposureParamsGuiComp.ui\nuic -o ../Generated/ui_CSnapBitmapSupplierGuiComp.h ../CSnapBitmapSupplierGuiComp.ui\nuic -o ../Generated/ui_CSnapImageGuiComp.h ../CSnapImageGuiComp.ui\n";
+			shellScript = "moc -o ../Generated/moc_CExposureParamsGuiComp.cpp ../CExposureParamsGuiComp.h\nmoc -o ../Generated/moc_CSnapBitmapSupplierGuiComp.cpp ../CSnapBitmapSupplierGuiComp.h\nmoc -o ../Generated/moc_CSnapImageGuiComp.cpp ../CSnapImageGuiComp.h\nuic -o ../Generated/ui_CExposureParamsGuiComp.h ../CExposureParamsGuiComp.ui\nuic -o ../Generated/ui_CSnapBitmapSupplierGuiComp.h ../CSnapBitmapSupplierGuiComp.ui\nuic -o ../Generated/ui_CSnapImageGuiComp.h ../CSnapImageGuiComp.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -230,9 +245,9 @@
 				223456800ED2E572006EC826 /* CFileAcquisitionComp.cpp in Sources */,
 				223456810ED2E572006EC826 /* CSnapBitmapSupplierGuiComp.cpp in Sources */,
 				223456820ED2E572006EC826 /* CSnapImageGuiComp.cpp in Sources */,
-				223456880ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp in Sources */,
-				223456890ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp in Sources */,
-				223456900ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp in Sources */,
+				223456910ED2E572006EC826 /* moc_CExposureParamsGuiComp.cpp in Sources */,
+				223456920ED2E572006EC826 /* moc_CSnapBitmapSupplierGuiComp.cpp in Sources */,
+				223456930ED2E572006EC826 /* moc_CSnapImageGuiComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
