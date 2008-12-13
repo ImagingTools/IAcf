@@ -10,10 +10,10 @@
         Application
       </ComponentName>
       <X>
-        337
+        362
       </X>
       <X>
-        712
+        737
       </X>
     </Element>
     <Element>
@@ -21,10 +21,10 @@
         Bitmap
       </ComponentName>
       <X>
-        962
+        987
       </X>
       <X>
-        862
+        887
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         BitmapAcquisition
       </ComponentName>
       <X>
-        650
+        675
       </X>
       <X>
-        1037
+        1062
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        762
+        787
       </X>
       <X>
-        1187
+        1212
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        50
+        75
       </X>
       <X>
-        837
+        862
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         FileSnapParamsGui
       </ComponentName>
       <X>
-        50
+        75
       </X>
       <X>
-        987
+        1012
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         ImageDialogSerializer
       </ComponentName>
       <X>
-        950
+        975
       </X>
       <X>
-        1037
+        1062
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         MainGui
       </ComponentName>
       <X>
-        662
+        687
       </X>
       <X>
-        712
+        737
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         Scene
       </ComponentName>
       <X>
-        937
+        962
       </X>
       <X>
-        712
+        737
       </X>
     </Element>
     <Element>
@@ -109,10 +109,10 @@
         SnapGui
       </ComponentName>
       <X>
-        650
+        675
       </X>
       <X>
-        912
+        937
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         SnapParams
       </ComponentName>
       <X>
-        337
+        362
       </X>
       <X>
-        837
+        862
       </X>
     </Element>
     <Element>
@@ -131,10 +131,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        337
+        362
       </X>
       <X>
-        987
+        1012
       </X>
     </Element>
   </PositionMap>

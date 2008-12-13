@@ -22,56 +22,56 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfqt.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfqt;
 		};
 		EA6A8E6E0EF1F634002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfstd.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfstd;
 		};
 		EA6A8E770EF1F650002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libiqtcam.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqtcam;
 		};
 		EA6A8EAA0EF1F6AE002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libiacfstd.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iacfstd;
 		};
 		EA6A8EB50EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfqt */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfqt;
 		};
 		EA6A8EB70EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtcam */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqtcam;
 		};
 		EA6A8EBB0EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iacfstd;
 		};
 		EA6A8EBD0EF1F6FB002C1F58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfstd;
 		};
 /* End PBXContainerItemProxy section */
@@ -108,12 +108,12 @@
 		08FB7794FE84155DC02AAC07 /* QtCamPck */ = {
 			isa = PBXGroup;
 			children = (
-				EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */,
-				EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */,
 				EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */,
 				EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */,
 				EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */,
 				EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */,
+				EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */,
+				EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,

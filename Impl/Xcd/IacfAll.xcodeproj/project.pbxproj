@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		EA668BAF0EF2F8CD006C46C0 /* IacfAll */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EA668BC40EF2F8EE006C46C0 /* Build configuration list for PBXAggregateTarget "IacfAll" */;
+			buildPhases = (
+			);
+			dependencies = (
+				EA2033110EF30E5600539A73 /* PBXTargetDependency */,
+				EA668BB30EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BB50EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BBF0EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BBB0EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BB70EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BB90EF2F8D9006C46C0 /* PBXTargetDependency */,
+				EA668BBD0EF2F8D9006C46C0 /* PBXTargetDependency */,
+			);
+			name = IacfAll;
+			productName = IacfAll;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		EA2033100EF30E5600539A73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA20330C0EF30E4A00539A73 /* AcfAll.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EA668A460EF2EDA4006C46C0;
+			remoteInfo = AcfAll;
+		};
+		EA668B490EF2F85C006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B420EF2F85C006C46C0 /* IacfQtPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = IacfQtPck;
+		};
+		EA668B530EF2F871006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B4B0EF2F871006C46C0 /* IacfBasePck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = IacfBasePck;
+		};
+		EA668B7A0EF2F883006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B700EF2F883006C46C0 /* IprPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = IprPck;
+		};
+		EA668B830EF2F892006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B7C0EF2F892006C46C0 /* ProdPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = ProdPck;
+		};
+		EA668B930EF2F8A0006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B850EF2F8A0006C46C0 /* QtCamPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = QtCamPck;
+		};
+		EA668BA30EF2F8AC006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B950EF2F8AC006C46C0 /* QtIprPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = QtIprPck;
+		};
+		EA668BAC0EF2F8BA006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668BA50EF2F8BA006C46C0 /* QtProdPck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = QtProdPck;
+		};
+		EA668BB20EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B4B0EF2F871006C46C0 /* IacfBasePck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = IacfBasePck;
+		};
+		EA668BB40EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B700EF2F883006C46C0 /* IprPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = IprPck;
+		};
+		EA668BB60EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668BA50EF2F8BA006C46C0 /* QtProdPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = QtProdPck;
+		};
+		EA668BB80EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B850EF2F8A0006C46C0 /* QtCamPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = QtCamPck;
+		};
+		EA668BBA0EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B420EF2F85C006C46C0 /* IacfQtPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = IacfQtPck;
+		};
+		EA668BBC0EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B950EF2F8AC006C46C0 /* QtIprPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = QtIprPck;
+		};
+		EA668BBE0EF2F8D9006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668B7C0EF2F892006C46C0 /* ProdPck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = ProdPck;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EA20330C0EF30E4A00539A73 /* AcfAll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfAll.xcodeproj; path = ../../../ACF/Impl/Xcd/AcfAll.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B420EF2F85C006C46C0 /* IacfQtPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfQtPck.xcodeproj; path = ../IacfQtPck/Xcd/IacfQtPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B4B0EF2F871006C46C0 /* IacfBasePck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfBasePck.xcodeproj; path = ../IacfBasePck/Xcd/IacfBasePck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B700EF2F883006C46C0 /* IprPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IprPck.xcodeproj; path = ../IprPck/Xcd/IprPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B7C0EF2F892006C46C0 /* ProdPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProdPck.xcodeproj; path = ../ProdPck/Xcd/ProdPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B850EF2F8A0006C46C0 /* QtCamPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QtCamPck.xcodeproj; path = ../QtCamPck/Xcd/QtCamPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668B950EF2F8AC006C46C0 /* QtIprPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QtIprPck.xcodeproj; path = ../QtIprPck/Xcd/QtIprPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668BA50EF2F8BA006C46C0 /* QtProdPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QtProdPck.xcodeproj; path = ../QtProdPck/Xcd/QtProdPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		EA20330D0EF30E4A00539A73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B310EF2F844006C46C0 = {
+			isa = PBXGroup;
+			children = (
+				EA20330C0EF30E4A00539A73 /* AcfAll.xcodeproj */,
+				EA668BA50EF2F8BA006C46C0 /* QtProdPck.xcodeproj */,
+				EA668B950EF2F8AC006C46C0 /* QtIprPck.xcodeproj */,
+				EA668B850EF2F8A0006C46C0 /* QtCamPck.xcodeproj */,
+				EA668B7C0EF2F892006C46C0 /* ProdPck.xcodeproj */,
+				EA668B700EF2F883006C46C0 /* IprPck.xcodeproj */,
+				EA668B4B0EF2F871006C46C0 /* IacfBasePck.xcodeproj */,
+				EA668B420EF2F85C006C46C0 /* IacfQtPck.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		EA668B430EF2F85C006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668B4A0EF2F85C006C46C0 /* IacfQtPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B4C0EF2F871006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668B540EF2F871006C46C0 /* IacfBasePck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B710EF2F883006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668B7B0EF2F883006C46C0 /* IprPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B7D0EF2F892006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668B840EF2F892006C46C0 /* ProdPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B860EF2F8A0006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668B940EF2F8A0006C46C0 /* QtCamPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668B960EF2F8AC006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668BA40EF2F8AC006C46C0 /* QtIprPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA668BA60EF2F8BA006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA668BAD0EF2F8BA006C46C0 /* QtProdPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		EA668B330EF2F844006C46C0 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = EA668B360EF2F844006C46C0 /* Build configuration list for PBXProject "IacfAll" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			mainGroup = EA668B310EF2F844006C46C0;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA20330D0EF30E4A00539A73 /* Products */;
+					ProjectRef = EA20330C0EF30E4A00539A73 /* AcfAll.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B4C0EF2F871006C46C0 /* Products */;
+					ProjectRef = EA668B4B0EF2F871006C46C0 /* IacfBasePck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B430EF2F85C006C46C0 /* Products */;
+					ProjectRef = EA668B420EF2F85C006C46C0 /* IacfQtPck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B710EF2F883006C46C0 /* Products */;
+					ProjectRef = EA668B700EF2F883006C46C0 /* IprPck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B7D0EF2F892006C46C0 /* Products */;
+					ProjectRef = EA668B7C0EF2F892006C46C0 /* ProdPck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B860EF2F8A0006C46C0 /* Products */;
+					ProjectRef = EA668B850EF2F8A0006C46C0 /* QtCamPck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668B960EF2F8AC006C46C0 /* Products */;
+					ProjectRef = EA668B950EF2F8AC006C46C0 /* QtIprPck.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668BA60EF2F8BA006C46C0 /* Products */;
+					ProjectRef = EA668BA50EF2F8BA006C46C0 /* QtProdPck.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				EA668BAF0EF2F8CD006C46C0 /* IacfAll */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA668B4A0EF2F85C006C46C0 /* IacfQtPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = IacfQtPck.arp;
+			remoteRef = EA668B490EF2F85C006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668B540EF2F871006C46C0 /* IacfBasePck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = IacfBasePck.arp;
+			remoteRef = EA668B530EF2F871006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668B7B0EF2F883006C46C0 /* IprPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = IprPck.arp;
+			remoteRef = EA668B7A0EF2F883006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668B840EF2F892006C46C0 /* ProdPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = ProdPck.arp;
+			remoteRef = EA668B830EF2F892006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668B940EF2F8A0006C46C0 /* QtCamPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = QtCamPck.arp;
+			remoteRef = EA668B930EF2F8A0006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668BA40EF2F8AC006C46C0 /* QtIprPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = QtIprPck.arp;
+			remoteRef = EA668BA30EF2F8AC006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA668BAD0EF2F8BA006C46C0 /* QtProdPck.arp */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = QtProdPck.arp;
+			remoteRef = EA668BAC0EF2F8BA006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		EA2033110EF30E5600539A73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AcfAll;
+			targetProxy = EA2033100EF30E5600539A73 /* PBXContainerItemProxy */;
+		};
+		EA668BB30EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IacfBasePck;
+			targetProxy = EA668BB20EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BB50EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IprPck;
+			targetProxy = EA668BB40EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BB70EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QtProdPck;
+			targetProxy = EA668BB60EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BB90EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QtCamPck;
+			targetProxy = EA668BB80EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BBB0EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IacfQtPck;
+			targetProxy = EA668BBA0EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BBD0EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QtIprPck;
+			targetProxy = EA668BBC0EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668BBF0EF2F8D9006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ProdPck;
+			targetProxy = EA668BBE0EF2F8D9006C46C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EA668B340EF2F844006C46C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		EA668B350EF2F844006C46C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		EA668BB00EF2F8CD006C46C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = IacfAll;
+			};
+			name = Debug;
+		};
+		EA668BB10EF2F8CD006C46C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = IacfAll;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EA668B360EF2F844006C46C0 /* Build configuration list for PBXProject "IacfAll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA668B340EF2F844006C46C0 /* Debug */,
+				EA668B350EF2F844006C46C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA668BC40EF2F8EE006C46C0 /* Build configuration list for PBXAggregateTarget "IacfAll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA668BB00EF2F8CD006C46C0 /* Debug */,
+				EA668BB10EF2F8CD006C46C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EA668B330EF2F844006C46C0 /* Project object */;
+}

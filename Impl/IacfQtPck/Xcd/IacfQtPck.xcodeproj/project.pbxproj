@@ -9,12 +9,105 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* IacfQtPck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* IacfQtPck.cpp */; };
 		223456800ED2E572006EC826 /* IacfQtPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* IacfQtPck.h */; };
+		EA668C200EF2F975006C46C0 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C1F0EF2F948006C46C0 /* libacfstd.a */; };
+		EA668C310EF2F9E4006C46C0 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C2C0EF2F9E4006C46C0 /* QtCore.framework */; };
+		EA668C320EF2F9E4006C46C0 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C2D0EF2F9E4006C46C0 /* QtGui.framework */; };
+		EA668C330EF2F9E4006C46C0 /* QtNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C2E0EF2F9E4006C46C0 /* QtNetwork.framework */; };
+		EA668C340EF2F9E4006C46C0 /* QtScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C2F0EF2F9E4006C46C0 /* QtScript.framework */; };
+		EA668C350EF2F9E4006C46C0 /* QtXml.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA668C300EF2F9E4006C46C0 /* QtXml.framework */; };
+		EA6690C90EF2FBBF006C46C0 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6690A50EF2FAB4006C46C0 /* libacfqt.a */; };
+		EA6690CA0EF2FBC0006C46C0 /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA66909F0EF2FA9D006C46C0 /* libiacfstd.a */; };
+		EA6690CB0EF2FBC1006C46C0 /* libiqtsig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6690990EF2FA73006C46C0 /* libiqtsig.a */; };
+		EAA147530EF30B6E006E3B43 /* libisig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA147520EF30B5F006E3B43 /* libisig.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA668C1E0EF2F948006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668C1A0EF2F948006C46C0 /* AcfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfstd;
+		};
+		EA6690980EF2FA73006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6690910EF2FA73006C46C0 /* iqtsig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = iqtsig;
+		};
+		EA66909E0EF2FA9D006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA66909A0EF2FA9D006C46C0 /* IacfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = iacfstd;
+		};
+		EA6690A40EF2FAB4006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6690A00EF2FAB4006C46C0 /* AcfQt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfqt;
+		};
+		EAA1473A0EF30A8F006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6690A00EF2FAB4006C46C0 /* AcfQt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfqt */;
+			remoteInfo = acfqt;
+		};
+		EAA1473C0EF30A8F006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6690910EF2FA73006C46C0 /* iqtsig.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtsig */;
+			remoteInfo = iqtsig;
+		};
+		EAA1473E0EF30A8F006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA668C1A0EF2F948006C46C0 /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteInfo = acfstd;
+		};
+		EAA147400EF30A8F006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA66909A0EF2FA9D006C46C0 /* IacfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteInfo = iacfstd;
+		};
+		EAA147510EF30B5F006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAA1474D0EF30B5F006E3B43 /* isig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libisig.a */;
+			remoteInfo = isig;
+		};
+		EAA147540EF30B75006E3B43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAA1474D0EF30B5F006E3B43 /* isig.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* isig */;
+			remoteInfo = isig;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* IacfQtPck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IacfQtPck.cpp; path = ../IacfQtPck.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* IacfQtPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IacfQtPck.h; path = ../IacfQtPck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* IacfQtPck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = IacfQtPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* IacfQtPck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = IacfQtPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA668C1A0EF2F948006C46C0 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA668C2C0EF2F9E4006C46C0 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
+		EA668C2D0EF2F9E4006C46C0 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Library/Frameworks/QtGui.framework; sourceTree = "<absolute>"; };
+		EA668C2E0EF2F9E4006C46C0 /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = /Library/Frameworks/QtNetwork.framework; sourceTree = "<absolute>"; };
+		EA668C2F0EF2F9E4006C46C0 /* QtScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtScript.framework; path = /Library/Frameworks/QtScript.framework; sourceTree = "<absolute>"; };
+		EA668C300EF2F9E4006C46C0 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = /Library/Frameworks/QtXml.framework; sourceTree = "<absolute>"; };
+		EA6690910EF2FA73006C46C0 /* iqtsig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtsig.xcodeproj; path = ../../../Include/iqtsig/Xcd/iqtsig.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA66909A0EF2FA9D006C46C0 /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA6690A00EF2FAB4006C46C0 /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = ../../../../ACF/Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAA1474D0EF30B5F006E3B43 /* isig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = isig.xcodeproj; path = ../../../Include/isig/Xcd/isig.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +115,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA668C200EF2F975006C46C0 /* libacfstd.a in Frameworks */,
+				EA668C310EF2F9E4006C46C0 /* QtCore.framework in Frameworks */,
+				EA668C320EF2F9E4006C46C0 /* QtGui.framework in Frameworks */,
+				EA668C330EF2F9E4006C46C0 /* QtNetwork.framework in Frameworks */,
+				EA668C340EF2F9E4006C46C0 /* QtScript.framework in Frameworks */,
+				EA668C350EF2F9E4006C46C0 /* QtXml.framework in Frameworks */,
+				EA6690C90EF2FBBF006C46C0 /* libacfqt.a in Frameworks */,
+				EA6690CA0EF2FBC0006C46C0 /* libiacfstd.a in Frameworks */,
+				EA6690CB0EF2FBC1006C46C0 /* libiqtsig.a in Frameworks */,
+				EAA147530EF30B6E006E3B43 /* libisig.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +134,16 @@
 		08FB7794FE84155DC02AAC07 /* IacfQtPck */ = {
 			isa = PBXGroup;
 			children = (
+				EA668C1A0EF2F948006C46C0 /* AcfStd.xcodeproj */,
+				EA6690A00EF2FAB4006C46C0 /* AcfQt.xcodeproj */,
+				EA66909A0EF2FA9D006C46C0 /* IacfStd.xcodeproj */,
+				EAA1474D0EF30B5F006E3B43 /* isig.xcodeproj */,
+				EA6690910EF2FA73006C46C0 /* iqtsig.xcodeproj */,
+				EA668C2C0EF2F9E4006C46C0 /* QtCore.framework */,
+				EA668C2D0EF2F9E4006C46C0 /* QtGui.framework */,
+				EA668C2F0EF2F9E4006C46C0 /* QtScript.framework */,
+				EA668C300EF2F9E4006C46C0 /* QtXml.framework */,
+				EA668C2E0EF2F9E4006C46C0 /* QtNetwork.framework */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,20 +155,20 @@
 			name = IacfQtPck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* IacfQtPck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* IacfQtPck.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* IacfQtPck.arp */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
@@ -65,11 +178,36 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		EA668C1B0EF2F948006C46C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				EA668C1F0EF2F948006C46C0 /* libacfstd.a */,
 			);
-			name = Resources;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6690920EF2FA73006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6690990EF2FA73006C46C0 /* libiqtsig.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA66909B0EF2FA9D006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA66909F0EF2FA9D006C46C0 /* libiacfstd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6690A10EF2FAB4006C46C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6690A50EF2FAB4006C46C0 /* libacfqt.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,12 +224,27 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* IacfQtPck.arp */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAA1474E0EF30B5F006E3B43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAA147520EF30B5F006E3B43 /* libisig.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* IacfQtPck.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +273,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				EAA1473B0EF30A8F006E3B43 /* PBXTargetDependency */,
+				EAA1473D0EF30A8F006E3B43 /* PBXTargetDependency */,
+				EAA1473F0EF30A8F006E3B43 /* PBXTargetDependency */,
+				EAA147410EF30A8F006E3B43 /* PBXTargetDependency */,
+				EAA147550EF30B75006E3B43 /* PBXTargetDependency */,
 			);
 			name = IacfQtPck;
 			productName = IacfQtPck;
@@ -136,12 +294,72 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* IacfQtPck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA6690A10EF2FAB4006C46C0 /* Products */;
+					ProjectRef = EA6690A00EF2FAB4006C46C0 /* AcfQt.xcodeproj */;
+				},
+				{
+					ProductGroup = EA668C1B0EF2F948006C46C0 /* Products */;
+					ProjectRef = EA668C1A0EF2F948006C46C0 /* AcfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA66909B0EF2FA9D006C46C0 /* Products */;
+					ProjectRef = EA66909A0EF2FA9D006C46C0 /* IacfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA6690920EF2FA73006C46C0 /* Products */;
+					ProjectRef = EA6690910EF2FA73006C46C0 /* iqtsig.xcodeproj */;
+				},
+				{
+					ProductGroup = EAA1474E0EF30B5F006E3B43 /* Products */;
+					ProjectRef = EAA1474D0EF30B5F006E3B43 /* isig.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* IacfQtPck */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA668C1F0EF2F948006C46C0 /* libacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfstd.a;
+			remoteRef = EA668C1E0EF2F948006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA6690990EF2FA73006C46C0 /* libiqtsig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqtsig.a;
+			remoteRef = EA6690980EF2FA73006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA66909F0EF2FA9D006C46C0 /* libiacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiacfstd.a;
+			remoteRef = EA66909E0EF2FA9D006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA6690A50EF2FAB4006C46C0 /* libacfqt.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfqt.a;
+			remoteRef = EA6690A40EF2FAB4006C46C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EAA147520EF30B5F006E3B43 /* libisig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libisig.a;
+			remoteRef = EAA147510EF30B5F006E3B43 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -171,20 +389,48 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EAA1473B0EF30A8F006E3B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfqt;
+			targetProxy = EAA1473A0EF30A8F006E3B43 /* PBXContainerItemProxy */;
+		};
+		EAA1473D0EF30A8F006E3B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqtsig;
+			targetProxy = EAA1473C0EF30A8F006E3B43 /* PBXContainerItemProxy */;
+		};
+		EAA1473F0EF30A8F006E3B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EAA1473E0EF30A8F006E3B43 /* PBXContainerItemProxy */;
+		};
+		EAA147410EF30A8F006E3B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iacfstd;
+			targetProxy = EAA147400EF30A8F006E3B43 /* PBXContainerItemProxy */;
+		};
+		EAA147550EF30B75006E3B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = isig;
+			targetProxy = EAA147540EF30B75006E3B43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IacfQtPck;
 				ZERO_LINK = YES;
@@ -194,13 +440,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IacfQtPck;
 			};

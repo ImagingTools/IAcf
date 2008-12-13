@@ -14,6 +14,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EA2034F60EF337D600539A73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteInfo = iacfstd;
+		};
 		EA28444B0EF0996F0044F226 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */;
@@ -146,6 +153,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA2034F70EF337D600539A73 /* PBXTargetDependency */,
 			);
 			name = IacfBasePck;
 			productName = IacfBasePck;
@@ -212,6 +220,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA2034F70EF337D600539A73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iacfstd;
+			targetProxy = EA2034F60EF337D600539A73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {

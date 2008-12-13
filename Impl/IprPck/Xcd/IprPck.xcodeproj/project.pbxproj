@@ -37,6 +37,27 @@
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iacfstd;
 		};
+		EA66916E0EF2FD60006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfqt */;
+			remoteInfo = acfqt;
+		};
+		EA6691700EF2FD60006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteInfo = acfstd;
+		};
+		EA6691720EF2FD60006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteInfo = iacfstd;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +205,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA66916F0EF2FD60006C46C0 /* PBXTargetDependency */,
+				EA6691710EF2FD60006C46C0 /* PBXTargetDependency */,
+				EA6691730EF2FD60006C46C0 /* PBXTargetDependency */,
 			);
 			name = IprPck;
 			productName = IprPck;
@@ -272,6 +296,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA66916F0EF2FD60006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfqt;
+			targetProxy = EA66916E0EF2FD60006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA6691710EF2FD60006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EA6691700EF2FD60006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA6691730EF2FD60006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iacfstd;
+			targetProxy = EA6691720EF2FD60006C46C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
