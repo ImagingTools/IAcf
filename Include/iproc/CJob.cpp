@@ -15,7 +15,7 @@ void CJob::RegisterElementFactory(IOperatorFactory* elementFactoryPtr)
 
 iproc::IOperator* CJob::AddProcessingElement(const std::string elementFactoryKey, const std::string& elementId)
 {
-	iproc::IOperator* processingElementPtr = AddElement(elementFactoryKey);
+	iproc::IOperator* processingElementPtr = BaseClass::AddElement(elementFactoryKey);
 	if (processingElementPtr != NULL){
 		istd::TChangeNotifier<iproc::IJob> changePtr(this);
 
@@ -32,13 +32,13 @@ iproc::IOperator* CJob::AddProcessingElement(const std::string elementFactoryKey
 
 int CJob::GetChildsCount() const
 {
-	return GetItemsCount();
+	return BaseClass::GetItemsCount();
 }
 
 
 istd::IPolymorphic* CJob::GetChild(int index) const
 {
-	return GetElement(index);
+	return BaseClass::GetElement(index);
 }
 
 
@@ -55,7 +55,7 @@ iproc::IOperator* CJob::CreateElement(const std::string& itemKey)
 		basePtr->SetParentPtr(this);
 	}
 
-	AddChild(operatorPtr);
+	BaseClass2::AddChild(operatorPtr);
 
 	return operatorPtr;
 }
