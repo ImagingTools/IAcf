@@ -155,7 +155,10 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->IsOperationSupported(paramsPtr, NULL, true, false)){
+			if (m_paramsLoaderCompPtr->IsOperationSupported(
+						paramsPtr,
+						NULL,
+						iser::IFileLoader::QF_NO_SAVING | iser::IFileLoader::QF_ANONYMOUS_ONLY)){
 				return true;
 			}
 		}
@@ -172,7 +175,10 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->IsOperationSupported(paramsPtr, NULL, false, true)){
+			if (m_paramsLoaderCompPtr->IsOperationSupported(
+						paramsPtr,
+						NULL,
+						iser::IFileLoader::QF_NO_LOADING | iser::IFileLoader::QF_ANONYMOUS_ONLY)){
 				return true;
 			}
 		}

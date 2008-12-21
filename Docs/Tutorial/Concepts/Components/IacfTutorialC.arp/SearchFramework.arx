@@ -171,7 +171,7 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Serializer
+              Exporter
             </Id>
             <Type>
               icomp::CReferenceAttribute

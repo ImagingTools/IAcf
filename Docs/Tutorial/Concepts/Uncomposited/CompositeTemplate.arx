@@ -101,6 +101,24 @@
     </Element>
     <Element>
       <Id>
+        BitmapLoader
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         CompositeTemplate
       </Id>
       <PackageId>
@@ -146,10 +164,10 @@
         DocumentFactory
       </Id>
       <PackageId>
-        TutorialPck
+        BasePck
       </PackageId>
       <ComponentId>
-        TextModel
+        TextDocument
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -192,7 +210,49 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              FileExtensions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  xtxt
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeDescriptions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  XML packed text
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               VersionInfo
@@ -229,7 +289,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DocumentFactory
@@ -285,48 +345,6 @@
               <Value>
                 Text
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Text Files (*.txt)
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -409,24 +427,6 @@
     </Element>
     <Element>
       <Id>
-        ImageLoader
-      </Id>
-      <PackageId>
-        QtCamPck
-      </PackageId>
-      <ComponentId>
-        FileAcquisition
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ImageTemplate
       </Id>
       <PackageId>
@@ -439,7 +439,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DocumentFactory
@@ -474,7 +474,7 @@
                 true
               </IsEnabled>
               <Value>
-                ImageLoader
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -495,51 +495,6 @@
               <Value>
                 Image
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  bmp
-                </Value>
-                <Value>
-                  png
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Image Files (*.png *.bmp)
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

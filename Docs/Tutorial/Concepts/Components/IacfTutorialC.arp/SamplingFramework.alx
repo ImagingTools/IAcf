@@ -10,10 +10,10 @@
         Application
       </ComponentName>
       <X>
-        -312
+        -306
       </X>
       <X>
-        -362
+        -356
       </X>
     </Element>
     <Element>
@@ -21,10 +21,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        -137
+        -131
       </X>
       <X>
-        -487
+        -481
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         MainGui
       </ComponentName>
       <X>
-        -125
+        -119
       </X>
       <X>
-        -237
+        -231
       </X>
     </Element>
     <Element>
@@ -46,7 +46,7 @@
         262
       </X>
       <X>
-        -237
+        -231
       </X>
     </Element>
     <Element>
@@ -79,7 +79,7 @@
         137
       </X>
       <X>
-        -362
+        -356
       </X>
     </Element>
     <Element>
@@ -109,10 +109,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        -25
+        -19
       </X>
       <X>
-        -362
+        -356
       </X>
     </Element>
     <Element>
@@ -134,7 +134,7 @@
         225
       </X>
       <X>
-        -487
+        -481
       </X>
     </Element>
   </PositionMap>
