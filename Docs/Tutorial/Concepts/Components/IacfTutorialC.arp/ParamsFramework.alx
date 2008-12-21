@@ -4,16 +4,16 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="38">
+  <PositionMap count="39">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        -437
+        -386
       </X>
       <X>
-        -362
+        -252
       </X>
     </Element>
     <Element>
@@ -150,6 +150,17 @@
     </Element>
     <Element>
       <ComponentName>
+        Info
+      </ComponentName>
+      <X>
+        -378
+      </X>
+      <X>
+        -109
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         Log
       </ComponentName>
       <X>
@@ -164,10 +175,10 @@
         LogTab
       </ComponentName>
       <X>
-        -225
+        177
       </X>
       <X>
-        -112
+        -251
       </X>
     </Element>
     <Element>
@@ -189,7 +200,7 @@
         162
       </X>
       <X>
-        -112
+        -111
       </X>
     </Element>
     <Element>
@@ -274,10 +285,10 @@
         ParamsTab
       </ComponentName>
       <X>
-        -62
+        -61
       </X>
       <X>
-        -112
+        -111
       </X>
     </Element>
     <Element>
@@ -296,7 +307,7 @@
         SceneGui
       </ComponentName>
       <X>
-        -175
+        -174
       </X>
       <X>
         62
@@ -395,10 +406,10 @@
         Tabs
       </ComponentName>
       <X>
-        -150
+        -52
       </X>
       <X>
-        -362
+        -250
       </X>
     </Element>
     <Element>

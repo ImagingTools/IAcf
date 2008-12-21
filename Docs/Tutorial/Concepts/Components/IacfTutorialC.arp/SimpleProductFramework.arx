@@ -35,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -82,13 +82,13 @@
     </Element>
     <Element>
       <Id>
-        ApplicationInfo
+        Info
       </Id>
       <PackageId>
-        BasePck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -110,7 +110,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapTest
+                TestProduct
               </Value>
             </Data>
           </AttributeInfo>
@@ -519,7 +519,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
     <Interface>
@@ -559,7 +559,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

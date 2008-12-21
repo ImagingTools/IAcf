@@ -35,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -101,13 +101,13 @@
     </Element>
     <Element>
       <Id>
-        ApplicationInfo
+        Info
       </Id>
       <PackageId>
-        BasePck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -399,7 +399,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -499,7 +499,7 @@ All rights reseved
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -521,7 +521,7 @@ All rights reseved
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
     <Interface>
@@ -529,7 +529,7 @@ All rights reseved
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

@@ -580,10 +580,10 @@
         Info
       </Id>
       <PackageId>
-        BasePck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>

@@ -35,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -82,13 +82,31 @@
     </Element>
     <Element>
       <Id>
-        ApplicationInfo
+        Bitmap
       </Id>
       <PackageId>
-        BasePck
+        QtPck
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        Bitmap
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Info
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -133,24 +151,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Bitmap
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -497,7 +497,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
     <Interface>
@@ -529,7 +529,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

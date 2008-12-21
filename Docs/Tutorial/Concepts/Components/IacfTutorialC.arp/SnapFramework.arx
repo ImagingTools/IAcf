@@ -35,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Info
               </Value>
             </Data>
           </AttributeInfo>
@@ -74,62 +74,6 @@
               </IsEnabled>
               <Value>
                 true
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ApplicationInfo
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ApplicationInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTest
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
@@ -206,6 +150,62 @@
                   BitmapLoader
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Info
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapTest
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -504,7 +504,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
     <Interface>
@@ -536,7 +536,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        Info
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
