@@ -103,16 +103,35 @@
         BitmapLoader
       </Id>
       <PackageId>
-        QtCamPck
+        QtPck
       </PackageId>
       <ComponentId>
-        FileAcquisition
+        BitmapLoader
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogTab
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -130,7 +149,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Loaders
@@ -150,6 +169,25 @@
                   BitmapLoader
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogTab
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

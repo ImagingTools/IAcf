@@ -10,10 +10,10 @@
         Application
       </ComponentName>
       <X>
-        -424
+        -418
       </X>
       <X>
-        -236
+        -230
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         Bitmap
       </ComponentName>
       <X>
-        125
+        60
       </X>
       <X>
-        -111
+        138
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        250
+        361
       </X>
       <X>
-        -111
+        -228
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         ImageDialogLoader
       </ComponentName>
       <X>
-        262
+        346
       </X>
       <X>
-        12
+        -22
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         Info
       </ComponentName>
       <X>
-        -412
+        -406
       </X>
       <X>
-        -109
+        -103
       </X>
     </Element>
     <Element>
@@ -175,10 +175,10 @@
         LogTab
       </ComponentName>
       <X>
-        -174
+        159
       </X>
       <X>
-        -111
+        -230
       </X>
     </Element>
     <Element>
@@ -252,7 +252,7 @@
         SceneGui
       </ComponentName>
       <X>
-        -124
+        -118
       </X>
       <X>
         12
@@ -285,7 +285,7 @@
         SnapGui
       </ComponentName>
       <X>
-        37
+        36
       </X>
       <X>
         12
@@ -340,10 +340,10 @@
         SnapTab
       </ComponentName>
       <X>
-        -49
+        -43
       </X>
       <X>
-        -111
+        -105
       </X>
     </Element>
     <Element>
@@ -351,10 +351,10 @@
         Tabs
       </ComponentName>
       <X>
-        -149
+        -143
       </X>
       <X>
-        -236
+        -230
       </X>
     </Element>
     <Element>

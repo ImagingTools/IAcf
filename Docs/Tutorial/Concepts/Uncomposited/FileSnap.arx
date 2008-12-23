@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="12">
     <Element>
       <Id>
         Application
@@ -65,6 +65,24 @@
         BitmapLoader
       </Id>
       <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileAcquisition
+      </Id>
+      <PackageId>
         QtCamPck
       </PackageId>
       <ComponentId>
@@ -74,7 +92,45 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              BitmapLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParameterId
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileBitmapAcquisition
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -276,7 +332,7 @@
                 true
               </IsEnabled>
               <Value>
-                BitmapLoader
+                FileAcquisition
               </Value>
             </Data>
           </AttributeInfo>

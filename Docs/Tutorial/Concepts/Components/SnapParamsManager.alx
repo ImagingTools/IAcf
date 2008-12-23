@@ -32,10 +32,10 @@
         BitmapAcquisition
       </ComponentName>
       <X>
-        62
+        61
       </X>
       <X>
-        -112
+        -110
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        100
+        57
       </X>
       <X>
-        12
+        -258
       </X>
     </Element>
     <Element>
@@ -186,7 +186,7 @@
         ParamsManager
       </ComponentName>
       <X>
-        -312
+        -310
       </X>
       <X>
         112
@@ -197,7 +197,7 @@
         ParamsManagerGui
       </ComponentName>
       <X>
-        -25
+        -23
       </X>
       <X>
         112
@@ -219,10 +219,10 @@
         SelectableParameter
       </ComponentName>
       <X>
-        -337
+        -335
       </X>
       <X>
-        12
+        -2
       </X>
     </Element>
     <Element>
@@ -241,10 +241,10 @@
         SnapApplication
       </ComponentName>
       <X>
-        -362
+        -360
       </X>
       <X>
-        -112
+        -110
       </X>
     </Element>
     <Element>
@@ -274,7 +274,7 @@
         SnapParamsColor
       </ComponentName>
       <X>
-        -600
+        -598
       </X>
       <X>
         212
@@ -285,7 +285,7 @@
         SnapParamsGray
       </ComponentName>
       <X>
-        -350
+        -348
       </X>
       <X>
         212
@@ -296,7 +296,7 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -37
+        -35
       </X>
       <X>
         212
