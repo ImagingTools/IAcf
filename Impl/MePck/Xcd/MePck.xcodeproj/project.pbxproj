@@ -255,13 +255,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
-					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
 					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
 					"${MEIDSDIR}/include",
 				);
 				PREBINDING = NO;
@@ -282,13 +280,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
-					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
 					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
 					"${MEIDSDIR}/include",
 				);
 				PREBINDING = NO;
