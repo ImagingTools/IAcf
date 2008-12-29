@@ -12,7 +12,7 @@
 		EA47E5E90EF1EA7300BE56DB /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5C00EF1EA0800BE56DB /* libacfqt.a */; };
 		EA47E5EA0EF1EA7500BE56DB /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5E10EF1EA3D00BE56DB /* libiacfstd.a */; };
 		EA47E5EB0EF1EA7500BE56DB /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E5A30EF1E9FB00BE56DB /* libacfstd.a */; };
-		EA47E6880EF1EF5D00BE56DB /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA47E6870EF1EF5D00BE56DB /* QtCore.framework */; };
+		EABF7B2B0F06EE2F00119803 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABF7B2A0F06EE2F00119803 /* QtCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,21 +41,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfqt */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfqt;
 		};
 		EA6691700EF2FD60006C46C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfstd;
 		};
 		EA6691720EF2FD60006C46C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iacfstd */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iacfstd;
 		};
 /* End PBXContainerItemProxy section */
@@ -67,7 +67,7 @@
 		EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = ../../../../ACF/Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA47E6870EF1EF5D00BE56DB /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
+		EABF7B2A0F06EE2F00119803 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = lib/QtCore.framework; sourceTree = QTDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,7 @@
 				EA47E5E90EF1EA7300BE56DB /* libacfqt.a in Frameworks */,
 				EA47E5EA0EF1EA7500BE56DB /* libiacfstd.a in Frameworks */,
 				EA47E5EB0EF1EA7500BE56DB /* libacfstd.a in Frameworks */,
-				EA47E6880EF1EF5D00BE56DB /* QtCore.framework in Frameworks */,
+				EABF7B2B0F06EE2F00119803 /* QtCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 		08FB7794FE84155DC02AAC07 /* IprPck */ = {
 			isa = PBXGroup;
 			children = (
-				EA47E6870EF1EF5D00BE56DB /* QtCore.framework */,
+				EABF7B2A0F06EE2F00119803 /* QtCore.framework */,
 				EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */,
 				EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */,
 				EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */,
@@ -323,12 +323,24 @@
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IprPck;
 				ZERO_LINK = YES;
@@ -342,9 +354,21 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = IprPck;
 			};

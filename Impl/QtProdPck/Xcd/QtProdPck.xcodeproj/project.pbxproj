@@ -13,11 +13,8 @@
 		EA6691350EF2FCDA006C46C0 /* libilolv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA66912A0EF2FCB6006C46C0 /* libilolv.a */; };
 		EA6691360EF2FCDB006C46C0 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691240EF2FC9F006C46C0 /* libacfstd.a */; };
 		EA6691370EF2FCDC006C46C0 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA66911E0EF2FC90006C46C0 /* libacfqt.a */; };
-		EA6691460EF2FD17006C46C0 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691410EF2FD17006C46C0 /* QtCore.framework */; };
-		EA6691470EF2FD17006C46C0 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691420EF2FD17006C46C0 /* QtGui.framework */; };
-		EA6691480EF2FD17006C46C0 /* QtNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691430EF2FD17006C46C0 /* QtNetwork.framework */; };
-		EA6691490EF2FD17006C46C0 /* QtScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691440EF2FD17006C46C0 /* QtScript.framework */; };
-		EA66914A0EF2FD17006C46C0 /* QtXml.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6691450EF2FD17006C46C0 /* QtXml.framework */; };
+		EABF7B550F06F0C900119803 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABF7B530F06F0C900119803 /* QtCore.framework */; };
+		EABF7B560F06F0C900119803 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABF7B540F06F0C900119803 /* QtGui.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,11 +84,8 @@
 		EA66911F0EF2FC9F006C46C0 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA6691250EF2FCB5006C46C0 /* ilolv.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ilolv.xcodeproj; path = ../../../Include/ilolv/Xcd/ilolv.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA66912B0EF2FCC6006C46C0 /* iqtcntl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtcntl.xcodeproj; path = ../../../Include/iqtcntl/Xcd/iqtcntl.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA6691410EF2FD17006C46C0 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
-		EA6691420EF2FD17006C46C0 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Library/Frameworks/QtGui.framework; sourceTree = "<absolute>"; };
-		EA6691430EF2FD17006C46C0 /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = /Library/Frameworks/QtNetwork.framework; sourceTree = "<absolute>"; };
-		EA6691440EF2FD17006C46C0 /* QtScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtScript.framework; path = /Library/Frameworks/QtScript.framework; sourceTree = "<absolute>"; };
-		EA6691450EF2FD17006C46C0 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = /Library/Frameworks/QtXml.framework; sourceTree = "<absolute>"; };
+		EABF7B530F06F0C900119803 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = lib/QtCore.framework; sourceTree = QTDIR; };
+		EABF7B540F06F0C900119803 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = lib/QtGui.framework; sourceTree = QTDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +97,8 @@
 				EA6691350EF2FCDA006C46C0 /* libilolv.a in Frameworks */,
 				EA6691360EF2FCDB006C46C0 /* libacfstd.a in Frameworks */,
 				EA6691370EF2FCDC006C46C0 /* libacfqt.a in Frameworks */,
-				EA6691460EF2FD17006C46C0 /* QtCore.framework in Frameworks */,
-				EA6691470EF2FD17006C46C0 /* QtGui.framework in Frameworks */,
-				EA6691480EF2FD17006C46C0 /* QtNetwork.framework in Frameworks */,
-				EA6691490EF2FD17006C46C0 /* QtScript.framework in Frameworks */,
-				EA66914A0EF2FD17006C46C0 /* QtXml.framework in Frameworks */,
+				EABF7B550F06F0C900119803 /* QtCore.framework in Frameworks */,
+				EABF7B560F06F0C900119803 /* QtGui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,11 +108,8 @@
 		08FB7794FE84155DC02AAC07 /* QtProdPck */ = {
 			isa = PBXGroup;
 			children = (
-				EA6691410EF2FD17006C46C0 /* QtCore.framework */,
-				EA6691420EF2FD17006C46C0 /* QtGui.framework */,
-				EA6691430EF2FD17006C46C0 /* QtNetwork.framework */,
-				EA6691440EF2FD17006C46C0 /* QtScript.framework */,
-				EA6691450EF2FD17006C46C0 /* QtXml.framework */,
+				EABF7B530F06F0C900119803 /* QtCore.framework */,
+				EABF7B540F06F0C900119803 /* QtGui.framework */,
 				EA66911F0EF2FC9F006C46C0 /* AcfStd.xcodeproj */,
 				EA6691190EF2FC90006C46C0 /* AcfQt.xcodeproj */,
 				EA66912B0EF2FCC6006C46C0 /* iqtcntl.xcodeproj */,
@@ -382,12 +370,24 @@
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtProdPck;
 				ZERO_LINK = YES;
@@ -401,9 +401,21 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtProdPck;
 			};

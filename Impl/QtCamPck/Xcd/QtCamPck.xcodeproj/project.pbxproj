@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* QtCamPck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* QtCamPck.cpp */; };
 		223456800ED2E572006EC826 /* QtCamPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* QtCamPck.h */; };
-		EA6A8EAE0EF1F6D1002C1F58 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */; };
-		EA6A8EAF0EF1F6D1002C1F58 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */; };
 		EA6A8EB10EF1F6DA002C1F58 /* libiqtcam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E780EF1F650002C1F58 /* libiqtcam.a */; };
 		EA6A8EB20EF1F6DA002C1F58 /* libiacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8EAB0EF1F6AE002C1F58 /* libiacfstd.a */; };
 		EA6A8EB30EF1F6DB002C1F58 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E6F0EF1F634002C1F58 /* libacfstd.a */; };
 		EA6A8EB40EF1F6DC002C1F58 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A8E690EF1F625002C1F58 /* libacfqt.a */; };
+		EABF7B660F06F2FC00119803 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABF7B640F06F2FC00119803 /* QtCore.framework */; };
+		EABF7B670F06F2FC00119803 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABF7B650F06F2FC00119803 /* QtGui.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +84,8 @@
 		EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../../../ACF/Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtcam.xcodeproj; path = ../../../Include/iqtcam/Xcd/iqtcam.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
-		EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Library/Frameworks/QtGui.framework; sourceTree = "<absolute>"; };
+		EABF7B640F06F2FC00119803 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = lib/QtCore.framework; sourceTree = QTDIR; };
+		EABF7B650F06F2FC00119803 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = lib/QtGui.framework; sourceTree = QTDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,12 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA6A8EAE0EF1F6D1002C1F58 /* QtCore.framework in Frameworks */,
-				EA6A8EAF0EF1F6D1002C1F58 /* QtGui.framework in Frameworks */,
 				EA6A8EB10EF1F6DA002C1F58 /* libiqtcam.a in Frameworks */,
 				EA6A8EB20EF1F6DA002C1F58 /* libiacfstd.a in Frameworks */,
 				EA6A8EB30EF1F6DB002C1F58 /* libacfstd.a in Frameworks */,
 				EA6A8EB40EF1F6DC002C1F58 /* libacfqt.a in Frameworks */,
+				EABF7B660F06F2FC00119803 /* QtCore.framework in Frameworks */,
+				EABF7B670F06F2FC00119803 /* QtGui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,12 +108,12 @@
 		08FB7794FE84155DC02AAC07 /* QtCamPck */ = {
 			isa = PBXGroup;
 			children = (
+				EABF7B640F06F2FC00119803 /* QtCore.framework */,
+				EABF7B650F06F2FC00119803 /* QtGui.framework */,
 				EA6A8E8B0EF1F6AE002C1F58 /* IacfStd.xcodeproj */,
 				EA6A8E700EF1F650002C1F58 /* iqtcam.xcodeproj */,
 				EA6A8E6A0EF1F634002C1F58 /* AcfStd.xcodeproj */,
 				EA6A8E640EF1F625002C1F58 /* AcfQt.xcodeproj */,
-				EA6A8EAC0EF1F6D1002C1F58 /* QtCore.framework */,
-				EA6A8EAD0EF1F6D1002C1F58 /* QtGui.framework */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -370,12 +370,24 @@
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtCamPck;
 				ZERO_LINK = YES;
@@ -389,9 +401,21 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_EXTENSION = arp;
 				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../Include,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${ACFDIR}/Include",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = QtCamPck;
 			};
