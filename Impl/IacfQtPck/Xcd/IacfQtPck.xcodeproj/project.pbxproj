@@ -427,6 +427,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
@@ -475,16 +476,22 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
+					"${QTDIR}/include/QtSql",
+					"${QTDIR}/include/QtOpenGL",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/ActiveQt",
+					"${QTDIR}/include/QtAssistant",
+					"${QTDIR}/include/QtSvg",
 					"${ACFDIR}/Include",
 				);
 				PREBINDING = NO;
@@ -506,11 +513,16 @@
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
+					"${QTDIR}/include/QtSql",
+					"${QTDIR}/include/QtOpenGL",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/ActiveQt",
+					"${QTDIR}/include/QtAssistant",
+					"${QTDIR}/include/QtSvg",
 					"${ACFDIR}/Include",
 				);
 				PREBINDING = NO;
