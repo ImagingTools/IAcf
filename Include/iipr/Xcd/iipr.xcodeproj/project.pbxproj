@@ -182,6 +182,73 @@
 			name = iipr;
 			sourceTree = "<group>";
 		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				123456790ED2E572006EC826 /* CCaliperBasedPositionSupplierComp.cpp */,
+				123456800ED2E572006EC826 /* CCaliperFeature.cpp */,
+				123456810ED2E572006EC826 /* CCaliperParams.cpp */,
+				123456820ED2E572006EC826 /* CCaliperParamsComp.cpp */,
+				123456830ED2E572006EC826 /* CExtremumCaliperProcessor.cpp */,
+				123456840ED2E572006EC826 /* CExtremumCaliperProcessorComp.cpp */,
+				123456850ED2E572006EC826 /* CGaussian2dFilterParams.cpp */,
+				123456860ED2E572006EC826 /* CHeaviestFeatureConsumer.cpp */,
+				123456870ED2E572006EC826 /* CImageProjection.cpp */,
+				123456880ED2E572006EC826 /* CIterativeProcessorComp.cpp */,
+				123456890ED2E572006EC826 /* CIterativeProcessorParams.cpp */,
+				123456900ED2E572006EC826 /* CLineProjectionProcessor.cpp */,
+				123456910ED2E572006EC826 /* CLineProjectionProcessorComp.cpp */,
+				123456920ED2E572006EC826 /* CLocalDifferenceFilterParams.cpp */,
+				123456930ED2E572006EC826 /* CLocalDifferenceProcessorComp.cpp */,
+				123456940ED2E572006EC826 /* CMovingAverageProcessorComp.cpp */,
+				123456950ED2E572006EC826 /* CMultidimensionalFilterParamsComp.cpp */,
+				123456960ED2E572006EC826 /* CProcessedAcquisitionComp.cpp */,
+				123456970ED2E572006EC826 /* CProjectionData.cpp */,
+				123456980ED2E572006EC826 /* CRectDerivativeProcessor.cpp */,
+				123456990ED2E572006EC826 /* CRectDerivativeProcessorComp.cpp */,
+				123457000ED2E572006EC826 /* CSearchBasedFeaturesSupplierComp.cpp */,
+				123457010ED2E572006EC826 /* CSearchFeature.cpp */,
+				123457020ED2E572006EC826 /* CSearchParams.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libiipr.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,73 +302,6 @@
 				123457500ED2E572006EC826 /* TUnaryTransformProcessorComp.h */,
 			);
 			name = Header;
-			sourceTree = "<group>";
-		};
-		08FB7795FE84155DC02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* CCaliperBasedPositionSupplierComp.cpp */,
-				123456800ED2E572006EC826 /* CCaliperFeature.cpp */,
-				123456810ED2E572006EC826 /* CCaliperParams.cpp */,
-				123456820ED2E572006EC826 /* CCaliperParamsComp.cpp */,
-				123456830ED2E572006EC826 /* CExtremumCaliperProcessor.cpp */,
-				123456840ED2E572006EC826 /* CExtremumCaliperProcessorComp.cpp */,
-				123456850ED2E572006EC826 /* CGaussian2dFilterParams.cpp */,
-				123456860ED2E572006EC826 /* CHeaviestFeatureConsumer.cpp */,
-				123456870ED2E572006EC826 /* CImageProjection.cpp */,
-				123456880ED2E572006EC826 /* CIterativeProcessorComp.cpp */,
-				123456890ED2E572006EC826 /* CIterativeProcessorParams.cpp */,
-				123456900ED2E572006EC826 /* CLineProjectionProcessor.cpp */,
-				123456910ED2E572006EC826 /* CLineProjectionProcessorComp.cpp */,
-				123456920ED2E572006EC826 /* CLocalDifferenceFilterParams.cpp */,
-				123456930ED2E572006EC826 /* CLocalDifferenceProcessorComp.cpp */,
-				123456940ED2E572006EC826 /* CMovingAverageProcessorComp.cpp */,
-				123456950ED2E572006EC826 /* CMultidimensionalFilterParamsComp.cpp */,
-				123456960ED2E572006EC826 /* CProcessedAcquisitionComp.cpp */,
-				123456970ED2E572006EC826 /* CProjectionData.cpp */,
-				123456980ED2E572006EC826 /* CRectDerivativeProcessor.cpp */,
-				123456990ED2E572006EC826 /* CRectDerivativeProcessorComp.cpp */,
-				123457000ED2E572006EC826 /* CSearchBasedFeaturesSupplierComp.cpp */,
-				123457010ED2E572006EC826 /* CSearchFeature.cpp */,
-				123457020ED2E572006EC826 /* CSearchParams.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		C6A0FF2B0290797F04C91782 /* Forms */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856A60EEABE5300C738EF /* Garbages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Garbages;
-			sourceTree = "<group>";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libiipr.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,17 +455,23 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"${QTDIR}/include",
+					../../,
+					"${ACFDIR}/Include",
+					"${QTDIR}/include/QtCore",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iipr;
 				ZERO_LINK = YES;
@@ -475,13 +481,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iipr;
 			};
@@ -491,8 +497,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
