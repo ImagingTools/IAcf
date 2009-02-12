@@ -58,7 +58,10 @@ int CFireGrabAcquisitionComp::DoProcessing(
 	int retVal = TS_INVALID;
 
 	FGFRAME frameInfo;
-	UINT32 status = m_camera.GetFrame(&frameInfo, 5000);
+
+	I_ASSERT(m_timeoutAttrPtr.IsValid());
+	int timeout = int(*m_timeoutAttrPtr * 1000);
+	UINT32 status = m_camera.GetFrame(&frameInfo, timeout);
 
 	// ... Here you can processs image data in Frame.pData
 	if (status == FCE_NOERROR && ((frameInfo.Flags & FGF_INVALID) == 0)){

@@ -46,6 +46,7 @@ public:
 		I_ASSIGN(m_triggerParamsCompPtr, "TriggerParams", "Trigger parameters that will be used", false, "TriggerParams");
 		I_ASSIGN(m_imageRegionParamsCompPtr, "ImageRegionParams", "Image region parameters that will be used", false, "ImageRegionParams");
 		I_ASSIGN(m_singleShootAttrPtr, "UseSingleShoot", "If it is true, only one shot will be done", true, true);
+		I_ASSIGN(m_timeoutAttrPtr, "Timeout", "Acquisition timeout", true, 5.0);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -110,6 +111,7 @@ private:
 	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
 
 	I_ATTR(bool, m_singleShootAttrPtr);
+	I_ATTR(double, m_timeoutAttrPtr);
 
 	enum
 	{
