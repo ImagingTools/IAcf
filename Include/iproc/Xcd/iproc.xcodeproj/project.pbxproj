@@ -8,66 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* CCascadedProcessorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* CCascadedProcessorComp.cpp */; };
-		223456800ED2E572006EC826 /* CHierarchicalOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CHierarchicalOperator.cpp */; };
-		223456810ED2E572006EC826 /* CJob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CJob.cpp */; };
-		223456820ED2E572006EC826 /* COperatorBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* COperatorBase.cpp */; };
-		223456830ED2E572006EC826 /* CProcessingControllerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CProcessingControllerBase.cpp */; };
-		223456840ED2E572006EC826 /* CProcessingElementBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CProcessingElementBase.cpp */; };
-		223456850ED2E572006EC826 /* CTestIdManagerComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CTestIdManagerComp.cpp */; };
-		223456860ED2E572006EC826 /* CCascadedProcessorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CCascadedProcessorComp.h */; };
-		223456870ED2E572006EC826 /* CHierarchicalOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CHierarchicalOperator.h */; };
-		223456880ED2E572006EC826 /* CJob.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CJob.h */; };
-		223456890ED2E572006EC826 /* COperatorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* COperatorBase.h */; };
-		223456900ED2E572006EC826 /* CProcessingControllerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CProcessingControllerBase.h */; };
-		223456910ED2E572006EC826 /* CProcessingElementBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CProcessingElementBase.h */; };
-		223456920ED2E572006EC826 /* CTestIdManagerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* CTestIdManagerComp.h */; };
-		223456930ED2E572006EC826 /* IIdManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* IIdManager.h */; };
-		223456940ED2E572006EC826 /* IJob.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* IJob.h */; };
-		223456950ED2E572006EC826 /* IOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* IOperator.h */; };
-		223456960ED2E572006EC826 /* IOperatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* IOperatorManager.h */; };
-		223456970ED2E572006EC826 /* iproc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* iproc.h */; };
-		223456980ED2E572006EC826 /* IProcessingController.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* IProcessingController.h */; };
-		223456990ED2E572006EC826 /* IProcessingEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* IProcessingEventHandler.h */; };
-		223457000ED2E572006EC826 /* IProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* IProcessor.h */; };
-		223457010ED2E572006EC826 /* IProgressEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* IProgressEventHandler.h */; };
-		223457020ED2E572006EC826 /* IProgressInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* IProgressInfo.h */; };
-		223457030ED2E572006EC826 /* ISupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* ISupplier.h */; };
-		223457040ED2E572006EC826 /* IValueSupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* IValueSupplier.h */; };
-		223457050ED2E572006EC826 /* TSupplierCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* TSupplierCompWrap.h */; };
-		223457060ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* TSyncProcessorCompBase.h */; };
-		223457070ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* TSyncProcessorWrap.h */; };
+		223456800ED2E572006EC826 /* CTestIdManagerComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CTestIdManagerComp.cpp */; };
+		223456810ED2E572006EC826 /* CCascadedProcessorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CCascadedProcessorComp.h */; };
+		223456820ED2E572006EC826 /* CTestIdManagerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CTestIdManagerComp.h */; };
+		223456830ED2E572006EC826 /* IIdManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* IIdManager.h */; };
+		223456840ED2E572006EC826 /* iproc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* iproc.h */; };
+		223456850ED2E572006EC826 /* IProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* IProcessor.h */; };
+		223456860ED2E572006EC826 /* IProgressEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* IProgressEventHandler.h */; };
+		223456870ED2E572006EC826 /* IProgressInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* IProgressInfo.h */; };
+		223456880ED2E572006EC826 /* ISupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* ISupplier.h */; };
+		223456890ED2E572006EC826 /* IValueSupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* IValueSupplier.h */; };
+		223456900ED2E572006EC826 /* TSupplierCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* TSupplierCompWrap.h */; };
+		223456910ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */; };
+		223456920ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* TSyncProcessorWrap.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* CCascadedProcessorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCascadedProcessorComp.cpp; path = ../CCascadedProcessorComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456800ED2E572006EC826 /* CHierarchicalOperator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHierarchicalOperator.cpp; path = ../CHierarchicalOperator.cpp; sourceTree = SOURCE_ROOT; };
-		123456810ED2E572006EC826 /* CJob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CJob.cpp; path = ../CJob.cpp; sourceTree = SOURCE_ROOT; };
-		123456820ED2E572006EC826 /* COperatorBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperatorBase.cpp; path = ../COperatorBase.cpp; sourceTree = SOURCE_ROOT; };
-		123456830ED2E572006EC826 /* CProcessingControllerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProcessingControllerBase.cpp; path = ../CProcessingControllerBase.cpp; sourceTree = SOURCE_ROOT; };
-		123456840ED2E572006EC826 /* CProcessingElementBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProcessingElementBase.cpp; path = ../CProcessingElementBase.cpp; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* CTestIdManagerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTestIdManagerComp.cpp; path = ../CTestIdManagerComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* CCascadedProcessorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCascadedProcessorComp.h; path = ../CCascadedProcessorComp.h; sourceTree = SOURCE_ROOT; };
-		123456870ED2E572006EC826 /* CHierarchicalOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHierarchicalOperator.h; path = ../CHierarchicalOperator.h; sourceTree = SOURCE_ROOT; };
-		123456880ED2E572006EC826 /* CJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CJob.h; path = ../CJob.h; sourceTree = SOURCE_ROOT; };
-		123456890ED2E572006EC826 /* COperatorBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperatorBase.h; path = ../COperatorBase.h; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* CProcessingControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProcessingControllerBase.h; path = ../CProcessingControllerBase.h; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* CProcessingElementBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProcessingElementBase.h; path = ../CProcessingElementBase.h; sourceTree = SOURCE_ROOT; };
-		123456920ED2E572006EC826 /* CTestIdManagerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTestIdManagerComp.h; path = ../CTestIdManagerComp.h; sourceTree = SOURCE_ROOT; };
-		123456930ED2E572006EC826 /* IIdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IIdManager.h; path = ../IIdManager.h; sourceTree = SOURCE_ROOT; };
-		123456940ED2E572006EC826 /* IJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IJob.h; path = ../IJob.h; sourceTree = SOURCE_ROOT; };
-		123456950ED2E572006EC826 /* IOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOperator.h; path = ../IOperator.h; sourceTree = SOURCE_ROOT; };
-		123456960ED2E572006EC826 /* IOperatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOperatorManager.h; path = ../IOperatorManager.h; sourceTree = SOURCE_ROOT; };
-		123456970ED2E572006EC826 /* iproc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iproc.h; path = ../iproc.h; sourceTree = SOURCE_ROOT; };
-		123456980ED2E572006EC826 /* IProcessingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProcessingController.h; path = ../IProcessingController.h; sourceTree = SOURCE_ROOT; };
-		123456990ED2E572006EC826 /* IProcessingEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProcessingEventHandler.h; path = ../IProcessingEventHandler.h; sourceTree = SOURCE_ROOT; };
-		123457000ED2E572006EC826 /* IProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProcessor.h; path = ../IProcessor.h; sourceTree = SOURCE_ROOT; };
-		123457010ED2E572006EC826 /* IProgressEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProgressEventHandler.h; path = ../IProgressEventHandler.h; sourceTree = SOURCE_ROOT; };
-		123457020ED2E572006EC826 /* IProgressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProgressInfo.h; path = ../IProgressInfo.h; sourceTree = SOURCE_ROOT; };
-		123457030ED2E572006EC826 /* ISupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISupplier.h; path = ../ISupplier.h; sourceTree = SOURCE_ROOT; };
-		123457040ED2E572006EC826 /* IValueSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IValueSupplier.h; path = ../IValueSupplier.h; sourceTree = SOURCE_ROOT; };
-		123457050ED2E572006EC826 /* TSupplierCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSupplierCompWrap.h; path = ../TSupplierCompWrap.h; sourceTree = SOURCE_ROOT; };
-		123457060ED2E572006EC826 /* TSyncProcessorCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorCompBase.h; path = ../TSyncProcessorCompBase.h; sourceTree = SOURCE_ROOT; };
-		123457070ED2E572006EC826 /* TSyncProcessorWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorWrap.h; path = ../TSyncProcessorWrap.h; sourceTree = SOURCE_ROOT; };
+		123456800ED2E572006EC826 /* CTestIdManagerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTestIdManagerComp.cpp; path = ../CTestIdManagerComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456810ED2E572006EC826 /* CCascadedProcessorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCascadedProcessorComp.h; path = ../CCascadedProcessorComp.h; sourceTree = SOURCE_ROOT; };
+		123456820ED2E572006EC826 /* CTestIdManagerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTestIdManagerComp.h; path = ../CTestIdManagerComp.h; sourceTree = SOURCE_ROOT; };
+		123456830ED2E572006EC826 /* IIdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IIdManager.h; path = ../IIdManager.h; sourceTree = SOURCE_ROOT; };
+		123456840ED2E572006EC826 /* iproc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iproc.h; path = ../iproc.h; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* IProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProcessor.h; path = ../IProcessor.h; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* IProgressEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProgressEventHandler.h; path = ../IProgressEventHandler.h; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* IProgressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProgressInfo.h; path = ../IProgressInfo.h; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* ISupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISupplier.h; path = ../ISupplier.h; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* IValueSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IValueSupplier.h; path = ../IValueSupplier.h; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* TSupplierCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSupplierCompWrap.h; path = ../TSupplierCompWrap.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorCompBase.h; path = ../TSyncProcessorCompBase.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* TSyncProcessorWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorWrap.h; path = ../TSyncProcessorWrap.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiproc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiproc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,28 +69,18 @@
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				123456860ED2E572006EC826 /* CCascadedProcessorComp.h */,
-				123456870ED2E572006EC826 /* CHierarchicalOperator.h */,
-				123456880ED2E572006EC826 /* CJob.h */,
-				123456890ED2E572006EC826 /* COperatorBase.h */,
-				123456900ED2E572006EC826 /* CProcessingControllerBase.h */,
-				123456910ED2E572006EC826 /* CProcessingElementBase.h */,
-				123456920ED2E572006EC826 /* CTestIdManagerComp.h */,
-				123456930ED2E572006EC826 /* IIdManager.h */,
-				123456940ED2E572006EC826 /* IJob.h */,
-				123456950ED2E572006EC826 /* IOperator.h */,
-				123456960ED2E572006EC826 /* IOperatorManager.h */,
-				123456970ED2E572006EC826 /* iproc.h */,
-				123456980ED2E572006EC826 /* IProcessingController.h */,
-				123456990ED2E572006EC826 /* IProcessingEventHandler.h */,
-				123457000ED2E572006EC826 /* IProcessor.h */,
-				123457010ED2E572006EC826 /* IProgressEventHandler.h */,
-				123457020ED2E572006EC826 /* IProgressInfo.h */,
-				123457030ED2E572006EC826 /* ISupplier.h */,
-				123457040ED2E572006EC826 /* IValueSupplier.h */,
-				123457050ED2E572006EC826 /* TSupplierCompWrap.h */,
-				123457060ED2E572006EC826 /* TSyncProcessorCompBase.h */,
-				123457070ED2E572006EC826 /* TSyncProcessorWrap.h */,
+				123456810ED2E572006EC826 /* CCascadedProcessorComp.h */,
+				123456820ED2E572006EC826 /* CTestIdManagerComp.h */,
+				123456830ED2E572006EC826 /* IIdManager.h */,
+				123456840ED2E572006EC826 /* iproc.h */,
+				123456850ED2E572006EC826 /* IProcessor.h */,
+				123456860ED2E572006EC826 /* IProgressEventHandler.h */,
+				123456870ED2E572006EC826 /* IProgressInfo.h */,
+				123456880ED2E572006EC826 /* ISupplier.h */,
+				123456890ED2E572006EC826 /* IValueSupplier.h */,
+				123456900ED2E572006EC826 /* TSupplierCompWrap.h */,
+				123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */,
+				123456920ED2E572006EC826 /* TSyncProcessorWrap.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -129,12 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* CCascadedProcessorComp.cpp */,
-				123456800ED2E572006EC826 /* CHierarchicalOperator.cpp */,
-				123456810ED2E572006EC826 /* CJob.cpp */,
-				123456820ED2E572006EC826 /* COperatorBase.cpp */,
-				123456830ED2E572006EC826 /* CProcessingControllerBase.cpp */,
-				123456840ED2E572006EC826 /* CProcessingElementBase.cpp */,
-				123456850ED2E572006EC826 /* CTestIdManagerComp.cpp */,
+				123456800ED2E572006EC826 /* CTestIdManagerComp.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -182,28 +137,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456860ED2E572006EC826 /* CCascadedProcessorComp.h in Headers */,
-				223456870ED2E572006EC826 /* CHierarchicalOperator.h in Headers */,
-				223456880ED2E572006EC826 /* CJob.h in Headers */,
-				223456890ED2E572006EC826 /* COperatorBase.h in Headers */,
-				223456900ED2E572006EC826 /* CProcessingControllerBase.h in Headers */,
-				223456910ED2E572006EC826 /* CProcessingElementBase.h in Headers */,
-				223456920ED2E572006EC826 /* CTestIdManagerComp.h in Headers */,
-				223456930ED2E572006EC826 /* IIdManager.h in Headers */,
-				223456940ED2E572006EC826 /* IJob.h in Headers */,
-				223456950ED2E572006EC826 /* IOperator.h in Headers */,
-				223456960ED2E572006EC826 /* IOperatorManager.h in Headers */,
-				223456970ED2E572006EC826 /* iproc.h in Headers */,
-				223456980ED2E572006EC826 /* IProcessingController.h in Headers */,
-				223456990ED2E572006EC826 /* IProcessingEventHandler.h in Headers */,
-				223457000ED2E572006EC826 /* IProcessor.h in Headers */,
-				223457010ED2E572006EC826 /* IProgressEventHandler.h in Headers */,
-				223457020ED2E572006EC826 /* IProgressInfo.h in Headers */,
-				223457030ED2E572006EC826 /* ISupplier.h in Headers */,
-				223457040ED2E572006EC826 /* IValueSupplier.h in Headers */,
-				223457050ED2E572006EC826 /* TSupplierCompWrap.h in Headers */,
-				223457060ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */,
-				223457070ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */,
+				223456810ED2E572006EC826 /* CCascadedProcessorComp.h in Headers */,
+				223456820ED2E572006EC826 /* CTestIdManagerComp.h in Headers */,
+				223456830ED2E572006EC826 /* IIdManager.h in Headers */,
+				223456840ED2E572006EC826 /* iproc.h in Headers */,
+				223456850ED2E572006EC826 /* IProcessor.h in Headers */,
+				223456860ED2E572006EC826 /* IProgressEventHandler.h in Headers */,
+				223456870ED2E572006EC826 /* IProgressInfo.h in Headers */,
+				223456880ED2E572006EC826 /* ISupplier.h in Headers */,
+				223456890ED2E572006EC826 /* IValueSupplier.h in Headers */,
+				223456900ED2E572006EC826 /* TSupplierCompWrap.h in Headers */,
+				223456910ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */,
+				223456920ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,12 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456790ED2E572006EC826 /* CCascadedProcessorComp.cpp in Sources */,
-				223456800ED2E572006EC826 /* CHierarchicalOperator.cpp in Sources */,
-				223456810ED2E572006EC826 /* CJob.cpp in Sources */,
-				223456820ED2E572006EC826 /* COperatorBase.cpp in Sources */,
-				223456830ED2E572006EC826 /* CProcessingControllerBase.cpp in Sources */,
-				223456840ED2E572006EC826 /* CProcessingElementBase.cpp in Sources */,
-				223456850ED2E572006EC826 /* CTestIdManagerComp.cpp in Sources */,
+				223456800ED2E572006EC826 /* CTestIdManagerComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
