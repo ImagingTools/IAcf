@@ -227,6 +227,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TCacheEngineBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TICacheEngine.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TSupplierCompWrap.h"
 				>
 			</File>

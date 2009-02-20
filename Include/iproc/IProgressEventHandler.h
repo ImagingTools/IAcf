@@ -16,6 +16,11 @@ public:
 		Callback function for an progress event.
 	*/
 	virtual void OnProgress(double currentProgress) = 0;
+
+	/**
+		Check if this processing operation should be canceled.
+	*/
+	virtual bool IsCanceled() const = 0;
 };
 
 
