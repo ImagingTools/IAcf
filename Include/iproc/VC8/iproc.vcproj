@@ -231,6 +231,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TFileCacheComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TICacheEngine.h"
 				>
 			</File>

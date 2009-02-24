@@ -2,6 +2,9 @@
 #define iproc_TICacheEngine_included
 
 
+#include "iproc/iproc.h"
+
+
 namespace iproc
 {
 

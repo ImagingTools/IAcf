@@ -2,6 +2,12 @@
 #define iproc_TCacheEngineBase_included
 
 
+// STL includes
+#include <list>
+
+#include "iproc/TICacheEngine.h"
+
+
 namespace iproc
 {
 
@@ -15,7 +21,7 @@ public:
 
 	// reimplemented (iproc::TICacheEngine)
 	virtual const CacheObject* LockCacheObject(const Key& key);
-	virtual void UnlockCacheObject(const CacheObject* objectPtr);
+	virtual void UnlockCacheObject(const Key& key);
 
 protected:
 	/**
@@ -28,9 +34,9 @@ protected:
 		Calculate cache object from source object.
 		\return	positive weight value if succeded of negative value (-1) if failed.
 	*/
-	virtual double CalcCacheObject(const SourceObject& source, CacheObject& cache) const = 0;
+	virtual double CalcCacheObject(const Key& key, const SourceObject& source, CacheObject& cache) const = 0;
 	virtual const SourceObject* LockSourceObject(const Key& key) = 0;
-	virtual void UnlockSourceObject(const SourceObject* objectPtr) = 0;
+	virtual void UnlockSourceObject(const Key& key, const SourceObject* sourcePtr) = 0;
 
 private:
 	double m_maxCumulatedWeight;
@@ -91,11 +97,11 @@ const CacheObject* TCacheEngineBase<Key, CacheObject, SourceObject>::LockCacheOb
 	if (sourcePtr != NULL){
 		m_cachedList.push_back(ListElement());
 
-		ListElement& element = m_cachedList.last();
+		ListElement& element = m_cachedList.back();
 
-		element.weight = CalcCacheObject(*sourcePtr, element.object);
+		element.weight = CalcCacheObject(key, *sourcePtr, element.object);
 
-		UnlockSourceObject(key);
+		UnlockSourceObject(key, sourcePtr);
 
 		if (element.weight < 0){
 			m_cachedList.pop_back();
