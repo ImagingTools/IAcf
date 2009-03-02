@@ -16,6 +16,8 @@ template <class Key, class CacheObject, class SourceObject>
 class TCacheEngineBase: public TICacheEngine<Key, CacheObject>
 {
 public:
+	TCacheEngineBase();
+
 	double GetMaxCumulatedWeight() const;
 	void SetMaxCumulatedWeight(double value);
 
@@ -63,6 +65,12 @@ private:
 
 
 // public methods
+
+template <class Key, class CacheObject, class SourceObject>
+TCacheEngineBase<Key, CacheObject, SourceObject>::TCacheEngineBase()
+:	m_maxCumulatedWeight(10), m_cumulatedWeight(0)
+{
+}
 
 
 template <class Key, class CacheObject, class SourceObject>
