@@ -1,11 +1,11 @@
-#ifndef iproc_TCacheEngineBase_included
-#define iproc_TCacheEngineBase_included
+#ifndef iproc_TMorphLockedProducerBase_included
+#define iproc_TMorphLockedProducerBase_included
 
 
 // STL includes
 #include <list>
 
-#include "iproc/TICacheEngine.h"
+#include "iproc/TILockedProducer.h"
 
 
 namespace iproc
@@ -13,17 +13,17 @@ namespace iproc
 
 
 template <class Key, class CacheObject, class SourceObject>
-class TCacheEngineBase: public TICacheEngine<Key, CacheObject>
+class TMorphLockedProducerBase: public TILockedProducer<Key, CacheObject>
 {
 public:
-	TCacheEngineBase();
+	TMorphLockedProducerBase();
 
 	double GetMaxCumulatedWeight() const;
 	void SetMaxCumulatedWeight(double value);
 
-	// reimplemented (iproc::TICacheEngine)
-	virtual const CacheObject* LockCacheObject(const Key& key);
-	virtual void UnlockCacheObject(const Key& key);
+	// reimplemented (iproc::TILockedProducer)
+	virtual const CacheObject* ProduceLockedObject(const Key& key);
+	virtual void UnlockObject(const Key& key);
 
 protected:
 	/**
@@ -67,21 +67,21 @@ private:
 // public methods
 
 template <class Key, class CacheObject, class SourceObject>
-TCacheEngineBase<Key, CacheObject, SourceObject>::TCacheEngineBase()
+TMorphLockedProducerBase<Key, CacheObject, SourceObject>::TMorphLockedProducerBase()
 :	m_maxCumulatedWeight(10), m_cumulatedWeight(0)
 {
 }
 
 
 template <class Key, class CacheObject, class SourceObject>
-double TCacheEngineBase<Key, CacheObject, SourceObject>::GetMaxCumulatedWeight() const
+double TMorphLockedProducerBase<Key, CacheObject, SourceObject>::GetMaxCumulatedWeight() const
 {
 	return m_maxCumulatedWeight;
 }
 
 
 template <class Key, class CacheObject, class SourceObject>
-void TCacheEngineBase<Key, CacheObject, SourceObject>::SetMaxCumulatedWeight(double value)
+void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::SetMaxCumulatedWeight(double value)
 {
 	m_maxCumulatedWeight = value;
 
@@ -89,10 +89,10 @@ void TCacheEngineBase<Key, CacheObject, SourceObject>::SetMaxCumulatedWeight(dou
 }
 
 
-// reimplemented (iproc::TICacheEngine)
+// reimplemented (iproc::TILockedProducer)
 
 template <class Key, class CacheObject, class SourceObject>
-const CacheObject* TCacheEngineBase<Key, CacheObject, SourceObject>::LockCacheObject(const Key& key)
+const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::ProduceLockedObject(const Key& key)
 {
 	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
 	if (foundIter != m_cachedList.end()){
@@ -130,7 +130,7 @@ const CacheObject* TCacheEngineBase<Key, CacheObject, SourceObject>::LockCacheOb
 
 
 template <class Key, class CacheObject, class SourceObject>
-void TCacheEngineBase<Key, CacheObject, SourceObject>::UnlockCacheObject(const Key& key)
+void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(const Key& key)
 {
 	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
 	I_ASSERT(foundIter != m_cachedList.end());	// if locked is done correctly, this element must exist.
@@ -142,12 +142,14 @@ void TCacheEngineBase<Key, CacheObject, SourceObject>::UnlockCacheObject(const K
 // protected methods
 
 template <class Key, class CacheObject, class SourceObject>
-void TCacheEngineBase<Key, CacheObject, SourceObject>::CleanElementList()
+void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::CleanElementList()
 {
 	CachedList::iterator iter = m_cachedList.begin();
 	while (		(m_cumulatedWeight > m_maxCumulatedWeight) &&
 				(iter != m_cachedList.end())){
 		if (iter->lockedCount <= 0){
+			m_cumulatedWeight -= iter->weight;
+
 			iter = m_cachedList.erase(iter);
 		}
 		else{
@@ -160,6 +162,6 @@ void TCacheEngineBase<Key, CacheObject, SourceObject>::CleanElementList()
 } // namespace iproc
 
 
-#endif // !iproc_TCacheEngineBase_included
+#endif // !iproc_TMorphLockedProducerBase_included
 
 

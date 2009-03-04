@@ -227,15 +227,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TCacheEngineBase.h"
+				RelativePath="..\TFileCachedProducerCompBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TFileCacheComp.h"
+				RelativePath="..\TILockedProducer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TICacheEngine.h"
+				RelativePath="..\TMemCachedProducerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TMorphLockedProducerBase.h"
 				>
 			</File>
 			<File

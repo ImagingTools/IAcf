@@ -1,5 +1,5 @@
-#ifndef iproc_TICacheEngine_included
-#define iproc_TICacheEngine_included
+#ifndef iproc_TILockedProducer_included
+#define iproc_TILockedProducer_included
 
 
 #include "iproc/iproc.h"
@@ -16,25 +16,25 @@ namespace iproc
 	Please note that \c Key class must implement standard STL operators needed to use it as std::map key.
 */
 template <class Key, class CacheObject>
-class TICacheEngine
+class TILockedProducer
 {
 public:
 	/**
 		Begin of accessing to cached element.
 		\return	cached object, if it was possible to produce it for specified key.
 	*/
-	virtual const CacheObject* LockCacheObject(const Key& key) = 0;
+	virtual const CacheObject* ProduceLockedObject(const Key& key) = 0;
 
 	/**
 		End of accessing to cached element.
 	*/
-	virtual void UnlockCacheObject(const CacheObject* objectPtr) = 0;
+	virtual void UnlockObject(const CacheObject* objectPtr) = 0;
 };
 
 
 } // namespace iproc
 
 
-#endif // !iproc_TICacheEngine_included
+#endif // !iproc_TILockedProducer_included
 
 
