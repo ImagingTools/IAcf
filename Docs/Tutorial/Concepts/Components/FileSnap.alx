@@ -32,10 +32,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        125
+        280
       </X>
       <X>
-        62
+        -7
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         FileAcquisition
       </ComponentName>
       <X>
-        50
+        47
       </X>
       <X>
-        -12
+        -5
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -512
+        -497
       </X>
       <X>
-        -137
+        -158
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -500
+        -497
       </X>
       <X>
-        -37
+        -13
       </X>
     </Element>
     <Element>
@@ -109,10 +109,10 @@
         Framework
       </ComponentName>
       <X>
-        0
+        79
       </X>
       <X>
-        -137
+        -132
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -212
+        -209
       </X>
       <X>
-        -162
+        -159
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -200
+        -210
       </X>
       <X>
-        -12
+        -6
       </X>
     </Element>
   </PositionMap>
