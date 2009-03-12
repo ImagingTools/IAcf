@@ -2,6 +2,9 @@
 #define iproc_TILockedProducer_included
 
 
+// ACF includes
+#include "istd/IPolymorphic.h"
+
 #include "iproc/iproc.h"
 
 
@@ -16,7 +19,7 @@ namespace iproc
 	Please note that \c Key class must implement standard STL operators needed to use it as std::map key.
 */
 template <class Key, class CacheObject>
-class TILockedProducer
+class TILockedProducer: virtual public istd::IPolymorphic
 {
 public:
 	/**

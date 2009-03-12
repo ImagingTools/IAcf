@@ -23,7 +23,7 @@ public:
 
 	// reimplemented (iproc::TILockedProducer)
 	virtual const CacheObject* ProduceLockedObject(const Key& key);
-	virtual void UnlockObject(const Key& key);
+	virtual void UnlockObject(const CacheObject* objectPtr);
 
 protected:
 	/**
@@ -130,7 +130,7 @@ const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::Pro
 
 
 template <class Key, class CacheObject, class SourceObject>
-void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(const Key& key)
+void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(const CacheObject* objectPtr)
 {
 	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
 	I_ASSERT(foundIter != m_cachedList.end());	// if locked is done correctly, this element must exist.

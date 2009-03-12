@@ -23,8 +23,10 @@ class TMemCachedProducerComp:
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef TILockedProducer<Key, CacheObject> LockedProducerType;
 
-	I_BEGIN_BASE_COMPONENT(TFileCachedProducerCompBase);
+	I_BEGIN_BASE_COMPONENT(TMemCachedProducerComp);
+		I_REGISTER_INTERFACE(LockedProducerType);
 		I_ASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
 		I_ASSIGN(m_maxCachedObjectsAttrPtr, "MaxCachedObjects", "Maximal number of cached objects", true, 20);
 	I_END_COMPONENT;

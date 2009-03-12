@@ -2,6 +2,9 @@
 #define iproc_TFileCachedProducerCompBase_included
 
 
+// STL includes
+#include <list>
+
 // ACF includes
 #include "iser/IFileLoader.h"
 #include "icomp/CComponentBase.h"
@@ -25,8 +28,10 @@ class TFileCachedProducerCompBase:
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef TILockedProducer<Key, CacheObject> LockedProducerType;
 
 	I_BEGIN_BASE_COMPONENT(TFileCachedProducerCompBase);
+		I_REGISTER_INTERFACE(LockedProducerType);
 		I_ASSIGN(m_cacheLoaderCompPtr, "CacheLoader", "Loads and saves cached object to temporary file", true, "CacheLoader");
 		I_ASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
 		I_ASSIGN(m_maxCachedFilesAttrPtr, "MaxCachedFiles", "Maximal number of cached files", true, 10);
@@ -50,12 +55,12 @@ protected:
 
 private:
 	I_REF(iser::IFileLoader, m_cacheLoaderCompPtr);
-	I_REF(TILockedProducer<Key, CacheObject>, m_slaveCacheEngineCompPtr);
+	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
 	I_ATTR(int, m_maxCachedFilesAttrPtr);
 
 	typedef std::map<Key, istd::CString> KeyToFileNameMap;
 	typedef std::list<Key> RecentlyUsedKeys;
-	typedef std::set<CacheObject*> OwnedObjects;
+	typedef std::set<const CacheObject*> OwnedObjects;
 
 	mutable KeyToFileNameMap m_keyToFileNameMap;
 	mutable RecentlyUsedKeys m_recentlyUsedKeys;
@@ -96,22 +101,20 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 	}
 
 	if (m_slaveCacheEngineCompPtr.IsValid()){
-		CacheObject* retVal = m_slaveCacheEngineCompPtr->ProduceLockedObject(key);
-		if (retVal != NULL){
+		const CacheObject* objectPtr = m_slaveCacheEngineCompPtr->ProduceLockedObject(key);
+		if (objectPtr != NULL){
 			istd::CString cacheFilePath = CalcCacheFilePath(key);
 			if (!cacheFilePath.IsEmpty() && m_cacheLoaderCompPtr.IsValid()){
-				if (m_cacheLoaderCompPtr->SaveToFile(retVal, cacheFilePath)){
+				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath)){
 					m_keyToFileNameMap[key] = cacheFilePath;
 					m_recentlyUsedKeys.push_back(key);
 
-					const_cast<CFileCachedInterpolator&>(*this).CleanFileList();
-
-					return 1;
+					const_cast<TFileCachedProducerCompBase<Key, CacheObject>&>(*this).CleanFileList();
 				}
 			}
-		}
 
-		return retVal;
+			return objectPtr;
+		}
 	}
 
 	return NULL;
@@ -129,6 +132,30 @@ void TFileCachedProducerCompBase<Key, CacheObject>::UnlockObject(const CacheObje
 	}
 
 	delete objectPtr;
+}
+
+
+template <class Key, class CacheObject>
+void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
+{
+	int maxCachedFiles = istd::Max(0, *m_maxCachedFilesAttrPtr);
+	I_ASSERT(maxCachedFiles >= 0);
+
+	while (int(m_recentlyUsedKeys.size()) > maxCachedFiles){
+		const istd::CString& key = m_recentlyUsedKeys.front();
+
+		KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
+		if (foundIter != m_keyToFileNameMap.end()){
+			const istd::CString& cacheFilePath = foundIter->second;
+
+			QFile cacheFile(iqt::GetQString(cacheFilePath));
+			cacheFile.remove();
+
+			m_keyToFileNameMap.erase(foundIter);
+		}
+
+		m_recentlyUsedKeys.pop_front();
+	}
 }
 
 
