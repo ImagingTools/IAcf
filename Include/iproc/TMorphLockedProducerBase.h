@@ -132,10 +132,17 @@ const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::Pro
 template <class Key, class CacheObject, class SourceObject>
 void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(const CacheObject* objectPtr)
 {
-	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
-	I_ASSERT(foundIter != m_cachedList.end());	// if locked is done correctly, this element must exist.
+	for (		CachedList::iterator iter = m_cachedList.begin();
+				iter != m_cachedList.end();
+				++iter){
+		if (&iter->object == objectPtr){
+			if (--iter->lockedCount <= 0){
+				m_cachedList.erase(iter);
+			}
 
-	foundIter->lockedCount--;
+			break;
+		}
+	}
 }
 
 
