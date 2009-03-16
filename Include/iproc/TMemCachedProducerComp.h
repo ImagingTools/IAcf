@@ -42,22 +42,23 @@ protected:
 	void CleanElementList();
 
 private:
-	I_REF(TILockedProducer<Key, CacheObject>, m_slaveCacheEngineCompPtr);
+	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
 	I_ATTR(int, m_maxCachedObjectsAttrPtr);
 
-	struct ListElement: public Key
+	struct ListElement
 	{
-		ListElement()
+		bool operator==(const Key& key)
 		{
-			lockedCount = 0;
+			return this->key == key;
 		}
 
-		CacheObject* objectPtr;
+		Key key;
+		const CacheObject* objectPtr;
 		int lockedCount;
 	};
 
 	typedef std::list<ListElement> CachedList;
-	typedef std::map<CacheObject*, CachedList::iterator> ObjectToListMap;
+	typedef std::map<const CacheObject*, typename CachedList::reverse_iterator> ObjectToListMap;
 
 	CachedList m_cachedList;
 	ObjectToListMap m_objectToListMap;
@@ -84,8 +85,9 @@ const CacheObject* TMemCachedProducerComp<Key, CacheObject>::ProduceLockedObject
 			m_cachedList.push_back(ListElement());
 
 			ListElement& element = m_cachedList.back();
-			m_objectToListMap[objectPtr] = m_cachedList.last();
+			m_objectToListMap[objectPtr] = m_cachedList.rbegin();
 
+			element.key = key;
 			element.objectPtr = objectPtr;
 			element.lockedCount = 1;
 
@@ -105,7 +107,10 @@ void TMemCachedProducerComp<Key, CacheObject>::UnlockObject(const CacheObject* o
 	ObjectToListMap::iterator foundIter = m_objectToListMap.find(objectPtr);
 	I_ASSERT(foundIter != m_objectToListMap.end());	// if locked is done correctly, this element must exist.
 
-	foundIter->second->lockedCount--;
+	typename CachedList::reverse_iterator objectIter = foundIter->second;
+	I_ASSERT(objectIter != m_cachedList.rend());
+
+	objectIter->lockedCount--;
 
 	CleanElementList();
 }
@@ -119,10 +124,9 @@ void TMemCachedProducerComp<Key, CacheObject>::CleanElementList()
 	int maxCachedObjects = istd::Max(0, *m_maxCachedObjectsAttrPtr);
 
 	CachedList::iterator iter = m_cachedList.begin();
-	while (		(m_cachedList.size() > maxCachedObjects) &&
+	while (		(int(m_cachedList.size()) > maxCachedObjects) &&
 				(iter != m_cachedList.end())){
 		I_ASSERT(m_objectToListMap.find(iter->objectPtr) != m_objectToListMap.end());	// object is present in objects map
-		I_ASSERT(m_objectToListMap[iter->objectPtr] == iter);	// iterator stored for this object is correct
 
 		if (iter->lockedCount <= 0){
 			I_ASSERT(m_slaveCacheEngineCompPtr.IsValid());

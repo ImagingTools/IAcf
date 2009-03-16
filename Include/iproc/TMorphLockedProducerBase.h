@@ -5,6 +5,9 @@
 // STL includes
 #include <list>
 
+// ACF includes
+#include "istd/TDelPtr.h"
+
 #include "iproc/TILockedProducer.h"
 
 
@@ -45,16 +48,16 @@ private:
 
 	mutable double m_cumulatedWeight;
 
-	struct ListElement: public Key
+	struct ListElement
 	{
-		ListElement()
+		bool operator==(const Key& key)
 		{
-			lockedCount = 0;
-			weight = 0.0;
+			return this->key == key;
 		}
 
+		Key key;
 		double weight;
-		CacheObject object;
+		istd::TDelPtr<CacheObject> objectPtr;
 		int lockedCount;
 	};
 
@@ -98,31 +101,38 @@ const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::Pro
 	if (foundIter != m_cachedList.end()){
 		foundIter->lockedCount++;
 
-		return &foundIter->object;
+		return foundIter->objectPtr.GetPtr();
 	}
 
 	const SourceObject* sourcePtr = LockSourceObject(key);
 	if (sourcePtr != NULL){
+		istd::TDelPtr<CacheObject> newObjectPtr(new CacheObject);
+		if (!newObjectPtr.IsValid()){
+			return NULL;
+		}
+
+		double weight = CalcCacheObject(key, *sourcePtr, *newObjectPtr);
+
+		UnlockSourceObject(key, sourcePtr);
+
+		if (weight < 0){
+			return NULL;
+		}
+
 		m_cachedList.push_back(ListElement());
 
 		ListElement& element = m_cachedList.back();
 
-		element.weight = CalcCacheObject(key, *sourcePtr, element.object);
+		element.key = key;
+		element.objectPtr.TakeOver(newObjectPtr);
+		element.weight = weight;
+		element.lockedCount = 1;
 
-		UnlockSourceObject(key, sourcePtr);
-
-		if (element.weight < 0){
-			m_cachedList.pop_back();
-
-			return NULL;
-		}
-
-		m_cumulatedWeight += element.weight;
-		element.lockedCount++;
+		m_cumulatedWeight += weight;
 
 		CleanElementList();
-		
-		return &element.object;
+
+		return element.objectPtr.GetPtr();
 	}
 
 	return NULL;
@@ -135,7 +145,7 @@ void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(cons
 	for (		CachedList::iterator iter = m_cachedList.begin();
 				iter != m_cachedList.end();
 				++iter){
-		if (&iter->object == objectPtr){
+		if (iter->objectPtr.GetPtr() == objectPtr){
 			if (--iter->lockedCount <= 0){
 				m_cachedList.erase(iter);
 			}

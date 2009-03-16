@@ -42,10 +42,16 @@ public:
 	virtual void UnlockObject(const CacheObject* objectPtr);
 
 protected:
+	bool PushKeyBack(const Key& key);
+
 	/**
 		Removes cache files if there is too many of them.
 	*/
 	void CleanFileList();
+
+	// methods for optional ovelloading
+	virtual void OnCacheFileSaved(const Key& key, const istd::CString& cacheFilePath);
+	virtual void OnCacheFileRemoved(const Key& key, const istd::CString& cacheFilePath);
 
 	// abstract methods
 	/**
@@ -76,25 +82,33 @@ template <class Key, class CacheObject>
 const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedObject(const Key& key)
 {
 	if (m_cacheLoaderCompPtr.IsValid()){
+		istd::CString cacheFilePath;
 		KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
-			const istd::CString& cacheFilePath = foundIter->second;
+			cacheFilePath = foundIter->second;
 			I_ASSERT(!cacheFilePath.IsEmpty());
+		}
+		else{
+			cacheFilePath = CalcCacheFilePath(key);
+		}
 
+		if (!cacheFilePath.IsEmpty()){
 			if (m_cacheLoaderCompPtr->IsOperationSupported(
 						NULL,
 						&cacheFilePath,
 						iser::IFileLoader::QF_NO_SAVING | iser::IFileLoader::QF_NAMED_ONLY,
 						false)){
-				istd::TDelPtr<CacheObject> retVal(new CacheObject);
+				istd::TDelPtr<CacheObject> objectPtr(new CacheObject);
 
-				if (m_cacheLoaderCompPtr->LoadFromFile(*retVal, cacheFilePath) != iser::IFileLoader::StateOk){
-					m_ownedObjects.insert(retVal.GetPtr());
+				if (objectPtr.IsValid()){
+					if (m_cacheLoaderCompPtr->LoadFromFile(*objectPtr, cacheFilePath) == iser::IFileLoader::StateOk){
+						m_ownedObjects.insert(objectPtr.GetPtr());
 
-					return retVal.PopPtr();
-				}
-				else{
-					m_keyToFileNameMap.erase(foundIter);
+						return objectPtr.PopPtr();
+					}
+					else if (foundIter != m_keyToFileNameMap.end()){
+						m_keyToFileNameMap.erase(foundIter);
+					}
 				}
 			}
 		}
@@ -105,7 +119,9 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 		if (objectPtr != NULL){
 			istd::CString cacheFilePath = CalcCacheFilePath(key);
 			if (!cacheFilePath.IsEmpty() && m_cacheLoaderCompPtr.IsValid()){
-				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath)){
+				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath) == iser::IFileLoader::StateOk){
+					OnCacheFileSaved(key, cacheFilePath);
+
 					m_keyToFileNameMap[key] = cacheFilePath;
 					m_recentlyUsedKeys.push_back(key);
 
@@ -124,14 +140,39 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 template <class Key, class CacheObject>
 void TFileCachedProducerCompBase<Key, CacheObject>::UnlockObject(const CacheObject* objectPtr)
 {
-	if (		m_ownedObjects.find(objectPtr) == m_ownedObjects.end() &&
-				m_slaveCacheEngineCompPtr.IsValid()){
-		m_slaveCacheEngineCompPtr->UnlockObject(objectPtr);
+	I_ASSERT(objectPtr != NULL);
+
+	OwnedObjects::iterator foundIter = m_ownedObjects.find(objectPtr);
+	if (foundIter != m_ownedObjects.end()){
+		m_ownedObjects.erase(objectPtr);
+
+		delete objectPtr;
 
 		return;
 	}
 
-	delete objectPtr;
+	if (m_slaveCacheEngineCompPtr.IsValid()){
+		m_slaveCacheEngineCompPtr->UnlockObject(objectPtr);
+	}
+}
+
+
+// protected methods
+
+template <class Key, class CacheObject>
+bool TFileCachedProducerCompBase<Key, CacheObject>::PushKeyBack(const Key& key)
+{
+	if (m_keyToFileNameMap.find(key) == m_keyToFileNameMap.end()){
+		istd::CString cacheFilePath = CalcCacheFilePath(key);
+		if (!cacheFilePath.IsEmpty()){
+			m_keyToFileNameMap[key] = cacheFilePath;
+			m_recentlyUsedKeys.push_back(key);
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 
@@ -151,11 +192,25 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 			QFile cacheFile(iqt::GetQString(cacheFilePath));
 			cacheFile.remove();
 
+			OnCacheFileRemoved(key, cacheFilePath);
+
 			m_keyToFileNameMap.erase(foundIter);
 		}
 
 		m_recentlyUsedKeys.pop_front();
 	}
+}
+
+
+template <class Key, class CacheObject>
+void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileSaved(const Key& /*key*/, const istd::CString& /*cacheFilePath*/)
+{
+}
+
+
+template <class Key, class CacheObject>
+void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileRemoved(const Key& /*key*/, const istd::CString& /*cacheFilePath*/)
+{
 }
 
 
