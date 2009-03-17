@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          825
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="2">
@@ -140,4 +151,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    AVT Camera with integrated default parameters
+  </Description>
+  <Keywords>
+    AVT Camera Fire Grab
+  </Keywords>
 </Acf>

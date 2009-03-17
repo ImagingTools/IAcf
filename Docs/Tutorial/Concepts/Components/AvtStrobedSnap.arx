@@ -10,7 +10,7 @@
         Camera
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         AvtStrobbedCamera
@@ -107,7 +107,7 @@
         Framework
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         SnapFramework

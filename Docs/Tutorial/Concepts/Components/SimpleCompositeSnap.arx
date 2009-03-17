@@ -65,7 +65,7 @@
         SnapApplication
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         SnapFramework
@@ -140,7 +140,7 @@
         SnapParams
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         FileSnapParams
@@ -177,7 +177,7 @@
         SnapParamsGui
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         FileSnapParamsGui

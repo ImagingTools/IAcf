@@ -137,7 +137,7 @@
         Framework
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         SnapFramework
@@ -285,7 +285,7 @@
         ProcessedCamera
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         ProcessedCamera

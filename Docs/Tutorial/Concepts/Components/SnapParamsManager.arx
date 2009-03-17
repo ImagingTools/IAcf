@@ -243,7 +243,7 @@
         SnapApplication
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         SnapFramework
@@ -337,7 +337,7 @@
         SnapParamsColor
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         FileSnapParams
@@ -374,7 +374,7 @@
         SnapParamsGray
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         FileSnapParams
@@ -411,7 +411,7 @@
         SnapParamsGui
       </Id>
       <PackageId>
-        IacfTutorialC
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
         FileSnapParamsGui
