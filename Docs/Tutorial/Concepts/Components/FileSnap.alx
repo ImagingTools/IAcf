@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          834
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="14">
@@ -32,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        280
+        341
       </X>
       <X>
-        -7
+        3
       </X>
     </Element>
     <Element>
@@ -57,7 +68,7 @@
         47
       </X>
       <X>
-        -5
+        -4
       </X>
     </Element>
     <Element>
@@ -76,10 +87,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -497
+        -496
       </X>
       <X>
-        -158
+        -157
       </X>
     </Element>
     <Element>
@@ -87,10 +98,10 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -497
+        -496
       </X>
       <X>
-        -13
+        -12
       </X>
     </Element>
     <Element>
@@ -109,10 +120,10 @@
         Framework
       </ComponentName>
       <X>
-        79
+        168
       </X>
       <X>
-        -132
+        -130
       </X>
     </Element>
     <Element>
@@ -142,10 +153,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -209
+        -208
       </X>
       <X>
-        -159
+        -158
       </X>
     </Element>
     <Element>
@@ -153,10 +164,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -210
+        -209
       </X>
       <X>
-        -6
+        -5
       </X>
     </Element>
   </PositionMap>
