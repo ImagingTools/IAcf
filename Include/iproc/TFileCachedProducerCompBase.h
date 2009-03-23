@@ -1,6 +1,8 @@
 #ifndef iproc_TFileCachedProducerCompBase_included
 #define iproc_TFileCachedProducerCompBase_included
 
+// Old C includes
+#include <stdio.h>
 
 // STL includes
 #include <list>
@@ -33,7 +35,7 @@ public:
 	I_BEGIN_BASE_COMPONENT(TFileCachedProducerCompBase);
 		I_REGISTER_INTERFACE(LockedProducerType);
 		I_ASSIGN(m_cacheLoaderCompPtr, "CacheLoader", "Loads and saves cached object to temporary file", true, "CacheLoader");
-		I_ASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
+		I_TASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
 		I_ASSIGN(m_maxCachedFilesAttrPtr, "MaxCachedFiles", "Maximal number of cached files", true, 10);
 	I_END_COMPONENT;
 
@@ -83,7 +85,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 {
 	if (m_cacheLoaderCompPtr.IsValid()){
 		istd::CString cacheFilePath;
-		KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
+		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
 			cacheFilePath = foundIter->second;
 			I_ASSERT(!cacheFilePath.IsEmpty());
@@ -142,7 +144,7 @@ void TFileCachedProducerCompBase<Key, CacheObject>::UnlockObject(const CacheObje
 {
 	I_ASSERT(objectPtr != NULL);
 
-	OwnedObjects::iterator foundIter = m_ownedObjects.find(objectPtr);
+	typename OwnedObjects::iterator foundIter = m_ownedObjects.find(objectPtr);
 	if (foundIter != m_ownedObjects.end()){
 		m_ownedObjects.erase(objectPtr);
 
@@ -185,14 +187,13 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 	while (int(m_recentlyUsedKeys.size()) > maxCachedFiles){
 		const istd::CString& key = m_recentlyUsedKeys.front();
 
-		KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
+		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
 			const istd::CString& cacheFilePath = foundIter->second;
 
-			QFile cacheFile(iqt::GetQString(cacheFilePath));
-			cacheFile.remove();
-
-			OnCacheFileRemoved(key, cacheFilePath);
+			if (remove(cacheFilePath.ToString().c_str()) != 0){
+				OnCacheFileRemoved(key, cacheFilePath);
+			}
 
 			m_keyToFileNameMap.erase(foundIter);
 		}

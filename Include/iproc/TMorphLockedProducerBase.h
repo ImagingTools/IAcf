@@ -97,7 +97,7 @@ void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::SetMaxCumulatedWe
 template <class Key, class CacheObject, class SourceObject>
 const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::ProduceLockedObject(const Key& key)
 {
-	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
+	typename CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
 	if (foundIter != m_cachedList.end()){
 		foundIter->lockedCount++;
 
@@ -142,7 +142,7 @@ const CacheObject* TMorphLockedProducerBase<Key, CacheObject, SourceObject>::Pro
 template <class Key, class CacheObject, class SourceObject>
 void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(const CacheObject* objectPtr)
 {
-	for (		CachedList::iterator iter = m_cachedList.begin();
+	for (		typename CachedList::iterator iter = m_cachedList.begin();
 				iter != m_cachedList.end();
 				++iter){
 		if (iter->objectPtr.GetPtr() == objectPtr){
@@ -161,7 +161,7 @@ void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::UnlockObject(cons
 template <class Key, class CacheObject, class SourceObject>
 void TMorphLockedProducerBase<Key, CacheObject, SourceObject>::CleanElementList()
 {
-	CachedList::iterator iter = m_cachedList.begin();
+	typename CachedList::iterator iter = m_cachedList.begin();
 	while (		(m_cumulatedWeight > m_maxCumulatedWeight) &&
 				(iter != m_cachedList.end())){
 		if (iter->lockedCount <= 0){

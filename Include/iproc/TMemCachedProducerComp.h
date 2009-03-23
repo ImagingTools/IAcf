@@ -27,7 +27,7 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(TMemCachedProducerComp);
 		I_REGISTER_INTERFACE(LockedProducerType);
-		I_ASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
+		I_TASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
 		I_ASSIGN(m_maxCachedObjectsAttrPtr, "MaxCachedObjects", "Maximal number of cached objects", true, 20);
 	I_END_COMPONENT;
 
@@ -72,7 +72,7 @@ private:
 template <class Key, class CacheObject>
 const CacheObject* TMemCachedProducerComp<Key, CacheObject>::ProduceLockedObject(const Key& key)
 {
-	CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
+	typename CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
 	if (foundIter != m_cachedList.end()){
 		foundIter->lockedCount++;
 
@@ -104,7 +104,7 @@ const CacheObject* TMemCachedProducerComp<Key, CacheObject>::ProduceLockedObject
 template <class Key, class CacheObject>
 void TMemCachedProducerComp<Key, CacheObject>::UnlockObject(const CacheObject* objectPtr)
 {
-	ObjectToListMap::iterator foundIter = m_objectToListMap.find(objectPtr);
+	typename ObjectToListMap::iterator foundIter = m_objectToListMap.find(objectPtr);
 	I_ASSERT(foundIter != m_objectToListMap.end());	// if locked is done correctly, this element must exist.
 
 	typename CachedList::reverse_iterator objectIter = foundIter->second;
@@ -123,7 +123,7 @@ void TMemCachedProducerComp<Key, CacheObject>::CleanElementList()
 {
 	int maxCachedObjects = istd::Max(0, *m_maxCachedObjectsAttrPtr);
 
-	CachedList::iterator iter = m_cachedList.begin();
+	typename CachedList::iterator iter = m_cachedList.begin();
 	while (		(int(m_cachedList.size()) > maxCachedObjects) &&
 				(iter != m_cachedList.end())){
 		I_ASSERT(m_objectToListMap.find(iter->objectPtr) != m_objectToListMap.end());	// object is present in objects map

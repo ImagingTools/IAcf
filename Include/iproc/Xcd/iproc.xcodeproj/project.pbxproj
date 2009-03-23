@@ -18,9 +18,13 @@
 		223456870ED2E572006EC826 /* IProgressInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* IProgressInfo.h */; };
 		223456880ED2E572006EC826 /* ISupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* ISupplier.h */; };
 		223456890ED2E572006EC826 /* IValueSupplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* IValueSupplier.h */; };
-		223456900ED2E572006EC826 /* TSupplierCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* TSupplierCompWrap.h */; };
-		223456910ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */; };
-		223456920ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* TSyncProcessorWrap.h */; };
+		223456900ED2E572006EC826 /* TFileCachedProducerCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* TFileCachedProducerCompBase.h */; };
+		223456910ED2E572006EC826 /* TILockedProducer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* TILockedProducer.h */; };
+		223456920ED2E572006EC826 /* TMemCachedProducerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* TMemCachedProducerComp.h */; };
+		223456930ED2E572006EC826 /* TMorphLockedProducerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* TMorphLockedProducerBase.h */; };
+		223456940ED2E572006EC826 /* TSupplierCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* TSupplierCompWrap.h */; };
+		223456950ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* TSyncProcessorCompBase.h */; };
+		223456960ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* TSyncProcessorWrap.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +39,13 @@
 		123456870ED2E572006EC826 /* IProgressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IProgressInfo.h; path = ../IProgressInfo.h; sourceTree = SOURCE_ROOT; };
 		123456880ED2E572006EC826 /* ISupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISupplier.h; path = ../ISupplier.h; sourceTree = SOURCE_ROOT; };
 		123456890ED2E572006EC826 /* IValueSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IValueSupplier.h; path = ../IValueSupplier.h; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* TSupplierCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSupplierCompWrap.h; path = ../TSupplierCompWrap.h; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorCompBase.h; path = ../TSyncProcessorCompBase.h; sourceTree = SOURCE_ROOT; };
-		123456920ED2E572006EC826 /* TSyncProcessorWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorWrap.h; path = ../TSyncProcessorWrap.h; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* TFileCachedProducerCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFileCachedProducerCompBase.h; path = ../TFileCachedProducerCompBase.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* TILockedProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TILockedProducer.h; path = ../TILockedProducer.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* TMemCachedProducerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMemCachedProducerComp.h; path = ../TMemCachedProducerComp.h; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* TMorphLockedProducerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMorphLockedProducerBase.h; path = ../TMorphLockedProducerBase.h; sourceTree = SOURCE_ROOT; };
+		123456940ED2E572006EC826 /* TSupplierCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSupplierCompWrap.h; path = ../TSupplierCompWrap.h; sourceTree = SOURCE_ROOT; };
+		123456950ED2E572006EC826 /* TSyncProcessorCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorCompBase.h; path = ../TSyncProcessorCompBase.h; sourceTree = SOURCE_ROOT; };
+		123456960ED2E572006EC826 /* TSyncProcessorWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSyncProcessorWrap.h; path = ../TSyncProcessorWrap.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiproc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiproc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,9 +86,13 @@
 				123456870ED2E572006EC826 /* IProgressInfo.h */,
 				123456880ED2E572006EC826 /* ISupplier.h */,
 				123456890ED2E572006EC826 /* IValueSupplier.h */,
-				123456900ED2E572006EC826 /* TSupplierCompWrap.h */,
-				123456910ED2E572006EC826 /* TSyncProcessorCompBase.h */,
-				123456920ED2E572006EC826 /* TSyncProcessorWrap.h */,
+				123456900ED2E572006EC826 /* TFileCachedProducerCompBase.h */,
+				123456910ED2E572006EC826 /* TILockedProducer.h */,
+				123456920ED2E572006EC826 /* TMemCachedProducerComp.h */,
+				123456930ED2E572006EC826 /* TMorphLockedProducerBase.h */,
+				123456940ED2E572006EC826 /* TSupplierCompWrap.h */,
+				123456950ED2E572006EC826 /* TSyncProcessorCompBase.h */,
+				123456960ED2E572006EC826 /* TSyncProcessorWrap.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -146,9 +158,13 @@
 				223456870ED2E572006EC826 /* IProgressInfo.h in Headers */,
 				223456880ED2E572006EC826 /* ISupplier.h in Headers */,
 				223456890ED2E572006EC826 /* IValueSupplier.h in Headers */,
-				223456900ED2E572006EC826 /* TSupplierCompWrap.h in Headers */,
-				223456910ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */,
-				223456920ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */,
+				223456900ED2E572006EC826 /* TFileCachedProducerCompBase.h in Headers */,
+				223456910ED2E572006EC826 /* TILockedProducer.h in Headers */,
+				223456920ED2E572006EC826 /* TMemCachedProducerComp.h in Headers */,
+				223456930ED2E572006EC826 /* TMorphLockedProducerBase.h in Headers */,
+				223456940ED2E572006EC826 /* TSupplierCompWrap.h in Headers */,
+				223456950ED2E572006EC826 /* TSyncProcessorCompBase.h in Headers */,
+				223456960ED2E572006EC826 /* TSyncProcessorWrap.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
