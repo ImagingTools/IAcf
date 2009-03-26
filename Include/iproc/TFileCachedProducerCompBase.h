@@ -36,7 +36,6 @@ public:
 		I_REGISTER_INTERFACE(LockedProducerType);
 		I_ASSIGN(m_cacheLoaderCompPtr, "CacheLoader", "Loads and saves cached object to temporary file", true, "CacheLoader");
 		I_TASSIGN(m_slaveCacheEngineCompPtr, "SlaveCacheEngine", "Slave cache engine providing access to cached object", true, "SlaveCacheEngine");
-		I_ASSIGN(m_maxCachedFilesAttrPtr, "MaxCachedFiles", "Maximal number of cached files", true, 10);
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::TILockedProducer)
@@ -60,11 +59,14 @@ protected:
 		Calculate unique file path of temporary file cache object.
 	*/
 	virtual istd::CString CalcCacheFilePath(const Key& key) const = 0;
+	/**
+		Get number of maximal cached files.
+	*/
+	virtual int GetMaxCachedFilesCount() const = 0;
 
 private:
 	I_REF(iser::IFileLoader, m_cacheLoaderCompPtr);
 	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
-	I_ATTR(int, m_maxCachedFilesAttrPtr);
 
 	typedef std::map<Key, istd::CString> KeyToFileNameMap;
 	typedef std::list<Key> RecentlyUsedKeys;
@@ -181,7 +183,7 @@ bool TFileCachedProducerCompBase<Key, CacheObject>::PushKeyBack(const Key& key)
 template <class Key, class CacheObject>
 void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 {
-	int maxCachedFiles = istd::Max(0, *m_maxCachedFilesAttrPtr);
+	int maxCachedFiles = GetMaxCachedFilesCount();
 	I_ASSERT(maxCachedFiles >= 0);
 
 	while (int(m_recentlyUsedKeys.size()) > maxCachedFiles){
