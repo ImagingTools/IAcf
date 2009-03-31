@@ -89,9 +89,9 @@
 			isa = PBXGroup;
 			children = (
 				EABF7B2A0F06EE2F00119803 /* QtCore.framework */,
-				EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */,
-				EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */,
 				EA47E5650EF1E9FA00BE56DB /* AcfStd.xcodeproj */,
+				EA47E5A40EF1EA0800BE56DB /* AcfQt.xcodeproj */,
+				EA47E5C10EF1EA3D00BE56DB /* IacfStd.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
