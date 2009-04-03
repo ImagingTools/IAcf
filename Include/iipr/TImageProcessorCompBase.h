@@ -2,15 +2,17 @@
 #define iipr_TImageProcessorCompBase_included
 
 
+// ACF includes
+#include "isys/ITimer.h"
+#include "istd/TSmartPtr.h"
+#include "istd/CStaticServicesProvider.h"
+#include "icomp/CComponentBase.h"
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iproc/TSyncProcessorCompBase.h"
 
-#include "icomp/CComponentBase.h"
-
 #include "iimg/CGeneralBitmap.h"
 
-#include "inat/CTimer.h"
 
 
 namespace iipr
@@ -26,6 +28,8 @@ class TImageProcessorCompBase: public iproc::CSyncProcessorCompBase
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
+	TImageProcessorCompBase();
+
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
@@ -38,10 +42,20 @@ protected:
 				const ParameterType* parameterPtr, 
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage) = 0;
+
+private:
+	istd::TSmartPtr<isys::ITimer> m_timerPtr;
 };
 
 
 // public methods
+
+template <class ParameterType>
+TImageProcessorCompBase<ParameterType>::TImageProcessorCompBase()
+:	m_timerPtr(istd::CreateService<isys::ITimer>())
+{
+}
+
 
 // reimplemented (iproc::IProcessor)
 
@@ -65,7 +79,9 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 		return TS_INVALID;
 	}
 
-	inat::CTimer timer;
+	if (m_timerPtr.IsValid()){
+		m_timerPtr->Start();
+	}
 
 	iimg::CGeneralBitmap bufferBitmap;
 
@@ -87,8 +103,11 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 		return TS_INVALID;
 	}
 	
-	double processingTime = timer.GetElapsed();
-	SendInfoMessage(0, istd::CString("Processed in ") + istd::CString::FromNumber(processingTime * 1000) + "ms");
+	if (m_timerPtr.IsValid()){
+		double processingTime = m_timerPtr->GetElapsed();
+
+		SendInfoMessage(0, istd::CString("Processed in ") + istd::CString::FromNumber(processingTime * 1000) + "ms");
+	}
 
 	return TS_OK;
 }
