@@ -35,7 +35,7 @@
 		123456800ED2E572006EC826 /* IacfBasePck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IacfBasePck.h; path = ../IacfBasePck.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* IacfBasePck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = IacfBasePck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2844470EF0996F0044F226 /* IacfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IacfStd.xcodeproj; path = ../../IacfStd/Xcd/IacfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA2844530EF09A790044F226 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../../ACF/Lib/DebugXcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
+		EA2844530EF09A790044F226 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ACF/Lib/ReleaseXcd/libacfstd.a; sourceTree = ACFDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../ACF/Lib/DebugXcd\"",
+					"\"$(ACFDIR)/Lib/$(CONFIGURATION)Xcd\"",
 				);
 				PRODUCT_NAME = IacfBasePck;
 				ZERO_LINK = YES;
@@ -267,7 +267,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../ACF/Lib/DebugXcd\"",
+					"\"$(ACFDIR)/Lib/$(CONFIGURATION)Xcd\"",
 				);
 				PRODUCT_NAME = IacfBasePck;
 			};
