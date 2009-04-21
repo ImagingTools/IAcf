@@ -23,7 +23,7 @@ public:
 	virtual const IMultidimensionalFilterConstraints* GetConstraints() const = 0;
 
 	/**
-		Get fileter length for each dimension.
+		Get filter length for each dimension.
 	*/
 	virtual imath::CVarVector GetFilterLengths() const = 0;
 
