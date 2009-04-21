@@ -5,7 +5,7 @@
 #include "iswr/iswr.h"
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include "iser/ISerializable.h"
 
 
 namespace iswr
@@ -15,7 +15,7 @@ namespace iswr
 /**
 	Parameters od SwissRanger sensor
 */
-class ISwissRangerParams: virtual public istd::IChangeable
+class ISwissRangerParams: virtual public iser::ISerializable
 {
 public:
 	virtual void SetMedianFilterEnabled(bool isEnabled = true) = 0;
@@ -24,8 +24,8 @@ public:
 	virtual void SetAmplitudeThreshold(double amplitudeThreshold) = 0;
 	virtual double GetAmplitudeThreshold() const = 0;
 
-	virtual void SetModulationFrequency(int modulationFrequency) = 0;
-	virtual int GetModulationFrequency() const = 0;
+	virtual void SetModulationFrequencyMode(int modulationFrequencyMode) = 0;
+	virtual int GetModulationFrequencyMode() const = 0;
 };
 
 

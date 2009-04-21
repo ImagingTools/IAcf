@@ -45,6 +45,21 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			paramsPtr->GetParameter((*m_swissRangerParamsIdAttrPtr).ToString()));
 	}
 
+	if (swissRangerParamsPtr != NULL){
+		int currentCameraMode = SR_GetMode(m_cameraPtr);
+
+		if(!swissRangerParamsPtr->GetMedianFilterEnabled()){
+			currentCameraMode = currentCameraMode & ~AM_MEDIAN;
+		}
+		else{
+			currentCameraMode = currentCameraMode  | AM_MEDIAN;
+		}
+
+		SR_SetMode(m_cameraPtr, currentCameraMode);		
+		SR_SetModulationFrequency(m_cameraPtr, ModulationFrq(swissRangerParamsPtr->GetModulationFrequencyMode()));
+		SR_SetAmplitudeThreshold(m_cameraPtr, I_WORD(swissRangerParamsPtr->GetAmplitudeThreshold() * (1 << 16)));
+	}
+
 	// setup exposure params:
 	const icam::IExposureParams* exposureParamsPtr = NULL;
 	if (paramsPtr != NULL && m_exposureParamsIdAttrPtr.IsValid()){
@@ -77,11 +92,6 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 	if (outputPtr != NULL){
 		istd::CIndex2d size = GetBitmapSize(paramsPtr);
 		if (!size.IsSizeEmpty()){
-
-			for (int imageIndex = 0; imageIndex < m_imagesCount; imageIndex++){
-				SR_GetImage(m_cameraPtr, (unsigned char)imageIndex);
-			}
-
 			SR_CoordTrfFlt(
 						m_cameraPtr, 
 						m_xBuffer.GetPtr(), 
@@ -92,21 +102,29 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 						sizeof(float));
 
 			istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
-			if (bitmapPtr.IsValid() && bitmapPtr->CreateBitmap(size)){
-				for (int y = 0; y < size.GetY(); ++y){
-					I_BYTE* outputBitmapPtr = (I_BYTE*)bitmapPtr->GetLinePtr(y);
-					float* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+			if (bitmapPtr.IsValid()){
+				if (bitmapPtr->CreateBitmap(size)){
+					for (int y = 0; y < size.GetY(); ++y){
+						I_BYTE* outputBitmapPtr = (I_BYTE*)bitmapPtr->GetLinePtr(y);
+						float* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
 
-					for (int x = 0; x < size.GetX(); x++){
-						float zValue = *(zBufferPtr + x);
-						I_ASSERT(zValue >= 0.0f);
-						I_ASSERT(zValue <= maxDistance);
+						for (int x = 0; x < size.GetX(); x++){
+							float zValue = *(zBufferPtr + x);
+							I_ASSERT(zValue >= 0.0f);
+							I_ASSERT(zValue <= maxDistance);
 
-						outputBitmapPtr[x] = I_BYTE(zValue / maxDistance * 255);
+							outputBitmapPtr[x] = I_BYTE(zValue / maxDistance * 255);
+						}
 					}
-				}
 
-				retVal = TS_OK;
+					retVal = TS_OK;
+				}
+			}
+			else{
+				// ... process the SwissRanger image
+				for (int imageIndex = 0; imageIndex < m_imagesCount; imageIndex++){
+					SR_GetImage(m_cameraPtr, (unsigned char)imageIndex);
+				}
 			}
 		}
 	}

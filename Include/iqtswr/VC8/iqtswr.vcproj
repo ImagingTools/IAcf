@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iswr"
-	ProjectGUID="{AC283B66-D80A-4C9E-B882-22AE9A1FE818}"
-	RootNamespace="iswr"
+	Name="iqtswr"
+	ProjectGUID="{7F1A163F-FF27-42D0-A4D0-F117B51A8F65}"
+	RootNamespace="iqtswr"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -13,6 +13,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -26,7 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -91,7 +103,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -155,11 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSwissRangerAcquisitionComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSwissRangerParams.cpp"
+				RelativePath="..\CSwissRangerParamsGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -169,19 +186,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSwissRangerAcquisitionComp.h"
+				RelativePath="..\CSwissRangerParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISwissRangerParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\iswr.h"
+				RelativePath="..\iqtswr.h"
 				>
 			</File>
 		</Filter>
@@ -191,16 +200,32 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
+			<File
+				RelativePath="..\CSwissRangerParamsGuiComp.moc"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\generated\moc_CSwissRangerParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSwissRangerParamsGuiComp.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CSwissRangerParamsGuiComp.ui"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
