@@ -8,7 +8,7 @@
 
 
 /**
-	Qt camera package.
+	Production controll package based on Qt.
 */
 namespace QtProdPck
 {

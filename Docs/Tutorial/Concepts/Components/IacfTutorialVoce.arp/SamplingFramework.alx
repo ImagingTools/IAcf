@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="13">
@@ -10,10 +21,10 @@
         Application
       </ComponentName>
       <X>
-        -305
+        -304
       </X>
       <X>
-        -355
+        -354
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         Info
       </ComponentName>
       <X>
-        -155
+        -154
       </X>
       <X>
-        -473
+        -472
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         MainGui
       </ComponentName>
       <X>
-        -118
+        -117
       </X>
       <X>
-        -230
+        -229
       </X>
     </Element>
     <Element>
@@ -57,7 +68,7 @@
         262
       </X>
       <X>
-        -230
+        -229
       </X>
     </Element>
     <Element>
@@ -90,7 +101,7 @@
         137
       </X>
       <X>
-        -355
+        -354
       </X>
     </Element>
     <Element>
@@ -120,10 +131,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        -18
+        -17
       </X>
       <X>
-        -355
+        -354
       </X>
     </Element>
     <Element>
@@ -145,7 +156,7 @@
         225
       </X>
       <X>
-        -480
+        -479
       </X>
     </Element>
   </PositionMap>

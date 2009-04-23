@@ -8,6 +8,7 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 
+#include "iproc/IProgressManager.h"
 #include "iproc/TILockedProducer.h"
 
 
@@ -33,13 +34,16 @@ protected:
 		Remove elements from list if cumulated weight is above defined maximum.
 	*/
 	void CleanElementList();
-
+	
 	// abstract methods
 	/**
 		Calculate cache object from source object.
 		\return	positive weight value if succeded of negative value (-1) if failed.
 	*/
-	virtual double CalcCacheObject(const Key& key, const SourceObject& source, CacheObject& cache) const = 0;
+	virtual double CalcCacheObject(
+				const Key& key,
+				const SourceObject& source,
+				CacheObject& cache) const = 0;
 	virtual const SourceObject* LockSourceObject(const Key& key) = 0;
 	virtual void UnlockSourceObject(const Key& key, const SourceObject* sourcePtr) = 0;
 

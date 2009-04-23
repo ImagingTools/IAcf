@@ -53,7 +53,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -126,7 +126,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -175,12 +175,24 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\iqtproc.h"
 				>
@@ -202,10 +214,22 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\generated\moc_CProgressManagerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CProgressManagerGuiComp.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.ui"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

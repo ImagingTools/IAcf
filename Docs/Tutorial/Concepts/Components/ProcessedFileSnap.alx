@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="26">
@@ -13,7 +24,7 @@
         587
       </X>
       <X>
-        -62
+        -60
       </X>
     </Element>
     <Element>
@@ -87,10 +98,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -50
+        -48
       </X>
       <X>
-        -37
+        -35
       </X>
     </Element>
     <Element>
@@ -142,7 +153,7 @@
         Framework
       </ComponentName>
       <X>
-        -225
+        -223
       </X>
       <X>
         87
@@ -156,7 +167,7 @@
         225
       </X>
       <X>
-        -162
+        -160
       </X>
     </Element>
     <Element>
@@ -263,7 +274,7 @@
         ProcessedCamera
       </ComponentName>
       <X>
-        -200
+        -198
       </X>
       <X>
         287
@@ -277,7 +288,7 @@
         237
       </X>
       <X>
-        -37
+        -35
       </X>
     </Element>
     <Element>

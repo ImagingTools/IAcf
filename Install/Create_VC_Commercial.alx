@@ -15,104 +15,93 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
-        Bitmap
+        Application
       </ComponentName>
       <X>
-        325
+        40
       </X>
       <X>
-        -186
+        -255
       </X>
     </Element>
     <Element>
       <ComponentName>
-        MILSearchParamsGui
+        Application_
       </ComponentName>
       <X>
-        350
+        40
       </X>
       <X>
-        -11
+        -257
       </X>
     </Element>
     <Element>
       <ComponentName>
-        MilSearchParams
+        Copy
       </ComponentName>
       <X>
-        125
+        90
       </X>
       <X>
-        -261
+        -41
       </X>
     </Element>
     <Element>
       <ComponentName>
-        MilSearchProcessor
+        CopyHeaders
       </ComponentName>
       <X>
-        -136
+        1
       </X>
       <X>
-        -11
+        -10
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ParamsSetGui
+        InitSeqence
       </ComponentName>
       <X>
-        100
+        -8
       </X>
       <X>
-        -11
+        171
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SearchBasedTask
+        InitSequence
       </ComponentName>
       <X>
-        -461
+        368
       </X>
       <X>
-        -136
+        -8
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SearchGui
+        Log
       </ComponentName>
       <X>
-        50
+        97
       </X>
       <X>
-        -136
+        115
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SearchParamsSet
+        VersionInfo
       </ComponentName>
       <X>
-        -199
+        -353
       </X>
       <X>
-        -261
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SearchResults
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        -111
+        -254
       </X>
     </Element>
   </PositionMap>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          857
+          860
         </Number>
         <Description>
           ACF
@@ -164,10 +164,10 @@
         Info
       </ComponentName>
       <X>
-        -776
+        -527
       </X>
       <X>
-        -165
+        -104
       </X>
     </Element>
     <Element>
@@ -186,10 +186,10 @@
         LogTab
       </ComponentName>
       <X>
-        -650
+        -191
       </X>
       <X>
-        1
+        -371
       </X>
     </Element>
     <Element>
@@ -252,10 +252,10 @@
         Product
       </ComponentName>
       <X>
-        353
+        137
       </X>
       <X>
-        128
+        162
       </X>
     </Element>
     <Element>
@@ -263,10 +263,10 @@
         ProductEditor
       </ComponentName>
       <X>
-        -51
+        -109
       </X>
       <X>
-        120
+        162
       </X>
     </Element>
     <Element>
@@ -274,10 +274,10 @@
         ProductGui
       </ComponentName>
       <X>
-        165
+        37
       </X>
       <X>
-        5
+        12
       </X>
     </Element>
     <Element>
@@ -307,10 +307,10 @@
         SceneGui
       </ComponentName>
       <X>
-        322
+        -122
       </X>
       <X>
-        -180
+        12
       </X>
     </Element>
     <Element>
@@ -395,10 +395,10 @@
         SnapTab
       </ComponentName>
       <X>
-        -111
+        -57
       </X>
       <X>
-        -137
+        -112
       </X>
     </Element>
     <Element>
@@ -406,10 +406,10 @@
         Tabs
       </ComponentName>
       <X>
-        -347
+        -147
       </X>
       <X>
-        -136
+        -234
       </X>
     </Element>
     <Element>

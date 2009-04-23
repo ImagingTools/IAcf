@@ -9,12 +9,21 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* iqtproc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* iqtproc.h */; };
 		223456800ED2E572006EC826 /* TSupplierGuiCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* TSupplierGuiCompBase.h */; };
+		EA4993480F9FC98A00926D4D /* CProgressManagerGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4993450F9FC98A00926D4D /* CProgressManagerGuiComp.cpp */; };
+		EA4993490F9FC98A00926D4D /* CProgressManagerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4993460F9FC98A00926D4D /* CProgressManagerGuiComp.h */; };
+		EA4997860F9FCD3000926D4D /* moc_CProgressManagerGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4997840F9FCD3000926D4D /* moc_CProgressManagerGuiComp.cpp */; };
+		EA4997870F9FCD3000926D4D /* ui_CProgressManagerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4997850F9FCD3000926D4D /* ui_CProgressManagerGuiComp.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* iqtproc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iqtproc.h; path = ../iqtproc.h; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* TSupplierGuiCompBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSupplierGuiCompBase.h; path = ../TSupplierGuiCompBase.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libiqtproc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtproc.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4993450F9FC98A00926D4D /* CProgressManagerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CProgressManagerGuiComp.cpp; path = ../CProgressManagerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		EA4993460F9FC98A00926D4D /* CProgressManagerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CProgressManagerGuiComp.h; path = ../CProgressManagerGuiComp.h; sourceTree = SOURCE_ROOT; };
+		EA4993470F9FC98A00926D4D /* CProgressManagerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = CProgressManagerGuiComp.ui; path = ../CProgressManagerGuiComp.ui; sourceTree = SOURCE_ROOT; };
+		EA4997840F9FCD3000926D4D /* moc_CProgressManagerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CProgressManagerGuiComp.cpp; path = ../Generated/moc_CProgressManagerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
+		EA4997850F9FCD3000926D4D /* ui_CProgressManagerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui_CProgressManagerGuiComp.h; path = ../Generated/ui_CProgressManagerGuiComp.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,39 +51,35 @@
 			name = iqtproc;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* iqtproc.h */,
-				123456800ED2E572006EC826 /* TSupplierGuiCompBase.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EA4993450F9FC98A00926D4D /* CProgressManagerGuiComp.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libiqtproc.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				EA4993470F9FC98A00926D4D /* CProgressManagerGuiComp.ui */,
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				EA4997840F9FCD3000926D4D /* moc_CProgressManagerGuiComp.cpp */,
+				EA4997850F9FCD3000926D4D /* ui_CProgressManagerGuiComp.h */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -86,12 +91,21 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libiqtproc.a */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				EA4993460F9FC98A00926D4D /* CProgressManagerGuiComp.h */,
+				123456790ED2E572006EC826 /* iqtproc.h */,
+				123456800ED2E572006EC826 /* TSupplierGuiCompBase.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,6 +117,8 @@
 			files = (
 				223456790ED2E572006EC826 /* iqtproc.h in Headers */,
 				223456800ED2E572006EC826 /* TSupplierGuiCompBase.h in Headers */,
+				EA4993490F9FC98A00926D4D /* CProgressManagerGuiComp.h in Headers */,
+				EA4997870F9FCD3000926D4D /* ui_CProgressManagerGuiComp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,12 +168,16 @@
 			files = (
 			);
 			inputPaths = (
+				../CProgressManagerGuiComp.h,
+				../CProgressManagerGuiComp.ui,
 			);
 			outputPaths = (
+				../Generated/moc_CProgressManagerGuiComp.cpp,
+				../Generated/ui_CProgressManagerGuiComp.h,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "moc -o ../Generated/moc_CProgressManagerGuiComp.cpp ../CProgressManagerGuiComp.h\nuic -o ../Generated/ui_CProgressManagerGuiComp.h ../CProgressManagerGuiComp.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -166,6 +186,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA4993480F9FC98A00926D4D /* CProgressManagerGuiComp.cpp in Sources */,
+				EA4997860F9FCD3000926D4D /* moc_CProgressManagerGuiComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,20 +197,25 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_DEBUG=1",
-					
-				);
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../,
+					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtproc;
 				ZERO_LINK = YES;
@@ -198,16 +225,22 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					
-				);
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../,
+					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtproc;
 			};
@@ -217,11 +250,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_DEBUG=1",
-					
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -244,10 +274,8 @@
 					i386,
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

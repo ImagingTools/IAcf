@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          834
+          860
         </Number>
         <Description>
           ACF
@@ -68,7 +68,7 @@
         47
       </X>
       <X>
-        -4
+        -3
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -496
+        -495
       </X>
       <X>
-        -157
+        -156
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -496
+        -495
       </X>
       <X>
-        -12
+        -11
       </X>
     </Element>
     <Element>
@@ -123,7 +123,7 @@
         168
       </X>
       <X>
-        -130
+        -129
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -208
+        -207
       </X>
       <X>
-        -158
+        -157
       </X>
     </Element>
     <Element>
@@ -164,10 +164,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -209
+        -208
       </X>
       <X>
-        -5
+        -4
       </X>
     </Element>
   </PositionMap>

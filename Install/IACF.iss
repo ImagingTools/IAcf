@@ -1,11 +1,12 @@
 #define AVTDIR GetEnv("AVTDIR")
 
 [Setup]
-AppVerName=IACF$WCMIXED? <Dirty>:$$WCMODS? <Local>:$
-AppVersion=0.6
+AppVerName=$AcfProductName$ $AcfVersion:10$
+AppVersion=$AcfVersion:10$
 AppPublisher=ImagingTools
 AppPublisherURL=http://www.imagingtools.de/
 AppName=IACF
+OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$
 
 DefaultDirName={sd}\ImagingTools\IACF
 WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
@@ -15,13 +16,15 @@ AlwaysShowDirOnReadyPage=True
 DefaultGroupName=ImagingTools\IACF
 DisableProgramGroupPage=True
 UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
-UninstallDisplayName=IACF
+UninstallDisplayName=$AcfProductName$ $AcfVersion:10$
 OutputDir=..\Setup
-LicenseFile=..\..\IACF-License.txt
+LicenseFile=$LicensePath$
 InfoAfterFile=..\InfoAfter.txt
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: iacfComp
+Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\DebugVC8; Flags: recursesubdirs; Components: iacfComp
+Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\ReleaseVC8; Flags: recursesubdirs; Components: iacfComp
 
 Source: {#AVTDIR}\FireGrab\*.dll; DestDir: {app}\ExtLib\Bin; Components: avtComp
 Source: {#AVTDIR}\*; DestDir: {app}\ExtLib\AVT; Flags: recursesubdirs; Excludes: *.dll; Components: avtComp

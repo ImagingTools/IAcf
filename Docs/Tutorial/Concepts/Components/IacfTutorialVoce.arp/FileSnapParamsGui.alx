@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="28">
@@ -98,7 +109,7 @@
         FileSnapGui
       </ComponentName>
       <X>
-        -12
+        -11
       </X>
       <X>
         312
@@ -285,7 +296,7 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -37
+        -36
       </X>
       <X>
         212

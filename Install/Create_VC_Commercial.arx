@@ -18,31 +18,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        FileSnapGui
+        Application
       </Id>
       <PackageId>
-        QtPck
+        InstallVoce
       </PackageId>
       <ComponentId>
-        FileNameParamGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SnapParamsGui
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSetGui
+        CreateInstallationCommercial
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -51,10 +33,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Editors
+              ApplicationInfo
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -63,16 +45,14 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileSnapGui
-                </Value>
-              </Values>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Ids
+              BinaryExcludeFilters
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -84,9 +64,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
-                  FileBitmapAcquisition
+                  *Xcd
+                </Value>
+                <Value>
+                  *QMake
                 </Value>
               </Values>
             </Data>
@@ -94,30 +77,70 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                IACF_Commercial
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsExtensionUsed
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        imod::IModelEditor
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        SnapParamsGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IObserver
-      </InterfaceId>
-      <ComponentId>
-        SnapParamsGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
-      </InterfaceId>
-      <ComponentId>
-        SnapParamsGui
+        Application
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

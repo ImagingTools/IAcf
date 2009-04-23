@@ -211,11 +211,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IProgressEventHandler.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IProgressInfo.h"
+				RelativePath="..\IProgressManager.h"
 				>
 			</File>
 			<File
