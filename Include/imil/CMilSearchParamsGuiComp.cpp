@@ -30,7 +30,7 @@ CMilSearchParamsGuiComp::CMilSearchParamsGuiComp()
 
 // reimplemented (imod::IModelEditor)
 
-void CMilSearchParamsGuiComp::UpdateEditor()
+void CMilSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	imil::CMilSearchParams* paramsPtr = GetObjectPtr();
 	if (paramsPtr == NULL){

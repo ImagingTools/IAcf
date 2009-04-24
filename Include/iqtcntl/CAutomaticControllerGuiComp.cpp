@@ -16,7 +16,7 @@ void CAutomaticControllerGuiComp::UpdateModel() const
 }
 
 
-void CAutomaticControllerGuiComp::UpdateEditor()
+void CAutomaticControllerGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	const icntl::IAutomaticController* modelPtr = GetObjectPtr();
 	if (IsGuiCreated() && (modelPtr != NULL)){

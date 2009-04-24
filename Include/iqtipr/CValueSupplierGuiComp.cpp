@@ -20,7 +20,7 @@ void CValueSupplierGuiComp::UpdateModel() const
 }
 
 
-void CValueSupplierGuiComp::UpdateEditor()
+void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
 	iproc::IIdManager* idManagerPtr = GetIdManager();

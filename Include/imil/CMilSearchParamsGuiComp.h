@@ -28,7 +28,7 @@ public:
 	CMilSearchParamsGuiComp();
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
 protected slots:

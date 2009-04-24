@@ -26,7 +26,7 @@ void CSwissRangerParamsGuiComp::UpdateModel() const
 }
 
 
-void CSwissRangerParamsGuiComp::UpdateEditor()
+void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
 	if (IsGuiCreated() && (objectPtr != NULL)){

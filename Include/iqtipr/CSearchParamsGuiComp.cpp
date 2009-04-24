@@ -10,7 +10,7 @@ namespace iqtipr
 
 // reimplemented (imod::IModelEditor)
 
-void CSearchParamsGuiComp::UpdateEditor()
+void CSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::ISearchParams* paramsPtr = GetObjectPtr();
 	if (paramsPtr == NULL){

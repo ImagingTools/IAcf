@@ -33,7 +33,7 @@ void CIterativeProcessorParamsGuiComp::UpdateModel() const
 }
 
 
-void CIterativeProcessorParamsGuiComp::UpdateEditor()
+void CIterativeProcessorParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::CIterativeProcessorParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

@@ -17,7 +17,7 @@ void CSamplingParamsGuiComp::UpdateModel() const
 }
 
 
-void CSamplingParamsGuiComp::UpdateEditor()
+void CSamplingParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	isig::ISamplingParams* objectPtr = GetObjectPtr();
 	if (IsGuiCreated() && (objectPtr != NULL)){

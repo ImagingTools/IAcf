@@ -42,7 +42,7 @@ void CRectangularFilterParamsGuiComp::UpdateModel() const
 }
 
 
-void CRectangularFilterParamsGuiComp::UpdateEditor()
+void CRectangularFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

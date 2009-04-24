@@ -103,7 +103,7 @@ void CExposureParamsGuiComp::UpdateModel() const
 }
 
 
-void CExposureParamsGuiComp::UpdateEditor()
+void CExposureParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	icam::IExposureParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

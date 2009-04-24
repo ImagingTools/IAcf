@@ -39,7 +39,7 @@ void CCaliperParamsGuiComp::UpdateModel() const
 }
 
 
-void CCaliperParamsGuiComp::UpdateEditor()
+void CCaliperParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::ICaliperParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

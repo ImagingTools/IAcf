@@ -40,7 +40,7 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 
 protected slots:
 	void on_SnapImageButton_clicked();

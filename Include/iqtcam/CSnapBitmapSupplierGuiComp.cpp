@@ -18,7 +18,7 @@ void CSnapBitmapSupplierGuiComp::UpdateModel() const
 }
 
 
-void CSnapBitmapSupplierGuiComp::UpdateEditor()
+void CSnapBitmapSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	icam::CSnapBitmapSupplierComp* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
