@@ -6,9 +6,6 @@
 
 
 /**
-	\defgroup iqtipr Qt Based Image Processing 
-	\ingroup ACF
-
 	This package contains Qt based implementations of image processing components.
 */
 

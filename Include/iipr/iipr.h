@@ -7,10 +7,7 @@
 
 
 /**
-	\defgroup image processing Image Processing
-	\ingroup ACF
-
-	Contains the system image processing classes.
+	Contains the image processing classes.
 	This package use following ACF packages:
 	\li istd
 	\li iser

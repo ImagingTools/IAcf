@@ -9,17 +9,6 @@
 
 
 /**
-\defgroup icam Image acquisition and processing.
-\ingroup ACF
-@{
-*/
-
-/** 
-@} 
-*/
-
-
-/**
 	Containes interfaces, implementations and components of image acquisition and processing.
 	This package is system independent.
 	This package use following ACF packages:

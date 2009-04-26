@@ -8,7 +8,7 @@ AppPublisherURL=http://www.imagingtools.de/
 AppName=IACF
 OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$
 
-DefaultDirName={sd}\ImagingTools\IACF
+DefaultDirName={pf}\ImagingTools\IACF
 WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
 WizardSmallImageFile=..\..\Docs\Images\Logo\Logo_128x128.bmp
 SetupIconFile=..\..\Docs\Images\Logo\Logo.ico

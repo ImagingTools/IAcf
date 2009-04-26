@@ -6,9 +6,6 @@
 
 
 /**
-	\defgroup iqtcam Qt Based Camera
-	\ingroup ACF
-
 	This package contains Qt based camera implementations.
 */
 
