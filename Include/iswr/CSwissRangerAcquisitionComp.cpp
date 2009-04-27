@@ -48,7 +48,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 	if (swissRangerParamsPtr != NULL){
 		int currentCameraMode = SR_GetMode(m_cameraPtr);
 
-		if(!swissRangerParamsPtr->GetMedianFilterEnabled()){
+		if(!swissRangerParamsPtr->IsMedianFilterEnabled()){
 			currentCameraMode = currentCameraMode & ~AM_MEDIAN;
 		}
 		else{
@@ -57,7 +57,9 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 
 		SR_SetMode(m_cameraPtr, currentCameraMode);		
 		SR_SetModulationFrequency(m_cameraPtr, ModulationFrq(swissRangerParamsPtr->GetModulationFrequencyMode()));
-		SR_SetAmplitudeThreshold(m_cameraPtr, I_WORD(swissRangerParamsPtr->GetAmplitudeThreshold() * (1 << 16)));
+
+		I_WORD amplitudeThreshold = I_WORD(swissRangerParamsPtr->GetAmplitudeThreshold() * (1 << 16)); 
+		SR_SetAmplitudeThreshold(m_cameraPtr, amplitudeThreshold);
 	}
 
 	// setup exposure params:
@@ -113,7 +115,9 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 							I_ASSERT(zValue >= 0.0f);
 							I_ASSERT(zValue <= maxDistance);
 
-							outputBitmapPtr[x] = I_BYTE(zValue / maxDistance * 255);
+							double normedZValue = zValue / maxDistance;
+
+							outputBitmapPtr[x] = I_BYTE(normedZValue * 255.0);
 						}
 					}
 
@@ -122,9 +126,6 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			}
 			else{
 				// ... process the SwissRanger image
-				for (int imageIndex = 0; imageIndex < m_imagesCount; imageIndex++){
-					SR_GetImage(m_cameraPtr, (unsigned char)imageIndex);
-				}
 			}
 		}
 	}

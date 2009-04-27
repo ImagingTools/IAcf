@@ -19,7 +19,7 @@ public:
 
 	// reimplemented (iswr::ISwissRangerParams)
 	virtual void SetMedianFilterEnabled(bool isMedianFilterEnabled = true);
-	virtual bool GetMedianFilterEnabled() const;
+	virtual bool IsMedianFilterEnabled() const;
 	virtual void SetAmplitudeThreshold(double amplitudeThreshold);
 	virtual double GetAmplitudeThreshold() const;
 	virtual void SetModulationFrequencyMode(int modulationFrequencyMode);

@@ -19,7 +19,7 @@ class ISwissRangerParams: virtual public iser::ISerializable
 {
 public:
 	virtual void SetMedianFilterEnabled(bool isEnabled = true) = 0;
-	virtual bool GetMedianFilterEnabled() const = 0;
+	virtual bool IsMedianFilterEnabled() const = 0;
 
 	virtual void SetAmplitudeThreshold(double amplitudeThreshold) = 0;
 	virtual double GetAmplitudeThreshold() const = 0;

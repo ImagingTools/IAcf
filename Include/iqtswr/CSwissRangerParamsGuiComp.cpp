@@ -19,7 +19,7 @@ void CSwissRangerParamsGuiComp::UpdateModel() const
 		istd::TChangeNotifier<iswr::ISwissRangerParams> changePtr(objectPtr);
 		UpdateBlocker block(const_cast<CSwissRangerParamsGuiComp*>(this));
 
-		objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSlider->value() /100.0);
+		objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSpin->value() / 100.0);
 		objectPtr->SetModulationFrequencyMode(ModulationFrequencyModeCombo->currentIndex());
 		objectPtr->SetMedianFilterEnabled(MedianFilterCheck->isChecked());
 	}
@@ -31,9 +31,9 @@ void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
 	if (IsGuiCreated() && (objectPtr != NULL)){
 		iqt::CSignalBlocker block(GetWidget(), true);
-		AmplitudeThresholdSlider->setValue(objectPtr->GetAmplitudeThreshold() * 100);
+		AmplitudeThresholdSpin->setValue(objectPtr->GetAmplitudeThreshold() * 100);
 		ModulationFrequencyModeCombo->setCurrentIndex(objectPtr->GetModulationFrequencyMode());
-		MedianFilterCheck->setChecked(objectPtr->GetMedianFilterEnabled());
+		MedianFilterCheck->setChecked(objectPtr->IsMedianFilterEnabled());
 	}
 }
 
@@ -53,7 +53,7 @@ void CSwissRangerParamsGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	connect(ModulationFrequencyModeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(OnModelChanged()));
-	connect(AmplitudeThresholdSlider, SIGNAL(valueChanged(int)), this, SLOT(OnModelChanged()));
+	connect(AmplitudeThresholdSpin, SIGNAL(valueChanged(int)), this, SLOT(OnModelChanged()));
 	connect(MedianFilterCheck, SIGNAL(stateChanged(int)), this, SLOT(OnModelChanged()));
 }
 

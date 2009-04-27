@@ -39,7 +39,7 @@ void CSwissRangerParams::SetMedianFilterEnabled(bool isMedianFilterEnabled)
 }
 
 
-bool CSwissRangerParams::GetMedianFilterEnabled() const
+bool CSwissRangerParams::IsMedianFilterEnabled() const
 {
 	return m_isMedianFilterEnabled;
 }
@@ -57,7 +57,7 @@ void CSwissRangerParams::SetAmplitudeThreshold(double amplitudeThreshold)
 
 double CSwissRangerParams::GetAmplitudeThreshold() const
 {
-	return m_isMedianFilterEnabled;
+	return m_amplitudeThreshold;
 }
 
 

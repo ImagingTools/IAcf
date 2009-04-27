@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>58</height>
+    <width>216</width>
+    <height>101</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -17,107 +17,83 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" >
-     <item>
-      <widget class="QCheckBox" name="MedianFilterCheck" >
+    <widget class="QCheckBox" name="MedianFilterCheck" >
+     <property name="text" >
+      <string>Enable Median Filter</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout" >
+     <item row="0" column="0" >
+      <widget class="QLabel" name="label_2" >
        <property name="text" >
-        <string>Enable Median Filter</string>
+        <string>Modulation Frequency</string>
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item row="0" column="1" >
+      <widget class="QComboBox" name="ModulationFrequencyModeCombo" >
        <item>
-        <widget class="QLabel" name="label_2" >
-         <property name="text" >
-          <string>Modulation Frequency</string>
-         </property>
-        </widget>
+        <property name="text" >
+         <string>40MHz</string>
+        </property>
        </item>
        <item>
-        <widget class="QComboBox" name="ModulationFrequencyModeCombo" >
-         <item>
-          <property name="text" >
-           <string>40MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>30MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>21MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>20MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>19MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>60MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>15MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>10MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>29MHz</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>31MHz</string>
-          </property>
-         </item>
-        </widget>
+        <property name="text" >
+         <string>30MHz</string>
+        </property>
        </item>
-      </layout>
+       <item>
+        <property name="text" >
+         <string>21MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>20MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>19MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>60MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>15MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>10MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>29MHz</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>31MHz</string>
+        </property>
+       </item>
+      </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3" >
-     <item>
+     <item row="1" column="0" >
       <widget class="QLabel" name="label" >
        <property name="text" >
         <string>Amplitude Threshold</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QSlider" name="AmplitudeThresholdSlider" >
-       <property name="maximum" >
-        <number>100</number>
-       </property>
-       <property name="singleStep" >
-        <number>5</number>
-       </property>
-       <property name="value" >
-        <number>50</number>
-       </property>
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
+     <item row="1" column="1" >
       <widget class="QSpinBox" name="AmplitudeThresholdSpin" >
        <property name="suffix" >
         <string>%</string>
@@ -151,22 +127,5 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>AmplitudeThresholdSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>AmplitudeThresholdSpin</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>144</x>
-     <y>37</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>334</x>
-     <y>44</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
