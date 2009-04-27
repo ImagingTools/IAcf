@@ -5,12 +5,19 @@
 // Qt includes
 #include <QTimer>
 
+
 // ACF includes
 #include "iser/IFileLoader.h"
+
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
+
 #include "iimg/IBitmap.h"
+
+#include "icmm/IColorTransformation.h"
+
 #include "iprm/IParamsSet.h"
+
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqt2d/TSceneExtenderCompBase.h"
@@ -37,6 +44,7 @@ public:
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap will be shown", true, "Bitmap");
 		I_ASSIGN(m_bitmapModelCompPtr, "Bitmap", "Bitmap will be shown", true, "Bitmap");
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision obje for image snap", false, "BitmapAcquisition");
+		I_ASSIGN(m_lookupTableCompPtr, "LookupTable", "Lookup table for pseudo colors in the image view", false, "LookupTable");
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
@@ -78,6 +86,7 @@ private:
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
 	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
+	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);

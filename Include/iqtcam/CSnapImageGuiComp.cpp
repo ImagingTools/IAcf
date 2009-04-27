@@ -136,7 +136,12 @@ bool CSnapImageGuiComp::SnapImage()
 void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
 	if (m_bitmapModelCompPtr.IsValid()){
-		istd::TDelPtr<iqt2d::CImageShape> shapePtr(new iqt2d::CImageShape);
+		icmm::IColorTransformation* lookupTablePtr = NULL;
+		if (m_lookupTableCompPtr.IsValid()){
+			lookupTablePtr = m_lookupTableCompPtr.GetPtr();
+		}
+
+		istd::TDelPtr<iqt2d::CImageShape> shapePtr(new iqt2d::CImageShape(lookupTablePtr));
 		if (shapePtr != NULL){
 			if (m_bitmapModelCompPtr->AttachObserver(shapePtr.GetPtr())){
 				result.PushBack(shapePtr.PopPtr());
