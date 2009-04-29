@@ -159,6 +159,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSwissRangerImage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSwissRangerImageLoader.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSwissRangerParams.cpp"
 				>
 			</File>
@@ -173,7 +181,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSwissRangerImage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSwissRangerImageLoader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSwissRangerParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ISwissRangerConstrains.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ISwissRangerImage.h"
 				>
 			</File>
 			<File

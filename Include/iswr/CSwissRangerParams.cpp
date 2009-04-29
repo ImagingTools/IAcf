@@ -22,7 +22,8 @@ namespace iswr
 CSwissRangerParams::CSwissRangerParams()
 	:m_isMedianFilterEnabled(true),
 	m_amplitudeThreshold(0.0),
-	m_modulationFrequencyMode(MF_40MHz)
+	m_modulationFrequencyMode(MF_40MHz),
+	m_distanceClipRange(0.0, 1.0)
 {
 }
 
@@ -77,6 +78,22 @@ int CSwissRangerParams::GetModulationFrequencyMode() const
 }
 
 
+void CSwissRangerParams::SetDistanceClipRange(const istd::CRange& distanceClipRange)
+{
+	if (distanceClipRange != m_distanceClipRange){
+		istd::CChangeNotifier changePtr(this);
+
+		m_distanceClipRange = distanceClipRange;
+	}
+}
+
+
+const istd::CRange& CSwissRangerParams::GetDistanceClipRange() const
+{
+	return m_distanceClipRange;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 
@@ -99,11 +116,15 @@ bool CSwissRangerParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_modulationFrequencyMode);
 	retVal = retVal && archive.EndTag(modulationFrequencyModeTag);
 
+	static iser::CArchiveTag distanceClipRangeTag("DistanceClipRange", "DistanceClipRange");
+	retVal = retVal && archive.BeginTag(distanceClipRangeTag);
+	retVal = retVal && archive.ProcessData(&m_distanceClipRange, sizeof(istd::CRange));
+	retVal = retVal && archive.EndTag(distanceClipRangeTag);
+
 	return retVal;
 }
 
 
 } // namespace iswr
-
 
 

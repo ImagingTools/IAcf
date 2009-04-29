@@ -45,6 +45,8 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			paramsPtr->GetParameter((*m_swissRangerParamsIdAttrPtr).ToString()));
 	}
 
+	istd::CRange clippingDistanceRange(0, 1.0);
+
 	if (swissRangerParamsPtr != NULL){
 		int currentCameraMode = SR_GetMode(m_cameraPtr);
 
@@ -54,6 +56,8 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		else{
 			currentCameraMode = currentCameraMode  | AM_MEDIAN;
 		}
+
+		clippingDistanceRange = swissRangerParamsPtr->GetDistanceClipRange();
 
 		SR_SetMode(m_cameraPtr, currentCameraMode);		
 		SR_SetModulationFrequency(m_cameraPtr, ModulationFrq(swissRangerParamsPtr->GetModulationFrequencyMode()));
@@ -82,58 +86,52 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		SR_SetIntegrationTime(m_cameraPtr, integrationTime);
 	}
 
-	static float maxDistances[MF_LAST] = {3.75f,5.0f,7.142f, 7.5f,7.895f, 2.6f, 10.f, 15.f, 5.1724f, 4.8387f};//MF_40MHz,MF_30MHz,MF_21MHz,MF_20MHz,MF_19MHz,...
+	static float maxDistances[MF_LAST] = {
+				3.75f,
+				5.0f,
+				7.142f, 
+				7.5f,
+				7.895f, 
+				2.6f, 
+				10.f, 
+				15.f, 
+				5.1724f, 
+				4.8387f};//MF_40MHz,MF_30MHz,MF_21MHz,MF_20MHz,MF_19MHz,...
+	
 	ModulationFrq frq = SR_GetModulationFrequency(m_cameraPtr);
-
 	float maxDistance = maxDistances[frq];
 
+	// acquire camera image:
 	SR_Acquire(m_cameraPtr);
 
-	int retVal = TS_INVALID;
-
+	// create output:
 	if (outputPtr != NULL){
-		istd::CIndex2d size = GetBitmapSize(paramsPtr);
-		if (!size.IsSizeEmpty()){
-			SR_CoordTrfFlt(
-						m_cameraPtr, 
-						m_xBuffer.GetPtr(), 
-						m_yBuffer.GetPtr(), 
-						m_zBuffer.GetPtr(), 
-						sizeof(float),
-						sizeof(float),
-						sizeof(float));
+		SR_CoordTrfFlt(
+			m_cameraPtr, 
+			m_xBuffer.GetPtr(), 
+			m_yBuffer.GetPtr(), 
+			m_zBuffer.GetPtr(), 
+			sizeof(float),
+			sizeof(float),
+			sizeof(float));
 
-			istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
-			if (bitmapPtr.IsValid()){
-				if (bitmapPtr->CreateBitmap(size)){
-					for (int y = 0; y < size.GetY(); ++y){
-						I_BYTE* outputBitmapPtr = (I_BYTE*)bitmapPtr->GetLinePtr(y);
-						float* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
-
-						for (int x = 0; x < size.GetX(); x++){
-							float zValue = *(zBufferPtr + x);
-							I_ASSERT(zValue >= 0.0f);
-							I_ASSERT(zValue <= maxDistance);
-
-							double normedZValue = zValue / maxDistance;
-
-							outputBitmapPtr[x] = I_BYTE(normedZValue * 255.0);
-						}
-					}
-
-					retVal = TS_OK;
-				}
+		istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
+		if (bitmapPtr.IsValid()){
+			if (!CreateOutputBitmap(*bitmapPtr.GetPtr(), maxDistance, clippingDistanceRange)){
+				return TS_INVALID;
 			}
-			else{
-				// ... process the SwissRanger image
+		}
+		else{
+			istd::TChangeNotifier<iswr::ISwissRangerImage> swissImagePtr(dynamic_cast<iswr::ISwissRangerImage*>(outputPtr));
+			if (swissImagePtr.IsValid()){
+				if (!CreateSwissImage(*swissImagePtr.GetPtr())){
+					return TS_INVALID;
+				}
 			}
 		}
 	}
-	else{
-		retVal = TS_OK;
-	}
 
-	return retVal;
+	return TS_OK;
 }
 
 
@@ -149,6 +147,14 @@ istd::CIndex2d CSwissRangerAcquisitionComp::GetBitmapSize(const iprm::IParamsSet
 	}
 
 	return istd::CIndex2d(-1, -1);	// unknown size
+}
+
+
+// reimplemented (iswr::ISwissRangerConstrains)
+
+const ISwissRangerConstrains::SupportedFrequencies& CSwissRangerAcquisitionComp::GetSupportedFrequences() const
+{
+	return m_supportedFrequencies;
 }
 
 
@@ -187,7 +193,7 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 		int timeout = int(*m_timeoutAttrPtr * 1000);
 		SR_SetTimeout(m_cameraPtr, timeout);
 	
-		SR_SetMode(m_cameraPtr, AM_MEDIAN | AM_COR_FIX_PTRN);
+		SR_SetMode(m_cameraPtr, AM_CONF_MAP | AM_MEDIAN | AM_COR_FIX_PTRN | AM_CONV_GRAY);
 		SR_SetModulationFrequency(m_cameraPtr, MF_40MHz);
 		SR_SetIntegrationTime(m_cameraPtr, 128);
 
@@ -198,6 +204,15 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 			m_xBuffer.SetPtr(new float[size.GetProductVolume()]);
 			m_yBuffer.SetPtr(new float[size.GetProductVolume()]);
 			m_zBuffer.SetPtr(new float[size.GetProductVolume()]);
+		}
+
+		// set device info
+		if (m_deviceInfoCompPtr.IsValid()){
+			char deviceString[4096] = {0};
+
+			SR_GetDeviceString(m_cameraPtr, deviceString, 4096);
+
+			m_deviceInfoCompPtr->SetDeviceId(deviceString);
 		}
 	}
 }
@@ -212,6 +227,48 @@ void CSwissRangerAcquisitionComp::OnComponentDestroyed()
 	}
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// private methods
+
+bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
+			iimg::IBitmap& bitmap, 
+			double maxDistance, 
+			const istd::CRange& clippingDistanceRange) const
+{
+	bool retVal = false;
+
+	istd::CIndex2d size = GetBitmapSize(NULL);
+	if (!size.IsSizeEmpty()){
+		if (bitmap.CreateBitmap(size)){
+			for (int y = 0; y < size.GetY(); ++y){
+				I_BYTE* outputBitmapPtr = (I_BYTE*)bitmap.GetLinePtr(y);
+				float* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+
+				for (int x = 0; x < size.GetX(); x++){
+					float zValue = *(zBufferPtr + x);
+					I_ASSERT(zValue >= 0.0f);
+					I_ASSERT(zValue <= maxDistance);
+
+					double normedZValue = zValue / maxDistance;
+					normedZValue = clippingDistanceRange.GetClipped(normedZValue);
+					normedZValue = clippingDistanceRange.GetMappedTo(normedZValue, istd::CRange(0, 1));
+					outputBitmapPtr[x] = I_BYTE(normedZValue * 255.0);
+				}
+			}
+
+			retVal = true;
+		}
+	}
+
+	return retVal;
+}
+
+
+bool CSwissRangerAcquisitionComp::CreateSwissImage(iswr::ISwissRangerImage& swissImage) const
+{
+	return true;
 }
 
 	

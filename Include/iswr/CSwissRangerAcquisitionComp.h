@@ -23,6 +23,11 @@
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
 
+#include "idev/IDeviceInfo.h"
+
+#include "iswr/ISwissRangerConstrains.h"
+#include "iswr/ISwissRangerImage.h"
+
 
 namespace iswr
 {
@@ -35,7 +40,8 @@ namespace iswr
 class CSwissRangerAcquisitionComp:
 			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>,
-			virtual public icam::IExposureConstraints
+			virtual public icam::IExposureConstraints,
+			virtual public iswr::ISwissRangerConstrains
 
 {
 public:
@@ -44,7 +50,9 @@ public:
 	I_BEGIN_COMPONENT(CSwissRangerAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
+		I_REGISTER_INTERFACE(iswr::ISwissRangerConstrains);
 		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
+		I_ASSIGN(m_deviceInfoCompPtr, "DeviceInfo", "Info about the SwissRanger sensor", false, "DeviceInfo");
 		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "Id used to get exposure parameters from the parameter set", false, "ExposureParamsId");
 		I_ASSIGN(m_swissRangerParamsIdAttrPtr, "SwissRangerParamsId", "Id used to get swiss ranger parameters from the parameter set", false, "SwissRangerParamsId");
 		I_ASSIGN(m_timeoutAttrPtr, "Timeout", "Acquisition timeout", true, 5.0);
@@ -71,6 +79,9 @@ public:
 	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
+	// reimplemented (iswr::ISwissRangerConstrains)
+	virtual const SupportedFrequencies& GetSupportedFrequences() const;
+
 	// reimplemented (icam::IExposureConstraints)
 	virtual istd::CRange GetShutterTimeRange() const;
 	virtual istd::CRange GetDelayTimeRange() const;
@@ -80,12 +91,13 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-protected:
-	/**
-		Check whether parameter was set correctly.
-	*/
-	bool CheckParameter(UINT16 parameterId, UINT32 setValue);
-	
+private:
+	bool CreateSwissImage(iswr::ISwissRangerImage& swissImage) const;
+	bool CreateOutputBitmap(
+				iimg::IBitmap& bitmap,
+				double maxDistance, 
+				const istd::CRange& clippingDistanceRange) const;
+
 private:
 	CMesaDevice* m_cameraPtr;
 
@@ -95,7 +107,10 @@ private:
 	istd::TDelPtr<float, true> m_yBuffer;
 	istd::TDelPtr<float, true> m_zBuffer;
 
+	SupportedFrequencies m_supportedFrequencies;
+
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
+	I_REF(idev::IDeviceInfo, m_deviceInfoCompPtr);
 	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_swissRangerParamsIdAttrPtr);
 	I_ATTR(double, m_timeoutAttrPtr);
