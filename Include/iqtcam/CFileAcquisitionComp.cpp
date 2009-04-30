@@ -47,7 +47,7 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 	QDir directory(iqt::GetQString(filesPath));
 
 	istd::CStringList extensions;
-	m_bitmapLoaderCompPtr->GetFileExtensions(extensions);
+	m_bitmapLoaderCompPtr->GetFileExtensions(extensions, iser::IFileLoader::QF_NO_SAVING);
 
 	ParamsInfo& info = m_dirInfos[filesPath];
 	if (info.filesIter == info.files.end()){
