@@ -6,6 +6,7 @@
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+#include "iser/CMemoryReadArchive.h"
 
 
 namespace iswr
@@ -19,8 +20,29 @@ CSwissRangerImage::CSwissRangerImage()
 }
 
 
-
 // reimplemented (iswr::ISwissRangerImage)
+
+bool CSwissRangerImage::CreateImage(
+				double* depthDataPtr, 
+				const iimg::IBitmap& amplitudeBitmap,
+				const iswr::ISwissRangerParams* paramsPtr,
+				const idev::IDeviceInfo* deviceInfoPtr)
+{
+	m_depthImage.Create(depthDataPtr, amplitudeBitmap.GetImageSize().GetX(), amplitudeBitmap.GetImageSize().GetY());
+	
+	bool retVal = m_amplitudeImage.CopyImageFrom(amplitudeBitmap);
+
+	if (paramsPtr != NULL){
+		retVal = retVal && iser::CMemoryReadArchive::CloneObjectByArchive(*paramsPtr, m_acquisitionParams);
+	}
+
+	if (paramsPtr != NULL){
+		retVal = retVal && iser::CMemoryReadArchive::CloneObjectByArchive(*deviceInfoPtr, m_sensorInfo);
+	}
+
+	return retVal;
+}
+
 
 const imath::ISampledFunction2d& CSwissRangerImage::GetDepthImage() const
 {

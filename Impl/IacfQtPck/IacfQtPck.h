@@ -6,6 +6,7 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "iqtproc/CProgressManagerGuiComp.h"
+#include "iqtproc/CAcquisitonProcessorGuiComp.h"
 
 #include "iqtsig/CSamplingParamsGuiComp.h"
 #include "iqtsig/CSampleAcquisitionGuiComp.h"
@@ -20,6 +21,7 @@ namespace IacfQtPck
 
 
 typedef iqtproc::CProgressManagerGuiComp ProgressManagerGui;
+typedef iqtproc::CAcquisitonProcessorGuiComp AcquisitionProcessorGui;
 
 typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
 typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;

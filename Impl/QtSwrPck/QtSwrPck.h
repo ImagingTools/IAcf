@@ -7,6 +7,7 @@
 
 
 #include "iqtswr/CSwissRangerParamsGuiComp.h"
+#include "iqtswr/CSwissRangerImageViewComp.h"
 
 
 /**
@@ -16,6 +17,7 @@ namespace QtSwrPck
 {
 
 typedef iqtswr::CSwissRangerParamsGuiComp SwissRangerParamsGui;
+typedef iqtswr::CSwissRangerImageViewComp SwissRangerImageView;
 
 } // namespace QtSwrPck
 

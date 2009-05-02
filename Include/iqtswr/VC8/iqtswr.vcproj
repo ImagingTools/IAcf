@@ -176,6 +176,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSwissRangerImageViewComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSwissRangerParamsGuiComp.cpp"
 				>
 			</File>
@@ -185,6 +193,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CSwissRangerImageViewComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CSwissRangerParamsGuiComp.h"
 				>
@@ -201,6 +213,10 @@
 			ParseFiles="false"
 			>
 			<File
+				RelativePath="..\CSwissRangerImageViewComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSwissRangerParamsGuiComp.moc"
 				>
 			</File>
@@ -210,6 +226,10 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\generated\moc_CSwissRangerImageViewComp.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\Generated\moc_CSwissRangerParamsGuiComp.cpp"
 				>
@@ -222,6 +242,10 @@
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CSwissRangerImageViewComp.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CSwissRangerParamsGuiComp.ui"
 				>

@@ -48,6 +48,7 @@ public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CSwissRangerAcquisitionComp);
+		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_REGISTER_INTERFACE(iswr::ISwissRangerConstrains);
@@ -92,7 +93,7 @@ public:
 	virtual void OnComponentDestroyed();
 
 private:
-	bool CreateSwissImage(iswr::ISwissRangerImage& swissImage) const;
+	bool CreateSwissImage(iswr::ISwissRangerImage& swissImage, iimg::IBitmap& amplitudeBitmap) const;
 	bool CreateOutputBitmap(
 				iimg::IBitmap& bitmap,
 				double maxDistance, 
@@ -103,9 +104,9 @@ private:
 
 	ImgEntry* m_imgEntryArray;
 	int m_imagesCount;
-	istd::TDelPtr<float, true> m_xBuffer;
-	istd::TDelPtr<float, true> m_yBuffer;
-	istd::TDelPtr<float, true> m_zBuffer;
+	istd::TDelPtr<double, true> m_xBuffer;
+	istd::TDelPtr<double, true> m_yBuffer;
+	istd::TDelPtr<double, true> m_zBuffer;
 
 	SupportedFrequencies m_supportedFrequencies;
 

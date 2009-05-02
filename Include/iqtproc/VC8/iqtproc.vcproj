@@ -176,6 +176,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CProgressManagerGuiComp.cpp"
 				>
 			</File>
@@ -185,6 +189,14 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CProgressManagerGuiComp.h"
 				>
@@ -215,6 +227,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CAcquisitonProcessorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CProgressManagerGuiComp.cpp"
 				>
 			</File>
@@ -226,6 +242,10 @@
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CProgressManagerGuiComp.ui"
 				>

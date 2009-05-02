@@ -4,10 +4,7 @@
 
 #include "iprm/IParamsSet.h"
 
-#include "icmm/CHsv.h"
-#include "icmm/CRgb.h"
-#include "icmm/CHsvToRgbTransformation.h"
-
+#include "iimg/CGeneralBitmap.h"
 
 #include "iswr/ISwissRangerParams.h"
 
@@ -106,14 +103,14 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 
 	// create output:
 	if (outputPtr != NULL){
-		SR_CoordTrfFlt(
+		SR_CoordTrfDbl(
 			m_cameraPtr, 
 			m_xBuffer.GetPtr(), 
 			m_yBuffer.GetPtr(), 
 			m_zBuffer.GetPtr(), 
-			sizeof(float),
-			sizeof(float),
-			sizeof(float));
+			sizeof(double),
+			sizeof(double),
+			sizeof(double));
 
 		istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
 		if (bitmapPtr.IsValid()){
@@ -122,10 +119,13 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			}
 		}
 		else{
-			istd::TChangeNotifier<iswr::ISwissRangerImage> swissImagePtr(dynamic_cast<iswr::ISwissRangerImage*>(outputPtr));
-			if (swissImagePtr.IsValid()){
-				if (!CreateSwissImage(*swissImagePtr.GetPtr())){
-					return TS_INVALID;
+			iimg::CGeneralBitmap amplitudeBitmap;
+			if (CreateOutputBitmap(amplitudeBitmap, maxDistance, clippingDistanceRange)){
+				istd::TChangeNotifier<iswr::ISwissRangerImage> swissImagePtr(dynamic_cast<iswr::ISwissRangerImage*>(outputPtr));
+				if (swissImagePtr.IsValid()){
+					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap)){
+						return TS_INVALID;
+					}
 				}
 			}
 		}
@@ -201,9 +201,9 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 
 		istd::CIndex2d size = GetBitmapSize(NULL);
 		if (!size.IsSizeEmpty()){
-			m_xBuffer.SetPtr(new float[size.GetProductVolume()]);
-			m_yBuffer.SetPtr(new float[size.GetProductVolume()]);
-			m_zBuffer.SetPtr(new float[size.GetProductVolume()]);
+			m_xBuffer.SetPtr(new double[size.GetProductVolume()]);
+			m_yBuffer.SetPtr(new double[size.GetProductVolume()]);
+			m_zBuffer.SetPtr(new double[size.GetProductVolume()]);
 		}
 
 		// set device info
@@ -214,6 +214,9 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 
 			m_deviceInfoCompPtr->SetDeviceId(deviceString);
 		}
+	}
+	else{
+		SendErrorMessage(0, "Could not open USB inteface", "SwissRanger");
 	}
 }
 
@@ -244,10 +247,10 @@ bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 		if (bitmap.CreateBitmap(size)){
 			for (int y = 0; y < size.GetY(); ++y){
 				I_BYTE* outputBitmapPtr = (I_BYTE*)bitmap.GetLinePtr(y);
-				float* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+				double* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
 
 				for (int x = 0; x < size.GetX(); x++){
-					float zValue = *(zBufferPtr + x);
+					double zValue = *(zBufferPtr + x);
 					I_ASSERT(zValue >= 0.0f);
 					I_ASSERT(zValue <= maxDistance);
 
@@ -266,12 +269,20 @@ bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 }
 
 
-bool CSwissRangerAcquisitionComp::CreateSwissImage(iswr::ISwissRangerImage& swissImage) const
+bool CSwissRangerAcquisitionComp::CreateSwissImage(
+			iswr::ISwissRangerImage& swissImage,
+			iimg::IBitmap& amplitudeBitmap) const
 {
-	return true;
+	if (m_zBuffer.IsValid()){
+		istd::CIndex2d size = GetBitmapSize(NULL);
+
+		return swissImage.CreateImage(m_zBuffer.GetPtr(), amplitudeBitmap);
+	}
+
+	return false;
 }
 
-	
+
 } // namespace iswr
 
 

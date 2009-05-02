@@ -23,6 +23,15 @@ class ISwissRangerImage: virtual public iser::ISerializable
 {
 public:
 	/**
+		Create image.
+	*/
+	virtual bool CreateImage(
+				double* depthDataPtr, 
+				const iimg::IBitmap& amplitudeBitmap,
+				const iswr::ISwissRangerParams* paramsPtr = NULL,
+				const idev::IDeviceInfo* deviceInfoPtr = NULL) = 0;
+
+	/**
 		Get depth image.
 	*/
 	virtual const imath::ISampledFunction2d& GetDepthImage() const = 0;

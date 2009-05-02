@@ -1,4 +1,4 @@
-#include "iqtswr/CSwissRangerParamsGuiComp.h"
+#include "iqtswr/CSwissRangerImageViewComp.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -12,64 +12,89 @@ namespace iqtswr
 
 // reimplemented (imod::IModelEditor)
 
-void CSwissRangerParamsGuiComp::UpdateModel() const
+void CSwissRangerImageViewComp::UpdateModel() const
 {
-	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL) && !IsUpdateBlocked()){
-		istd::TChangeNotifier<iswr::ISwissRangerParams> changePtr(objectPtr);
-		UpdateBlocker block(const_cast<CSwissRangerParamsGuiComp*>(this));
-
-		objectPtr->SetDistanceClipRange(istd::CRange(
-					DistanceClippingFromSpin->value() / 100.0,
-					DistanceClippingToSpin->value() / 100.0));
-		objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSpin->value() / 100.0);
-		objectPtr->SetModulationFrequencyMode(ModulationFrequencyModeCombo->currentIndex());
-		objectPtr->SetMedianFilterEnabled(MedianFilterCheck->isChecked());
-	}
 }
 
 
-void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+void CSwissRangerImageViewComp::UpdateEditor(int /*updateFlags*/)
 {
-	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL)){
-		iqt::CSignalBlocker block(GetWidget(), true);
-		AmplitudeThresholdSpin->setValue(objectPtr->GetAmplitudeThreshold() * 100);
-		DistanceClippingFromSpin->setValue(objectPtr->GetDistanceClipRange().GetMinValue() * 100);
-		DistanceClippingToSpin->setValue(objectPtr->GetDistanceClipRange().GetMaxValue() * 100);
-		ModulationFrequencyModeCombo->setCurrentIndex(objectPtr->GetModulationFrequencyMode());
-		MedianFilterCheck->setChecked(objectPtr->IsMedianFilterEnabled());
-	}
 }
 
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CSwissRangerParamsGuiComp::OnGuiModelAttached()
+void CSwissRangerImageViewComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
+
+	iswr::ISwissRangerImage* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(&objectPtr->GetDepthImage());
+		if (modelPtr != NULL && m_depthImage3dObserverCompPtr.IsValid()){
+			(const_cast<imod::IModel*>(modelPtr))->AttachObserver(m_depthImage3dObserverCompPtr.GetPtr());
+		}
+	}
+}
+
+
+void CSwissRangerImageViewComp::OnGuiModelDetached()
+{
+	iswr::ISwissRangerImage* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(&objectPtr->GetDepthImage());
+		if (modelPtr != NULL && m_depthImage3dObserverCompPtr.IsValid()){
+			(const_cast<imod::IModel*>(modelPtr))->DetachObserver(m_depthImage3dObserverCompPtr.GetPtr());
+		}
+	}
+
+	BaseClass::OnGuiModelDetached();
 }
 
 
 // reimplemented (iqtgui::CComponentBase)
 
-void CSwissRangerParamsGuiComp::OnGuiCreated()
+void CSwissRangerImageViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	connect(ModulationFrequencyModeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(OnModelChanged()));
-	connect(AmplitudeThresholdSpin, SIGNAL(valueChanged(double)), this, SLOT(OnModelChanged()));
-	connect(DistanceClippingFromSpin, SIGNAL(valueChanged(double)), this, SLOT(OnModelChanged()));
-	connect(DistanceClippingToSpin, SIGNAL(valueChanged(double)), this, SLOT(OnModelChanged()));
-	connect(MedianFilterCheck, SIGNAL(stateChanged(int)), this, SLOT(OnModelChanged()));
+	if (m_depthImage3dGuiCompPtr.IsValid()){
+		m_depthImage3dGuiCompPtr->CreateGui(DepthImageFrame);
+	}
+
+	if (m_depthImage2dGuiCompPtr.IsValid()){
+		m_depthImage2dGuiCompPtr->CreateGui(DepthImage2dFrame);
+	}
+
+	if (m_amplitudeImageGuiCompPtr.IsValid()){
+		m_amplitudeImageGuiCompPtr->CreateGui(AmplitudeImageFrame);
+	}
+
+	if (m_confidenceMapGuiCompPtr.IsValid()){
+		m_confidenceMapGuiCompPtr->CreateGui(ConfidenceMapFrame);
+	}
 }
 
 
-// protected slots
-
-void CSwissRangerParamsGuiComp::OnModelChanged()
+void CSwissRangerImageViewComp::OnGuiDestroyed()
 {
-	UpdateModel();
+	if (m_depthImage3dGuiCompPtr.IsValid()){
+		m_depthImage3dGuiCompPtr->DestroyGui();
+	}
+
+	if (m_depthImage2dGuiCompPtr.IsValid()){
+		m_depthImage2dGuiCompPtr->DestroyGui();
+	}
+
+	if (m_amplitudeImageGuiCompPtr.IsValid()){
+		m_amplitudeImageGuiCompPtr->DestroyGui();
+	}
+
+	if (m_confidenceMapGuiCompPtr.IsValid()){
+		m_confidenceMapGuiCompPtr->DestroyGui();
+	}
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

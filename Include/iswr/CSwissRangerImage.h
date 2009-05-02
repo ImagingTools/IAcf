@@ -2,12 +2,16 @@
 #define iswr_CSwissRangerImage_included
 
 
-#include "iswr/ISwissRangerImage.h"
-
 #include "imath/CSampledFunction2d.h"
+
+#include "imod/TModelWrap.h"
+
 #include "iimg/CGeneralBitmap.h"
-#include "iswr/CSwissRangerParams.h"
+
 #include "idev/CDeviceInfo.h"
+
+#include "iswr/ISwissRangerImage.h"
+#include "iswr/CSwissRangerParams.h"
 
 
 namespace iswr
@@ -23,6 +27,12 @@ public:
 	CSwissRangerImage();
 
 	// reimplemented (iswr::ISwissRangerImage)
+	virtual bool CreateImage(
+				double* depthDataPtr, 
+				const iimg::IBitmap& amplitudeBitmap,
+				const iswr::ISwissRangerParams* paramsPtr = NULL,
+				const idev::IDeviceInfo* deviceInfoPtr = NULL);
+
 	virtual const imath::ISampledFunction2d& GetDepthImage() const;
 	virtual const iimg::IBitmap& GetAmplitudeImage() const;
 	virtual const iswr::ISwissRangerParams& GetAcquisitionParams() const;
@@ -32,9 +42,9 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	imath::CSampledFunction2d m_depthImage;
-	iimg::CGeneralBitmap m_amplitudeImage;
-	iswr::CSwissRangerParams m_acquisitionParams;
+	imod::TModelWrap<imath::CSampledFunction2d> m_depthImage;
+	imod::TModelWrap<iimg::CGeneralBitmap> m_amplitudeImage;
+	imod::TModelWrap<iswr::CSwissRangerParams> m_acquisitionParams;
 	idev::CDeviceInfo m_sensorInfo;
 };
 

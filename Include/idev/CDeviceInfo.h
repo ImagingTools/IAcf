@@ -27,8 +27,8 @@ public:
 
 protected:
 	istd::CString m_deviceId;
-	istd::CString m_deviceDriverVersion;
-	istd::CString m_deviceLibraryVersion;
+	I_DWORD m_deviceDriverVersion;
+	I_DWORD m_deviceLibraryVersion;
 };
 
 
