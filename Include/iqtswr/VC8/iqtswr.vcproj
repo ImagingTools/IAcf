@@ -176,10 +176,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSwissRangerImageViewComp.cpp"
 				>
 			</File>
@@ -232,6 +228,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CSwissRangerParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSwissRangerImageViewComp.h"
 				>
 			</File>
 			<File
