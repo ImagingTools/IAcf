@@ -107,7 +107,7 @@ protected:
 private:
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
 	I_REF(icam::ITriggerParams, m_triggerParamsCompPtr);
-	I_REF(i2d::IObject2d, m_imageRegionParamsCompPtr);
+	I_REF(i2d::CRectangle, m_imageRegionParamsCompPtr);
 	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
 
 	I_ATTR(bool, m_singleShootAttrPtr);
