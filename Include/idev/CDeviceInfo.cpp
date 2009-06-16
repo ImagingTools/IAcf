@@ -18,7 +18,7 @@ istd::CString CDeviceInfo::GetDeviceId() const
 }
 
 
-void CDeviceInfo::SetDeviceId(const istd::CString& deviceId)
+void CDeviceInfo::SetDeviceId(const istd::CString& /*deviceId*/)
 {
 }
 
@@ -29,7 +29,7 @@ I_DWORD CDeviceInfo::GetDeviceDriverVersion() const
 }
 
 
-void CDeviceInfo::SetDeviceDriverVersion(I_DWORD deviceVersion)
+void CDeviceInfo::SetDeviceDriverVersion(I_DWORD /*deviceVersion*/)
 {
 }
 
@@ -40,14 +40,14 @@ I_DWORD CDeviceInfo::GetDeviceLibraryVersion() const
 }
 
 
-void CDeviceInfo::SetDeviceLibraryVersion(I_DWORD libararyVersion)
+void CDeviceInfo::SetDeviceLibraryVersion(I_DWORD /*libararyVersion*/)
 {
 }
 
 
 // reimplemented (iser::ISerializable)
 
-bool CDeviceInfo::Serialize(iser::IArchive& archive)
+bool CDeviceInfo::Serialize(iser::IArchive& /*archive*/)
 {
 	return true;
 }
