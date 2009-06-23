@@ -4,8 +4,6 @@
 
 #include "iser/ISerializable.h"
 
-#include "ibase/CSize.h"
-
 
 namespace iipr
 {

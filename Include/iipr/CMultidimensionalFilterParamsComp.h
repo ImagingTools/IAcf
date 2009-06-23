@@ -4,8 +4,6 @@
 
 #include "iser/ISerializable.h"
 
-#include "ibase/CSize.h"
-
 #include "icomp/CComponentBase.h"
 
 #include "iipr/IMultidimensionalFilterParams.h"

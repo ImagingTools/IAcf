@@ -2,7 +2,11 @@
 #define iipr_TKernel2d_included
 
 
+// ACF includes
+#include "ibase/CSize.h"
 #include "iimg/TBitmapIterator2d.h"
+
+#include "iipr/iipr.h"
 
 
 namespace iipr
