@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          800
+          991
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="33">
+  <ElementsList count="34">
     <Element>
       <Id>
         AnnulusSegmentTestTask
@@ -141,6 +141,43 @@
           true
         </IsEnabled>
         <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        BitmapLoader
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Framework
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -621,7 +658,64 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              BitmapLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DefaultDir
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                C:\
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MaxCachedDirs
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ParameterId
@@ -811,22 +905,22 @@
                   Image
                 </Value>
                 <Value>
-                  Line Test
+                  Line
                 </Value>
                 <Value>
-                  Rectangle Test
+                  Rectangle
                 </Value>
                 <Value>
-                  Circle Test
+                  Circle
                 </Value>
                 <Value>
-                  Annulus Test
+                  Annulus
                 </Value>
                 <Value>
-                  Annulus Segment Test
+                  Annulus Segment
                 </Value>
                 <Value>
-                  Position Test
+                  Position
                 </Value>
               </Values>
             </Data>
@@ -1118,7 +1212,26 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              BitmapLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               IdManager
@@ -1288,7 +1401,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CaliperProcessor
+              CaliperTool
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -1529,4 +1642,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    
+  </Description>
+  <Keywords>
+    
+  </Keywords>
 </Acf>

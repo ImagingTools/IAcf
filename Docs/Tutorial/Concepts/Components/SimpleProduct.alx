@@ -1,10 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          991
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="37">
+  <PositionMap count="38">
     <Element>
       <ComponentName>
         AnnulusSegmentParamsGui
@@ -73,6 +84,17 @@
     </Element>
     <Element>
       <ComponentName>
+        BitmapLoader
+      </ComponentName>
+      <X>
+        -640.639
+      </X>
+      <X>
+        137.179
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         Buffer
       </ComponentName>
       <X>
@@ -109,10 +131,10 @@
         Caliper
       </ComponentName>
       <X>
-        1412
+        1436
       </X>
       <X>
-        487
+        290
       </X>
     </Element>
     <Element>
@@ -156,7 +178,7 @@
         962
       </X>
       <X>
-        62
+        59.1716
       </X>
     </Element>
     <Element>
@@ -197,10 +219,10 @@
         CasadedCaliper
       </ComponentName>
       <X>
-        1150
+        1153
       </X>
       <X>
-        287
+        278
       </X>
     </Element>
     <Element>
@@ -241,10 +263,10 @@
         FileCamera
       </ComponentName>
       <X>
-        -362
+        -295.532
       </X>
       <X>
-        -37
+        -1.64466
       </X>
     </Element>
     <Element>
@@ -318,10 +340,10 @@
         ImageTask
       </ComponentName>
       <X>
-        -75
+        -71
       </X>
       <X>
-        187
+        185
       </X>
     </Element>
     <Element>

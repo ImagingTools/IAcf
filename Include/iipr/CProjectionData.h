@@ -34,7 +34,7 @@ public:
 	const iimg::IBitmap& GetProjectionImage() const;
 	/**
 		Get access to bitmap object representing projection data.
-		Typically with is equal 1.
+		Typically height is equal 1.
 	*/
 	iimg::IBitmap& GetProjectionImage();
 
