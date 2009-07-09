@@ -8,7 +8,7 @@ AppPublisherURL=http://www.imagingtools.de/
 AppName=IACF
 OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$
 
-DefaultDirName={pf}\ImagingTools\IACF
+DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
 WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
 WizardSmallImageFile=..\..\Docs\Images\Logo\Logo_128x128.bmp
 SetupIconFile=..\..\Docs\Images\Logo\Logo.ico
@@ -19,7 +19,6 @@ UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
 UninstallDisplayName=$AcfProductName$ $AcfVersion:10$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
-InfoAfterFile=..\InfoAfter.txt
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: iacfComp
@@ -60,6 +59,9 @@ Name: customType; Description: {cm:CustomType}; Flags: iscustom
 Name: iacfComp; Description: IACF; Types: minimalType fullType customType
 Name: avtComp; Description: {cm:AvtComponents}; Types: fullType customType
 
+[Icons]
+Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: iacfComp
+
 [Registry]
-Root: HKLM; Subkey: SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\; ValueName: IACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: iacfComp
-Root: HKLM; Subkey: SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\; ValueName: AVTDIR; ValueData: {app}\ExtLib\AVT; ValueType: string; Flags: uninsdeletevalue; Components: avtComp
+Root: HKCU; Subkey: "Environment"; ValueName: IACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: iacfComp
+Root: HKCU; Subkey: "Environment"; ValueName: AVTDIR; ValueData: {app}\ExtLib\AVT; ValueType: string; Flags: uninsdeletevalue; Components: avtComp

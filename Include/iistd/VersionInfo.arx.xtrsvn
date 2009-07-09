@@ -18,7 +18,7 @@
 	<ElementsList count="2">
 		<Element>
 			<Id>
-				AcfInfo
+				IacfInfo
 			</Id>
 			<PackageId>
 				AcfVoce
@@ -123,11 +123,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								SlaveApplicationInfo
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -328,7 +325,7 @@
 								true
 							</IsEnabled>
 							<Value>
-								AcfInfo
+								IacfInfo
 							</Value>
 						</Data>
 					</AttributeInfo>
