@@ -413,6 +413,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ILineProjectionSupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IMultidimensionalFilterConstraints.h"
 				>
 			</File>

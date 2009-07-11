@@ -16,7 +16,7 @@ class CTestIdManagerComp: public icomp::CComponentBase, virtual public IIdManage
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(CTestIdManagerComp);
+	I_BEGIN_COMPONENT(CTestIdManagerComp);
 		I_REGISTER_INTERFACE(IIdManager);
 	I_END_COMPONENT;
 
