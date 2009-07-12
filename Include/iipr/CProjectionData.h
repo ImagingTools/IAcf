@@ -5,6 +5,8 @@
 #include "istd/CRange.h"
 #include "istd/TOptDelPtr.h"
 
+#include "i2d/CLine2d.h"
+
 #include "iser/ISerializable.h"
 
 #include "iimg/IBitmap.h"
@@ -25,7 +27,9 @@ namespace iipr
 class CProjectionData: public iser::ISerializable
 {
 public:
-	explicit CProjectionData(iimg::IBitmap* dataImagePtr = new iimg::CGeneralBitmap(), bool releaseFlag = true);
+	explicit CProjectionData(
+		iimg::IBitmap* dataImagePtr = new iimg::CGeneralBitmap(),
+		bool releaseFlag = true);
 
 	/**
 		Reset the image projection data.
@@ -42,6 +46,16 @@ public:
 		Typically height is equal 1.
 	*/
 	iimg::IBitmap& GetProjectionImage();
+
+	/**
+		Get projection line.
+	*/
+	const i2d::CLine2d& GetProjectionLine() const; 
+
+	/**
+		Set projection line.
+	*/
+	void SetProjectionLine(const i2d::CLine2d& projectionLine);
 
 	/**
 		Get proportion of logical projection to bitmap represented projection.
@@ -73,6 +87,8 @@ private:
 	istd::TOptDelPtr<iimg::IBitmap> m_projectionImagePtr;
 	istd::CRange m_proportionRangeX;
 	istd::CRange m_proportionRangeY;
+	i2d::CLine2d m_projectionLine;
+
 };
 
 
@@ -87,6 +103,18 @@ inline const iimg::IBitmap& CProjectionData::GetProjectionImage() const
 inline iimg::IBitmap& CProjectionData::GetProjectionImage()
 {
 	return *m_projectionImagePtr;
+}
+
+
+inline const i2d::CLine2d& CProjectionData::GetProjectionLine() const
+{
+	return m_projectionLine;
+}
+
+
+inline void CProjectionData::SetProjectionLine(const i2d::CLine2d& projectionLine)
+{
+	m_projectionLine = projectionLine;
 }
 
 

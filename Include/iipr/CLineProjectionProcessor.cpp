@@ -114,6 +114,8 @@ bool CLineProjectionProcessor::DoAutosizeProjection(
 		return false;
 	}
 
+	results.SetProjectionLine(projectionLine);
+
 	istd::CIndex2d addressDiffs(bytesPerPixel, bitmap.GetLinesDifference());
 	const I_BYTE* firstPixelAddress = (const I_BYTE*)bitmap.GetLinePtr(0);
 	i2d::CLine2d transformedLine = projectionLine;

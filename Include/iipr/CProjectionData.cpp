@@ -75,6 +75,11 @@ bool CProjectionData::Serialize(iser::IArchive& archive)
 	m_proportionRangeY.SetMinValue(minY);
 	m_proportionRangeY.SetMaxValue(maxY);
 
+	static iser::CArchiveTag projectionLineTag("ProjectionLine", "projection line");
+	retVal = retVal && archive.BeginTag(projectionLineTag);
+	retVal = retVal && m_projectionLine.Serialize(archive);
+	retVal = retVal && archive.EndTag(projectionLineTag);
+
 	static iser::CArchiveTag projectionImageTag("ProjectionImage", "Projection Image Data");
 	retVal = retVal && archive.BeginTag(projectionImageTag);
 	retVal = retVal && m_projectionImagePtr->Serialize(archive);
