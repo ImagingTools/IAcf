@@ -196,6 +196,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProjectionShape.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangularFilterParamsGuiComp.cpp"
 				>
 			</File>
@@ -247,6 +251,10 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProjectionShape.h"
 				>
 			</File>
 			<File

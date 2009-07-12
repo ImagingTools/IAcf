@@ -14,6 +14,10 @@
 #include "iqt2d/CPosition2dShape.h"
 
 
+// IACF includes
+#include "iqtipr/CProjectionShape.h"
+
+
 namespace iqtipr
 {
 
@@ -80,8 +84,14 @@ QWidget* CLineProjectionSupplierGuiComp::GetParamsWidget() const
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CLineProjectionSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes&/* result*/)
+void CLineProjectionSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
+	iqtipr::CProjectionShape* shapePtr = new iqtipr::CProjectionShape;
+	if (shapePtr != NULL){
+		result.PushBack(shapePtr);
+	
+		m_projectionData.AttachObserver(shapePtr);
+	}
 }
 
 
