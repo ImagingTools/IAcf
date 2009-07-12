@@ -11,10 +11,11 @@
 #include "iqtipr/CSearchParamsGuiComp.h"
 #include "iqtipr/CValueSupplierGuiComp.h"
 #include "iqtipr/CCaliperParamsGuiComp.h"
+#include "iqtipr/CLineProjectionSupplierGuiComp.h"
 
 
 /**
-	Standard Qt image processing package.
+	Standard package of Qt related implementations for image processing.
 */
 namespace QtIprPck
 {
@@ -26,6 +27,7 @@ typedef iqtipr::CSearchGuiComp SearchGui;
 typedef iqtipr::CSearchParamsGuiComp SearchParamsGui;
 typedef iqtipr::CValueSupplierGuiComp ValueSupplierGui;
 typedef iqtipr::CCaliperParamsGuiComp CaliperParamsGui;
+typedef iqtipr::CLineProjectionSupplierGuiComp LineProjectionSupplierGui;
 
 
 } // namespace QtIprPck

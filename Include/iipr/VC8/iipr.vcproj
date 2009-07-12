@@ -232,6 +232,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLineProjectionSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLocalDifferenceFilterParams.cpp"
 				>
 			</File>
@@ -330,6 +334,10 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierComp.h"
 				>
 			</File>
 			<File

@@ -20,6 +20,15 @@ CProjectionData::CProjectionData(iimg::IBitmap* dataImagePtr, bool releaseFlag)
 }
 
 
+void CProjectionData::ResetProjectionData()
+{
+	if (m_projectionImagePtr != NULL && !m_projectionImagePtr->IsEmpty()){
+		istd::CChangeNotifier notifier(this);
+
+		m_projectionImagePtr->ResetImage();
+	}
+}
+
 void CProjectionData::SetProportionRangeX(const istd::CRange& range)
 {
 	if (range != m_proportionRangeX){

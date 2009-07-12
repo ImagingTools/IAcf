@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangularFilterParamsGuiComp.cpp"
 				>
 			</File>
@@ -242,6 +246,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangularFilterParamsGuiComp.h"
 				>
 			</File>
@@ -279,11 +287,19 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CCaliperParamsGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CIterativeProcessorParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -308,6 +324,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CIterativeProcessorParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
@@ -336,6 +356,10 @@
 			</File>
 			<File
 				RelativePath="..\CIterativeProcessorParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
 				>
 			</File>
 			<File

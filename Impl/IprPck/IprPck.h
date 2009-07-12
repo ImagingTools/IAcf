@@ -27,6 +27,7 @@
 #include "iipr/TFeaturesContainerWrap.h"
 #include "iipr/CSearchFeature.h"
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
+#include "iipr/CLineProjectionSupplierComp.h"
 
 
 /**
@@ -60,6 +61,8 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> SearchResults;
 typedef icomp::TModelCompWrap<iipr::CCaliperBasedPositionSupplierComp> CaliperBasedPositionSupplier;
 typedef icomp::TModelCompWrap<iipr::CSearchBasedFeaturesSupplierComp> SearchBasedFeaturesSupplier;
+typedef icomp::TModelCompWrap<iipr::CLineProjectionSupplierComp> ProjectionSupplier;
+
 typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iipr::CProjectionData>,

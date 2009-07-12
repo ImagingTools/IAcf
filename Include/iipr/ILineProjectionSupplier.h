@@ -21,7 +21,7 @@ public:
 		Get access to produced line projection object.
 		\param	objectId	ID of inspected object. \sa	iproc::ISupplier::BeginNextObject.
 	*/
-	virtual iipr::CProjectionData GetLineProjection(I_DWORD objectId) const = 0;
+	virtual const iipr::CProjectionData* GetLineProjection(I_DWORD objectId) const = 0;
 };
 
 

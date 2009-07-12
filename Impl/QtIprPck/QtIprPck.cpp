@@ -21,6 +21,7 @@ I_EXPORT_COMPONENT(SearchGui, "SearchGui", "Model Search Qt Image Processing");
 I_EXPORT_COMPONENT(SearchParamsGui, "SearchParamsGui", "GUI Model Search Parameter Qt Image Processing");
 I_EXPORT_COMPONENT(ValueSupplierGui, "GUI for supplier implementation returning position found using caliper tool", "GUI Observer Caliper Position Qt Processing Supplier");
 I_EXPORT_COMPONENT(CaliperParamsGui, "GUI to parametrize caliper", "GUI Observer Caliper Parameters Direction Edge Mode Threshold Qt");
+I_EXPORT_COMPONENT(LineProjectionSupplierGui, "GUI for line projection supplier", "GUI Observer Supplier Line Projection Image Processing Qt");
 
 
 } // namespace QtIprPck

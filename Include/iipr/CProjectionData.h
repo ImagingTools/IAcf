@@ -28,6 +28,11 @@ public:
 	explicit CProjectionData(iimg::IBitmap* dataImagePtr = new iimg::CGeneralBitmap(), bool releaseFlag = true);
 
 	/**
+		Reset the image projection data.
+	*/
+	void ResetProjectionData();
+
+	/**
 		Get access to bitmap object representing projection data.
 		Typically with is equal 1.
 	*/
