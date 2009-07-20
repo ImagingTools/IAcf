@@ -86,7 +86,7 @@ QWidget* CLineProjectionSupplierGuiComp::GetParamsWidget() const
 
 void CLineProjectionSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
-	iqtipr::CProjectionShape* shapePtr = new iqtipr::CProjectionShape;
+ 	iqtipr::CProjectionShape* shapePtr = new iqtipr::CProjectionShape;
 	if (shapePtr != NULL){
 		result.PushBack(shapePtr);
 	

@@ -1,5 +1,5 @@
-#ifndef iqtcam_CBitmapLoaderComp_included
-#define iqtcam_CBitmapLoaderComp_included
+#ifndef iqtcam_CFileAcquisitionComp_included
+#define iqtcam_CFileAcquisitionComp_included
 
 
 // Qt includes
@@ -76,6 +76,6 @@ private:
 } // namespace iqtcam
 
 
-#endif // !iqtcam_CBitmapLoaderComp_included
+#endif // !iqtcam_CFileAcquisitionComp_included
 
 

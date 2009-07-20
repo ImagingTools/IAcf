@@ -47,6 +47,7 @@ void CProjectionShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags
 		transform.translate(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint1().GetY());
 		transform.rotate(imath::GetDegreeFromRadian(alpha));
 		transform.scale(scaleFactor, scaleFactor);
+		transform.translate(0, -128);
 
 		setTransform(transform);
 

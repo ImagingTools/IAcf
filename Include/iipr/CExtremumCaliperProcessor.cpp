@@ -79,7 +79,7 @@ bool FeaturesExtraction(
 						double featureWeight = 2.0 * pixelIntensity / conversion.whiteIntensity - 1.0;
 						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
 
-						if (		!results.AddFeature(new CCaliperFeature(featureWeight, position), &isReady) ||
+						if (		!results.AddFeature(new CCaliperFeature(CCaliperFeature::EM_RISING, featureWeight, position), &isReady) ||
 									isReady){
 							return isReady;
 						}
@@ -112,7 +112,7 @@ bool FeaturesExtraction(
 						double featureWeight = 1.0 - 2.0 * pixelIntensity / conversion.whiteIntensity;
 						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
 
-						if (		!results.AddFeature(new CCaliperFeature(featureWeight, position), &isReady) ||
+						if (		!results.AddFeature(new CCaliperFeature(CCaliperFeature::EM_FALLING, featureWeight, position), &isReady) ||
 									isReady){
 							return isReady;
 						}

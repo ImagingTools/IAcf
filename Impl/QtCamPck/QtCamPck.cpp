@@ -14,6 +14,7 @@ I_EXPORT_COMPONENT(FileAcquisition, "Acquise bitmap from file, load and save bit
 I_EXPORT_COMPONENT(SnapImageGui, "Show snapped image and allow to change snap parameters", "View Image Bitmap Camera Snap Parameters GUI Qt");
 I_EXPORT_COMPONENT(ExposureParamsGui, "Gui for exposure parameters", "Image Bitmap Camera Snap Acquisition Exposure Parameters GUI Qt");
 I_EXPORT_COMPONENT(SnapBitmapSupplierGui, "Gui getting image from camera and connecting it to display console", "Image Bitmap Camera Snap Acquisition Supplier Parameters GUI Qt");
+I_EXPORT_COMPONENT(MemoryAcquisition, "Image acquisition from the image itself", "Image Bitmap Camera Snap Acquisition Qt");
 
 
 } // namespace QtCamPck

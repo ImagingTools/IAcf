@@ -9,10 +9,17 @@ namespace iipr
 {
 
 
-CCaliperFeature::CCaliperFeature(double weight, double position)
-:	m_weight(weight),
+CCaliperFeature::CCaliperFeature(int edgeMode, double weight, double position)
+:	m_edgeMode(edgeMode), 
+	m_weight(weight),
 	m_position(1, position)
 {
+}
+
+
+int CCaliperFeature::GetEdgeMode() const
+{
+	return m_edgeMode;
 }
 
 

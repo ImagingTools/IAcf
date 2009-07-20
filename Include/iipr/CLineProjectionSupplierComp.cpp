@@ -1,6 +1,11 @@
 #include "iipr/CLineProjectionSupplierComp.h"
 
 
+#include "iser/CMemoryReadArchive.h"
+
+#include "iipr/CRectDerivativeProcessor.h"
+
+
 namespace iipr
 {
 
@@ -57,6 +62,14 @@ int CLineProjectionSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<i
 				return WS_ERROR;
 			}
 
+/*			iipr::CRectDerivativeProcessor derivative;
+			iipr::CProjectionData output;
+			i2d::CLine2d projectionLine = result->GetProjectionLine();
+			derivative.DoDerivativeProcessing(*result.GetPtr(), 5, output);
+
+			iser::CMemoryReadArchive::CloneObjectByArchive(output, *result.GetPtr());
+			result->SetProjectionLine(projectionLine);
+*/
 			return WS_OK;
 		}
 	}

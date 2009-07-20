@@ -15,7 +15,15 @@ namespace iipr
 class CCaliperFeature: virtual public IFeature
 {
 public:
-	CCaliperFeature(double weight, double position);
+	enum EdgeMode
+	{
+		EM_FALLING,
+		EM_RISING
+	};
+
+	CCaliperFeature(int edgeMode, double weight, double position);
+
+	virtual int GetEdgeMode() const;
 
 	// reimplemented (iipr::IFeature)
 	virtual double GetWeight() const;
@@ -26,6 +34,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
+	int m_edgeMode;
 	double m_weight;
 	imath::CVarVector m_position;
 };
