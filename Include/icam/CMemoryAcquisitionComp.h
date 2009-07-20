@@ -1,25 +1,21 @@
-#ifndef iqtcam_CMemoryAcquisitionComp_included
-#define iqtcam_CMemoryAcquisitionComp_included
+#ifndef icam_CMemoryAcquisitionComp_included
+#define icam_CMemoryAcquisitionComp_included
 
-
-// Qt includes
-#include <QDir>
-#include <QStringList>
 
 // ACF includes
 #include "iser/IFileLoader.h"
 #include "icomp/CComponentBase.h"
 #include "iprm/IFileNameParam.h"
-#include "iqt/CBitmap.h"
+#include "iimg/CGeneralBitmap.h"
 
 #include "iproc/TSyncProcessorWrap.h"
 
 #include "icam/IBitmapAcquisition.h"
 
-#include "iqtcam/iqtcam.h"
+#include "icam/icam.h"
 
 
-namespace iqtcam
+namespace icam
 {
 
 
@@ -28,12 +24,12 @@ namespace iqtcam
 */
 class CMemoryAcquisitionComp:
 			public icomp::CComponentBase,
-			public iqt::CBitmap,
+			public iimg::CGeneralBitmap,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-	typedef iqt::CBitmap BaseClass2;
+	typedef iimg::CGeneralBitmap BaseClass2;
 
 	I_BEGIN_COMPONENT(CMemoryAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
@@ -51,9 +47,9 @@ public:
 };
 
 
-} // namespace iqtcam
+} // namespace icam
 
 
-#endif // !iqtcam_CMemoryAcquisitionComp_included
+#endif // !icam_CMemoryAcquisitionComp_included
 
 

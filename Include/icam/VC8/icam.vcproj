@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMemoryAcquisitionComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSnapBitmapSupplierComp.cpp"
 				>
 			</File>
@@ -196,6 +200,10 @@
 			>
 			<File
 				RelativePath="..\CExposureParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMemoryAcquisitionComp.h"
 				>
 			</File>
 			<File

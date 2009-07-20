@@ -1,20 +1,13 @@
-#include "iqtcam/CMemoryAcquisitionComp.h"
+#include "icam/CMemoryAcquisitionComp.h"
 
-
-// Qt includes
-#include <QFileInfo>
-#include <QByteArray>
-#include <QImageReader>
-#include <QStringList>
 
 #include "istd/TChangeNotifier.h"
 
 #include "iprm/IParamsSet.h"
 
-#include "iqt/IQImageProvider.h"
 
 
-namespace iqtcam
+namespace icam
 {
 
 
@@ -43,6 +36,6 @@ istd::CIndex2d CMemoryAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*p
 }
 
 
-} // namespace iqtcam
+} // namespace icam
 
 

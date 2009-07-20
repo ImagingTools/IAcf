@@ -10,6 +10,7 @@
 
 #include "icam/CExposureParamsComp.h"
 #include "icam/CSnapBitmapSupplierComp.h"
+#include "icam/CMemoryAcquisitionComp.h"
 
 
 /**
@@ -24,6 +25,7 @@ typedef iproc::CCascadedProcessorComp CascadedProcessor;
 
 typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
+typedef icam::CMemoryAcquisitionComp MemoryAcquisition;
 
 
 } // namespace IacfBasePck
