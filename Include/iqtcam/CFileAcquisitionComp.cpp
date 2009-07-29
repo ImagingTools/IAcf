@@ -19,7 +19,8 @@ namespace iqtcam
 
 
 CFileAcquisitionComp::CFileAcquisitionComp()
-:	m_lastIdStamp(0)
+:	m_lastIdStamp(0),
+	m_lastImageSize(-1, -1)
 {
 }
 
@@ -80,6 +81,11 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 		if (outputPtr != NULL){
 			int loadState = m_bitmapLoaderCompPtr->LoadFromFile(*outputPtr, fileName);
 			retVal = (loadState == iser::IFileLoader::StateOk)? TS_OK: TS_INVALID;
+
+			iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IRasterImage*>(outputPtr);
+			if (imagePtr != NULL){
+				m_lastImageSize = imagePtr->GetImageSize();
+			}
 		}
 		else{
 			retVal = TS_OK;
@@ -112,7 +118,7 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 
 istd::CIndex2d CFileAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {
-	return istd::CIndex2d(-1, -1);	// unknown size
+	return m_lastImageSize;
 }
 
 

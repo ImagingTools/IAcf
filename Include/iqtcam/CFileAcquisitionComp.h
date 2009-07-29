@@ -66,6 +66,8 @@ private:
 
 	I_DWORD m_lastIdStamp;
 
+	istd::CIndex2d m_lastImageSize;
+
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_ATTR(istd::CString, m_defaultDirAttrPtr);
 	I_ATTR(istd::CString, m_parameterIdAttrPtr);
