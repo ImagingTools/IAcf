@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          991
+          1022
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="38">
+  <PositionMap count="41">
     <Element>
       <ComponentName>
         AnnulusSegmentParamsGui
@@ -43,10 +43,10 @@
         AnnulusSegmentTestTaskGui
       </ComponentName>
       <X>
-        1075
+        1200.87
       </X>
       <X>
-        -287
+        -298.314
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         AnnulusTestTaskGui
       </ComponentName>
       <X>
-        887
+        991.652
       </X>
       <X>
-        -287
+        -295.485
       </X>
     </Element>
     <Element>
@@ -241,10 +241,10 @@
         CircleTestTaskGui
       </ComponentName>
       <X>
-        662
+        769.48
       </X>
       <X>
-        -287
+        -291.243
       </X>
     </Element>
     <Element>
@@ -373,10 +373,10 @@
         LineTestTask
       </ComponentName>
       <X>
-        212
+        73.4071
       </X>
       <X>
-        -37
+        -42.6569
       </X>
     </Element>
     <Element>
@@ -384,10 +384,10 @@
         LineTestTaskGui
       </ComponentName>
       <X>
-        187
+        148.816
       </X>
       <X>
-        -287
+        -292.657
       </X>
     </Element>
     <Element>
@@ -414,13 +414,46 @@
     </Element>
     <Element>
       <ComponentName>
+        Quadrangle
+      </ComponentName>
+      <X>
+        227.688
+      </X>
+      <X>
+        120.208
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        QuadrangleTask
+      </ComponentName>
+      <X>
+        468.105
+      </X>
+      <X>
+        -46.669
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        QuadrangleTaskGui
+      </ComponentName>
+      <X>
+        565.685
+      </X>
+      <X>
+        -291.328
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         RectangleTestTask
       </ComponentName>
       <X>
-        412
+        249.365
       </X>
       <X>
-        -37
+        -44.0711
       </X>
     </Element>
     <Element>
@@ -428,10 +461,10 @@
         RectangleTestTaskGui
       </ComponentName>
       <X>
-        400
+        333.532
       </X>
       <X>
-        -287
+        -291.243
       </X>
     </Element>
   </PositionMap>

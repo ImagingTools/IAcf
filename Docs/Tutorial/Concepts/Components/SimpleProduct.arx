@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          991
+          1022
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="34">
+  <ElementsList count="36">
     <Element>
       <Id>
         AnnulusSegmentTestTask
@@ -619,7 +619,7 @@
                 true
               </IsEnabled>
               <Value>
-                RectangleTestTaskGui
+                QuadrangleTaskGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -822,7 +822,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   ImageTaskGui
                 </Value>
@@ -831,6 +831,9 @@
                 </Value>
                 <Value>
                   RectangleTestTaskGui
+                </Value>
+                <Value>
+                  QuadrangleTaskGui
                 </Value>
                 <Value>
                   CircleTestTaskGui
@@ -861,7 +864,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   Image
                 </Value>
@@ -870,6 +873,9 @@
                 </Value>
                 <Value>
                   Rectangle
+                </Value>
+                <Value>
+                  Quadrangle
                 </Value>
                 <Value>
                   Circle
@@ -900,7 +906,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   Image
                 </Value>
@@ -909,6 +915,9 @@
                 </Value>
                 <Value>
                   Rectangle
+                </Value>
+                <Value>
+                  Quadrangle
                 </Value>
                 <Value>
                   Circle
@@ -939,7 +948,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   ImageTask
                 </Value>
@@ -948,6 +957,9 @@
                 </Value>
                 <Value>
                   RectangleTestTask
+                </Value>
+                <Value>
+                  QuadrangleTask
                 </Value>
                 <Value>
                   CircleTestTask
@@ -1528,6 +1540,80 @@
               </IsEnabled>
               <Value>
                 ImageTaskGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        QuadrangleTask
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Quadrangle
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        QuadrangleTaskGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        QuadrangleParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ShapeZValue
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveSceneExtender
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RectangleTestTaskGui
               </Value>
             </Data>
           </AttributeInfo>
