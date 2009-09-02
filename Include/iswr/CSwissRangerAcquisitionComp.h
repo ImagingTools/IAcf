@@ -1,5 +1,5 @@
-#ifndef iqt_CSwissRangerAcquisitionComp_included
-#define iqt_CSwissRangerAcquisitionComp_included
+#ifndef iswr_CSwissRangerAcquisitionComp_included
+#define iswr_CSwissRangerAcquisitionComp_included
 
 
 // SwissRanger includes
@@ -102,8 +102,6 @@ private:
 private:
 	CMesaDevice* m_cameraPtr;
 
-	ImgEntry* m_imgEntryArray;
-	int m_imagesCount;
 	istd::TDelPtr<double, true> m_xBuffer;
 	istd::TDelPtr<double, true> m_yBuffer;
 	istd::TDelPtr<double, true> m_zBuffer;
@@ -121,6 +119,6 @@ private:
 } // namespace iswr
 
 
-#endif // !iqt_CSwissRangerAcquisitionComp_included
+#endif // !iswr_CSwissRangerAcquisitionComp_included
 
 

@@ -47,11 +47,11 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 	if (swissRangerParamsPtr != NULL){
 		int currentCameraMode = SR_GetMode(m_cameraPtr);
 
-		if(!swissRangerParamsPtr->IsMedianFilterEnabled()){
-			currentCameraMode = currentCameraMode & ~AM_MEDIAN;
+		if(swissRangerParamsPtr->IsMedianFilterEnabled()){
+			currentCameraMode = currentCameraMode  | AM_MEDIAN;
 		}
 		else{
-			currentCameraMode = currentCameraMode  | AM_MEDIAN;
+			currentCameraMode = currentCameraMode & ~AM_MEDIAN;
 		}
 
 		clippingDistanceRange = swissRangerParamsPtr->GetDistanceClipRange();
@@ -193,11 +193,9 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 		int timeout = int(*m_timeoutAttrPtr * 1000);
 		SR_SetTimeout(m_cameraPtr, timeout);
 	
-		SR_SetMode(m_cameraPtr, AM_CONF_MAP | AM_MEDIAN | AM_COR_FIX_PTRN | AM_CONV_GRAY);
+		SR_SetMode(m_cameraPtr, AM_CONF_MAP | AM_COR_FIX_PTRN);
 		SR_SetModulationFrequency(m_cameraPtr, MF_40MHz);
 		SR_SetIntegrationTime(m_cameraPtr, 128);
-
-		m_imagesCount = SR_GetImageList(m_cameraPtr, &m_imgEntryArray);
 
 		istd::CIndex2d size = GetBitmapSize(NULL);
 		if (!size.IsSizeEmpty()){

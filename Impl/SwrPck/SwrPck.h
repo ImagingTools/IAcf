@@ -7,8 +7,8 @@
 
 #include "iswr/CSwissRangerAcquisitionComp.h"
 #include "iswr/CSwissRangerParams.h"
+#include "iswr/CSwissRangerParamsComp.h"
 #include "iswr/CSwissRangerImage.h"
-
 
 
 /**
@@ -24,6 +24,8 @@ typedef icomp::TModelCompWrap<
 						iswr::CSwissRangerParams, 
 						iswr::ISwissRangerParams, 
 						iser::ISerializable> > SwissRangerParams;
+
+typedef icomp::TModelCompWrap<iswr::CSwissRangerParamsComp> AttributedSwissRangerParams;
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<

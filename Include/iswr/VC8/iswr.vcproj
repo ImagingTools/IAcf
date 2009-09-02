@@ -170,6 +170,10 @@
 				RelativePath="..\CSwissRangerParams.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSwissRangerParamsComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -190,6 +194,10 @@
 			</File>
 			<File
 				RelativePath="..\CSwissRangerParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSwissRangerParamsComp.h"
 				>
 			</File>
 			<File
