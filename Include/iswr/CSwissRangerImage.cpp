@@ -28,7 +28,7 @@ bool CSwissRangerImage::CreateImage(
 				const iswr::ISwissRangerParams* paramsPtr,
 				const idev::IDeviceInfo* deviceInfoPtr)
 {
-	m_depthImage.CreateFunction(depthDataPtr, amplitudeBitmap.GetImageSize().GetX(), amplitudeBitmap.GetImageSize().GetY());
+	m_depthImage.CreateFunction(depthDataPtr, amplitudeBitmap.GetImageSize());
 	
 	bool retVal = m_amplitudeImage.CopyImageFrom(amplitudeBitmap);
 
