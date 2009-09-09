@@ -23,14 +23,16 @@ CSwissRangerImage::CSwissRangerImage()
 // reimplemented (iswr::ISwissRangerImage)
 
 bool CSwissRangerImage::CreateImage(
-				double* depthDataPtr, 
-				const iimg::IBitmap& amplitudeBitmap,
+				I_WORD* depthDataPtr, 
+				const iimg::IBitmap& confidenceImage,
 				const iswr::ISwissRangerParams* paramsPtr,
 				const idev::IDeviceInfo* deviceInfoPtr)
 {
-	m_depthImage.CreateFunction(depthDataPtr, amplitudeBitmap.GetImageSize());
-	
-	bool retVal = m_amplitudeImage.CopyImageFrom(amplitudeBitmap);
+	if (!m_depthImage.CreateBitmap(confidenceImage.GetImageSize(), depthDataPtr, true, 0, 16, 1)){
+		return false;
+	}
+
+	bool retVal = m_confidenceMap.CopyImageFrom(confidenceImage);
 
 	if (paramsPtr != NULL){
 		retVal = retVal && iser::CMemoryReadArchive::CloneObjectByArchive(*paramsPtr, m_acquisitionParams);
@@ -44,15 +46,28 @@ bool CSwissRangerImage::CreateImage(
 }
 
 
-const imath::ISampledFunction2d& CSwissRangerImage::GetDepthImage() const
+const iimg::IBitmap& CSwissRangerImage::GetDepthImage() const
 {
 	return m_depthImage;
 }
 
 
-const iimg::IBitmap& CSwissRangerImage::GetAmplitudeImage() const
+void CSwissRangerImage::SetDepthImage(const iimg::IBitmap& depthImage)
 {
-	return m_amplitudeImage;
+	m_depthImage.CopyImageFrom(depthImage);
+}
+
+
+
+const iimg::IBitmap& CSwissRangerImage::GetConfidenceMap() const
+{
+	return m_confidenceMap;
+}
+
+
+void CSwissRangerImage::SetConfidenceMap(const iimg::IBitmap& confidenceMap)
+{
+	m_confidenceMap.CopyImageFrom(confidenceMap);
 }
 
 
@@ -77,13 +92,13 @@ bool CSwissRangerImage::Serialize(iser::IArchive& archive)
 
 	static iser::CArchiveTag depthImageTag("DepthImage", "DepthImage");
 	retVal = retVal && archive.BeginTag(depthImageTag);
-//	retVal = retVal && m_depthImage.Serialize(archive);
+	retVal = retVal && m_depthImage.Serialize(archive);
 	retVal = retVal && archive.EndTag(depthImageTag);
 
-	static iser::CArchiveTag amplitudeImageTag("AmplitudeImage", "AmplitudeImage");
-	retVal = retVal && archive.BeginTag(amplitudeImageTag);
-	retVal = retVal && m_amplitudeImage.Serialize(archive);
-	retVal = retVal && archive.EndTag(amplitudeImageTag);
+	static iser::CArchiveTag confidenceMapTag("ConfidenceMap", "ConfidenceMap");
+	retVal = retVal && archive.BeginTag(confidenceMapTag);
+	retVal = retVal && m_confidenceMap.Serialize(archive);
+	retVal = retVal && archive.EndTag(confidenceMapTag);
 
 	static iser::CArchiveTag acquisitionParamsTag("ModulationFrequencyMode", "ModulationFrequencyMode");
 	retVal = retVal && archive.BeginTag(acquisitionParamsTag);

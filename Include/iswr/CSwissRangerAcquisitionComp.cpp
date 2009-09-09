@@ -103,14 +103,14 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 
 	// create output:
 	if (outputPtr != NULL){
-		SR_CoordTrfDbl(
+		SR_CoordTrfUint16(
 			m_cameraPtr, 
 			m_xBuffer.GetPtr(), 
 			m_yBuffer.GetPtr(), 
 			m_zBuffer.GetPtr(), 
-			sizeof(double),
-			sizeof(double),
-			sizeof(double));
+			sizeof(I_SWORD),
+			sizeof(I_SWORD),
+			sizeof(I_WORD));
 
 		istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
 		if (bitmapPtr.IsValid()){
@@ -123,7 +123,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			if (CreateOutputBitmap(amplitudeBitmap, maxDistance, clippingDistanceRange)){
 				istd::TChangeNotifier<iswr::ISwissRangerImage> swissImagePtr(dynamic_cast<iswr::ISwissRangerImage*>(outputPtr));
 				if (swissImagePtr.IsValid()){
-					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap)){
+					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap, maxDistance, clippingDistanceRange)){
 						return TS_INVALID;
 					}
 				}
@@ -199,9 +199,9 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 
 		istd::CIndex2d size = GetBitmapSize(NULL);
 		if (!size.IsSizeEmpty()){
-			m_xBuffer.SetPtr(new double[size.GetProductVolume()]);
-			m_yBuffer.SetPtr(new double[size.GetProductVolume()]);
-			m_zBuffer.SetPtr(new double[size.GetProductVolume()]);
+			m_xBuffer.SetPtr(new I_SWORD[size.GetProductVolume()]);
+			m_yBuffer.SetPtr(new I_SWORD[size.GetProductVolume()]);
+			m_zBuffer.SetPtr(new I_WORD[size.GetProductVolume()]);
 		}
 
 		// set device info
@@ -245,14 +245,12 @@ bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 		if (bitmap.CreateBitmap(size)){
 			for (int y = 0; y < size.GetY(); ++y){
 				I_BYTE* outputBitmapPtr = (I_BYTE*)bitmap.GetLinePtr(y);
-				double* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+				I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
 
 				for (int x = 0; x < size.GetX(); x++){
-					double zValue = *(zBufferPtr + x);
-					I_ASSERT(zValue >= 0.0f);
-					I_ASSERT(zValue <= maxDistance);
-
-					double normedZValue = zValue / maxDistance;
+					I_WORD zValue = *(zBufferPtr + x);
+			
+					double normedZValue = zValue / (maxDistance * 1000);
 					normedZValue = clippingDistanceRange.GetClipped(normedZValue);
 					normedZValue = clippingDistanceRange.GetMappedTo(normedZValue, istd::CRange(0, 1));
 					outputBitmapPtr[x] = I_BYTE(normedZValue * 255.0);
@@ -269,12 +267,30 @@ bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 
 bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			iswr::ISwissRangerImage& swissImage,
-			iimg::IBitmap& amplitudeBitmap) const
+			iimg::IBitmap& amplitudeBitmap,
+			double maxDistance,
+			const istd::CRange& clippingDistanceRange) const
 {
 	if (m_zBuffer.IsValid()){
 		istd::CIndex2d size = GetBitmapSize(NULL);
 
-		return swissImage.CreateImage(m_zBuffer.GetPtr(), amplitudeBitmap);
+		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[amplitudeBitmap.GetImageSize().GetProductVolume()]);
+
+		for (int y = 0; y < size.GetY(); ++y){
+			I_WORD* outputBitmapPtr = imageDataPtr.GetPtr() + y * size.GetX();
+			I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+		
+			for (int x = 0; x < size.GetX(); x++){
+				I_WORD zValue = *(zBufferPtr + x);
+			
+				double normedZValue = zValue / (maxDistance * 1000);
+				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
+				normedZValue = clippingDistanceRange.GetMappedTo(normedZValue, istd::CRange(0.0, 1.0));
+				outputBitmapPtr[x] = I_WORD(normedZValue * maxDistance * 1000); // depth in mm
+			}
+		}
+
+		return swissImage.CreateImage(imageDataPtr.PopPtr(), amplitudeBitmap);
 	}
 
 	return false;

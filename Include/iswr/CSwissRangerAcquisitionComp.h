@@ -93,7 +93,11 @@ public:
 	virtual void OnComponentDestroyed();
 
 private:
-	bool CreateSwissImage(iswr::ISwissRangerImage& swissImage, iimg::IBitmap& amplitudeBitmap) const;
+	bool CreateSwissImage(
+				iswr::ISwissRangerImage& swissImage,
+				iimg::IBitmap& amplitudeBitmap,
+				double maxDistance,
+				const istd::CRange& clippingDistanceRange) const;
 	bool CreateOutputBitmap(
 				iimg::IBitmap& bitmap,
 				double maxDistance, 
@@ -102,9 +106,9 @@ private:
 private:
 	CMesaDevice* m_cameraPtr;
 
-	istd::TDelPtr<double, true> m_xBuffer;
-	istd::TDelPtr<double, true> m_yBuffer;
-	istd::TDelPtr<double, true> m_zBuffer;
+	istd::TDelPtr<I_SWORD, true> m_xBuffer;
+	istd::TDelPtr<I_SWORD, true> m_yBuffer;
+	istd::TDelPtr<I_WORD, true> m_zBuffer;
 
 	SupportedFrequencies m_supportedFrequencies;
 

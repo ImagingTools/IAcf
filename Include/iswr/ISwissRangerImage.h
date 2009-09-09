@@ -26,7 +26,7 @@ public:
 		Create image.
 	*/
 	virtual bool CreateImage(
-				double* depthDataPtr, 
+				I_WORD* depthDataPtr, 
 				const iimg::IBitmap& amplitudeBitmap,
 				const iswr::ISwissRangerParams* paramsPtr = NULL,
 				const idev::IDeviceInfo* deviceInfoPtr = NULL) = 0;
@@ -34,12 +34,22 @@ public:
 	/**
 		Get depth image.
 	*/
-	virtual const imath::ISampledFunction2d& GetDepthImage() const = 0;
+	virtual const iimg::IBitmap& GetDepthImage() const = 0;
 
 	/**
-		Get amplitude image.
+		Set depth image.
 	*/
-	virtual const iimg::IBitmap& GetAmplitudeImage() const = 0;
+	virtual void SetDepthImage(const iimg::IBitmap& depthImage) = 0;
+
+	/**
+		Get confidence map.
+	*/
+	virtual const iimg::IBitmap& GetConfidenceMap() const = 0;
+
+	/**
+		Set confidence map.
+	*/
+	virtual void SetConfidenceMap(const iimg::IBitmap& confidenceMap) = 0;
 
 	/**
 		Get the acquisition parameter for this image.

@@ -28,13 +28,15 @@ public:
 
 	// reimplemented (iswr::ISwissRangerImage)
 	virtual bool CreateImage(
-				double* depthDataPtr, 
+				I_WORD* depthDataPtr, 
 				const iimg::IBitmap& amplitudeBitmap,
 				const iswr::ISwissRangerParams* paramsPtr = NULL,
 				const idev::IDeviceInfo* deviceInfoPtr = NULL);
 
-	virtual const imath::ISampledFunction2d& GetDepthImage() const;
-	virtual const iimg::IBitmap& GetAmplitudeImage() const;
+	virtual const iimg::IBitmap& GetDepthImage() const;
+	virtual void SetDepthImage(const iimg::IBitmap& depthImage);
+	virtual const iimg::IBitmap& GetConfidenceMap() const;
+	virtual void SetConfidenceMap(const iimg::IBitmap& confidenceMap);
 	virtual const iswr::ISwissRangerParams& GetAcquisitionParams() const;
 	virtual const idev::IDeviceInfo& GetSensorInfo() const;	
 
@@ -42,8 +44,8 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	imod::TModelWrap<imath::CSampledFunction2d> m_depthImage;
-	imod::TModelWrap<iimg::CGeneralBitmap> m_amplitudeImage;
+	imod::TModelWrap<iimg::CGeneralBitmap> m_depthImage;
+	imod::TModelWrap<iimg::CGeneralBitmap> m_confidenceMap;
 	imod::TModelWrap<iswr::CSwissRangerParams> m_acquisitionParams;
 	idev::CDeviceInfo m_sensorInfo;
 };
