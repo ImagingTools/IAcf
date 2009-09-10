@@ -285,7 +285,6 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			
 				double normedZValue = zValue / (maxDistance * 1000);
 				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
-				normedZValue = clippingDistanceRange.GetMappedTo(normedZValue, istd::CRange(0.0, 1.0));
 				outputBitmapPtr[x] = I_WORD(normedZValue * maxDistance * 1000); // depth in mm
 			}
 		}

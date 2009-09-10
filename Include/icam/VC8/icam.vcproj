@@ -178,6 +178,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CAcquisitionConstraintsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsComp.cpp"
 				>
 			</File>
@@ -198,6 +202,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CAcquisitionConstraintsComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CExposureParamsComp.h"
 				>

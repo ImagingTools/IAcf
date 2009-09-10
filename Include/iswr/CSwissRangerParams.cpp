@@ -116,10 +116,21 @@ bool CSwissRangerParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_modulationFrequencyMode);
 	retVal = retVal && archive.EndTag(modulationFrequencyModeTag);
 
-	static iser::CArchiveTag distanceClipRangeTag("DistanceClipRange", "DistanceClipRange");
-	retVal = retVal && archive.BeginTag(distanceClipRangeTag);
-	retVal = retVal && archive.ProcessData(&m_distanceClipRange, sizeof(istd::CRange));
-	retVal = retVal && archive.EndTag(distanceClipRangeTag);
+	double distanceClipMin = m_distanceClipRange.GetMinValue();
+	static iser::CArchiveTag distanceClipMinTag("DistanceClipMin", "DistanceClipMin");
+	retVal = retVal && archive.BeginTag(distanceClipMinTag);
+	retVal = retVal && archive.Process(distanceClipMin);
+	retVal = retVal && archive.EndTag(distanceClipMinTag);
+
+	double distanceClipMax = m_distanceClipRange.GetMaxValue();
+	static iser::CArchiveTag distanceClipMaxTag("DistanceClipMax", "DistanceClipMax");
+	retVal = retVal && archive.BeginTag(distanceClipMaxTag);
+	retVal = retVal && archive.Process(distanceClipMax);
+	retVal = retVal && archive.EndTag(distanceClipMaxTag);
+
+	if (!archive.IsStoring()){
+		m_distanceClipRange = istd::CRange(distanceClipMin, distanceClipMax);
+	}
 
 	return retVal;
 }
