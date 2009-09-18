@@ -87,7 +87,7 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              DefaultDir
+              DefaultPath
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;

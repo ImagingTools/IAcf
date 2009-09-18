@@ -42,7 +42,7 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 	if (paramsPtr != NULL){
 		loaderParamsPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter((*m_parameterIdAttrPtr).ToString()));
 		if (loaderParamsPtr != NULL){
-			filesPath = loaderParamsPtr->GetDirectory();
+			filesPath = loaderParamsPtr->GetPath();
 		}
 	}
 	QDir directory(iqt::GetQString(filesPath));
