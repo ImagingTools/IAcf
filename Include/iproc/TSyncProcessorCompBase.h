@@ -18,11 +18,11 @@ namespace iproc
 */
 template <class Base, class Interface = Base>
 class TSyncProcessorCompBase:
-			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
+			public ibase::CLoggerComponentBase,
 			public iproc::TSyncProcessorWrap<Base>
 {
 public:
-	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef iproc::TSyncProcessorWrap<Base> BaseClass2;
 	typedef Interface InterfaceType;
 

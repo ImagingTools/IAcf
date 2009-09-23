@@ -38,14 +38,14 @@ namespace iswr
 	\c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CSwissRangerAcquisitionComp:
-			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
+			public ibase::CLoggerComponentBase,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>,
 			virtual public icam::IExposureConstraints,
 			virtual public iswr::ISwissRangerConstrains
 
 {
 public:
-	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSwissRangerAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);

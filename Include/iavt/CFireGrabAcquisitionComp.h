@@ -29,13 +29,13 @@ namespace iavt
 	AVT based camera component implementing interfaces \c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CFireGrabAcquisitionComp:
-			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
+			public ibase::CLoggerComponentBase,
 			virtual public icam::IExposureConstraints,
 			virtual public icam::ITriggerConstraints,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
-	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFireGrabAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
