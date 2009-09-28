@@ -10,7 +10,7 @@
 
 // SwissRanger includes
 #include <windows.h>
-#include <libusbSR.h>
+#include <libMesaSR.h>
 
 
 namespace iswr

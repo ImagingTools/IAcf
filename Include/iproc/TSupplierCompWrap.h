@@ -16,6 +16,8 @@
 
 #include "icomp/CComponentBase.h"
 
+#include "ibase/TLoggerCompWrap.h"
+
 #include "isys/ITimer.h"
 
 
@@ -32,12 +34,12 @@ namespace iproc
 */
 template <class SupplierInterface, class Product>
 class TSupplierCompWrap:
-			public icomp::CComponentBase,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			private imod::CSingleModelObserverBase,
 			virtual public SupplierInterface
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 	typedef imod::CSingleModelObserverBase BaseClass2;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);

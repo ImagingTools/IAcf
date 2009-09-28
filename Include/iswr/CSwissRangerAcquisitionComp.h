@@ -4,7 +4,7 @@
 
 // SwissRanger includes
 #include <windows.h>
-#include <libusbSR.h>
+#include <libMesaSR.h>
 
 
 // ACF includes
