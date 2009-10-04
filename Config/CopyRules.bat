@@ -1,0 +1,1 @@
+copy %ACFDIR%\Config\VC8\*.rules VC8
