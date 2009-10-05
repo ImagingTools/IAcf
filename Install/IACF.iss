@@ -6,7 +6,7 @@ AppVersion=$AcfVersion:10$
 AppPublisher=ImagingTools
 AppPublisherURL=http://www.imagingtools.de/
 AppName=IACF
-OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$
+OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
 WizardImageFile=..\..\Docs\Images\InstallerImage.bmp

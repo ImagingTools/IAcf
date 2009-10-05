@@ -13,7 +13,7 @@ rmdir /Q /S TempExcl
 mkdir Temp
 mkdir TempExcl
 
-set COMPILER_EXT=VC8
+set COMPILER_EXT=VC9
 
 call Rebuild.bat
 

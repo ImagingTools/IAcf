@@ -8,7 +8,7 @@
 **	Licensees holding valid IACF Commercial licenses may use this file in
 **	accordance with the IACF Commercial License Agreement provided with the
 **	Software or, alternatively, in accordance with the terms contained in
-**	a written agreement between you and ImagingTools GbR.
+**	a written agreement between you and ImagingTools Gantzke & Lepskiy GbR.
 **
 **	If you are unsure which license is appropriate for your use, please
 **	contact us at info@imagingtools.de.

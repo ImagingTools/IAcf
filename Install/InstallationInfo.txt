@@ -1,4 +1,5 @@
 Installation creation time: $AcfTimestamp$
 IACF Version: $AcfVersion:10$ ($AcfRawVersion:10$)
+Compiler code: $CompilerName$
 
 This distribution based on ACF $AcfVersion:0$ ($AcfRawVersion:0$)
