@@ -4,20 +4,17 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ConfigFiles count ="2">
+  <ConfigFiles count ="1">
     <FilePath>
-      ./IacfCore.xpc
-    </FilePath>
-    <FilePath>
-      $(ACFDIR)/Config/AcfFull.xpc
+      $(ACFDIR)/Config/Core.xpc
     </FilePath>
   </ConfigFiles>
   <PackageDirs count="2">
     <Dir>
-      ../Bin/$(ConfigurationName)/Tutorial
+      ../Bin/$(ConfigurationName)
     </Dir>
     <Dir>
-      ../Docs/Tutorial/Concepts/Components
+      ../Partitura
     </Dir>
   </PackageDirs>
   <PackageFiles count="0">
