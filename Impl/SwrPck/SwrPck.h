@@ -8,7 +8,7 @@
 #include "iswr/CSwissRangerAcquisitionComp.h"
 #include "iswr/CSwissRangerParams.h"
 #include "iswr/CSwissRangerParamsComp.h"
-#include "iswr/CSwissRangerImage.h"
+#include "iswr/CSwissRangerAcquisitionData.h"
 
 
 /**
@@ -29,9 +29,9 @@ typedef icomp::TModelCompWrap<iswr::CSwissRangerParamsComp> AttributedSwissRange
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
-						iswr::CSwissRangerImage, 
-						iswr::ISwissRangerImage, 
-						iser::ISerializable> > SwissRangerImage;
+						iswr::CSwissRangerAcquisitionData, 
+						iswr::ISwissRangerAcquisitionData, 
+						iser::ISerializable> > SwissRangerAcquisitionData;
 
 
 } // namespace SwrPck

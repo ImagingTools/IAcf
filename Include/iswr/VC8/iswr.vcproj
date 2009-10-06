@@ -159,7 +159,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerImage.cpp"
+				RelativePath="..\CSwissRangerAcquisitionData.cpp"
 				>
 			</File>
 			<File
@@ -185,7 +185,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerImage.h"
+				RelativePath="..\CSwissRangerAcquisitionData.h"
 				>
 			</File>
 			<File
@@ -201,11 +201,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ISwissRangerConstrains.h"
+				RelativePath="..\ISwissRangerAcquisitionData.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ISwissRangerImage.h"
+				RelativePath="..\ISwissRangerConstrains.h"
 				>
 			</File>
 			<File
@@ -216,23 +216,6 @@
 				RelativePath="..\iswr.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
 		</Filter>
 	</Files>
 	<Globals>

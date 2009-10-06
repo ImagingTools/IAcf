@@ -1,34 +1,34 @@
-#ifndef iqtswr_CSwissRangerImageViewComp_included
-#define iqtswr_CSwissRangerImageViewComp_included
+#ifndef iqtswr_CSwissRangerAcquisitionDataViewComp_included
+#define iqtswr_CSwissRangerAcquisitionDataViewComp_included
 
 
-#include "iswr/ISwissRangerImage.h"
+#include "iswr/ISwissRangerAcquisitionData.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtswr/Generated/ui_CSwissRangerImageViewComp.h"
+#include "iqtswr/Generated/ui_CSwissRangerAcquisitionDataViewComp.h"
 
 
 namespace iqtswr
 {
 
 
-class CSwissRangerImageViewComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CSwissRangerImageViewComp,
-			iswr::ISwissRangerImage>
+class CSwissRangerAcquisitionDataViewComp: public iqtgui::TDesignerGuiObserverCompBase<
+			Ui::CSwissRangerAcquisitionDataViewComp,
+			iswr::ISwissRangerAcquisitionData>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CSwissRangerImageViewComp,
-				iswr::ISwissRangerImage> BaseClass;
+				Ui::CSwissRangerAcquisitionDataViewComp,
+				iswr::ISwissRangerAcquisitionData> BaseClass;
 
-	I_BEGIN_COMPONENT(CSwissRangerImageViewComp)
-		I_ASSIGN(m_depthImage3dGuiCompPtr, "SurfaceView", "", true, "SurfaceView")
-		I_ASSIGN(m_depthImage3dObserverCompPtr, "SurfaceView", "", true, "SurfaceView")
-		I_ASSIGN(m_depthImage2dGuiCompPtr, "DepthImage2dView", "", true, "DepthImage2dView")
-		I_ASSIGN(m_depthImage2dObserverCompPtr, "DepthImage2dView", "", true, "DepthImage2dView")
+	I_BEGIN_COMPONENT(CSwissRangerAcquisitionDataViewComp)
+		I_ASSIGN(m_depthImageGuiCompPtr, "SurfaceView", "", true, "SurfaceView")
+		I_ASSIGN(m_depthImageObserverCompPtr, "SurfaceView", "", true, "SurfaceView")
+		I_ASSIGN(m_intensityImageGuiCompPtr, "DepthImageView", "", true, "DepthImageView")
+		I_ASSIGN(m_intensityImageObserverCompPtr, "DepthImageView", "", true, "DepthImageView")
 		I_ASSIGN(m_amplitudeImageGuiCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
 		I_ASSIGN(m_amplitudeImageObserverCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
 		I_ASSIGN(m_confidenceMapGuiCompPtr, "ConfidenceMapView", "", true, "ConfidenceMapView")
@@ -48,11 +48,11 @@ public:
 	virtual void OnGuiDestroyed();
 
 private:
-	I_REF(iqtgui::IGuiObject, m_depthImage3dGuiCompPtr);
-	I_REF(imod::IObserver, m_depthImage3dObserverCompPtr);
+	I_REF(iqtgui::IGuiObject, m_depthImageGuiCompPtr);
+	I_REF(imod::IObserver, m_depthImageObserverCompPtr);
 	
-	I_REF(iqtgui::IGuiObject, m_depthImage2dGuiCompPtr);
-	I_REF(imod::IObserver, m_depthImage2dObserverCompPtr);
+	I_REF(iqtgui::IGuiObject, m_intensityImageGuiCompPtr);
+	I_REF(imod::IObserver, m_intensityImageObserverCompPtr);
 	
 	I_REF(iqtgui::IGuiObject, m_amplitudeImageGuiCompPtr);
 	I_REF(imod::IObserver, m_amplitudeImageObserverCompPtr);
@@ -65,6 +65,6 @@ private:
 } // namespace iqtswr
 
 
-#endif // !iqtswr_CSwissRangerImageViewComp_included
+#endif // !iqtswr_CSwissRangerAcquisitionDataViewComp_included
 
 

@@ -26,7 +26,7 @@
 #include "idev/IDeviceInfo.h"
 
 #include "iswr/ISwissRangerConstrains.h"
-#include "iswr/ISwissRangerImage.h"
+#include "iswr/ISwissRangerAcquisitionData.h"
 
 
 namespace iswr
@@ -94,14 +94,18 @@ public:
 
 private:
 	bool CreateSwissImage(
-				iswr::ISwissRangerImage& swissImage,
+				iswr::ISwissRangerAcquisitionData& swissImage,
 				iimg::IBitmap& amplitudeBitmap,
 				double maxDistance,
 				const istd::CRange& clippingDistanceRange) const;
+	void CreateAmplitudeImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
+	void CreateIntensityImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
+	void CreateConfidenceMap(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
 	bool CreateOutputBitmap(
 				iimg::IBitmap& bitmap,
 				double maxDistance, 
 				const istd::CRange& clippingDistanceRange) const;
+	
 
 private:
 	CMesaDevice* m_cameraPtr;

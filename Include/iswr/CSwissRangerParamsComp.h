@@ -28,7 +28,7 @@ public:
 		I_REGISTER_INTERFACE(iswr::ISwissRangerParams);	
 		I_ASSIGN(m_isMedianFilterEnabledAttrPtr, "MedianEnabled", "Internal 3x3 median filter is enabled", false, true);
 		I_ASSIGN(m_amplitudeThresholdAttrPtr, "AmplitudeThreshold", "Threshold for signal amplitude.\nAll values below this value are ignored", false, 0);
-		I_ASSIGN(m_modulationFrequencyModeAttrPtr, "ModulationFrequency", "Modulation frequency.\n0 - 40MHz(3.75m SRR3)\n1 - 30MHz(5m SR3, SR4)\n2 - 21MHz(7.14m, SR3)\n3 - 20MHz(7.5m, SR3)\n4 - 19MHz(7.89m, SR3)", false, 0);
+		I_ASSIGN(m_modulationFrequencyModeAttrPtr, "ModulationFrequency", "Modulation frequency.\n0 - 40MHz(3.75m SRR3)\n1 - 30MHz(5m SR3, SR4)\n2 - 21MHz(7.14m, SR3)\n3 - 20MHz(7.5m, SR3)\n4 - 19MHz(7.89m, SR3)", false, 1);
 		I_ASSIGN(m_distanceClipMinAttrPtr, "MinDistanceClip", "Distances below this value clipped to the range", false, 0);
 		I_ASSIGN(m_distanceClipMaxAttrPtr, "MaxDistanceClip", "Distances above this value clipped to the range", false, 1.0);
 	I_END_COMPONENT;

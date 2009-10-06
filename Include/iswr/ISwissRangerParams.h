@@ -24,6 +24,9 @@ public:
 	virtual void SetMedianFilterEnabled(bool isEnabled = true) = 0;
 	virtual bool IsMedianFilterEnabled() const = 0;
 
+	virtual void SetAdaptiveFilterEnabled(bool isEnabled = true) = 0;
+	virtual bool IsAdaptiveFilterEnabled() const = 0;
+
 	virtual void SetAmplitudeThreshold(double amplitudeThreshold) = 0;
 	virtual double GetAmplitudeThreshold() const = 0;
 
@@ -32,6 +35,7 @@ public:
 
 	virtual void SetDistanceClipRange(const istd::CRange& distanceClipRange) = 0;
 	virtual const istd::CRange& GetDistanceClipRange() const = 0;
+
 };
 
 

@@ -54,9 +54,17 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			currentCameraMode = currentCameraMode & ~AM_MEDIAN;
 		}
 
+		if (swissRangerParamsPtr->IsAdaptiveFilterEnabled()){
+			currentCameraMode = currentCameraMode  | AM_DENOISE_ANF;
+		}
+		else{
+			currentCameraMode = currentCameraMode & ~AM_DENOISE_ANF;
+		}
+
 		clippingDistanceRange = swissRangerParamsPtr->GetDistanceClipRange();
 
 		SR_SetMode(m_cameraPtr, currentCameraMode);		
+		
 		SR_SetModulationFrequency(m_cameraPtr, ModulationFrq(swissRangerParamsPtr->GetModulationFrequencyMode()));
 
 		I_WORD amplitudeThreshold = I_WORD(swissRangerParamsPtr->GetAmplitudeThreshold() * (1 << 16)); 
@@ -78,7 +86,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		double shutterTime = exposureParamsPtr->GetShutterTime();
 		I_ASSERT(GetShutterTimeRange().Contains(shutterTime));
 
-		unsigned char integrationTime = unsigned char(shutterTime / 0.0002 - 1);
+		unsigned char integrationTime = unsigned char((shutterTime - 0.0003) / 0.0001);
 
 		SR_SetIntegrationTime(m_cameraPtr, integrationTime);
 	}
@@ -86,14 +94,17 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 	static float maxDistances[MF_LAST] = {
 				3.75f,
 				5.0f,
-				7.142f, 
+				7.14f, 
 				7.5f,
 				7.895f, 
-				2.6f, 
+				2.5f, 
 				10.f, 
 				15.f, 
-				5.1724f, 
-				4.8387f};//MF_40MHz,MF_30MHz,MF_21MHz,MF_20MHz,MF_19MHz,...
+				5.17f, 
+				4.8487f,
+				10.34f,
+				9.68f
+	};
 	
 	ModulationFrq frq = SR_GetModulationFrequency(m_cameraPtr);
 	float maxDistance = maxDistances[frq];
@@ -121,9 +132,9 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		else{
 			iimg::CGeneralBitmap amplitudeBitmap;
 			if (CreateOutputBitmap(amplitudeBitmap, maxDistance, clippingDistanceRange)){
-				istd::TChangeNotifier<iswr::ISwissRangerImage> swissImagePtr(dynamic_cast<iswr::ISwissRangerImage*>(outputPtr));
+				istd::TChangeNotifier<iswr::ISwissRangerAcquisitionData> swissImagePtr(dynamic_cast<iswr::ISwissRangerAcquisitionData*>(outputPtr));
 				if (swissImagePtr.IsValid()){
-					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap, maxDistance, clippingDistanceRange)){
+					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap, maxDistance * 1000, clippingDistanceRange)){
 						return TS_INVALID;
 					}
 				}
@@ -162,7 +173,7 @@ const ISwissRangerConstrains::SupportedFrequencies& CSwissRangerAcquisitionComp:
 
 istd::CRange CSwissRangerAcquisitionComp::GetShutterTimeRange() const
 {
-	return istd::CRange(0.0002, 0.051);
+	return istd::CRange(0.0003, 0.0258);
 }
 
 
@@ -194,7 +205,7 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 		SR_SetTimeout(m_cameraPtr, timeout);
 	
 		SR_SetMode(m_cameraPtr, AM_CONF_MAP | AM_COR_FIX_PTRN);
-		SR_SetModulationFrequency(m_cameraPtr, MF_40MHz);
+		SR_SetModulationFrequency(m_cameraPtr, MF_31MHz);
 		SR_SetIntegrationTime(m_cameraPtr, 128);
 
 		istd::CIndex2d size = GetBitmapSize(NULL);
@@ -233,6 +244,82 @@ void CSwissRangerAcquisitionComp::OnComponentDestroyed()
 
 // private methods
 
+bool CSwissRangerAcquisitionComp::CreateSwissImage(
+			iswr::ISwissRangerAcquisitionData& swissImage,
+			iimg::IBitmap& amplitudeBitmap,
+			double maxDistance,
+			const istd::CRange& clippingDistanceRange) const
+{
+	if (m_zBuffer.IsValid()){
+		istd::CIndex2d size = GetBitmapSize(NULL);
+
+		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[amplitudeBitmap.GetImageSize().GetProductVolume()]);
+
+		for (int y = 0; y < size.GetY(); ++y){
+			I_WORD* outputBitmapPtr = imageDataPtr.GetPtr() + y * size.GetX();
+			I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+		
+			for (int x = 0; x < size.GetX(); x++){
+				I_WORD zValue = *(zBufferPtr + x);
+			
+				double normedZValue = zValue / (maxDistance * 1000);
+				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
+				outputBitmapPtr[x] = I_WORD(normedZValue * maxDistance * 1000); // depth in mm
+			}
+		}
+
+		ImgEntry* imgEntryArray = NULL;
+
+		iimg::CGeneralBitmap amplitudeImage;
+		iimg::CGeneralBitmap intensityImage;
+		iimg::CGeneralBitmap confidenceMap;
+
+		int imageCount = SR_GetImageList(m_cameraPtr, &imgEntryArray);
+		for (int imageIndex = 0; imageIndex < imageCount; imageIndex++){
+			ImgEntry currentImage = imgEntryArray[imageIndex];
+
+			if (currentImage.imgType == ImgEntry::IT_AMPLITUDE){
+				CreateAmplitudeImage(amplitudeImage, currentImage);
+			}
+			if (currentImage.imgType == ImgEntry::IT_INTENSITY){
+				CreateIntensityImage(intensityImage, currentImage);
+			}
+			if (currentImage.imgType == ImgEntry::IT_CONF_MAP){
+				CreateConfidenceMap(confidenceMap, currentImage);
+			}
+		}		
+
+		return swissImage.CreateData(
+			imageDataPtr.PopPtr(),
+			maxDistance,
+			size,
+			confidenceMap,
+			intensityImage,
+			amplitudeImage,
+			NULL,
+			NULL,
+			true);
+	}
+
+	return false;
+}
+
+	
+void CSwissRangerAcquisitionComp::CreateAmplitudeImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
+{
+}
+
+
+void CSwissRangerAcquisitionComp::CreateIntensityImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
+{
+}
+	
+
+void CSwissRangerAcquisitionComp::CreateConfidenceMap(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
+{
+}
+
+
 bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 			iimg::IBitmap& bitmap, 
 			double maxDistance, 
@@ -262,37 +349,6 @@ bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
 	}
 
 	return retVal;
-}
-
-
-bool CSwissRangerAcquisitionComp::CreateSwissImage(
-			iswr::ISwissRangerImage& swissImage,
-			iimg::IBitmap& amplitudeBitmap,
-			double maxDistance,
-			const istd::CRange& clippingDistanceRange) const
-{
-	if (m_zBuffer.IsValid()){
-		istd::CIndex2d size = GetBitmapSize(NULL);
-
-		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[amplitudeBitmap.GetImageSize().GetProductVolume()]);
-
-		for (int y = 0; y < size.GetY(); ++y){
-			I_WORD* outputBitmapPtr = imageDataPtr.GetPtr() + y * size.GetX();
-			I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
-		
-			for (int x = 0; x < size.GetX(); x++){
-				I_WORD zValue = *(zBufferPtr + x);
-			
-				double normedZValue = zValue / (maxDistance * 1000);
-				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
-				outputBitmapPtr[x] = I_WORD(normedZValue * maxDistance * 1000); // depth in mm
-			}
-		}
-
-		return swissImage.CreateImage(imageDataPtr.PopPtr(), amplitudeBitmap);
-	}
-
-	return false;
 }
 
 

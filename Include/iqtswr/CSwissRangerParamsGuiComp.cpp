@@ -25,6 +25,7 @@ void CSwissRangerParamsGuiComp::UpdateModel() const
 		objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSpin->value() / 100.0);
 		objectPtr->SetModulationFrequencyMode(ModulationFrequencyModeCombo->currentIndex());
 		objectPtr->SetMedianFilterEnabled(MedianFilterCheck->isChecked());
+		objectPtr->SetAdaptiveFilterEnabled(AdaptiveFilterCheck->isChecked());
 	}
 }
 
@@ -39,6 +40,7 @@ void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 		DistanceClippingToSpin->setValue(objectPtr->GetDistanceClipRange().GetMaxValue() * 100);
 		ModulationFrequencyModeCombo->setCurrentIndex(objectPtr->GetModulationFrequencyMode());
 		MedianFilterCheck->setChecked(objectPtr->IsMedianFilterEnabled());
+		AdaptiveFilterCheck->setChecked(objectPtr->IsAdaptiveFilterEnabled());
 	}
 }
 

@@ -21,8 +21,9 @@ namespace iswr
 
 CSwissRangerParams::CSwissRangerParams()
 	:m_isMedianFilterEnabled(true),
+	m_isAdaptiveFilterEnabled(true),
 	m_amplitudeThreshold(0.0),
-	m_modulationFrequencyMode(MF_40MHz),
+	m_modulationFrequencyMode(MF_31MHz),
 	m_distanceClipRange(0.0, 1.0)
 {
 }
@@ -32,7 +33,7 @@ CSwissRangerParams::CSwissRangerParams()
 
 void CSwissRangerParams::SetMedianFilterEnabled(bool isMedianFilterEnabled)
 {
-	if (isMedianFilterEnabled != m_isMedianFilterEnabled){
+	if (m_isMedianFilterEnabled != isMedianFilterEnabled){
 		istd::CChangeNotifier changePtr(this);
 
 		m_isMedianFilterEnabled = isMedianFilterEnabled;
@@ -43,6 +44,22 @@ void CSwissRangerParams::SetMedianFilterEnabled(bool isMedianFilterEnabled)
 bool CSwissRangerParams::IsMedianFilterEnabled() const
 {
 	return m_isMedianFilterEnabled;
+}
+
+
+void CSwissRangerParams::SetAdaptiveFilterEnabled(bool isAdaptiveFilterEnabled)
+{
+	if (m_isAdaptiveFilterEnabled != isAdaptiveFilterEnabled){
+		istd::CChangeNotifier changePtr(this);
+
+		m_isAdaptiveFilterEnabled = isAdaptiveFilterEnabled;
+	}
+}
+
+
+bool CSwissRangerParams::IsAdaptiveFilterEnabled() const
+{
+	return m_isAdaptiveFilterEnabled;
 }
 
 
@@ -105,6 +122,11 @@ bool CSwissRangerParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(isMedianFilterEnabledTag);
 	retVal = retVal && archive.Process(m_isMedianFilterEnabled);
 	retVal = retVal && archive.EndTag(isMedianFilterEnabledTag);
+
+	static iser::CArchiveTag isAdaptiveFilterEnabledTag("AdaptiveFilterEnabled", "AdaptiveFilterEnabled");
+	retVal = retVal && archive.BeginTag(isAdaptiveFilterEnabledTag);
+	retVal = retVal && archive.Process(m_isAdaptiveFilterEnabled);
+	retVal = retVal && archive.EndTag(isAdaptiveFilterEnabledTag);
 
 	static iser::CArchiveTag amplitudeThresholdTag("AmplitudeThreshold", "AmplitudeThreshold");
 	retVal = retVal && archive.BeginTag(amplitudeThresholdTag);

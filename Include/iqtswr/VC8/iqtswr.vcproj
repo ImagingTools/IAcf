@@ -176,7 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSwissRangerImageViewComp.cpp"
+				RelativePath="..\CSwissRangerAcquisitionDataViewComp.cpp"
 				>
 			</File>
 			<File
@@ -190,7 +190,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSwissRangerImageViewComp.h"
+				RelativePath="..\CSwissRangerAcquisitionDataViewComp.h"
 				>
 			</File>
 			<File
@@ -208,14 +208,6 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
-			<File
-				RelativePath="..\CSwissRangerImageViewComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSwissRangerParamsGuiComp.moc"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -223,7 +215,15 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CSwissRangerImageViewComp.cpp"
+				RelativePath="..\CSwissRangerAcquisitionDataViewComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSwissRangerParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSwissRangerAcquisitionDataViewComp.cpp"
 				>
 			</File>
 			<File
@@ -231,7 +231,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSwissRangerImageViewComp.h"
+				RelativePath="..\generated\ui_CSwissRangerAcquisitionDataViewComp.h"
 				>
 			</File>
 			<File
@@ -243,7 +243,7 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CSwissRangerImageViewComp.ui"
+				RelativePath="..\CSwissRangerAcquisitionDataViewComp.ui"
 				>
 			</File>
 			<File
