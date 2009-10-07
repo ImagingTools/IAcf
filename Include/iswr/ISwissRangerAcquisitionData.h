@@ -26,25 +26,25 @@ public:
 		Create image.
 	*/
 	virtual bool CreateData(
-				I_WORD* depthDataPtr,
 				int maximalDepth,
-				const istd::CIndex2d& imageSize,
+				const iimg::IBitmap& depthImage,
 				const iimg::IBitmap& confidenceMap,
 				const iimg::IBitmap& intensityImage,
 				const iimg::IBitmap& amplitudeImage,
 				const iswr::ISwissRangerParams* paramsPtr = NULL,
-				const idev::IDeviceInfo* deviceInfoPtr = NULL,
-				bool releaseFlag = true) = 0;
+				const idev::IDeviceInfo* deviceInfoPtr = NULL) = 0;
 
-	/**
-		Get raw depth data.
-	*/
-	virtual const I_WORD* GetDepthData() const = 0;
+	virtual double GetMaxDistance() const = 0;
 
 	/**
 		Get depth image.
 	*/
 	virtual const iimg::IBitmap& GetDepthImage() const = 0;
+
+	/**
+		Get 8-bit distance image.
+	*/
+	virtual const iimg::IBitmap& GetDistanceImage() const = 0;
 
 	/**
 		Get confidence map.

@@ -125,19 +125,25 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 
 		istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
 		if (bitmapPtr.IsValid()){
-			if (!CreateOutputBitmap(*bitmapPtr.GetPtr(), maxDistance, clippingDistanceRange)){
-				return TS_INVALID;
+			ImgEntry* imgEntryArray = NULL;
+			int imageCount = SR_GetImageList(m_cameraPtr, &imgEntryArray);
+	
+			for (int imageIndex = 0; imageIndex < imageCount; imageIndex++){
+				ImgEntry currentImage = imgEntryArray[imageIndex];
+				if (currentImage.imgType == ImgEntry::IT_DISTANCE){
+					CreateFromCamera(*dynamic_cast<iimg::IBitmap*>(outputPtr), currentImage, int(maxDistance * 1000));
+				}
 			}
 		}
 		else{
-			iimg::CGeneralBitmap amplitudeBitmap;
-			if (CreateOutputBitmap(amplitudeBitmap, maxDistance, clippingDistanceRange)){
-				istd::TChangeNotifier<iswr::ISwissRangerAcquisitionData> swissImagePtr(dynamic_cast<iswr::ISwissRangerAcquisitionData*>(outputPtr));
-				if (swissImagePtr.IsValid()){
-					if (!CreateSwissImage(*swissImagePtr.GetPtr(), amplitudeBitmap, maxDistance * 1000, clippingDistanceRange)){
-						return TS_INVALID;
-					}
+			istd::TChangeNotifier<iswr::ISwissRangerAcquisitionData> swissImagePtr(dynamic_cast<iswr::ISwissRangerAcquisitionData*>(outputPtr));
+			if (swissImagePtr.IsValid()){
+				if (!CreateSwissImage(*swissImagePtr.GetPtr(), maxDistance, clippingDistanceRange)){
+					return TS_INVALID;
 				}
+			}
+			else{
+				return TS_INVALID;
 			}
 		}
 	}
@@ -246,26 +252,35 @@ void CSwissRangerAcquisitionComp::OnComponentDestroyed()
 
 bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			iswr::ISwissRangerAcquisitionData& swissImage,
-			iimg::IBitmap& amplitudeBitmap,
 			double maxDistance,
 			const istd::CRange& clippingDistanceRange) const
 {
 	if (m_zBuffer.IsValid()){
 		istd::CIndex2d size = GetBitmapSize(NULL);
 
-		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[amplitudeBitmap.GetImageSize().GetProductVolume()]);
+		int maxDistanceMm = int(maxDistance * 1000);
+
+		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[size.GetProductVolume()]);
 
 		for (int y = 0; y < size.GetY(); ++y){
-			I_WORD* outputBitmapPtr = imageDataPtr.GetPtr() + y * size.GetX();
+			I_WORD* outputImageLinePtr = imageDataPtr.GetPtr() + y * size.GetX();
 			I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
 		
 			for (int x = 0; x < size.GetX(); x++){
 				I_WORD zValue = *(zBufferPtr + x);
 			
-				double normedZValue = zValue / (maxDistance * 1000);
+				double normedZValue = zValue / (double)maxDistanceMm;
 				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
-				outputBitmapPtr[x] = I_WORD(normedZValue * maxDistance * 1000); // depth in mm
+				outputImageLinePtr[x] = I_WORD(normedZValue * maxDistanceMm); // depth in mm
 			}
+		}
+
+		iimg::CGeneralBitmap depthImage;
+		if (depthImage.CreateBitmap(size, imageDataPtr.GetPtr(), true, size.GetX() * 2, 16)){
+			imageDataPtr.PopPtr();
+		}
+		else{
+			return false;
 		}
 
 		ImgEntry* imgEntryArray = NULL;
@@ -279,76 +294,47 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			ImgEntry currentImage = imgEntryArray[imageIndex];
 
 			if (currentImage.imgType == ImgEntry::IT_AMPLITUDE){
-				CreateAmplitudeImage(amplitudeImage, currentImage);
+				CreateFromCamera(amplitudeImage, currentImage, 0xffff);
 			}
-			if (currentImage.imgType == ImgEntry::IT_INTENSITY){
-				CreateIntensityImage(intensityImage, currentImage);
+			if (currentImage.imgType == ImgEntry::IT_DISTANCE){
+				CreateFromCamera(intensityImage, currentImage, 0xffff);
 			}
 			if (currentImage.imgType == ImgEntry::IT_CONF_MAP){
-				CreateConfidenceMap(confidenceMap, currentImage);
+				CreateFromCamera(confidenceMap, currentImage, 0xffff);
 			}
 		}		
 
 		return swissImage.CreateData(
-			imageDataPtr.PopPtr(),
-			maxDistance,
-			size,
+			maxDistanceMm,
+			depthImage,
 			confidenceMap,
 			intensityImage,
 			amplitudeImage,
 			NULL,
-			NULL,
-			true);
+			NULL);
 	}
 
 	return false;
 }
 
 	
-void CSwissRangerAcquisitionComp::CreateAmplitudeImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
+bool CSwissRangerAcquisitionComp::CreateFromCamera(iimg::IBitmap& image, const ImgEntry& imageEntry, int scaleFactor) const
 {
-}
+	istd::TDelPtr<I_BYTE, true> imageDataPtr(new I_BYTE[imageEntry.width * imageEntry.height]);
 
-
-void CSwissRangerAcquisitionComp::CreateIntensityImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
-{
-}
-	
-
-void CSwissRangerAcquisitionComp::CreateConfidenceMap(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const
-{
-}
-
-
-bool CSwissRangerAcquisitionComp::CreateOutputBitmap(
-			iimg::IBitmap& bitmap, 
-			double maxDistance, 
-			const istd::CRange& clippingDistanceRange) const
-{
-	bool retVal = false;
-
-	istd::CIndex2d size = GetBitmapSize(NULL);
-	if (!size.IsSizeEmpty()){
-		if (bitmap.CreateBitmap(size)){
-			for (int y = 0; y < size.GetY(); ++y){
-				I_BYTE* outputBitmapPtr = (I_BYTE*)bitmap.GetLinePtr(y);
-				I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
-
-				for (int x = 0; x < size.GetX(); x++){
-					I_WORD zValue = *(zBufferPtr + x);
-			
-					double normedZValue = zValue / (maxDistance * 1000);
-					normedZValue = clippingDistanceRange.GetClipped(normedZValue);
-					normedZValue = clippingDistanceRange.GetMappedTo(normedZValue, istd::CRange(0, 1));
-					outputBitmapPtr[x] = I_BYTE(normedZValue * 255.0);
-				}
-			}
-
-			retVal = true;
+	// convert input data to 8-bit image:
+	for (int y = 0; y < imageEntry.height; y++){
+		I_BYTE* imageLinePtr = imageDataPtr.GetPtr() + y * imageEntry.width;
+		const I_WORD* inputDataPtr = (I_WORD*)imageEntry.data + y * imageEntry.width;
+		for (int x = 0; x < imageEntry.width; x++){
+			imageLinePtr[x] = I_BYTE((inputDataPtr[x] / (double)scaleFactor) * 255);
 		}
 	}
 
-	return retVal;
+	return image.CreateBitmap(
+				istd::CIndex2d(imageEntry.width, imageEntry.height), 
+				imageDataPtr.PopPtr(),
+				true);
 }
 
 

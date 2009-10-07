@@ -2,7 +2,7 @@
 #define iswr_CSwissRangerAcquisitionData_included
 
 
-#include "imath/CSampledFunction2d.h"
+#include "istd/CIndex2d.h"
 
 #include "imod/TModelWrap.h"
 
@@ -28,18 +28,15 @@ public:
 
 	// reimplemented (iswr::ISwissRangerAcquisitionData)
 	virtual bool CreateData(
-				I_WORD* depthDataPtr,
 				int maximalDepth,
-				const istd::CIndex2d& imageSize,
+				const iimg::IBitmap& depthImage,
 				const iimg::IBitmap& confidenceMap,
 				const iimg::IBitmap& intensityImage,
 				const iimg::IBitmap& amplitudeImage,
 				const iswr::ISwissRangerParams* paramsPtr = NULL,
-				const idev::IDeviceInfo* deviceInfoPtr = NULL,
-				bool releaseFlag = true);
-
-	virtual const I_WORD* GetDepthData() const;
-
+				const idev::IDeviceInfo* deviceInfoPtr = NULL);
+	virtual double GetMaxDistance() const;
+	virtual const iimg::IBitmap& GetDistanceImage() const;
 	virtual const iimg::IBitmap& GetDepthImage() const;
 	virtual const iimg::IBitmap& GetConfidenceMap() const;
 	virtual const iimg::IBitmap& GetIntensityImage() const;
@@ -51,14 +48,13 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
+	mutable imod::TModelWrap<iimg::CGeneralBitmap> m_distanceImage;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_depthImage;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_confidenceMap;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_intensityImage;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_amplitudeImage;
 	imod::TModelWrap<iswr::CSwissRangerParams> m_acquisitionParams;
 	idev::CDeviceInfo m_sensorInfo;
-
-	istd::TOptDelPtr<I_WORD, true> m_depthDataPtr;
 	int m_maxDepth;
 };
 

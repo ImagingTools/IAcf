@@ -2,9 +2,16 @@
 #define iqtswr_CSwissRangerAcquisitionDataViewComp_included
 
 
-#include "iswr/ISwissRangerAcquisitionData.h"
+// ACF includes
+#include "imath/CSampledFunction2d.h"
+
+#include "imod/TModelWrap.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+
+// IACF includes
+#include "iswr/ISwissRangerAcquisitionData.h"
 
 #include "iqtswr/Generated/ui_CSwissRangerAcquisitionDataViewComp.h"
 
@@ -25,10 +32,10 @@ public:
 				iswr::ISwissRangerAcquisitionData> BaseClass;
 
 	I_BEGIN_COMPONENT(CSwissRangerAcquisitionDataViewComp)
-		I_ASSIGN(m_depthImageGuiCompPtr, "SurfaceView", "", true, "SurfaceView")
-		I_ASSIGN(m_depthImageObserverCompPtr, "SurfaceView", "", true, "SurfaceView")
-		I_ASSIGN(m_intensityImageGuiCompPtr, "DepthImageView", "", true, "DepthImageView")
-		I_ASSIGN(m_intensityImageObserverCompPtr, "DepthImageView", "", true, "DepthImageView")
+		I_ASSIGN(m_depthImageGuiCompPtr, "DepthImageView", "", true, "DepthImageView")
+		I_ASSIGN(m_depthImageObserverCompPtr, "DepthImageView", "", true, "DepthImageView")
+		I_ASSIGN(m_depthImageGui3dCompPtr, "DepthImageView3D", "", true, "DepthImageView3D")
+		I_ASSIGN(m_depthImageObserver3dCompPtr, "DepthImageView3D", "", true, "DepthImageView3D")
 		I_ASSIGN(m_amplitudeImageGuiCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
 		I_ASSIGN(m_amplitudeImageObserverCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
 		I_ASSIGN(m_confidenceMapGuiCompPtr, "ConfidenceMapView", "", true, "ConfidenceMapView")
@@ -48,17 +55,22 @@ public:
 	virtual void OnGuiDestroyed();
 
 private:
+	void Create3dModel();
+
+private:
 	I_REF(iqtgui::IGuiObject, m_depthImageGuiCompPtr);
 	I_REF(imod::IObserver, m_depthImageObserverCompPtr);
 	
-	I_REF(iqtgui::IGuiObject, m_intensityImageGuiCompPtr);
-	I_REF(imod::IObserver, m_intensityImageObserverCompPtr);
+	I_REF(iqtgui::IGuiObject, m_depthImageGui3dCompPtr);
+	I_REF(imod::IObserver, m_depthImageObserver3dCompPtr);
 	
 	I_REF(iqtgui::IGuiObject, m_amplitudeImageGuiCompPtr);
 	I_REF(imod::IObserver, m_amplitudeImageObserverCompPtr);
 	
 	I_REF(iqtgui::IGuiObject, m_confidenceMapGuiCompPtr);
 	I_REF(imod::IObserver, m_confidenceMapObserverCompPtr);
+
+	imod::TModelWrap<imath::CSampledFunction2d> m_depthImage3d;
 };
 
 

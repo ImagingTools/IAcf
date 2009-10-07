@@ -95,17 +95,9 @@ public:
 private:
 	bool CreateSwissImage(
 				iswr::ISwissRangerAcquisitionData& swissImage,
-				iimg::IBitmap& amplitudeBitmap,
 				double maxDistance,
 				const istd::CRange& clippingDistanceRange) const;
-	void CreateAmplitudeImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
-	void CreateIntensityImage(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
-	void CreateConfidenceMap(iimg::IBitmap& amplitudeImage, const ImgEntry& imageEntry) const;
-	bool CreateOutputBitmap(
-				iimg::IBitmap& bitmap,
-				double maxDistance, 
-				const istd::CRange& clippingDistanceRange) const;
-	
+	bool CreateFromCamera(iimg::IBitmap& image, const ImgEntry& imageEntry, int scaleFactor) const;
 
 private:
 	CMesaDevice* m_cameraPtr;

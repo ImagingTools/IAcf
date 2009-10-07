@@ -25,37 +25,17 @@ CSwissRangerAcquisitionData::CSwissRangerAcquisitionData()
 // reimplemented (iswr::ISwissRangerAcquisitionData)
 
 bool CSwissRangerAcquisitionData::CreateData(
-			I_WORD* depthDataPtr,
 			int maximalDepth,
-			const istd::CIndex2d& imageSize,
+			const iimg::IBitmap& depthImage,
 			const iimg::IBitmap& confidenceMap,
 			const iimg::IBitmap& intensityImage,
 			const iimg::IBitmap& amplitudeImage,
 			const iswr::ISwissRangerParams* paramsPtr,
-			const idev::IDeviceInfo* deviceInfoPtr,
-			bool releaseFlag)
+			const idev::IDeviceInfo* deviceInfoPtr)
 {
 	m_maxDepth = maximalDepth;
-	int imageWidth = imageSize.GetX();
-	int imageHeight = imageSize.GetY();
 
-	istd::TDelPtr<I_BYTE, true> imageDataPtr(new I_BYTE[imageWidth * imageHeight]);
-
-	// convert input data to 8-bit image:
-	for (int y = 0; y < imageHeight; y++){
-		I_BYTE* imageLinePtr = imageDataPtr.GetPtr() + y * imageWidth;
-		I_WORD* inputDataPtr = depthDataPtr + y * imageWidth;
-		for (int x = 0; x < imageWidth; x++){
-			imageLinePtr[x] = I_BYTE((inputDataPtr[x] / (double)m_maxDepth) * 255);
-		}
-	}
-
-	if (m_depthImage.CreateBitmap(istd::CIndex2d(imageWidth, imageHeight), imageDataPtr.GetPtr(), true)){
-		imageDataPtr.PopPtr();
-	
-		m_depthDataPtr.SetPtr(depthDataPtr, releaseFlag);
-	}
-	
+	m_depthImage.CopyImageFrom(depthImage);
 	m_confidenceMap.CopyImageFrom(confidenceMap);
 	m_intensityImage.CopyImageFrom(intensityImage);
 	m_amplitudeImage.CopyImageFrom(amplitudeImage);
@@ -72,9 +52,36 @@ bool CSwissRangerAcquisitionData::CreateData(
 }
 
 
-const I_WORD* CSwissRangerAcquisitionData::GetDepthData() const
+double CSwissRangerAcquisitionData::GetMaxDistance() const
 {
-	return m_depthDataPtr.GetPtr();
+	return m_maxDepth;
+}
+
+
+const iimg::IBitmap& CSwissRangerAcquisitionData::GetDistanceImage() const
+{
+	// calculate the 8-bit version of depth image.
+	if (m_distanceImage.IsEmpty() && !m_depthImage.IsEmpty()){
+		int imageWidth = m_depthImage.GetImageSize().GetX();
+		int imageHeight = m_depthImage.GetImageSize().GetY();
+
+		istd::TDelPtr<I_BYTE, true> imageDataPtr(new I_BYTE[imageWidth * imageHeight]);
+
+		// convert input data to 8-bit image:
+		for (int y = 0; y < imageHeight; y++){
+			I_BYTE* imageLinePtr = imageDataPtr.GetPtr() + y * imageWidth;
+			I_WORD* inputDataPtr = (I_WORD*)m_depthImage.GetLinePtr(y);
+			for (int x = 0; x < imageWidth; x++){
+				imageLinePtr[x] = I_BYTE((inputDataPtr[x] / (double)m_maxDepth) * 255);
+			}
+		}
+
+		if (m_distanceImage.CreateBitmap(m_depthImage.GetImageSize(), imageDataPtr.GetPtr(), true)){
+			imageDataPtr.PopPtr();
+		}
+	}
+	
+	return m_distanceImage;
 }
 
 
@@ -126,6 +133,11 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 	retVal = retVal && m_depthImage.Serialize(archive);
 	retVal = retVal && archive.EndTag(depthImageTag);
 
+	static iser::CArchiveTag maxDepthTag("MaxDepth", "MaxDepth");
+	retVal = retVal && archive.BeginTag(maxDepthTag);
+	retVal = retVal && archive.Process(m_maxDepth);
+	retVal = retVal && archive.EndTag(maxDepthTag);
+
 	static iser::CArchiveTag confidenceMapTag("ConfidenceMap", "ConfidenceMap");
 	retVal = retVal && archive.BeginTag(confidenceMapTag);
 	retVal = retVal && m_confidenceMap.Serialize(archive);
@@ -150,6 +162,12 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(sensorInfoTag);
 	retVal = retVal && m_sensorInfo.Serialize(archive);
 	retVal = retVal && archive.EndTag(sensorInfoTag);
+
+	if (!archive.IsStoring()){
+		m_distanceImage.ResetImage();
+
+		GetDistanceImage();
+	}
 
 	return retVal;
 }
