@@ -128,6 +128,8 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
+	istd::CChangeNotifier changePtr(archive.IsStoring() ? NULL : this);
+
 	static iser::CArchiveTag depthImageTag("DepthImage", "DepthImage");
 	retVal = retVal && archive.BeginTag(depthImageTag);
 	retVal = retVal && m_depthImage.Serialize(archive);

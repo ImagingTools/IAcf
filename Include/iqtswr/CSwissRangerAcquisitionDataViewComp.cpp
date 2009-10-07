@@ -125,6 +125,8 @@ void CSwissRangerAcquisitionDataViewComp::OnGuiDestroyed()
 
 void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 {
+	int downsamplingFactor = 2;
+
 	iswr::ISwissRangerAcquisitionData* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
@@ -144,19 +146,19 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 	int imageHeight = depthImage.GetImageSize().GetY();
 	int maxDistance = objectPtr->GetMaxDistance();
 
-	istd::CIndex2d newSize(imageWidth / 2, imageHeight / 2);
+	istd::CIndex2d newSize(imageWidth / downsamplingFactor, imageHeight / downsamplingFactor);
 
 	istd::TDelPtr<double, true> outputDataPtr(new double[newSize.GetProductVolume()]);
 
 	for (int y = 0; y < newSize.GetY(); y++){
 		double* outputLinePtr = outputDataPtr.GetPtr() + y * newSize.GetX();
-		I_WORD* inputLinePtr = (I_WORD*)depthImage.GetLinePtr(y * 2);
-		//I_BYTE* confidenceLinePtr = (I_BYTE*)confidenceMap.GetLinePtr(y * 2);
+		I_WORD* inputLinePtr = (I_WORD*)depthImage.GetLinePtr(y * downsamplingFactor);
+		//I_BYTE* confidenceLinePtr = (I_BYTE*)confidenceMap.GetLinePtr(y * downsamplingFactor);
 
 		for (int x = 0; x < newSize.GetX(); x++){
-//			I_BYTE confidence = *(confidenceLinePtr+ 2 * x);
+//			I_BYTE confidence = *(confidenceLinePtr+ downsamplingFactor * x);
 
-			outputLinePtr[x] = 100  - 100 * *(inputLinePtr + 2 * x) / maxDistance;
+			outputLinePtr[x] = 100  - 100 * *(inputLinePtr + downsamplingFactor * x) / maxDistance;
 		}
 	}
 
