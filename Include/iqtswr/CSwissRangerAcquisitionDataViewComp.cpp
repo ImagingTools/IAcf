@@ -153,12 +153,17 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 	for (int y = 0; y < newSize.GetY(); y++){
 		double* outputLinePtr = outputDataPtr.GetPtr() + y * newSize.GetX();
 		I_WORD* inputLinePtr = (I_WORD*)depthImage.GetLinePtr(y * downsamplingFactor);
-		//I_BYTE* confidenceLinePtr = (I_BYTE*)confidenceMap.GetLinePtr(y * downsamplingFactor);
+		I_BYTE* confidenceLinePtr = (I_BYTE*)confidenceMap.GetLinePtr(y * downsamplingFactor);
 
 		for (int x = 0; x < newSize.GetX(); x++){
-//			I_BYTE confidence = *(confidenceLinePtr+ downsamplingFactor * x);
+			I_BYTE confidence = *(confidenceLinePtr+ downsamplingFactor * x);
 
-			outputLinePtr[x] = 100  - 100 * *(inputLinePtr + downsamplingFactor * x) / maxDistance;
+			if (confidence > 128){
+				outputLinePtr[x] = 100  - 100 * *(inputLinePtr + downsamplingFactor * x) / maxDistance;
+			}
+			else{
+				outputLinePtr[x] = 0;
+			}	
 		}
 	}
 
