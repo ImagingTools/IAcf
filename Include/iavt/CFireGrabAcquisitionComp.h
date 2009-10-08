@@ -1,5 +1,5 @@
-#ifndef iqt_CFireGrabAcquisitionComp_included
-#define iqt_CFireGrabAcquisitionComp_included
+#ifndef iavt_CFireGrabAcquisitionComp_included
+#define iavt_CFireGrabAcquisitionComp_included
 
 
 // FireGrab includes
@@ -129,6 +129,6 @@ private:
 } // namespace iavt
 
 
-#endif // !iqt_CFireGrabAcquisitionComp_included
+#endif // !iavt_CFireGrabAcquisitionComp_included
 
 
