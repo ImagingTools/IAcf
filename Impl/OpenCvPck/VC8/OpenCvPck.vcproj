@@ -68,6 +68,7 @@
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR)\Lib&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
+				OptimizeReferences="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

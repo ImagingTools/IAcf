@@ -2,10 +2,14 @@
 #define OpenCvPck_included
 
 
+// ACF includes
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
+
+// IACF includes
 #include "iocv/COpenCvAcquisitionComp.h"
+#include "iocv/COcvVideoControllerComp.h"
 
 
 /**
@@ -16,7 +20,7 @@ namespace OpenCvPck
 
 
 typedef iocv::COpenCvAcquisitionComp OpenCvAcquisition;
-
+typedef icomp::TModelCompWrap<iocv::COcvVideoControllerComp> OpenCvVideoController;
 
 } // namespace OpenCvPck
 
