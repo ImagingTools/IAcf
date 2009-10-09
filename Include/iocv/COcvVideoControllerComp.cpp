@@ -16,12 +16,12 @@ namespace iocv
 // public methods
 
 COcvVideoControllerComp::COcvVideoControllerComp()
+	:m_isPlaying(false)
 {
 }
 
 
 // reimplemented (icomp::IComponent)
-
 
 void COcvVideoControllerComp::OnComponentDestroyed()
 {
@@ -41,16 +41,23 @@ istd::CString COcvVideoControllerComp::GetOpenedMediumUrl() const
 
 bool COcvVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool autoPlay)
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	if (m_mediumUrl != url){
+		istd::CChangeNotifier notifier(this, CF_STATUS);
 
-	EnsureMediumClosed();
+		EnsureMediumClosed();
 
-	m_capturePtr.SetPtr(cvCreateFileCapture(url.ToString().c_str()));
-	if (!m_capturePtr.IsValid()){
-		return false;
+		m_capturePtr.SetPtr(cvCreateFileCapture(url.ToString().c_str()));
+		if (!m_capturePtr.IsValid()){
+			return false;
+		}
+
+		int frames = GetFramesCount();
+		double length = GetMediumLength();
+
+		SetPlaying(autoPlay);
+
+		m_mediumUrl = url;
 	}
-
-	SetPlaying(autoPlay);
 
 	return true;
 }
@@ -68,13 +75,17 @@ void COcvVideoControllerComp::CloseMedium()
 
 bool COcvVideoControllerComp::IsPlaying() const
 {
-	return false;
+	return m_isPlaying;
 }
 
 
-bool COcvVideoControllerComp::SetPlaying(bool/* state*/)
+bool COcvVideoControllerComp::SetPlaying(bool state)
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	if (m_isPlaying != state){
+		istd::CChangeNotifier notifier(this, CF_STATUS);
+
+		m_isPlaying = state;
+	}
 
 	return true;
 }
@@ -93,13 +104,19 @@ double COcvVideoControllerComp::GetMediumLength() const
 
 double COcvVideoControllerComp::GetCurrentPosition() const
 {
-	return GetCurrentFrame() / *m_framesPerSecondAttrPtr;
+	return GetCurrentFrame() * GetFrameIntervall();
 }
 
 
 bool COcvVideoControllerComp::SetCurrentPosition(double position)
 {
-	return SetCurrentFrame(int(position * *m_framesPerSecondAttrPtr + 0.5));
+	return SetCurrentFrame(int(position / GetFrameIntervall() + 0.5));
+}
+
+
+int COcvVideoControllerComp::GetSupportedFeatures() const
+{
+	return SF_SEEK;
 }
 
 
@@ -117,7 +134,11 @@ int COcvVideoControllerComp::GetFramesCount() const
 
 double COcvVideoControllerComp::GetFrameIntervall() const
 {
-	return 1.0 / *m_framesPerSecondAttrPtr;
+	if (m_capturePtr.IsValid()){
+		return 1.0 / cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FPS);
+	}
+
+	return 0;
 }
 
 
@@ -185,7 +206,7 @@ bool COcvVideoControllerComp::GrabFrame(iimg::IBitmap& result, int frameIndex) c
 bool COcvVideoControllerComp::GrabCurrentFrame(iimg::IBitmap& result) const
 {
 	if (m_capturePtr.IsValid()){
-		IplImage* framePtr = cvQueryFrame(m_capturePtr.GetPtr());
+		IplImage* framePtr = cvRetrieveFrame(m_capturePtr.GetPtr());
 		if (framePtr != NULL){
 			istd::CChangeNotifier changePtr(&result);
 
@@ -202,9 +223,11 @@ bool COcvVideoControllerComp::SeekToPostion(int frameIndex) const
 	if (m_capturePtr.IsValid()){
 		bool retVal = (cvSetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_POS_FRAMES, frameIndex) != 0);
 		if (retVal){
-			int setIndex = GetCurrentFrame();
+			if (cvGrabFrame(m_capturePtr.GetPtr()) != 0){
+				int setIndex = GetCurrentFrame();
 
-			return (setIndex == frameIndex);
+				return (setIndex == frameIndex);
+			}
 		}
 	}
 

@@ -33,7 +33,6 @@ public:
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);
-		I_ASSIGN(m_framesPerSecondAttrPtr, "FramesPerSecond", "Default number of frames per second if this info is unavailable from video", true, 25.0);
 		I_ASSIGN(m_frameDataCompPtr, "FrameData", "Frame instance will be loaded with loader", true, "FrameData");
 	I_END_COMPONENT();
 
@@ -51,6 +50,7 @@ public:
 	virtual double GetMediumLength() const;
 	virtual double GetCurrentPosition() const;
 	virtual bool SetCurrentPosition(double position);
+	virtual int GetSupportedFeatures() const;
 
 	// reimplemented (imm::IVideoInfo)
 	virtual int GetFramesCount() const;
@@ -71,10 +71,10 @@ private:
 	void EnsureMediumClosed();
 
 private:
-	I_ATTR(double, m_framesPerSecondAttrPtr);
 	I_REF(istd::IChangeable, m_frameDataCompPtr);
 
 	istd::CString m_mediumUrl;
+	bool m_isPlaying;
 
 	istd::TPointer<CvCapture> m_capturePtr;
 };
