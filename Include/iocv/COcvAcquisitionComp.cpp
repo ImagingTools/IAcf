@@ -1,4 +1,4 @@
-#include "iocv/COpenCvAcquisitionComp.h"
+#include "iocv/COcvAcquisitionComp.h"
 
 
 // ACF includes 
@@ -15,13 +15,13 @@ namespace iocv
 {
 
 
-COpenCvAcquisitionComp::COpenCvAcquisitionComp()
+COcvAcquisitionComp::COcvAcquisitionComp()
 :	m_cameraPtr(NULL)
 {
 }
 
 
-bool COpenCvAcquisitionComp::IsCameraValid() const
+bool COcvAcquisitionComp::IsCameraValid() const
 {
 	return (m_cameraPtr != NULL);
 }
@@ -29,7 +29,7 @@ bool COpenCvAcquisitionComp::IsCameraValid() const
 
 // reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 
-int COpenCvAcquisitionComp::DoProcessing(
+int COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /* paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr)
@@ -58,7 +58,7 @@ int COpenCvAcquisitionComp::DoProcessing(
 
 // reimplemented (icam::IBitmapAcquisition)
 
-istd::CIndex2d COpenCvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
+istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {
 	int imageWidth = (int)cvGetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_WIDTH);
 	int imageHeight = (int)cvGetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_HEIGHT);
@@ -69,13 +69,13 @@ istd::CIndex2d COpenCvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*p
 
 // reimplemented (icam::ITriggerConstraints)
 
-bool COpenCvAcquisitionComp::IsTriggerSupported() const
+bool COcvAcquisitionComp::IsTriggerSupported() const
 {
 	return false;
 }
 
 
-bool COpenCvAcquisitionComp::IsTriggerModeSupported(int /*triggerMode*/) const
+bool COcvAcquisitionComp::IsTriggerModeSupported(int /*triggerMode*/) const
 {
 	return false;
 }
@@ -83,7 +83,7 @@ bool COpenCvAcquisitionComp::IsTriggerModeSupported(int /*triggerMode*/) const
 
 // reimplemented (icomp::IComponent)
 
-void COpenCvAcquisitionComp::OnComponentCreated()
+void COcvAcquisitionComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -95,7 +95,7 @@ void COpenCvAcquisitionComp::OnComponentCreated()
 }
 
 
-void COpenCvAcquisitionComp::OnComponentDestroyed()
+void COcvAcquisitionComp::OnComponentDestroyed()
 {
 	if (m_cameraPtr != NULL){
 		cvReleaseCapture(&m_cameraPtr);

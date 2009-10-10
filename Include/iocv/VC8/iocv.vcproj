@@ -155,15 +155,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\COcvAcquisitionComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\COcvImage.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\COcvVideoControllerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\COpenCvAcquisitionComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -173,15 +173,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\COcvAcquisitionComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\COcvImage.h"
 				>
 			</File>
 			<File
 				RelativePath="..\COcvVideoControllerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\COpenCvAcquisitionComp.h"
 				>
 			</File>
 			<File

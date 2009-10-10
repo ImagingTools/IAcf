@@ -1,5 +1,5 @@
-#ifndef iocv_COpenCvAcquisitionComp_included
-#define iocv_COpenCvAcquisitionComp_included
+#ifndef iocv_COcvAcquisitionComp_included
+#define iocv_COcvAcquisitionComp_included
 
 
 // OpenCV includes
@@ -31,7 +31,7 @@ namespace iocv
 /**
 	Open CV based camera component implementation.
 */
-class COpenCvAcquisitionComp:
+class COcvAcquisitionComp:
 			public ibase::CLoggerComponentBase,
 			virtual public icam::ITriggerConstraints,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
@@ -39,7 +39,7 @@ class COpenCvAcquisitionComp:
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(COpenCvAcquisitionComp);
+	I_BEGIN_COMPONENT(COcvAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::ITriggerConstraints);
 	I_END_COMPONENT;
@@ -48,7 +48,7 @@ public:
 	{
 	};
 
-	COpenCvAcquisitionComp();
+	COcvAcquisitionComp();
 
 	bool IsCameraValid() const;
 
@@ -85,6 +85,6 @@ private:
 } // namespace iocv
 
 
-#endif // !iocv_COpenCvAcquisitionComp_included
+#endif // !iocv_COcvAcquisitionComp_included
 
 
