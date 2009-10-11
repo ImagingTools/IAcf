@@ -16,7 +16,8 @@ namespace iocv
 // public methods
 
 COcvVideoControllerComp::COcvVideoControllerComp()
-	:m_isPlaying(false)
+	:m_isPlaying(false),
+	m_currentFrameIndex(0)
 {
 }
 
@@ -42,8 +43,6 @@ istd::CString COcvVideoControllerComp::GetOpenedMediumUrl() const
 bool COcvVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool autoPlay)
 {
 	if (m_mediumUrl != url){
-		istd::CChangeNotifier notifier(this, CF_STATUS);
-
 		EnsureMediumClosed();
 
 		m_capturePtr.SetPtr(cvCreateFileCapture(url.ToString().c_str()));
@@ -51,12 +50,15 @@ bool COcvVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool autoP
 			return false;
 		}
 
-		int frames = GetFramesCount();
-		double length = GetMediumLength();
+		cvQueryFrame(m_capturePtr.GetPtr());
 
-		SetPlaying(autoPlay);
+		m_framesCount = (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FRAME_COUNT);
+
+		istd::CChangeNotifier notifier(this, CF_STATUS);
 
 		m_mediumUrl = url;
+
+		SetPlaying(autoPlay);
 	}
 
 	return true;
@@ -124,11 +126,7 @@ int COcvVideoControllerComp::GetSupportedFeatures() const
 
 int COcvVideoControllerComp::GetFramesCount() const
 {
-	if (m_capturePtr.IsValid()){
-		return (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FRAME_COUNT);
-	}
-
-	return 0;
+	return m_framesCount;
 }
 
 
@@ -144,6 +142,13 @@ double COcvVideoControllerComp::GetFrameIntervall() const
 
 istd::CIndex2d COcvVideoControllerComp::GetFrameSize() const
 {
+	if (m_capturePtr.IsValid()){
+		int frameWidth = (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FRAME_WIDTH);
+		int frameHeight = (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FRAME_HEIGHT);
+
+		return istd::CIndex2d(frameWidth, frameHeight);
+	}
+	
 	return istd::CIndex2d::GetInvalid();
 }
 
@@ -158,19 +163,17 @@ double COcvVideoControllerComp::GetPixelAspectRatio() const
 
 int COcvVideoControllerComp::GetCurrentFrame() const
 {
-	if (m_capturePtr.IsValid()){
-		return (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_POS_FRAMES);
-	}
-
-	return 0;
+	return m_currentFrameIndex;
 }
 
 
 bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 {
 	if (m_capturePtr.IsValid()){
-		bool retVal = SeekToPostion(frameIndex);
+		bool retVal = SeekToPosition(frameIndex);
 		if (retVal){
+			istd::CChangeNotifier notifier(this, CF_POSITION);
+
 			iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(m_frameDataCompPtr.GetPtr());
 			if (bitmapPtr != NULL){
 				return GrabCurrentFrame(*bitmapPtr);
@@ -188,16 +191,18 @@ bool COcvVideoControllerComp::GrabFrame(iimg::IBitmap& result, int frameIndex) c
 		return false;
 	}
 
+	return true;
+
 	int currentIndex = GetCurrentFrame();
 	bool retVal = false;
 
 	// seek to frame:
-	if (SeekToPostion(frameIndex)){
+	if (SeekToPosition(frameIndex)){
 		retVal = GrabCurrentFrame(result);
 	}
 
 	// restore original frame:
-	return SeekToPostion(currentIndex) && retVal;
+	return SeekToPosition(currentIndex) && retVal;
 }
 
 
@@ -218,20 +223,32 @@ bool COcvVideoControllerComp::GrabCurrentFrame(iimg::IBitmap& result) const
 }
 
 
-bool COcvVideoControllerComp::SeekToPostion(int frameIndex) const
+bool COcvVideoControllerComp::SeekToPosition(int frameIndex) const
 {
-	if (m_capturePtr.IsValid()){
-		bool retVal = (cvSetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_POS_FRAMES, frameIndex) != 0);
-		if (retVal){
-			if (cvGrabFrame(m_capturePtr.GetPtr()) != 0){
-				int setIndex = GetCurrentFrame();
+	if (m_currentFrameIndex == frameIndex){
+		return true;
+	}
 
-				return (setIndex == frameIndex);
+	int posDiff = frameIndex - m_currentFrameIndex;
+
+	bool retVal = true;
+
+	if (posDiff > 0){
+		while (posDiff--){
+			retVal = retVal && MoveToNextFrame();
+		}
+	}
+	else{
+		if (m_capturePtr.GetPtr()){
+			if (cvSetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_POS_FRAMES, frameIndex) != 0){
+				if (cvGrabFrame(m_capturePtr.GetPtr()) != 0){
+					m_currentFrameIndex = frameIndex;
+				}
 			}
 		}
 	}
 
-	return false;
+	return retVal;
 }
 
 
@@ -245,6 +262,30 @@ void COcvVideoControllerComp::EnsureMediumClosed()
 	}
 
 	m_capturePtr.Reset();
+}
+
+
+int COcvVideoControllerComp::GetStreamPosition() const
+{
+	if (m_capturePtr.GetPtr()){
+		return (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_POS_FRAMES);
+	}
+
+	return 0;
+}
+
+
+bool COcvVideoControllerComp::MoveToNextFrame() const
+{
+	if (m_capturePtr.IsValid()){
+		if (cvGrabFrame(m_capturePtr.GetPtr()) != 0){
+			m_currentFrameIndex++;
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 

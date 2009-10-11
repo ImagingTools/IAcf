@@ -65,10 +65,12 @@ public:
 
 protected:
 	virtual bool GrabCurrentFrame(iimg::IBitmap& result) const;
-	virtual bool SeekToPostion(int frameIndex) const;
+	virtual bool SeekToPosition(int frameIndex) const;
 
 private:
 	void EnsureMediumClosed();
+	int GetStreamPosition() const;
+	bool MoveToNextFrame() const;
 
 private:
 	I_REF(istd::IChangeable, m_frameDataCompPtr);
@@ -77,6 +79,8 @@ private:
 	bool m_isPlaying;
 
 	istd::TPointer<CvCapture> m_capturePtr;
+	mutable int m_currentFrameIndex;
+	int m_framesCount;
 };
 
 

@@ -8,7 +8,7 @@
 
 
 // IACF includes
-#include "iocv/COpenCvAcquisitionComp.h"
+#include "iocv/COcvAcquisitionComp.h"
 #include "iocv/COcvVideoControllerComp.h"
 
 
@@ -19,7 +19,7 @@ namespace OpenCvPck
 {
 
 
-typedef iocv::COpenCvAcquisitionComp OpenCvAcquisition;
+typedef iocv::COcvAcquisitionComp OpenCvAcquisition;
 typedef icomp::TModelCompWrap<iocv::COcvVideoControllerComp> OpenCvVideoController;
 
 } // namespace OpenCvPck
