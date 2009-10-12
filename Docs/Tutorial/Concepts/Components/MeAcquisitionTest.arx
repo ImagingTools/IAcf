@@ -91,7 +91,7 @@
               AddressParamId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -110,7 +110,7 @@
               IsOutput
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -279,7 +279,7 @@
               MaxDispValue
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -298,7 +298,7 @@
               MinDispValue
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               

@@ -89,7 +89,7 @@
               DefaultShutterTime
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               

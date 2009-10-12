@@ -237,7 +237,7 @@
               CaliperParamsId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -394,7 +394,7 @@
               DesignType
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -485,7 +485,7 @@
               ShowAllShapes
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -683,7 +683,7 @@
               DefaultDir
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -702,7 +702,7 @@
               MaxCachedDirs
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -721,7 +721,7 @@
               ParameterId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -758,7 +758,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -1305,7 +1305,7 @@
               LineParamId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -1584,7 +1584,7 @@
               ShapeZValue
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               

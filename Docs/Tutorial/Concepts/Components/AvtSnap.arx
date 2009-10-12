@@ -36,7 +36,7 @@
               ExposureParamsId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -112,7 +112,7 @@
               UseSingleShoot
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -399,7 +399,7 @@
               Height
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -418,7 +418,7 @@
               Width
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -437,7 +437,7 @@
               X
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -456,7 +456,7 @@
               Y
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -493,7 +493,7 @@
               ExternalTriggerEnabled
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               

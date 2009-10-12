@@ -267,7 +267,7 @@
               DefaultScript
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -286,7 +286,7 @@
               SamplesCount
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               

@@ -363,7 +363,7 @@
               AcquisitionDir
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -400,7 +400,7 @@
               AcquisitionDir
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               

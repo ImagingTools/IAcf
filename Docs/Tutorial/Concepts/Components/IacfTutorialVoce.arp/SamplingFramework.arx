@@ -93,7 +93,7 @@
               SplashTime
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -130,7 +130,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               ApplicationName
@@ -167,7 +167,7 @@
               LiveInterval
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -186,7 +186,7 @@
               MaxDispValue
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               MaxDispValue
@@ -202,7 +202,7 @@
               MinDispValue
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               MinDispValue
@@ -419,7 +419,7 @@
               CopyrightText
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               

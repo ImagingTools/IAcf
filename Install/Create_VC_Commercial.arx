@@ -97,7 +97,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -116,7 +116,7 @@
               IsExtensionUsed
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               

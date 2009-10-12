@@ -73,7 +73,7 @@
               ParameterId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -306,7 +306,7 @@
               DesignType
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -451,7 +451,7 @@
               ParamsId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
