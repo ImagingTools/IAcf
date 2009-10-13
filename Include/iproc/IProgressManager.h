@@ -17,7 +17,7 @@ public:
 		Begin progress report session.
 		\return	session ID or negative value if failed.
 	*/
-	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag) = 0;
+	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag, bool isCancelable = false) = 0;
 	/**
 		Close progress report session.
 		\param	sessionId	session ID returned by \c BeginProgressSession.

@@ -30,7 +30,7 @@ public:
 	CProgressManagerGuiComp();
 
 	// reimplemented (iproc::IProgressManager)
-	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag);
+	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag, bool isCancelable = false);
 	virtual void EndProgressSession(int sessionId);
 	virtual void OnProgress(int sessionId, double currentProgress);
 	virtual bool IsCanceled(int sessionId) const;

@@ -1,5 +1,5 @@
-#ifndef QtPck_included
-#define QtPck_included
+#ifndef IacfQtPck_included
+#define IacfQtPck_included
 
 
 #include "icomp/TModelCompWrap.h"
@@ -31,6 +31,6 @@ typedef iqtsig::CScriptSampleAcquisitionComp ScriptSampleAcquisition;
 } // namespace IacfQtPck
 
 
-#endif // !QtPck_included
+#endif // !IacfQtPck_included
 
 

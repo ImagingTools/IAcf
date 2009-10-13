@@ -18,7 +18,7 @@ CProgressManagerGuiComp::CProgressManagerGuiComp()
 
 // reimplemented (iproc::IProgressManager)
 
-int CProgressManagerGuiComp::BeginProgressSession(const iser::CArchiveTag& /*progressTag*/)
+int CProgressManagerGuiComp::BeginProgressSession(const iser::CArchiveTag& /*progressTag*/, bool isCancelable)
 {
 	if (m_isCanceled){
 		return -1;
@@ -30,7 +30,7 @@ int CProgressManagerGuiComp::BeginProgressSession(const iser::CArchiveTag& /*pro
 
 	if (IsGuiCreated()){
 		ProgressBar->setEnabled(true);
-		CancelButton->setEnabled(true);
+		CancelButton->setVisible(isCancelable);
 		
 		QCoreApplication::processEvents();
 	}
@@ -55,7 +55,7 @@ void CProgressManagerGuiComp::EndProgressSession(int sessionId)
 		if (IsGuiCreated()){
 			ProgressBar->setEnabled(false);
 			ProgressBar->setValue(0);
-			CancelButton->setEnabled(false);
+			CancelButton->setVisible(false);
 
 			QCoreApplication::processEvents();
 		}
