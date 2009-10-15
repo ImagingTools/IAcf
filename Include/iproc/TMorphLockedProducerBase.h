@@ -5,10 +5,12 @@
 // STL includes
 #include <list>
 
+
 // ACF includes
 #include "istd/TDelPtr.h"
 
-#include "iproc/IProgressManager.h"
+
+// IACF includes
 #include "iproc/TILockedProducer.h"
 
 
