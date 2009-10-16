@@ -87,10 +87,13 @@
 								<Value>
 									0.1.0
 								</Value>
-								<Value>
-									0.1.1
-								</Value>
-							</Values>
+                <Value>
+                  0.1.1
+                </Value>
+                <Value>
+                  0.1.2
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -107,14 +110,17 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									122
 								</Value>
-								<Value>
-									152
-								</Value>
-							</Values>
+                <Value>
+                  152
+                </Value>
+                <Value>
+                  169
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
