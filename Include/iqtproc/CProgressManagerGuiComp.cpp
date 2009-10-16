@@ -11,7 +11,8 @@ namespace iqtproc
 CProgressManagerGuiComp::CProgressManagerGuiComp()
 :	m_nextSessionId(0),
 	m_progressSum(0),
-	m_isCanceled(false)
+	m_isCanceled(false),
+	m_cancelableSessionsCount(0)
 {
 }
 
@@ -26,12 +27,17 @@ int CProgressManagerGuiComp::BeginProgressSession(const iser::CArchiveTag& /*pro
 
 	int id = m_nextSessionId++;
 
-	m_progressMap[id] = 0;
+	ProgressInfo& info = m_progressMap[id];
+	info.progress = 0;
+	info.isCancelable = isCancelable;
+
+	if (isCancelable){
+		++m_cancelableSessionsCount;
+	}
 
 	if (IsGuiCreated()){
-		ProgressBar->setEnabled(true);
-		CancelButton->setVisible(isCancelable);
-		
+		UpdateVisibleComponents();
+
 		QCoreApplication::processEvents();
 	}
 
@@ -44,21 +50,24 @@ void CProgressManagerGuiComp::EndProgressSession(int sessionId)
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
 	I_ASSERT(iter != m_progressMap.end());
 
-	m_progressSum -= iter->second;
+	const ProgressInfo& info = iter->second;
+	m_progressSum -= info.progress;
+
+	if (info.isCancelable){
+		--m_cancelableSessionsCount;
+	}
 
 	m_progressMap.erase(iter);
 
 	if (m_progressMap.empty()){
 		m_progressSum = 0;
 		m_isCanceled = false;
+	}
 
-		if (IsGuiCreated()){
-			ProgressBar->setEnabled(false);
-			ProgressBar->setValue(0);
-			CancelButton->setVisible(false);
+	if (IsGuiCreated()){
+		UpdateVisibleComponents();
 
-			QCoreApplication::processEvents();
-		}
+		QCoreApplication::processEvents();
 	}
 }
 
@@ -68,8 +77,8 @@ void CProgressManagerGuiComp::OnProgress(int sessionId, double currentProgress)
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
 	I_ASSERT(iter != m_progressMap.end());
 
-	m_progressSum += currentProgress - iter->second;
-	iter->second = currentProgress;
+	m_progressSum += currentProgress - iter->second.progress;
+	iter->second.progress = currentProgress;
 
 	if (IsGuiCreated()){
 		UpdateProgressBar();
@@ -87,10 +96,31 @@ bool CProgressManagerGuiComp::IsCanceled(int /*sessionId*/) const
 
 // protected methods
 
+void CProgressManagerGuiComp::UpdateVisibleComponents()
+{
+	QWidget* widgetPtr = GetWidget();
+	if (widgetPtr != NULL){
+		if (*m_automaticHideAttrPtr){
+			widgetPtr->setVisible(!m_progressMap.empty());
+		}
+
+		CancelButton->setVisible(m_cancelableSessionsCount > 0);
+		CancelButton->setEnabled(!m_isCanceled);
+
+		UpdateProgressBar();
+	}
+}
+
+
 void CProgressManagerGuiComp::UpdateProgressBar()
 {
-	if (!m_progressMap.empty()){
+	if (m_progressMap.empty()){
+		ProgressBar->setValue(0);
+		ProgressBar->setEnabled(false);
+	}
+	else{
 		ProgressBar->setValue(1000 * m_progressSum / m_progressMap.size());
+		ProgressBar->setEnabled(true);
 	}
 }
 
@@ -101,7 +131,15 @@ void CProgressManagerGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	UpdateProgressBar();
+	if (m_descriptionAttrPtr.IsValid()){
+		DescriptionLabel->setText(tr((*m_descriptionAttrPtr).ToString().c_str()));
+		DescriptionLabel->setVisible(true);
+	}
+	else{
+		DescriptionLabel->setVisible(false);
+	}
+
+	UpdateVisibleComponents();
 }
 
 
@@ -109,7 +147,7 @@ void CProgressManagerGuiComp::OnGuiCreated()
 
 void CProgressManagerGuiComp::on_CancelButton_clicked()
 {
-	CancelButton->setEnabled(false);
+	UpdateVisibleComponents();
 
 	m_isCanceled = true;
 }
