@@ -3,14 +3,14 @@
 [Setup]
 AppVerName=$AcfProductName$ $AcfVersion:10$
 AppVersion=$AcfVersion:10$
-AppPublisher=ImagingTools
+AppPublisher=$AcfCompanyName$
 AppPublisherURL=http://www.imagingtools.de/
 AppName=IACF
 OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:10$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
-WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
-WizardSmallImageFile=..\..\Docs\Images\Logo\Logo_128x128.bmp
+WizardImageFile=..\WizardImageFile.bmp
+WizardSmallImageFile=..\WizardSmallImageFile.bmp
 SetupIconFile=..\..\Docs\Images\Logo\Logo.ico
 AlwaysShowDirOnReadyPage=True
 DefaultGroupName=ImagingTools\IACF
@@ -19,6 +19,9 @@ UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
 UninstallDisplayName=$AcfProductName$ $AcfVersion:10$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
+VersionInfoDescription=$AcfProductName$ v. $AcfVersion:10$ ($AcfRawVersion:10$) by $AcfCompanyName$, compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$)
+AppCopyright=Copyright (C) 2007-2009 $AcfCompanyName$
+VersionInfoVersion=$AcfVersion:10$
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: iacfComp
