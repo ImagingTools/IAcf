@@ -83,7 +83,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									0.1.0
 								</Value>

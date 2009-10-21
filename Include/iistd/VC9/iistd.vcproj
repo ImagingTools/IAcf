@@ -30,19 +30,22 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -120,19 +123,22 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -238,6 +244,18 @@
 						OutputDir="..\..\..\Partitura\IacfVoce.arp"
 					/>
 				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated"
+			>
+			<File
+				RelativePath="..\generated\IacfVersion.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Partitura\IacfVoce.arp\VersionInfo.arx"
+				>
 			</File>
 		</Filter>
 	</Files>

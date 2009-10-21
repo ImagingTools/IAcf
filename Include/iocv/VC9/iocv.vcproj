@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtswr"
-	ProjectGUID="{7F1A163F-FF27-42D0-A4D0-F117B51A8F65}"
-	RootNamespace="iqtswr"
+	Name="iocv"
+	ProjectGUID="{FD4A04E8-65BA-4AF7-A1FE-7ADCBA37D083}"
+	RootNamespace="iocv"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -13,9 +13,6 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -29,16 +26,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -53,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;;&quot;$(SWISSRANGERDIR)&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(OPENCVDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -103,16 +91,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -126,7 +105,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(SWISSRANGERDIR)&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(OPENCVDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -176,11 +155,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSwissRangerAcquisitionDataViewComp.cpp"
+				RelativePath="..\COcvAcquisitionComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerParamsGuiComp.cpp"
+				RelativePath="..\COcvImage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\COcvVideoControllerComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -190,64 +173,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSwissRangerAcquisitionDataViewComp.h"
+				RelativePath="..\COcvAcquisitionComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerParamsGuiComp.h"
+				RelativePath="..\COcvImage.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtswr.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-			<File
-				RelativePath="..\CSwissRangerAcquisitionDataViewComp.moc"
+				RelativePath="..\COcvVideoControllerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSwissRangerParamsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSwissRangerAcquisitionDataViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CSwissRangerParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSwissRangerAcquisitionDataViewComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CSwissRangerParamsGuiComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CSwissRangerAcquisitionDataViewComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSwissRangerParamsGuiComp.ui"
+				RelativePath="..\iocv.h"
 				>
 			</File>
 		</Filter>
