@@ -172,7 +172,7 @@ bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 	if (m_capturePtr.IsValid()){
 		bool retVal = SeekToPosition(frameIndex);
 		if (retVal){
-			istd::CChangeNotifier notifier(this, CF_POSITION);
+			istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
 
 			iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(m_frameDataCompPtr.GetPtr());
 			if (bitmapPtr != NULL){
