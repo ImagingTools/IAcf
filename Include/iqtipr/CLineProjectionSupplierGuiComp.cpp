@@ -11,8 +11,6 @@
 #include "istd/TChangeNotifier.h"
 #include "iser/CMemoryReadArchive.h"
 
-#include "iqt2d/CPosition2dShape.h"
-
 
 // IACF includes
 #include "iqtipr/CProjectionShape.h"

@@ -83,7 +83,7 @@ QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 
 void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
-	iqt2d::CPosition2dShape* shapePtr = new iqt2d::CPosition2dShape;
+	iqt2d::CPosition2dShape* shapePtr = new iqt2d::CPosition2dShape(false);
 	if (shapePtr != NULL){
 		shapePtr->setZValue(2);
 
