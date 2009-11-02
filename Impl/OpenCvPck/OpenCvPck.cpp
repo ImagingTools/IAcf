@@ -6,6 +6,7 @@
 namespace OpenCvPck
 {
 
+
 I_EXPORT_DEFAULT_SERVICES
 
 I_EXPORT_PACKAGE("OpenCvPck", "Standard OpenCV package", "OpenCV Standard Image Processing Camera");

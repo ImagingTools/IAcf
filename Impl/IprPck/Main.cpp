@@ -7,6 +7,8 @@ namespace IprPck
 {
 
 
+I_EXPORT_DEFAULT_SERVICES
+
 I_EXPORT_PACKAGE("Ipr", "Image processing package", "Image Processing");
 
 I_EXPORT_COMPONENT(MovingAverageProcessor, "Moving average image processor", "Image Processing");

@@ -7,6 +7,8 @@ namespace ProdPck
 {
 
 
+I_EXPORT_DEFAULT_SERVICES
+
 I_EXPORT_PACKAGE("Prod", "Production and control package", "Production Automatic Controller");
 
 I_EXPORT_COMPONENT(MultiLineParams, "Parameter set for multi line production system", "Production Multi Lines Automatic Controller");

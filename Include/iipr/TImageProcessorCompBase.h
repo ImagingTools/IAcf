@@ -95,8 +95,10 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 	// create output image:
 	outputBitmapPtr->CopyImageFrom(*inputBitmapPtr);
 
-	const ParameterType* processorParamsPtr = dynamic_cast<const ParameterType*>(
-				paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
+	const ParameterType* processorParamsPtr = NULL;	
+	if (paramsPtr != NULL){
+		processorParamsPtr = dynamic_cast<const ParameterType*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
+	}
 	
 	// do image processing:
 	if (!ProcessImage(processorParamsPtr, *inputBitmapPtr, *outputBitmapPtr)){

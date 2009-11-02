@@ -6,6 +6,7 @@
 namespace QtProdPck
 {
 
+
 I_EXPORT_DEFAULT_SERVICES
 
 I_EXPORT_PACKAGE("QtProd", "Qt-based Production and control package", "Qt Production Automatic Controller");

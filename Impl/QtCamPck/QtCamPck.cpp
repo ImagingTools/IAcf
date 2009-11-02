@@ -6,6 +6,7 @@
 namespace QtCamPck
 {
 
+
 I_EXPORT_DEFAULT_SERVICES
 
 I_EXPORT_PACKAGE("QtCam", "Qt camera package", "Qt Camera");

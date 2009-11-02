@@ -6,6 +6,7 @@
 namespace QtSwrPck
 {
 
+
 I_EXPORT_DEFAULT_SERVICES
 
 I_EXPORT_PACKAGE("QtSwrPck", "Standard SwissRanger hardware package based on Qt", "SwissRanger Qt Standard");
