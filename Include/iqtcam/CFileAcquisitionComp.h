@@ -32,13 +32,14 @@ class CFileAcquisitionComp:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CFileAcquisitionComp)
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
+	I_BEGIN_COMPONENT(CFileAcquisitionComp);
+		I_REGISTER_INTERFACE(iproc::IProcessor);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
-		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".")
-		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition")
-		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10)
-	I_END_COMPONENT
+		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
+		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition");
+		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
+	I_END_COMPONENT;
 
 	CFileAcquisitionComp();
 
