@@ -155,7 +155,7 @@ istd::CIndex2d COcvVideoControllerComp::GetFrameSize() const
 
 double COcvVideoControllerComp::GetPixelAspectRatio() const
 {
-	return 1;
+	return -1;
 }
 
 
