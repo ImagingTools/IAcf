@@ -21,7 +21,7 @@
         FileSnapGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileNameParamGui
@@ -39,7 +39,7 @@
         SnapParamsGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui

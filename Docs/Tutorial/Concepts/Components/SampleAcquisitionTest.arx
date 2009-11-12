@@ -81,7 +81,7 @@
         ParamsSetGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui
@@ -234,7 +234,7 @@
         SamplingParamsGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         SamplingParamsGui
@@ -252,7 +252,7 @@
         TestSampleAcquisition
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ScriptSampleAcquisition

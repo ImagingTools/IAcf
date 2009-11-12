@@ -161,7 +161,7 @@
         ParamsManagerGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ParamsManagerGui

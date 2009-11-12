@@ -21,7 +21,7 @@
         Application
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         GuiApplication
@@ -141,7 +141,7 @@
         ImageDialogLoader
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader
@@ -261,7 +261,7 @@
         LogTab
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         Log
@@ -282,7 +282,7 @@
         SceneGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         SceneProvider
@@ -445,7 +445,7 @@
         SnapTab
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         SceneConnector
@@ -504,7 +504,7 @@
         Tabs
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         TabContainer

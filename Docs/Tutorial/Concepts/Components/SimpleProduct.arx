@@ -42,7 +42,7 @@
         AnnulusSegmentTestTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         AnnulusSegmentParamsGui
@@ -103,7 +103,7 @@
         AnnulusTestTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         AnnulusParamsGui
@@ -286,7 +286,7 @@
         CaliperLineGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         Line2dParamsGui
@@ -418,7 +418,7 @@
         CaliperParamsSetGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui
@@ -549,7 +549,7 @@
         CasadedCaliper
       </Id>
       <PackageId>
-        IacfBasePck
+        BasePck
       </PackageId>
       <ComponentId>
         CascadedProcessor
@@ -642,7 +642,7 @@
         CircleTestTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         CircleParamsGui
@@ -859,7 +859,7 @@
         FilePathParamGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileNameParamGui
@@ -1069,7 +1069,7 @@
         IdManager
       </Id>
       <PackageId>
-        IacfBasePck
+        BasePck
       </PackageId>
       <ComponentId>
         TestIdManager
@@ -1153,7 +1153,7 @@
         ImageParamsSetGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui
@@ -1451,7 +1451,7 @@
         LineTestTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         Line2dParamsGui
@@ -1687,7 +1687,7 @@
         QuadrangleTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         QuadrangleParamsGui
@@ -1767,7 +1767,7 @@
         RectangleTestTaskGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         RectangleParamsGui

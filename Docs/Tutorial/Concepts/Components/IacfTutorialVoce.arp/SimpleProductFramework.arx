@@ -21,7 +21,7 @@
         Application
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         GuiApplication
@@ -139,7 +139,7 @@
         LogTab
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         Log
@@ -213,7 +213,7 @@
         ProductEditor
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui
@@ -301,7 +301,7 @@
         ProductGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ModelEditorGui
@@ -360,7 +360,7 @@
         SceneGui
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         SceneProvider
@@ -419,7 +419,7 @@
         SnapTab
       </Id>
       <PackageId>
-        QtPck
+        QtViewPck
       </PackageId>
       <ComponentId>
         SceneConnector
@@ -478,7 +478,7 @@
         Tabs
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         TabContainer

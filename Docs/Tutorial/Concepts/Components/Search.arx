@@ -113,7 +113,7 @@
         FileCameraParamsGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileNameParamGui
@@ -291,7 +291,7 @@
         ParamsGuis
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui

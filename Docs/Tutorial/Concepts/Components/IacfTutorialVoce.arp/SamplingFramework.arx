@@ -21,7 +21,7 @@
         Application
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         GuiApplication
@@ -307,7 +307,7 @@
         ParamsLoader
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader
@@ -346,7 +346,7 @@
         SampleLoader
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader
@@ -385,7 +385,7 @@
         SplashScreen
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         SplashScreen

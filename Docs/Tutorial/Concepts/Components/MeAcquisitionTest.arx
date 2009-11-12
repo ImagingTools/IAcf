@@ -58,7 +58,7 @@
         ChannelAddressGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         SelectionParamGui
@@ -198,7 +198,7 @@
         ParamsSetGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         ComposedParamsSetGui
@@ -414,7 +414,7 @@
         SamplingParamsGui
       </Id>
       <PackageId>
-        QtPck
+        QtGuiPck
       </PackageId>
       <ComponentId>
         SamplingParamsGui
