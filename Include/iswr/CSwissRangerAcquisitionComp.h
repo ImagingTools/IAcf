@@ -19,7 +19,7 @@
 // IACF includes
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
 
@@ -35,11 +35,11 @@ namespace iswr
 
 /**
 	SwissRanger based camera component implementing interfaces 
-	\c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
+	\c iproc::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CSwissRangerAcquisitionComp:
 			public ibase::CLoggerComponentBase,
-			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>,
+			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>,
 			virtual public icam::IExposureConstraints,
 			virtual public iswr::ISwissRangerConstrains
 
@@ -49,7 +49,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSwissRangerAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_REGISTER_INTERFACE(iswr::ISwissRangerConstrains);
 		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
@@ -71,13 +71,13 @@ public:
 
 	bool IsCameraValid() const;
 
-	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+	// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
-	// reimplemented (icam::IBitmapAcquisition)
+	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iswr::ISwissRangerConstrains)

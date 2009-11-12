@@ -12,7 +12,7 @@
 
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/ITriggerConstraints.h"
 #include "icam/IExposureParams.h"
@@ -26,19 +26,19 @@ namespace iavt
 
 
 /**
-	AVT based camera component implementing interfaces \c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
+	AVT based camera component implementing interfaces \c iproc::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CFireGrabAcquisitionComp:
 			public ibase::CLoggerComponentBase,
 			virtual public icam::IExposureConstraints,
 			virtual public icam::ITriggerConstraints,
-			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFireGrabAcquisitionComp);
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_REGISTER_INTERFACE(icam::ITriggerConstraints);
 		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
@@ -66,13 +66,13 @@ public:
 
 	bool IsCameraValid() const;
 
-	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+	// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
-	// reimplemented (icam::IBitmapAcquisition)
+	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (icam::IExposureConstraints)

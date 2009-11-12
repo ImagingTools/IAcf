@@ -25,7 +25,7 @@ bool CSwissRangerAcquisitionComp::IsCameraValid() const
 }
 
 
-// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
 
 int CSwissRangerAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
@@ -152,7 +152,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 }
 
 
-// reimplemented (icam::IBitmapAcquisition)
+// reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d CSwissRangerAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {

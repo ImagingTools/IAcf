@@ -9,7 +9,7 @@
 #include "iprm/IParamsSet.h"
 #include "iproc/IProcessor.h"
 #include "iipr/IFeaturesConsumer.h"
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 #include "iqt2d/TSceneExtenderCompBase.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
@@ -64,7 +64,7 @@ private:
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
-	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
+	I_REF(iproc::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
 };

@@ -24,7 +24,7 @@ bool CFireGrabAcquisitionComp::IsCameraValid() const
 }
 
 
-// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
 
 int CFireGrabAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
@@ -91,7 +91,7 @@ int CFireGrabAcquisitionComp::DoProcessing(
 }
 
 
-// reimplemented (icam::IBitmapAcquisition)
+// reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d CFireGrabAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {

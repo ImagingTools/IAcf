@@ -22,7 +22,7 @@
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqt2d/TSceneExtenderCompBase.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -85,7 +85,7 @@ protected:
 private:
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
-	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
+	I_REF(iproc::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);

@@ -9,7 +9,7 @@
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 
-#include "icam/IBitmapSupplier.h"
+#include "iproc/IBitmapSupplier.h"
 
 #include "iproc/IValueSupplier.h"
 #include "iipr/IFeaturesMapper.h"
@@ -42,7 +42,7 @@ protected:
 	virtual int ProduceObject(I_DWORD objectId, imath::CVarVector& result) const;
 
 private:
-	I_REF(icam::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
 
 	I_REF(iipr::IFeaturesMapper, m_featuresMapperCompPtr);
 	I_REF(iproc::IProcessor, m_caliperToolCompPtr);

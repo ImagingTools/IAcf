@@ -13,7 +13,7 @@
 
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -23,18 +23,18 @@ namespace iqtcam
 
 
 /**
-	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
+	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c iproc::IBitmapAcquisition.
 */
 class CFileAcquisitionComp:
 			public icomp::CComponentBase,
-			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
 		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition");
@@ -49,7 +49,7 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
-	// reimplemented (icam::IBitmapAcquisition)
+	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 protected:

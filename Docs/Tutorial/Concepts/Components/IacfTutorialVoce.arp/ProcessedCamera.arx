@@ -428,7 +428,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        icam::IBitmapAcquisition
+        iproc::IBitmapAcquisition
       </InterfaceId>
       <ComponentId>
         ProcessedCamera

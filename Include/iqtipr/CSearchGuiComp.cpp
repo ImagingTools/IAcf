@@ -88,7 +88,7 @@ void CSearchGuiComp::DoSearch()
 	}
 		
 	int retVal = m_bitmapAcquisitionCompPtr->DoProcessing(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
-	if (retVal == icam::IBitmapAcquisition::TS_OK){
+	if (retVal == iproc::IBitmapAcquisition::TS_OK){
 		m_searchProcessorCompPtr->DoProcessing(m_paramsSetCompPtr.GetPtr(), m_bitmapCompPtr.GetPtr(), m_searchResultsCompPtr.GetPtr());
 	}
 }

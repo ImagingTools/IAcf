@@ -9,7 +9,7 @@
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 
-#include "icam/IBitmapSupplier.h"
+#include "iproc/IBitmapSupplier.h"
 
 #include "iipr/ILineProjectionSupplier.h"
 #include "iipr/ILineProjectionProcessor.h"
@@ -41,7 +41,7 @@ protected:
 	virtual int ProduceObject(I_DWORD objectId, istd::TDelPtr<iipr::CProjectionData>& result) const;
 
 private:
-	I_REF(icam::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 
 	iipr::CProjectionData m_projectionData;

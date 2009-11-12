@@ -15,7 +15,7 @@
 
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/ITriggerConstraints.h"
 #include "icam/IExposureParams.h"
@@ -34,13 +34,13 @@ namespace iocv
 class COcvAcquisitionComp:
 			public ibase::CLoggerComponentBase,
 			virtual public icam::ITriggerConstraints,
-			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::ITriggerConstraints);
 	I_END_COMPONENT;
 
@@ -52,13 +52,13 @@ public:
 
 	bool IsCameraValid() const;
 
-	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+	// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
-	// reimplemented (icam::IBitmapAcquisition)
+	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (icam::ITriggerConstraints)

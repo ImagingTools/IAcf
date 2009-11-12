@@ -9,7 +9,7 @@
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 
-#include "icam/IBitmapSupplier.h"
+#include "iproc/IBitmapSupplier.h"
 
 #include "iipr/IFeaturesSupplier.h"
 #include "iipr/TFeaturesContainerWrap.h"
@@ -45,7 +45,7 @@ protected:
 	virtual int ProduceObject(I_DWORD objectId, CSearchFeatures& result) const;
 
 private:
-	I_REF(icam::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 };
 

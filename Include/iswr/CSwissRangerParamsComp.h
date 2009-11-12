@@ -15,7 +15,7 @@ namespace iswr
 
 /**
 	SwissRanger based camera component implementing interfaces 
-	\c icam::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
+	\c iproc::IBitmapAcquisition and \c icam::IExposureConstraints for exposure control support.
 */
 class CSwissRangerParamsComp: public icomp::CComponentBase, public iswr::CSwissRangerParams
 

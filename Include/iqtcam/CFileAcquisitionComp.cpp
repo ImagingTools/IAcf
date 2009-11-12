@@ -114,7 +114,7 @@ int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const 
 }
 
 
-// reimplemented (icam::IBitmapAcquisition)
+// reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d CFileAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {

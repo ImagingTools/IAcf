@@ -4,34 +4,34 @@
 
 #include "iproc/TSyncProcessorCompBase.h"
 
-#include "icam/IBitmapAcquisition.h"
+#include "iproc/IBitmapAcquisition.h"
 
 
 namespace iipr
 {
 
 
-class CProcessedAcquisitionComp: public iproc::TSyncProcessorCompBase<icam::IBitmapAcquisition>
+class CProcessedAcquisitionComp: public iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition>
 {
 public:
-	typedef iproc::TSyncProcessorCompBase<icam::IBitmapAcquisition> BaseClass;
+	typedef iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition> BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedAcquisitionComp);
 		I_ASSIGN(m_slaveAcquisitionCompPtr, "SlaveCamera", "Camera for real image acquisition", true, "SlaveCamera");
 		I_ASSIGN(m_processorCompPtr, "ImageProcessor", "Image processor", false, "ImageProcessor");
 	I_END_COMPONENT
 
-	// reimplemented (icam::IBitmapAcquisition)
+	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
-	// reimplemented iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
+	// reimplemented iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
 private:
-	I_REF(icam::IBitmapAcquisition, m_slaveAcquisitionCompPtr);
+	I_REF(iproc::IBitmapAcquisition, m_slaveAcquisitionCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 };
 
