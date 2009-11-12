@@ -10,8 +10,8 @@
 
 #include "iproc/TSupplierCompWrap.h"
 
-#include "icam/IBitmapAcquisition.h"
-#include "icam/IBitmapSupplier.h"
+#include "iproc/IBitmapAcquisition.h"
+#include "iproc/IBitmapSupplier.h"
 
 
 namespace icam
@@ -21,10 +21,10 @@ namespace icam
 /**
 	Implementation of bitmap supplier based on image acquisition.
 */
-class CSnapBitmapSupplierComp: public iproc::TSupplierCompWrap<IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> >
+class CSnapBitmapSupplierComp: public iproc::TSupplierCompWrap<iproc::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> >
 {
 public:
-	typedef iproc::TSupplierCompWrap<IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> > BaseClass;
+	typedef iproc::TSupplierCompWrap<iproc::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
@@ -41,7 +41,7 @@ protected:
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
-	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
+	I_REF(iproc::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 };
 
 

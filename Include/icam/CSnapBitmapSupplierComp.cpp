@@ -31,10 +31,10 @@ int CSnapBitmapSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<iimg:
 	if (result.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.GetPtr());
 		switch (status){
-		case IBitmapAcquisition::TS_OK:
+		case iproc::IProcessor::TS_OK:
 			return WS_OK;
 
-		case IBitmapAcquisition::TS_CANCELED:
+		case iproc::IProcessor::TS_CANCELED:
 			return WS_CANCELED;
 
 		default:

@@ -28,7 +28,7 @@ int CMemoryAcquisitionComp::DoProcessing(const iprm::IParamsSet* /*paramsPtr*/, 
 }
 
 
-// reimplemented (icam::IBitmapAcquisition)
+// reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d CMemoryAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {
