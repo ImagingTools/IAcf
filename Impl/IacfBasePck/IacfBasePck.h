@@ -5,9 +5,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "iproc/CTestIdManagerComp.h"
-#include "iproc/CCascadedProcessorComp.h"
-
 #include "icam/CExposureParamsComp.h"
 #include "icam/CSnapBitmapSupplierComp.h"
 #include "icam/CMemoryAcquisitionComp.h"
@@ -20,9 +17,6 @@
 namespace IacfBasePck
 {
 
-
-typedef iproc::CTestIdManagerComp TestIdManager;
-typedef iproc::CCascadedProcessorComp CascadedProcessor;
 
 typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
