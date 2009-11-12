@@ -65,7 +65,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfWin.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -144,7 +144,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfWin.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
