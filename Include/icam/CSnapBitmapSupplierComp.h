@@ -31,7 +31,7 @@ public:
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision object for image snap", true, "BitmapAcquisition");
 	I_END_COMPONENT;
 
-	// reimplemented (icam::IBitmapSupplier)
+	// reimplemented (iproc::IBitmapSupplier)
 	virtual const iimg::IBitmap* GetBitmap(I_DWORD objectId) const;
 
 protected:

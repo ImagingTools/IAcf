@@ -5,7 +5,7 @@ namespace icam
 {
 
 
-// reimplemented (icam::IBitmapSupplier)
+// reimplemented (iproc::IBitmapSupplier)
 
 const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap(I_DWORD objectId) const
 {
