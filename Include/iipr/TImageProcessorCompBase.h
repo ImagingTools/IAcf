@@ -30,6 +30,10 @@ public:
 
 	TImageProcessorCompBase();
 
+	I_BEGIN_BASE_COMPONENT(TSyncProcessorCompBase)
+		I_TASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
+	I_END_COMPONENT
+
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
@@ -45,6 +49,8 @@ protected:
 
 private:
 	istd::TSmartPtr<isys::ITimer> m_timerPtr;
+
+	I_TREF(iproc::IProcessor, m_preprocessorCompPtr);
 };
 
 
