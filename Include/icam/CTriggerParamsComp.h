@@ -12,6 +12,9 @@ namespace icam
 {
 
 
+/**
+	Implementatation of standard trigger parameters set.
+*/
 class CTriggerParamsComp: public icomp::CComponentBase, virtual public icam::ITriggerParams
 {
 public:
@@ -22,7 +25,7 @@ public:
 	I_BEGIN_COMPONENT(CTriggerParamsComp);
 		I_REGISTER_INTERFACE(icam::ITriggerParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_ASSIGN(m_triggerConstraintsCompPtr, "TriggerConstraints", "Describing allowed parameter state, tipically implemented in camera component", false, "TriggerConstraints");
+		I_ASSIGN(m_triggerConstraintsCompPtr, "TriggerConstraints", "Describing allowed parameter state, typically implemented in camera component", false, "TriggerConstraints");
 		I_ASSIGN(m_isTriggerEnabledAttrPtr, "ExternalTriggerEnabled", "Enables external trigger", false, false);
 		I_ASSIGN(m_triggerModeAttrPtr, "TriggerMode", "Set trigger mode: 0 - Default, 1 - Rising edge, 2 - Falling edge, 3 - Positive level, 4 - Negative level", false, 0);
 	I_END_COMPONENT;

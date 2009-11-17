@@ -16,7 +16,7 @@ namespace iocv
 // public methods
 
 COcvVideoControllerComp::COcvVideoControllerComp()
-	:m_isPlaying(false),
+:	m_isPlaying(false),
 	m_currentFrameIndex(0)
 {
 }
@@ -29,6 +29,34 @@ void COcvVideoControllerComp::OnComponentDestroyed()
 	CloseMedium();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// reimplemented (iproc::IBitmapAcquisition)
+
+istd::CIndex2d COcvVideoControllerComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
+{
+	return GetFrameSize();
+}
+
+
+// reimplemented (iproc::IProcessor)
+
+int COcvVideoControllerComp::DoProcessing(
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const istd::IPolymorphic* /*inputPtr*/,
+			istd::IChangeable* outputPtr)
+{
+	if (outputPtr == NULL){
+		return TS_OK;
+	}
+
+	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if ((bitmapPtr != NULL) && GrabCurrentFrame(*bitmapPtr)){
+		return TS_OK;
+	}
+
+	return TS_INVALID;
 }
 
 
@@ -182,27 +210,6 @@ bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 	}
 
 	return false;
-}
-
-
-bool COcvVideoControllerComp::GrabFrame(iimg::IBitmap& result, int frameIndex) const
-{
-	if (!m_capturePtr.IsValid()){
-		return false;
-	}
-
-	return true;
-
-	int currentIndex = GetCurrentFrame();
-	bool retVal = false;
-
-	// seek to frame:
-	if (SeekToPosition(frameIndex)){
-		retVal = GrabCurrentFrame(result);
-	}
-
-	// restore original frame:
-	return SeekToPosition(currentIndex) && retVal;
 }
 
 

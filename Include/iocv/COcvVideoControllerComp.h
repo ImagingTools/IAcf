@@ -10,7 +10,8 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-
+#include "iproc/IBitmapAcquisition.h"
+#include "iproc/TSyncProcessorCompBase.h"
 #include "imm/IVideoController.h"
 
 
@@ -22,11 +23,11 @@ namespace iocv
 	Component for video controlling using OpenCV API.
 */
 class COcvVideoControllerComp:
-			public icomp::CComponentBase,
+			public iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition>,
 			virtual public imm::IVideoController
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition> BaseClass;
 
 	I_BEGIN_COMPONENT(COcvVideoControllerComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
@@ -40,6 +41,15 @@ public:
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentDestroyed();
+
+	// reimplemented (iproc::IBitmapAcquisition)
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+
+	// reimplemented (iproc::IProcessor)
+	virtual int DoProcessing(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr);
 
 	// reimplemented (imm::IMediaController)
 	virtual istd::CString GetOpenedMediumUrl() const;
@@ -61,7 +71,6 @@ public:
 	// reimplemented (imm::IVideoController)
 	virtual int GetCurrentFrame() const;
 	virtual bool SetCurrentFrame(int frameIndex);
-	virtual bool GrabFrame(iimg::IBitmap& result, int frameIndex = -1) const;
 
 protected:
 	virtual bool GrabCurrentFrame(iimg::IBitmap& result) const;

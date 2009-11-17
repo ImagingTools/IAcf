@@ -30,8 +30,9 @@ public:
 
 	TImageProcessorCompBase();
 
-	I_BEGIN_BASE_COMPONENT(TSyncProcessorCompBase)
-		I_TASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
+	I_BEGIN_BASE_COMPONENT(TImageProcessorCompBase)
+		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
+		I_ASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
 	I_END_COMPONENT
 
 	// reimplemented (iproc::IProcessor)
@@ -50,7 +51,8 @@ protected:
 private:
 	istd::TSmartPtr<isys::ITimer> m_timerPtr;
 
-	I_TREF(iproc::IProcessor, m_preprocessorCompPtr);
+	I_ATTR(istd::CString, m_paramsIdAttrPtr);
+	I_REF(iproc::IProcessor, m_preprocessorCompPtr);
 };
 
 

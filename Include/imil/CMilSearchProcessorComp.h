@@ -25,6 +25,7 @@ public:
 	typedef ibase::TLoggerCompWrap<iproc::CSyncProcessorCompBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CMilSearchProcessorComp)
+		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
 	I_END_COMPONENT
 
 	// reimplemented (iproc::IProcessor)
@@ -41,6 +42,8 @@ protected:
 
 private:
 	imil::CMilEngine m_engine;
+
+	I_ATTR(istd::CString, m_paramsIdAttrPtr);
 };
 
 
