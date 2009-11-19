@@ -8,18 +8,18 @@
 
 #include "imod/TSingleModelObserverBase.h"
 
-#include "isig/ISamplesContainer.h"
+#include "imeas/ISamplesSequence.h"
 
 
 namespace iqtsig
 {
 
 
-class CSampleContainerView: public QWidget, public imod::TSingleModelObserverBase<isig::ISamplesContainer>
+class CSampleContainerView: public QWidget, public imod::TSingleModelObserverBase<imeas::ISamplesSequence>
 {
 public:
 	typedef QWidget BaseClass;
-	typedef imod::TSingleModelObserverBase<isig::ISamplesContainer> BaseClass2;
+	typedef imod::TSingleModelObserverBase<imeas::ISamplesSequence> BaseClass2;
 
 	CSampleContainerView(QWidget* parentPtr = NULL);
 

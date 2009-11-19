@@ -177,10 +177,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CSamplesContainer.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSamplingParamsComp.cpp"
 				>
 			</File>
@@ -190,15 +186,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CSamplesContainer.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSamplingParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISamplesContainer.h"
 				>
 			</File>
 			<File

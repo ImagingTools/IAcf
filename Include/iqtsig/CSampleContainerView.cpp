@@ -35,7 +35,7 @@ void CSampleContainerView::OnUpdate(int updateFlags, istd::IPolymorphic* updateP
 
 void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 {
-	const isig::ISamplesContainer* samplesPtr = GetObjectPtr();
+	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr != NULL){
 		QPainter painter(this);
 

@@ -177,7 +177,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CSamplesContainer.cpp"
+				RelativePath="..\CGeneralSamplesSequence.cpp"
 				>
 			</File>
 			<File
@@ -190,7 +190,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CSamplesContainer.h"
+				RelativePath="..\CGeneralSamplesSequence.h"
 				>
 			</File>
 			<File
@@ -198,7 +198,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ISamplesContainer.h"
+				RelativePath="..\ISamplesSequence.h"
 				>
 			</File>
 			<File

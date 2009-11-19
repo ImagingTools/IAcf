@@ -40,11 +40,11 @@ bool CMeilhausSimpleComp::AreParamsAccepted(
 			const istd::IPolymorphic* inputPtr,
 			const istd::IChangeable* outputPtr) const
 {
-	if ((inputPtr != NULL) && (dynamic_cast<const isig::ISamplesContainer*>(inputPtr) == NULL)){
+	if ((inputPtr != NULL) && (dynamic_cast<const imeas::ISamplesSequence*>(inputPtr) == NULL)){
 		return false;
 	}
 
-	if ((outputPtr != NULL) && (dynamic_cast<const isig::ISamplesContainer*>(outputPtr) == NULL)){
+	if ((outputPtr != NULL) && (dynamic_cast<const imeas::ISamplesSequence*>(outputPtr) == NULL)){
 		return false;
 	}
 
@@ -74,8 +74,8 @@ int CMeilhausSimpleComp::BeginTask(
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr)
 {
-	const isig::ISamplesContainer* inputContainerPtr = dynamic_cast<const isig::ISamplesContainer*>(inputPtr);
-	isig::ISamplesContainer* outputContainerPtr = dynamic_cast<isig::ISamplesContainer*>(outputPtr);
+	const imeas::ISamplesSequence* inputContainerPtr = dynamic_cast<const imeas::ISamplesSequence*>(inputPtr);
+	imeas::ISamplesSequence* outputContainerPtr = dynamic_cast<imeas::ISamplesSequence*>(outputPtr);
 
 	CMeAddr address;
 	if (!GetChannelAddress(paramsPtr, address)){
@@ -93,7 +93,7 @@ int CMeilhausSimpleComp::BeginTask(
 			return -1;
 		}
 
-		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, const_cast<isig::ISamplesContainer*>(inputContainerPtr));
+		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, const_cast<imeas::ISamplesSequence*>(inputContainerPtr));
 
 		context->CopyFromContainer();
 	}
@@ -102,7 +102,7 @@ int CMeilhausSimpleComp::BeginTask(
 			return -1;
 		}
 
-		outputContainerPtr->SetSamplesCount(1024);
+		outputContainerPtr->CreateSequence(1024);
 
 		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, outputContainerPtr);
 	}

@@ -3,7 +3,7 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "isig/ISamplesContainer.h"
+#include "imeas/ISamplesSequence.h"
 
 
 namespace iqtsig
@@ -33,7 +33,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 	QString functionScript = iqt::GetQString(*m_defaultScriptAttrPtr);
 	m_scriptEngine.evaluate(functionScript);
 
-	istd::TChangeNotifier<isig::ISamplesContainer> containerPtr(dynamic_cast<isig::ISamplesContainer*>(outputPtr));
+	istd::TChangeNotifier<imeas::ISamplesSequence> containerPtr(dynamic_cast<imeas::ISamplesSequence*>(outputPtr));
 	if (!containerPtr.IsValid()){
 		return TS_INVALID;
 	}
@@ -41,7 +41,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 	int samplesCount;
 	if (m_samplesCountAttrPtr.IsValid()){
 		samplesCount = *m_samplesCountAttrPtr;
-		if (!containerPtr->SetSamplesCount(samplesCount)){
+		if (!containerPtr->CreateSequence(samplesCount)){
 			return TS_INVALID;
 		}
 	}
@@ -62,7 +62,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 			return TS_INVALID;
 		}
 
-		containerPtr->SetSample(i, sample);
+		containerPtr->SetSample(i, 0, sample);
 	}
 
 	return TS_OK;

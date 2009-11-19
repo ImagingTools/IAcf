@@ -8,15 +8,15 @@ namespace imebase
 {
 
 
-CMeContext::CMeContext(const CMeAddr& address, int id, bool isOutput, isig::ISamplesContainer* containerPtr)
+CMeContext::CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::ISamplesSequence* containerPtr)
 :	m_address(address),
 	m_isOutput(isOutput),
 	m_id(id),
-	m_samplesContainer(*containerPtr)
+	m_samplesSequence(*containerPtr)
 {
 	I_ASSERT(containerPtr != NULL);
 
-	m_hwBuffer.resize(m_samplesContainer.GetSamplesCount());
+	m_hwBuffer.resize(m_samplesSequence.GetSamplesCount());
 
 	m_bufferCount = 0;
 }
@@ -127,16 +127,16 @@ void CMeContext::CopyToContainer()
 
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
-	int samplesCount = m_samplesContainer.GetSamplesCount();
+	int samplesCount = m_samplesSequence.GetSamplesCount();
 	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
-	istd::CChangeNotifier notifier(&m_samplesContainer);
+	istd::CChangeNotifier notifier(&m_samplesSequence);
 
 	for (int index=0; index < samplesCount; index++){
 		double value;
 		meUtilityDigitalToPhysical(minVoltage, maxVoltage, maxData, m_hwBuffer[index], ME_EXTENSION_TYPE_NONE, 0, &value);
 
-		m_samplesContainer.SetSample(index, value);
+		m_samplesSequence.SetSample(index, 0, value);
 	}
 
 }
@@ -151,11 +151,11 @@ void CMeContext::CopyFromContainer()
 
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
-	int samplesCount = m_samplesContainer.GetSamplesCount();
+	int samplesCount = m_samplesSequence.GetSamplesCount();
 	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
 	for (int index = 0; index < samplesCount; index++){
-		double sample = m_samplesContainer.GetSample(index);
+		double sample = m_samplesSequence.GetSample(index);
 
 		meUtilityPhysicalToDigital(minVoltage, maxVoltage, maxData, sample, &m_hwBuffer[index]);
 	}
@@ -169,7 +169,7 @@ bool CMeContext::ConfigInputStream()
 	int interval_high;
 	int interval_low;
 
-	double sampleInterval = m_interval / m_samplesContainer.GetSamplesCount();
+	double sampleInterval = m_interval / m_samplesSequence.GetSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,
@@ -217,7 +217,7 @@ bool CMeContext::ConfigOutputStream()
 	int interval_high;
 	int interval_low;
 
-	double sampleInterval = m_interval / m_samplesContainer.GetSamplesCount();
+	double sampleInterval = m_interval / m_samplesSequence.GetSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,
