@@ -44,7 +44,7 @@ void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 		int rectWidth = width();
 		int rectHeight = height();
 
-		int samplesCount = samplesPtr->GetSamplesCount();
+		int samplesCount = samplesPtr->GetTimeSamplesCount();
 		QPolygonF polyline(samplesCount);
 
 		for (int i = 0; i < samplesCount; ++i){

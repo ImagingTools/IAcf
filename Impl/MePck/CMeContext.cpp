@@ -16,7 +16,7 @@ CMeContext::CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::ISa
 {
 	I_ASSERT(containerPtr != NULL);
 
-	m_hwBuffer.resize(m_samplesSequence.GetSamplesCount());
+	m_hwBuffer.resize(m_samplesSequence.GetTimeSamplesCount());
 
 	m_bufferCount = 0;
 }
@@ -127,7 +127,7 @@ void CMeContext::CopyToContainer()
 
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
-	int samplesCount = m_samplesSequence.GetSamplesCount();
+	int samplesCount = m_samplesSequence.GetTimeSamplesCount();
 	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
 	istd::CChangeNotifier notifier(&m_samplesSequence);
@@ -151,7 +151,7 @@ void CMeContext::CopyFromContainer()
 
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
-	int samplesCount = m_samplesSequence.GetSamplesCount();
+	int samplesCount = m_samplesSequence.GetTimeSamplesCount();
 	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
 	for (int index = 0; index < samplesCount; index++){
@@ -169,7 +169,7 @@ bool CMeContext::ConfigInputStream()
 	int interval_high;
 	int interval_low;
 
-	double sampleInterval = m_interval / m_samplesSequence.GetSamplesCount();
+	double sampleInterval = m_interval / m_samplesSequence.GetTimeSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,
@@ -217,7 +217,7 @@ bool CMeContext::ConfigOutputStream()
 	int interval_high;
 	int interval_low;
 
-	double sampleInterval = m_interval / m_samplesSequence.GetSamplesCount();
+	double sampleInterval = m_interval / m_samplesSequence.GetTimeSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,

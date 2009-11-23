@@ -46,7 +46,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 		}
 	}
 	else{
-		samplesCount = containerPtr->GetSamplesCount();
+		samplesCount = containerPtr->GetTimeSamplesCount();
 	}
 
 	QScriptValue calcCtor = m_scriptEngine.evaluate("Calc");
