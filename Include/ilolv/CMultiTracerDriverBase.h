@@ -41,8 +41,6 @@ protected:
 	class SingleLine: public ilolv::CIoCardTracerDriverBase
 	{
 	public:
-		friend class CMultiTracerDriverBase;
-
 		typedef ilolv::CIoCardTracerDriverBase BaseClass;
 
 		SingleLine();
@@ -68,6 +66,8 @@ protected:
 	private:
 		int m_lineNumber;						// number of this line
 		CMultiTracerDriverBase* m_parentPtr;	// parent object
+
+		friend class CMultiTracerDriverBase;
 	};
 
 	void CopyFromHardware();

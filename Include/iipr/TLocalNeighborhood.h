@@ -18,7 +18,6 @@ class TLocalNeighborhood
 {
 public:
 	typedef typename BitmapIterator::ValueType PixelValue;
-	friend class Iterator;
 
 	class Iterator
 	{
