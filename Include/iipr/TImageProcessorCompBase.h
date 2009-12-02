@@ -31,7 +31,7 @@ public:
 	TImageProcessorCompBase();
 
 	I_BEGIN_BASE_COMPONENT(TImageProcessorCompBase)
-		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
+		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", false, "ParamsId");
 		I_ASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
 	I_END_COMPONENT
 
@@ -80,10 +80,7 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 
-	if (		(inputBitmapPtr == NULL) ||
-				(outputBitmapPtr == NULL) ||
-				(paramsPtr == NULL) ||
-				!m_paramsIdAttrPtr.IsValid()){
+	if ((inputBitmapPtr == NULL) || (outputBitmapPtr == NULL)){
 		return TS_INVALID;
 	}
 
@@ -104,7 +101,7 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 	outputBitmapPtr->CopyImageFrom(*inputBitmapPtr);
 
 	const ParameterType* processorParamsPtr = NULL;	
-	if (paramsPtr != NULL){
+	if (paramsPtr != NULL && m_paramsIdAttrPtr.IsValid()){
 		processorParamsPtr = dynamic_cast<const ParameterType*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
 	}
 	
