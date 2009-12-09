@@ -20,7 +20,7 @@ int CMemoryAcquisitionComp::DoProcessing(const iprm::IParamsSet* /*paramsPtr*/, 
 		return TS_INVALID;
 	}
 
-	if (!outputImagePtr->CopyImageFrom(*this)){
+	if (!outputImagePtr->CopyFrom(*this)){
 		return TS_INVALID;
 	}
 

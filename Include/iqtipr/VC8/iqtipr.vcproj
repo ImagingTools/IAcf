@@ -180,18 +180,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCaliperParamsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
@@ -204,23 +192,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSearchGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSearchParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -229,10 +205,6 @@
 			</File>
 			<File
 				RelativePath="..\CValueSupplierGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -246,11 +218,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.h"
+				RelativePath="..\CCaliperParamsGuiComp.moc"
 				>
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -262,11 +238,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchGuiComp.h"
 				>
 			</File>
 			<File
+				RelativePath="..\CSearchGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -275,6 +263,10 @@
 			</File>
 			<File
 				RelativePath="..\CValueSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -295,15 +287,7 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\Generated\moc_CCaliperParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CIterativeProcessorParamsGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -328,10 +312,6 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CCaliperParamsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CIterativeProcessorParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -360,10 +340,6 @@
 			>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.ui"
 				>
 			</File>
 			<File

@@ -98,7 +98,7 @@ int TImageProcessorCompBase<ParameterType>::DoProcessing(
 	}
 
 	// create output image:
-	outputBitmapPtr->CopyImageFrom(*inputBitmapPtr);
+	outputBitmapPtr->CopyFrom(*inputBitmapPtr);
 
 	const ParameterType* processorParamsPtr = NULL;	
 	if (paramsPtr != NULL && m_paramsIdAttrPtr.IsValid()){

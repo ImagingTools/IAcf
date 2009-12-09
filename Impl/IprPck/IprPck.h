@@ -13,8 +13,6 @@
 #include "iipr/CProcessedAcquisitionComp.h"
 #include "iipr/CLocalDifferenceProcessorComp.h"
 #include "iipr/CLocalDifferenceFilterParams.h"
-#include "iipr/CIterativeProcessorComp.h"
-#include "iipr/CIterativeProcessorParams.h"
 #include "iipr/TUnaryTransformProcessorComp.h"
 #include "iipr/TGaussianProcessorComp.h"
 #include "iipr/CGaussian2dFilterParams.h"
@@ -42,8 +40,6 @@ typedef iipr::CMovingAverageProcessorComp MovingAverageProcessor;
 typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> RectangularFilterParams;
 typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CLocalDifferenceFilterParams>, iser::ISerializable> LocalDifferenceFilterParams;
-typedef iipr::CIterativeProcessorComp IterationProcessor;
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CIterativeProcessorParams>, iser::ISerializable> IterativeProcessorParams;
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
 typedef iipr::CInvertOperatorComp InvertOperator;

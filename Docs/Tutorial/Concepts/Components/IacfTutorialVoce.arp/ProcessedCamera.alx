@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          1248
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="30">
+  <PositionMap count="32">
     <Element>
       <ComponentName>
         AverageFilter
@@ -69,6 +69,17 @@
       </X>
       <X>
         337
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        BufferBitmap
+      </ComponentName>
+      <X>
+        -136
+      </X>
+      <X>
+        312
       </X>
     </Element>
     <Element>
@@ -190,6 +201,17 @@
       </X>
       <X>
         462
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        GeneralBitmap
+      </ComponentName>
+      <X>
+        -151
+      </X>
+      <X>
+        308
       </X>
     </Element>
     <Element>

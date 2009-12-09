@@ -216,14 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CIterativeProcessorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorParams.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CLineProjectionProcessor.cpp"
 				>
 			</File>
@@ -318,14 +310,6 @@
 			</File>
 			<File
 				RelativePath="..\CImageProjection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CIterativeProcessorParams.h"
 				>
 			</File>
 			<File

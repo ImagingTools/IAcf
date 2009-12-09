@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          1248
         </Number>
         <Description>
           ACF
@@ -32,10 +32,10 @@
         AverageParamsGui
       </ComponentName>
       <X>
-        275
+        172
       </X>
       <X>
-        312
+        344
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         FileAcquisition
       </ComponentName>
       <X>
-        87
+        39
       </X>
       <X>
-        287
+        464
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         FireAcquisition
       </ComponentName>
       <X>
-        50
+        -252
       </X>
       <X>
-        387
+        462
       </X>
     </Element>
     <Element>

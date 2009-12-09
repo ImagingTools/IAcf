@@ -70,7 +70,7 @@ void CMilSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 	istd::TChangeNotifier<iimg::IBitmap> updatePtr(&m_modelBitmap);
 	const iimg::IBitmap* bitmapPtr = &paramsPtr->GetModelImage();
 	if (bitmapPtr != NULL){
-		updatePtr->CopyImageFrom(*bitmapPtr);
+		updatePtr->CopyFrom(*bitmapPtr);
 	}
 }
 

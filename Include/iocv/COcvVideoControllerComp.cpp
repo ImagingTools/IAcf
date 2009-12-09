@@ -146,7 +146,7 @@ bool COcvVideoControllerComp::SetCurrentPosition(double position)
 
 int COcvVideoControllerComp::GetSupportedFeatures() const
 {
-	return SF_SEEK;
+	return SF_OPEN_MEDIA | SF_SEEK;
 }
 
 

@@ -46,7 +46,7 @@ int CProcessedAcquisitionComp::DoProcessing(
 			iimg::CGeneralBitmap bufferBitmap;
 			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr.GetPtr(), &bufferBitmap);
 			if (retVal == TS_OK){
-				if (!outputBitmapPtr->CopyImageFrom(bufferBitmap)){
+				if (!outputBitmapPtr->CopyFrom(bufferBitmap)){
 					retVal = TS_INVALID;
 				}
 			}

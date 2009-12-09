@@ -35,10 +35,10 @@ bool CSwissRangerAcquisitionData::CreateData(
 {
 	m_maxDepth = maximalDepth;
 
-	m_depthImage.CopyImageFrom(depthImage);
-	m_confidenceMap.CopyImageFrom(confidenceMap);
-	m_intensityImage.CopyImageFrom(intensityImage);
-	m_amplitudeImage.CopyImageFrom(amplitudeImage);
+	m_depthImage.CopyFrom(depthImage);
+	m_confidenceMap.CopyFrom(confidenceMap);
+	m_intensityImage.CopyFrom(intensityImage);
+	m_amplitudeImage.CopyFrom(amplitudeImage);
 
 	if (paramsPtr != NULL){
 		iser::CMemoryReadArchive::CloneObjectByArchive(*paramsPtr, m_acquisitionParams);

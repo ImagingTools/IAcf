@@ -109,7 +109,7 @@ bool TMorphoProcessorComp<PixelType, CompareFunction>::ProcessImage(
 	}
 
 	iimg::CGeneralBitmap tempBitmap;
-	tempBitmap.CopyImageFrom(outputImage);
+	tempBitmap.CopyFrom(outputImage);
 
 	for (int x = 0; x < imageWidth; x++){
 		iimg::TBitmapIterator2d<PixelType> inputIterator(&tempBitmap);

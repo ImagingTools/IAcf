@@ -57,7 +57,7 @@ bool CMovingAverageProcessorComp::ProcessImage(
 
 	if (kernelHalfHeight > 0){
 		iimg::CGeneralBitmap tempBitmap;
-		tempBitmap.CopyImageFrom(outputImage);
+		tempBitmap.CopyFrom(outputImage);
 
 		int lineDifference = tempBitmap.GetLinesDifference();
 

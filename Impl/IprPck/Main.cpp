@@ -16,8 +16,6 @@ I_EXPORT_COMPONENT(RectangularFilterParams, "Rectangular filter parameter", "Fil
 I_EXPORT_COMPONENT(LocalDifferenceProcessor, "Line difference image processor", "Image Processing");
 I_EXPORT_COMPONENT(LocalDifferenceFilterParams, "Line difference processor params", "Filter Image Processing Parameter");
 I_EXPORT_COMPONENT(ProcessedCamera, "Processed Camera", "Image Bitmap Acquisition Snap Parameters Camera Processing");
-I_EXPORT_COMPONENT(IterationProcessor, "Iterative Processor", "Image Bitmap Processing");
-I_EXPORT_COMPONENT(IterativeProcessorParams, "Iterative Processor Params", "Iterative Filter Image Processing Parameter");
 I_EXPORT_COMPONENT(MorphoMinOperator, "Morphological minimum operator with rectangular kernel", "Morphological Operator Image Processing");
 I_EXPORT_COMPONENT(MorphoMaxOperator, "Morphological maximum operator with rectangular kernel", "Morphological Operator Image Processing");
 I_EXPORT_COMPONENT(InvertOperator, "Invertation operator", "Operator Image Processing");

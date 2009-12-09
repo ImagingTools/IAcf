@@ -201,7 +201,7 @@ bool CMilSearchModel::CreateFromImage(const iimg::IBitmap& modelImage, const iip
 
 	// Create the model image:
 	if (bitmapPtr != &m_modelImage){
-		m_modelImage.CopyImageFrom(*bitmapPtr);
+		m_modelImage.CopyFrom(*bitmapPtr);
 	}
 
 	// Create MIL-image:
