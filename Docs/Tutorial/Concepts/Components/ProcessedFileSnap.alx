@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1248
+          1266
         </Number>
         <Description>
           ACF
@@ -54,10 +54,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        -225
+        -490
       </X>
       <X>
-        337
+        81
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         FileAcquisition
       </ComponentName>
       <X>
-        39
+        -522
       </X>
       <X>
-        464
+        283
       </X>
     </Element>
     <Element>
