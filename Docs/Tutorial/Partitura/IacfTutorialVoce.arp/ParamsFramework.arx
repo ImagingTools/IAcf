@@ -136,8 +136,8 @@
         QtGuiPck
       </PackageId>
       <ComponentId>
-        Log
-      </ComponentId>
+				LogGui
+			</ComponentId>
       <Data>
         <IsEnabled>
           true
