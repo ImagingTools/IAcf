@@ -447,7 +447,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              SlaveWidgets
+              Guis
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -471,7 +471,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              TabTitles
+              Names
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
