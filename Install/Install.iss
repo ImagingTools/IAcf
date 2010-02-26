@@ -25,8 +25,6 @@ VersionInfoVersion=$AcfVersion:10$
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: iacfComp
-Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\DebugVC8; Flags: recursesubdirs; Components: iacfComp
-Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\ReleaseVC8; Flags: recursesubdirs; Components: iacfComp
 
 Source: {#AVTDIR}\FireGrab\*.dll; DestDir: {app}\ExtLib\Bin; Components: avtComp
 Source: {#AVTDIR}\*; DestDir: {app}\ExtLib\AVT; Flags: recursesubdirs; Excludes: *.dll; Components: avtComp
