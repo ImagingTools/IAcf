@@ -14,14 +14,12 @@ I_EXPORT_PACKAGE("QtSwrPck", "Standard SwissRanger hardware package based on Qt"
 I_EXPORT_COMPONENT(
 		SwissRangerParamsGui,
 		"SwissRanger parameter editor",
-		"SwissRanger Camera 3D Acquisition Parameter GUI Editor",
-		icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+		"SwissRanger Camera 3D Acquisition Parameter GUI Editor");
 
 I_EXPORT_COMPONENT(
 			SwissRangerAcquisitionDataView,
 			"SwissRanger image view",
-			"SwissRanger Camera 3D Acquisition Parameter GUI View Image",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"SwissRanger Camera 3D Acquisition Parameter GUI View Image");
 
 
 } // namespace QtSwrPck

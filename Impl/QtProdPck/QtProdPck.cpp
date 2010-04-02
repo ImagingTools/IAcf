@@ -14,20 +14,17 @@ I_EXPORT_PACKAGE("QtProd", "Qt-based Production and control package", "Qt Produc
 I_EXPORT_COMPONENT(
 			DriverController,
 			"Synchronize driver with production line parameter and control working mode",
-			"Production Line Automatic Driver Controller",
-			icomp::IComponentStaticInfo::CCT_DATA_PROCESSING);
+			"Production Line Automatic Driver Controller");
 
 I_EXPORT_COMPONENT(
 			AutomaticControllerGui,
 			"GUI for automatic controller implemented as observer",
-			"Production Line Automatic Driver Controller Observer",
-			icomp::IComponentStaticInfo::CCT_GUI);
+			"Production Line Automatic Driver Controller Observer");
 
 I_EXPORT_COMPONENT(
 			SimulatedMultiTracerGui,
 			"Simulated multi line object tracer delegating controlled using GUI",
-			"Sumulation Multi Line Object Tracer Qt GUI",
-			icomp::IComponentStaticInfo::CCT_GUI);
+			"Sumulation Multi Line Object Tracer Qt GUI");
 
 
 } // namespace QtProdPck

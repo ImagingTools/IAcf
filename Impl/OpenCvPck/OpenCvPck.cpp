@@ -14,14 +14,12 @@ I_EXPORT_PACKAGE("OpenCvPck", "Standard OpenCV package", "OpenCV Standard Image 
 I_EXPORT_COMPONENT(
 			OpenCvAcquisition,
 			"Implementation of camera interface using OpenCV API",
-			"OpenCV Camera Acquisition Bitmap Image",
-			icomp::IComponentStaticInfo::CCT_DATA_PROCESSING);
+			"OpenCV Camera Acquisition Bitmap Image");
 
 I_EXPORT_COMPONENT(
 			OpenCvVideoController,
 			"OpenCV-based video controller",
-			"OpenCV Video Multimedia Controller",
-			icomp::IComponentStaticInfo::CCT_MULTIMEDIA);
+			"OpenCV Video Multimedia Controller");
 
 
 } // namespace OpenCvPck

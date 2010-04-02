@@ -28,20 +28,17 @@ I_EXPORT_PACKAGE("IacfQt", "Imaging tools Qt-based general package", "Imaging To
 I_EXPORT_COMPONENT(
 			SamplingParamsGui,
 			"Sampling parameters",
-			"Interval Sample Sampling Model Parameters GUI Qt",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Interval Sample Sampling Model Parameters GUI Qt");
 
 I_EXPORT_COMPONENT(
 			SampleAcquisitionGui,
 			"Sample acquisition GUI",
-			"Sample Sampling Acquisition GUI Qt",
-			icomp::IComponentStaticInfo::CCT_GUI);
+			"Sample Sampling Acquisition GUI Qt");
 
 I_EXPORT_COMPONENT(
 			ScriptSampleAcquisition,
 			"Test sample acquisition based on QtScript",
-			"Test Sample Sampling Acquisition Script QtScript Qt",
-			icomp::IComponentStaticInfo::CCT_DATA_PROCESSING);
+			"Test Sample Sampling Acquisition Script QtScript Qt");
 
 
 } // namespace IacfQtPck
