@@ -35,7 +35,7 @@ void CSampleContainerView::OnUpdate(int updateFlags, istd::IPolymorphic* updateP
 
 void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 {
-	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr != NULL){
 		QPainter painter(this);
 
@@ -44,7 +44,7 @@ void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 		int rectWidth = width();
 		int rectHeight = height();
 
-		int samplesCount = samplesPtr->GetTimeSamplesCount();
+		int samplesCount = samplesPtr->GetSamplesCount();
 		QPolygonF polyline(samplesCount);
 
 		for (int i = 0; i < samplesCount; ++i){

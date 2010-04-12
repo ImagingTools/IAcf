@@ -39,7 +39,7 @@ void CSampleAcquisitionGuiComp::on_StartButton_toggled(bool checked)
 
 void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
 {
-	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetTimeSamplesCount() > 0)){
+	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetSamplesCount() > 0)){
 		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,

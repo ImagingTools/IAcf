@@ -5,7 +5,7 @@
 #include <QMutex>
 #include <QWaitCondition>
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
 
 #include "imebase.h"
 
@@ -20,7 +20,7 @@ namespace imebase
 class CMeContext
 {
 public:
-	CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::ISamplesSequence* containerPtr);
+	CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::IDataSequence* containerPtr);
 	~CMeContext();
 
 	/**
@@ -68,7 +68,7 @@ private:
 	bool m_isOutput;
 	double m_interval;
 
-	imeas::ISamplesSequence& m_samplesSequence;
+	imeas::IDataSequence& m_samplesSequence;
 };
 
 
