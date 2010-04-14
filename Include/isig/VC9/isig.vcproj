@@ -177,7 +177,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CGeneralSamplesSequence.cpp"
+				RelativePath="..\CGeneralDataSequence.cpp"
 				>
 			</File>
 			<File
@@ -189,30 +189,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CGeneralSamplesSequence.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSamplingParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDataSequence.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISamplingConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISamplingParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\isig.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

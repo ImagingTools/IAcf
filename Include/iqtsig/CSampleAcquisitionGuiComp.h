@@ -15,7 +15,7 @@
 
 #include "iproc/IProcessor.h"
 
-#include "imeas/CGeneralSamplesSequence.h"
+#include "imeas/CGeneralDataSequence.h"
 
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
@@ -87,7 +87,7 @@ private:
 	I_ATTR(double, m_acquisitionTimeoutAttrPtr);
 	I_ATTR(bool, m_startOnInitAttrPtr);
 
-	imod::TModelWrap<imeas::CGeneralSamplesSequence> m_samples;
+	imod::TModelWrap<imeas::CGeneralDataSequence> m_samples;
 	CSampleContainerView m_samplesView;
 
 	QTimer m_timer;
