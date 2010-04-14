@@ -23,12 +23,8 @@ void CValueSupplierGuiComp::UpdateModel() const
 void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
-	iproc::IIdManager* idManagerPtr = GetIdManager();
-	I_DWORD objectId;
-	if (		(supplierPtr != NULL) &&
-				(idManagerPtr != NULL) &&
-				idManagerPtr->GetCurrentId(objectId)){
-		imath::CVarVector position = supplierPtr->GetValue(objectId);
+	if (supplierPtr != NULL){
+		imath::CVarVector position = supplierPtr->GetValue();
 		if (position.GetElementsCount() >= 2){
 			m_foundPosition.SetCenter(i2d::CVector2d(position[0], position[1]));
 

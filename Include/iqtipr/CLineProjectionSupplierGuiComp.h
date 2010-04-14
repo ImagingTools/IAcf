@@ -12,7 +12,6 @@
 
 
 // IACF includes
-#include "iproc/IIdManager.h"
 #include "iproc/IValueSupplier.h"
 
 #include "iipr/ILineProjectionSupplier.h"

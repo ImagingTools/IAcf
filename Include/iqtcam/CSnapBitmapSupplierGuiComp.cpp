@@ -72,15 +72,11 @@ void CSnapBitmapSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 void CSnapBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	iproc::IIdManager* idManagerPtr = GetIdManager();
-	I_DWORD objectId;
-	if (		(supplierPtr != NULL) &&
-				(idManagerPtr != NULL) &&
-				idManagerPtr->SkipToNextId(objectId)){
-		supplierPtr->BeginNextObject(objectId);
-		supplierPtr->EnsureWorkFinished(objectId);
+	if (supplierPtr != NULL){
+		supplierPtr->InitNewWork();
+		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus(objectId) >= iproc::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
 			QMessageBox::information(
 						NULL,
 						QObject::tr("Error"),
@@ -122,12 +118,8 @@ void CSnapBitmapSupplierGuiComp::on_SaveParamsButton_clicked()
 const iimg::IBitmap* CSnapBitmapSupplierGuiComp::GetCurrentBitmap() const
 {
 	icam::CSnapBitmapSupplierComp* supplierPtr = GetObjectPtr();
-	iproc::IIdManager* idManagerPtr = GetIdManager();
-	I_DWORD objectId;
-	if (		(supplierPtr != NULL) &&
-				(idManagerPtr != NULL) &&
-				idManagerPtr->GetCurrentId(objectId)){
-		return supplierPtr->GetBitmap(objectId);
+	if (supplierPtr != NULL){
+		return supplierPtr->GetBitmap();
 	}
 
 	return NULL;

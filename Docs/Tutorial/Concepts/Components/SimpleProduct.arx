@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="36">
+  <ElementsList count="35">
     <Element>
       <Id>
         AnnulusSegmentTestTask
@@ -1066,27 +1066,6 @@
     </Element>
     <Element>
       <Id>
-        IdManager
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        TestIdManager
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ImageParamsSet
       </Id>
       <PackageId>
@@ -1324,7 +1303,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               BitmapLoader
@@ -1341,25 +1320,6 @@
               </IsEnabled>
               <Value>
                 BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IdManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                IdManager
               </Value>
             </Data>
           </AttributeInfo>
@@ -1600,26 +1560,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              IdManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                IdManager
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ParamsSetGui

@@ -30,12 +30,8 @@ void CLineProjectionSupplierGuiComp::UpdateModel() const
 void CLineProjectionSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
-	iproc::IIdManager* idManagerPtr = GetIdManager();
-	I_DWORD objectId;
-	if (		(supplierPtr != NULL) &&
-				(idManagerPtr != NULL) &&
-				idManagerPtr->GetCurrentId(objectId)){
-		const iipr::CProjectionData* projectionPtr = supplierPtr->GetLineProjection(objectId);
+	if (supplierPtr != NULL){
+		const iipr::CProjectionData* projectionPtr = supplierPtr->GetLineProjection();
 		if (projectionPtr != NULL){
 			istd::CChangeNotifier changePtr(&m_projectionData);
 

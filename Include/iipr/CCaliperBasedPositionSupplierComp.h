@@ -32,14 +32,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IValueSupplier)
-	virtual imath::CVarVector GetValue(I_DWORD objectId, int index = -1, int valueTypeId = VTI_AUTO) const;
-
-	// reimplemented (iproc::ISupplier)
-	virtual void BeginNextObject(I_DWORD objectId);
+	virtual imath::CVarVector GetValue(int index = -1, int valueTypeId = VTI_AUTO) const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(I_DWORD objectId, imath::CVarVector& result) const;
+	virtual int ProduceObject(imath::CVarVector& result) const;
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);

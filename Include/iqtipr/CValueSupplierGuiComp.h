@@ -10,7 +10,6 @@
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iproc/IIdManager.h"
 #include "iproc/IValueSupplier.h"
 
 #include "iqtproc/TSupplierGuiCompBase.h"

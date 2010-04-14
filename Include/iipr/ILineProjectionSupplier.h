@@ -19,9 +19,8 @@ class ILineProjectionSupplier: virtual public iproc::ISupplier
 public:
 	/**
 		Get access to produced line projection object.
-		\param	objectId	ID of inspected object. \sa	iproc::ISupplier::BeginNextObject.
 	*/
-	virtual const iipr::CProjectionData* GetLineProjection(I_DWORD objectId) const = 0;
+	virtual const iipr::CProjectionData* GetLineProjection() const = 0;
 };
 
 

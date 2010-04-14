@@ -32,11 +32,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IBitmapSupplier)
-	virtual const iimg::IBitmap* GetBitmap(I_DWORD objectId) const;
+	virtual const iimg::IBitmap* GetBitmap() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(I_DWORD objectId, istd::TDelPtr<iimg::IBitmap>& result) const;
+	virtual int ProduceObject(istd::TDelPtr<iimg::IBitmap>& result) const;
 
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);

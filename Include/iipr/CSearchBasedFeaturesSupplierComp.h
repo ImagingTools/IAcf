@@ -35,14 +35,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IFeaturesSupplier)
-	virtual const iipr::IFeaturesContainer* GetFeatures(I_DWORD objectId) const;
-
-	// reimplemented (iproc::ISupplier)
-	virtual void BeginNextObject(I_DWORD objectId);
+	virtual const iipr::IFeaturesContainer* GetFeatures() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(I_DWORD objectId, CSearchFeatures& result) const;
+	virtual int ProduceObject(CSearchFeatures& result) const;
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);

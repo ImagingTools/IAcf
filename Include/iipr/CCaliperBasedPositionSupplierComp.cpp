@@ -10,27 +10,14 @@ namespace iipr
 
 // reimplemented (iproc::IValueSupplier)
 
-imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(I_DWORD objectId, int /*index*/, int /*valueTypeId*/) const
+imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(int /*index*/, int /*valueTypeId*/) const
 {
-	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
-	if ((infoPtr != NULL) && (infoPtr->status == WS_OK)){
-		return infoPtr->product;
+	const imath::CVarVector* productPtr = GetWorkProduct();
+	if (productPtr != NULL){
+		return *productPtr;
 	}
-
-	return imath::CVarVector();
-}
-
-
-// reimplemented (iproc::ISupplier)
-
-void CCaliperBasedPositionSupplierComp::BeginNextObject(I_DWORD objectId)
-{
-	if (!IsIdKnown(objectId)){
-		BaseClass::BeginNextObject(objectId);
-
-		if (m_bitmapSupplierCompPtr.IsValid()){
-			m_bitmapSupplierCompPtr->BeginNextObject(objectId);
-		}
+	else{
+		return imath::CVarVector();
 	}
 }
 
@@ -39,12 +26,12 @@ void CCaliperBasedPositionSupplierComp::BeginNextObject(I_DWORD objectId)
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, imath::CVarVector& result) const
+int CCaliperBasedPositionSupplierComp::ProduceObject(imath::CVarVector& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_featuresMapperCompPtr.IsValid() &&
 				m_caliperToolCompPtr.IsValid()){
-		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap(objectId);
+		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap();
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
@@ -73,6 +60,16 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, imath::CV
 	}
 
 	return WS_CRITICAL;
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CCaliperBasedPositionSupplierComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	AddInputSupplier(m_bitmapSupplierCompPtr.GetPtr());
 }
 
 

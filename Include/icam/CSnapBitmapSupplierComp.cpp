@@ -7,14 +7,15 @@ namespace icam
 
 // reimplemented (iproc::IBitmapSupplier)
 
-const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap(I_DWORD objectId) const
+const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap() const
 {
-	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
-	if (infoPtr != NULL){
-		return infoPtr->product.GetPtr();
+	const istd::TDelPtr<iimg::IBitmap>* productPtr = GetWorkProduct();
+	if (productPtr != NULL){
+		return productPtr->GetPtr();
 	}
-
-	return NULL;
+	else{
+		return NULL;
+	}
 }
 
 
@@ -22,7 +23,7 @@ const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap(I_DWORD objectId) const
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CSnapBitmapSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<iimg::IBitmap>& result) const
+int CSnapBitmapSupplierComp::ProduceObject(istd::TDelPtr<iimg::IBitmap>& result) const
 {
 	if (m_bitmapCompFact.IsValid() && !result.IsValid()){
 		result.SetPtr(m_bitmapCompFact.CreateInstance());

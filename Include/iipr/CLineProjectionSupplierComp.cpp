@@ -12,27 +12,14 @@ namespace iipr
 
 // reimplemented (iproc::IValueSupplier)
 
-const iipr::CProjectionData* CLineProjectionSupplierComp::GetLineProjection(I_DWORD objectId) const
+const iipr::CProjectionData* CLineProjectionSupplierComp::GetLineProjection() const
 {
-	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
-	if ((infoPtr != NULL) && (infoPtr->status == WS_OK)){
-		return infoPtr->product.GetPtr();
+	const istd::TDelPtr<iipr::CProjectionData>* productPtr = GetWorkProduct();
+	if (productPtr != NULL){
+		return productPtr->GetPtr();
 	}
-
-	return NULL;
-}
-
-
-// reimplemented (iproc::ISupplier)
-
-void CLineProjectionSupplierComp::BeginNextObject(I_DWORD objectId)
-{
-	if (!IsIdKnown(objectId)){
-		BaseClass::BeginNextObject(objectId);
-
-		if (m_bitmapSupplierCompPtr.IsValid()){
-			m_bitmapSupplierCompPtr->BeginNextObject(objectId);
-		}
+	else{
+		return NULL;
 	}
 }
 
@@ -41,7 +28,7 @@ void CLineProjectionSupplierComp::BeginNextObject(I_DWORD objectId)
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CLineProjectionSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<iipr::CProjectionData>& result) const
+int CLineProjectionSupplierComp::ProduceObject(istd::TDelPtr<iipr::CProjectionData>& result) const
 {
 	if (!result.IsValid()){
 		result.SetPtr(new iipr::CProjectionData);
@@ -49,7 +36,7 @@ int CLineProjectionSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<i
 
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_projectionProcessorCompPtr.IsValid()){
-		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap(objectId);
+		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap();
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
@@ -75,6 +62,16 @@ int CLineProjectionSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<i
 	}
 
 	return WS_CRITICAL;
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CLineProjectionSupplierComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	AddInputSupplier(m_bitmapSupplierCompPtr.GetPtr());
 }
 
 

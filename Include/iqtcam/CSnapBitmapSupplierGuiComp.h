@@ -8,8 +8,6 @@
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iproc/IIdManager.h"
-
 #include "icam/CSnapBitmapSupplierComp.h"
 
 #include "iqtproc/TSupplierGuiCompBase.h"

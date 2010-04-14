@@ -31,14 +31,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::ILineProjectionSupplier)
-	virtual const iipr::CProjectionData* GetLineProjection(I_DWORD objectId) const;
-
-	// reimplemented (iproc::ISupplier)
-	virtual void BeginNextObject(I_DWORD objectId);
+	virtual const iipr::CProjectionData* GetLineProjection() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(I_DWORD objectId, istd::TDelPtr<iipr::CProjectionData>& result) const;
+	virtual int ProduceObject(istd::TDelPtr<iipr::CProjectionData>& result) const;
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
