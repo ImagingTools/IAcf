@@ -13,7 +13,7 @@ namespace isig
 {
 
 
-} // namespace iprm
+} // namespace isig
 
 
 #endif // !isig_included
