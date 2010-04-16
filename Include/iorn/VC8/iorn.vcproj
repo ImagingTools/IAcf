@@ -190,6 +190,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ILearnFeedback.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ILearningSet.h"
 				>
 			</File>

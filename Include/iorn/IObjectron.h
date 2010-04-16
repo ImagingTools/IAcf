@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iproc/IProcessor.h"
+#include "iser/ISerializable.h"
 
 #include "iorn/iorn.h"
 
@@ -13,6 +13,7 @@ namespace iorn
 
 
 class CHypothesesSet;
+class ILearnFeedback;
 
 
 /**
@@ -22,77 +23,81 @@ class CHypothesesSet;
 	It can be leaned self-associative or based on teached learning - it depends on implementation.
 	The main difference to ANN is that objectron defines no assumption about internal realisation of this interface.
 	It means classic algebraic realisation can be used, some recursive combinations of slave objectrons etc.
+	Objectron is serializable, its state is determined by learning process.
 */
-class IObjectron: virtual public iproc::IProcessor
+class IObjectron: virtual public iser::ISerializable
 {
 public:
 	enum QualityQuery
 	{
 		/**
-			Autoassociative learning.
+			General quality of this processing method.
 		*/
-		QQ_AA_LEARNING,
+		QQ_PROCESSING,
 		/**
-			Learning with teacher.
+			Backpropagation of hypotheses.
 		*/
-		QQ_TEACHER
+		QQ_HYPOTHESES_BACKPROPAGATION,
+		/**
+			Backpropagation of error.
+		*/
+		QQ_ERROR_BACKPROPAGATION,
+		/**
+			Unsupervised learning.
+		*/
+		QQ_UNSUPERVISED_LEARNING,
+		/**
+			Supervised learning with examples.
+		*/
+		QQ_EXAMPLE_LEARNING,
+		/**
+			Supervised learning with critic.
+		*/
+		QQ_CRITIC_LEARNING
 	};
+
+	virtual double GetOperationQuality(int qualityQuery) const = 0;
 
 	/**
 		Get output hypothesis set.
 		This set is the product of objectron processing.
+		\param	inputSet	set of possible input hypothesis.
+		\param	outputSet	set of possible output hypothesis.
+		\return	false if calculation of hypotheses failed.
 	*/
-	virtual int ProcessHypotheses(
-				const iprm::IParamsSet* paramsPtr,
-				const CHypothesesSet& input,
-				CHypothesesSet& output) const = 0;
+	virtual bool ProcessHypotheses(
+				const CHypothesesSet& inputSet,
+				CHypothesesSet& outputSet) const = 0;
 
 	/**
 		Get approximation of input hypothesis set from the output.
+		\return	false if calculation of hypotheses failed or this operation is not supported.
 	*/
-	virtual int BackPropagateHypotheses(
-				const iprm::IParamsSet* paramsPtr,
-				const CHypothesesSet& input,
-				CHypothesesSet& output) const = 0;
+	virtual bool BackpropagateHypotheses(
+				const CHypothesesSet& outputSet,
+				CHypothesesSet& approxInputSet) const = 0;
 
 	/**
-		Do autoassociative training process.
-		\param	paramsPtr			set of external parameters used to control train process.
+		Get approximation of input error propagated from output.
+		\return	false if calculation of error failed or this operation is not supported.
+	*/
+	virtual bool BackpropagateError(
+				const CHypothesesSet& inputSet,
+				double outputError,
+				double& approxInputError,
+				double& approxQuality) const = 0;
+
+	/**
+		Do learning process.
+		There are generally two kinds of learning: supervised and unsupervised.
+		For supervised learning you have to provide \c ILearnFeedback object used to retrive supervisor information.
 		\param	inputLearningSet	set of learning input examples.
-		\param	isProgressive		if true, the progressive learning is enabled.
+		\param	learnFeedbackPtr	pointer to learn feedback. It is necessary for supervised learning.
+		\param	isProgressive		if true, the progressive learning is enabled, it means only correction of current state should be done.
 	*/
-	virtual int DoTrainAutoassoc(
-				const iprm::IParamsSet* paramsPtr,
-				const ILearningSet& inputLearningSet,
-				bool isProgressive = false) = 0;
-
-	/**
-		Do training process with a teacher.
-		\param	paramsPtr				set of external parameters used to control train process.
-		\param	inputLearningSet		set of learning input examples.
-		\param	outputLearningSet		set of learning output examples.
-		\param	isProgressive			if true, the progressive learning is enabled.
-	*/
-	virtual int DoTrainWithTeacher(
-				const iprm::IParamsSet* paramsPtr,
-				const ILearningSet& inputLearningSet,
-				const ILearningSet& outputLearningSet,
-				bool isProgressive = false) = 0;
-
-	/**
-		Do training process with a additional error information.
-		\param	paramsPtr				set of external parameters used to control train process.
-		\param	inputLearningSet		set of learning input examples.
-		\param	outputErrorSet			set of informations about output error.
-										This information is represented as \c ILearningSet
-										with only one 'sample' in data seuence.
-										This value is interpreted as error value.
-		\param	isProgressive			if true, the progressive learning is enabled.
-	*/
-	virtual int DoTrainWithError(
-				const iprm::IParamsSet* paramsPtr,
-				const ILearningSet& inputLearningSet,
-				const ILearningSet& outputErrorSet,
+	virtual int DoLearning(
+				const ILearningSet& learningSet,
+				const ILearnFeedback* learnFeedbackPtr,
 				bool isProgressive = false) = 0;
 };
 

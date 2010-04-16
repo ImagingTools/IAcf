@@ -12,6 +12,9 @@ namespace iorn
 {
 
 
+class CHypothesesSet;
+
+
 /**
 	Represent learning set.
 	Learning set consists of set of hypothesis sets, one hypothesis set for one example.
