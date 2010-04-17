@@ -180,6 +180,14 @@
 				RelativePath="..\CHypothesesSet.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CHypothesisInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSigmoidalObjectronComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -187,6 +195,14 @@
 			>
 			<File
 				RelativePath="..\CHypothesesSet.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHypothesisInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSigmoidalObjectronComp.h"
 				>
 			</File>
 			<File

@@ -102,7 +102,7 @@ int CMeilhausSimpleComp::BeginTask(
 			return -1;
 		}
 
-		outputContainerPtr->CreateSequence(1024);
+		outputContainerPtr->CreateSequence(1024, 1);
 
 		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, outputContainerPtr);
 	}

@@ -5,19 +5,35 @@ namespace iorn
 {
 
 
-CHypothesesSet::CHypothesesSet()
-:	m_isBestKnown(true),
+CHypothesesSet::CHypothesesSet(const istd::TRetSmartPtr<CHypothesisInfo>& infoPtr)
+:	m_infoPtr(infoPtr),
+	m_isBestKnown(true),
 	m_bestHypothesisIndex(-1)
 {
+	I_ASSERT(m_infoPtr.IsValid());
 }
 
 
 CHypothesesSet::CHypothesesSet(const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned)
 :	m_isBestKnown(true)
 {
+	I_ASSERT(hypothesisPtr != NULL);
+
 	Element element = {weight, hypothesisPtr, isOwned};
 
 	m_elements.push_back(element);
+
+	istd::TRetSmartPtr<imeas::IDataSequenceInfo> infoPtr = hypothesisPtr->GetSequenceInfo();
+	const CHypothesisInfo* hypothesisInfoPtr = infoPtr.Cast<const CHypothesisInfo*>();
+
+	m_infoPtr.SetCastedOrRemove(hypothesisInfoPtr->CloneMe());
+}
+
+
+
+const istd::TRetSmartPtr<CHypothesisInfo>& CHypothesesSet::GetInfo() const
+{
+	return m_infoPtr;
 }
 
 
@@ -45,16 +61,25 @@ const imeas::IDataSequence* CHypothesesSet::GetHypothesis(int index, double& wei
 }
 
 
-void CHypothesesSet::SetHypothesis(int index, const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned)
+bool CHypothesesSet::SetHypothesis(int index, const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned)
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < int(m_elements.size()));
+	I_ASSERT(hypothesisPtr != NULL);
+
+	if (		!m_infoPtr.IsValid() ||
+				(m_infoPtr->GetChannelsCount() != hypothesisPtr->GetChannelsCount()) ||
+				(m_infoPtr->GetSamplesCount() != hypothesisPtr->GetSamplesCount())){
+		return false;
+	}
 
 	Element& element = m_elements[index];
 
 	element.weight = weight;
 	element.hypothesisPtr = hypothesisPtr;
 	element.isOwned = isOwned;
+
+	return true;
 }
 
 

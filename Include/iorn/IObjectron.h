@@ -13,6 +13,7 @@ namespace iorn
 
 
 class CHypothesesSet;
+class ILearningSet;
 class ILearnFeedback;
 
 
@@ -35,13 +36,21 @@ public:
 		*/
 		QQ_PROCESSING,
 		/**
-			Backpropagation of hypotheses.
+			Backpropagation of hypotheses without input data.
 		*/
-		QQ_HYPOTHESES_BACKPROPAGATION,
+		QQ_BACKPROPAGATION,
+		/**
+			Backpropagation of hypotheses with input data.
+		*/
+		QQ_BACKPROPAGATION_INPUT,
 		/**
 			Backpropagation of error.
 		*/
 		QQ_ERROR_BACKPROPAGATION,
+		/**
+			Progressive learning.
+		*/
+		QQ_PROGRESSIVE_LEARNING,
 		/**
 			Unsupervised learning.
 		*/
@@ -70,10 +79,14 @@ public:
 				CHypothesesSet& outputSet) const = 0;
 
 	/**
-		Get approximation of input hypothesis set from the output.
+		Get approximation of input hypothesis set from the output and (optional) suggested input.
+		\param	inputSetPtr		optional suggested input set.
+		\param	outputSet		output set should used as input data for backpropagation.
+		\param	approxInputSet	result of this operation - approximated input data set.
 		\return	false if calculation of hypotheses failed or this operation is not supported.
 	*/
 	virtual bool BackpropagateHypotheses(
+				const CHypothesesSet* inputSetPtr,
 				const CHypothesesSet& outputSet,
 				CHypothesesSet& approxInputSet) const = 0;
 

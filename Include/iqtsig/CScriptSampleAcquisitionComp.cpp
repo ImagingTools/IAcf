@@ -41,7 +41,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 	int samplesCount;
 	if (m_samplesCountAttrPtr.IsValid()){
 		samplesCount = *m_samplesCountAttrPtr;
-		if (!containerPtr->CreateSequence(samplesCount)){
+		if (!containerPtr->CreateSequence(samplesCount, 1)){
 			return TS_INVALID;
 		}
 	}

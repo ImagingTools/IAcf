@@ -7,11 +7,14 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
+#include "istd/TRetSmartPtr.h"
+#include "istd/TSmartPtr.h"
 
 // ACF-Solutions incldues
 #include "imeas/IDataSequence.h"
+#include "imeas/IDataSequenceInfo.h"
 
-#include "iorn/iorn.h"
+#include "iorn/CHypothesisInfo.h"
 
 
 namespace iorn
@@ -28,11 +31,18 @@ public:
 	/**
 		Construct empty hypothesis set.
 	*/
-	CHypothesesSet();
+	explicit CHypothesesSet(const istd::TRetSmartPtr<CHypothesisInfo>& infoPtr);
+
 	/**
 		Construct hypothesis set containing one hypothesis.
 	*/
 	CHypothesesSet(const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned);
+
+	/**
+		Get data info.
+		All depend hypothesis must use the same info.
+	*/
+	const istd::TRetSmartPtr<CHypothesisInfo>& GetInfo() const;
 
 	/**
 		Get number of possible hypotheses.
@@ -59,7 +69,7 @@ public:
 		\param	weight			hypothesis weight.
 		\param	isOwned			indicate that the hypothesis is owned by this container and will be removed during its destruction.
 	*/
-	virtual void SetHypothesis(int index, const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned = false);
+	virtual bool SetHypothesis(int index, const imeas::IDataSequence* hypothesisPtr, double weight, bool isOwned = false);
 	/**
 		Get ownership of some hipothesis and reset it in container.
 		\param	index	index of hypothesis.
@@ -86,6 +96,8 @@ private:
 	typedef std::vector<Element> Elements;
 
 	Elements m_elements;
+
+	istd::TSmartPtr<CHypothesisInfo> m_infoPtr;
 
 	mutable bool m_isBestKnown;
 	mutable int m_bestHypothesisIndex;
