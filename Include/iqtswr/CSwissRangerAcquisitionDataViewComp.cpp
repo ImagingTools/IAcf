@@ -17,6 +17,11 @@ void CSwissRangerAcquisitionDataViewComp::UpdateModel() const
 
 void CSwissRangerAcquisitionDataViewComp::UpdateEditor(int /*updateFlags*/)
 {
+	CoherenceThresholdLabel->setText(QString("%1%").arg(CoherenceThresholdSlider->value()));
+	MinimalDistanceCropLabel->setText(QString("%1%").arg(MinimalDistanceCropSlider->value()));
+	MaximalDistanceCropLabel->setText(QString("%1%").arg(MaximalDistanceCropSlider->value()));
+	ResolutionLabel->setText(QString("%1%").arg(int(1.0 / double(ResolutionSlider->value()) * 100)));
+
 	Create3dModel();
 }
 
@@ -161,7 +166,7 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 			if (confidence > confidenceThresold){
 				double distance = *(inputLinePtr + downsamplingFactor * x);
 				if (distance < minDistance){
-					distance = maxDistance;
+					distance = minDistance;
 				}
 
 				double relativeDistance = 100.0 * distance / maxDistance;
@@ -189,34 +194,26 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 
 // private slots:
 	
-void CSwissRangerAcquisitionDataViewComp::on_ResolutionSlider_valueChanged(int value)
+void CSwissRangerAcquisitionDataViewComp::on_ResolutionSlider_valueChanged(int /*value*/)
 {
-	ResolutionLabel->setText(QString("%1%").arg(1.0 / double(value) * 100));
-
 	UpdateEditor();
 }
 
 
-void CSwissRangerAcquisitionDataViewComp::on_MaximalDistanceCropSlider_valueChanged(int value)
+void CSwissRangerAcquisitionDataViewComp::on_MaximalDistanceCropSlider_valueChanged(int /*value*/)
 {
-	MaximalDistanceCropLabel->setText(QString("%1%").arg(value));
-
 	UpdateEditor();
 }
 
 
-void CSwissRangerAcquisitionDataViewComp::on_MinimalDistanceCropSlider_valueChanged(int value)
+void CSwissRangerAcquisitionDataViewComp::on_MinimalDistanceCropSlider_valueChanged(int /*value*/)
 {
-	MinimalDistanceCropLabel->setText(QString("%1%").arg(value));
-
 	UpdateEditor();
 }
 
 
-void CSwissRangerAcquisitionDataViewComp::on_CoherenceThresholdSlider_valueChanged(int value)
+void CSwissRangerAcquisitionDataViewComp::on_CoherenceThresholdSlider_valueChanged(int /*value*/)
 {
-	CoherenceThresholdLabel->setText(QString("%1%").arg(value));
-
 	UpdateEditor();
 }
 
