@@ -57,6 +57,12 @@ public:
 private:
 	void Create3dModel();
 
+private Q_SLOTS:
+	void on_ResolutionSlider_valueChanged(int value);
+	void on_MaximalDistanceCropSlider_valueChanged(int value);
+	void on_MinimalDistanceCropSlider_valueChanged(int value);
+	void on_CoherenceThresholdSlider_valueChanged(int value);
+
 private:
 	I_REF(iqtgui::IGuiObject, m_depthImageGuiCompPtr);
 	I_REF(imod::IObserver, m_depthImageObserverCompPtr);

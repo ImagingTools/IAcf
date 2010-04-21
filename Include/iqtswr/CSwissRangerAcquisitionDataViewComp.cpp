@@ -123,7 +123,7 @@ void CSwissRangerAcquisitionDataViewComp::OnGuiDestroyed()
 
 void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 {
-	int downsamplingFactor = 2;
+	int downsamplingFactor = ResolutionSlider->value();
 
 	iswr::ISwissRangerAcquisitionData* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
@@ -142,7 +142,9 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 
 	int imageWidth = depthImage.GetImageSize().GetX();
 	int imageHeight = depthImage.GetImageSize().GetY();
-	int maxDistance = objectPtr->GetMaxDistance();
+	int maxDistance = objectPtr->GetMaxDistance() * (MaximalDistanceCropSlider->value() / 100.0);
+	int minDistance = objectPtr->GetMaxDistance() * (MinimalDistanceCropSlider->value() / 100.0);
+	double confidenceThresold = CoherenceThresholdSlider->value() / 100.0 * 255.0;
 
 	istd::CIndex2d newSize(imageWidth / downsamplingFactor, imageHeight / downsamplingFactor);
 
@@ -156,8 +158,18 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 		for (int x = 0; x < newSize.GetX(); x++){
 			I_BYTE confidence = *(confidenceLinePtr+ downsamplingFactor * x);
 
-			if (confidence > 128){
-				outputLinePtr[x] = 100  - 100 * *(inputLinePtr + downsamplingFactor * x) / maxDistance;
+			if (confidence > confidenceThresold){
+				double distance = *(inputLinePtr + downsamplingFactor * x);
+				if (distance < minDistance){
+					distance = maxDistance;
+				}
+
+				double relativeDistance = 100.0 * distance / maxDistance;
+				if (relativeDistance > 100){
+					relativeDistance = 100;
+				}
+
+				outputLinePtr[x] = 100.0 - relativeDistance;
 			}
 			else{
 				outputLinePtr[x] = 0;
@@ -172,6 +184,40 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 	sizes[1] = newSize.GetY();
 
 	m_depthImage3d.CreateFunction(outputDataPtr.GetPtr(), sizes);
+}
+
+
+// private slots:
+	
+void CSwissRangerAcquisitionDataViewComp::on_ResolutionSlider_valueChanged(int value)
+{
+	ResolutionLabel->setText(QString("%1%").arg(1.0 / double(value) * 100));
+
+	UpdateEditor();
+}
+
+
+void CSwissRangerAcquisitionDataViewComp::on_MaximalDistanceCropSlider_valueChanged(int value)
+{
+	MaximalDistanceCropLabel->setText(QString("%1%").arg(value));
+
+	UpdateEditor();
+}
+
+
+void CSwissRangerAcquisitionDataViewComp::on_MinimalDistanceCropSlider_valueChanged(int value)
+{
+	MinimalDistanceCropLabel->setText(QString("%1%").arg(value));
+
+	UpdateEditor();
+}
+
+
+void CSwissRangerAcquisitionDataViewComp::on_CoherenceThresholdSlider_valueChanged(int value)
+{
+	CoherenceThresholdLabel->setText(QString("%1%").arg(value));
+
+	UpdateEditor();
 }
 
 
