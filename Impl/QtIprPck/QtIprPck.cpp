@@ -13,7 +13,10 @@ namespace QtIprPck
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("QtIpr", "Standard Qt image processing package", "Qt Image Processing");
+I_EXPORT_PACKAGE(
+			"QtIpr",
+			"Standard Qt image processing package",
+			"Qt \"Image Processing\"" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			RectangularFilterParamsGui,

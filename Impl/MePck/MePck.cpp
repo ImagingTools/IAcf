@@ -7,7 +7,10 @@ namespace MePck
 {
 
 
-I_EXPORT_PACKAGE("MePck", "Standard Meilhaus hardware package based on Qt", "Meilhaus Qt Standard");
+I_EXPORT_PACKAGE(
+			"MePck",
+			"Standard Meilhaus hardware package based on Qt",
+			"Meilhaus Qt Standard" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SamplingParams,

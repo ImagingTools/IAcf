@@ -9,7 +9,10 @@ namespace OpenCvPck
 
 I_EXPORT_DEFAULT_SERVICES
 
-I_EXPORT_PACKAGE("OpenCvPck", "Standard OpenCV package", "OpenCV Standard Image Processing Camera");
+I_EXPORT_PACKAGE(
+			"OpenCvPck",
+			"OpenCV integration",
+			"OpenCV" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			OpenCvAcquisition,

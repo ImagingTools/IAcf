@@ -9,7 +9,11 @@ namespace IacfBasePck
 
 I_EXPORT_DEFAULT_SERVICES
 
-I_EXPORT_PACKAGE("IacfBase", "ImagingTools system-undependent general package", "Undependend Standard Base Imaging Tools");
+I_EXPORT_PACKAGE(
+			"IacfBase",
+			"ImagingTools system-undependent general package",
+			"Standard Base Imaging Tools" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+
 
 I_EXPORT_COMPONENT(
 			ExposureParams,

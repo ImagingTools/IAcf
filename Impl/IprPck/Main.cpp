@@ -9,7 +9,10 @@ namespace IprPck
 
 I_EXPORT_DEFAULT_SERVICES
 
-I_EXPORT_PACKAGE("Ipr", "Image processing package", "Image Processing");
+I_EXPORT_PACKAGE(
+			"IprPck",
+			"Image processing package",
+			"\"Image Processing\"" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			MovingAverageProcessor,
