@@ -68,7 +68,12 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 	iimg::TBitmapIterator<PixelType> outputIterator(&outputImage);
 
 	while (inputIterator.IsValid()){
-		*outputIterator = m_predicate(*inputIterator);
+		const iimg::TBitmapIterator<PixelType>::PixelAccessor& inputPixel = *inputIterator;
+		iimg::TBitmapIterator<PixelType>::PixelAccessor& outputPixel = *outputIterator;
+
+		for (int colorComponentIndex = 0; colorComponentIndex < inputPixel.GetComponentsCount(); colorComponentIndex++){
+			outputPixel[colorComponentIndex] = m_predicate(inputPixel[colorComponentIndex]);
+		}
 
 		++inputIterator;
 		++outputIterator;

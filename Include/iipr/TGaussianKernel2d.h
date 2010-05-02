@@ -31,10 +31,11 @@ TGaussianKernel2d<PixelType, KernelType>::TGaussianKernel2d()
 
 
 template <typename PixelType, typename KernelType> 
-TGaussianKernel2d<PixelType, KernelType>::TGaussianKernel2d(double sigma1, 
-															double sigma2, 
-															double angle, 
-															const iimg::IBitmap* bitmapPtr)
+TGaussianKernel2d<PixelType, KernelType>::TGaussianKernel2d(
+			double sigma1,
+			double sigma2, 
+			double angle, 
+			const iimg::IBitmap* bitmapPtr)
 {
 	CreateKernel(sigma1, sigma2, angle);
 

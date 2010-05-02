@@ -58,14 +58,14 @@ TLocalNeighborhood<BitmapIterator, Kernel>::TLocalNeighborhood(const BitmapItera
 template <class BitmapIterator, class Kernel> 
 typename TLocalNeighborhood<BitmapIterator, Kernel>::Iterator TLocalNeighborhood<BitmapIterator, Kernel>::Begin() const
 {
-	return Iterator(&(*m_bitmapIterator), m_kernel.Begin());
+	return Iterator((*m_bitmapIterator).GetPixelBuffer(), m_kernel.Begin());
 }
 
 
 template <class BitmapIterator, class Kernel> 
 typename TLocalNeighborhood<BitmapIterator, Kernel>::Iterator TLocalNeighborhood<BitmapIterator, Kernel>::End() const
 {
-	return Iterator(&(*m_bitmapIterator), m_kernel.End());
+	return Iterator((*m_bitmapIterator).GetPixelBuffer(), m_kernel.End());
 }
 
 
