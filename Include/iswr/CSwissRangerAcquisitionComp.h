@@ -95,8 +95,8 @@ public:
 private:
 	bool CreateSwissImage(
 				iswr::ISwissRangerAcquisitionData& swissImage,
-				double maxDistance,
-				const istd::CRange& clippingDistanceRange) const;
+				double maxDistance) const;
+	
 	bool CreateFromCamera(iimg::IBitmap& image, const ImgEntry& imageEntry, int scaleFactor) const;
 
 private:

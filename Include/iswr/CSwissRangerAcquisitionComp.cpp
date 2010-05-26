@@ -42,7 +42,6 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			paramsPtr->GetParameter((*m_swissRangerParamsIdAttrPtr).ToString()));
 	}
 
-	istd::CRange clippingDistanceRange(0, 1.0);
 
 	if (swissRangerParamsPtr != NULL){
 		int currentCameraMode = SR_GetMode(m_cameraPtr);
@@ -60,8 +59,6 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		else{
 			currentCameraMode = currentCameraMode & ~AM_DENOISE_ANF;
 		}
-
-		clippingDistanceRange = swissRangerParamsPtr->GetDistanceClipRange();
 
 		SR_SetMode(m_cameraPtr, currentCameraMode);		
 		
@@ -138,7 +135,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 		else{
 			istd::TChangeNotifier<iswr::ISwissRangerAcquisitionData> swissImagePtr(dynamic_cast<iswr::ISwissRangerAcquisitionData*>(outputPtr));
 			if (swissImagePtr.IsValid()){
-				if (!CreateSwissImage(*swissImagePtr.GetPtr(), maxDistance, clippingDistanceRange)){
+				if (!CreateSwissImage(*swissImagePtr.GetPtr(), maxDistance)){
 					return TS_INVALID;
 				}
 			}
@@ -252,8 +249,7 @@ void CSwissRangerAcquisitionComp::OnComponentDestroyed()
 
 bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			iswr::ISwissRangerAcquisitionData& swissImage,
-			double maxDistance,
-			const istd::CRange& clippingDistanceRange) const
+			double maxDistance) const
 {
 	if (m_zBuffer.IsValid()){
 		istd::CIndex2d size = GetBitmapSize(NULL);
@@ -270,7 +266,6 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 				I_WORD zValue = *(zBufferPtr + x);
 			
 				double normedZValue = zValue / (double)maxDistanceMm;
-				normedZValue = clippingDistanceRange.GetClipped(normedZValue);
 				outputImageLinePtr[x] = I_WORD(normedZValue * maxDistanceMm); // depth in mm
 			}
 		}
@@ -310,8 +305,8 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			confidenceMap,
 			intensityImage,
 			amplitudeImage,
-			NULL,
-			NULL);
+			m_xBuffer.GetPtr(),
+			m_yBuffer.GetPtr());
 	}
 
 	return false;

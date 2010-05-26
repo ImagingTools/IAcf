@@ -2,14 +2,7 @@
 #define iswr_ISwissRangerAcquisitionData_included
 
 
-#include "imath/TISampledFunction.h"
-
 #include "iimg/IBitmap.h"
-
-#include "idev/IDeviceInfo.h"
-
-#include "iswr/ISwissRangerParams.h"
-#include "iswr/ISwissRangerConstrains.h"
 
 
 namespace iswr
@@ -31,8 +24,8 @@ public:
 				const iimg::IBitmap& confidenceMap,
 				const iimg::IBitmap& intensityImage,
 				const iimg::IBitmap& amplitudeImage,
-				const iswr::ISwissRangerParams* paramsPtr = NULL,
-				const idev::IDeviceInfo* deviceInfoPtr = NULL) = 0;
+				const I_SWORD* xBufferPtr,
+				const I_SWORD* yBufferPtr) = 0;
 
 	virtual double GetMaxDistance() const = 0;
 
@@ -51,19 +44,25 @@ public:
 	*/
 	virtual const iimg::IBitmap& GetConfidenceMap() const = 0;
 
+	/**
+		Get intensity image.
+	*/
 	virtual const iimg::IBitmap& GetIntensityImage() const = 0;
 
+	/**
+		Get amplitude image
+	*/
 	virtual const iimg::IBitmap& GetAmplitudeImage() const = 0;
 
 	/**
-		Get the acquisition parameter for this image.
+		Get X-coordinates buffer. Coordinates are in mm.
 	*/
-	virtual const iswr::ISwissRangerParams& GetAcquisitionParams() const = 0;
+	virtual const I_SWORD* GetXCoordinatesBuffer() const = 0;
 
 	/**
-		Get the sensor info for this image.
+		Get Y-coordinates buffer. Coordinates are in mm.
 	*/
-	virtual const idev::IDeviceInfo& GetSensorInfo() const = 0;
+	virtual const I_SWORD* GetYCoordinatesBuffer() const = 0;
 };
 
 

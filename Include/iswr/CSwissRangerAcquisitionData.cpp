@@ -30,8 +30,8 @@ bool CSwissRangerAcquisitionData::CreateData(
 			const iimg::IBitmap& confidenceMap,
 			const iimg::IBitmap& intensityImage,
 			const iimg::IBitmap& amplitudeImage,
-			const iswr::ISwissRangerParams* paramsPtr,
-			const idev::IDeviceInfo* deviceInfoPtr)
+			const I_SWORD* xBufferPtr,
+			const I_SWORD* yBufferPtr)
 {
 	m_maxDepth = maximalDepth;
 
@@ -40,13 +40,13 @@ bool CSwissRangerAcquisitionData::CreateData(
 	m_intensityImage.CopyFrom(intensityImage);
 	m_amplitudeImage.CopyFrom(amplitudeImage);
 
-	if (paramsPtr != NULL){
-		iser::CMemoryReadArchive::CloneObjectByArchive(*paramsPtr, m_acquisitionParams);
-	}
+	int imageDataSize = m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
 
-	if (paramsPtr != NULL){
-		iser::CMemoryReadArchive::CloneObjectByArchive(*deviceInfoPtr, m_sensorInfo);
-	}
+	m_xBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
+	memcpy(m_xBufferPtr.GetPtr(), xBufferPtr, imageDataSize * sizeof(I_SWORD));
+
+	m_yBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
+	memcpy(m_yBufferPtr.GetPtr(), yBufferPtr, imageDataSize * sizeof(I_SWORD));
 
 	return true;
 }
@@ -109,15 +109,15 @@ const iimg::IBitmap& CSwissRangerAcquisitionData::GetAmplitudeImage() const
 }
 
 
-const iswr::ISwissRangerParams& CSwissRangerAcquisitionData::GetAcquisitionParams() const
+const I_SWORD* CSwissRangerAcquisitionData::GetXCoordinatesBuffer() const
 {
-	return m_acquisitionParams;
+	return m_xBufferPtr.GetPtr();
 }
 
 
-const idev::IDeviceInfo& CSwissRangerAcquisitionData::GetSensorInfo() const
+const I_SWORD* CSwissRangerAcquisitionData::GetYCoordinatesBuffer() const
 {
-	return m_sensorInfo;
+	return m_yBufferPtr.GetPtr();
 }
 
 
@@ -155,15 +155,17 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 	retVal = retVal && m_amplitudeImage.Serialize(archive);
 	retVal = retVal && archive.EndTag(amplitudeImageTag);
 
-	static iser::CArchiveTag acquisitionParamsTag("AcquisitionParams", "AcquisitionParams");
-	retVal = retVal && archive.BeginTag(acquisitionParamsTag);
-	retVal = retVal && m_acquisitionParams.Serialize(archive);
-	retVal = retVal && archive.EndTag(acquisitionParamsTag);
+	int imageDataSize = sizeof(I_SWORD) * m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
 
-	static iser::CArchiveTag sensorInfoTag("SensorInfo", "SensorInfo");
-	retVal = retVal && archive.BeginTag(sensorInfoTag);
-	retVal = retVal && m_sensorInfo.Serialize(archive);
-	retVal = retVal && archive.EndTag(sensorInfoTag);
+	static iser::CArchiveTag xBufferTag("XBuffer", "X - coordinates");
+	retVal = retVal && archive.BeginTag(xBufferTag);
+	retVal = retVal && archive.ProcessData(m_xBufferPtr.GetPtr(), imageDataSize);
+	retVal = retVal && archive.EndTag(xBufferTag);
+
+	static iser::CArchiveTag yBufferTag("YBuffer", "Y - coordinates");
+	retVal = retVal && archive.BeginTag(yBufferTag);
+	retVal = retVal && archive.ProcessData(m_yBufferPtr.GetPtr(), imageDataSize);
+	retVal = retVal && archive.EndTag(yBufferTag);
 
 	if (!archive.IsStoring()){
 		m_distanceImage.ResetImage();

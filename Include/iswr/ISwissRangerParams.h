@@ -32,10 +32,6 @@ public:
 
 	virtual void SetModulationFrequencyMode(int modulationFrequencyMode) = 0;
 	virtual int GetModulationFrequencyMode() const = 0;
-
-	virtual void SetDistanceClipRange(const istd::CRange& distanceClipRange) = 0;
-	virtual const istd::CRange& GetDistanceClipRange() const = 0;
-
 };
 
 

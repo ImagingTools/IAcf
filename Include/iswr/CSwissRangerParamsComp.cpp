@@ -23,18 +23,6 @@ void CSwissRangerParamsComp::OnComponentCreated()
 	if (m_modulationFrequencyModeAttrPtr.IsValid()){
 		SetModulationFrequencyMode(*m_modulationFrequencyModeAttrPtr);
 	}
-
-	istd::CRange distanceClipRange(0.0, 1.0);
-
-	if (m_distanceClipMinAttrPtr.IsValid()){
-		distanceClipRange.SetMinValue(*m_distanceClipMinAttrPtr);
-	}
-	
-	if (m_distanceClipMaxAttrPtr.IsValid()){
-		distanceClipRange.SetMaxValue(*m_distanceClipMaxAttrPtr);
-	}
-
-	SetDistanceClipRange(distanceClipRange);
 }
 
 

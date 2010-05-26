@@ -23,8 +23,7 @@ CSwissRangerParams::CSwissRangerParams()
 	:m_isMedianFilterEnabled(true),
 	m_isAdaptiveFilterEnabled(true),
 	m_amplitudeThreshold(0.0),
-	m_modulationFrequencyMode(MF_31MHz),
-	m_distanceClipRange(0.0, 1.0)
+	m_modulationFrequencyMode(MF_31MHz)
 {
 }
 
@@ -95,22 +94,6 @@ int CSwissRangerParams::GetModulationFrequencyMode() const
 }
 
 
-void CSwissRangerParams::SetDistanceClipRange(const istd::CRange& distanceClipRange)
-{
-	if (distanceClipRange != m_distanceClipRange){
-		istd::CChangeNotifier changePtr(this);
-
-		m_distanceClipRange = distanceClipRange;
-	}
-}
-
-
-const istd::CRange& CSwissRangerParams::GetDistanceClipRange() const
-{
-	return m_distanceClipRange;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 
@@ -137,22 +120,6 @@ bool CSwissRangerParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(modulationFrequencyModeTag);
 	retVal = retVal && archive.Process(m_modulationFrequencyMode);
 	retVal = retVal && archive.EndTag(modulationFrequencyModeTag);
-
-	double distanceClipMin = m_distanceClipRange.GetMinValue();
-	static iser::CArchiveTag distanceClipMinTag("DistanceClipMin", "DistanceClipMin");
-	retVal = retVal && archive.BeginTag(distanceClipMinTag);
-	retVal = retVal && archive.Process(distanceClipMin);
-	retVal = retVal && archive.EndTag(distanceClipMinTag);
-
-	double distanceClipMax = m_distanceClipRange.GetMaxValue();
-	static iser::CArchiveTag distanceClipMaxTag("DistanceClipMax", "DistanceClipMax");
-	retVal = retVal && archive.BeginTag(distanceClipMaxTag);
-	retVal = retVal && archive.Process(distanceClipMax);
-	retVal = retVal && archive.EndTag(distanceClipMaxTag);
-
-	if (!archive.IsStoring()){
-		m_distanceClipRange = istd::CRange(distanceClipMin, distanceClipMax);
-	}
 
 	return retVal;
 }

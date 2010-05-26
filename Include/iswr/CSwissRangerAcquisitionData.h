@@ -6,12 +6,11 @@
 
 #include "imod/TModelWrap.h"
 
+#include "imath/TISampledFunction.h"
+
 #include "iimg/CGeneralBitmap.h"
 
-#include "idev/CDeviceInfo.h"
-
 #include "iswr/ISwissRangerAcquisitionData.h"
-#include "iswr/CSwissRangerParams.h"
 
 
 namespace iswr
@@ -33,16 +32,16 @@ public:
 				const iimg::IBitmap& confidenceMap,
 				const iimg::IBitmap& intensityImage,
 				const iimg::IBitmap& amplitudeImage,
-				const iswr::ISwissRangerParams* paramsPtr = NULL,
-				const idev::IDeviceInfo* deviceInfoPtr = NULL);
+				const I_SWORD* xBufferPtr,
+				const I_SWORD* yBufferPtr);
 	virtual double GetMaxDistance() const;
 	virtual const iimg::IBitmap& GetDistanceImage() const;
 	virtual const iimg::IBitmap& GetDepthImage() const;
 	virtual const iimg::IBitmap& GetConfidenceMap() const;
 	virtual const iimg::IBitmap& GetIntensityImage() const;
 	virtual const iimg::IBitmap& GetAmplitudeImage() const;
-	virtual const iswr::ISwissRangerParams& GetAcquisitionParams() const;
-	virtual const idev::IDeviceInfo& GetSensorInfo() const;	
+	virtual const I_SWORD* GetXCoordinatesBuffer() const;
+	virtual const I_SWORD* GetYCoordinatesBuffer() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -53,8 +52,10 @@ private:
 	imod::TModelWrap<iimg::CGeneralBitmap> m_confidenceMap;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_intensityImage;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_amplitudeImage;
-	imod::TModelWrap<iswr::CSwissRangerParams> m_acquisitionParams;
-	idev::CDeviceInfo m_sensorInfo;
+
+	istd::TDelPtr<I_SWORD, true> m_xBufferPtr;
+	istd::TDelPtr<I_SWORD, true> m_yBufferPtr;
+
 	int m_maxDepth;
 };
 

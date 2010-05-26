@@ -26,8 +26,6 @@ public:
 	virtual double GetAmplitudeThreshold() const;
 	virtual void SetModulationFrequencyMode(int modulationFrequencyMode);
 	virtual int GetModulationFrequencyMode() const;
-	virtual void SetDistanceClipRange(const istd::CRange& distanceClipRange);
-	virtual const istd::CRange& GetDistanceClipRange() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
