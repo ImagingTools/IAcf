@@ -155,16 +155,20 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 	retVal = retVal && m_amplitudeImage.Serialize(archive);
 	retVal = retVal && archive.EndTag(amplitudeImageTag);
 
-	int imageDataSize = sizeof(I_SWORD) * m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
+	int imageDataSize = m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
+	if (!archive.IsStoring()){
+		m_xBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
+		m_yBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
+	}
 
 	static iser::CArchiveTag xBufferTag("XBuffer", "X - coordinates");
 	retVal = retVal && archive.BeginTag(xBufferTag);
-	retVal = retVal && archive.ProcessData(m_xBufferPtr.GetPtr(), imageDataSize);
+	retVal = retVal && archive.ProcessData(m_xBufferPtr.GetPtr(), imageDataSize * sizeof(I_SWORD));
 	retVal = retVal && archive.EndTag(xBufferTag);
 
 	static iser::CArchiveTag yBufferTag("YBuffer", "Y - coordinates");
 	retVal = retVal && archive.BeginTag(yBufferTag);
-	retVal = retVal && archive.ProcessData(m_yBufferPtr.GetPtr(), imageDataSize);
+	retVal = retVal && archive.ProcessData(m_yBufferPtr.GetPtr(), imageDataSize * sizeof(I_SWORD));
 	retVal = retVal && archive.EndTag(yBufferTag);
 
 	if (!archive.IsStoring()){
