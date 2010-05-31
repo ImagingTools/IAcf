@@ -26,7 +26,7 @@ double CSigmoidalObjectronComp::GetOperationQuality(int qualityQuery) const
 
 bool CSigmoidalObjectronComp::ProcessHypotheses(
 			const CHypothesesSet& inputSet,
-			CHypothesesSet& outputSet) const
+			CHypothesesSet& /*outputSet*/) const
 {
 	const CHypothesisInfo* inputInfoPtr = inputSet.GetInfo().GetPtr();
 	if (inputInfoPtr == NULL){
@@ -71,37 +71,45 @@ bool CSigmoidalObjectronComp::ProcessHypotheses(
 
 
 bool CSigmoidalObjectronComp::BackpropagateHypotheses(
-			const CHypothesesSet* inputSetPtr,
-			const CHypothesesSet& outputSet,
-			CHypothesesSet& approxInputSet) const
+			const CHypothesesSet* /*inputSetPtr*/,
+			const CHypothesesSet& /*outputSet*/,
+			CHypothesesSet& /*approxInputSet*/) const
 {
+	// TODO: implement it
+
 	return false;
 }
 
 
 bool CSigmoidalObjectronComp::BackpropagateError(
-			const CHypothesesSet& inputSet,
-			double outputError,
-			double& approxInputError,
-			double& approxQuality) const
+			const CHypothesesSet& /*inputSet*/,
+			double /*outputError*/,
+			double& /*approxInputError*/,
+			double& /*approxQuality*/) const
 {
+	// TODO: implement it
+
 	return false;
 }
 
 
 int CSigmoidalObjectronComp::DoLearning(
-			const ILearningSet& learningSet,
-			const ILearnFeedback* learnFeedbackPtr,
-			bool isProgressive)
+			const ILearningSet& /*learningSet*/,
+			const ILearnFeedback* /*learnFeedbackPtr*/,
+			bool /*isProgressive*/)
 {
+	// TODO: implement it
+
 	return false;
 }
 
 
 // reimplemented (iser::ISerializable)
 
-bool CSigmoidalObjectronComp::Serialize(iser::IArchive& archive)
+bool CSigmoidalObjectronComp::Serialize(iser::IArchive& /*archive*/)
 {
+	// TODO: implement it
+
 	return false;
 }
 
