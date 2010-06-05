@@ -46,9 +46,9 @@ void CChannelSelectionNode::ResetNodes()
 
 // reimplemented (iser::ISelectionParam)
 
-int CChannelSelectionNode::GetOptionsCount() const
+const iprm::ISelectionConstraints* CChannelSelectionNode::GetConstraints() const
 {
-	return m_subselections.GetCount();
+	return this;
 }
 
 
@@ -70,18 +70,6 @@ bool CChannelSelectionNode::SetSelectedOptionIndex(int index)
 }
 
 
-const istd::CString& CChannelSelectionNode::GetOptionName(int index) const
-{
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_subselections.GetCount());
-
-	const SelectionInfo* infoPtr = m_subselections.GetAt(index);
-	I_ASSERT(infoPtr != NULL);
-
-	return infoPtr->name;
-}
-
-
 iprm::ISelectionParam* CChannelSelectionNode::GetActiveSubselection() const
 {
 	if (m_selectedIndex >= GetOptionsCount()){
@@ -95,6 +83,26 @@ iprm::ISelectionParam* CChannelSelectionNode::GetActiveSubselection() const
 }
 
 	
+// reimplemented (iprm::ISelectionConstraints)
+
+int CChannelSelectionNode::GetOptionsCount() const
+{
+	return m_subselections.GetCount();
+}
+
+
+const istd::CString& CChannelSelectionNode::GetOptionName(int index) const
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < m_subselections.GetCount());
+
+	const SelectionInfo* infoPtr = m_subselections.GetAt(index);
+	I_ASSERT(infoPtr != NULL);
+
+	return infoPtr->name;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CChannelSelectionNode::Serialize(iser::IArchive& archive)
