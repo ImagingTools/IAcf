@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="icam"
-	ProjectGUID="{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}"
-	RootNamespace="icam"
+	Name="isgige"
+	ProjectGUID="{74D96FEF-1D00-4CDF-81C7-00B9E9010789}"
+	RootNamespace="isgige"
+	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
 		<Platform
@@ -12,6 +13,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -20,14 +24,21 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -37,30 +48,20 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
-				HeaderFileName=""
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-				CompileAs="0"
+				WarningLevel="4"
+				DebugInformationFormat="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -68,8 +69,6 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="NDEBUG"
-				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -99,14 +98,21 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -116,27 +122,20 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="./iwin/DebugVC7/iwin.tlb"
-				HeaderFileName=""
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				BasicRuntimeChecks="3"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				StringPooling="true"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
-				CompileAs="0"
+				BrowseInformation="1"
+				WarningLevel="4"
+				DebugInformationFormat="3"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -144,8 +143,6 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -175,75 +172,82 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp"
+			Filter="cpp;cxx;c;def"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CAcquisitionConstraintsComp.cpp"
+				RelativePath="..\CGenicamCameraComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CExposureParamsComp.cpp"
+				RelativePath="..\CGenicamCameraComp.moc"
 				>
 			</File>
 			<File
-				RelativePath="..\CMemoryAcquisitionComp.cpp"
+				RelativePath="..\CGenicamCameraSingleton.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CTriggerParamsComp.cpp"
+				RelativePath="..\CGenicamCameraSingleton.moc"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CAcquisitionConstraintsComp.h"
+				RelativePath="..\CGenicamCameraComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CExposureParamsComp.h"
+				RelativePath="..\CGenicamCameraSingleton.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CMemoryAcquisitionComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSnapBitmapSupplierComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTriggerParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\icam.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IExposureConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IExposureParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ITriggerConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ITriggerParams.h"
+				RelativePath="..\isgige.h"
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="qrc;*"
+			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
+			ParseFiles="false"
+			>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp"
+			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
+			>
+			<File
+				RelativePath="..\generated\moc_CGenicamCameraComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CGenicamCameraSingleton.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Forms"
+			>
+		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="MocDir"
+			Value="$(InputDir)\Generated"
+		/>
+		<Global
+			Name="QtVersion"
+			Value="4.2.3"
+		/>
+		<Global
+			Name="UicDir"
+			Value="$(InputDir)\Generated"
+		/>
 	</Globals>
 </VisualStudioProject>
