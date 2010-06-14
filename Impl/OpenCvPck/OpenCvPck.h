@@ -6,7 +6,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-
 // IACF includes
 #include "iocv/COcvAcquisitionComp.h"
 #include "iocv/COcvVideoControllerComp.h"

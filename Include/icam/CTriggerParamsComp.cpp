@@ -12,7 +12,7 @@ namespace icam
 
 
 CTriggerParamsComp::CTriggerParamsComp()
-	:m_isTriggerEnabled(false),
+:	m_isTriggerEnabled(false),
 	m_triggerMode(TM_RISING_EDGE)
 {
 }

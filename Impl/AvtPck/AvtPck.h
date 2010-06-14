@@ -2,10 +2,9 @@
 #define AvtPck_included
 
 
+// ACF includes
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
-
-#include "icam/CTriggerParamsComp.h"
 
 #include "iavt/CFireGrabAcquisitionComp.h"
 
@@ -19,7 +18,6 @@ namespace AvtPck
 
 
 typedef iavt::CFireGrabAcquisitionComp FireGrabAcquisition;
-typedef icomp::TModelCompWrap<icam::CTriggerParamsComp> TriggerParams;
 
 
 } // namespace AvtPck

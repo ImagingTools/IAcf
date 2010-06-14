@@ -386,6 +386,9 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::EnsureDeviceSynchronized(con
 			return deviceInfoPtr;
 		}
 	}
+	else{
+		SendErrorMessage(MI_DEVICE_INTERN, iqt::GetCString(tr("Cannot find camera")));
+	}
 
 	return NULL;
 }

@@ -21,11 +21,6 @@ I_EXPORT_COMPONENT(
 			"Implementation of camera interface using FireGrab API",
 			"AVT Grabber Camera Acquisition Bitmap Image FireGrab");
 
-I_EXPORT_COMPONENT(
-			TriggerParams,
-			"Trigger params for cameras",
-			"Grabber Camera Acquisition Bitmap Image FireGrab Parameter");
-
 
 } // namespace AvtPck
 

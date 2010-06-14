@@ -510,8 +510,8 @@
         TriggerParams
       </Id>
       <PackageId>
-        AvtPck
-      </PackageId>
+				IacfBasePck
+			</PackageId>
       <ComponentId>
         TriggerParams
       </ComponentId>

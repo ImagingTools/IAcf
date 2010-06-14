@@ -2,6 +2,7 @@
 #define MePck_included
 
 
+// ACF includes
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
@@ -13,7 +14,7 @@
 
 
 /**
-	Meilhaus-specific package.
+	Package for components depending on I/O component of Meilhaus GmbH company.
 */
 namespace MePck
 {
