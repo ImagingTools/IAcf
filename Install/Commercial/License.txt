@@ -1,12 +1,12 @@
-ImagingTools Gantzke Lepskiy GbR END-USER LICENSE AGREEMENT FOR IACF SOFTWARE
+Witold Gantzke and Kirill Lepskiy END-USER LICENSE AGREEMENT FOR IACF SOFTWARE
 
-IMPORTANT-READ CAREFULLY: This END-USER License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and ImagingTools Gantzke Lepskiy GbR ("ImagingTools") for the ImagingTools Software accompanying this EULA, which includes computer software and may include associated media, printed materials, and "online" or electronic documentation ("SOFTWARE PRODUCT" or "SOFTWARE"). By installing, copy or otherwise using the SOFTWARE PRODUCT, you agree to be bound by the terms of this EULA. If you do not agree to the terms of this EULA, discontinue installation, copy, or use of the SOFTWARE PRODUCT, destroy all copies and all component parts of the SOFTWARE PRODUCT, and promptly contact ImagingTools for instructions on return of the SOFTWARE PRODUCT for a refund.
+IMPORTANT-READ CAREFULLY: This END-USER License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and copyrights owner (Witold Gantzke and Lepskiy) for the IACF Software accompanying this EULA, which includes computer software and may include associated media, printed materials, and "online" or electronic documentation ("SOFTWARE PRODUCT" or "SOFTWARE"). By installing, copy or otherwise using the SOFTWARE PRODUCT, you agree to be bound by the terms of this EULA. If you do not agree to the terms of this EULA, discontinue installation, copy, or use of the SOFTWARE PRODUCT, destroy all copies and all component parts of the SOFTWARE PRODUCT, and promptly contact ImagingTools for instructions on return of the SOFTWARE PRODUCT for a refund.
 
 SOFTWARE PRODUCT LICENSE
 The SOFTWARE PRODUCT is protected by copyright laws and international copyright treaties, as well as other applicable intellectual property laws and treaties. This is a License and not a "sale" of the SOFTWARE PRODUCT. ImagingTools grants you a non-exclusive right to use this copy of the SOFTWARE PRODUCT.
 
 APPLICABILITY
-This EULA shall apply to only SOFTWARE ImagingTools Image Recognition based on ACF Toolkit ("IACF"), and shall not be effective to convey rights in any other software.
+This EULA shall apply to only SOFTWARE Image Recognition Toolkit based on ACF Toolkit ("IACF"), and shall not be effective to convey rights in any other software.
 
 GRANT OF LICENSE
 Except as otherwise expressly provided in this EULA, you may only install and use one copy of the SOFTWARE PRODUCT on one computer system.
