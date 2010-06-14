@@ -532,7 +532,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -547,6 +547,14 @@
       </InterfaceId>
       <ComponentId>
         Info
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ibase::IMessageConsumer
+      </InterfaceId>
+      <ComponentId>
+        Log
       </ComponentId>
     </Interface>
     <Interface>

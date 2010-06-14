@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="7">
     <Element>
       <Id>
         Camera
       </Id>
       <PackageId>
-        AvtPck
+        SmaGigEPck
       </PackageId>
       <ComponentId>
-        FireGrabAcquisition
+        GenicamCamera
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,13 +44,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              ExposureParamsId
+              DefaultExposureParams
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -66,7 +66,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ImageRegionParams
+              DefaultTriggerParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -79,7 +79,7 @@
                 true
               </IsEnabled>
               <Value>
-                ImageAOI
+                TriggerParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -99,44 +99,6 @@
               </IsEnabled>
               <Value>
                 Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TriggerParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                TriggerParams
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseSingleShoot
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -402,103 +364,6 @@
               </IsEnabled>
               <Value>
                 ComposedParamsSetGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ImageAOI
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        AttributedRectangle
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              Height
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1024
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Width
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1280
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              X
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Y
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0
               </Value>
             </Data>
           </AttributeInfo>

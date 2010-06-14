@@ -56,9 +56,9 @@ int CGenicamCameraComp::DoProcessing(
 	if (deviceInfoPtr->triggerMode == 0){
 		if (!deviceInfoPtr->devicePtr->CommandNodeExecute("TriggerSoftware")){
 			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot send software trigger").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
-		}
 
-		return false;
+			return false;
+		}
 	}
 
 	iwin::CTimer elapsedTime;
@@ -329,7 +329,7 @@ int CGenicamCameraComp::GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr
 		return m_defaultTriggerParamsCompPtr->GetTriggerMode();
 	}
 
-	return -1;
+	return 0;
 }
 
 
