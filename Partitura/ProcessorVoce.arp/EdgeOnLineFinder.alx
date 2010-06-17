@@ -26,13 +26,35 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
-        FileCamera
+        Buffer1
       </ComponentName>
       <X>
-        325
+        425
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Buffer2
+      </ComponentName>
+      <X>
+        725
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Caliper
+      </ComponentName>
+      <X>
+        900
       </X>
       <X>
         425
@@ -40,13 +62,35 @@
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        Casade
       </ComponentName>
       <X>
-        772.161
+        575
       </X>
       <X>
-        424.264
+        175
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Derivative
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        425
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        LineProjection
+      </ComponentName>
+      <X>
+        225
+      </X>
+      <X>
+        425
       </X>
     </Element>
   </PositionMap>

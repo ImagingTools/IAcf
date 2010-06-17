@@ -29,13 +29,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        FileCamera
+        EdgeOnLineFinder
       </Id>
       <PackageId>
-        IacfVoce
+        ProcessorVoce
       </PackageId>
       <ComponentId>
-        FileCamera
+        EdgeOnLineFinder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -47,7 +47,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              DefaultDir
+              CaliperParamId
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -60,7 +60,101 @@
                 true
               </IsEnabled>
               <Value>
-                C://
+                Caliper
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LineParamId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Line
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        PositionTask
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        CaliperBasedPositionSupplier
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              BitmapSupplier
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              BitmapSupplier
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CaliperTool
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgeOnLineFinder
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FeaturesMapper
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgeOnLineFinder
               </Value>
             </Data>
           </AttributeInfo>
@@ -72,108 +166,73 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Framework
-              </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Framework
-      </Id>
-      <PackageId>
-        IacfTutorialVoce
-      </PackageId>
-      <ComponentId>
-        ComplexProductFramework
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              Camera
+              ParamsSet
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              ParamsSet
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                FileCamera
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CameraParamsGui
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileCamera/Gui
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CameraParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileCamera/ParamsSet
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        imod::IModel
       </InterfaceId>
       <ComponentId>
-        Framework
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iproc::ISupplier
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iproc::IValueSupplier
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

@@ -26,27 +26,60 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="5">
+    <Element>
+      <ComponentName>
+        BitmapLoader
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        100
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComposedParamsSet
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         FileCamera
       </ComponentName>
       <X>
-        325
+        250
       </X>
       <X>
-        425
+        100
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        FilePathParam
       </ComponentName>
       <X>
-        772.161
+        575
       </X>
       <X>
-        424.264
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePathParamGui
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <X>
+        200
       </X>
     </Element>
   </PositionMap>

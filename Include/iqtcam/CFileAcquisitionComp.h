@@ -23,7 +23,7 @@ namespace iqtcam
 
 
 /**
-	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c iproc::IBitmapAcquisition.
+	Bitmap loader component implementing interface \c iproc::IBitmapAcquisition over \c iser::IFileLoader.
 */
 class CFileAcquisitionComp:
 			public icomp::CComponentBase,

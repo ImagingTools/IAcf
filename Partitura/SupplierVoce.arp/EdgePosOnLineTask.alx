@@ -29,24 +29,24 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        FileCamera
+        EdgeOnLineFinder
       </ComponentName>
       <X>
-        325
+        275
       </X>
       <X>
-        425
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        PositionTask
       </ComponentName>
       <X>
-        772.161
+        275
       </X>
       <X>
-        424.264
+        150
       </X>
     </Element>
   </PositionMap>
