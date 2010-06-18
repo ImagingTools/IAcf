@@ -179,11 +179,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSampleAcquisitionGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSampleContainerView.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CSamplingParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSamplingParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -201,19 +209,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSampleAcquisitionGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSampleContainerView.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CSamplingParamsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSamplingParamsGuiComp.moc"
 				>
 			</File>
 			<File

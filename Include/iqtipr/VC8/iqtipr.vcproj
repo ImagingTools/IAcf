@@ -180,7 +180,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCaliperParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -192,11 +200,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchGuiComp.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CSearchGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -205,6 +225,10 @@
 			</File>
 			<File
 				RelativePath="..\CValueSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -218,15 +242,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCaliperParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -238,23 +254,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSearchGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSearchParamsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -263,10 +267,6 @@
 			</File>
 			<File
 				RelativePath="..\CValueSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 			<File
