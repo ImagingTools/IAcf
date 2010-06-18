@@ -18,6 +18,14 @@ class ICaliperParams;
 class ICaliperProcessor: virtual public iproc::IProcessor
 {
 public:
+	enum FeatureTypeId
+	{
+		/**
+			Unique ID of caliper fearutes.
+		*/
+		FTI_CALIPER_FEATURE = 6572
+	};
+
 	virtual bool DoCaliper(
 				const CProjectionData& projection,
 				const ICaliperParams* paramsPtr,

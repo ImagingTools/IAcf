@@ -17,6 +17,7 @@ namespace iipr
 
 template <class PixelConversion>
 bool FeaturesExtraction(
+			const iipr::IFeatureInfo* featureInfoPtr,
 			const iimg::IBitmap& bitmap,
 			bool isBackward,
 			bool isRisedEdgeSupported,
@@ -79,7 +80,7 @@ bool FeaturesExtraction(
 						double featureWeight = 2.0 * pixelIntensity / conversion.whiteIntensity - 1.0;
 						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
 
-						if (		!results.AddFeature(new CCaliperFeature(CCaliperFeature::EM_RISING, featureWeight, position), &isReady) ||
+						if (		!results.AddFeature(new CCaliperFeature(featureInfoPtr, featureWeight, position, CCaliperFeature::EM_RISING), &isReady) ||
 									isReady){
 							return isReady;
 						}
@@ -112,7 +113,7 @@ bool FeaturesExtraction(
 						double featureWeight = 1.0 - 2.0 * pixelIntensity / conversion.whiteIntensity;
 						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
 
-						if (		!results.AddFeature(new CCaliperFeature(CCaliperFeature::EM_FALLING, featureWeight, position), &isReady) ||
+						if (		!results.AddFeature(new CCaliperFeature(featureInfoPtr, featureWeight, position, CCaliperFeature::EM_FALLING), &isReady) ||
 									isReady){
 							return isReady;
 						}
@@ -151,6 +152,7 @@ bool CExtremumCaliperProcessor::DoExtremumCaliper(const CProjectionData& source,
 	iimg::CGrayGrayPixelConversion conversion;
 
 	return FeaturesExtraction(
+				this,
 				bitmap,
 				isBackward,
 				(polarityMode != ICaliperParams::PM_DROPPED),
@@ -204,6 +206,44 @@ int CExtremumCaliperProcessor::DoProcessing(
 	}
 
 	return DoExtremumCaliper(*projectionPtr, *caliperParamsPtr, *consumerPtr)? TS_OK: TS_INVALID;
+}
+
+
+// protected methods
+
+// reimplemented (iipr::IFeatureInfo)
+
+int CExtremumCaliperProcessor::GetFeatureTypeId() const
+{
+	return FTI_CALIPER_FEATURE;
+}
+
+
+const istd::CString& CExtremumCaliperProcessor::GetFeatureTypeDescription() const
+{
+	static istd::CString description("Feature extracted by caliper");
+
+	return description;
+}
+
+
+istd::CString CExtremumCaliperProcessor::GetFeatureDescription(const IFeature& feature) const
+{
+	const CCaliperFeature* caliperFeaturePtr = dynamic_cast<const CCaliperFeature*>(&feature);
+	if (caliperFeaturePtr != NULL){
+		imath::CVarVector position = caliperFeaturePtr->GetValue();
+		I_ASSERT(position.GetElementsCount() >= 1);
+
+		return		istd::CString("Position ") +
+					istd::CString::FromNumber(position[0] * 100) +
+					"%, weght " +
+					istd::CString::FromNumber(caliperFeaturePtr->GetWeight() * 100) +
+					"% " +
+					((caliperFeaturePtr->GetEdgeMode() == CCaliperFeature::EM_FALLING)? "-": "+");
+	}
+	else{
+		return "";
+	}
 }
 
 

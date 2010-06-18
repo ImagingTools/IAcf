@@ -71,7 +71,6 @@ public:
 	enum MessageId
 	{
 		MI_CANNOT_INIT = 0x2ef3310,
-		MI_BAD_PARAMS,
 		MI_CANNOT_SET,
 		MI_TIMEOUT,
 		MI_CANNOT_CONNECT,

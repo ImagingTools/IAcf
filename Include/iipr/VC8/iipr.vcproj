@@ -381,6 +381,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFeatureInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFeaturesConsumer.h"
 				>
 			</File>
@@ -394,6 +398,10 @@
 			</File>
 			<File
 				RelativePath="..\IFeaturesSupplier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IImageToFeatureProcessor.h"
 				>
 			</File>
 			<File

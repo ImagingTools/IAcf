@@ -1,30 +1,52 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1505
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          210
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="13">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
-        Bitmap
+        AoiParams
       </ComponentName>
       <X>
-        575
+        1050
       </X>
       <X>
-        387
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        BitmapLoader
+        AoiParamsGui
       </ComponentName>
       <X>
-        -225
+        150
       </X>
       <X>
-        -112
+        425
       </X>
     </Element>
     <Element>
@@ -32,32 +54,10 @@
         FileCamera
       </ComponentName>
       <X>
-        -12
+        625
       </X>
       <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileCameraParams
-      </ComponentName>
-      <X>
-        287
-      </X>
-      <X>
-        262
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileCameraParamsGui
-      </ComponentName>
-      <X>
-        -275
-      </X>
-      <X>
-        237
+        300
       </X>
     </Element>
     <Element>
@@ -65,21 +65,10 @@
         Framework
       </ComponentName>
       <X>
-        87
+        625
       </X>
       <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        562
-      </X>
-      <X>
-        262
+        125
       </X>
     </Element>
     <Element>
@@ -87,10 +76,10 @@
         Params
       </ComponentName>
       <X>
-        187
+        850
       </X>
       <X>
-        112
+        500
       </X>
     </Element>
     <Element>
@@ -98,21 +87,10 @@
         ParamsGuis
       </ComponentName>
       <X>
-        -137
+        375
       </X>
       <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SearchGui
-      </ComponentName>
-      <X>
-        -212
-      </X>
-      <X>
-        237
+        500
       </X>
     </Element>
     <Element>
@@ -120,10 +98,10 @@
         SearchParams
       </ComponentName>
       <X>
-        137
+        1050
       </X>
       <X>
-        262
+        575
       </X>
     </Element>
     <Element>
@@ -131,10 +109,10 @@
         SearchParamsGui
       </ComponentName>
       <X>
-        -50
+        150
       </X>
       <X>
-        237
+        575
       </X>
     </Element>
     <Element>
@@ -142,10 +120,10 @@
         SearchProcessor
       </ComponentName>
       <X>
-        250
+        950
       </X>
       <X>
-        -112
+        125
       </X>
     </Element>
   </PositionMap>

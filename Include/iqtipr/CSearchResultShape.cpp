@@ -43,14 +43,14 @@ void CSearchResultShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFla
 				angle = searchFeaturePtr->GetAngle();
 			}
 
-			double x = featurePtr->GetPosition()[0];
-			double y = featurePtr->GetPosition()[1];
+			imath::CVarVector position = featurePtr->GetValue();
+			if (position.GetElementsCount() >= 2){
+				CModelPointShape* itemPtr = new CModelPointShape(position[0], position[1], 25, 25, NULL, NULL, angle);
+				itemPtr->setPen(QPen(Qt::yellow));
+				addToGroup(itemPtr);
 
-			CModelPointShape* itemPtr = new CModelPointShape(x, y, 25, 25, NULL, NULL, angle);
-			itemPtr->setPen(QPen(Qt::yellow));
-			addToGroup(itemPtr);
-
-			m_items.PushBack(itemPtr);
+				m_items.PushBack(itemPtr);
+			}
 		}
 	}
 

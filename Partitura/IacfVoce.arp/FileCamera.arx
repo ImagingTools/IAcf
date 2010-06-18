@@ -204,7 +204,7 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              ImageDirParamId
             </ExportId>
             <Data>
               <IsEnabled>

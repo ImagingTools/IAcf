@@ -2,9 +2,11 @@
 #define iipr_CExtremumCaliperProcessor_included
 
 
+// ACF includes
 #include "iproc/TSyncProcessorWrap.h"
 
 #include "iipr/ICaliperProcessor.h"
+#include "iipr/IFeatureInfo.h"
 
 
 namespace iipr
@@ -15,7 +17,9 @@ namespace iipr
 	Calculate extremum of projection data (iipr::CProjectionData).
 	Using this tool together with derivative calculation it is possible to create caliper tool (extremums of first derivative).
 */
-class CExtremumCaliperProcessor: public iproc::TSyncProcessorWrap<ICaliperProcessor>
+class CExtremumCaliperProcessor:
+			public iproc::TSyncProcessorWrap<ICaliperProcessor>,
+			protected IFeatureInfo
 {
 public:
 	typedef iproc::TSyncProcessorWrap<ICaliperProcessor> BaseClass;
@@ -47,6 +51,12 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
+
+protected:
+	// reimplemented (iipr::IFeatureInfo)
+	virtual int GetFeatureTypeId() const;
+	virtual const istd::CString& GetFeatureTypeDescription() const;
+	virtual istd::CString GetFeatureDescription(const IFeature& feature) const;
 
 private:
 	std::string m_caliperParamsId;

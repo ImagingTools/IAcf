@@ -16,6 +16,31 @@ namespace imil
 
 // public methods
 
+// reimplemented (iipr::IImageToFeatureProcessor)
+
+int CMilSearchProcessorComp::DoExtractFeatures(
+			const iprm::IParamsSet* paramsPtr,
+			const iimg::IBitmap& image,
+			iipr::IFeaturesConsumer& results)
+{
+	if (		(paramsPtr == NULL) ||
+				!m_milParamsIdAttrPtr.IsValid()){
+		return TS_INVALID;
+	}
+
+	const CMilSearchParams* milParamsPtr = dynamic_cast<const CMilSearchParams*>(paramsPtr->GetParameter((*m_milParamsIdAttrPtr).ToString()));
+	if (milParamsPtr == NULL){
+		SendErrorMessage(MI_BAD_PARAMS, "Invalid parameter type");
+
+		return TS_INVALID;
+	}
+
+	const i2d::CRectangle* aoiPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter((*m_aoiParamIdAttrPtr).ToString()));
+
+	return DoModelSearch(*milParamsPtr, image, aoiPtr, results)? TS_OK: TS_INVALID;
+}
+
+
 // reimplemented (iproc::IProcessor)
 
 int CMilSearchProcessorComp::DoProcessing(
@@ -23,36 +48,30 @@ int CMilSearchProcessorComp::DoProcessing(
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr)
 {
+	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
+	if (inputBitmapPtr == NULL){
+		return TS_INVALID;
+	}
+
 	if (outputPtr == NULL){
 		return TS_OK;
 	}
 
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	iipr::IFeaturesConsumer* outputConsumerPtr = dynamic_cast<iipr::IFeaturesConsumer*>(outputPtr);
-
-	if (		(inputBitmapPtr == NULL) ||
-				(outputConsumerPtr == NULL) ||
-				(paramsPtr == NULL) ||
-				!m_paramsIdAttrPtr.IsValid()){
+	if (outputConsumerPtr == NULL){
 		return TS_INVALID;
 	}
 
-	const CMilSearchParams* milParamsPtr = dynamic_cast<const CMilSearchParams*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
-	if (milParamsPtr == NULL){
-		SendErrorMessage(0, "Invalid parameter type");
-
-		return TS_INVALID;
-	}
-
-	return DoSearch(*milParamsPtr, *inputBitmapPtr, *outputConsumerPtr)? TS_OK: TS_INVALID;
+	return DoExtractFeatures(paramsPtr, *inputBitmapPtr, *outputConsumerPtr);
 }
 
 
 // protected methods
 
-bool CMilSearchProcessorComp::DoSearch(
+bool CMilSearchProcessorComp::DoModelSearch(
 			const CMilSearchParams& params,
 			const iimg::IBitmap& bitmap,
+			const i2d::CRectangle* aoiPtr,
 			iipr::IFeaturesConsumer& result)
 {
 	iwin::CTimer timer;
@@ -64,16 +83,17 @@ bool CMilSearchProcessorComp::DoSearch(
 
 	const imil::CMilSearchModel& searchModel = params.GetModel(); 
 	if (!searchModel.IsValid()){
-		SendErrorMessage(0, "Invalid model or model type");
+		SendErrorMessage(MI_BAD_PARAMS, "Invalid model or model type");
 
 		return false;
 	}
 
-	i2d::CRectangle searchRegion = params.GetSearchRegion();
-	i2d::CRectangle bitmapRect = i2d::CRectangle(0, 0, bitmap.GetImageSize().GetX(), bitmap.GetImageSize().GetY());
-	searchRegion = bitmapRect.GetIntersection(searchRegion);
+	istd::CIndex2d imageSize = bitmap.GetImageSize();
+	i2d::CRectangle bitmapRect = i2d::CRectangle(0, 0, imageSize.GetX(), imageSize.GetY());
+
+	i2d::CRectangle searchRegion = (aoiPtr != NULL)? aoiPtr->GetIntersection(bitmapRect): bitmapRect;
 	if (searchRegion.IsEmpty()){
-		SendErrorMessage(0, "Search region is empty");
+		SendErrorMessage(MI_BAD_PARAMS, "Search region is empty");
 
 		return false;
 	}
@@ -144,7 +164,7 @@ bool CMilSearchProcessorComp::DoSearch(
 
 			angle = (fmod(1 + angle / 180.0, 2) - 1)  * I_PI;
 
-			consumerPtr->AddFeature(new iipr::CSearchFeature(position, scale, angle, score));
+			consumerPtr->AddFeature(new iipr::CSearchFeature(this, position, scale, angle, score));
 		}
 	}
 
@@ -155,6 +175,48 @@ bool CMilSearchProcessorComp::DoSearch(
 	MmodFree(milResult);
 
 	return true;
+}
+
+
+
+// reimplemented (iipr::IFeatureInfo)
+
+int CMilSearchProcessorComp::GetFeatureTypeId() const
+{
+	return FTI_MIL_SEARCH_FEATURE;
+}
+
+
+const istd::CString& CMilSearchProcessorComp::GetFeatureTypeDescription() const
+{
+	static istd::CString description("Found model position");
+
+	return description;
+}
+
+
+istd::CString CMilSearchProcessorComp::GetFeatureDescription(const iipr::IFeature& feature) const
+{
+	const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&feature);
+	if (searchFeaturePtr != NULL){
+		imath::CVarVector position = searchFeaturePtr->GetValue();
+		I_ASSERT(position.GetElementsCount() >= 2);
+
+		i2d::CVector2d scale = searchFeaturePtr->GetScale();
+
+		return		istd::CString("Position (") +
+					istd::CString::FromNumber(position[0]) + ", " + istd::CString::FromNumber(position[1] * 100) +
+					"), angle " +
+					istd::CString::FromNumber(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle())) +
+					"°, scale [" +
+					istd::CString::FromNumber(scale.GetX() * 100) + "%, " + istd::CString::FromNumber(scale.GetY() * 100) +
+					"%], weight " +
+					istd::CString::FromNumber(searchFeaturePtr->GetWeight() * 100) +
+					"%";
+	}
+	else{
+		return "";
+	}
 }
 
 

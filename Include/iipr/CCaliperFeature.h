@@ -21,22 +21,28 @@ public:
 		EM_RISING
 	};
 
-	CCaliperFeature(int edgeMode, double weight, double position);
+	CCaliperFeature(
+				const IFeatureInfo* infoPtr,
+				double weight,
+				double position,
+				int edgeMode);
 
-	virtual int GetEdgeMode() const;
+	int GetEdgeMode() const;
 
 	// reimplemented (iipr::IFeature)
+	virtual const IFeatureInfo* GetFeatureInfo() const;
 	virtual double GetWeight() const;
-	virtual imath::CVarVector GetPosition() const;
-	virtual istd::CString GetDescription() const;
+	virtual imath::CVarVector GetValue() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	int m_edgeMode;
+	const IFeatureInfo* m_infoPtr;
+
 	double m_weight;
-	imath::CVarVector m_position;
+	imath::CVarVector m_value;
+	int m_edgeMode;
 };
 
 

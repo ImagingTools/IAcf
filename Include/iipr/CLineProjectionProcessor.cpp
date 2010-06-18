@@ -165,7 +165,7 @@ imath::CVarVector CLineProjectionProcessor::GetImagePosition(
 			const IFeature& feature,
 			const iprm::IParamsSet* paramsPtr) const
 {
-	const imath::CVarVector& projectionPosition = feature.GetPosition();
+	const imath::CVarVector& projectionPosition = feature.GetValue();
 
 	if ((projectionPosition.GetElementsCount() >= 1) && (paramsPtr != NULL) && !m_lineParamId.empty()){
 		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(m_lineParamId));

@@ -13,7 +13,9 @@ namespace iipr
 {
 
 
-class CExtremumCaliperProcessorComp: public icomp::CComponentBase, public CExtremumCaliperProcessor
+class CExtremumCaliperProcessorComp:
+			public icomp::CComponentBase,
+			public CExtremumCaliperProcessor
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

@@ -11,8 +11,14 @@ namespace iipr
 
 // public methods
 
-CSearchFeature::CSearchFeature(const i2d::CVector2d& position, const i2d::CVector2d& scale, double angle, double score)
-:	m_position(position),
+CSearchFeature::CSearchFeature(
+			const IFeatureInfo* infoPtr,
+			const i2d::CVector2d& position,
+			const i2d::CVector2d& scale,
+			double angle,
+			double score)
+:	m_infoPtr(infoPtr),
+	m_value(position),
 	m_scale(scale),
 	m_angle(angle),
 	m_score(score)
@@ -34,21 +40,21 @@ i2d::CVector2d CSearchFeature::GetScale() const
 
 // reimplemented (iipr::IFeature)
 
+const IFeatureInfo* CSearchFeature::GetFeatureInfo() const
+{
+	return m_infoPtr;
+}
+
+
 double CSearchFeature::GetWeight() const
 {
 	return m_score;
 }
 
 
-imath::CVarVector CSearchFeature::GetPosition() const
+imath::CVarVector CSearchFeature::GetValue() const
 {
-	return m_position;
-}
-
-
-istd::CString CSearchFeature::GetDescription() const
-{
-	return "";
+	return m_value;
 }
 
 
@@ -63,10 +69,10 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_score);
 	retVal = retVal && archive.EndTag(scoreTag);
 
-	static iser::CArchiveTag positionTag("Position", "Position of found model");
-	retVal = retVal && archive.BeginTag(positionTag);
-	retVal = retVal && m_position.Serialize(archive);
-	retVal = retVal && archive.EndTag(positionTag);
+	static iser::CArchiveTag valueTag("Position", "Position of found model");
+	retVal = retVal && archive.BeginTag(valueTag);
+	retVal = retVal && m_value.Serialize(archive);
+	retVal = retVal && archive.EndTag(valueTag);
 
 	static iser::CArchiveTag angleTag("Angle", "Angle of found model");
 	retVal = retVal && archive.BeginTag(angleTag);

@@ -2,13 +2,13 @@
 #define imil_CMilSearchProcessorComp_included
 
 
-#include "ibase/TLoggerCompWrap.h"
-
-#include "iipr/IFeaturesConsumer.h"
-
+// ACF includes
+#include "iimg/IBitmap.h"
 #include "iproc/TSyncProcessorCompBase.h"
 
-#include "iimg/IBitmap.h"
+#include "iipr/IFeaturesConsumer.h"
+#include "iipr/IFeatureInfo.h"
+#include "iipr/IImageToFeatureProcessor.h"
 
 #include "imil/CMilSearchParams.h"
 #include "imil/CMilSearchModel.h"
@@ -19,14 +19,31 @@ namespace imil
 {
 
 
-class CMilSearchProcessorComp: public ibase::TLoggerCompWrap<iproc::CSyncProcessorCompBase>
+class CMilSearchProcessorComp:
+			public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>,
+			protected iipr::IFeatureInfo
 {
 public:
-	typedef ibase::TLoggerCompWrap<iproc::CSyncProcessorCompBase> BaseClass;
+	typedef iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor> BaseClass;
+
+	enum FeatureTypeId
+	{
+		/**
+			Unique ID of caliper fearutes.
+		*/
+		FTI_MIL_SEARCH_FEATURE = 73731
+	};
 
 	I_BEGIN_COMPONENT(CMilSearchProcessorComp)
-		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
+		I_ASSIGN(m_milParamsIdAttrPtr, "MilParamsId", "ID of MIL-specific parameters", true, "MilParamsId");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamsId", "ID of rectangle area of interest", true, "AoiParamsId");
 	I_END_COMPONENT
+
+	// reimplemented (iipr::IImageToFeatureProcessor)
+	virtual int DoExtractFeatures(
+				const iprm::IParamsSet* paramsPtr,
+				const iimg::IBitmap& image,
+				iipr::IFeaturesConsumer& results);
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
@@ -35,15 +52,22 @@ public:
 				istd::IChangeable* outputPtr);
 
 protected:
-	virtual bool DoSearch(
+	virtual bool DoModelSearch(
 				const CMilSearchParams& params,
 				const iimg::IBitmap& bitmap,
+				const i2d::CRectangle* aoiPtr,
 				iipr::IFeaturesConsumer& result);
+
+	// reimplemented (iipr::IFeatureInfo)
+	virtual int GetFeatureTypeId() const;
+	virtual const istd::CString& GetFeatureTypeDescription() const;
+	virtual istd::CString GetFeatureDescription(const iipr::IFeature& feature) const;
 
 private:
 	imil::CMilEngine m_engine;
 
-	I_ATTR(istd::CString, m_paramsIdAttrPtr);
+	I_ATTR(istd::CString, m_milParamsIdAttrPtr);
+	I_ATTR(istd::CString, m_aoiParamIdAttrPtr);
 };
 
 
