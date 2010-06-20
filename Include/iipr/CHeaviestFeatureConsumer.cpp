@@ -37,6 +37,20 @@ bool CHeaviestFeatureConsumer::AddFeature(const IFeature* featurePtr, bool* isFu
 }
 
 
+// reimplemented (iipr::IFeaturesContainer)
+
+IFeaturesContainer::Features CHeaviestFeatureConsumer::GetFeatures() const
+{
+	Features retVal;
+
+	if (m_featurePtr.IsValid()){
+		retVal.push_back(m_featurePtr.GetPtr());
+	}
+
+	return retVal;
+}
+
+
 } // namespace iipr
 
 

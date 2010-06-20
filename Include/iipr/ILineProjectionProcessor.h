@@ -8,7 +8,7 @@
 
 #include "iimg/IBitmap.h"
 
-#include "iipr/CProjectionData.h"
+#include "imeas/IDataSequence.h"
 
 
 namespace iipr
@@ -28,7 +28,7 @@ public:
 				const iimg::IBitmap& bitmap,
 				const i2d::CLine2d& projectionLine,
 				const IProjectionParams* paramsPtr,
-				CProjectionData& results) = 0;
+				imeas::IDataSequence& results) = 0;
 };
 
 

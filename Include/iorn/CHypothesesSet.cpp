@@ -22,11 +22,6 @@ CHypothesesSet::CHypothesesSet(const imeas::IDataSequence* hypothesisPtr, double
 	Element element = {weight, hypothesisPtr, isOwned};
 
 	m_elements.push_back(element);
-
-	istd::TRetSmartPtr<imeas::IDataSequenceInfo> infoPtr = hypothesisPtr->GetSequenceInfo();
-	const CHypothesisInfo* hypothesisInfoPtr = infoPtr.Cast<const CHypothesisInfo*>();
-
-	m_infoPtr.SetCastedOrRemove(hypothesisInfoPtr->CloneMe());
 }
 
 

@@ -18,29 +18,26 @@ class CSearchFeature: virtual public iipr::IFeature
 {
 public:
 	CSearchFeature(
-				const IFeatureInfo* infoPtr,
+				double weight,
 				const i2d::CVector2d& position,
-				const i2d::CVector2d& scale,
-				double angle, double score);
+				double angle,
+				const i2d::CVector2d& scale);
 
-	virtual double GetAngle() const;
-	virtual i2d::CVector2d GetScale() const;
+	const i2d::CVector2d& GetPosition() const;
+	double GetAngle() const;
+	const i2d::CVector2d& GetScale() const;
 
 	// reimplemented (iipr::IFeature)
-	virtual const IFeatureInfo* GetFeatureInfo() const;
 	virtual double GetWeight() const;
-	virtual imath::CVarVector GetValue() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	const IFeatureInfo* m_infoPtr;
-
-	i2d::CVector2d m_value;
-	i2d::CVector2d m_scale;
+	double m_weight;
+	i2d::CVector2d m_position;
 	double m_angle;
-	double m_score;
+	i2d::CVector2d m_scale;
 };
 
 

@@ -12,7 +12,6 @@
 
 // ACF-Solutions incldues
 #include "imeas/IDataSequence.h"
-#include "imeas/IDataSequenceInfo.h"
 
 #include "iorn/CHypothesisInfo.h"
 

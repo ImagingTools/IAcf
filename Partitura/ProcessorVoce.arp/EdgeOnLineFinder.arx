@@ -32,10 +32,10 @@
         Buffer1
       </Id>
       <PackageId>
-        IprPck
+        MeasPck
       </PackageId>
       <ComponentId>
-        ProjectionData
+        GeneralDataSequence
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -53,10 +53,10 @@
         Buffer2
       </Id>
       <PackageId>
-        IprPck
+        MeasPck
       </PackageId>
       <ComponentId>
-        ProjectionData
+        GeneralDataSequence
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -232,7 +232,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              FeatureMapper
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Caliper
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               LineParamId
@@ -256,7 +275,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        iipr::IFeaturesMapper
+        iipr::IFeatureToImageMapper
       </InterfaceId>
       <ComponentId>
         LineProjection

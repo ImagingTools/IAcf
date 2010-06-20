@@ -2,9 +2,11 @@
 #define iipr_CRectDerivativeProcessor_included
 
 
+// ACF includes
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "iipr/CProjectionData.h"
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
 
 
 namespace iipr
@@ -20,7 +22,7 @@ public:
 	/**
 		Do extremum features analyze.
 	*/
-	virtual bool DoDerivativeProcessing(const CProjectionData& source, double filterLength, CProjectionData& results);
+	virtual bool DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results);
 
 	/**
 		Get parameter ID used to extract caliper parameter object from parameter set.
@@ -38,9 +40,6 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
-
-protected:
-	bool DoBitmapProcessing(const iimg::IBitmap& sourceBitmap, double filterLength, iimg::IBitmap& resultBitmap);
 
 private:
 	std::string m_filterParamsId;

@@ -2,9 +2,13 @@
 #define iipr_ILineProjectionSupplier_included
 
 
+// ACF includes
 #include "iproc/ISupplier.h"
 
-#include "iipr/CProjectionData.h"
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
+
+#include "iipr/iipr.h"
 
 
 namespace iipr
@@ -20,7 +24,7 @@ public:
 	/**
 		Get access to produced line projection object.
 	*/
-	virtual const iipr::CProjectionData* GetLineProjection() const = 0;
+	virtual const imeas::IDataSequence* GetLineProjection() const = 0;
 };
 
 

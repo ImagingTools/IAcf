@@ -10,24 +10,78 @@ namespace iipr
 {
 
 
-bool CRectDerivativeProcessor::DoDerivativeProcessing(const CProjectionData& source, double filterLength, CProjectionData& results)
+bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results)
 {
-	const iimg::IBitmap& sourceBitmap = source.GetProjectionImage();
-
-	istd::CIndex2d sourceBitmapSize = sourceBitmap.GetImageSize();
+	int samplesCount = source.GetSamplesCount();
+	int channelsCount = source.GetChannelsCount();
+	if ((samplesCount < 2) || (channelsCount < 1)){
+		return false;
+	}
 
 	istd::CChangeNotifier notifier(&results);
 
-	const istd::CRange& sourceProportionRange = source.GetProportionRangeX();
-	double proportionXAlpha = 0.5 / sourceBitmapSize.GetX();
-	results.SetProportionRangeX(istd::CRange(
+	const istd::CRange& sourceProportionRange = source.GetLogicalSamplesRange();
+	double proportionXAlpha = 0.5 / samplesCount;
+	results.SetLogicalSamplesRange(istd::CRange(
 				sourceProportionRange.GetValueFromAlpha(proportionXAlpha),
 				sourceProportionRange.GetValueFromAlpha(1.0 - proportionXAlpha)));
-	results.SetProportionRangeY(source.GetProportionRangeY());
 
-	iimg::IBitmap& resultBitmap = results.GetProjectionImage();
+	double halfRealLength = istd::Max(1.0, filterLength * 0.5);
 
-	return DoBitmapProcessing(sourceBitmap, sourceProportionRange.GetLength() * filterLength, resultBitmap);
+	int sumOffset = int(halfRealLength);
+	double sumLastAlpha = halfRealLength - sumOffset;
+
+	int projectionWidth = samplesCount - 1;
+
+	if (!results.CreateSequence(projectionWidth, channelsCount)){
+		return false;
+	}
+
+	if (projectionWidth > 0){
+		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+			double leftSum = 0.0;
+			double leftWeight = 0.0;
+			double rightSum = source.GetSample(0, channelIndex) * sumLastAlpha;
+			double rightWeight = sumLastAlpha;
+			for (int x = -sumOffset; x < projectionWidth; ++x){
+				if (x <= projectionWidth - sumOffset){
+					if (x < projectionWidth - sumOffset){
+						rightSum +=	source.GetSample(x + sumOffset + 1, channelIndex) * sumLastAlpha +
+									source.GetSample(x + sumOffset, channelIndex) * (1 - sumLastAlpha);
+						rightWeight += 1;
+					}
+					else{
+						rightSum += source.GetSample(x + sumOffset, channelIndex) * (1 - sumLastAlpha);
+						rightWeight += (1 - sumLastAlpha);
+					}
+				}
+
+				if (x >= 0){
+					leftSum += source.GetSample(x, channelIndex);
+					if (x >= sumOffset){
+						leftSum -= source.GetSample(x - sumOffset, channelIndex) * (1 - sumLastAlpha);
+
+						if (x > sumOffset){
+							leftSum -= source.GetSample(x - sumOffset - 1, channelIndex) * sumLastAlpha;
+						}
+						else{
+							leftWeight += sumLastAlpha;
+						}
+					}
+					else{
+						leftWeight += 1;
+					}
+
+					rightSum -= source.GetSample(x, channelIndex);
+					rightWeight -= 1;
+
+					results.SetSample(x, channelIndex, rightSum / rightWeight - leftSum / leftWeight);
+				}
+			}
+		}
+	}
+
+	return true;
 }
 
 
@@ -38,8 +92,8 @@ int CRectDerivativeProcessor::DoProcessing(
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr)
 {
-	const CProjectionData* inputProjectionPtr = dynamic_cast<const CProjectionData*>(inputPtr);
-	CProjectionData* outputProjectionPtr = dynamic_cast<CProjectionData*>(outputPtr);
+	const imeas::IDataSequence* inputProjectionPtr = dynamic_cast<const imeas::IDataSequence*>(inputPtr);
+	imeas::IDataSequence* outputProjectionPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 
 	double filterLength = 5.0;
 	if (paramsPtr != NULL){
@@ -53,114 +107,9 @@ int CRectDerivativeProcessor::DoProcessing(
 		}
 	}
 
-	if (		(inputProjectionPtr == NULL) ||
-				(outputProjectionPtr == NULL)){
-		const iimg::IBitmap* sourceBitmapPtr = (inputProjectionPtr != NULL)?
-					&inputProjectionPtr->GetProjectionImage():
-					dynamic_cast<const iimg::IBitmap*>(inputPtr);
-		iimg::IBitmap* resultBitmapPtr = (outputProjectionPtr != NULL)?
-					&outputProjectionPtr->GetProjectionImage():
-					dynamic_cast<iimg::IBitmap*>(outputPtr);
-
-		if (		(sourceBitmapPtr == NULL) ||
-					(resultBitmapPtr == NULL)){
-			return TS_INVALID;
-		}
-
-		return DoBitmapProcessing(*sourceBitmapPtr, filterLength, *resultBitmapPtr)?
-					TS_OK:
-					TS_INVALID;
-	}
-
 	return DoDerivativeProcessing(*inputProjectionPtr, filterLength, *outputProjectionPtr)?
 				TS_OK:
 				TS_INVALID;
-}
-
-
-// protected methods
-
-bool CRectDerivativeProcessor::DoBitmapProcessing(
-			const iimg::IBitmap& sourceBitmap,
-			double filterLength,
-			iimg::IBitmap& resultBitmap)
-{
-	if (sourceBitmap.GetComponentBitsCount() != 8){
-		return false;
-	}
-
-	double halfRealLength = istd::Max(1.0, filterLength * 0.5);
-
-	int sumOffset = int(halfRealLength);
-	double sumLastAlpha = halfRealLength - sumOffset;
-
-	istd::CIndex2d sourceBitmapSize = sourceBitmap.GetImageSize();
-
-	int projectionWidth = sourceBitmapSize.GetX() - 1;
-
-	istd::CChangeNotifier notifier(&resultBitmap);
-
-	if (!resultBitmap.CreateBitmap(istd::CIndex2d(projectionWidth, sourceBitmapSize.GetY()), 8, 1)){
-		return false;
-	}
-
-	if (projectionWidth > 0){
-		for (int y = 0; y < sourceBitmapSize.GetY(); ++y){
-			const I_BYTE* sourceLinePtr = (const I_BYTE*)sourceBitmap.GetLinePtr(y);
-			I_ASSERT(sourceLinePtr != NULL);
-			I_BYTE* destLinePtr = (I_BYTE*)resultBitmap.GetLinePtr(y);
-			I_ASSERT(destLinePtr != NULL);
-
-			double leftSum = 0.0;
-			double leftWeight = 0.0;
-			double rightSum = sourceLinePtr[0] * sumLastAlpha;
-			double rightWeight = sumLastAlpha;
-			for (int x = -sumOffset; x < projectionWidth; ++x){
-				if (x <= projectionWidth - sumOffset){
-					if (x < projectionWidth - sumOffset){
-						rightSum += sourceLinePtr[x + sumOffset + 1] * sumLastAlpha + sourceLinePtr[x + sumOffset] * (1 - sumLastAlpha);
-						rightWeight += 1;
-					}
-					else{
-						rightSum += sourceLinePtr[x + sumOffset] * (1 - sumLastAlpha);
-						rightWeight += (1 - sumLastAlpha);
-					}
-				}
-
-				if (x >= 0){
-					leftSum += sourceLinePtr[x];
-					if (x >= sumOffset){
-						leftSum -= sourceLinePtr[x - sumOffset] * (1 - sumLastAlpha);
-
-						if (x > sumOffset){
-							leftSum -= sourceLinePtr[x - sumOffset - 1] * sumLastAlpha;
-						}
-						else{
-							leftWeight += sumLastAlpha;
-						}
-					}
-					else{
-						leftWeight += 1;
-					}
-
-					rightSum -= sourceLinePtr[x];
-					rightWeight -= 1;
-
-					int pixelValue = int(128 + (rightSum / rightWeight - leftSum / leftWeight));
-					if (pixelValue < 0){
-						pixelValue = 0;
-					}
-					else if (pixelValue > 255){
-						pixelValue = 255;
-					}
-
-					destLinePtr[x] = I_BYTE(pixelValue);
-				}
-			}
-		}
-	}
-
-	return true;
 }
 
 

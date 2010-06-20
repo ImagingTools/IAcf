@@ -164,7 +164,7 @@ bool CMilSearchProcessorComp::DoModelSearch(
 
 			angle = (fmod(1 + angle / 180.0, 2) - 1)  * I_PI;
 
-			consumerPtr->AddFeature(new iipr::CSearchFeature(this, position, scale, angle, score));
+			consumerPtr->AddFeature(new iipr::CSearchFeature(score, position, angle, scale));
 		}
 	}
 
@@ -175,48 +175,6 @@ bool CMilSearchProcessorComp::DoModelSearch(
 	MmodFree(milResult);
 
 	return true;
-}
-
-
-
-// reimplemented (iipr::IFeatureInfo)
-
-int CMilSearchProcessorComp::GetFeatureTypeId() const
-{
-	return FTI_MIL_SEARCH_FEATURE;
-}
-
-
-const istd::CString& CMilSearchProcessorComp::GetFeatureTypeDescription() const
-{
-	static istd::CString description("Found model position");
-
-	return description;
-}
-
-
-istd::CString CMilSearchProcessorComp::GetFeatureDescription(const iipr::IFeature& feature) const
-{
-	const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&feature);
-	if (searchFeaturePtr != NULL){
-		imath::CVarVector position = searchFeaturePtr->GetValue();
-		I_ASSERT(position.GetElementsCount() >= 2);
-
-		i2d::CVector2d scale = searchFeaturePtr->GetScale();
-
-		return		istd::CString("Position (") +
-					istd::CString::FromNumber(position[0]) + ", " + istd::CString::FromNumber(position[1] * 100) +
-					"), angle " +
-					istd::CString::FromNumber(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle())) +
-					"°, scale [" +
-					istd::CString::FromNumber(scale.GetX() * 100) + "%, " + istd::CString::FromNumber(scale.GetY() * 100) +
-					"%], weight " +
-					istd::CString::FromNumber(searchFeaturePtr->GetWeight() * 100) +
-					"%";
-	}
-	else{
-		return "";
-	}
 }
 
 

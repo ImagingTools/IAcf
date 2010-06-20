@@ -49,7 +49,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -126,7 +126,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				BasicRuntimeChecks="3"
@@ -196,11 +196,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessor.cpp"
+				RelativePath="..\CExtremumCaliperProcessorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessorComp.cpp"
+				RelativePath="..\CFeaturesContainer.cpp"
 				>
 			</File>
 			<File
@@ -209,14 +209,6 @@
 			</File>
 			<File
 				RelativePath="..\CHeaviestFeatureConsumer.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CImageProjection.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLineProjectionProcessor.cpp"
 				>
 			</File>
 			<File
@@ -245,10 +237,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CProjectionData.cpp"
 				>
 			</File>
 			<File
@@ -293,11 +281,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessor.h"
+				RelativePath="..\CExtremumCaliperProcessorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessorComp.h"
+				RelativePath="..\CFeaturesContainer.h"
 				>
 			</File>
 			<File
@@ -306,14 +294,6 @@
 			</File>
 			<File
 				RelativePath="..\CHeaviestFeatureConsumer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CImageProjection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLineProjectionProcessor.h"
 				>
 			</File>
 			<File
@@ -342,10 +322,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProjectionData.h"
 				>
 			</File>
 			<File
@@ -381,10 +357,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFeatureInfo.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IFeaturesConsumer.h"
 				>
 			</File>
@@ -393,11 +365,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFeaturesMapper.h"
+				RelativePath="..\IFeaturesSupplier.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IFeaturesSupplier.h"
+				RelativePath="..\IFeatureToImageMapper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IFeatureToProjectionMapper.h"
 				>
 			</File>
 			<File
@@ -441,11 +417,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TConvolutionProcessorComp.h"
+				RelativePath="..\IValueSupplier.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TFeaturesContainerWrap.h"
+				RelativePath="..\TConvolutionProcessorComp.h"
 				>
 			</File>
 			<File

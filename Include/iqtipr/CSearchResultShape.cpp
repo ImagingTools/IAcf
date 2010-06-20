@@ -1,6 +1,7 @@
 #include "iqtipr/CSearchResultShape.h"
 
 
+// Qt includes
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 
@@ -34,18 +35,17 @@ void CSearchResultShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFla
 		for (int featureIndex = 0; featureIndex < int(features.size()); featureIndex++){
 			const iipr::IFeature* featurePtr = features[featureIndex];
 			I_ASSERT(featurePtr != NULL);
-			I_ASSERT(featurePtr->GetPosition().GetElementsCount() == 2);
 
 			double angle = 0;
 
 			const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(featurePtr);
 			if (searchFeaturePtr != NULL){
 				angle = searchFeaturePtr->GetAngle();
-			}
 
-			imath::CVarVector position = featurePtr->GetValue();
-			if (position.GetElementsCount() >= 2){
-				CModelPointShape* itemPtr = new CModelPointShape(position[0], position[1], 25, 25, NULL, NULL, angle);
+				CModelPointShape* itemPtr = new CModelPointShape(
+							searchFeaturePtr->GetPosition(),
+							i2d::CVector2d(25, 25),
+							NULL, NULL, angle);
 				itemPtr->setPen(QPen(Qt::yellow));
 				addToGroup(itemPtr);
 
@@ -60,8 +60,13 @@ void CSearchResultShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFla
 
 // public methods
 
-CSearchResultShape::CModelPointShape::CModelPointShape(double x, double y, double w, double h, QGraphicsItem* parentPtr, QGraphicsScene* scenePtr, double angle)
-	:BaseClass(x, y, w, h, parentPtr, scenePtr),
+CSearchResultShape::CModelPointShape::CModelPointShape(
+			const i2d::CVector2d& position,
+			const i2d::CVector2d& size,
+			QGraphicsItem* parentPtr,
+			QGraphicsScene* scenePtr,
+			double angle)
+:	BaseClass(position.GetX(), position.GetY(), size.GetX(), size.GetY(), parentPtr, scenePtr),
 	m_angle(angle)
 {
 }

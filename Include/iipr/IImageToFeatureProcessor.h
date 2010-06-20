@@ -5,7 +5,6 @@
 #include "iproc/IProcessor.h"
 
 #include "iipr/IFeaturesConsumer.h"
-#include "iipr/CProjectionData.h"
 
 
 namespace iipr

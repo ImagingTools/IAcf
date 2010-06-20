@@ -7,7 +7,6 @@
 #include "iproc/TSyncProcessorCompBase.h"
 
 #include "iipr/IFeaturesConsumer.h"
-#include "iipr/IFeatureInfo.h"
 #include "iipr/IImageToFeatureProcessor.h"
 
 #include "imil/CMilSearchParams.h"
@@ -20,8 +19,7 @@ namespace imil
 
 
 class CMilSearchProcessorComp:
-			public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>,
-			protected iipr::IFeatureInfo
+			public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>
 {
 public:
 	typedef iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor> BaseClass;
@@ -57,11 +55,6 @@ protected:
 				const iimg::IBitmap& bitmap,
 				const i2d::CRectangle* aoiPtr,
 				iipr::IFeaturesConsumer& result);
-
-	// reimplemented (iipr::IFeatureInfo)
-	virtual int GetFeatureTypeId() const;
-	virtual const istd::CString& GetFeatureTypeDescription() const;
-	virtual istd::CString GetFeatureDescription(const iipr::IFeature& feature) const;
 
 private:
 	imil::CMilEngine m_engine;

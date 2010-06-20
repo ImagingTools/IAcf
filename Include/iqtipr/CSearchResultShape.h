@@ -2,12 +2,13 @@
 #define iqtipr_CSearchResultShape_included
 
 
+// Qt includes
 #include <QGraphicsItemGroup>
 
-
+// ACF includes
 #include "istd/TPointerVector.h"
-
 #include "imod/TSingleModelObserverBase.h"
+#include "i2d/CVector2d.h"
 
 #include "iipr/IFeaturesContainer.h"
 
@@ -31,7 +32,12 @@ private:
 	public:
 		typedef QGraphicsEllipseItem BaseClass;
 
-		CModelPointShape(double x, double y, double w, double h, QGraphicsItem* parentPtr = NULL, QGraphicsScene* scenePtr = NULL, double angle = 0);
+		CModelPointShape(
+					const i2d::CVector2d& position,
+					const i2d::CVector2d& size,
+					QGraphicsItem* parentPtr = NULL,
+					QGraphicsScene* scenePtr = NULL,
+					double angle = 0);
 	
 	protected:
 		// reimplemented (QGraphicsRectItem)

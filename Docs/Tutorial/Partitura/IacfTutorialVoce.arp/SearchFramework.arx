@@ -355,8 +355,8 @@
         IprPck
       </PackageId>
       <ComponentId>
-        SearchResults
-      </ComponentId>
+				FeaturesContainer
+			</ComponentId>
       <Data>
         <IsEnabled>
           true

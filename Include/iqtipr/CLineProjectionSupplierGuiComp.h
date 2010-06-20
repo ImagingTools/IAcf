@@ -7,17 +7,15 @@
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
 #include "i2d/CPosition2d.h"
+#include "iproc/IValueSupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "iqtproc/TSupplierGuiCompBase.h"
 
-
-// IACF includes
-#include "iproc/IValueSupplier.h"
+// ACF-SOlutions includes
+#include "imeas/CGeneralDataSequence.h"
 
 #include "iipr/ILineProjectionSupplier.h"
-#include "iipr/CProjectionData.h"
-
-#include "iqtproc/TSupplierGuiCompBase.h"
 
 #include "iqtipr/iqtipr.h"
 
@@ -68,7 +66,7 @@ protected:
 	virtual void OnGuiDestroyed();
 
 private:
-	imod::TModelWrap<iipr::CProjectionData> m_projectionData;
+	imod::TModelWrap<imeas::CGeneralDataSequence> m_projectionData;
 
 	I_REF(imod::IObserver, m_projectionObserverCompPtr);
 	I_REF(iqtgui::IGuiObject, m_projectionObserverGuiCompPtr);

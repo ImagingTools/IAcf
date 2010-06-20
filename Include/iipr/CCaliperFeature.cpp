@@ -10,15 +10,19 @@ namespace iipr
 
 
 CCaliperFeature::CCaliperFeature(
-			const IFeatureInfo* infoPtr,
 			double weight,
 			double position,
 			int edgeMode)
-:	m_infoPtr(infoPtr),
-	m_weight(weight),
-	m_value(1, position),
+:	m_weight(weight),
+	m_position(position),
 	m_edgeMode(edgeMode)
 {
+}
+
+
+double CCaliperFeature::GetPosition() const
+{
+	return m_position;
 }
 
 
@@ -30,21 +34,9 @@ int CCaliperFeature::GetEdgeMode() const
 
 // reimplemented (iipr::IFeature)
 
-const IFeatureInfo* CCaliperFeature::GetFeatureInfo() const
-{
-	return m_infoPtr;
-}
-
-
 double CCaliperFeature::GetWeight() const
 {
 	return m_weight;
-}
-
-
-imath::CVarVector CCaliperFeature::GetValue() const
-{
-	return m_value;
 }
 
 
@@ -59,10 +51,15 @@ bool CCaliperFeature::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_weight);
 	retVal = retVal && archive.EndTag(weightTag);
 
-	static iser::CArchiveTag valueTag("Value", "Position of caliper feature");
+	static iser::CArchiveTag valueTag("Position", "Position on projection");
 	retVal = retVal && archive.BeginTag(valueTag);
-	retVal = retVal && archive.Process(m_value[0]);
+	retVal = retVal && archive.Process(m_position);
 	retVal = retVal && archive.EndTag(valueTag);
+
+	static iser::CArchiveTag edgeModeTag("EdgeMode", "Edge mode");
+	retVal = retVal && archive.BeginTag(edgeModeTag);
+	retVal = retVal && archive.Process(m_edgeMode);
+	retVal = retVal && archive.EndTag(edgeModeTag);
 
 	return retVal;
 }

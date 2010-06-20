@@ -12,7 +12,7 @@ namespace iipr
 
 imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(int /*index*/, int /*valueTypeId*/) const
 {
-	const imath::CVarVector* productPtr = GetWorkProduct();
+	const i2d::CVector2d* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return *productPtr;
 	}
@@ -26,7 +26,7 @@ imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(int /*index*/, int
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CCaliperBasedPositionSupplierComp::ProduceObject(imath::CVarVector& result) const
+int CCaliperBasedPositionSupplierComp::ProduceObject(i2d::CVector2d& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_featuresMapperCompPtr.IsValid() &&
@@ -50,10 +50,10 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(imath::CVarVector& result) 
 				return WS_ERROR;
 			}
 
-			result = m_featuresMapperCompPtr->GetImagePosition(
+			if (m_featuresMapperCompPtr->GetImagePosition(
 						*featurePtr,
-						paramsSetPtr);
-			if (result.GetElementsCount() >= 2){
+						paramsSetPtr,
+						result)){
 				return WS_OK;
 			}
 		}

@@ -4,7 +4,7 @@
 
 #include "istd/TDelPtr.h"
 
-#include "iipr/IFeaturesConsumer.h"
+#include "iipr/IFeaturesContainer.h"
 
 
 namespace iipr
@@ -14,7 +14,7 @@ namespace iipr
 /**
 	Feature consumer implmentation storing the heaviest feature only.
 */
-class CHeaviestFeatureConsumer: virtual public IFeaturesConsumer
+class CHeaviestFeatureConsumer: virtual public IFeaturesContainer
 {
 public:
 	const IFeature* GetFeature() const;
@@ -22,6 +22,9 @@ public:
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
 	virtual bool AddFeature(const IFeature* featurePtr, bool* isFullPtr = NULL);
+
+	// reimplemented (iipr::IFeaturesContainer)
+	virtual Features GetFeatures() const;
 
 private:
 	istd::TDelPtr<const IFeature> m_featurePtr;

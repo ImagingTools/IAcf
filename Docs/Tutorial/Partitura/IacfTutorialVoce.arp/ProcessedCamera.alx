@@ -1,74 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1248
+          1505
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          210
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="32">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
         AverageFilter
       </ComponentName>
       <X>
-        137
+        925
       </X>
       <X>
-        462
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AverageParams
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        -37
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AverageParamsGui
-      </ComponentName>
-      <X>
-        312
-      </X>
-      <X>
-        237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AverageProcessor
-      </ComponentName>
-      <X>
-        -300
-      </X>
-      <X>
-        512
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapLoader
-      </ComponentName>
-      <X>
-        -225
-      </X>
-      <X>
-        337
+        200
       </X>
     </Element>
     <Element>
@@ -76,120 +43,10 @@
         BufferBitmap
       </ComponentName>
       <X>
-        -136
+        125
       </X>
       <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DeriavativeFilter
-      </ComponentName>
-      <X>
-        487
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DerivativeFilter
-      </ComponentName>
-      <X>
-        512
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DifferenceProcessor
-      </ComponentName>
-      <X>
-        300
-      </X>
-      <X>
-        387
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DofferenceProcessorParams
-      </ComponentName>
-      <X>
-        -37
-      </X>
-      <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileAcquisition
-      </ComponentName>
-      <X>
-        50
-      </X>
-      <X>
-        237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParam
-      </ComponentName>
-      <X>
-        -112
-      </X>
-      <X>
-        -12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParamGui
-      </ComponentName>
-      <X>
-        300
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilterParams
-      </ComponentName>
-      <X>
-        -175
-      </X>
-      <X>
-        -137
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilterParamsGui
-      </ComponentName>
-      <X>
-        312
-      </X>
-      <X>
-        237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Framework
-      </ComponentName>
-      <X>
-        -225
-      </X>
-      <X>
-        87
+        275
       </X>
     </Element>
     <Element>
@@ -197,21 +54,10 @@
         GaussianFilter
       </ComponentName>
       <X>
-        575
+        725
       </X>
       <X>
-        462
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GeneralBitmap
-      </ComponentName>
-      <X>
-        -151
-      </X>
-      <X>
-        308
+        475
       </X>
     </Element>
     <Element>
@@ -219,43 +65,10 @@
         InvertProcessor
       </ComponentName>
       <X>
-        387
+        925
       </X>
       <X>
-        462
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        IterationParams
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        62
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        IterationParamsGui
-      </ComponentName>
-      <X>
-        562
-      </X>
-      <X>
-        237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        IterativeParams
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        87
+        375
       </X>
     </Element>
     <Element>
@@ -263,10 +76,10 @@
         IterativeProcessor
       </ComponentName>
       <X>
-        137
+        450
       </X>
       <X>
-        312
+        300
       </X>
     </Element>
     <Element>
@@ -274,21 +87,10 @@
         MaxOperator
       </ComponentName>
       <X>
-        -99
+        725
       </X>
       <X>
-        462
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MedOperator
-      </ComponentName>
-      <X>
-        37
-      </X>
-      <X>
-        487
+        125
       </X>
     </Element>
     <Element>
@@ -304,68 +106,13 @@
     </Element>
     <Element>
       <ComponentName>
-        MovingAvaerageFilter
-      </ComponentName>
-      <X>
-        762
-      </X>
-      <X>
-        462
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MovingAverage
-      </ComponentName>
-      <X>
-        -250
-      </X>
-      <X>
-        337
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         ProcessedCamera
       </ComponentName>
       <X>
-        100
+        425
       </X>
       <X>
-        162
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParams
-      </ComponentName>
-      <X>
-        237
-      </X>
-      <X>
-        -12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParamsGui
-      </ComponentName>
-      <X>
-        75
-      </X>
-      <X>
-        162
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Test
-      </ComponentName>
-      <X>
-        512
-      </X>
-      <X>
-        312
+        150
       </X>
     </Element>
   </PositionMap>

@@ -22,26 +22,22 @@ public:
 	};
 
 	CCaliperFeature(
-				const IFeatureInfo* infoPtr,
 				double weight,
 				double position,
 				int edgeMode);
 
+	double GetPosition() const;
 	int GetEdgeMode() const;
 
 	// reimplemented (iipr::IFeature)
-	virtual const IFeatureInfo* GetFeatureInfo() const;
 	virtual double GetWeight() const;
-	virtual imath::CVarVector GetValue() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	const IFeatureInfo* m_infoPtr;
-
 	double m_weight;
-	imath::CVarVector m_value;
+	double m_position;
 	int m_edgeMode;
 };
 

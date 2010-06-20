@@ -25,8 +25,6 @@ int CHypothesisInfo::GetWeightChannelIndex() const
 }
 
 
-// reimplemented (imeas::IDataSequenceInfo)
-
 int CHypothesisInfo::GetSamplesCount() const
 {
 	return m_samplesCount;
@@ -39,7 +37,7 @@ int CHypothesisInfo::GetChannelsCount() const
 }
 
 
-istd::CRange CHypothesisInfo::GetValueRange(int channelIndex) const
+istd::CRange CHypothesisInfo::GetValueRange(int /*channelIndex*/) const
 {
 	return istd::CRange(0, 1);
 }

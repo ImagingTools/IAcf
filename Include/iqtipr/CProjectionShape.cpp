@@ -5,6 +5,9 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
+
 
 namespace iqtipr
 {
@@ -21,48 +24,51 @@ CProjectionShape::CProjectionShape()
 
 // reimplemented (imod::IObserver)
 
-void CProjectionShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CProjectionShape::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(modelPtr);
+	if (linePtr != NULL){
+		m_projectionLine = *linePtr;
+
+		return;
+	}
+
 	resetTransform();
 
-	iipr::CProjectionData* projectionPtr = GetObjectPtr();
+	const imeas::IDataSequence* projectionPtr = dynamic_cast<const imeas::IDataSequence*>(modelPtr);
 	if (projectionPtr != NULL){
-		iimg::IBitmap& bitmap = projectionPtr->GetProjectionImage();
-		int lineSize = bitmap.GetLineBytesCount();
 		QPainterPath path;
 
 		QTransform transform;
-		const i2d::CLine2d& projectionLine = projectionPtr->GetProjectionLine();
 
-		double alpha = projectionLine.GetDiffVector().GetAngle();
-	
-		const i2d::CVector2d center = projectionLine.GetCenter();
+		const i2d::CVector2d center = m_projectionLine.GetCenter();
 
-		double scaleFactor = 1.0;
-		
-		if (lineSize > 0 && projectionLine.GetDiffVector().GetLength() > 0){
-			scaleFactor = projectionLine.GetDiffVector().GetLength() / lineSize;
-		}
+		int samplesCount = projectionPtr->GetSamplesCount();
+		if (		(samplesCount > 0) &&
+					(projectionPtr->GetChannelsCount() > 0) &&
+					(m_projectionLine.GetDiffVector().GetLength() > 0)){
+			transform.translate(m_projectionLine.GetPoint1().GetX(), m_projectionLine.GetPoint1().GetY());
+			transform.rotate(imath::GetDegreeFromRadian(m_projectionLine.GetDiffVector().GetAngle()));
+			double scaleFactor = m_projectionLine.GetDiffVector().GetLength() / samplesCount;
+			transform.scale(scaleFactor, scaleFactor);
+			transform.translate(0, -128);
 
-		transform.translate(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint1().GetY());
-		transform.rotate(imath::GetDegreeFromRadian(alpha));
-		transform.scale(scaleFactor, scaleFactor);
-		transform.translate(0, -128);
+			setTransform(transform);
 
-		setTransform(transform);
+			double prevSample = projectionPtr->GetSample(0);
+			for(int x = 1; x < samplesCount - 1; x++){
+				double sample = projectionPtr->GetSample(x);
 
-		if (!bitmap.IsEmpty()){
-			const I_BYTE* imageLinePtr = (I_BYTE*)bitmap.GetLinePtr(0);
-			for(int x = 1; x < lineSize - 1; x++){
-				path.moveTo(x - 1, 255 - imageLinePtr[x - 1]);
-				path.lineTo(x, 255 - imageLinePtr[x]);
+				path.moveTo(x - 1, prevSample * 100);
+				path.lineTo(x, 255 - sample * 100);
+
+				prevSample = sample;
 			}
+		}
 
-			setPath(path);
-		}
-		else{
-			setPath(QPainterPath());
-		}
+		setPath(path);
+
+		return;
 	}
 }
 

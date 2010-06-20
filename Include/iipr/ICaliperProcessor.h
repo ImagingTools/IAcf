@@ -2,10 +2,13 @@
 #define iipr_ICaliperProcessor_included
 
 
+// ACF includes
 #include "iproc/IProcessor.h"
 
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
+
 #include "iipr/IFeaturesConsumer.h"
-#include "iipr/CProjectionData.h"
 
 
 namespace iipr
@@ -27,7 +30,7 @@ public:
 	};
 
 	virtual bool DoCaliper(
-				const CProjectionData& projection,
+				const imeas::IDataSequence& derivative,
 				const ICaliperParams* paramsPtr,
 				IFeaturesConsumer& results) = 0;
 };

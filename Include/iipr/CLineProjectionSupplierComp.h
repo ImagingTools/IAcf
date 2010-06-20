@@ -2,14 +2,15 @@
 #define iipr_CLineProjectionSupplierComp_included
 
 
+// ACF includes
 #include "i2d/CVector2d.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
-
 #include "iproc/IBitmapSupplier.h"
+
+// ACF-Solutions includes
+#include "imeas/CGeneralDataSequence.h"
 
 #include "iipr/ILineProjectionSupplier.h"
 #include "iipr/ILineProjectionProcessor.h"
@@ -19,10 +20,10 @@ namespace iipr
 {
 
 
-class CLineProjectionSupplierComp: public iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, istd::TDelPtr<iipr::CProjectionData> >
+class CLineProjectionSupplierComp: public iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, imeas::CGeneralDataSequence>
 {
 public:
-	typedef iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, istd::TDelPtr<iipr::CProjectionData> > BaseClass;
+	typedef iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, imeas::CGeneralDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(CLineProjectionSupplierComp);
@@ -31,11 +32,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::ILineProjectionSupplier)
-	virtual const iipr::CProjectionData* GetLineProjection() const;
+	virtual const imeas::IDataSequence* GetLineProjection() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(istd::TDelPtr<iipr::CProjectionData>& result) const;
+	virtual int ProduceObject(imeas::CGeneralDataSequence& result) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -43,8 +44,6 @@ protected:
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
-
-	iipr::CProjectionData m_projectionData;
 };
 
 

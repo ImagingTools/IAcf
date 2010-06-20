@@ -5,30 +5,31 @@
 // Qt includes
 #include <QGraphicsPathItem>
 
-
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
+#include "imod/CMultiModelObserverBase.h"
 
-#include "iqt2d/iqt2d.h"
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
 
-
-// IACF includes
-#include "iipr/CProjectionData.h"
+#include "iqtipr/iqtipr.h"
 
 
 namespace iqtipr
 {
 
 
-class CProjectionShape: public QGraphicsPathItem, public imod::TSingleModelObserverBase<iipr::CProjectionData>
+class CProjectionShape: public QGraphicsPathItem, public imod::CMultiModelObserverBase
 {
 public:
-	typedef imod::TSingleModelObserverBase<iipr::CProjectionData> BaseClass;
+	typedef imod::CMultiModelObserverBase BaseClass;
 
 	CProjectionShape();
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+private:
+	i2d::CLine2d m_projectionLine;
 };
 
 

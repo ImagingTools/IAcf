@@ -12,21 +12,17 @@
 #include "iproc/IBitmapSupplier.h"
 
 #include "iipr/IFeaturesSupplier.h"
-#include "iipr/TFeaturesContainerWrap.h"
-#include "iipr/CSearchFeature.h"
+#include "iipr/CFeaturesContainer.h"
 
 
 namespace iipr
 {
 
 
-typedef iipr::TFeaturesContainerWrap<iipr::IFeaturesContainer, iipr::CSearchFeature> CSearchFeatures;
-
-
-class CSearchBasedFeaturesSupplierComp: public iproc::TSupplierCompWrap<iipr::IFeaturesSupplier, CSearchFeatures>
+class CSearchBasedFeaturesSupplierComp: public iproc::TSupplierCompWrap<iipr::IFeaturesSupplier, CFeaturesContainer>
 {
 public:
-	typedef iproc::TSupplierCompWrap<iipr::IFeaturesSupplier, CSearchFeatures> BaseClass;
+	typedef iproc::TSupplierCompWrap<iipr::IFeaturesSupplier, CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(CSearchBasedFeaturesSupplierComp);
@@ -39,7 +35,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(CSearchFeatures& result) const;
+	virtual int ProduceObject(CFeaturesContainer& result) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();

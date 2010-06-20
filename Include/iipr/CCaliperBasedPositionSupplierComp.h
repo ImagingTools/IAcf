@@ -2,27 +2,25 @@
 #define iipr_CCaliperBasedPositionSupplierComp_included
 
 
+// ACF includes
 #include "i2d/CVector2d.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
-
 #include "iproc/IBitmapSupplier.h"
-
 #include "iproc/IValueSupplier.h"
-#include "iipr/IFeaturesMapper.h"
+
+#include "iipr/IFeatureToImageMapper.h"
 
 
 namespace iipr
 {
 
 
-class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector>
+class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d>
 {
 public:
-	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector> BaseClass;
+	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierComp);
 		I_REGISTER_INTERFACE(CCaliperBasedPositionSupplierComp);
@@ -36,7 +34,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(imath::CVarVector& result) const;
+	virtual int ProduceObject(i2d::CVector2d& result) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -44,7 +42,7 @@ protected:
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
 
-	I_REF(iipr::IFeaturesMapper, m_featuresMapperCompPtr);
+	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
 	I_REF(iproc::IProcessor, m_caliperToolCompPtr);
 };
 

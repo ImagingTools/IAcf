@@ -184,7 +184,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCaliperFeature.cpp"
+				RelativePath="..\CCaliperResultElement.cpp"
 				>
 			</File>
 			<File
@@ -272,7 +272,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchFeature.cpp"
+				RelativePath="..\CSearchResultElement.cpp"
 				>
 			</File>
 			<File
@@ -289,7 +289,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCaliperFeature.h"
+				RelativePath="..\CCaliperResultElement.h"
 				>
 			</File>
 			<File
@@ -377,7 +377,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchFeature.h"
+				RelativePath="..\CSearchResultElement.h"
 				>
 			</File>
 			<File
@@ -405,7 +405,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFeaturesMapper.h"
+				RelativePath="..\IFeatureToImageMapper.h"
 				>
 			</File>
 			<File

@@ -80,9 +80,14 @@ I_EXPORT_COMPONENT(
 			"Projection Line Processor");
 
 I_EXPORT_COMPONENT(
-			SearchResults,
-			"Search results",
-			"Model Search Feature Extraction");
+			FeaturesContainer,
+			"Container of feature set used to store processing results of some processors",
+			"Model Caliper Search Feature Extraction Container");
+
+I_EXPORT_COMPONENT(
+			HeaviestFeatureConsumer,
+			"Features container storing the heaviest feature only",
+			"Model Caliper Search Feature Extraction Container");
 
 I_EXPORT_COMPONENT(
 			CaliperBasedPositionSupplier,
@@ -98,11 +103,6 @@ I_EXPORT_COMPONENT(
 			RectDerivativeProcessor,
 			"Calculate derivative of projection using rectangular kernel",
 			"Projection Derivative Processor Filter Rectangular Kernel");
-
-I_EXPORT_COMPONENT(
-			ProjectionData,
-			"Projection data model",
-			"Projection Data Image Bitmap Model");
 
 I_EXPORT_COMPONENT(
 			ProjectionSupplier,

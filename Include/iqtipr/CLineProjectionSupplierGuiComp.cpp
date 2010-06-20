@@ -31,14 +31,14 @@ void CLineProjectionSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		const iipr::CProjectionData* projectionPtr = supplierPtr->GetLineProjection();
+		const imeas::IDataSequence* projectionPtr = supplierPtr->GetLineProjection();
 		if (projectionPtr != NULL){
 			istd::CChangeNotifier changePtr(&m_projectionData);
 
-			iser::CMemoryReadArchive::CloneObjectByArchive(*projectionPtr, m_projectionData);
+			m_projectionData.CopyFrom(*projectionPtr);
 		}
 		else{
-			m_projectionData.ResetProjectionData();
+			m_projectionData.ResetSequence();
 		}
 	}
 }

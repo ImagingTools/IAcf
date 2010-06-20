@@ -17,7 +17,7 @@ const iipr::IFeaturesContainer* CSearchBasedFeaturesSupplierComp::GetFeatures() 
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CSearchBasedFeaturesSupplierComp::ProduceObject(CSearchFeatures& result) const
+int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_searchProcessorCompPtr.IsValid()){
