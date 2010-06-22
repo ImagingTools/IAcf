@@ -26,14 +26,14 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 	if (supplierPtr != NULL){
 		imath::CVarVector position = supplierPtr->GetValue();
 		if (position.GetElementsCount() >= 2){
-			m_foundPosition.SetCenter(i2d::CVector2d(position[0], position[1]));
+			m_foundPosition.SetPosition(i2d::CVector2d(position[0], position[1]));
 
 			if (IsGuiCreated()){
 				PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
 			}
 		}
 		else{
-			m_foundPosition.SetCenter(i2d::CVector2d(0, 0));
+			m_foundPosition.SetPosition(i2d::CVector2d(0, 0));
 
 			if (IsGuiCreated()){
 				PositionLabel->setText("No position");

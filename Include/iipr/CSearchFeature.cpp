@@ -16,17 +16,11 @@ CSearchFeature::CSearchFeature(
 			const i2d::CVector2d& position,
 			double angle,
 			const i2d::CVector2d& scale)
-:	m_weight(weight),
-	m_position(position),
+:	BaseClass(position),
+	m_weight(weight),
 	m_scale(scale),
 	m_angle(angle)
 {
-}
-
-
-const i2d::CVector2d&  CSearchFeature::GetPosition() const
-{
-	return m_position;
 }
 
 
@@ -61,10 +55,7 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_weight);
 	retVal = retVal && archive.EndTag(scoreTag);
 
-	static iser::CArchiveTag valueTag("Position", "Position of found model");
-	retVal = retVal && archive.BeginTag(valueTag);
-	retVal = retVal && m_position.Serialize(archive);
-	retVal = retVal && archive.EndTag(valueTag);
+	retVal = retVal && BaseClass::Serialize(archive);
 
 	static iser::CArchiveTag angleTag("Angle", "Angle of found model");
 	retVal = retVal && archive.BeginTag(angleTag);
