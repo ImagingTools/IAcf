@@ -13,7 +13,7 @@ CCaliperFeature::CCaliperFeature(
 			double weight,
 			double position,
 			int edgeMode)
-:	m_weight(weight),
+:	BaseClass(weight),
 	m_position(position),
 	m_edgeMode(edgeMode)
 {
@@ -32,24 +32,13 @@ int CCaliperFeature::GetEdgeMode() const
 }
 
 
-// reimplemented (iipr::IFeature)
-
-double CCaliperFeature::GetWeight() const
-{
-	return m_weight;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CCaliperFeature::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag weightTag("Weight", "Weight of feature");
-	retVal = retVal && archive.BeginTag(weightTag);
-	retVal = retVal && archive.Process(m_weight);
-	retVal = retVal && archive.EndTag(weightTag);
+	retVal = retVal && BaseClass::Serialize(archive);
 
 	static iser::CArchiveTag valueTag("Position", "Position on projection");
 	retVal = retVal && archive.BeginTag(valueTag);

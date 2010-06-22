@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFeatureBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFeaturesContainer.cpp"
 				>
 			</File>
@@ -282,6 +286,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFeatureBase.h"
 				>
 			</File>
 			<File

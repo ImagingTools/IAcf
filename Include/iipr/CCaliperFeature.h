@@ -2,7 +2,7 @@
 #define iipr_CCaliperFeature_included
 
 
-#include "iipr/IFeature.h"
+#include "iipr/CFeatureBase.h"
 
 
 namespace iipr
@@ -12,9 +12,11 @@ namespace iipr
 /**
 	Implementation of IFeature interface for caliper-extracted features.
 */
-class CCaliperFeature: virtual public IFeature
+class CCaliperFeature: public CFeatureBase
 {
 public:
+	typedef CFeatureBase BaseClass;
+
 	enum EdgeMode
 	{
 		EM_FALLING,
@@ -29,14 +31,10 @@ public:
 	double GetPosition() const;
 	int GetEdgeMode() const;
 
-	// reimplemented (iipr::IFeature)
-	virtual double GetWeight() const;
-
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	double m_weight;
 	double m_position;
 	int m_edgeMode;
 };

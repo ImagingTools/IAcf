@@ -1,6 +1,7 @@
 #include "iipr/CSearchFeature.h"
 
 
+// ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -16,8 +17,8 @@ CSearchFeature::CSearchFeature(
 			const i2d::CVector2d& position,
 			double angle,
 			const i2d::CVector2d& scale)
-:	BaseClass(position),
-	m_weight(weight),
+:	BaseClass(weight),
+	BaseClass2(position),
 	m_scale(scale),
 	m_angle(angle)
 {
@@ -36,26 +37,14 @@ const i2d::CVector2d& CSearchFeature::GetScale() const
 }
 
 
-// reimplemented (iipr::IFeature)
-
-double CSearchFeature::GetWeight() const
-{
-	return m_weight;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CSearchFeature::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag scoreTag("Score", "Model score");
-	retVal = retVal && archive.BeginTag(scoreTag);
-	retVal = retVal && archive.Process(m_weight);
-	retVal = retVal && archive.EndTag(scoreTag);
-
 	retVal = retVal && BaseClass::Serialize(archive);
+	retVal = retVal && BaseClass2::Serialize(archive);
 
 	static iser::CArchiveTag angleTag("Angle", "Angle of found model");
 	retVal = retVal && archive.BeginTag(angleTag);
