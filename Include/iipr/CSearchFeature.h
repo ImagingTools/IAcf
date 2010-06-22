@@ -2,10 +2,11 @@
 #define iipr_CSearchFeature_included
 
 
+// ACF includes
 #include "i2d/CVector2d.h"
 #include "i2d/CPosition2d.h"
 
-#include "iipr/CFeatureBase.h"
+#include "iipr/TFeatureWrap.h"
 
 
 namespace iipr
@@ -15,14 +16,11 @@ namespace iipr
 /**
 	Implementation of IFeature interface for pattern search features.
 */
-class CSearchFeature:
-			public CFeatureBase,
-			public i2d::CPosition2d
+class CSearchFeature: public TFeatureWrap<i2d::CPosition2d>
 			
 {
 public:
-	typedef CFeatureBase BaseClass;
-	typedef i2d::CPosition2d BaseClass2;
+	typedef TFeatureWrap<i2d::CPosition2d> BaseClass;
 
 	CSearchFeature(
 				double weight,

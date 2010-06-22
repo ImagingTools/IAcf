@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFeatureToImageMapperProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CGaussian2dFilterParams.cpp"
 				>
 			</File>
@@ -297,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFeatureToImageMapperProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CGaussian2dFilterParams.h"
 				>
 			</File>
@@ -377,6 +385,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFeatureToFeatureProcessor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFeatureToImageMapper.h"
 				>
 			</File>
@@ -430,6 +442,10 @@
 			</File>
 			<File
 				RelativePath="..\TConvolutionProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TFeatureWrap.h"
 				>
 			</File>
 			<File

@@ -18,10 +18,10 @@ CSearchFeature::CSearchFeature(
 			double angle,
 			const i2d::CVector2d& scale)
 :	BaseClass(weight),
-	BaseClass2(position),
 	m_scale(scale),
 	m_angle(angle)
 {
+	BaseClass::SetPosition(position);
 }
 
 
@@ -44,7 +44,6 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 
 	retVal = retVal && BaseClass::Serialize(archive);
-	retVal = retVal && BaseClass2::Serialize(archive);
 
 	static iser::CArchiveTag angleTag("Angle", "Angle of found model");
 	retVal = retVal && archive.BeginTag(angleTag);
