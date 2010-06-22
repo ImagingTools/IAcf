@@ -180,10 +180,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CPositionFromImageSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CCaliperFeature.cpp"
 				>
 			</File>
@@ -193,6 +189,10 @@
 			</File>
 			<File
 				RelativePath="..\CCaliperParamsComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFindProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -244,6 +244,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPositionFromImageSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CProcessedAcquisitionComp.cpp"
 				>
 			</File>
@@ -273,10 +277,6 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CPositionFromImageSupplierComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CCaliperFeature.h"
 				>
 			</File>
@@ -286,6 +286,10 @@
 			</File>
 			<File
 				RelativePath="..\CCaliperParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFindProcessorComp.h"
 				>
 			</File>
 			<File
@@ -334,6 +338,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultidimensionalFilterParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPositionFromImageSupplierComp.h"
 				>
 			</File>
 			<File

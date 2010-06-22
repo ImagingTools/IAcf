@@ -2,6 +2,9 @@
 #define iipr_IImageToFeatureProcessor_included
 
 
+// ACF includes
+#include "iimg/IBitmap.h"
+#include "iprm/IParamsSet.h"
 #include "iproc/IProcessor.h"
 
 #include "iipr/IFeaturesConsumer.h"
