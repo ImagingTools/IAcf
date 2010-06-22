@@ -1,32 +1,33 @@
-#ifndef iipr_CCaliperBasedPositionSupplierComp_included
-#define iipr_CCaliperBasedPositionSupplierComp_included
+#ifndef iipr_CPositionFromImageSupplierComp_included
+#define iipr_CPositionFromImageSupplierComp_included
 
 
 // ACF includes
 #include "i2d/CVector2d.h"
-#include "iprm/IParamsSet.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "iproc/IBitmapSupplier.h"
 #include "iproc/IValueSupplier.h"
-
-#include "iipr/IFeatureToImageMapper.h"
 
 
 namespace iipr
 {
 
 
-class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d>
+/**
+	Implementation of value supplier returning position on the image.
+	To calculate this position is some processor used.
+	This processor must accept image object as input and produce some set of features containing position into feature consumer.
+	This supplier takes the feature with the higher weight value and output it as found position value.
+*/
+class CPositionFromImageSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d>
 {
 public:
 	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d> BaseClass;
 
-	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierComp);
-		I_REGISTER_INTERFACE(CCaliperBasedPositionSupplierComp);
+	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
-		I_ASSIGN(m_featuresMapperCompPtr, "FeaturesMapper", "Calculate position from caliper extracted features", true, "FeaturesMapper");
-		I_ASSIGN(m_caliperToolCompPtr, "CaliperTool", "Calculate position from projection", true, "CaliperTool");
+		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IValueSupplier)
@@ -41,15 +42,13 @@ protected:
 
 private:
 	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
-
-	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_REF(iproc::IProcessor, m_caliperToolCompPtr);
+	I_REF(iproc::IProcessor, m_processorCompPtr);
 };
 
 
 } // namespace iipr
 
 
-#endif // !iipr_CCaliperBasedPositionSupplierComp_included
+#endif // !iipr_CPositionFromImageSupplierComp_included
 
 

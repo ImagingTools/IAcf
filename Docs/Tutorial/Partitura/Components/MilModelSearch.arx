@@ -205,8 +205,8 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SearchProcessor
-            </Id>
+							Processor
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
@@ -218,8 +218,8 @@
                 true
               </IsEnabled>
               <Value>
-                SearchProcessor
-              </Value>
+								Processor
+							</Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -490,8 +490,8 @@
     </Element>
     <Element>
       <Id>
-        SearchProcessor
-      </Id>
+				Processor
+			</Id>
       <PackageId>
         MilPck
       </PackageId>

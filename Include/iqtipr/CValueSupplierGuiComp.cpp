@@ -24,9 +24,11 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
+		bool isResultVisible = false;
 		imath::CVarVector position = supplierPtr->GetValue();
 		if (position.GetElementsCount() >= 2){
 			m_foundPosition.SetPosition(i2d::CVector2d(position[0], position[1]));
+			isResultVisible = true;
 
 			if (IsGuiCreated()){
 				PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
@@ -38,6 +40,12 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 			if (IsGuiCreated()){
 				PositionLabel->setText("No position");
 			}
+		}
+
+		int shapesCount = m_foundPosition.GetObserverCount();
+		for (int i = 0; i < shapesCount; ++i){
+			QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundPosition.GetObserverPtr(i));
+			shapePtr->setVisible(isResultVisible);
 		}
 	}
 }
@@ -82,6 +90,7 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/,
 	iqt2d::CPosition2dShape* shapePtr = new iqt2d::CPosition2dShape(false);
 	if (shapePtr != NULL){
 		shapePtr->setZValue(2);
+		shapePtr->setVisible(false);
 
 		m_foundPosition.AttachObserver(shapePtr);
 

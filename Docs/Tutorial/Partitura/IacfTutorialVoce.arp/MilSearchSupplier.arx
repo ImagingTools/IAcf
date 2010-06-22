@@ -246,7 +246,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SearchProcessor
+              Processor
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -359,7 +359,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SearchProcessor
+              Processor
             </Id>
             <Type>
               icomp::CReferenceAttribute

@@ -27,7 +27,7 @@ public:
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(CSearchBasedFeaturesSupplierComp);
 		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
-		I_ASSIGN(m_searchProcessorCompPtr, "SearchProcessor", "Calculate model positions in the image", true, "SearchProcessor");
+		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Calculate model positions in the image", true, "Processor");
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IFeaturesSupplier)

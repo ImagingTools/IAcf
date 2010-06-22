@@ -180,7 +180,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierComp.cpp"
+				RelativePath="..\CPositionFromImageSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -285,7 +285,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierComp.h"
+				RelativePath="..\CPositionFromImageSupplierComp.h"
 				>
 			</File>
 			<File

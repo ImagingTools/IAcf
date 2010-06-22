@@ -26,46 +26,24 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
-        Caliper
+        CascadedProcessor
       </ComponentName>
       <X>
-        900
+        625
       </X>
       <X>
-        425
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Casade
+        EdgeOnLineFinder
       </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Derivative
-      </ComponentName>
-      <X>
-        725
-      </X>
       <X>
         300
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DerivativeProcessor
-      </ComponentName>
-      <X>
-        575
       </X>
       <X>
         375
@@ -73,24 +51,24 @@
     </Element>
     <Element>
       <ComponentName>
-        LineProjection
+        FeatureToImageMapperProcessor
       </ComponentName>
       <X>
-        225
+        1000
       </X>
       <X>
-        425
+        375
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Projection
+        FeaturesContainer
       </ComponentName>
       <X>
-        425
+        625
       </X>
       <X>
-        300
+        275
       </X>
     </Element>
   </PositionMap>

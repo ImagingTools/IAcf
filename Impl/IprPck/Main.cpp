@@ -90,7 +90,12 @@ I_EXPORT_COMPONENT(
 			"Model Caliper Search Feature Extraction Container");
 
 I_EXPORT_COMPONENT(
-			CaliperBasedPositionSupplier,
+			FeatureToImageMapperProcessor,
+			"Processor converting feature container to set of positions using mapper of features",
+			"Feature Position Processor Mapper Caliper Convertion");
+
+I_EXPORT_COMPONENT(
+			PositionFromImageSupplier,
 			"Supplier implementation returning position found using caliper tool",
 			"Model Caliper Position Processing Supplier");
 

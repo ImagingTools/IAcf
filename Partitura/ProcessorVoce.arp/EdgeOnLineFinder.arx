@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -27,48 +27,6 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="6">
-    <Element>
-      <Id>
-        Buffer1
-      </Id>
-      <PackageId>
-        MeasPck
-      </PackageId>
-      <ComponentId>
-        GeneralDataSequence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Buffer2
-      </Id>
-      <PackageId>
-        MeasPck
-      </PackageId>
-      <ComponentId>
-        GeneralDataSequence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
     <Element>
       <Id>
         Caliper
@@ -140,10 +98,10 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  Buffer1
+                  Projection
                 </Value>
                 <Value>
-                  Buffer2
+                  Derivative
                 </Value>
               </Values>
             </Data>
@@ -167,7 +125,7 @@
                   LineProjection
                 </Value>
                 <Value>
-                  Derivative
+                  DerivativeProcessor
                 </Value>
                 <Value>
                   Caliper
@@ -181,6 +139,27 @@
     <Element>
       <Id>
         Derivative
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        GeneralDataSequence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DerivativeProcessor
       </Id>
       <PackageId>
         IprPck
@@ -271,6 +250,27 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        Projection
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        GeneralDataSequence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <ExportedInterfaces count="3">
     <Interface>
@@ -298,10 +298,26 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        Derivative
+      </ExportedId>
+      <ComponentId>
+        Derivative
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Projection
+      </ExportedId>
+      <ComponentId>
+        Projection
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
-    Find for ege position along single line with 1 pixel projection
+    Search for ege on the line position using 1 pixel wide projection
   </Description>
   <Keywords>
     Edge Finder Processor Caliper Tool

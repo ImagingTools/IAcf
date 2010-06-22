@@ -295,13 +295,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SearchProcessor
+              Processor
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              SearchProcessor
+              Processor
             </ExportId>
             <Data>
               <IsEnabled>

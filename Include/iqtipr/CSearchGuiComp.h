@@ -36,7 +36,7 @@ public:
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Gets image", true, "BitmapAcquisition");
-		I_ASSIGN(m_searchProcessorCompPtr, "SearchProcessor", "Does model search in an image", true, "SearchProcessor");
+		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Does model search in an image", true, "Processor");
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap", true, "Bitmap");
 		I_ASSIGN(m_bitmapModelCompPtr, "Bitmap", "Bitmap", true, "Bitmap");
 	I_END_COMPONENT

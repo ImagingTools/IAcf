@@ -1,5 +1,8 @@
-#include "iipr/CCaliperBasedPositionSupplierComp.h"
+#include "iipr/CPositionFromImageSupplierComp.h"
 
+
+// ACF includes
+#include "i2d/CPosition2d.h"
 
 #include "iipr/CHeaviestFeatureConsumer.h"
 
@@ -10,7 +13,7 @@ namespace iipr
 
 // reimplemented (iproc::IValueSupplier)
 
-imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(int /*index*/, int /*valueTypeId*/) const
+imath::CVarVector CPositionFromImageSupplierComp::GetValue(int /*index*/, int /*valueTypeId*/) const
 {
 	const i2d::CVector2d* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -26,17 +29,16 @@ imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(int /*index*/, int
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CCaliperBasedPositionSupplierComp::ProduceObject(i2d::CVector2d& result) const
+int CPositionFromImageSupplierComp::ProduceObject(i2d::CVector2d& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
-				m_featuresMapperCompPtr.IsValid() &&
-				m_caliperToolCompPtr.IsValid()){
+				m_processorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap();
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
 			CHeaviestFeatureConsumer consumer;
-			int caliperState = m_caliperToolCompPtr->DoProcessing(
+			int caliperState = m_processorCompPtr->DoProcessing(
 							paramsSetPtr,
 							bitmapPtr,
 							&consumer);
@@ -45,17 +47,14 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(i2d::CVector2d& result) con
 				return WS_ERROR;
 			}
 
-			const IFeature* featurePtr = consumer.GetFeature();
-			if (featurePtr == NULL){
+			const i2d::CPosition2d* positionPtr = dynamic_cast<const i2d::CPosition2d*>(consumer.GetFeature());
+			if (positionPtr == NULL){
 				return WS_ERROR;
 			}
 
-			if (m_featuresMapperCompPtr->GetImagePosition(
-						*featurePtr,
-						paramsSetPtr,
-						result)){
-				return WS_OK;
-			}
+			result = positionPtr->GetPosition();
+
+			return WS_OK;
 		}
 	}
 
@@ -65,7 +64,7 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(i2d::CVector2d& result) con
 
 // reimplemented (icomp::IComponent)
 
-void CCaliperBasedPositionSupplierComp::OnComponentCreated()
+void CPositionFromImageSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 

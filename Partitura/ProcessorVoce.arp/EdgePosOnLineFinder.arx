@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="4">
     <Element>
       <Id>
-        CaliperProcessor
+        CascadedProcessor
       </Id>
       <PackageId>
-        ProcessorVoce
+        BasePck
       </PackageId>
       <ComponentId>
-        EdgePosOnLineFinder
+        CascadedProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -47,10 +47,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              CaliperParamId
+              Buffers
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -59,9 +59,88 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                Caliper
-              </Value>
+              <Values count="1">
+                <Value>
+                  FeaturesContainer
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Processors
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  EdgeOnLineFinder
+                </Value>
+                <Value>
+                  FeatureToImageMapperProcessor
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        EdgeOnLineFinder
+      </Id>
+      <PackageId>
+        ProcessorVoce
+      </PackageId>
+      <ComponentId>
+        EdgeOnLineFinder
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              CaliperParamId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              CaliperParamId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FilterParamsId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              FilterParamsId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -72,6 +151,43 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
+              LineParamId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FeatureToImageMapperProcessor
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        FeatureToImageMapperProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              FeaturesMapper
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
               
             </ExportId>
             <Data>
@@ -79,7 +195,7 @@
                 true
               </IsEnabled>
               <Value>
-                Line
+                EdgeOnLineFinder
               </Value>
             </Data>
           </AttributeInfo>
@@ -88,14 +204,14 @@
     </Element>
     <Element>
       <Id>
-        PositionTask
+        FeaturesContainer
       </Id>
       <PackageId>
         IprPck
       </PackageId>
       <ComponentId>
-				PositionFromImageSupplier
-			</ComponentId>
+        FeaturesContainer
+      </ComponentId>
       <Data>
         <IsEnabled>
           true
@@ -103,126 +219,51 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              BitmapSupplier
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              BitmapSupplier
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-							Processor
-						</Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                CaliperProcessor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        imod::IModel
+        iipr::IProjectionConstraints
       </InterfaceId>
       <ComponentId>
-        PositionTask
+        EdgeOnLineFinder
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::ISupplier
+        iproc::IProcessor
       </InterfaceId>
       <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iproc::IValueSupplier
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
+        CascadedProcessor
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        Derivative
+      </ExportedId>
+      <ComponentId>
+        EdgeOnLineFinder/Derivative
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Projection
+      </ExportedId>
+      <ComponentId>
+        EdgeOnLineFinder/Projection
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
-    
+    Search for ege image position using 1 pixel wide projection
   </Description>
   <Keywords>
-    
+    Edge Position 2D Finder Processor Caliper Tool
   </Keywords>
 </Acf>
