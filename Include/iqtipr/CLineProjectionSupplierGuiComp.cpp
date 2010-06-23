@@ -126,6 +126,7 @@ void CLineProjectionSupplierGuiComp::OnGuiDestroyed()
 	BaseClass::OnGuiDestroyed();
 }
 
+
 } // namespace iqtipr
 
 

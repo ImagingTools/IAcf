@@ -111,6 +111,32 @@ void CValueSupplierGuiComp::OnGuiModelAttached()
 }
 
 
+// reimplemented (iqtgui::IGuiObject)
+
+void CValueSupplierGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	if (m_intermediateResultsGuiCompPtr.IsValid()){
+		m_intermediateResultsGuiCompPtr->CreateGui(IntResultsFrame);
+
+		IntResultsFrame->setVisible(true);
+	}
+	else{
+		IntResultsFrame->setVisible(false);
+	}
+}
+
+
+void CValueSupplierGuiComp::OnGuiDestroyed()
+{
+	if (m_intermediateResultsGuiCompPtr.IsValid()){
+		m_intermediateResultsGuiCompPtr->DestroyGui();
+	}
+	
+	BaseClass::OnGuiDestroyed();
+}
+
 } // namespace iqtipr
 
 

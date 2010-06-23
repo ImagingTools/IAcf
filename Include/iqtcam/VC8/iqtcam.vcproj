@@ -176,6 +176,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CBitmapSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsGuiComp.cpp"
 				>
 			</File>
@@ -185,14 +193,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileAcquisitionComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -210,15 +210,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\CBitmapSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CFileAcquisitionComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
@@ -243,27 +243,27 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CExposureParamsGuiComp.cpp"
+				RelativePath="..\generated\moc_CBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSnapBitmapSupplierGuiComp.cpp"
+				RelativePath="..\generated\moc_CExposureParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSnapImageGuiComp.cpp"
+				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CExposureParamsGuiComp.h"
+				RelativePath="..\generated\ui_CBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CSnapBitmapSupplierGuiComp.h"
+				RelativePath="..\generated\ui_CExposureParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CSnapImageGuiComp.h"
+				RelativePath="..\generated\ui_CSnapImageGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -271,11 +271,11 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CExposureParamsGuiComp.ui"
+				RelativePath="..\CBitmapSupplierGuiComp.ui"
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.ui"
+				RelativePath="..\CExposureParamsGuiComp.ui"
 				>
 			</File>
 			<File

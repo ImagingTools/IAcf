@@ -1,0 +1,137 @@
+#include "iqtcam/CBitmapSupplierGuiComp.h"
+
+
+// Qt includes
+#include <QMessageBox>
+
+#include "iqt2d/CImageShape.h"
+
+
+namespace iqtcam
+{
+
+
+// reimplemented (imod::IModelEditor)
+
+void CBitmapSupplierGuiComp::UpdateModel() const
+{
+}
+
+
+void CBitmapSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
+{
+	iproc::IBitmapSupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		const iimg::IBitmap* bitmapPtr = supplierPtr->GetBitmap();
+
+		if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
+			m_bitmap.ResetImage();
+		}
+	}
+	else{
+		m_bitmap.ResetImage();
+	}
+
+	if (IsGuiCreated()){
+		istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
+
+		SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
+		SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty());
+	}
+}
+
+
+// protected slots
+
+void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
+{
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		supplierPtr->InitNewWork();
+		supplierPtr->EnsureWorkFinished();
+
+		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Snap Error"));
+		}
+	}
+}
+
+
+void CBitmapSupplierGuiComp::on_SaveImageButton_clicked()
+{
+	if (		m_bitmapLoaderCompPtr.IsValid() &&
+				m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, "") == iser::IFileLoader::StateFailed){
+		QMessageBox::information(
+					NULL,
+					QObject::tr("Error"),
+					QObject::tr("Cannot save image"));
+	}
+}
+
+
+void CBitmapSupplierGuiComp::on_LoadParamsButton_clicked()
+{
+	LoadParams();
+}
+
+
+void CBitmapSupplierGuiComp::on_SaveParamsButton_clicked()
+{
+	SaveParams();
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CBitmapSupplierGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	SaveImageButton->setVisible(m_bitmapLoaderCompPtr.IsValid());
+}
+
+
+// reimplemented (iqtproc::TSupplierGuiCompBase)
+
+QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const
+{
+	I_ASSERT(IsGuiCreated());
+
+	return ParamsFrame;
+}
+
+
+// reimplemented (iqt2d::TSceneExtenderCompBase)
+
+void CBitmapSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+{
+	iqt2d::CImageShape* shapePtr = new iqt2d::CImageShape;
+	if (shapePtr != NULL){
+		result.PushBack(shapePtr);
+
+		m_bitmap.AttachObserver(shapePtr);
+	}
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CBitmapSupplierGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	ParamsGB->setVisible(AreParamsEditable() || IsLoadParamsSupported());
+
+	LoadParamsButton->setVisible(IsLoadParamsSupported());
+	SaveParamsButton->setVisible(IsSaveParamsSupported());
+}
+
+
+} // namespace iqtcam
+
+

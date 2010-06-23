@@ -35,6 +35,7 @@ public:
 				iproc::IValueSupplier> BaseClass;
 
 	I_BEGIN_COMPONENT(CValueSupplierGuiComp)
+		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT
 
 	// reimplemented (imod::IModelEditor)
@@ -56,7 +57,13 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 
+	// reimplemented (iqtgui::IGuiObject)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
 private:
+	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
+
 	imod::TModelWrap<i2d::CPosition2d> m_foundPosition;
 };
 

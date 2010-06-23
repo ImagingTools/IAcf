@@ -1,40 +1,41 @@
-#ifndef iqtcam_CSnapBitmapSupplierGuiComp_included
-#define iqtcam_CSnapBitmapSupplierGuiComp_included
+#ifndef iqtcam_CBitmapSupplierGuiComp_included
+#define iqtcam_CBitmapSupplierGuiComp_included
 
 
 // ACF includes
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
+#include "imod/TModelWrap.h"
+#include "iproc/IBitmapSupplier.h"
+#include "iqt/CBitmap.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
-#include "icam/CSnapBitmapSupplierComp.h"
 
 #include "iqtproc/TSupplierGuiCompBase.h"
 
 #include "iqtcam/iqtcam.h"
 
-#include "iqtcam/Generated/ui_CSnapBitmapSupplierGuiComp.h"
+#include "iqtcam/Generated/ui_CBitmapSupplierGuiComp.h"
 
 
 namespace iqtcam
 {
 
 
-class CSnapBitmapSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
-			Ui::CSnapBitmapSupplierGuiComp,
-			icam::CSnapBitmapSupplierComp>
+class CBitmapSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+			Ui::CBitmapSupplierGuiComp,
+			iproc::IBitmapSupplier>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtproc::TSupplierGuiCompBase<
-				Ui::CSnapBitmapSupplierGuiComp,
-				icam::CSnapBitmapSupplierComp> BaseClass;
+				Ui::CBitmapSupplierGuiComp,
+				iproc::IBitmapSupplier> BaseClass;
 
-	I_BEGIN_COMPONENT(CSnapBitmapSupplierGuiComp)
+	I_BEGIN_COMPONENT(CBitmapSupplierGuiComp);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -47,8 +48,6 @@ protected slots:
 	void on_SaveParamsButton_clicked();
 
 protected:
-	const iimg::IBitmap* GetCurrentBitmap() const;
-
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
@@ -63,12 +62,14 @@ protected:
 
 private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+
+	imod::TModelWrap<iqt::CBitmap> m_bitmap;
 };
 
 
 } // namespace iqtcam
 
 
-#endif // !iqtcam_CSnapBitmapSupplierGuiComp_included
+#endif // !iqtcam_CBitmapSupplierGuiComp_included
 
 

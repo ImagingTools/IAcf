@@ -184,7 +184,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.cpp"
+				RelativePath="..\CBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -210,11 +210,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.h"
+				RelativePath="..\CBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.moc"
+				RelativePath="..\CBitmapSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -275,7 +275,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSnapBitmapSupplierGuiComp.ui"
+				RelativePath="..\CBitmapSupplierGuiComp.ui"
 				>
 			</File>
 			<File
