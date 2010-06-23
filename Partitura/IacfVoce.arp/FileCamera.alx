@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         BitmapLoader
@@ -74,6 +74,17 @@
     <Element>
       <ComponentName>
         FilePathParamGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        200
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
       </ComponentName>
       <X>
         250

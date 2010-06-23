@@ -29,24 +29,24 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        FileCamera
+        CaliperTestFramework
       </ComponentName>
       <X>
-        325
+        800
       </X>
       <X>
-        425
+        350
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        FileCamera
       </ComponentName>
       <X>
-        772.161
+        375
       </X>
       <X>
-        424.264
+        350
       </X>
     </Element>
   </PositionMap>

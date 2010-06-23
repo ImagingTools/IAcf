@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="25">
+  <PositionMap count="15">
     <Element>
       <ComponentName>
         AnnulusSegmentTestTask
       </ComponentName>
       <X>
-        1087
+        200
       </X>
       <X>
-        -37
+        800
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         AnnulusSegmentTestTaskGui
       </ComponentName>
       <X>
-        1200.87
+        975
       </X>
       <X>
-        -298.314
+        800
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         AnnulusTestTask
       </ComponentName>
       <X>
-        900
+        200
       </X>
       <X>
-        -37
+        700
       </X>
     </Element>
     <Element>
@@ -65,87 +65,10 @@
         AnnulusTestTaskGui
       </ComponentName>
       <X>
-        991.652
+        975
       </X>
       <X>
-        -295.485
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        -337
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapLoader
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        500
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperLineGui
-      </ComponentName>
-      <X>
-        1162
-      </X>
-      <X>
-        -662
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParams
-      </ComponentName>
-      <X>
-        537
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParamsGui
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        -662
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParamsSet
-      </ComponentName>
-      <X>
-        962
-      </X>
-      <X>
-        59.1716
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParamsSetGui
-      </ComponentName>
-      <X>
-        1137
-      </X>
-      <X>
-        -537
+        700
       </X>
     </Element>
     <Element>
@@ -153,10 +76,10 @@
         CircleTestTask
       </ComponentName>
       <X>
-        675
+        200
       </X>
       <X>
-        -37
+        600
       </X>
     </Element>
     <Element>
@@ -164,10 +87,10 @@
         CircleTestTaskGui
       </ComponentName>
       <X>
-        769.48
+        975
       </X>
       <X>
-        -291.243
+        600
       </X>
     </Element>
     <Element>
@@ -175,43 +98,10 @@
         Framework
       </ComponentName>
       <X>
-        -475
+        575
       </X>
       <X>
-        -162
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageParamsSetGui
-      </ComponentName>
-      <X>
-        -437
-      </X>
-      <X>
-        -287
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageTask
-      </ComponentName>
-      <X>
-        -71
-      </X>
-      <X>
-        185
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageTaskGui
-      </ComponentName>
-      <X>
-        -87
-      </X>
-      <X>
-        -287
+        200
       </X>
     </Element>
     <Element>
@@ -219,10 +109,10 @@
         LineTestTask
       </ComponentName>
       <X>
-        73.4071
+        200
       </X>
       <X>
-        -42.6569
+        300
       </X>
     </Element>
     <Element>
@@ -230,32 +120,10 @@
         LineTestTaskGui
       </ComponentName>
       <X>
-        148.816
-      </X>
-      <X>
-        -292.657
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PositionTask
-      </ComponentName>
-      <X>
         975
       </X>
       <X>
-        275
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PositionTaskGui
-      </ComponentName>
-      <X>
-        1300
-      </X>
-      <X>
-        -412
+        400
       </X>
     </Element>
     <Element>
@@ -263,10 +131,10 @@
         QuadrangleTask
       </ComponentName>
       <X>
-        468.105
+        200
       </X>
       <X>
-        -46.669
+        500
       </X>
     </Element>
     <Element>
@@ -274,10 +142,10 @@
         QuadrangleTaskGui
       </ComponentName>
       <X>
-        565.685
+        975
       </X>
       <X>
-        -291.328
+        500
       </X>
     </Element>
     <Element>
@@ -285,10 +153,10 @@
         RectangleTestTask
       </ComponentName>
       <X>
-        249.365
+        200
       </X>
       <X>
-        -44.0711
+        400
       </X>
     </Element>
     <Element>
@@ -296,10 +164,32 @@
         RectangleTestTaskGui
       </ComponentName>
       <X>
-        333.532
+        975
       </X>
       <X>
-        -291.243
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SnapTask
+      </ComponentName>
+      <X>
+        200
+      </X>
+      <X>
+        75
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SnapTaskGui
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        50
       </X>
     </Element>
   </PositionMap>

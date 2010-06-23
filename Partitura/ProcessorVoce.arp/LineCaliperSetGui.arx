@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
     <Element>
       <Id>
-        FileCamera
+        CaliperLineGui
       </Id>
       <PackageId>
-        IacfVoce
+        QtViewPck
       </PackageId>
       <ComponentId>
-        FileCamera
+        Line2dParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,57 +44,19 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DefaultDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                C://
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        Framework
+        CaliperParamsGui
       </Id>
       <PackageId>
-        IacfTutorialVoce
+        QtIprPck
       </PackageId>
       <ComponentId>
-        ComplexProductFramework
+        CaliperParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -103,13 +65,34 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CaliperParamsSetGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSetGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              Camera
+              DesignType
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -119,13 +102,13 @@
                 true
               </IsEnabled>
               <Value>
-                FileCamera
+                2
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CameraParamsGui
+              Editors
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -137,19 +120,22 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
-                  FileCamera/Gui
+                  CaliperLineGui
+                </Value>
+                <Value>
+                  CaliperParamsGui
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CameraParamsSet
+              Ids
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -158,17 +144,46 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                FileCamera/ParamsSet
-              </Value>
+              <Values count="2">
+                <Value>
+                  Line
+                </Value>
+                <Value>
+                  Caliper
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CameraParamsSetGui
+              Names
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  Geometry
+                </Value>
+                <Value>
+                  Caliper
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowAllShapes
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -178,7 +193,7 @@
                 true
               </IsEnabled>
               <Value>
-                FileCamera/SetGui
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -186,13 +201,37 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        Framework
+        CaliperParamsSetGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IObserver
+      </InterfaceId>
+      <ComponentId>
+        CaliperParamsSetGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqt2d::ISceneExtender
+      </InterfaceId>
+      <ComponentId>
+        CaliperParamsSetGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        CaliperParamsSetGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

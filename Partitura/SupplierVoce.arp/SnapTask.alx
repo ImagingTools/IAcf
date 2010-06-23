@@ -29,24 +29,24 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        FileCamera
+        Bitmap
       </ComponentName>
       <X>
-        325
+        275
       </X>
       <X>
-        425
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        ImageTask
       </ComponentName>
       <X>
-        772.161
+        275
       </X>
       <X>
-        424.264
+        225
       </X>
     </Element>
   </PositionMap>

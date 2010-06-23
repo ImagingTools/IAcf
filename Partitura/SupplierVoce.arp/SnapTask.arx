@@ -29,13 +29,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        FileCamera
+        Bitmap
       </Id>
       <PackageId>
-        IacfVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        FileCamera
+        Bitmap
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,57 +44,19 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DefaultDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                C://
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        Framework
+        ImageTask
       </Id>
       <PackageId>
-        IacfTutorialVoce
+        IacfBasePck
       </PackageId>
       <ComponentId>
-        ComplexProductFramework
+        SnapBitmapSupplier
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -106,10 +68,26 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
+              BitmapAcquisition
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
               Camera
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              BitmapFactory
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CFactoryAttribute
             </Type>
             <ExportId>
               
@@ -119,89 +97,94 @@
                 true
               </IsEnabled>
               <Value>
-                FileCamera
+                Bitmap
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CameraParamsGui
+              Log
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileCamera/Gui
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
               CameraParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                FileCamera/ParamsSet
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CameraParamsSetGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileCamera/SetGui
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        imod::IModel
       </InterfaceId>
       <ComponentId>
-        Framework
+        ImageTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iproc::IBitmapSupplier
+      </InterfaceId>
+      <ComponentId>
+        ImageTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iproc::ISupplier
+      </InterfaceId>
+      <ComponentId>
+        ImageTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        ImageTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        ImageTask
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Complex framework showing different task
   </Description>
   <Keywords>
-    
+    Product Framework Task Image Caliper GUI Application
   </Keywords>
 </Acf>

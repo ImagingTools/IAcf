@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -29,24 +29,24 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        EdgeOnLineFinder
+        BitmapDialogLoader
       </ComponentName>
       <X>
-        275
+        600
       </X>
       <X>
-        300
+        200
       </X>
     </Element>
     <Element>
       <ComponentName>
-        PositionTask
+        ImageTaskGui
       </ComponentName>
       <X>
-        275
+        250
       </X>
       <X>
-        150
+        200
       </X>
     </Element>
   </PositionMap>

@@ -26,27 +26,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        FileCamera
+        CaliperLineGui
       </ComponentName>
       <X>
-        325
+        700
       </X>
       <X>
-        425
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        CaliperParamsGui
       </ComponentName>
       <X>
-        772.161
+        700
       </X>
       <X>
-        424.264
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParamsSetGui
+      </ComponentName>
+      <X>
+        300
+      </X>
+      <X>
+        200
       </X>
     </Element>
   </PositionMap>

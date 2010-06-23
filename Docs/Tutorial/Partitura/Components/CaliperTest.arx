@@ -29,72 +29,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        FileCamera
-      </Id>
-      <PackageId>
-        IacfVoce
-      </PackageId>
-      <ComponentId>
-        FileCamera
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DefaultDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                C://
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Framework
+        CaliperTestFramework
       </Id>
       <PackageId>
         IacfTutorialVoce
       </PackageId>
       <ComponentId>
-        ComplexProductFramework
+        CaliperTestFramework
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -103,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Camera
@@ -121,27 +62,6 @@
               <Value>
                 FileCamera
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CameraParamsGui
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileCamera/Gui
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -185,6 +105,27 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        FileCamera
+      </Id>
+      <PackageId>
+        IacfVoce
+      </PackageId>
+      <ComponentId>
+        FileCamera
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <ExportedInterfaces count="1">
     <Interface>
@@ -192,7 +133,7 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Framework
+        CaliperTestFramework
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

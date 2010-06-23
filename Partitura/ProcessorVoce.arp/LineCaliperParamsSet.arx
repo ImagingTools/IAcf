@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1508
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          212
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
     <Element>
       <Id>
-        CaliperProcessor
+        CaliperParams
       </Id>
       <PackageId>
-        ProcessorVoce
+        IprPck
       </PackageId>
       <ComponentId>
-        EdgePosOnLineFinder
+        CaliperParams
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,58 +44,20 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              CaliperParamId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Caliper
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LineParamId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Line
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        PositionTask
+        CaliperParamsSet
       </Id>
       <PackageId>
-        IprPck
+        BasePck
       </PackageId>
       <ComponentId>
-				PositionFromImageSupplier
-			</ComponentId>
+        ComposedParamsSet
+      </ComponentId>
       <Data>
         <IsEnabled>
           true
@@ -103,29 +65,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              BitmapSupplier
+              Parameters
             </Id>
             <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              BitmapSupplier
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-							Processor
-						</Id>
-            <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -134,20 +80,49 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                CaliperProcessor
-              </Value>
+              <Values count="2">
+                <Value>
+                  Line
+                </Value>
+                <Value>
+                  CaliperParams
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              ParametersId
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              Log
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  Line
+                </Value>
+                <Value>
+                  Caliper
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveSets
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              SlaveSets
             </ExportId>
             <Data>
               <IsEnabled>
@@ -155,22 +130,27 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Line
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Line
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -181,23 +161,15 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        PositionTask
+        CaliperParamsSet
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::ISupplier
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iproc::IValueSupplier
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
+        CaliperParamsSet
       </ComponentId>
     </Interface>
     <Interface>
@@ -205,7 +177,7 @@
         iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        PositionTask
+        CaliperParamsSet
       </ComponentId>
     </Interface>
     <Interface>
@@ -213,11 +185,35 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        PositionTask
+        CaliperParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::TIHierarchical&lt;istd::IPolymorphic&gt;
+      </InterfaceId>
+      <ComponentId>
+        CaliperParamsSet
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        CaliperParams
+      </ExportedId>
+      <ComponentId>
+        CaliperParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Line
+      </ExportedId>
+      <ComponentId>
+        Line
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     
