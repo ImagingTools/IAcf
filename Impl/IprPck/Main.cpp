@@ -80,6 +80,11 @@ I_EXPORT_COMPONENT(
 			"Projection Line Processor");
 
 I_EXPORT_COMPONENT(
+			CircleFindProcessor,
+			"Circle finder processor",
+			"Circle Finder Annulus Caliper Processor");
+
+I_EXPORT_COMPONENT(
 			FeaturesContainer,
 			"Container of feature set used to store processing results of some processors",
 			"Model Caliper Search Feature Extraction Container");

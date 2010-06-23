@@ -19,6 +19,7 @@
 #include "iipr/CCaliperParamsComp.h"
 #include "iipr/CExtremumCaliperProcessorComp.h"
 #include "iipr/CLineProjectionProcessorComp.h"
+#include "iipr/CCircleFindProcessorComp.h"
 #include "iipr/CPositionFromImageSupplierComp.h"
 #include "iipr/CRectDerivativeProcessorComp.h"
 #include "iipr/CFeaturesContainer.h"
@@ -48,6 +49,7 @@ typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams
 typedef icomp::TModelCompWrap<iipr::CCaliperParamsComp> CaliperParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
+typedef iipr::CCircleFindProcessorComp CircleFindProcessor;
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iipr::CFeaturesContainer>,
 			iipr::IFeaturesConsumer,
