@@ -26,13 +26,13 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
-        Framework
+        FileCamera
       </ComponentName>
       <X>
-        550
+        375
       </X>
       <X>
         350
@@ -40,46 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTask
+        Framework
       </ComponentName>
       <X>
-        850
+        800
       </X>
       <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LineCaliperTaskGui
-      </ComponentName>
-      <X>
-        850
-      </X>
-      <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTask
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTaskGui
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        475
+        350
       </X>
     </Element>
   </PositionMap>

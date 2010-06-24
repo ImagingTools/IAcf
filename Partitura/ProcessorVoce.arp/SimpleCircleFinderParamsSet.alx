@@ -26,60 +26,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        Framework
+        AnnulusSegment
       </ComponentName>
       <X>
-        550
+        675
       </X>
       <X>
-        350
+        175
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTask
+        CaliperParams
       </ComponentName>
       <X>
-        850
+        675
       </X>
       <X>
-        225
+        325
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTaskGui
+        CaliperParamsSet
       </ComponentName>
       <X>
-        850
+        300
       </X>
-      <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTask
-      </ComponentName>
       <X>
         250
-      </X>
-      <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTaskGui
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        475
       </X>
     </Element>
   </PositionMap>

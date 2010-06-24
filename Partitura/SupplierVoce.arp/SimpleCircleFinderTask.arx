@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
-        CaliperProcessor
+        Caliper
       </Id>
       <PackageId>
         ProcessorVoce
       </PackageId>
       <ComponentId>
-        EdgePosOnLineFinder
+        EdgeOnLineFinder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,13 +44,34 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CircleFindProcessor
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        CircleFindProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              CaliperParamId
+              FeaturesMapper
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -66,26 +87,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FilterParamsId
+              SlaveEdgeProcessor
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              FilterParamsId
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LineParamId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -95,7 +100,7 @@
                 true
               </IsEnabled>
               <Value>
-                Line
+                Caliper
               </Value>
             </Data>
           </AttributeInfo>
@@ -110,7 +115,7 @@
         ProcessorVoce
       </PackageId>
       <ComponentId>
-        LineCaliperParamsSet
+        SimpleCircleFinderParamsSet
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -207,7 +212,7 @@
                 true
               </IsEnabled>
               <Value>
-                CaliperProcessor
+                CircleFindProcessor
               </Value>
             </Data>
           </AttributeInfo>
@@ -215,29 +220,13 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="7">
-    <Interface>
-      <InterfaceId>
-        iipr::IProjectionConstraints
-      </InterfaceId>
-      <ComponentId>
-        CaliperProcessor
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
         PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iproc::IProcessor
-      </InterfaceId>
-      <ComponentId>
-        CaliperProcessor
       </ComponentId>
     </Interface>
     <Interface>
@@ -273,7 +262,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="4">
+    <Component>
+      <ExportedId>
+        AnnulusSegment
+      </ExportedId>
+      <ComponentId>
+        ParamsSet/AnnulusSegment
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         CaliperParams
@@ -287,7 +284,7 @@
         Line
       </ExportedId>
       <ComponentId>
-        ParamsSet/Line
+        LineCaliperParamsSet/Line
       </ComponentId>
     </Component>
     <Component>

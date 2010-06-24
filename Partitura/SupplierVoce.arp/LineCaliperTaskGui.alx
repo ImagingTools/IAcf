@@ -29,57 +29,57 @@
   <PositionMap count="5">
     <Element>
       <ComponentName>
-        Framework
+        FileDialogLoader
       </ComponentName>
       <X>
-        550
+        325
       </X>
       <X>
-        350
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTask
+        GzXmlFileSerializer
       </ComponentName>
       <X>
-        850
+        300
       </X>
       <X>
-        225
+        575
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTaskGui
+        ParamsGui
       </ComponentName>
       <X>
-        850
+        725
       </X>
       <X>
-        475
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SnapTask
+        ValueSupplierGui
       </ComponentName>
       <X>
-        250
+        325
       </X>
       <X>
-        225
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SnapTaskGui
+        XmlFileSerializer
       </ComponentName>
       <X>
-        250
+        600
       </X>
       <X>
-        475
+        575
       </X>
     </Element>
   </PositionMap>

@@ -64,7 +64,7 @@
                   SnapTaskGui
                 </Value>
                 <Value>
-                  LineCaliperTaskGui
+                  SimpleCircleFinderTaskGui
                 </Value>
               </Values>
             </Data>
@@ -172,7 +172,7 @@
                   SnapTask
                 </Value>
                 <Value>
-                  LineCaliperTask
+                  SimpleCircleFinderTask
                 </Value>
               </Values>
             </Data>
@@ -182,13 +182,13 @@
     </Element>
     <Element>
       <Id>
-        LineCaliperTask
+        SimpleCircleFinderTask
       </Id>
       <PackageId>
         SupplierVoce
       </PackageId>
       <ComponentId>
-        LineCaliperTask
+        SimpleCircleFinderTask
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -241,13 +241,13 @@
     </Element>
     <Element>
       <Id>
-        LineCaliperTaskGui
+        SimpleCircleFinderTaskGui
       </Id>
       <PackageId>
         SupplierVoce
       </PackageId>
       <ComponentId>
-        LineCaliperTaskGui
+        SimpleCircleFinderTaskGui
       </ComponentId>
       <Data>
         <IsEnabled>

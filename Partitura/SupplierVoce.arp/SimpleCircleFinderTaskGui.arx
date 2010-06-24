@@ -29,13 +29,74 @@
   <ElementsList count="5">
     <Element>
       <Id>
-        Framework
+        FileDialogLoader
       </Id>
       <PackageId>
-        IacfTutorialVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        SimpleProductFramework
+        FileDialogLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Loaders
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  XmlFileSerializer
+                </Value>
+                <Value>
+                  GzXmlFileSerializer
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        GzXmlFileSerializer
+      </Id>
+      <PackageId>
+        ZlibPck
+      </PackageId>
+      <ComponentId>
+        GzXmlFileSerializer
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -47,31 +108,7 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              InspectionGuis
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  SnapTaskGui
-                </Value>
-                <Value>
-                  LineCaliperTaskGui
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InspectionIds
+              FileExtensions
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -83,37 +120,32 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="1">
                 <Value>
-                  Image
-                </Value>
-                <Value>
-                  Line
-                </Value>
-                <Value>
-                  Rectangle
-                </Value>
-                <Value>
-                  Quadrangle
-                </Value>
-                <Value>
-                  Circle
-                </Value>
-                <Value>
-                  Annulus
-                </Value>
-                <Value>
-                  AnnulusSegment
-                </Value>
-                <Value>
-                  Position
+                  cifix
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InspectionNames
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeDescriptions
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -125,174 +157,11 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="1">
                 <Value>
-                  Image
-                </Value>
-                <Value>
-                  Line
-                </Value>
-                <Value>
-                  Rectangle
-                </Value>
-                <Value>
-                  Quadrangle
-                </Value>
-                <Value>
-                  Circle
-                </Value>
-                <Value>
-                  Annulus
-                </Value>
-                <Value>
-                  Annulus Segment
-                </Value>
-                <Value>
-                  Position
+                  Circle finder XML parameters
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Inspections
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  SnapTask
-                </Value>
-                <Value>
-                  LineCaliperTask
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LineCaliperTask
-      </Id>
-      <PackageId>
-        SupplierVoce
-      </PackageId>
-      <ComponentId>
-        LineCaliperTask
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              BitmapSupplier
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTask
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LineCaliperTaskGui
-      </Id>
-      <PackageId>
-        SupplierVoce
-      </PackageId>
-      <ComponentId>
-        LineCaliperTaskGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveSceneExtender
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTaskGui
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -303,15 +172,12 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Framework
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -319,13 +185,13 @@
     </Element>
     <Element>
       <Id>
-        SnapTask
+        ParamsGui
       </Id>
       <PackageId>
-        SupplierVoce
+        ProcessorVoce
       </PackageId>
       <ComponentId>
-        SnapTask
+        SimpleCircleFinderSetGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -334,16 +200,75 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ValueSupplierGui
+      </Id>
+      <PackageId>
+        QtIprPck
+      </PackageId>
+      <ComponentId>
+        ValueSupplierGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              Camera
+              ParamsLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Camera
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileDialogLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ParamsGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneIdFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              SceneIdFilters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -353,18 +278,60 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CameraParamsSet
+              SlaveSceneExtender
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              CameraParamsSet
+              SlaveSceneExtender
             </ExportId>
             <Data>
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        XmlFileSerializer
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        XmlFileSerializer
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              FileExtensions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  cifix.gz
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -375,47 +342,7 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SnapTaskGui
-      </Id>
-      <PackageId>
-        SupplierVoce
-      </PackageId>
-      <ComponentId>
-        SnapTaskGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              CameraParamsSetGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              CameraParamsSetGui
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
@@ -425,10 +352,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              TypeDescriptions
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -437,46 +364,59 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                Framework
-              </Value>
+              <Values count="2">
+                <Value>
+                  Circle finder compressed parameters
+                </Value>
+                <Value>
+                  
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        Framework
+        ValueSupplierGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IApplicationInfo
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        Framework
+        ValueSupplierGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        iqt2d::ISceneExtender
       </InterfaceId>
       <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        Framework
+        ValueSupplierGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -484,24 +424,48 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::IVersionInfo
-      </InterfaceId>
-      <ComponentId>
-        Framework
+        ValueSupplierGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="4">
+    <Component>
+      <ExportedId>
+        AnnulusSegment
+      </ExportedId>
+      <ComponentId>
+        SimpleCircleFinderParamsSet/AnnulusSegment
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        CaliperParams
+      </ExportedId>
+      <ComponentId>
+        SimpleCircleFinderParamsSet/CaliperParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Line
+      </ExportedId>
+      <ComponentId>
+        LineCaliperParamsSet/Line
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        ParamsGui
+      </ExportedId>
+      <ComponentId>
+        ParamsGui
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
-    Complex framework showing different task
+    
   </Description>
   <Keywords>
-    Product Framework Task Image Caliper GUI Application
+    
   </Keywords>
 </Acf>

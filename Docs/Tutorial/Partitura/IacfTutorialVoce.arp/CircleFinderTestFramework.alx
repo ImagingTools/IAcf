@@ -40,10 +40,10 @@
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTask
+        SimpleCircleFinderTask
       </ComponentName>
       <X>
-        850
+        925
       </X>
       <X>
         225
@@ -51,10 +51,10 @@
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTaskGui
+        SimpleCircleFinderTaskGui
       </ComponentName>
       <X>
-        850
+        925
       </X>
       <X>
         475

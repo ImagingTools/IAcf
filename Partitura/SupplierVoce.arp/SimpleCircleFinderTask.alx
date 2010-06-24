@@ -26,60 +26,49 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
-        Framework
+        Caliper
       </ComponentName>
       <X>
-        550
+        325
       </X>
       <X>
-        350
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTask
+        CircleFindProcessor
       </ComponentName>
       <X>
-        850
+        650
       </X>
       <X>
-        225
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LineCaliperTaskGui
+        ParamsSet
       </ComponentName>
       <X>
-        850
+        950
       </X>
       <X>
-        475
+        275
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SnapTask
+        PositionTask
       </ComponentName>
       <X>
-        250
+        950
       </X>
       <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTaskGui
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        475
+        125
       </X>
     </Element>
   </PositionMap>
