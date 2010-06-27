@@ -196,11 +196,12 @@ bool CCircleFindProcessorComp::CalculateCircle(const i2d::CVector2d& center, Ray
 		return false;
 	}
 
-	i2d::CVector2d position(
-				resultMatrix.GetAt(istd::CIndex2d(0, 0)) + center[0],
-				resultMatrix.GetAt(istd::CIndex2d(0, 1)) + center[1]);
+	double relX = resultMatrix.GetAt(istd::CIndex2d(0, 0));
+	double relY = resultMatrix.GetAt(istd::CIndex2d(0, 1));
+	i2d::CVector2d position(relX + center[0], relY + center[1]);
 	result.SetPosition(position);
-	result.SetRadius(sqrt(position.GetLength2() - resultMatrix.GetAt(istd::CIndex2d(0, 2))));
+	double relPosNorm = relX * relX + relY * relY;
+	result.SetRadius(sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2))));
 
 	result.SetWeight(weightSum / raysCount);
 
@@ -272,13 +273,14 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 		return false;
 	}
 
-	i2d::CVector2d position(
-				resultMatrix.GetAt(istd::CIndex2d(0, 0)) + center[0],
-				resultMatrix.GetAt(istd::CIndex2d(0, 1)) + center[1]);
+	double relX = resultMatrix.GetAt(istd::CIndex2d(0, 0));
+	double relY = resultMatrix.GetAt(istd::CIndex2d(0, 1));
+	i2d::CVector2d position(relX + center[0], relY + center[1]);
 	result.SetPosition(position);
 
-	double radius1 = sqrt(position.GetLength2() - resultMatrix.GetAt(istd::CIndex2d(0, 2)));
-	double radius2 = sqrt(position.GetLength2() - resultMatrix.GetAt(istd::CIndex2d(0, 3)));
+	double relPosNorm = relX * relX + relY * relY;
+	double radius1 = sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2)));
+	double radius2 = sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 3)));
 	result.SetInnerRadius(istd::Min(radius1, radius2));
 	result.SetOuterRadius(istd::Max(radius1, radius2));
 

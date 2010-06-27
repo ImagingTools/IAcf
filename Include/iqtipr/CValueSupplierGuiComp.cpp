@@ -7,10 +7,17 @@
 // ACF includes
 #include "imath/TVarVector.h"
 #include "iqt2d/CPosition2dShape.h"
+#include "iqt2d/CCircleShape.h"
 
 
 namespace iqtipr
 {
+
+
+CValueSupplierGuiComp::CValueSupplierGuiComp()
+:	m_paramsObserver(this)
+{
+}
 
 
 // reimplemented (imod::IModelEditor)
@@ -25,9 +32,10 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		bool isResultVisible = false;
-		imath::CVarVector position = supplierPtr->GetValue();
+		imath::CVarVector position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
 		if (position.GetElementsCount() >= 2){
-			m_foundPosition.SetPosition(i2d::CVector2d(position[0], position[1]));
+			m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+
 			isResultVisible = true;
 
 			if (IsGuiCreated()){
@@ -35,17 +43,34 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 			}
 		}
 		else{
-			m_foundPosition.SetPosition(i2d::CVector2d(0, 0));
+			m_foundModel.SetPosition(i2d::CVector2d(0, 0));
 
 			if (IsGuiCreated()){
 				PositionLabel->setText("No position");
 			}
 		}
 
-		int shapesCount = m_foundPosition.GetObserverCount();
+		imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
+		if (radius.GetElementsCount() >= 1){
+			m_foundModel.SetRadius(radius[0]);
+		}
+		else{
+			m_foundModel.SetRadius(0);
+		}
+
+		int shapesCount = m_foundModel.GetObserverCount();
 		for (int i = 0; i < shapesCount; ++i){
-			QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundPosition.GetObserverPtr(i));
+			QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
 			shapePtr->setVisible(isResultVisible);
+		}
+
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
+		if (paramsModelPtr != NULL){
+			if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
+				m_paramsObserver.EnsureDetached();
+
+				paramsModelPtr->AttachObserver(&m_paramsObserver);
+			}
 		}
 	}
 }
@@ -87,14 +112,24 @@ QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 
 void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
-	iqt2d::CPosition2dShape* shapePtr = new iqt2d::CPosition2dShape(false);
-	if (shapePtr != NULL){
-		shapePtr->setZValue(2);
-		shapePtr->setVisible(false);
+	iqt2d::CCircleShape* circleShapePtr = new iqt2d::CCircleShape(false);
+	if (circleShapePtr != NULL){
+		circleShapePtr->setZValue(2);
+		circleShapePtr->setVisible(false);
 
-		m_foundPosition.AttachObserver(shapePtr);
+		m_foundModel.AttachObserver(circleShapePtr);
 
-		result.PushBack(shapePtr);
+		result.PushBack(circleShapePtr);
+	}
+
+	iqt2d::CPosition2dShape* posShapePtr = new iqt2d::CPosition2dShape(false);
+	if (posShapePtr != NULL){
+		posShapePtr->setZValue(2);
+		posShapePtr->setVisible(false);
+
+		m_foundModel.AttachObserver(posShapePtr);
+
+		result.PushBack(posShapePtr);
 	}
 }
 
@@ -136,6 +171,28 @@ void CValueSupplierGuiComp::OnGuiDestroyed()
 	
 	BaseClass::OnGuiDestroyed();
 }
+
+
+// public methods of embedded class ParamsObserver
+
+CValueSupplierGuiComp::ParamsObserver::ParamsObserver(CValueSupplierGuiComp* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CValueSupplierGuiComp::ParamsObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if (		((updateFlags & istd::IChangeable::CF_MODEL) != 0) &&
+				m_parent.IsGuiCreated() &&
+				m_parent.AutoUpdateButton->isChecked()){
+		m_parent.DoTest();
+	}
+}
+
 
 } // namespace iqtipr
 

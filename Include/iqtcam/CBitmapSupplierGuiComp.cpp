@@ -47,7 +47,7 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		supplierPtr->InitNewWork();
+		supplierPtr->InitNewWork(true);
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){

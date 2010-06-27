@@ -32,7 +32,7 @@
         Framework
       </ComponentName>
       <X>
-        550
+        575
       </X>
       <X>
         350
@@ -43,7 +43,7 @@
         SimpleCircleFinderTask
       </ComponentName>
       <X>
-        925
+        950
       </X>
       <X>
         225
@@ -54,7 +54,7 @@
         SimpleCircleFinderTaskGui
       </ComponentName>
       <X>
-        925
+        950
       </X>
       <X>
         475

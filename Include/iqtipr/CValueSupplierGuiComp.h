@@ -6,13 +6,13 @@
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
-#include "i2d/CPosition2d.h"
+#include "imod/CSingleModelObserverBase.h"
+#include "i2d/CCircle.h"
+#include "iproc/IValueSupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
-#include "iproc/IValueSupplier.h"
-
 #include "iqtproc/TSupplierGuiCompBase.h"
+
 
 #include "iqtipr/iqtipr.h"
 
@@ -34,9 +34,11 @@ public:
 				Ui::CValueSupplierGuiComp,
 				iproc::IValueSupplier> BaseClass;
 
-	I_BEGIN_COMPONENT(CValueSupplierGuiComp)
+	I_BEGIN_COMPONENT(CValueSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
-	I_END_COMPONENT
+	I_END_COMPONENT;
+
+	CValueSupplierGuiComp();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -48,6 +50,21 @@ protected slots:
 	void on_SaveParamsButton_clicked();
 
 protected:
+	class ParamsObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		ParamsObserver(CValueSupplierGuiComp* parentPtr);
+
+		using imod::CSingleModelObserverBase::EnsureDetached;
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CValueSupplierGuiComp& m_parent;
+	};
+
 	// reimplemented (iqtproc::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
@@ -64,7 +81,9 @@ protected:
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
-	imod::TModelWrap<i2d::CPosition2d> m_foundPosition;
+	imod::TModelWrap<i2d::CCircle> m_foundModel;
+
+	ParamsObserver m_paramsObserver;
 };
 
 

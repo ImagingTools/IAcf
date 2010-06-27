@@ -125,30 +125,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="2">
                 <Value>
                   Image
                 </Value>
                 <Value>
-                  Line
-                </Value>
-                <Value>
-                  Rectangle
-                </Value>
-                <Value>
-                  Quadrangle
-                </Value>
-                <Value>
-                  Circle
-                </Value>
-                <Value>
-                  Annulus
-                </Value>
-                <Value>
-                  Annulus Segment
-                </Value>
-                <Value>
-                  Position
+                  Caliper
                 </Value>
               </Values>
             </Data>

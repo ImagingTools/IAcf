@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "i2d/CPosition2d.h"
+#include "i2d/CCircle.h"
 
 #include "iipr/CHeaviestFeatureConsumer.h"
 
@@ -13,15 +13,29 @@ namespace iipr
 
 // reimplemented (iproc::IValueSupplier)
 
-imath::CVarVector CPositionFromImageSupplierComp::GetValue(int /*index*/, int /*valueTypeId*/) const
+imath::CVarVector CPositionFromImageSupplierComp::GetValue(int /*index*/, int valueTypeId) const
 {
-	const i2d::CVector2d* productPtr = GetWorkProduct();
+	const imath::CVarVector* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return *productPtr;
+		switch (valueTypeId){
+		case VTI_AUTO:
+			return *productPtr;
+
+		case VTI_POSITION:
+			if (productPtr->GetElementsCount() >= 2){
+				return i2d::CVector2d(productPtr->GetElement(0), productPtr->GetElement(1));
+			}
+			break;
+
+		case VTI_RADIUS:
+			if (productPtr->GetElementsCount() >= 3){
+				return imath::CVarVector(1, productPtr->GetElement(2));
+			}
+			break;
+		}
 	}
-	else{
-		return imath::CVarVector();
-	}
+
+	return imath::CVarVector();
 }
 
 
@@ -29,7 +43,7 @@ imath::CVarVector CPositionFromImageSupplierComp::GetValue(int /*index*/, int /*
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CPositionFromImageSupplierComp::ProduceObject(i2d::CVector2d& result) const
+int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_processorCompPtr.IsValid()){
@@ -53,6 +67,12 @@ int CPositionFromImageSupplierComp::ProduceObject(i2d::CVector2d& result) const
 			}
 
 			result = positionPtr->GetPosition();
+
+			const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
+			if (circlePtr != NULL){
+				result.SetElementsCount(3);
+				result[2] = circlePtr->GetRadius();
+			}
 
 			return WS_OK;
 		}

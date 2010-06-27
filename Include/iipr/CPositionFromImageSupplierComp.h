@@ -20,10 +20,10 @@ namespace iipr
 	This processor must accept image object as input and produce some set of features containing position into feature consumer.
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
-class CPositionFromImageSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d>
+class CPositionFromImageSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector>
 {
 public:
-	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, i2d::CVector2d> BaseClass;
+	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
@@ -35,7 +35,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(i2d::CVector2d& result) const;
+	virtual int ProduceObject(imath::CVarVector& result) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
