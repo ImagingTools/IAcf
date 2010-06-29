@@ -4,6 +4,7 @@
 
 #include "icmm/icmm.h"
 #include "iproc/iproc.h"
+#include "imeas/imeas.h"
 
 
 /**
@@ -13,6 +14,7 @@
 	\li iser
 	\li	icmm
 	\li	iproc
+	\li imeas
 */
 namespace iipr
 {

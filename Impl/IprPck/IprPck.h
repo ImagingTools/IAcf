@@ -27,6 +27,7 @@
 #include "iipr/CFeatureToImageMapperProcessorComp.h"
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 #include "iipr/CLineProjectionSupplierComp.h"
+#include "iipr/CImageHistogramProcessorComp.h"
 
 
 /**
@@ -70,7 +71,7 @@ typedef icomp::TModelCompWrap<iipr::CSearchBasedFeaturesSupplierComp> SearchBase
 typedef icomp::TModelCompWrap<iipr::CLineProjectionSupplierComp> ProjectionSupplier;
 
 typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
-
+typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;
 
 
 } // namespace IprPck

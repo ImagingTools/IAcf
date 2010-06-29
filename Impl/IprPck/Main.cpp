@@ -110,14 +110,19 @@ I_EXPORT_COMPONENT(
 			"Model Pattern Search Processing Supplier");
 
 I_EXPORT_COMPONENT(
+			ProjectionSupplier,
+			"Supplier implementation returning image projection data",
+			"Supplier Projection Data Image Bitmap Model");
+
+I_EXPORT_COMPONENT(
 			RectDerivativeProcessor,
 			"Calculate derivative of projection using rectangular kernel",
 			"Projection Derivative Processor Filter Rectangular Kernel");
 
 I_EXPORT_COMPONENT(
-			ProjectionSupplier,
-			"Supplier implementation returning image projection data",
-			"Supplier Projection Data Image Bitmap Model");
+			ImageHistogramProcessor,
+			"Calculate image histogram",
+			"Processor Histogram");
 
 
 } // namespace IprPck

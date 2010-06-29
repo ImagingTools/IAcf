@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageHistogramProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionProcessorComp.cpp"
 				>
 			</File>
@@ -314,6 +318,10 @@
 			</File>
 			<File
 				RelativePath="..\CHeaviestFeatureConsumer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageHistogramProcessorComp.h"
 				>
 			</File>
 			<File
