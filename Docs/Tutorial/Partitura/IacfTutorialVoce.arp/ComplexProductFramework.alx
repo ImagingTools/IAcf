@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1508
+          1518
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          212
+          219
         </Number>
         <Description>
           ACF-Solutions
@@ -65,7 +65,7 @@
         AnnulusTestTaskGui
       </ComponentName>
       <X>
-        975
+        950
       </X>
       <X>
         700
@@ -87,7 +87,7 @@
         CircleTestTaskGui
       </ComponentName>
       <X>
-        975
+        950
       </X>
       <X>
         600
@@ -120,10 +120,10 @@
         LineTestTaskGui
       </ComponentName>
       <X>
-        975
+        950
       </X>
       <X>
-        400
+        300
       </X>
     </Element>
     <Element>
@@ -142,7 +142,7 @@
         QuadrangleTaskGui
       </ComponentName>
       <X>
-        975
+        950
       </X>
       <X>
         500
@@ -164,10 +164,10 @@
         RectangleTestTaskGui
       </ComponentName>
       <X>
-        975
+        950
       </X>
       <X>
-        300
+        400
       </X>
     </Element>
     <Element>
