@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1510
+          1518
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          213
+          219
         </Number>
         <Description>
           ACF-Solutions
@@ -29,13 +29,13 @@
   <PositionMap count="9">
     <Element>
       <ComponentName>
-        Application
+        AboutGui
       </ComponentName>
       <X>
-        750
+        425
       </X>
       <X>
-        175
+        275
       </X>
     </Element>
     <Element>
@@ -43,21 +43,21 @@
         Info
       </ComponentName>
       <X>
-        450
+        425
       </X>
       <X>
-        175
+        75
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LogTab
+        LogDock
       </ComponentName>
       <X>
-        450
+        1050
       </X>
       <X>
-        300
+        175
       </X>
     </Element>
     <Element>
@@ -117,13 +117,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Tabs
+        StandaloneApp
       </ComponentName>
       <X>
         750
       </X>
       <X>
-        300
+        175
       </X>
     </Element>
   </PositionMap>

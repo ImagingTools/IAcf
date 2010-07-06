@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1510
+          1518
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          213
+          219
         </Number>
         <Description>
           ACF-Solutions
@@ -29,13 +29,13 @@
   <ElementsList count="9">
     <Element>
       <Id>
-        Application
+        AboutGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        GuiApplication
+        AboutGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -66,21 +66,34 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MainGui
+              DescriptionText
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              AboutDescriptionText
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Tabs
-              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LogoPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              AboutLogoPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -103,7 +116,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -112,7 +125,7 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              ApplicatioName
             </ExportId>
             <Data>
               <IsEnabled>
@@ -131,7 +144,7 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              CompanyName
             </ExportId>
             <Data>
               <IsEnabled>
@@ -142,18 +155,34 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SlaveApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        LogTab
+        LogDock
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        LogGui
+        LogDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -486,13 +515,13 @@
     </Element>
     <Element>
       <Id>
-        Tabs
+        StandaloneApp
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        TabContainer
+        StandaloneApp
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -501,10 +530,86 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              Guis
+              AboutGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                AboutGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Info
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsMenuVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainView
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapTab
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -516,38 +621,27 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="1">
                 <Value>
-                  SnapTab
-                </Value>
-                <Value>
-                  LogTab
+                  LogDock
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Names
+              SplashScreen
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              SplashScreen
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Snap
-                </Value>
-                <Value>
-                  Log
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -560,7 +654,7 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        StandaloneApp
       </ComponentId>
     </Interface>
     <Interface>
@@ -576,7 +670,7 @@
         ibase::IMessageConsumer
       </InterfaceId>
       <ComponentId>
-        LogTab
+        LogDock
       </ComponentId>
     </Interface>
     <Interface>
@@ -584,23 +678,23 @@
         ibase::IMessageContainer
       </InterfaceId>
       <ComponentId>
-        LogTab
+        LogDock
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IModel
+        iqt2d::ISceneProvider
       </InterfaceId>
       <ComponentId>
-        LogTab
+        SceneGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iqtgui::IGuiObject
+        iqt::ISettingsProvider
       </InterfaceId>
       <ComponentId>
-        LogTab
+        StandaloneApp
       </ComponentId>
     </Interface>
     <Interface>
