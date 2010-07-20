@@ -467,6 +467,9 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 		deviceInfo.triggerMode = triggerMode;
 	}
 
+	retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
+	retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSource", "ExposureActive") && retVal;
+
 	retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 1) && retVal;
 
 	retVal = deviceInfo.devicePtr->CommandNodeExecute("AcquisitionStart") && retVal;

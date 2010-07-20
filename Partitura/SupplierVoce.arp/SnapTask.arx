@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1508
+          1526
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          212
+          224
         </Number>
         <Description>
           ACF-Solutions
@@ -182,9 +182,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Complex framework showing different task
+    Image acquisition task using camera to retrive image
   </Description>
   <Keywords>
-    Product Framework Task Image Caliper GUI Application
+    Task Image Acquisition Camera
   </Keywords>
 </Acf>
