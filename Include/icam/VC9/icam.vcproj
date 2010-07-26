@@ -19,7 +19,7 @@
 			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -98,7 +98,7 @@
 			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -220,14 +220,6 @@
 			</File>
 			<File
 				RelativePath="..\CTriggerParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IBitmapAcquisition.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IBitmapSupplier.h"
 				>
 			</File>
 			<File
