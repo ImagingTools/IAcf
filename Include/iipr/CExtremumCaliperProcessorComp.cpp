@@ -1,6 +1,10 @@
 #include "iipr/CExtremumCaliperProcessorComp.h"
 
 
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
+#include "imeas/CSamplesInfo.h"
+
 #include "iipr/ICaliperParams.h"
 #include "iipr/IFeaturesConsumer.h"
 #include "iipr/CCaliperFeature.h"
@@ -29,9 +33,14 @@ bool CExtremumCaliperProcessorComp::DoCaliper(
 	double weightThreshold = paramsPtr->GetWeightThreshold();
 	I_ASSERT(weightThreshold >= 0);
 
-	istd::CRange proportionRange = derivative.GetLogicalSamplesRange();
-	if (!proportionRange.IsValid()){
-		proportionRange = istd::CRange(0, 1);
+	istd::CRange proportionRange(0, 1);
+
+	const imeas::CSamplesInfo* derivativeInfoPtr = dynamic_cast<const imeas::CSamplesInfo*>(derivative.GetSequenceInfo());
+	if (derivativeInfoPtr != NULL){
+		const istd::CRange& logicalRange = derivativeInfoPtr->GetLogicalSamplesRange();
+		if (logicalRange.IsValid()){
+			proportionRange = logicalRange;
+		}
 	}
 
 	int polarityMode = paramsPtr->GetPolarityMode();

@@ -1,7 +1,12 @@
 #include "iipr/CRectDerivativeProcessor.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
+
+// ACF-Solutions includes
+#include "imeas/IDataSequence.h"
+#include "imeas/CSamplesInfo.h"
 
 #include "iipr/IMultidimensionalFilterParams.h"
 
@@ -20,11 +25,21 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 
 	istd::CChangeNotifier notifier(&results);
 
-	const istd::CRange& sourceProportionRange = source.GetLogicalSamplesRange();
+	istd::CRange sourceProportionRange(0, 1);
+
+	const imeas::CSamplesInfo* sourceInfoPtr = dynamic_cast<const imeas::CSamplesInfo*>(source.GetSequenceInfo());
+	if (sourceInfoPtr != NULL){
+		const istd::CRange& logicalRange = sourceInfoPtr->GetLogicalSamplesRange();
+		if (logicalRange.IsValid()){
+			sourceProportionRange = logicalRange;
+		}
+	}
+
 	double proportionXAlpha = 0.5 / samplesCount;
-	results.SetLogicalSamplesRange(istd::CRange(
+	istd::CRange resultProportionRange(
 				sourceProportionRange.GetValueFromAlpha(proportionXAlpha),
-				sourceProportionRange.GetValueFromAlpha(1.0 - proportionXAlpha)));
+				sourceProportionRange.GetValueFromAlpha(1.0 - proportionXAlpha));
+	results.SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
 
 	double halfRealLength = istd::Max(1.0, filterLength * 0.5);
 

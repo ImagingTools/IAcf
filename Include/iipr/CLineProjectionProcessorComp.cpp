@@ -8,6 +8,7 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
+#include "imeas/CSamplesInfo.h"
 
 #include "iipr/IFeature.h"
 
@@ -83,9 +84,10 @@ bool ProjectionFunction(
 		}
 
 		istd::CRange axis1CutLineRange(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint2().GetX());
-		results.SetLogicalSamplesRange(istd::CRange(
+		istd::CRange resultProportionRange(
 					axis1CutLineRange.GetAlphaFromValue(axis1Begin),
-					axis1CutLineRange.GetAlphaFromValue(axis1End)));
+					axis1CutLineRange.GetAlphaFromValue(axis1End));
+		results.SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
 
 		return true;
 	}
