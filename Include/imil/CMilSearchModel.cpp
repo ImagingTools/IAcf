@@ -145,7 +145,7 @@ void CMilSearchModel::EnsurePreprocessing(const imil::CMilSearchParams& paramsPt
 
 // reimplemented (iipr::ISearchModel)
 
-bool CMilSearchModel::IsValid() const
+bool CMilSearchModel::IsModelValid() const
 {
 	int numberModels =  MmodInquire(m_milSearchContextId, M_CONTEXT, M_NUMBER_MODELS, M_NULL);
 
@@ -174,7 +174,7 @@ const iimg::IBitmap& CMilSearchModel::GetImage() const
 
 bool CMilSearchModel::CreateFromImage(const iimg::IBitmap& modelImage, const iipr::ISearchParams* paramsPtr)
 {
-	bool isModelCreated = IsValid();
+	bool isModelCreated = IsModelValid();
 
 	const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(&modelImage);
 	I_ASSERT(bitmapPtr != NULL);

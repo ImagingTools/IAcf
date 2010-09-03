@@ -27,7 +27,7 @@ public:
 	/**
 		Returns a \c true, if the model was created and is ready for use, otherwise a \c false.
 	*/
-	virtual bool IsValid() const = 0;
+	virtual bool IsModelValid() const = 0;
 
 	/**
 		Resets the model object. All model data will be cleared.

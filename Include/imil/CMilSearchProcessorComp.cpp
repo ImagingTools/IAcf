@@ -82,7 +82,7 @@ bool CMilSearchProcessorComp::DoModelSearch(
 	consumerPtr->ResetFeatures();
 
 	const imil::CMilSearchModel& searchModel = params.GetModel(); 
-	if (!searchModel.IsValid()){
+	if (!searchModel.IsModelValid()){
 		SendErrorMessage(MI_BAD_PARAMS, "Invalid model or model type");
 
 		return false;

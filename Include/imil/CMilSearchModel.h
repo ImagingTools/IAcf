@@ -32,7 +32,7 @@ public:
 	void EnsurePreprocessing(const imil::CMilSearchParams& params, bool preprocess = false) const;
 
 	// reimplemented (iipr::ISearchModel)
-	virtual bool IsValid() const;
+	virtual bool IsModelValid() const;
 	virtual void ResetModel();
 	virtual const iimg::IBitmap& GetImage() const;
 	bool CreateFromImage(const iimg::IBitmap& modelImage, const iipr::ISearchParams* params);
