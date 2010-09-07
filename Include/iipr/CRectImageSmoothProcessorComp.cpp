@@ -1,11 +1,35 @@
 #include "iipr/CRectImageSmoothProcessorComp.h"
 
 
+// ACF includes
+#include "imath/CFixedPointManip.h"
 #include "iimg/CGeneralBitmap.h"
 
 
 namespace iipr
 {
+
+
+// reimplemented (iipr::IMultidimensionalFilterConstraints)
+
+int CRectImageSmoothProcessorComp::GetFilterDimensionsCount() const
+{
+	return 2;
+}
+
+
+istd::CRange CRectImageSmoothProcessorComp::GetFilterLengthRange(int /*dimension*/) const
+{
+	return istd::CRange(1, 100);
+}
+
+
+const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetFilterLengthManip(int /*dimension*/) const
+{
+	static imath::CFixedPointManip manip(0);
+
+	return manip;
+}
 
 
 // reimplemented (iipr::TImageProcessorCompBase)
