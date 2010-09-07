@@ -35,7 +35,7 @@
         IprPck
       </PackageId>
       <ComponentId>
-        MovingAverageProcessor
+        RectImageSmoothProcessor
       </ComponentId>
       <Data>
         <IsEnabled>

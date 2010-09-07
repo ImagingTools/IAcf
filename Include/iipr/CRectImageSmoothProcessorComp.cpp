@@ -1,4 +1,4 @@
-#include "iipr/CMovingAverageProcessorComp.h"
+#include "iipr/CRectImageSmoothProcessorComp.h"
 
 
 #include "iimg/CGeneralBitmap.h"
@@ -10,7 +10,7 @@ namespace iipr
 
 // reimplemented (iipr::TImageProcessorCompBase)
 
-bool CMovingAverageProcessorComp::ProcessImage(
+bool CRectImageSmoothProcessorComp::ProcessImage(
 			const IMultidimensionalFilterParams* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)

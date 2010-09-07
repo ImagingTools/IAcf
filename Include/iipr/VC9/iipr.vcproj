@@ -240,7 +240,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMovingAverageProcessorComp.cpp"
+				RelativePath="..\CRectImageSmoothProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -341,7 +341,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMovingAverageProcessorComp.h"
+				RelativePath="..\CRectImageSmoothProcessorComp.h"
 				>
 			</File>
 			<File

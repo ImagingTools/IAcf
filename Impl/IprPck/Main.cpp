@@ -15,9 +15,9 @@ I_EXPORT_PACKAGE(
 			"\"Image Processing\"" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			MovingAverageProcessor,
-			"Moving average image processor",
-			"Image Processing");
+			RectImageSmoothProcessor,
+			"Fast smooth image processor using simple rectangle kernel",
+			"Image Processing Rectangle Kernel");
 
 I_EXPORT_COMPONENT(
 			RectangularFilterParams,

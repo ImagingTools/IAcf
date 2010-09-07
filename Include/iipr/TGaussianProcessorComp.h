@@ -16,11 +16,16 @@ namespace iipr
 */
 
 template <typename PixelType>
-class TGaussianProcessorComp: 
-	public iipr::TConvolutionProcessorComp<PixelType, iipr::CGaussian2dFilterParams, iipr::CGaussianKernel2d>
+class TGaussianProcessorComp: public iipr::TConvolutionProcessorComp<
+			PixelType,
+			iipr::CGaussian2dFilterParams,
+			iipr::CGaussianKernel2d>
 {
 public:
-	typedef iipr::TConvolutionProcessorComp<PixelType, iipr::CGaussian2dFilterParams, iipr::CGaussianKernel2d> BaseClass;
+	typedef iipr::TConvolutionProcessorComp<
+				PixelType,
+				iipr::CGaussian2dFilterParams,
+				iipr::CGaussianKernel2d> BaseClass;
 
 protected:		
 	// reimplemented (iipr::TConvolutionProcessorComp)

@@ -8,7 +8,7 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "iipr/TMorphoProcessorComp.h"
-#include "iipr/CMovingAverageProcessorComp.h"
+#include "iipr/CRectImageSmoothProcessorComp.h"
 #include "iipr/CMultidimensionalFilterParamsComp.h"
 #include "iipr/CProcessedAcquisitionComp.h"
 #include "iipr/CLocalDifferenceProcessorComp.h"
@@ -38,7 +38,7 @@ namespace IprPck
 
 
 typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
-typedef iipr::CMovingAverageProcessorComp MovingAverageProcessor;
+typedef iipr::CRectImageSmoothProcessorComp RectImageSmoothProcessor;
 typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> RectangularFilterParams;
 typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CLocalDifferenceFilterParams>, iser::ISerializable> LocalDifferenceFilterParams;
