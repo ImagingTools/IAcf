@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "imath/CDoubleManip.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
@@ -125,6 +126,28 @@ int CRectDerivativeProcessor::DoProcessing(
 	return DoDerivativeProcessing(*inputProjectionPtr, filterLength, *outputProjectionPtr)?
 				TS_OK:
 				TS_INVALID;
+}
+
+
+// reimplemented (iipr::IMultidimensionalFilterConstraints)
+
+int CRectDerivativeProcessor::GetFilterDimensionsCount() const
+{
+	return 1;
+}
+
+
+istd::CRange CRectDerivativeProcessor::GetFilterLengthRange(int /*dimension*/) const
+{
+	return istd::CRange(1, 100);
+}
+
+
+const imath::IDoubleManip& CRectDerivativeProcessor::GetFilterLengthManip(int /*dimension*/) const
+{
+	static imath::CDoubleManip manip;
+
+	return manip;
 }
 
 

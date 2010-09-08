@@ -6,9 +6,10 @@
 
 
 #include "iimg/TBitmapIterator2d.h"
+#include "iimg/CGeneralBitmap.h"
 
 #include "iipr/IMultidimensionalFilterParams.h"
-#include "iipr/TImageProcessorCompBase.h"
+#include "iipr/TImageParamProcessorCompBase.h"
 
 
 namespace iipr
@@ -39,14 +40,14 @@ public:
 	Implementation of general morphological operator.
 */
 template <typename PixelType, class CompareFunction> 
-class TMorphoProcessorComp: public iipr::TImageProcessorCompBase<IMultidimensionalFilterParams>
+class TMorphoProcessorComp: public iipr::TImageParamProcessorCompBase<IMultidimensionalFilterParams>
 {
 public:
-	typedef iipr::TImageProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
+	typedef iipr::TImageParamProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
 
 protected:		
-	// reimplemented (iipr::TImageProcessorCompBase<iipr::IMultidimensionalFilterParams>)
-	virtual bool ProcessImage(
+	// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
+	virtual bool ParamProcessImage(
 				const IMultidimensionalFilterParams* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
@@ -56,10 +57,10 @@ private:
 };
 
 
-// reimplemented (iipr::TImageProcessorCompBase<iipr::IMultidimensionalFilterParams>)
+// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
 
 template <typename PixelType, class CompareFunction> 
-bool TMorphoProcessorComp<PixelType, CompareFunction>::ProcessImage(
+bool TMorphoProcessorComp<PixelType, CompareFunction>::ParamProcessImage(
 			const IMultidimensionalFilterParams* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)

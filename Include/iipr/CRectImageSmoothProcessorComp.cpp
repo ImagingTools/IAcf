@@ -32,9 +32,9 @@ const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetFilterLengthManip(i
 }
 
 
-// reimplemented (iipr::TImageProcessorCompBase)
+// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
 
-bool CRectImageSmoothProcessorComp::ProcessImage(
+bool CRectImageSmoothProcessorComp::ParamProcessImage(
 			const IMultidimensionalFilterParams* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)

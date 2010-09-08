@@ -12,7 +12,6 @@
 #include "iipr/CMultidimensionalFilterParamsComp.h"
 #include "iipr/CProcessedAcquisitionComp.h"
 #include "iipr/CLocalDifferenceProcessorComp.h"
-#include "iipr/CLocalDifferenceFilterParams.h"
 #include "iipr/TUnaryTransformProcessorComp.h"
 #include "iipr/TGaussianProcessorComp.h"
 #include "iipr/CGaussian2dFilterParams.h"
@@ -41,7 +40,6 @@ typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
 typedef iipr::CRectImageSmoothProcessorComp RectImageSmoothProcessor;
 typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> RectangularFilterParams;
 typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CLocalDifferenceFilterParams>, iser::ISerializable> LocalDifferenceFilterParams;
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
 typedef iipr::CInvertOperatorComp InvertOperator;

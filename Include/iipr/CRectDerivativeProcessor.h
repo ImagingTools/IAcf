@@ -9,6 +9,9 @@
 #include "imeas/IDataSequence.h"
 
 
+#include "iipr/IMultidimensionalFilterConstraints.h"
+
+
 namespace iipr
 {
 
@@ -16,7 +19,9 @@ namespace iipr
 /**
 	Calculate derivative of projection using rectangular filter kernel.
 */
-class CRectDerivativeProcessor: public iproc::CSyncProcessorBase
+class CRectDerivativeProcessor:
+			public iproc::CSyncProcessorBase,
+			virtual public IMultidimensionalFilterConstraints
 {
 public:
 	/**
@@ -40,6 +45,11 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
+
+	// reimplemented (iipr::IMultidimensionalFilterConstraints)
+	virtual int GetFilterDimensionsCount() const;
+	virtual istd::CRange GetFilterLengthRange(int dimension) const;
+	virtual const imath::IDoubleManip& GetFilterLengthManip(int dimension) const;
 
 private:
 	std::string m_filterParamsId;

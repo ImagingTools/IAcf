@@ -4,7 +4,7 @@
 
 #include "iimg/TBitmapIterator.h"
 
-#include "iipr/TImageProcessorCompBase.h"
+#include "iipr/TImageParamProcessorCompBase.h"
 #include "iipr/TLocalNeighborhood.h"
 
 
@@ -16,28 +16,28 @@ namespace iipr
 	Implementation of general convolution operator.
 */
 template <typename PixelType, class ParameterType, class Kernel> 
-class TConvolutionProcessorComp: public iipr::TImageProcessorCompBase<ParameterType>
+class TConvolutionProcessorComp: public iipr::TImageParamProcessorCompBase<ParameterType>
 {
 public:
-	typedef iipr::TImageProcessorCompBase<ParameterType> BaseClass;
+	typedef iipr::TImageParamProcessorCompBase<ParameterType> BaseClass;
 	typedef iipr::TLocalNeighborhood<iimg::TBitmapIterator<PixelType>, Kernel> Neighborhood;
 
 protected:		
 	// abstract methods
 	virtual Kernel* CreateKernel(const ParameterType* paramsPtr) = 0;
 
-	// reimplemented (iipr::TImageProcessorCompBase<ParameterType>)
-	virtual bool ProcessImage(
+	// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
+	virtual bool ParamProcessImage(
 				const ParameterType* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 };
 
 
-// reimplemented (iipr::TImageProcessorCompBase<ParameterType>)
+// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
 
 template <typename PixelType, class ParameterType, class Kernel> 
-bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ProcessImage(
+bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ParamProcessImage(
 			const ParameterType* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)

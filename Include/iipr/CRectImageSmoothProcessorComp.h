@@ -4,7 +4,7 @@
 
 #include "iipr/IMultidimensionalFilterParams.h"
 #include "iipr/IMultidimensionalFilterConstraints.h"
-#include "iipr/TImageProcessorCompBase.h"
+#include "iipr/TImageParamProcessorCompBase.h"
 
 
 namespace iipr
@@ -16,11 +16,11 @@ namespace iipr
 	This implementation uses moving average alghorithm.
 */
 class CRectImageSmoothProcessorComp:
-			public TImageProcessorCompBase<IMultidimensionalFilterParams>,
+			public TImageParamProcessorCompBase<IMultidimensionalFilterParams>,
 			virtual public IMultidimensionalFilterConstraints
 {
 public:
-	typedef iipr::TImageProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
+	typedef iipr::TImageParamProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CRectImageSmoothProcessorComp);
 		I_REGISTER_INTERFACE(IMultidimensionalFilterConstraints);
@@ -32,8 +32,8 @@ public:
 	virtual const imath::IDoubleManip& GetFilterLengthManip(int dimension) const;
 
 protected:
-	// reimplemented (iipr::TImageProcessorCompBase<iipr::IMultidimensionalFilterParams>)
-	virtual bool ProcessImage(
+	// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
+	virtual bool ParamProcessImage(
 				const IMultidimensionalFilterParams* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);

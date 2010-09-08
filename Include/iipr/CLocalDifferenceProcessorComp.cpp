@@ -8,43 +8,38 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::TImageProcessorCompBase)
+// reimplemented (iipr::CImageProcessorCompBase)
 
 bool CLocalDifferenceProcessorComp::ProcessImage(
-			const iipr::CLocalDifferenceFilterParams* paramsPtr,
+			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	int alpha;
-	double beta;;
-	int gamma;
+	const iprm::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
+	const IMultidimensionalFilterParams* filterParamsPtr = m_defaultFilterParamCompPtr.GetPtr();
 
-	if (paramsPtr == NULL){
-		if (m_alphaAttrPtr.IsValid()){
-			alpha = m_alphaAttrPtr->GetValue();
+	if (paramsPtr != NULL){
+		if (m_adjustParamsIdAttrPtr.IsValid()){
+			adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter((*m_adjustParamsIdAttrPtr).ToString()));
 		}
-		else{
-			return false;
-		}
-
-		if (m_betaAttrPtr.IsValid()){
-			beta = m_betaAttrPtr->GetValue();
-		}
-		else{
-			return false;
-		}
-		
-		if (m_gammaAttrPtr.IsValid()){
-			gamma = m_gammaAttrPtr->GetValue();
-		}
-		else{
-			return false;
+		if (m_filterParamIdAttrPtr.IsValid()){
+			filterParamsPtr = dynamic_cast<const IMultidimensionalFilterParams*>(paramsPtr->GetParameter((*m_filterParamIdAttrPtr).ToString()));
 		}
 	}
-	else{
-		alpha = paramsPtr->GetAlpha();
-		beta = paramsPtr->GetBeta();
-		gamma = paramsPtr->GetGamma();
+
+	double contrast = 1;
+	double brightness = 128;
+	if (adjustParamsPtr != NULL){
+		contrast = adjustParamsPtr->GetScaleFactor();
+		brightness = adjustParamsPtr->GetOffsetFactor() * 255;
+	}
+
+	int filterLength = 10;
+	if (filterParamsPtr != NULL){
+		imath::CVarVector filters = filterParamsPtr->GetFilterLengths();
+		if (filters.GetElementsCount() >= 1){
+			filterLength = int(filters[0] + 0.5);
+		}
 	}
 
 	int imageHeight = inputImage.GetImageSize().GetY();
@@ -55,11 +50,11 @@ bool CLocalDifferenceProcessorComp::ProcessImage(
 		I_BYTE* outputLinePtr = (I_BYTE*)outputImage.GetLinePtr(lineIndex);
 
 		for (int x = 0; x < imageWidth; x++){
-			int beginPoint = x - alpha;
+			int beginPoint = x - filterLength;
 			if (beginPoint < 0){
 				beginPoint = 0;
 			}
-			int endPoint = x + alpha;
+			int endPoint = x + filterLength;
 			if (endPoint >= imageWidth){
 				endPoint = imageWidth - 1;
 			}
@@ -68,11 +63,11 @@ bool CLocalDifferenceProcessorComp::ProcessImage(
 			I_BYTE lastValue = *(inputLinePtr + endPoint);
  
 			I_BYTE* outputImagePtr = outputLinePtr + x;
-			int outputValue = int(labs(firstValue - lastValue) * beta + gamma);
+			int outputValue = int(labs(firstValue - lastValue) * contrast + brightness);
 			if (outputValue < 0){
 				outputValue = 0;
 			}
-			if (outputValue > 255){
+			else if (outputValue > 255){
 				outputValue = 255;
 			}
 

@@ -7,7 +7,7 @@
 
 #include "iimg/TBitmapIterator.h"
 
-#include "iipr/TImageProcessorCompBase.h"
+#include "iipr/CImageProcessorCompBase.h"
 
 
 namespace iipr
@@ -37,15 +37,15 @@ private:
 	Implementation of general morphological operator.
 */
 template <typename PixelType, class Predicate> 
-class TUnaryTransformProcessorComp: public iipr::TImageProcessorCompBase<istd::IPolymorphic>
+class TUnaryTransformProcessorComp: public iipr::CImageProcessorCompBase
 {
 public:
-	typedef iipr::TImageProcessorCompBase<istd::IPolymorphic> BaseClass;
+	typedef iipr::CImageProcessorCompBase BaseClass;
 
 protected:		
-	// reimplemented (iipr::TImageProcessorCompBase<istd::IPolymorphic>)
+	// reimplemented (iipr::CImageProcessorCompBase)
 	virtual bool ProcessImage(
-				const istd::IPolymorphic* paramsPtr,
+				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 
@@ -54,11 +54,11 @@ private:
 };
 
 
-// reimplemented (iipr::TImageProcessorCompBase<istd::IPolymorphic>)
+// reimplemented (iipr::CImageProcessorCompBase)
 
 template <typename PixelType, class Predicate> 
 bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
-			const istd::IPolymorphic* /*paramsPtr*/,
+			const iprm::IParamsSet* /*paramsPtr*/,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {

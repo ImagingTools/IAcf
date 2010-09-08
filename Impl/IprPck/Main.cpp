@@ -30,11 +30,6 @@ I_EXPORT_COMPONENT(
 			"Image Processing");
 
 I_EXPORT_COMPONENT(
-			LocalDifferenceFilterParams,
-			"Line difference processor params",
-			"Filter Image Processing Parameter");
-
-I_EXPORT_COMPONENT(
 			ProcessedCamera,
 			"Processed Camera",
 			"Image Bitmap Acquisition Snap Parameters Camera Processing");
