@@ -224,6 +224,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageNormalizeProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageProcessorCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionProcessorComp.cpp"
 				>
 			</File>
@@ -232,15 +240,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLocalDifferenceFilterParams.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CLocalDifferenceProcessorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectImageSmoothProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -261,6 +261,10 @@
 			</File>
 			<File
 				RelativePath="..\CRectDerivativeProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectImageSmoothProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -325,6 +329,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageNormalizeProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageProcessorCompBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionProcessorComp.h"
 				>
 			</File>
@@ -333,15 +345,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLocalDifferenceFilterParams.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CLocalDifferenceProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectImageSmoothProcessorComp.h"
 				>
 			</File>
 			<File
@@ -362,6 +366,10 @@
 			</File>
 			<File
 				RelativePath="..\CRectDerivativeProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectImageSmoothProcessorComp.h"
 				>
 			</File>
 			<File
@@ -473,7 +481,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TImageProcessorCompBase.h"
+				RelativePath="..\TImageParamProcessorCompBase.h"
 				>
 			</File>
 			<File
@@ -497,5 +505,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
