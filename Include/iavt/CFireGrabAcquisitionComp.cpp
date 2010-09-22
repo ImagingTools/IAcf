@@ -29,7 +29,8 @@ bool CFireGrabAcquisitionComp::IsCameraValid() const
 int CFireGrabAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	I_ASSERT(m_singleShootAttrPtr.IsValid());	// isObligatory is true
 

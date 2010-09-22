@@ -32,7 +32,8 @@ bool COcvAcquisitionComp::IsCameraValid() const
 int COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /* paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (m_cameraPtr == NULL){
 		return TS_INVALID;

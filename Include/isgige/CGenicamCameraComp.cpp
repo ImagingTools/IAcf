@@ -38,7 +38,8 @@ CGenicamCameraComp::~CGenicamCameraComp()
 int CGenicamCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* progressManagerPtr)
 {
 	iimg::IBitmap* resultBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if ((outputPtr != NULL) && (resultBitmapPtr == NULL)){

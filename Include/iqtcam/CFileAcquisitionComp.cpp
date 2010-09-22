@@ -27,7 +27,11 @@ CFileAcquisitionComp::CFileAcquisitionComp()
 
 // reimplemented (iproc::IProcessor)
 
-int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const istd::IPolymorphic* /*inputPtr*/, istd::IChangeable* outputPtr)
+int CFileAcquisitionComp::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const istd::IPolymorphic* /*inputPtr*/,
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* progressManagerPtr)
 {
 	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_parameterIdAttrPtr.IsValid());	// obligatory attribute

@@ -49,7 +49,8 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr);
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr = NULL);
 
 protected:
 	typedef TFeatureWrap<i2d::CCircle> CircleFeature;

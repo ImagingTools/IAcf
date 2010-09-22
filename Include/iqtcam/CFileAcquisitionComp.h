@@ -47,7 +47,8 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr);
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr = NULL);
 
 	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;

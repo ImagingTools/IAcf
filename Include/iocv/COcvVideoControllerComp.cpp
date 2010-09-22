@@ -45,7 +45,8 @@ istd::CIndex2d COcvVideoControllerComp::GetBitmapSize(const iprm::IParamsSet* /*
 int COcvVideoControllerComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (outputPtr == NULL){
 		return TS_OK;

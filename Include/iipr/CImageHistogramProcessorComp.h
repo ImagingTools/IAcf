@@ -34,7 +34,8 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr);
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr = NULL);
 
 private:
 	bool CalculateHistogramFromBitmap(const iimg::IBitmap& input, const i2d::CRectangle* aoiPtr, imeas::IDiscrDataSequence& histogram) const;

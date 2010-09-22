@@ -25,7 +25,8 @@ CImageProcessorCompBase::CImageProcessorCompBase()
 int CImageProcessorCompBase::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
