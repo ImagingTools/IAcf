@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
         App
@@ -145,84 +145,6 @@
     </Element>
     <Element>
       <Id>
-        BitmapFileProcessing
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        BitmapFileProcessing
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              ImageProcessor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SmoothProcessorFramework
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImageProcessingHotfolderFramework
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SmoothProcessorFramework/FilterParams
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ImageProcessingHotfolderFramework
       </Id>
       <PackageId>
@@ -254,7 +176,7 @@
                 true
               </IsEnabled>
               <Value>
-                BitmapFileProcessing
+                SmoothProcessorFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -334,9 +256,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Simple demonstration of hotfolder processing.\n Image files will be copied from the observed input location to the output folder.
+    Simple demonstration of hotfolder processing.Image files will be copied from the observed input location to the output folder.
   </Description>
   <Keywords>
-    Hotfoder Demo Tutorial Processing
+    Hotfoder Demo Tutorial Image Processing
   </Keywords>
 </Acf>

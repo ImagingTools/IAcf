@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -29,25 +29,25 @@
   <ElementsList count="8">
     <Element>
       <Id>
-        FilePersistence
+        BitmapFileProcessing
       </Id>
       <PackageId>
-        BasePck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        FilePersistence
+        BitmapFileProcessing
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              FileLoader
+              ImageProcessor
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -60,32 +60,29 @@
                 true
               </IsEnabled>
               <Value>
-                XmlFileSerializer
+                RectImageSmoothProcessor
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FilePath
+              Log
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                HotfolderProcessingParams.xml
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Object
+              ProcessingParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -396,6 +393,81 @@
     </Element>
     <Element>
       <Id>
+        ProcessingParamsPersistence
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        XmlFilePersistence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              FilePath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderProcessingParams.xml
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Hotfolder
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FilterParamsSet
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         RectImageSmoothProcessor
       </Id>
       <PackageId>
@@ -450,35 +522,14 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        XmlFileSerializer
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        XmlFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        iproc::IProcessor
+        ibase::IFileConvertCopy
       </InterfaceId>
       <ComponentId>
-        RectImageSmoothProcessor
+        BitmapFileProcessing
       </ComponentId>
     </Interface>
     <Interface>

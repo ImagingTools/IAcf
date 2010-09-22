@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -26,27 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         App
       </ComponentName>
       <X>
-        575
+        725
       </X>
       <X>
-        125
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapFileProcessing
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        550
+        100
       </X>
     </Element>
     <Element>
@@ -65,10 +54,10 @@
         SmoothProcessorFramework
       </ComponentName>
       <X>
-        1025
+        250
       </X>
       <X>
-        325
+        575
       </X>
     </Element>
   </PositionMap>

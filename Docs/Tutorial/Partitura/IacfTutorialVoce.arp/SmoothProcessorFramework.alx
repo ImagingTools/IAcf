@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -29,13 +29,13 @@
   <PositionMap count="8">
     <Element>
       <ComponentName>
-        FilePersistence
+        BitmapFileProcessing
       </ComponentName>
       <X>
-        475
+        800
       </X>
       <X>
-        725
+        175
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         FilterParams
       </ComponentName>
       <X>
-        750
+        225
       </X>
       <X>
-        575
+        175
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         FilterParamsGui
       </ComponentName>
       <X>
-        775
+        450
       </X>
       <X>
-        375
+        625
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         FilterParamsSet
       </ComponentName>
       <X>
-        475
+        450
       </X>
       <X>
-        575
+        175
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         FilterParamsSetGui
       </ComponentName>
       <X>
-        475
+        450
       </X>
       <X>
-        375
+        500
       </X>
     </Element>
     <Element>
@@ -87,10 +87,21 @@
         ModelDialogGui
       </ComponentName>
       <X>
-        200
+        150
       </X>
       <X>
-        475
+        350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProcessingParamsPersistence
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <X>
+        50
       </X>
     </Element>
     <Element>
@@ -98,21 +109,10 @@
         RectImageSmoothProcessor
       </ComponentName>
       <X>
-        625
+        800
       </X>
       <X>
-        200
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlFileSerializer
-      </ComponentName>
-      <X>
-        750
-      </X>
-      <X>
-        725
+        300
       </X>
     </Element>
   </PositionMap>
