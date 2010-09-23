@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1563
+          1564
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          245
+          246
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         App
       </ComponentName>
       <X>
-        725
+        700
       </X>
       <X>
-        100
+        150
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         ImageProcessingHotfolderFramework
       </ComponentName>
       <X>
-        575
+        725
       </X>
       <X>
-        325
+        375
       </X>
     </Element>
     <Element>
@@ -54,7 +54,7 @@
         SmoothProcessorFramework
       </ComponentName>
       <X>
-        250
+        325
       </X>
       <X>
         575
