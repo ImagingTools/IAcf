@@ -15,6 +15,15 @@ namespace iqtsig
 {
 
 
+/**
+	Processor creating some data sequence (sample) using user defined script.
+	The user script must define function named \c Calc.
+	This function gets one parameter containing zero-based index of sample and it should return sample value.
+	Additionally following global variables are defined and can be used from the calculation script:
+	\li	frame		index of calculated frame, increased each time new calculation of complete sample was finished.
+	\li	minValue	user defined minimal value.
+	\li	maxValue	user defined minimal value.
+*/
 class CScriptSampleAcquisitionComp:
 			public icomp::CComponentBase,
 			public iproc::CSyncProcessorBase
@@ -50,7 +59,7 @@ public:
 
 private:
 	QScriptEngine m_scriptEngine;
-	int frameNumber;
+	int m_frameNumber;
 
 	I_ATTR(double, m_minValueAttrPtr);
 	I_ATTR(double, m_maxValueAttrPtr);

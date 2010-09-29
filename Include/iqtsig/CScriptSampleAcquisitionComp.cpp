@@ -1,8 +1,11 @@
 #include "iqtsig/CScriptSampleAcquisitionComp.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
+#include "iproc/IProgressManager.h"
 
+// ACF-Solution includes
 #include "imeas/IDataSequence.h"
 
 
@@ -11,7 +14,7 @@ namespace iqtsig
 
 
 CScriptSampleAcquisitionComp::CScriptSampleAcquisitionComp()
-:	frameNumber(0)
+:	m_frameNumber(0)
 {
 }
 
@@ -28,7 +31,7 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 		return TS_OK;
 	}
 
-	QScriptValue frameValue(&m_scriptEngine, ++frameNumber);
+	QScriptValue frameValue(&m_scriptEngine, ++m_frameNumber);
 	m_scriptEngine.globalObject().setProperty("frame", frameValue);
 
 	QString functionScript = iqt::GetQString(*m_defaultScriptAttrPtr);
@@ -52,6 +55,13 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 
 	QScriptValue calcCtor = m_scriptEngine.evaluate("Calc");
 
+	int progressSessionId = -1;
+	if (progressManagerPtr != NULL){
+		progressSessionId = progressManagerPtr->BeginProgressSession("SampleCalc", "Calculate sampling", true);
+	}
+
+	int retVal = TS_OK;
+
 	for (int i = 0; i < samplesCount; ++i){
 		QScriptValueList arguments;
 		QScriptValue xValue(&m_scriptEngine, i);
@@ -60,10 +70,30 @@ int CScriptSampleAcquisitionComp::DoProcessing(
 		double sample = calcCtor.call(m_scriptEngine.nullValue(), arguments).toNumber();
 
 		if (m_scriptEngine.hasUncaughtException()) {
-			return TS_INVALID;
+			retVal = TS_INVALID;
+
+			break;
 		}
 
 		containerPtr->SetSample(i, 0, sample);
+
+		if ((progressSessionId >= 0) && ((i % 100) == 50)){
+			I_ASSERT(progressManagerPtr != NULL);
+
+			if (progressManagerPtr->IsCanceled(progressSessionId)){
+				retVal = TS_CANCELED;
+
+				break;
+			}
+
+			progressManagerPtr->OnProgress(progressSessionId, double(i + 1) / samplesCount);
+		}
+	}
+
+	if (progressSessionId >= 0){
+		I_ASSERT(progressManagerPtr != NULL);
+
+		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return TS_OK;
