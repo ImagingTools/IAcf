@@ -13,11 +13,6 @@ I_EXPORT_PACKAGE(
 			"Meilhaus Qt Standard" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			SamplingParams,
-			"Sampling params based on fixed boundary values",
-			"Sample Sampling Acquisition Model Parameters");
-
-I_EXPORT_COMPONENT(
 			MeilhausSimpleAcquisition,
 			"Simple implementation of sample aquisition using Meilhaus MEIDS API",
 			"Simple Sample Acquisition Meids Osciloscope Meilhaus Analog IO Card");

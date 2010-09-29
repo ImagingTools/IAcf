@@ -6,8 +6,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "isig/CSamplingParamsComp.h"
-
 #include "CMeilhausSimpleComp.h"
 #include "CChannelAddressParamComp.h"
 
@@ -19,8 +17,6 @@
 namespace MePck
 {
 
-
-typedef icomp::TModelCompWrap<isig::CSamplingParamsComp> SamplingParams;
 
 typedef imebase::CMeilhausSimpleComp MeilhausSimpleAcquisition;
 typedef icomp::TModelCompWrap<imebase::CChannelAddressParamComp> ChannelAddressParam;

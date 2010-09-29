@@ -1,63 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1571
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          258
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="13">
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        -287
-      </X>
-      <X>
-        -362
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        -137
-      </X>
-      <X>
-        -487
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MainGui
-      </ComponentName>
-      <X>
-        -125
-      </X>
-      <X>
-        -237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsLoader
-      </ComponentName>
-      <X>
-        312
-      </X>
-      <X>
-        -237
-      </X>
-    </Element>
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         ParamsSet
       </ComponentName>
       <X>
-        -137
+        600
       </X>
       <X>
-        -112
+        475
       </X>
     </Element>
     <Element>
@@ -65,21 +43,10 @@
         ParamsSetGui
       </ComponentName>
       <X>
-        -387
+        225
       </X>
       <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SampleLoader
-      </ComponentName>
-      <X>
-        137
-      </X>
-      <X>
-        -362
+        475
       </X>
     </Element>
     <Element>
@@ -87,10 +54,10 @@
         SamplingFramework
       </ComponentName>
       <X>
-        -187
+        600
       </X>
       <X>
-        -237
+        275
       </X>
     </Element>
     <Element>
@@ -98,10 +65,10 @@
         SamplingParams
       </ComponentName>
       <X>
-        -137
+        600
       </X>
       <X>
-        12
+        625
       </X>
     </Element>
     <Element>
@@ -109,21 +76,10 @@
         SamplingParamsGui
       </ComponentName>
       <X>
-        -375
+        225
       </X>
       <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SplashScreen
-      </ComponentName>
-      <X>
-        -25
-      </X>
-      <X>
-        -362
+        625
       </X>
     </Element>
     <Element>
@@ -131,21 +87,10 @@
         TestSampleAcquisition
       </ComponentName>
       <X>
-        112
+        1025
       </X>
       <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlSerializer
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        -487
+        500
       </X>
     </Element>
   </PositionMap>

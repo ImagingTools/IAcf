@@ -377,8 +377,8 @@
         SamplingParams
       </Id>
       <PackageId>
-        MePck
-      </PackageId>
+				IacfBasePck
+			</PackageId>
       <ComponentId>
         SamplingParams
       </ComponentId>
@@ -414,8 +414,8 @@
         SamplingParamsGui
       </Id>
       <PackageId>
-        QtGuiPck
-      </PackageId>
+				IacfQtPck
+			</PackageId>
       <ComponentId>
         SamplingParamsGui
       </ComponentId>

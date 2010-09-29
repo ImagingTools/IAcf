@@ -41,6 +41,12 @@ I_EXPORT_COMPONENT(
 			"Image Bitmap Camera Snap Acquisition Constraints");
 
 
+I_EXPORT_COMPONENT(
+			SamplingParams,
+			"Sampling params based on fixed boundary values",
+			"Sample Sampling Acquisition Model Parameters");
+
+
 } // namespace IacfBasePck
 
 
