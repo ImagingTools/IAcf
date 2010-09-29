@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1571
+          1577
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          258
+          259
         </Number>
         <Description>
           ACF-Solutions
@@ -26,29 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
-    <Element>
-      <ComponentName>
-        ParamsSet
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSetGui
-      </ComponentName>
-      <X>
-        225
-      </X>
-      <X>
-        475
-      </X>
-    </Element>
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         SamplingFramework
@@ -62,35 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        SamplingParams
+        TestSampleAcquisition
       </ComponentName>
       <X>
         600
       </X>
       <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SamplingParamsGui
-      </ComponentName>
-      <X>
-        225
-      </X>
-      <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TestSampleAcquisition
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        500
+        450
       </X>
     </Element>
   </PositionMap>
