@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="11">
     <Element>
       <Id>
-        Application
+        AboutGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        GuiApplication
+        AboutGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -66,10 +66,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MainGui
+              LogoPath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -79,16 +79,56 @@
                 true
               </IsEnabled>
               <Value>
-                MainGui
+                :/Icons/AcfLogo3d.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DataSequenceView
+      </Id>
+      <PackageId>
+        QtMeasPck
+      </PackageId>
+      <ComponentId>
+        DataSequenceView
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              IsChannelPanelVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashScreen
+              IsScalePanelVisible
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -98,29 +138,50 @@
                 true
               </IsEnabled>
               <Value>
-                SplashScreen
+                false
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashTime
+              IsTimeSpanPanelVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              
+              IsTimeSpanVisible
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                5
+                false
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        GeneralDataSequence
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        GeneralDataSequence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -166,13 +227,74 @@
     </Element>
     <Element>
       <Id>
-        MainGui
+        ModelBinder
       </Id>
       <PackageId>
-        IacfQtPck
+        BasePck
       </PackageId>
       <ComponentId>
-        SampleAcquisitionGui
+        ModelBinder
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                GeneralDataSequence
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Observers
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  DataSequenceView
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProcessorControlDock
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        DockWidgetGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -181,13 +303,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              LiveInterval
+              DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -197,45 +319,13 @@
                 true
               </IsEnabled>
               <Value>
-                0.04
+                Script Processor
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MaxDispValue
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              MaxDispValue
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MinDispValue
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              MinDispValue
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsLoader
+              SlaveGui
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -248,61 +338,53 @@
                 true
               </IsEnabled>
               <Value>
-                ParamsLoader
+                ProcessorControlGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProcessorControlGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ProcessorControlGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              OutputData
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                GeneralDataSequence
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSetGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSetGui
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SampleAcquisition
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              SampleAcquisition
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SampleLoader
+              OutputDataLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -319,46 +401,68 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ParamsLoader
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        FileDialogLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Loaders
+              ParamsLoader
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              ParamsLoader
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  XmlSerializer
-                </Value>
-              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSetGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Processor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SampleAcquisition
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -423,7 +527,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -459,6 +563,162 @@
               </IsEnabled>
               <Value>
                 &#169; 2010 Imagingtools&#10;&#10;All rights reseved
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ImagePath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        StandaloneApp
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        StandaloneApp
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              AboutGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                AboutGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Info
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsMenuVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainView
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DataSequenceView
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ProcessorControlDock
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashScreen
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SplashScreen
               </Value>
             </Data>
           </AttributeInfo>
@@ -554,7 +814,7 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        StandaloneApp
       </ComponentId>
     </Interface>
     <Interface>

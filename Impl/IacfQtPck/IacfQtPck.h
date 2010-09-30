@@ -8,7 +8,7 @@
 
 #include "iqtsig/CSamplingParamsGuiComp.h"
 #include "iqtsig/CSampleAcquisitionGuiComp.h"
-#include "iqtsig/CScriptSampleAcquisitionComp.h"
+#include "iqtsig/CScriptDataProcessorComp.h"
 
 
 /**
@@ -20,7 +20,7 @@ namespace IacfQtPck
 
 typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
 typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
-typedef iqtsig::CScriptSampleAcquisitionComp ScriptSampleAcquisition;
+typedef iqtsig::CScriptDataProcessorComp ScriptDataProcessor;
 
 
 } // namespace IacfQtPck

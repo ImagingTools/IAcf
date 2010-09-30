@@ -195,7 +195,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CScriptSampleAcquisitionComp.cpp"
+				RelativePath="..\CScriptDataProcessorComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -217,7 +217,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CScriptSampleAcquisitionComp.h"
+				RelativePath="..\CScriptDataProcessorComp.h"
 				>
 			</File>
 			<File

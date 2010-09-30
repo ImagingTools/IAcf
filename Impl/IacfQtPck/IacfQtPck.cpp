@@ -41,7 +41,7 @@ I_EXPORT_COMPONENT(
 			"Sample Sampling Acquisition GUI Qt");
 
 I_EXPORT_COMPONENT(
-			ScriptSampleAcquisition,
+			ScriptDataProcessor,
 			"Test sample acquisition based on QtScript",
 			"Test Sample Sampling Acquisition Script QtScript Qt");
 

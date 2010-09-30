@@ -26,7 +26,40 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="8">
+    <Element>
+      <ComponentName>
+        FileDialogLoader
+      </ComponentName>
+      <X>
+        950
+      </X>
+      <X>
+        450
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        450
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        450
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         SamplingFramework
@@ -43,10 +76,43 @@
         TestSampleAcquisition
       </ComponentName>
       <X>
+        975
+      </X>
+      <X>
+        275
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        TextDocument
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        575
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        TextEditor
+      </ComponentName>
+      <X>
         600
       </X>
       <X>
-        450
+        575
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        TextFileLoader
+      </ComponentName>
+      <X>
+        950
+      </X>
+      <X>
+        575
       </X>
     </Element>
   </PositionMap>
