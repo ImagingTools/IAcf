@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/TSmartPtr.h"
 #include "imath/CDoubleManip.h"
 
 // ACF-Solutions includes
@@ -36,12 +37,6 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 		}
 	}
 
-	double proportionXAlpha = 0.5 / samplesCount;
-	istd::CRange resultProportionRange(
-				sourceProportionRange.GetValueFromAlpha(proportionXAlpha),
-				sourceProportionRange.GetValueFromAlpha(1.0 - proportionXAlpha));
-	results.SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
-
 	double halfRealLength = istd::Max(1.0, filterLength * 0.5);
 
 	int sumOffset = int(halfRealLength);
@@ -49,7 +44,14 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 
 	int projectionWidth = samplesCount - 1;
 
-	if (!results.CreateSequence(projectionWidth, channelsCount)){
+	double proportionXAlpha = 0.5 / samplesCount;
+	istd::CRange resultProportionRange(
+				sourceProportionRange.GetValueFromAlpha(proportionXAlpha),
+				sourceProportionRange.GetValueFromAlpha(1.0 - proportionXAlpha));
+	if (!results.CreateSequenceWithInfo(
+				istd::TSmartPtr<const imeas::IDataSequenceInfo>(new imeas::CSamplesInfo(resultProportionRange)),
+				projectionWidth,
+				channelsCount)){
 		return false;
 	}
 

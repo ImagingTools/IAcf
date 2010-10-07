@@ -6,14 +6,12 @@
 #include <windows.h>
 #include <libMesaSR.h>
 
+// STL includes
+#include <vector>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-
 #include "i2d/CRectangle.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "ibase/TLoggerCompWrap.h"
 
 // IACF includes
@@ -103,9 +101,9 @@ private:
 private:
 	CMesaDevice* m_cameraPtr;
 
-	istd::TDelPtr<I_SWORD, true> m_xBuffer;
-	istd::TDelPtr<I_SWORD, true> m_yBuffer;
-	istd::TDelPtr<I_WORD, true> m_zBuffer;
+	std::vector<I_SWORD> m_xBuffer;
+	std::vector<I_SWORD> m_yBuffer;
+	std::vector<I_WORD> m_zBuffer;
 
 	SupportedFrequencies m_supportedFrequencies;
 

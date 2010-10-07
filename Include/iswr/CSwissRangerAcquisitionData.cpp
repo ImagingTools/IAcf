@@ -17,7 +17,7 @@ namespace iswr
 // public methods
 
 CSwissRangerAcquisitionData::CSwissRangerAcquisitionData()
-	:m_maxDepth(0)
+:	m_maxDepth(0)
 {
 }
 
@@ -42,11 +42,11 @@ bool CSwissRangerAcquisitionData::CreateData(
 
 	int imageDataSize = m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
 
-	m_xBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
-	memcpy(m_xBufferPtr.GetPtr(), xBufferPtr, imageDataSize * sizeof(I_SWORD));
+	m_xBuffer.resize(imageDataSize);
+	memcpy(&m_xBuffer[0], xBufferPtr, imageDataSize * sizeof(I_SWORD));
 
-	m_yBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
-	memcpy(m_yBufferPtr.GetPtr(), yBufferPtr, imageDataSize * sizeof(I_SWORD));
+	m_yBuffer.resize(imageDataSize);
+	memcpy(&m_yBuffer[0], yBufferPtr, imageDataSize * sizeof(I_SWORD));
 
 	return true;
 }
@@ -65,7 +65,7 @@ const iimg::IBitmap& CSwissRangerAcquisitionData::GetDistanceImage() const
 		int imageWidth = m_depthImage.GetImageSize().GetX();
 		int imageHeight = m_depthImage.GetImageSize().GetY();
 
-		istd::TDelPtr<I_BYTE, true> imageDataPtr(new I_BYTE[imageWidth * imageHeight]);
+		istd::TDelPtr<I_BYTE, istd::ArrayAccessor<I_BYTE> > imageDataPtr(new I_BYTE[imageWidth * imageHeight]);
 
 		// convert input data to 8-bit image:
 		for (int y = 0; y < imageHeight; y++){
@@ -76,9 +76,7 @@ const iimg::IBitmap& CSwissRangerAcquisitionData::GetDistanceImage() const
 			}
 		}
 
-		if (m_distanceImage.CreateBitmap(m_depthImage.GetImageSize(), imageDataPtr.GetPtr(), true)){
-			imageDataPtr.PopPtr();
-		}
+		m_distanceImage.CreateBitmap(m_depthImage.GetImageSize(), imageDataPtr.PopPtr(), true);
 	}
 	
 	return m_distanceImage;
@@ -111,13 +109,13 @@ const iimg::IBitmap& CSwissRangerAcquisitionData::GetAmplitudeImage() const
 
 const I_SWORD* CSwissRangerAcquisitionData::GetXCoordinatesBuffer() const
 {
-	return m_xBufferPtr.GetPtr();
+	return &m_xBuffer[0];
 }
 
 
 const I_SWORD* CSwissRangerAcquisitionData::GetYCoordinatesBuffer() const
 {
-	return m_yBufferPtr.GetPtr();
+	return &m_yBuffer[0];
 }
 
 
@@ -157,18 +155,18 @@ bool CSwissRangerAcquisitionData::Serialize(iser::IArchive& archive)
 
 	int imageDataSize = m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
 	if (!archive.IsStoring()){
-		m_xBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
-		m_yBufferPtr.SetPtr(new I_SWORD[imageDataSize]);
+		m_xBuffer.resize(imageDataSize);
+		m_yBuffer.resize(imageDataSize);
 	}
 
 	static iser::CArchiveTag xBufferTag("XBuffer", "X - coordinates");
 	retVal = retVal && archive.BeginTag(xBufferTag);
-	retVal = retVal && archive.ProcessData(m_xBufferPtr.GetPtr(), imageDataSize * sizeof(I_SWORD));
+	retVal = retVal && archive.ProcessData(&m_xBuffer[0], imageDataSize * sizeof(I_SWORD));
 	retVal = retVal && archive.EndTag(xBufferTag);
 
 	static iser::CArchiveTag yBufferTag("YBuffer", "Y - coordinates");
 	retVal = retVal && archive.BeginTag(yBufferTag);
-	retVal = retVal && archive.ProcessData(m_yBufferPtr.GetPtr(), imageDataSize * sizeof(I_SWORD));
+	retVal = retVal && archive.ProcessData(&m_yBuffer[0], imageDataSize * sizeof(I_SWORD));
 	retVal = retVal && archive.EndTag(yBufferTag);
 
 	if (!archive.IsStoring()){

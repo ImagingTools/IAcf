@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/TRetSmartPtr.h"
+#include "istd/TTransPtr.h"
 #include "istd/TSmartPtr.h"
 
 // ACF-Solutions incldues
@@ -30,7 +30,7 @@ public:
 	/**
 		Construct empty hypothesis set.
 	*/
-	explicit CHypothesesSet(const istd::TRetSmartPtr<CHypothesisInfo>& infoPtr);
+	explicit CHypothesesSet(const istd::TTransPtr<CHypothesisInfo>& infoPtr);
 
 	/**
 		Construct hypothesis set containing one hypothesis.
@@ -41,7 +41,7 @@ public:
 		Get data info.
 		All depend hypothesis must use the same info.
 	*/
-	const istd::TRetSmartPtr<CHypothesisInfo>& GetInfo() const;
+	const istd::TTransPtr<CHypothesisInfo>& GetInfo() const;
 
 	/**
 		Get number of possible hypotheses.

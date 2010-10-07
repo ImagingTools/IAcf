@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/TSmartPtr.h"
 #include "i2d/CRectangle.h"
 #include "iimg/TPixelConversion.h"
 
@@ -49,7 +50,13 @@ bool ProjectionFunction(
 	istd::CChangeNotifier projectionNotifier(&results);
 
 	int projectionSize = axis1End - axis1Begin;
-	if (results.CreateSequence(projectionSize)){
+	istd::CRange axis1CutLineRange(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint2().GetX());
+	istd::CRange resultProportionRange(
+				axis1CutLineRange.GetAlphaFromValue(axis1Begin),
+				axis1CutLineRange.GetAlphaFromValue(axis1End));
+	if (results.CreateSequenceWithInfo(
+				istd::TSmartPtr<const imeas::IDataSequenceInfo>(new imeas::CSamplesInfo(resultProportionRange)),
+				projectionSize)){
 		double axis2Delta = delta.GetY() / delta.GetX();
 		double axis2Position = axis2Delta * (axis1Begin - beginPoint.GetX() + 0.5) + beginPoint.GetY() + 0.5;
 
@@ -82,12 +89,6 @@ bool ProjectionFunction(
 
 			results.SetSample(sampleIndex, 0, value);
 		}
-
-		istd::CRange axis1CutLineRange(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint2().GetX());
-		istd::CRange resultProportionRange(
-					axis1CutLineRange.GetAlphaFromValue(axis1Begin),
-					axis1CutLineRange.GetAlphaFromValue(axis1End));
-		results.SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
 
 		return true;
 	}

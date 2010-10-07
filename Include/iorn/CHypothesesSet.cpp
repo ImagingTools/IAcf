@@ -5,7 +5,7 @@ namespace iorn
 {
 
 
-CHypothesesSet::CHypothesesSet(const istd::TRetSmartPtr<CHypothesisInfo>& infoPtr)
+CHypothesesSet::CHypothesesSet(const istd::TTransPtr<CHypothesisInfo>& infoPtr)
 :	m_infoPtr(infoPtr),
 	m_isBestKnown(true),
 	m_bestHypothesisIndex(-1)
@@ -26,7 +26,7 @@ CHypothesesSet::CHypothesesSet(const imeas::IDataSequence* hypothesisPtr, double
 
 
 
-const istd::TRetSmartPtr<CHypothesisInfo>& CHypothesesSet::GetInfo() const
+const istd::TTransPtr<CHypothesisInfo>& CHypothesesSet::GetInfo() const
 {
 	return m_infoPtr;
 }

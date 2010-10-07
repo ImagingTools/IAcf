@@ -31,7 +31,7 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* progressManagerPtr)
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (!IsCameraValid()){
 		return TS_INVALID;
@@ -114,9 +114,9 @@ int CSwissRangerAcquisitionComp::DoProcessing(
 	if (outputPtr != NULL){
 		SR_CoordTrfUint16(
 			m_cameraPtr, 
-			m_xBuffer.GetPtr(), 
-			m_yBuffer.GetPtr(), 
-			m_zBuffer.GetPtr(), 
+			&m_xBuffer[0], 
+			&m_yBuffer[0], 
+			&m_zBuffer[0], 
 			sizeof(I_SWORD),
 			sizeof(I_SWORD),
 			sizeof(I_WORD));
@@ -214,9 +214,9 @@ void CSwissRangerAcquisitionComp::OnComponentCreated()
 
 		istd::CIndex2d size = GetBitmapSize(NULL);
 		if (!size.IsSizeEmpty()){
-			m_xBuffer.SetPtr(new I_SWORD[size.GetProductVolume()]);
-			m_yBuffer.SetPtr(new I_SWORD[size.GetProductVolume()]);
-			m_zBuffer.SetPtr(new I_WORD[size.GetProductVolume()]);
+			m_xBuffer.resize(size.GetProductVolume());
+			m_yBuffer.resize(size.GetProductVolume());
+			m_zBuffer.resize(size.GetProductVolume());
 		}
 
 		// set device info
@@ -252,19 +252,22 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 			iswr::ISwissRangerAcquisitionData& swissImage,
 			double maxDistance) const
 {
-	if (m_zBuffer.IsValid()){
+	if (!m_zBuffer.empty()){
+		I_ASSERT(!m_xBuffer.empty());
+		I_ASSERT(!m_yBuffer.empty());
+
 		istd::CIndex2d size = GetBitmapSize(NULL);
 
 		int maxDistanceMm = int(maxDistance * 1000);
 
-		istd::TDelPtr<I_WORD, true> imageDataPtr(new I_WORD[size.GetProductVolume()]);
+		istd::TDelPtr<I_WORD, istd::ArrayAccessor<I_WORD> > imageDataPtr(new I_WORD[size.GetProductVolume()]);
 
 		for (int y = 0; y < size.GetY(); ++y){
 			I_WORD* outputImageLinePtr = imageDataPtr.GetPtr() + y * size.GetX();
-			I_WORD* zBufferPtr = m_zBuffer.GetPtr() + y * size.GetX();
+			const I_WORD* zBufferPtr = &m_zBuffer[y * size.GetX()];
 		
 			for (int x = 0; x < size.GetX(); x++){
-				I_WORD zValue = *(zBufferPtr + x);
+				I_WORD zValue = zBufferPtr[x];
 			
 				double normedZValue = zValue / (double)maxDistanceMm;
 				outputImageLinePtr[x] = I_WORD(normedZValue * maxDistanceMm); // depth in mm
@@ -272,10 +275,7 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 		}
 
 		iimg::CGeneralBitmap depthImage;
-		if (depthImage.CreateBitmap(size, imageDataPtr.GetPtr(), true, size.GetX() * 2, 16)){
-			imageDataPtr.PopPtr();
-		}
-		else{
+		if (!depthImage.CreateBitmap(size, imageDataPtr.PopPtr(), true, size.GetX() * 2, 16)){
 			return false;
 		}
 
@@ -301,13 +301,13 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 		}		
 
 		return swissImage.CreateData(
-			maxDistanceMm,
-			depthImage,
-			confidenceMap,
-			intensityImage,
-			amplitudeImage,
-			m_xBuffer.GetPtr(),
-			m_yBuffer.GetPtr());
+					maxDistanceMm,
+					depthImage,
+					confidenceMap,
+					intensityImage,
+					amplitudeImage,
+					&m_xBuffer[0],
+					&m_yBuffer[0]);
 	}
 
 	return false;
@@ -316,7 +316,7 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 	
 bool CSwissRangerAcquisitionComp::CreateFromCamera(iimg::IBitmap& image, const ImgEntry& imageEntry, int scaleFactor) const
 {
-	istd::TDelPtr<I_BYTE, true> imageDataPtr(new I_BYTE[imageEntry.width * imageEntry.height]);
+	istd::TDelPtr<I_BYTE, istd::ArrayAccessor<I_BYTE> > imageDataPtr(new I_BYTE[imageEntry.width * imageEntry.height]);
 
 	// convert input data to 8-bit image:
 	for (int y = 0; y < imageEntry.height; y++){

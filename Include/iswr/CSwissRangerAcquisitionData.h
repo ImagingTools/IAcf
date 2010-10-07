@@ -2,12 +2,10 @@
 #define iswr_CSwissRangerAcquisitionData_included
 
 
+// ACF includes
 #include "istd/CIndex2d.h"
-
 #include "imod/TModelWrap.h"
-
 #include "imath/TISampledFunction.h"
-
 #include "iimg/CGeneralBitmap.h"
 
 #include "iswr/ISwissRangerAcquisitionData.h"
@@ -53,8 +51,8 @@ private:
 	imod::TModelWrap<iimg::CGeneralBitmap> m_intensityImage;
 	imod::TModelWrap<iimg::CGeneralBitmap> m_amplitudeImage;
 
-	istd::TDelPtr<I_SWORD, true> m_xBufferPtr;
-	istd::TDelPtr<I_SWORD, true> m_yBufferPtr;
+	std::vector<I_SWORD> m_xBuffer;
+	std::vector<I_SWORD> m_yBuffer;
 
 	int m_maxDepth;
 };

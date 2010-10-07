@@ -79,7 +79,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	int componentsCount = input.GetComponentsCount();
 	int histogramSize = 255 * componentsCount;
 
-	istd::TDelPtr<I_DWORD, true> histogramDataPtr(new I_DWORD[histogramSize]);
+	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
 	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
 
 	memset(histogramDataBufferPtr, 0, histogramSize);

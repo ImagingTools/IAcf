@@ -19,6 +19,7 @@ namespace QtSwrPck
 typedef iqtswr::CSwissRangerParamsGuiComp SwissRangerParamsGui;
 typedef iqtswr::CSwissRangerAcquisitionDataViewComp SwissRangerAcquisitionDataView;
 
+
 } // namespace QtSwrPck
 
 

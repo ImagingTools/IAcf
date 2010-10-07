@@ -4,9 +4,7 @@
 
 // ACF includes
 #include "imath/CSampledFunction2d.h"
-
 #include "imod/TModelWrap.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 

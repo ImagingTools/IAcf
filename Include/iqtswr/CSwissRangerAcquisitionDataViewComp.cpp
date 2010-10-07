@@ -153,10 +153,10 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 
 	istd::CIndex2d newSize(imageWidth / downsamplingFactor, imageHeight / downsamplingFactor);
 
-	istd::TDelPtr<double, true> outputDataPtr(new double[newSize.GetProductVolume()]);
+	std::vector<double> outputData(newSize.GetProductVolume());
 
 	for (int y = 0; y < newSize.GetY(); y++){
-		double* outputLinePtr = outputDataPtr.GetPtr() + y * newSize.GetX();
+		double* outputLinePtr = &outputData[y * newSize.GetX()];
 		I_WORD* inputLinePtr = (I_WORD*)depthImage.GetLinePtr(y * downsamplingFactor);
 		I_BYTE* confidenceLinePtr = (I_BYTE*)confidenceMap.GetLinePtr(y * downsamplingFactor);
 
@@ -188,7 +188,7 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 	sizes[0] = newSize.GetX();
 	sizes[1] = newSize.GetY();
 
-	m_depthImage3d.CreateFunction(outputDataPtr.GetPtr(), sizes);
+	m_depthImage3d.CreateFunction(&outputData[0], sizes);
 }
 
 

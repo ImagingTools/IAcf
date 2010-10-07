@@ -9,6 +9,7 @@
 
 
 // ACF includes
+#include "istd/TDelPtr.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorCompBase.h"
@@ -88,7 +89,7 @@ private:
 	istd::CString m_mediumUrl;
 	bool m_isPlaying;
 
-	istd::TPointer<CvCapture> m_capturePtr;
+	istd::TDelPtr<CvCapture> m_capturePtr;
 	mutable int m_currentFrameIndex;
 	int m_framesCount;
 };
