@@ -39,7 +39,7 @@ int CGenicamCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* progressManagerPtr)
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	iimg::IBitmap* resultBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if ((outputPtr != NULL) && (resultBitmapPtr == NULL)){
@@ -87,7 +87,7 @@ int CGenicamCameraComp::DoProcessing(
 			iwin::CTimer imageTimestamp;
 			imageTimestamp.SetNativeRepresentation(imageInfoPtr->GetTimestamp());
 
-			double timeDiff =	imageTimestamp.GetTimeTo(*triggerTimerPtr) - *m_triggerDifferenceAttrPtr;
+			double timeDiff = imageTimestamp.GetTimeTo(*triggerTimerPtr) - *m_triggerDifferenceAttrPtr;
 
 			if (timeDiff < -*m_triggerToleranceAttrPtr){	// image older than trigger
 				SendWarningMessage(MI_DEVICE_INTERN, iqt::GetCString(tr("Camera %1: image dropped becouse of time difference %2 ms").arg(iqt::GetQString(deviceInfoPtr->cameraId)).arg(timeDiff * 1000)));
