@@ -77,7 +77,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	}
 
 	int componentsCount = input.GetComponentsCount();
-	int histogramSize = 255 * componentsCount;
+	int histogramSize = 256 * componentsCount;
 
 	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
 	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
@@ -92,14 +92,14 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 				I_BYTE pixelComponentValue = *lineDataBeg++;
 
-				++histogramDataBufferPtr[pixelComponentValue * componentIndex];
+				++histogramBuffer[pixelComponentValue + (componentIndex * 256)];
 			}
 		}
 	}
 
 	istd::CChangeNotifier changePtr(&histogram);
 
-	return histogram.CreateDiscrSequence(histogramSize, histogramDataPtr.PopPtr(), true, 0, 0, 8, componentsCount);
+	return histogram.CreateDiscrSequence(histogramSize, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, componentsCount);
 }
 
 
