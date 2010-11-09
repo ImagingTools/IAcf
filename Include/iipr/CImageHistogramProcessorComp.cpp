@@ -92,7 +92,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 				I_BYTE pixelComponentValue = *lineDataBeg++;
 
-				++histogramBuffer[pixelComponentValue + (componentIndex * 256)];
+				++histogramDataBufferPtr[pixelComponentValue + (componentIndex * 256)];
 			}
 		}
 	}
