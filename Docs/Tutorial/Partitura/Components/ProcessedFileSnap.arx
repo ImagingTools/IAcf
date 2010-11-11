@@ -355,7 +355,7 @@
         BasePck
       </PackageId>
       <ComponentId>
-        IterativeProcessorParams
+        SelectionParam
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -370,13 +370,13 @@
     </Element>
     <Element>
       <Id>
-        IterationParamsGui
+        IterationParamGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        IterationParamsGui
+        SelectionParamIndexGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -569,8 +569,8 @@
                   AverageParamsGui
                 </Value>
                 <Value>
-                  IterationParamsGui
-                </Value>
+									IterationParamGui
+								</Value>
               </Values>
             </Data>
           </AttributeInfo>
