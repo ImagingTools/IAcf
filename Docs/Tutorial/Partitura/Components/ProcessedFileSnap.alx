@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1614
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          281
         </Number>
         <Description>
           ACF-Solutions
@@ -54,10 +54,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        375
+        175
       </X>
       <X>
-        350
+        500
       </X>
     </Element>
     <Element>
@@ -68,7 +68,7 @@
         125
       </X>
       <X>
-        350
+        400
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        450
+        1050
       </X>
       <X>
-        225
+        325
       </X>
     </Element>
     <Element>
@@ -117,24 +117,24 @@
     </Element>
     <Element>
       <ComponentName>
-        IterationParams
+        IterationParamGui
       </ComponentName>
       <X>
-        1050
+        300
       </X>
       <X>
-        350
+        600
       </X>
     </Element>
     <Element>
       <ComponentName>
-        IterationParamsGui
+        IterationParams
       </ComponentName>
       <X>
-        1075
+        425
       </X>
       <X>
-        700
+        125
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         ProcessedCamera
       </ComponentName>
       <X>
-        275
+        375
       </X>
       <X>
-        475
+        300
       </X>
     </Element>
     <Element>

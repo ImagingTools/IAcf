@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1614
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          281
         </Number>
         <Description>
           ACF-Solutions
@@ -214,7 +214,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               BufferObject
@@ -248,6 +248,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MaxIterations
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                5
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -476,7 +495,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -491,6 +510,14 @@
       </InterfaceId>
       <ComponentId>
         Framework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::ISelectionConstraints
+      </InterfaceId>
+      <ComponentId>
+        IterativeProcessor
       </ComponentId>
     </Interface>
     <Interface>
