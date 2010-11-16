@@ -205,7 +205,7 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = $(ACFDIR)/Docs/TechnicalDoc.tag=file:\\$(ACFDIR)/Docs/TechnicalDoc $(ACFSLNDIR)/Docs/TechnicalDoc.tag=file:\\$(ACFSLNDIR)/Docs/TechnicalDoc
+TAGFILES               = $(ACFSLNDIR)/Docs/TechnicalDoc.tag=file:\\$(ACFSLNDIR)/Docs/TechnicalDoc $(ACFDIR)/Docs/TechnicalDoc.tag=file:\\$(ACFDIR)/Docs/TechnicalDoc
 GENERATE_TAGFILE       = ../../Docs/TechnicalDoc.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = NO
