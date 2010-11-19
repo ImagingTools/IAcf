@@ -5,6 +5,7 @@
 	Name="iipr"
 	ProjectGUID="{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}"
 	RootNamespace="iipr"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
