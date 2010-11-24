@@ -5,7 +5,9 @@ namespace iipr
 {
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CRectDerivativeProcessorComp::OnComponentCreated()
 {

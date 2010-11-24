@@ -213,7 +213,9 @@ bool CLineParamsComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CLineParamsComp::OnComponentCreated()
 {

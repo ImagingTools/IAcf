@@ -20,14 +20,6 @@ CSnapImageGuiComp::CSnapImageGuiComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CSnapImageGuiComp::OnComponentCreated()
-{
-	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
-}
-
-
 // reimplemented (iqt2d::ISceneExtender)
 
 void CSnapImageGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
@@ -47,72 +39,6 @@ void CSnapImageGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
 	}
 
 	BaseClass::RemoveItemsFromScene(providerPtr);
-}
-
-
-// protected slots
-
-void CSnapImageGuiComp::on_SnapImageButton_clicked()
-{
-	LiveImageButton->setChecked(false);
-
-	SnapImage();
-}
-
-
-void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
-{
-	if (checked){
-		m_timer.start();
-	}
-	else{
-		m_timer.stop();
-	}
-}
-
-
-void CSnapImageGuiComp::on_SaveImageButton_clicked()
-{
-	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
-		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save image"));
-		}
-	}
-}
-
-
-void CSnapImageGuiComp::on_LoadParamsButton_clicked()
-{
-	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot load parameters"));
-		}
-	}
-}
-
-
-void CSnapImageGuiComp::on_SaveParamsButton_clicked()
-{
-	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save parameters"));
-		}
-	}
-}
-
-
-void CSnapImageGuiComp::OnTimerReady()
-{
-	SnapImage();
 }
 
 
@@ -193,6 +119,80 @@ void CSnapImageGuiComp::OnGuiDestroyed()
 	if (m_paramsSetGuiCompPtr.IsValid() && m_paramsSetGuiCompPtr->IsGuiCreated()){
 		m_paramsSetGuiCompPtr->DestroyGui();
 	}
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CSnapImageGuiComp::OnComponentCreated()
+{
+	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
+}
+
+
+// protected slots
+
+void CSnapImageGuiComp::on_SnapImageButton_clicked()
+{
+	LiveImageButton->setChecked(false);
+
+	SnapImage();
+}
+
+
+void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
+{
+	if (checked){
+		m_timer.start();
+	}
+	else{
+		m_timer.stop();
+	}
+}
+
+
+void CSnapImageGuiComp::on_SaveImageButton_clicked()
+{
+	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
+		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot save image"));
+		}
+	}
+}
+
+
+void CSnapImageGuiComp::on_LoadParamsButton_clicked()
+{
+	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot load parameters"));
+		}
+	}
+}
+
+
+void CSnapImageGuiComp::on_SaveParamsButton_clicked()
+{
+	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot save parameters"));
+		}
+	}
+}
+
+
+void CSnapImageGuiComp::OnTimerReady()
+{
+	SnapImage();
 }
 
 

@@ -66,7 +66,8 @@ public:
 	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 	

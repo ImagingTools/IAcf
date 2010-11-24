@@ -17,17 +17,6 @@ CExposureParamsComp::CExposureParamsComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CExposureParamsComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	I_ASSERT(m_defaultShutterTimeAttrPtr.IsValid());	// isObligatory is set
-	m_shutterTime = *m_defaultShutterTimeAttrPtr;
-}
-
-
 // reimplemented (icam::IExposureParams)
 
 const IExposureConstraints* CExposureParamsComp::GetConstraints() const
@@ -135,6 +124,19 @@ bool CExposureParamsComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(eenDelayTimeTag);
 
 	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CExposureParamsComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	I_ASSERT(m_defaultShutterTimeAttrPtr.IsValid());	// isObligatory is set
+	m_shutterTime = *m_defaultShutterTimeAttrPtr;
 }
 
 

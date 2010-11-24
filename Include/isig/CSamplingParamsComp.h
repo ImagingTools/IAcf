@@ -31,9 +31,6 @@ public:
 
 	CSamplingParamsComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 	// reimplemented (isig::ISamplingParams)
 	virtual const ISamplingConstraints* GetConstraints() const;
 	virtual double GetInterval() const;
@@ -43,6 +40,10 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 
 private:
 	double m_interval;

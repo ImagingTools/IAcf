@@ -5,8 +5,9 @@ namespace iswr
 {
 
 
+// protected methods
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CSwissRangerParamsComp::OnComponentCreated()
 {

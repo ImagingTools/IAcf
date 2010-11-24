@@ -46,25 +46,6 @@ bool CSimulatedMultiTracerGuiComp::CallCommand(
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CSimulatedMultiTracerGuiComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	m_periodicTimer.start(10);
-}
-
-
-void CSimulatedMultiTracerGuiComp::OnComponentDestroyed()
-{
-	m_periodicTimer.stop();
-	m_runTimer.stop();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // protected methods
 
 // reimplemented (ilolv::CMultiTracerDriverBase)
@@ -195,6 +176,25 @@ void CSimulatedMultiTracerGuiComp::OnGuiCreated()
 		QLabel* counterWidgetPtr = new QLabel("-");
 		BitsTable->setCellWidget(i, 2, counterWidgetPtr);
 	}
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CSimulatedMultiTracerGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_periodicTimer.start(10);
+}
+
+
+void CSimulatedMultiTracerGuiComp::OnComponentDestroyed()
+{
+	m_periodicTimer.stop();
+	m_runTimer.stop();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

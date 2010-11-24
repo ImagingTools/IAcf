@@ -38,7 +38,7 @@ protected:
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(imeas::CGeneralDataSequence& result) const;
 
-	// reimplemented (icomp::IComponent)
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:

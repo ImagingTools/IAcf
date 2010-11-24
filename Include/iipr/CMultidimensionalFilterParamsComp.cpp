@@ -90,7 +90,9 @@ bool CMultidimensionalFilterParamsComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CMultidimensionalFilterParamsComp::OnComponentCreated()
 {

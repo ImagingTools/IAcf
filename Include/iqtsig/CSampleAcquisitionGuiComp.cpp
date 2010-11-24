@@ -16,72 +16,6 @@ CSampleAcquisitionGuiComp::CSampleAcquisitionGuiComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CSampleAcquisitionGuiComp::OnComponentCreated()
-{
-	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
-}
-
-
-// protected slots
-
-void CSampleAcquisitionGuiComp::on_StartButton_toggled(bool checked)
-{
-	if (checked){
-		m_timer.start();
-	}
-	else{
-		m_timer.stop();
-	}
-}
-
-
-void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
-{
-	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetSamplesCount() > 0)){
-		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save sample"));
-		}
-	}
-}
-
-
-void CSampleAcquisitionGuiComp::on_LoadParamsButton_clicked()
-{
-	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot load parameters"));
-		}
-	}
-}
-
-
-void CSampleAcquisitionGuiComp::on_SaveParamsButton_clicked()
-{
-	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save parameters"));
-		}
-	}
-}
-
-
-void CSampleAcquisitionGuiComp::OnTimerReady()
-{
-	AcquireSample();
-}
-
-
 // protected methods
 
 bool CSampleAcquisitionGuiComp::AcquireSample()
@@ -164,6 +98,72 @@ void CSampleAcquisitionGuiComp::OnGuiDestroyed()
 	}
 
 	m_samples.DetachObserver(&m_samplesView);
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CSampleAcquisitionGuiComp::OnComponentCreated()
+{
+	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
+}
+
+
+// protected slots
+
+void CSampleAcquisitionGuiComp::on_StartButton_toggled(bool checked)
+{
+	if (checked){
+		m_timer.start();
+	}
+	else{
+		m_timer.stop();
+	}
+}
+
+
+void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
+{
+	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetSamplesCount() > 0)){
+		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot save sample"));
+		}
+	}
+}
+
+
+void CSampleAcquisitionGuiComp::on_LoadParamsButton_clicked()
+{
+	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot load parameters"));
+		}
+	}
+}
+
+
+void CSampleAcquisitionGuiComp::on_SaveParamsButton_clicked()
+{
+	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot save parameters"));
+		}
+	}
+}
+
+
+void CSampleAcquisitionGuiComp::OnTimerReady()
+{
+	AcquireSample();
 }
 
 

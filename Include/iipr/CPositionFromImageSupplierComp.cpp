@@ -82,7 +82,7 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 }
 
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CPositionFromImageSupplierComp::OnComponentCreated()
 {

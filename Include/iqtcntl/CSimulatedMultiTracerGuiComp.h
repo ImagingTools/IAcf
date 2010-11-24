@@ -51,10 +51,6 @@ public:
 				int responseBufferSize,
 				int& responseSize);
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 protected:
 	// reimplemented (ilolv::CMultiTracerDriverBase)
 	virtual I_WORD ReadCounter(int counterIndex);
@@ -79,6 +75,10 @@ protected:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 signals:
 	void OutputChanged();

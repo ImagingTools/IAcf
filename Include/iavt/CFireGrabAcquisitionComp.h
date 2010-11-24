@@ -85,10 +85,6 @@ public:
 	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 protected:
 	/**
 		Check whether parameter was set correctly.
@@ -105,6 +101,10 @@ protected:
 	*/
 	void InitializeImageRegion(const i2d::CRectangle& imageRegion);
 	
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
+
 private:
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
 	I_REF(icam::ITriggerParams, m_triggerParamsCompPtr);

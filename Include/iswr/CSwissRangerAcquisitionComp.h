@@ -87,7 +87,8 @@ public:
 	virtual istd::CRange GetDelayTimeRange() const;
 	virtual istd::CRange GetEenDelayRange() const;
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 

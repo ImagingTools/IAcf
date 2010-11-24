@@ -24,7 +24,8 @@ public:
 		I_ASSIGN(m_directionModeAttrPtr, "DirectionMode", "Mode of direction, 0 - forward, 1 - backwards", true, DM_FORWARD);
 	I_END_COMPONENT;
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:

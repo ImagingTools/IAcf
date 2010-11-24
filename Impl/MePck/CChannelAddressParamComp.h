@@ -23,7 +23,8 @@ public:
 		I_ASSIGN(m_mailhausAccessCompPtr, "MeilhausAccess", "Allows to read set of possible options based on connected Me hardware", true, "MeilhausAccess")
 	I_END_COMPONENT
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 

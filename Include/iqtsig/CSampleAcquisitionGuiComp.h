@@ -53,7 +53,14 @@ public:
 
 	CSampleAcquisitionGuiComp();
 
-	// reimplemented (icomp::IComponent)
+protected:
+	bool AcquireSample();
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 protected slots:
@@ -62,13 +69,6 @@ protected slots:
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 	void OnTimerReady();
-
-protected:
-	bool AcquireSample();
-
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 private:
 	I_REF(iproc::IProcessor, m_sampleAcquisitionCompPtr);

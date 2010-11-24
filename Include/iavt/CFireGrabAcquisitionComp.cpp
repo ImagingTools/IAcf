@@ -143,111 +143,6 @@ bool CFireGrabAcquisitionComp::IsTriggerModeSupported(int triggerMode) const
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CFireGrabAcquisitionComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	I_ASSERT(m_singleShootAttrPtr.IsValid());	// isObligatory is true
-
-	// Init module
-	UINT32 status = FGInitModule(NULL);
-
-	// Get list of connected nodes
-	if (status == FCE_NOERROR){
-		status = FGGetNodeList(m_nodeInfos, MAX_NODES_COUNT, &m_nodesCount);
-
-		// Connect with node
-		if ((status == FCE_NOERROR) && (m_nodesCount > 0)){
-			status = m_camera.Connect(&m_nodeInfos[0].Guid);
-
-			// initialize image region:
-			if (m_imageRegionParamsCompPtr.IsValid()){
-				InitializeImageRegion(m_imageRegionParamsCompPtr->GetBoundingBox());
-			}
-
-			// Start DMA logic
-			if (status == FCE_NOERROR){
-				status = m_camera.OpenCapture();
-
-				// Start image device
-				if (status == FCE_NOERROR){
-					// if trigger params component is set, set trigger params to device:
-					if (m_triggerParamsCompPtr.IsValid()){
-						InitializeTriggerParams(*m_triggerParamsCompPtr.GetPtr());
-					}
-
-					if (*m_singleShootAttrPtr){
-						if (m_camera.SetParameter(FGP_BURSTCOUNT, 1) == FCE_NOERROR){
-							m_isCameraValid = true;
-
-							return;
-						}
-						else{
-							SendErrorMessage(MI_CANNOT_SET_SINGLE_SHOT, "Cannot set single shot mode");
-						}
-					}
-					else{
-						if (m_camera.SetParameter(FGP_BURSTCOUNT, BC_INFINITE) != FCE_NOERROR){
-							SendErrorMessage(MI_CANNOT_SET_CONTINUOUS, "Cannot set continuous mode");
-						}
-					}
-
-					status = m_camera.StartDevice();
-
-					if (status == FCE_NOERROR){
-						m_isCameraValid = true;
-
-						return;
-					}
-					else{
-						SendErrorMessage(MI_CANNOT_START, "Cannot start grab");
-					}
-
-					m_camera.StopDevice();
-				}
-				else{
-					SendErrorMessage(MI_CANNOT_OPEN, "Cannot open capture device");
-				}
-
-				m_camera.CloseCapture();
-			}
-			else{
-				SendErrorMessage(MI_CANNOT_CONNECT, "Cannot connect to camera node");
-			}
-
-			m_camera.Disconnect();
-		}
-		else{
-			SendErrorMessage(MI_NO_NODES, "No camera nodes");
-		}
-
-		FGExitModule();
-	}
-	else{
-		SendErrorMessage(MI_CANNOT_INIT, "Cannot init Fire Grab module");
-	}
-
-	m_isCameraValid = false;
-}
-
-
-void CFireGrabAcquisitionComp::OnComponentDestroyed()
-{
-	if (m_isCameraValid){
-		m_camera.StopDevice();
-		m_camera.CloseCapture();
-		m_camera.Disconnect();
-		FGExitModule();
-
-		m_isCameraValid = false;
-	}
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // protected methods
 	
 bool CFireGrabAcquisitionComp::CheckParameter(UINT16 parameterId, UINT32 setValue)
@@ -363,6 +258,110 @@ void CFireGrabAcquisitionComp::InitializeImageRegion(const i2d::CRectangle& imag
 	}
 }
 
+
+// reimplemented (icomp::CComponentBase)
+
+void CFireGrabAcquisitionComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	I_ASSERT(m_singleShootAttrPtr.IsValid());	// isObligatory is true
+
+	// Init module
+	UINT32 status = FGInitModule(NULL);
+
+	// Get list of connected nodes
+	if (status == FCE_NOERROR){
+		status = FGGetNodeList(m_nodeInfos, MAX_NODES_COUNT, &m_nodesCount);
+
+		// Connect with node
+		if ((status == FCE_NOERROR) && (m_nodesCount > 0)){
+			status = m_camera.Connect(&m_nodeInfos[0].Guid);
+
+			// initialize image region:
+			if (m_imageRegionParamsCompPtr.IsValid()){
+				InitializeImageRegion(m_imageRegionParamsCompPtr->GetBoundingBox());
+			}
+
+			// Start DMA logic
+			if (status == FCE_NOERROR){
+				status = m_camera.OpenCapture();
+
+				// Start image device
+				if (status == FCE_NOERROR){
+					// if trigger params component is set, set trigger params to device:
+					if (m_triggerParamsCompPtr.IsValid()){
+						InitializeTriggerParams(*m_triggerParamsCompPtr.GetPtr());
+					}
+
+					if (*m_singleShootAttrPtr){
+						if (m_camera.SetParameter(FGP_BURSTCOUNT, 1) == FCE_NOERROR){
+							m_isCameraValid = true;
+
+							return;
+						}
+						else{
+							SendErrorMessage(MI_CANNOT_SET_SINGLE_SHOT, "Cannot set single shot mode");
+						}
+					}
+					else{
+						if (m_camera.SetParameter(FGP_BURSTCOUNT, BC_INFINITE) != FCE_NOERROR){
+							SendErrorMessage(MI_CANNOT_SET_CONTINUOUS, "Cannot set continuous mode");
+						}
+					}
+
+					status = m_camera.StartDevice();
+
+					if (status == FCE_NOERROR){
+						m_isCameraValid = true;
+
+						return;
+					}
+					else{
+						SendErrorMessage(MI_CANNOT_START, "Cannot start grab");
+					}
+
+					m_camera.StopDevice();
+				}
+				else{
+					SendErrorMessage(MI_CANNOT_OPEN, "Cannot open capture device");
+				}
+
+				m_camera.CloseCapture();
+			}
+			else{
+				SendErrorMessage(MI_CANNOT_CONNECT, "Cannot connect to camera node");
+			}
+
+			m_camera.Disconnect();
+		}
+		else{
+			SendErrorMessage(MI_NO_NODES, "No camera nodes");
+		}
+
+		FGExitModule();
+	}
+	else{
+		SendErrorMessage(MI_CANNOT_INIT, "Cannot init Fire Grab module");
+	}
+
+	m_isCameraValid = false;
+}
+
+
+void CFireGrabAcquisitionComp::OnComponentDestroyed()
+{
+	if (m_isCameraValid){
+		m_camera.StopDevice();
+		m_camera.CloseCapture();
+		m_camera.Disconnect();
+		FGExitModule();
+
+		m_isCameraValid = false;
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
 
 
 } // namespace iavt

@@ -22,16 +22,6 @@ COcvVideoControllerComp::COcvVideoControllerComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void COcvVideoControllerComp::OnComponentDestroyed()
-{
-	CloseMedium();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d COcvVideoControllerComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
@@ -257,6 +247,16 @@ bool COcvVideoControllerComp::SeekToPosition(int frameIndex) const
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void COcvVideoControllerComp::OnComponentDestroyed()
+{
+	CloseMedium();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

@@ -46,7 +46,7 @@ int CLineProjectionSupplierComp::ProduceObject(imeas::CGeneralDataSequence& resu
 }
 
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CLineProjectionSupplierComp::OnComponentCreated()
 {

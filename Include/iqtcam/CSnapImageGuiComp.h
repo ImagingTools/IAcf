@@ -57,20 +57,9 @@ public:
 
 	CSnapImageGuiComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 	// reimplemented (iqt2d::ISceneExtender)
 	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
-
-protected slots:
-	void on_SnapImageButton_clicked();
-	void on_LiveImageButton_toggled(bool checked);
-	void on_SaveImageButton_clicked();
-	void on_LoadParamsButton_clicked();
-	void on_SaveParamsButton_clicked();
-	void OnTimerReady();
 
 protected:
 	bool SnapImage();
@@ -81,6 +70,17 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+protected slots:
+	void on_SnapImageButton_clicked();
+	void on_LiveImageButton_toggled(bool checked);
+	void on_SaveImageButton_clicked();
+	void on_LoadParamsButton_clicked();
+	void on_SaveParamsButton_clicked();
+	void OnTimerReady();
 
 private:
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);

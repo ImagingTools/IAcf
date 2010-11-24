@@ -20,25 +20,6 @@ CSamplingParamsComp::CSamplingParamsComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CSamplingParamsComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (m_samplingConstraintsCompPtr.IsValid()){
-		for (int i = 0; i <= SM_LAST; ++i){
-			if (m_samplingConstraintsCompPtr->IsSamplingModeSupported(i)){
-				m_samplingMode = i;
-				break;
-			}
-		}
-		istd::CRange intervalRange = m_samplingConstraintsCompPtr->GetIntervalRange();
-		m_interval = std::sqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
-	}
-}
-
-
 // reimplemented (isig::ISamplingParams)
 
 const ISamplingConstraints* CSamplingParamsComp::GetConstraints() const
@@ -113,6 +94,27 @@ bool CSamplingParamsComp::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CSamplingParamsComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_samplingConstraintsCompPtr.IsValid()){
+		for (int i = 0; i <= SM_LAST; ++i){
+			if (m_samplingConstraintsCompPtr->IsSamplingModeSupported(i)){
+				m_samplingMode = i;
+				break;
+			}
+		}
+		istd::CRange intervalRange = m_samplingConstraintsCompPtr->GetIntervalRange();
+		m_interval = std::sqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
+	}
 }
 
 

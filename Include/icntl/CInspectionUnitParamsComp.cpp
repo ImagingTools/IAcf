@@ -69,7 +69,9 @@ bool CInspectionUnitParamsComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CInspectionUnitParamsComp::OnComponentCreated()
 {

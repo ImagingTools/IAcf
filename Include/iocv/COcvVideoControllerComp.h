@@ -40,9 +40,6 @@ public:
 
 	COcvVideoControllerComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentDestroyed();
-
 	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
@@ -77,6 +74,9 @@ public:
 protected:
 	virtual bool GrabCurrentFrame(iimg::IBitmap& result) const;
 	virtual bool SeekToPosition(int frameIndex) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentDestroyed();
 
 private:
 	void EnsureMediumClosed();

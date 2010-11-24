@@ -26,9 +26,6 @@ public:
 
 	CExposureParamsComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 	// reimplemented (icam::IExposureParams)
 	virtual const IExposureConstraints* GetConstraints() const;
 	virtual double GetShutterTime() const;
@@ -40,6 +37,10 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 
 private:
 	I_REF(IExposureConstraints, m_exposureConstraintsCompPtr);

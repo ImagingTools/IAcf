@@ -69,7 +69,9 @@ bool CEjectorParamsComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CEjectorParamsComp::OnComponentCreated()
 {

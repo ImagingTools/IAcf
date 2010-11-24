@@ -193,7 +193,9 @@ istd::CRange CSwissRangerAcquisitionComp::GetEenDelayRange() const
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CSwissRangerAcquisitionComp::OnComponentCreated()
 {

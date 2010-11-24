@@ -160,7 +160,9 @@ int CScriptDataProcessorComp::GetMaximalSamplesCount(bool /*forInput*/, bool /*f
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CScriptDataProcessorComp::OnComponentCreated()
 {

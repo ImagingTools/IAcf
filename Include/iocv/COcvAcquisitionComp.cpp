@@ -82,7 +82,9 @@ bool COcvAcquisitionComp::IsTriggerModeSupported(int /*triggerMode*/) const
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void COcvAcquisitionComp::OnComponentCreated()
 {

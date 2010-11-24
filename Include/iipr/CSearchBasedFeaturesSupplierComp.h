@@ -37,7 +37,7 @@ protected:
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(CFeaturesContainer& result) const;
 
-	// reimplemented (icomp::IComponent)
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:

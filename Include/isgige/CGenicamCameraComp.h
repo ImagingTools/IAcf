@@ -143,7 +143,7 @@ protected:
 	DeviceInfo* EnsureDeviceSynchronized(const iprm::IParamsSet* paramsPtr);
 	bool SynchronizeCameraParams(const iprm::IParamsSet* paramsPtr, DeviceInfo& deviceInfo);
 
-	// reimplemented (icomp::IComponent)
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 protected slots:

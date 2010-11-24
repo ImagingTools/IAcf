@@ -5,7 +5,9 @@ namespace imebase
 {
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CChannelAddressParamComp::OnComponentCreated()
 {

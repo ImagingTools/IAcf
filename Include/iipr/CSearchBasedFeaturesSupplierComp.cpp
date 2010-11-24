@@ -42,7 +42,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 }
 
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CSearchBasedFeaturesSupplierComp::OnComponentCreated()
 {
