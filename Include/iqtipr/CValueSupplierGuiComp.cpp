@@ -31,45 +31,53 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		bool isResultVisible = false;
-		imath::CVarVector position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
-		if (position.GetElementsCount() >= 2){
-			m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+		imath::CVarVector position;
 
-			isResultVisible = true;
+		int workStatus = supplierPtr->GetWorkStatus();
+		if (workStatus == iproc::ISupplier::WS_OK){
+			position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
+		}
 
-			if (IsGuiCreated()){
-				PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+		if (workStatus >= iproc::ISupplier::WS_OK){
+			bool isResultVisible = false;
+			if (position.GetElementsCount() >= 2){
+				m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+
+				isResultVisible = true;
+
+				if (IsGuiCreated()){
+					PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+				}
 			}
-		}
-		else{
-			m_foundModel.SetPosition(i2d::CVector2d(0, 0));
+			else{
+				m_foundModel.SetPosition(i2d::CVector2d(0, 0));
 
-			if (IsGuiCreated()){
-				PositionLabel->setText("No position");
+				if (IsGuiCreated()){
+					PositionLabel->setText("No position");
+				}
 			}
-		}
 
-		imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
-		if (radius.GetElementsCount() >= 1){
-			m_foundModel.SetRadius(radius[0]);
-		}
-		else{
-			m_foundModel.SetRadius(0);
-		}
+			imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
+			if (radius.GetElementsCount() >= 1){
+				m_foundModel.SetRadius(radius[0]);
+			}
+			else{
+				m_foundModel.SetRadius(0);
+			}
 
-		int shapesCount = m_foundModel.GetObserverCount();
-		for (int i = 0; i < shapesCount; ++i){
-			QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
-			shapePtr->setVisible(isResultVisible);
-		}
+			int shapesCount = m_foundModel.GetObserverCount();
+			for (int i = 0; i < shapesCount; ++i){
+				QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
+				shapePtr->setVisible(isResultVisible);
+			}
 
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
-		if (paramsModelPtr != NULL){
-			if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
-				m_paramsObserver.EnsureDetached();
+			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
+			if (paramsModelPtr != NULL){
+				if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
+					m_paramsObserver.EnsureDetached();
 
-				paramsModelPtr->AttachObserver(&m_paramsObserver);
+					paramsModelPtr->AttachObserver(&m_paramsObserver);
+				}
 			}
 		}
 	}

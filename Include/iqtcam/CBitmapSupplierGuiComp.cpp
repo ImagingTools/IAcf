@@ -20,18 +20,6 @@ void CBitmapSupplierGuiComp::UpdateModel() const
 
 void CBitmapSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
-	iproc::IBitmapSupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		const iimg::IBitmap* bitmapPtr = supplierPtr->GetBitmap();
-
-		if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
-			m_bitmap.ResetImage();
-		}
-	}
-	else{
-		m_bitmap.ResetImage();
-	}
-
 	if (IsGuiCreated()){
 		istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
 
@@ -47,7 +35,7 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		supplierPtr->InitNewWork(true);
+		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
@@ -129,6 +117,33 @@ void CBitmapSupplierGuiComp::OnGuiModelAttached()
 
 	LoadParamsButton->setVisible(IsLoadParamsSupported());
 	SaveParamsButton->setVisible(IsSaveParamsSupported());
+}
+
+
+// reimplemented (imod::IObserver)
+
+void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	iproc::IBitmapSupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		const iimg::IBitmap* bitmapPtr = NULL;
+
+		int workStatus = supplierPtr->GetWorkStatus();
+		if (workStatus == iproc::ISupplier::WS_OK){
+			bitmapPtr = supplierPtr->GetBitmap();
+		}
+
+		if (workStatus >= iproc::ISupplier::WS_OK){
+			if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
+				m_bitmap.ResetImage();
+			}
+		}
+	}
+	else{
+		m_bitmap.ResetImage();
+	}
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 

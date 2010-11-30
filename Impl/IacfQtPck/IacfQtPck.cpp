@@ -38,12 +38,17 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			SampleAcquisitionGui,
 			"Sample acquisition GUI",
-			"Sample Sampling Acquisition GUI Qt");
+			"Sample Sampling Acquisition GUI");
 
 I_EXPORT_COMPONENT(
 			ScriptDataProcessor,
 			"Test sample acquisition based on QtScript",
-			"Test Sample Sampling Acquisition Script QtScript Qt");
+			"Test Sample Sampling Acquisition Script QtScript");
+
+I_EXPORT_COMPONENT(
+			InspectionTaskGui,
+			"Gui for general inspection task",
+			"Task Supplier Composite Observer" IM_TAG("Inspection GUI Editor"));
 
 
 } // namespace IacfQtPck

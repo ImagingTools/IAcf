@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1526
+          1627
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          224
+          286
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         AboutGui
@@ -51,6 +51,39 @@
     </Element>
     <Element>
       <ComponentName>
+        InspectionGui
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <X>
+        575
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        InspectionTask
+      </ComponentName>
+      <X>
+        1100
+      </X>
+      <X>
+        575
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        InspectionTaskEditor
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        725
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         LogDock
       </ComponentName>
       <X>
@@ -58,61 +91,6 @@
       </X>
       <X>
         175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Product
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        725
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProductEditor
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        725
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProductGui
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        575
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SceneGui
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        575
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTab
-      </ComponentName>
-      <X>
-        750
-      </X>
-      <X>
-        450
       </X>
     </Element>
     <Element>

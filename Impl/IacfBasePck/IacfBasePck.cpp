@@ -40,11 +40,15 @@ I_EXPORT_COMPONENT(
 			"Static acquisition constraints for some device",
 			"Image Bitmap Camera Snap Acquisition Constraints");
 
-
 I_EXPORT_COMPONENT(
 			SamplingParams,
 			"Sampling params based on fixed boundary values",
 			"Sample Sampling Acquisition Model Parameters");
+
+I_EXPORT_COMPONENT(
+			InspectionTask,
+			"Group set of suppliers into single inspection task",
+			"Task Model Supplier Composite" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 
 } // namespace IacfBasePck

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1526
+          1627
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          224
+          286
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="7">
     <Element>
       <Id>
         AboutGui
@@ -176,34 +176,13 @@
     </Element>
     <Element>
       <Id>
-        LogDock
+        InspectionGui
       </Id>
       <PackageId>
-        AcfGuiVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        LogDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Product
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSet
+        ModelEditorGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -215,7 +194,85 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Parameters
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InspectionTask
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveEditorGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InspectionTaskEditor
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        InspectionTask
+      </Id>
+      <PackageId>
+        IacfBasePck
+      </PackageId>
+      <ComponentId>
+        InspectionTask
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Subtasks
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -231,13 +288,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ParametersId
+              ToSerialize
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              InspectionIds
+              InspectionsToSerialize
             </ExportId>
             <Data>
               <IsEnabled>
@@ -250,13 +307,13 @@
     </Element>
     <Element>
       <Id>
-        ProductEditor
+        InspectionTaskEditor
       </Id>
       <PackageId>
-        QtGuiPck
+        IacfQtPck
       </PackageId>
       <ComponentId>
-        ComposedParamsSetGui
+        InspectionTaskGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -265,7 +322,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DesignType
@@ -303,22 +360,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Ids
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              InspectionIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               Names
             </Id>
             <Type>
@@ -333,89 +374,25 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProductGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ModelEditorGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Model
+              PreviewGuis
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              
+              InspectionPreviews
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Product
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SlaveEditorGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ProductEditor
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SceneGui
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneProvider
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              BackgroundMode
+              TabBarOrientation
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -428,26 +405,7 @@
                 true
               </IsEnabled>
               <Value>
-                1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseAntialiasing
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
+                3
               </Value>
             </Data>
           </AttributeInfo>
@@ -456,13 +414,13 @@
     </Element>
     <Element>
       <Id>
-        SnapTab
+        LogDock
       </Id>
       <PackageId>
-        QtViewPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        SceneConnector
+        LogDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -471,45 +429,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ExtenderGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ProductGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SceneGui
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -603,7 +523,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapTab
+                InspectionGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -648,7 +568,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="7">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -679,14 +599,6 @@
       </InterfaceId>
       <ComponentId>
         LogDock
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqt2d::ISceneProvider
-      </InterfaceId>
-      <ComponentId>
-        SceneGui
       </ComponentId>
     </Interface>
     <Interface>

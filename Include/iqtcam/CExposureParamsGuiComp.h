@@ -25,8 +25,8 @@ public:
 				Ui::CExposureParamsGuiComp,
 				icam::IExposureParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CExposureParamsGuiComp)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CExposureParamsGuiComp);
+	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

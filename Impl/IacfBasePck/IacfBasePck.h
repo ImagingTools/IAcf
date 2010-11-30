@@ -11,7 +11,10 @@
 #include "icam/CSnapBitmapSupplierComp.h"
 #include "icam/CMemoryAcquisitionComp.h"
 #include "icam/CAcquisitionConstraintsComp.h"
+
 #include "isig/CSamplingParamsComp.h"
+
+#include "iinsp/CInspectionTaskComp.h"
 
 
 /**
@@ -27,6 +30,7 @@ typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
 typedef icam::CMemoryAcquisitionComp MemoryAcquisition;
 typedef icam::CAcquisitionConstraintsComp AcquisitionConstraints;
 typedef icomp::TModelCompWrap<isig::CSamplingParamsComp> SamplingParams;
+typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
 
 
 } // namespace IacfBasePck

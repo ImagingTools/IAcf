@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1518
+          1627
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          219
+          286
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,24 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         Framework
       </ComponentName>
       <X>
-        575
+        675
+      </X>
+      <X>
+        350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageView
+      </ComponentName>
+      <X>
+        225
       </X>
       <X>
         350
@@ -43,7 +54,7 @@
         SimpleCircleFinderTask
       </ComponentName>
       <X>
-        950
+        975
       </X>
       <X>
         225
@@ -54,7 +65,7 @@
         SimpleCircleFinderTaskGui
       </ComponentName>
       <X>
-        950
+        975
       </X>
       <X>
         475
@@ -65,7 +76,7 @@
         SnapTask
       </ComponentName>
       <X>
-        250
+        400
       </X>
       <X>
         225
@@ -76,7 +87,7 @@
         SnapTaskGui
       </ComponentName>
       <X>
-        250
+        400
       </X>
       <X>
         475
