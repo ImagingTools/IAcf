@@ -9,12 +9,15 @@
 #include <QTabWidget>
 #include <QGroupBox>
 
+
+// ACF includes
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
 
 namespace iqtinsp
 {
+
 
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 :	m_currentGuiIndex(-1)
