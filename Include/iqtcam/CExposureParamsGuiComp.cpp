@@ -74,37 +74,39 @@ void CExposureParamsGuiComp::OnGuiModelDetached()
 
 void CExposureParamsGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
 	icam::IExposureParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		UpdateBlocker blocker(const_cast<CExposureParamsGuiComp*>(this));
+	I_ASSERT(objectPtr != NULL);
 
-		double tolerance = 0.9e-6;
+	double tolerance = 0.9e-6;
 
-		istd::CChangeNotifier notifier(NULL);
+	istd::CChangeNotifier notifier(NULL);
 
-		double shutterTime = ShutterTimeSB->value() * 0.001;
-		if (ShutterTimeSB->isVisible() && (fabs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetShutterTime(shutterTime);
-		}
+	double shutterTime = ShutterTimeSB->value() * 0.001;
+	if (ShutterTimeSB->isVisible() && (fabs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetShutterTime(shutterTime);
+	}
 
-		double delayTime = DelayTimeSB->value() * 0.001;
-		if (DelayTimeSB->isVisible() && (fabs(objectPtr->GetDelayTime() - delayTime) > tolerance)){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetDelayTime(delayTime);
-		}
+	double delayTime = DelayTimeSB->value() * 0.001;
+	if (DelayTimeSB->isVisible() && (fabs(objectPtr->GetDelayTime() - delayTime) > tolerance)){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetDelayTime(delayTime);
+	}
 
-		double eenDelayTime = EenDelayTimeSB->value() * 0.001;
-		if (EenDelayTimeSB->isVisible() && (fabs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetEenDelay(eenDelayTime);
-		}
+	double eenDelayTime = EenDelayTimeSB->value() * 0.001;
+	if (EenDelayTimeSB->isVisible() && (fabs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetEenDelay(eenDelayTime);
 	}
 }
 
 
 void CExposureParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	icam::IExposureParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);

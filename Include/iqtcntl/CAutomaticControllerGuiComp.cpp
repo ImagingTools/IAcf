@@ -9,15 +9,19 @@ namespace iqtcntl
 
 void CAutomaticControllerGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
 	icntl::IAutomaticController* modelPtr = GetObjectPtr();
-	if (IsGuiCreated() && (modelPtr != NULL)){
-		modelPtr->SetWorkMode(AutomaticButton->isChecked()? icntl::IAutomaticController::WM_AUTOMATIC: icntl::IAutomaticController::WM_MANUAL);
-	}
+	I_ASSERT(modelPtr != NULL);
+
+	modelPtr->SetWorkMode(AutomaticButton->isChecked()? icntl::IAutomaticController::WM_AUTOMATIC: icntl::IAutomaticController::WM_MANUAL);
 }
 
 
 void CAutomaticControllerGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	const icntl::IAutomaticController* modelPtr = GetObjectPtr();
 	if (IsGuiCreated() && (modelPtr != NULL)){
 		AutomaticButton->setChecked(modelPtr->GetWorkMode() == icntl::IAutomaticController::WM_AUTOMATIC);

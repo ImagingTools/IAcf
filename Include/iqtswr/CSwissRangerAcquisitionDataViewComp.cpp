@@ -12,11 +12,14 @@ namespace iqtswr
 
 void CSwissRangerAcquisitionDataViewComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CSwissRangerAcquisitionDataViewComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	CoherenceThresholdLabel->setText(QString("%1%").arg(CoherenceThresholdSlider->value()));
 	MinimalDistanceCropLabel->setText(QString("%1%").arg(MinimalDistanceCropSlider->value()));
 	MaximalDistanceCropLabel->setText(QString("%1%").arg(MaximalDistanceCropSlider->value()));

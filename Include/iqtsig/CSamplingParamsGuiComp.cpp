@@ -14,13 +14,16 @@ namespace iqtsig
 
 void CSamplingParamsGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CSamplingParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	isig::ISamplingParams* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL)){
+	if (objectPtr != NULL){
 		IntervalSB->setValue(objectPtr->GetInterval() * 1000);
 		ModeCB->setCurrentIndex(objectPtr->GetSamplingMode());
 	}

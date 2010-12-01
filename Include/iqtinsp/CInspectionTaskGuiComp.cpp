@@ -29,6 +29,8 @@ CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 
 void CInspectionTaskGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
+
 	int editorsCount = m_editorsCompPtr.GetCount();
 	for (int i = 0; i < editorsCount; ++i){
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
@@ -41,6 +43,8 @@ void CInspectionTaskGuiComp::UpdateModel() const
 
 void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 {
+	I_ASSERT(IsGuiCreated());
+
 	int editorsCount = m_editorsCompPtr.GetCount();
 	for (int i = 0; i < editorsCount; ++i){
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];

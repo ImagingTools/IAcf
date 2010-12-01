@@ -24,11 +24,14 @@ CValueSupplierGuiComp::CValueSupplierGuiComp()
 
 void CValueSupplierGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		imath::CVarVector position;

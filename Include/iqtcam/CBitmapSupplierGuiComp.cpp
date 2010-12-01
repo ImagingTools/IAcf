@@ -15,17 +15,18 @@ namespace iqtcam
 
 void CBitmapSupplierGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CBitmapSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
-	if (IsGuiCreated()){
-		istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
+	I_ASSERT(IsGuiCreated());
 
-		SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
-		SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty());
-	}
+	istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
+
+	SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
+	SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty());
 }
 
 

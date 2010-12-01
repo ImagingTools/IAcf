@@ -24,11 +24,14 @@ namespace iqtipr
 
 void CLineProjectionSupplierGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CLineProjectionSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		const imeas::IDataSequence* projectionPtr = supplierPtr->GetLineProjection();

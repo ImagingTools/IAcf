@@ -12,35 +12,37 @@ namespace iqtipr
 
 void CCaliperParamsGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
 	iipr::ICaliperParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && !IsUpdateBlocked()){
-		UpdateBlocker blocker(const_cast<CCaliperParamsGuiComp*>(this));
+	I_ASSERT(objectPtr != NULL);
 
-		istd::CChangeNotifier notifier(NULL);
+	istd::CChangeNotifier notifier(NULL);
 
-		double threshold = ThresholdSB->value() * 0.01;
-		if (fabs(objectPtr->GetWeightThreshold() - threshold) > I_BIG_EPSILON){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetWeightThreshold(threshold);
-		}
+	double threshold = ThresholdSB->value() * 0.01;
+	if (fabs(objectPtr->GetWeightThreshold() - threshold) > I_BIG_EPSILON){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetWeightThreshold(threshold);
+	}
 
-		int edgePolarity = EdgePolarityCB->currentIndex();
-		if (objectPtr->GetPolarityMode() != edgePolarity){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetPolarityMode(edgePolarity);
-		}
+	int edgePolarity = EdgePolarityCB->currentIndex();
+	if (objectPtr->GetPolarityMode() != edgePolarity){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetPolarityMode(edgePolarity);
+	}
 
-		int direction = DirectionCB->currentIndex();
-		if (objectPtr->GetDirectionMode() != direction){
-			notifier.SetPtr(objectPtr);
-			objectPtr->SetDirectionMode(direction);
-		}
+	int direction = DirectionCB->currentIndex();
+	if (objectPtr->GetDirectionMode() != direction){
+		notifier.SetPtr(objectPtr);
+		objectPtr->SetDirectionMode(direction);
 	}
 }
 
 
 void CCaliperParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iipr::ICaliperParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		double threshold = objectPtr->GetWeightThreshold();

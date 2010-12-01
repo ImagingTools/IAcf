@@ -15,35 +15,35 @@ namespace iqtipr
 
 void CRectangularFilterParamsGuiComp::UpdateModel() const
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blocker(const_cast<CRectangularFilterParamsGuiComp*>(this));
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
-		iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			imath::CVarVector filterLengths = objectPtr->GetFilterLengths();
+	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
 
-			if (filterLengths.GetElementsCount() >= 1){
-				filterLengths[0] = FilterWidthSlider->value() * 2 + 1;
-			}
+	imath::CVarVector filterLengths = objectPtr->GetFilterLengths();
 
-			if (filterLengths.GetElementsCount() >= 2){
-				filterLengths[1] = FilterHeightSlider->value() * 2 + 1;
-			}
+	if (filterLengths.GetElementsCount() >= 1){
+		filterLengths[0] = FilterWidthSlider->value() * 2 + 1;
+	}
 
-			if (filterLengths != objectPtr->GetFilterLengths()){
-				istd::CChangeNotifier notifier(objectPtr);
+	if (filterLengths.GetElementsCount() >= 2){
+		filterLengths[1] = FilterHeightSlider->value() * 2 + 1;
+	}
 
-				objectPtr->SetFilterLengths(filterLengths);
+	if (filterLengths != objectPtr->GetFilterLengths()){
+		istd::CChangeNotifier notifier(objectPtr);
 
-				const_cast<CRectangularFilterParamsGuiComp&>(*this).UpdateLabel(filterLengths);
-			}
-		}
+		objectPtr->SetFilterLengths(filterLengths);
+
+		const_cast<CRectangularFilterParamsGuiComp&>(*this).UpdateLabel(filterLengths);
 	}
 }
 
 
 void CRectangularFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		const imath::CVarVector& filterLengths = objectPtr->GetFilterLengths();

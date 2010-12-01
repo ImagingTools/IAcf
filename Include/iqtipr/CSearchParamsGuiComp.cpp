@@ -12,6 +12,8 @@ namespace iqtipr
 
 void CSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iipr::ISearchParams* paramsPtr = GetObjectPtr();
 	if (paramsPtr == NULL){
 		return;
@@ -37,23 +39,19 @@ void CSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 
 void CSearchParamsGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
+
 	iipr::ISearchParams* paramsPtr = GetObjectPtr();
-	if (paramsPtr == NULL || !IsGuiCreated()){
-		return;
-	}
+	I_ASSERT(paramsPtr != NULL);
 
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blocker(const_cast<CSearchParamsGuiComp*>(this));
+	istd::TChangeNotifier<iipr::ISearchParams> updatePtr(paramsPtr);
 
-		istd::TChangeNotifier<iipr::ISearchParams> updatePtr(paramsPtr);
-
-		updatePtr->SetRotationRange(istd::CRange(m_spinMinimumAngle->value(), m_spinMaximumAngle->value()));
-		updatePtr->SetScaleRange(istd::CRange(m_spinMinimumScale->value(), m_spinMaximumScale->value()));
-		updatePtr->SetMinScore(m_spinMinimumScore->value());
-		updatePtr->SetNominalModelsCount(m_spinModelNumber->value());
-		updatePtr->SetRotationEnabled(m_checkEnableRotation->isChecked());
-		updatePtr->SetScaleEnabled(m_checkEnableScale->isChecked());
-	}
+	updatePtr->SetRotationRange(istd::CRange(m_spinMinimumAngle->value(), m_spinMaximumAngle->value()));
+	updatePtr->SetScaleRange(istd::CRange(m_spinMinimumScale->value(), m_spinMaximumScale->value()));
+	updatePtr->SetMinScore(m_spinMinimumScore->value());
+	updatePtr->SetNominalModelsCount(m_spinModelNumber->value());
+	updatePtr->SetRotationEnabled(m_checkEnableRotation->isChecked());
+	updatePtr->SetScaleEnabled(m_checkEnableScale->isChecked());
 }
 
 

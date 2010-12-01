@@ -14,23 +14,26 @@ namespace iqtswr
 
 void CSwissRangerParamsGuiComp::UpdateModel() const
 {
-	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL) && !IsUpdateBlocked()){
-		istd::TChangeNotifier<iswr::ISwissRangerParams> changePtr(objectPtr);
-		UpdateBlocker block(const_cast<CSwissRangerParamsGuiComp*>(this));
+	I_ASSERT(IsGuiCreated());
 
-		objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSpin->value() / 100.0);
-		objectPtr->SetModulationFrequencyMode(ModulationFrequencyModeCombo->currentIndex());
-		objectPtr->SetMedianFilterEnabled(MedianFilterCheck->isChecked());
-		objectPtr->SetAdaptiveFilterEnabled(AdaptiveFilterCheck->isChecked());
-	}
+	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
+
+	istd::TChangeNotifier<iswr::ISwissRangerParams> changePtr(objectPtr);
+
+	objectPtr->SetAmplitudeThreshold(AmplitudeThresholdSpin->value() / 100.0);
+	objectPtr->SetModulationFrequencyMode(ModulationFrequencyModeCombo->currentIndex());
+	objectPtr->SetMedianFilterEnabled(MedianFilterCheck->isChecked());
+	objectPtr->SetAdaptiveFilterEnabled(AdaptiveFilterCheck->isChecked());
 }
 
 
 void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	iswr::ISwissRangerParams* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL)){
+	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(GetWidget(), true);
 		AmplitudeThresholdSpin->setValue(objectPtr->GetAmplitudeThreshold() * 100);
 		ModulationFrequencyModeCombo->setCurrentIndex(objectPtr->GetModulationFrequencyMode());
