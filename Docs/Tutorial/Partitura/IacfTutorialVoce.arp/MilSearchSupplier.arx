@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          860
+          1633
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          289
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -30,6 +41,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -48,6 +62,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -66,6 +83,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -84,6 +104,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -102,6 +125,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
@@ -205,6 +231,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
@@ -218,11 +247,8 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                BitmapSupplier
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -280,6 +306,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
@@ -312,11 +341,8 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                BitmapAcquisition
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -412,6 +438,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -466,12 +495,15 @@
         IprPck
       </PackageId>
       <ComponentId>
-				FeaturesContainer
-			</ComponentId>
+        FeaturesContainer
+      </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -594,9 +626,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Model search taks with ingrated GUI based on MIL library
   </Description>
   <Keywords>
-    
+    MIL Model GMF Search Tag='Supplier'
   </Keywords>
 </Acf>
