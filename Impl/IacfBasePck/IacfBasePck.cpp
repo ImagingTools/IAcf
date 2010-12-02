@@ -12,7 +12,7 @@ I_EXPORT_DEFAULT_SERVICES
 I_EXPORT_PACKAGE(
 			"IacfBase",
 			"General, system-independent image processing package",
-			"Standard Base Imaging Tools" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Standard Base Imaging Tools" IM_PROJECT("IACF") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 
 I_EXPORT_COMPONENT(

@@ -12,7 +12,7 @@ I_EXPORT_DEFAULT_SERVICES
 I_EXPORT_PACKAGE(
 			"QtProd",
 			"Qt-based production and control package",
-			"Qt Production Automatic Controller" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Qt Production Automatic Controller" IM_PROJECT("IACF") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			DriverController,

@@ -13,7 +13,7 @@ I_EXPORT_DEFAULT_SERVICES
 I_EXPORT_PACKAGE(
 			"SmaGigEPck",
 			"GigE Vision camera package based on Smartek SDK",
-			"GigE Vision Qt Standard" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("Qt \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\""));
+			"GigE Vision Qt Standard" IM_PROJECT("IACF") IM_TAG("Qt \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\""));
 
 
 I_EXPORT_COMPONENT(

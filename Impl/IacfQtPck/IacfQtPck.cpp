@@ -27,7 +27,7 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 I_EXPORT_PACKAGE(
 			"IacfQt",
 			"Imaging tools Qt-based general package",
-			"Imaging Tools Qt Standard" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Imaging Tools Qt Standard" IM_PROJECT("IACF") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 
 I_EXPORT_COMPONENT(

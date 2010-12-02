@@ -13,7 +13,7 @@ I_EXPORT_DEFAULT_SERVICES
 I_EXPORT_PACKAGE(
 			"AvtPck",
 			"Standard Applied Vision Technologies (AVT) hardware package based on Qt",
-			"AVT Applied Vision Technologies Qt Standard" IM_PROJECT("\"ACF Computer Vision\"") IM_TAG("Qt \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"AVT Applied Vision Technologies Qt Standard" IM_PROJECT("IACF") IM_TAG("Qt \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 
 I_EXPORT_COMPONENT(
