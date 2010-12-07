@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iinsp"
-	ProjectGUID="{34125E03-433E-4FFE-8D7A-9833C6B3AAA9}"
-	RootNamespace="iinsp"
+	Name="iqtinsp"
+	ProjectGUID="{71BBC8AD-BA3F-48B4-883F-4924B4CC0453}"
+	RootNamespace="iqtinsp"
+	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -13,45 +15,31 @@
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Acf.rules"
-		/>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Tortoise.rules"
+			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC8"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -61,28 +49,20 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
-				HeaderFileName=""
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
-				SuppressStartupBanner="true"
-				CompileAs="0"
+				DebugInformationFormat="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -90,8 +70,6 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="NDEBUG"
-				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -113,41 +91,29 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC8"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -157,29 +123,20 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="./iwin/DebugVC7/iwin.tlb"
-				HeaderFileName=""
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
-				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
-				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
-				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -187,8 +144,6 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -210,7 +165,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -219,71 +173,74 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp"
+			Filter="cpp;cxx;c;def"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CInspectionTaskComp.cpp"
+				RelativePath="..\CInspectionTaskGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CInspectionTaskGuiComp.moc"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CInspectionTaskComp.h"
+				RelativePath="..\CInspectionTaskGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iinsp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IInspectionTask.h"
+				RelativePath="..\iqtinsp.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="Other"
+			Name="Resource Files"
+			Filter="qrc;*"
+			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
+			ParseFiles="false"
+			>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp"
+			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\IacfVersion.h.xtrsvn"
+				RelativePath="..\Generated\moc_CInspectionTaskGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
+				RelativePath="..\Generated\ui_CInspectionTaskGuiComp.h"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
-			Name="Generated"
+			Name="Forms"
 			>
 			<File
-				RelativePath="..\generated\IacfVersion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Partitura\IacfVoce.arp\VersionInfo.arx"
+				RelativePath="..\CInspectionTaskGuiComp.ui"
 				>
 			</File>
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="MocDir"
+			Value="$(InputDir)\Generated"
+		/>
+		<Global
+			Name="QtVersion"
+			Value="4.2.3"
+		/>
+		<Global
+			Name="UicDir"
+			Value="$(InputDir)\Generated"
+		/>
 	</Globals>
 </VisualStudioProject>
