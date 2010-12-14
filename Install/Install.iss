@@ -20,7 +20,7 @@ UninstallDisplayName=$AcfProductName$ $AcfVersion:10$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
 VersionInfoDescription=$AcfProductName$ v. $AcfVersion:10$ ($AcfRawVersion:10$) by $AcfCompanyName$, compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$)
-AppCopyright=Copyright (C) 2007-2009 $AcfCompanyName$
+AppCopyright=Copyright (C) 2007-2010 Witold Gantzke and Kirill Lepskiy
 VersionInfoVersion=$AcfVersion:10$
 
 [Files]

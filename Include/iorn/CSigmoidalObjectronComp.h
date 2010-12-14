@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "imath/TVarMatrix.h"
+#include "imath/CVarMatrix.h"
 
 #include "iorn/IObjectron.h"
 

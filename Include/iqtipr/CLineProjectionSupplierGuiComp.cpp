@@ -6,7 +6,7 @@
 
 
 // ACF includes
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 
 #include "istd/TChangeNotifier.h"
 #include "iser/CMemoryReadArchive.h"

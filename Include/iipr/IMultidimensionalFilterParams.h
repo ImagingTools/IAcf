@@ -4,7 +4,7 @@
 
 #include "iser/ISerializable.h"
 
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 
 
 namespace iipr

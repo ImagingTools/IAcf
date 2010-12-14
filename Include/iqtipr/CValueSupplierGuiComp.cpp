@@ -5,7 +5,7 @@
 #include <QMessageBox>
 
 // ACF includes
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 #include "iqt2d/CPosition2dShape.h"
 #include "iqt2d/CCircleShape.h"
 

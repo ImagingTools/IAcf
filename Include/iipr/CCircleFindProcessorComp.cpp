@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "imath/TVarMatrix.h"
+#include "imath/CVarMatrix.h"
 #include "i2d/CAnnulusSegment.h"
 #include "iprm/CParamsSet.h"
 
