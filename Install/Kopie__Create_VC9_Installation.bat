@@ -23,13 +23,13 @@ call Create_TechnicalDoc.bat
 
 call Create_VC_Commercial.bat
 
-rem call Compile_Setup.bat
+call Compile_Setup.bat
 
-rem echo Installation done
+echo Installation done
 
-rem pause
+pause
 
-rem echo Removing temporary files...
-rem rmdir /Q /S Temp
-rem rmdir /Q /S TempExcl
+echo Removing temporary files...
+rmdir /Q /S Temp
+rmdir /Q /S TempExcl
 
