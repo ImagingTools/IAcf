@@ -31,12 +31,13 @@ void CInspectionTaskGuiComp::UpdateModel() const
 {
 	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
-	int editorsCount = m_editorsCompPtr.GetCount();
-	for (int i = 0; i < editorsCount; ++i){
-		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-		if (editorPtr != NULL){
-			editorPtr->UpdateModel();
-		}
+	for (		EditorsList::const_iterator iter = m_editorsList.begin();
+				iter != m_editorsList.end();
+				++iter){
+		const imod::IModelEditor* editorPtr = *iter;
+		I_ASSERT(editorPtr != NULL);
+		
+		editorPtr->UpdateModel();
 	}
 }
 
@@ -45,12 +46,13 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
-	int editorsCount = m_editorsCompPtr.GetCount();
-	for (int i = 0; i < editorsCount; ++i){
-		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-		if (editorPtr != NULL){
-			editorPtr->UpdateEditor(updateFlags);
-		}
+	for (		EditorsList::const_iterator iter = m_editorsList.begin();
+				iter != m_editorsList.end();
+				++iter){
+		imod::IModelEditor* editorPtr = *iter;
+		I_ASSERT(editorPtr != NULL);
+		
+		editorPtr->UpdateEditor(updateFlags);
 	}
 }
 
@@ -59,6 +61,8 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 
 bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 {
+	m_editorsList.clear();
+
 	if (!BaseClass::OnAttached(modelPtr)){
 		return false;
 	}
@@ -66,13 +70,34 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 	iinsp::IInspectionTask* inspectionTaskPtr = GetObjectPtr();
 	I_ASSERT(inspectionTaskPtr != NULL);
 
-	int subtasksCount = istd::Min(m_observersCompPtr.GetCount(), inspectionTaskPtr->GetSubtasksCount());
+	int subtasksCount = inspectionTaskPtr->GetSubtasksCount();
 	for (int i = 0; i < subtasksCount; ++i){
 		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetSubtask(i));
-		imod::IObserver* observerPtr = m_observersCompPtr[i];
+		if (parameterModelPtr == NULL){
+			continue;
+		}
 
-		if ((parameterModelPtr != NULL) && (observerPtr != NULL)){
-			parameterModelPtr->AttachObserver(observerPtr);
+		if (i < m_observersCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_observersCompPtr[i];
+
+			if (observerPtr != NULL){
+				if (parameterModelPtr->AttachObserver(observerPtr)){
+					if (i < m_editorsCompPtr.GetCount()){
+						imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
+						if (editorPtr != NULL){
+							m_editorsList.insert(editorPtr);
+						}
+					}
+				}
+			}
+		}
+
+		if (i < m_previewObserversCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_previewObserversCompPtr[i];
+
+			if (observerPtr != NULL){
+				parameterModelPtr->AttachObserver(observerPtr);
+			}
 		}
 	}
 
@@ -82,16 +107,32 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 
 bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 {
+	m_editorsList.clear();
+
 	iinsp::IInspectionTask* inspectionTaskPtr = GetObjectPtr();
 	I_ASSERT(inspectionTaskPtr != NULL);
 
-	int subtasksCount = istd::Min(m_observersCompPtr.GetCount(), inspectionTaskPtr->GetSubtasksCount());
+	int subtasksCount = inspectionTaskPtr->GetSubtasksCount();
 	for (int i = 0; i < subtasksCount; ++i){
 		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetSubtask(i));
-		imod::IObserver* observerPtr = m_observersCompPtr[i];
+		if (parameterModelPtr == NULL){
+			continue;
+		}
 
-		if ((parameterModelPtr != NULL) && (observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){
-			parameterModelPtr->DetachObserver(observerPtr);
+		if (i < m_observersCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_observersCompPtr[i];
+
+			if ((observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){
+				parameterModelPtr->DetachObserver(observerPtr);
+			}
+		}
+
+		if (i < m_previewObserversCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_previewObserversCompPtr[i];
+
+			if ((observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){
+				parameterModelPtr->DetachObserver(observerPtr);
+			}
 		}
 	}
 
@@ -225,6 +266,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 void CInspectionTaskGuiComp::OnGuiDestroyed()
 {
+	m_editorsList.clear();
+
 	int subtasksCount = m_guisCompPtr.GetCount();
 	for (int i = 0; i < subtasksCount; ++i){
 		iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];

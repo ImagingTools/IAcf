@@ -10,6 +10,7 @@
 #include "iqtsig/CSampleAcquisitionGuiComp.h"
 #include "iqtsig/CScriptDataProcessorComp.h"
 #include "iqtinsp/CInspectionTaskGuiComp.h"
+#include "iqtinsp/CGeneralSupplierGuiComp.h"
 
 
 /**
@@ -23,6 +24,7 @@ typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
 typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
 typedef iqtsig::CScriptDataProcessorComp ScriptDataProcessor;
 typedef iqtinsp::CInspectionTaskGuiComp InspectionTaskGui;
+typedef iqtinsp::CGeneralSupplierGuiComp GeneralSupplierGui;
 
 
 } // namespace IacfQtPck

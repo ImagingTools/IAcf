@@ -47,8 +47,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			InspectionTaskGui,
-			"Gui for general inspection task",
+			"GUI for general inspection task",
 			"Task Supplier Composite Observer" IM_TAG("Inspection GUI Editor"));
+
+I_EXPORT_COMPONENT(
+			GeneralSupplierGui,
+			"General GUI for supplier (usable as subtask GUI)",
+			"Task Supplier Observer Subtask" IM_TAG("Inspection GUI Editor"));
 
 
 } // namespace IacfQtPck

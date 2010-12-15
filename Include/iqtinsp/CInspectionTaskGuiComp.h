@@ -4,6 +4,7 @@
 
 // STL includes
 #include <map>
+#include <set>
 
 // ACF includes
 #include "istd/CString.h"
@@ -82,8 +83,10 @@ private:
 
 	int m_currentGuiIndex;
 	typedef std::map<int, int> GuiMap;
-	GuiMap m_tabToStackIndexMap;	// map GUI index to stack index
-	GuiMap m_stackIndexToTabMap;	// map GUI index to stack index
+	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
+	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
+	typedef std::set<imod::IModelEditor*> EditorsList;
+	EditorsList m_editorsList;
 };
 
 

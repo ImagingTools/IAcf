@@ -175,6 +175,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CGeneralSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CInspectionTaskGuiComp.cpp"
 				>
 			</File>
@@ -188,6 +196,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CInspectionTaskGuiComp.h"
 				>
@@ -210,7 +222,15 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\Generated\moc_CGeneralSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CInspectionTaskGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CGeneralSupplierGuiComp.h"
 				>
 			</File>
 			<File
@@ -221,6 +241,10 @@
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CInspectionTaskGuiComp.ui"
 				>
