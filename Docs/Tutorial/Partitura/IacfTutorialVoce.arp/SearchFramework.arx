@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1654
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          295
         </Number>
         <Description>
           ACF-Solutions
@@ -171,10 +171,10 @@
         LogTab
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        LogGui
+        Log
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -355,8 +355,8 @@
         IprPck
       </PackageId>
       <ComponentId>
-				FeaturesContainer
-			</ComponentId>
+        FeaturesContainer
+      </ComponentId>
       <Data>
         <IsEnabled>
           true
@@ -497,6 +497,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
