@@ -20,7 +20,7 @@ I_EXPORT_COMPONENT(
 			"Image Processing Rectangle Kernel");
 
 I_EXPORT_COMPONENT(
-			RectangularFilterParams,
+			MultidimensionalFilterParams,
 			"Rectangular filter parameter",
 			"Filter Image Processing Parameter");
 

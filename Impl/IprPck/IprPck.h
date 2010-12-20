@@ -38,7 +38,7 @@ namespace IprPck
 
 typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
 typedef iipr::CRectImageSmoothProcessorComp RectImageSmoothProcessor;
-typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> RectangularFilterParams;
+typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> MultidimensionalFilterParams;
 typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;

@@ -35,7 +35,7 @@
         IprPck
       </PackageId>
       <ComponentId>
-        RectangularFilterParams
+        MultidimensionalFilterParams
       </ComponentId>
       <Data>
         <IsEnabled>
