@@ -67,7 +67,11 @@ void CSwissRangerParamsGuiComp::OnGuiCreated()
 
 void CSwissRangerParamsGuiComp::OnModelChanged()
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

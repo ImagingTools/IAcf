@@ -119,7 +119,11 @@ void CMilSearchParamsGuiComp::UpdateModel() const
 
 void CMilSearchParamsGuiComp::OnParameterChanged()
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

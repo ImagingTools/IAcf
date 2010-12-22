@@ -33,7 +33,11 @@ void CAutomaticControllerGuiComp::UpdateEditor(int /*updateFlags*/)
 
 void CAutomaticControllerGuiComp::on_AutomaticButton_toggled(bool /*checked*/)
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

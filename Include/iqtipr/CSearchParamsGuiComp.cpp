@@ -59,7 +59,11 @@ void CSearchParamsGuiComp::UpdateModel() const
 
 void CSearchParamsGuiComp::OnParameterChanged()
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

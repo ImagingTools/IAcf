@@ -101,13 +101,21 @@ void CRectangularFilterParamsGuiComp::UpdateLabel(const imath::CVarVector& filte
 
 void CRectangularFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*value*/)
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 
 void CRectangularFilterParamsGuiComp::on_FilterHeightSlider_valueChanged(int /*value*/)
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

@@ -120,7 +120,11 @@ void CExposureParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 
 void CExposureParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	UpdateModel();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 
