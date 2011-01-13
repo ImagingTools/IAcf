@@ -37,6 +37,9 @@ public:
 		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of area of interest in parameter set", true, "AoiParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
+		I_ASSIGN(m_maxRaysCountAttrPtr, "MaxRaysCount", "Maximal number of caliper using for the circle search", false, 16);
+		I_ASSIGN(m_removeOutlierAttrPtr, "RemoveOutliers", "Enable removing of the outlayers", false, false);
+		I_ASSIGN(m_minimalOutlierDistanceAttrPtr, "MinimalOutlierDistance", "Distance threshold in pixel for a point to be an outlayer", false, 5);
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
@@ -96,6 +99,9 @@ private:
 	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_slaveLineIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
+	I_ATTR(int, m_maxRaysCountAttrPtr);
+	I_ATTR(bool, m_removeOutlierAttrPtr);
+	I_ATTR(double, m_minimalOutlierDistanceAttrPtr);
 };
 
 

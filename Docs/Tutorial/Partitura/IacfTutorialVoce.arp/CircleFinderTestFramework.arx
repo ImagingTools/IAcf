@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1627
+          1656
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          286
+          295
         </Number>
         <Description>
           ACF-Solutions
@@ -512,6 +512,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
@@ -565,9 +567,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Complex framework showing different task
+    Test framework for demonstration of the circle finder
   </Description>
   <Keywords>
-    Product Framework Task Image Caliper GUI Application
+    Product Framework Task Image Circle Caliper GUI Application
   </Keywords>
 </Acf>

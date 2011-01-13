@@ -138,6 +138,10 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		CFeaturesContainer container;
 
 		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
+		if (m_maxRaysCountAttrPtr.IsValid()){
+			stepsCount = istd::Min(stepsCount, *m_maxRaysCountAttrPtr);
+		}
+
 		for (int i = 0; i < stepsCount; ++i){
 			double alpha = (i + 0.5) / stepsCount;
 			double angle = alpha * (endAngle - beginAngle) + beginAngle;
@@ -205,6 +209,29 @@ bool CCircleFindProcessorComp::CalculateCircle(const i2d::CVector2d& center, Ray
 	result.SetRadius(sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2))));
 
 	result.SetWeight(weightSum / raysCount);
+
+	if (m_removeOutlierAttrPtr.IsValid() && *m_removeOutlierAttrPtr){
+		double minimalOutlierDistance = m_minimalOutlierDistanceAttrPtr.IsValid() ? *m_minimalOutlierDistanceAttrPtr : 5.0;
+
+		Rays optimizedRays;
+
+		for (int i = 0; i < raysCount; ++i){
+			Ray& ray = rays[i];
+			i2d::CVector2d point = ray.points[ray.usedIndex].position - result.GetPosition();
+
+			double currentRadius = sqrt(point.GetX() * point.GetX() + point.GetY()* point.GetY());
+
+			double foundRadius = result.GetRadius();
+
+			if (fabs(currentRadius - foundRadius) < minimalOutlierDistance){
+				optimizedRays.push_back(ray);
+			}
+		}
+
+		if (optimizedRays.size() != rays.size() && optimizedRays.size() >= 3){
+			return CalculateCircle(center, optimizedRays, result);
+		}
+	}
 
 	return true;
 }

@@ -71,7 +71,9 @@ void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 			int shapesCount = m_foundModel.GetObserverCount();
 			for (int i = 0; i < shapesCount; ++i){
 				QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
-				shapePtr->setVisible(isResultVisible);
+				if (shapePtr != NULL){
+					shapePtr->setVisible(isResultVisible);
+				}
 			}
 
 			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
