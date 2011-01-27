@@ -24,37 +24,22 @@ iproc::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
 }
 
 
+iprm::IParamsSet* CInspectionTaskComp::GetGeneralParams() const
+{
+	return m_generalParamsCompPtr.GetPtr();
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks");
-	static iser::CArchiveTag taskTag("Subtask", "Single subtask");
-
 	bool retVal = true;
 
-	if (m_toSerializeCompPtr.IsValid()){
-		int subtasksCount = m_toSerializeCompPtr.GetCount();
+	if (*m_serialzeSuppliersAttrPtr){
+		static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks");
+		static iser::CArchiveTag taskTag("Subtask", "Single subtask");
 
-		retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
-
-		if (!retVal || (!archive.IsStoring() && subtasksCount != m_toSerializeCompPtr.GetCount())){
-			return false;
-		}
-
-		for (int i = 0; i < subtasksCount; ++i){
-			retVal = retVal && archive.BeginTag(taskTag);
-
-			iser::ISerializable* serializablePtr = m_toSerializeCompPtr[i];
-			if (serializablePtr != NULL){
-				SendWarningMessage(MI_BAD_PARAMS_COUNT, "Bad number of parameter to serialize");
-				retVal = retVal && serializablePtr->Serialize(archive);
-			}
-
-			retVal = retVal && archive.EndTag(taskTag);
-		}
-	}
-	else{
 		int subtasksCount = m_subtasksCompPtr.GetCount();
 
 		retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
@@ -80,9 +65,17 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && archive.EndTag(taskTag);
 		}
+
+		retVal = retVal && archive.EndTag(taskListTag);
 	}
 
-	retVal = retVal && archive.EndTag(taskListTag);
+	if (m_generalParamsCompPtr.IsValid()){
+		static iser::CArchiveTag generalParamsTag("GeneralParams", "General inspection parameters");
+
+		retVal = retVal && archive.BeginTag(generalParamsTag);
+		retVal = retVal && m_generalParamsCompPtr->Serialize(archive);
+		retVal = retVal && archive.EndTag(generalParamsTag);
+	}
 
 	return retVal;
 }

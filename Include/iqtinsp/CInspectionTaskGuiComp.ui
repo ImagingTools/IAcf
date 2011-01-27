@@ -37,7 +37,8 @@
              <string>Test All</string>
             </property>
             <property name="icon">
-             <iconset><normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
+             <iconset>
+              <normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -83,7 +84,8 @@
                 <string>Load...</string>
                </property>
                <property name="icon">
-                <iconset><normaloff>:/Icons/Open.svg</normaloff>:/Icons/Open.svg</iconset>
+                <iconset>
+                 <normaloff>:/Icons/Open.svg</normaloff>:/Icons/Open.svg</iconset>
                </property>
               </widget>
              </item>
@@ -99,7 +101,8 @@
                 <string>Save...</string>
                </property>
                <property name="icon">
-                <iconset><normaloff>:/Icons/Save.svg</normaloff>:/Icons/Save.svg</iconset>
+                <iconset>
+                 <normaloff>:/Icons/Save.svg</normaloff>:/Icons/Save.svg</iconset>
                </property>
               </widget>
              </item>
@@ -107,6 +110,11 @@
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="GeneralParamsFrame" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_4"/>
         </widget>
        </item>
        <item>
@@ -130,11 +138,7 @@
     </widget>
    </item>
   </layout>
-  <zorder>splitter</zorder>
-  <zorder>PreviewStack</zorder>
-  <zorder>groupBox</zorder>
  </widget>
- <resources>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -250,7 +250,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -286,23 +286,7 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ToSerialize
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              InspectionsToSerialize
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
+         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>

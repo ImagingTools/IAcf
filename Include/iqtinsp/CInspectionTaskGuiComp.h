@@ -41,6 +41,9 @@ public:
 		I_ASSIGN_MULTI_0(m_previewObserversCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", false);
 		I_ASSIGN_MULTI_0(m_previewSceneProvidersCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", false);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
+		I_ASSIGN(m_generalParamsGuiCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
+		I_ASSIGN(m_generalParamsObserverCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
+		I_ASSIGN(m_generalParamsEditorCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
 		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0)
@@ -77,6 +80,9 @@ private:
 	I_MULTIREF(iqt2d::ISceneProvider, m_previewSceneProvidersCompPtr);
 	I_MULTIATTR(istd::CString, m_namesAttrPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
+	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
+	I_REF(imod::IModelEditor, m_generalParamsEditorCompPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);

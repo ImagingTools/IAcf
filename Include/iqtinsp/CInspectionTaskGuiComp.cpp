@@ -101,6 +101,13 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 		}
 	}
 
+	if (m_generalParamsObserverCompPtr.IsValid()){
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetGeneralParams());
+		if (generalParamsModelPtr != NULL){
+			generalParamsModelPtr->AttachObserver(m_generalParamsObserverCompPtr.GetPtr());
+		}
+	}
+
 	return true;
 }
 
@@ -133,6 +140,13 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 			if ((observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){
 				parameterModelPtr->DetachObserver(observerPtr);
 			}
+		}
+	}
+
+	if (m_generalParamsObserverCompPtr.IsValid()){
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetGeneralParams());
+		if ((generalParamsModelPtr != NULL) && generalParamsModelPtr->IsAttached(m_generalParamsObserverCompPtr.GetPtr())){
+			generalParamsModelPtr->DetachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}
 	}
 
@@ -258,6 +272,10 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		m_tabToStackIndexMap[previewIndex] = stackIndex;
 	}
 
+	if (m_generalParamsGuiCompPtr.IsValid()){
+		m_generalParamsGuiCompPtr->CreateGui(GeneralParamsFrame);
+	}
+
 	OnEditorChanged(0);
 
 	BaseClass::OnGuiCreated();
@@ -288,6 +306,10 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 		I_ASSERT(guiPtr != NULL);
 
 		guiPtr->DestroyGui();
+	}
+
+	if (m_generalParamsGuiCompPtr.IsValid() && m_generalParamsGuiCompPtr->IsGuiCreated()){
+		m_generalParamsGuiCompPtr->DestroyGui();
 	}
 
 	BaseClass::OnGuiDestroyed();
@@ -328,6 +350,10 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 
 void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 {
+	if (m_generalParamsEditorCompPtr.IsValid()){
+		m_generalParamsEditorCompPtr->UpdateModel();
+	}
+
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int subtasksCount = objectPtr->GetSubtasksCount();
