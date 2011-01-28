@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1510
+          1666
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          213
+          299
         </Number>
         <Description>
           ACF-Solutions
@@ -215,6 +215,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
@@ -300,9 +302,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    
+    Search of edge on image along some specified line
   </Description>
   <Keywords>
-    
+    Line Processing Task Supplier Edge Caliper
   </Keywords>
 </Acf>
