@@ -5,7 +5,6 @@
 	Name="iipr"
 	ProjectGUID="{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}"
 	RootNamespace="iipr"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -191,6 +190,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleFinderParams.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCircleFindProcessorComp.cpp"
 				>
 			</File>
@@ -296,6 +303,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleFinderParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CCircleFindProcessorComp.h"
 				>
 			</File>
@@ -389,6 +404,10 @@
 			</File>
 			<File
 				RelativePath="..\ICaliperProcessor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICircleFinderParams.h"
 				>
 			</File>
 			<File

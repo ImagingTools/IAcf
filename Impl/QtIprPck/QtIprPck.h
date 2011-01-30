@@ -12,6 +12,7 @@
 #include "iqtipr/CValueSupplierGuiComp.h"
 #include "iqtipr/CCaliperParamsGuiComp.h"
 #include "iqtipr/CLineProjectionSupplierGuiComp.h"
+#include "iqtipr/CCircleFinderParamsGuiComp.h"
 
 
 /**
@@ -27,6 +28,8 @@ typedef iqtipr::CSearchParamsGuiComp SearchParamsGui;
 typedef iqtipr::CValueSupplierGuiComp ValueSupplierGui;
 typedef iqtipr::CCaliperParamsGuiComp CaliperParamsGui;
 typedef iqtipr::CLineProjectionSupplierGuiComp LineProjectionSupplierGui;
+typedef iqtipr::CCircleFinderParamsGuiComp CircleFinderParamsGui;
+
 
 
 } // namespace QtIprPck

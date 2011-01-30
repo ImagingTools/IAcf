@@ -182,6 +182,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
@@ -240,6 +248,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
@@ -289,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CCircleFinderParamsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
@@ -310,6 +326,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CCaliperParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CCircleFinderParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -338,6 +358,10 @@
 			>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.ui"
 				>
 			</File>
 			<File
@@ -377,4 +401,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-

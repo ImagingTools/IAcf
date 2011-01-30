@@ -48,6 +48,10 @@ I_EXPORT_COMPONENT(
 			"GUI for line projection supplier",
 			"GUI Observer Supplier Line Projection Image Processing Qt");
 
+I_EXPORT_COMPONENT(
+			CircleFinderParamsGui,
+			"GUI to parametrize the circle finder",
+			"GUI Observer Caliper Circle Parameters Qt");
 
 
 } // namespace QtIprPck

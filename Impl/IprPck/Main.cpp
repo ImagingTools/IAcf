@@ -120,6 +120,11 @@ I_EXPORT_COMPONENT(
 			"Processor Histogram");
 
 
+I_EXPORT_COMPONENT(
+			CircleFinderParams,
+			"Circle finder parameters",
+			"Circle Finder Processor Parameters");
+
 } // namespace IprPck
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1510
+          1667
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          213
+          299
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
         AnnulusSegmentParamsGui
@@ -120,12 +120,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   AnnulusSegmentParamsGui
                 </Value>
                 <Value>
                   CaliperParamsGui
+                </Value>
+                <Value>
+                  CircleFinderParamsGui
                 </Value>
               </Values>
             </Data>
@@ -144,12 +147,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   CircleFinderAoi
                 </Value>
                 <Value>
                   Caliper
+                </Value>
+                <Value>
+                  CircleFinderParams
                 </Value>
               </Values>
             </Data>
@@ -168,12 +174,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   Geometry
                 </Value>
                 <Value>
+                  Edge Detection
+                </Value>
+                <Value>
                   Circle Finder
+                </Value>
+                <Value>
+                  
                 </Value>
               </Values>
             </Data>
@@ -200,7 +212,30 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        CircleFinderParamsGui
+      </Id>
+      <PackageId>
+        QtIprPck
+      </PackageId>
+      <ComponentId>
+        CircleFinderParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>

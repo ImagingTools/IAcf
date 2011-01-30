@@ -35,11 +35,9 @@ public:
 		I_ASSIGN(m_slaveProcessorCompPtr, "SlaveEdgeProcessor", "Slave edge finder processor converting image to list of found edges", true, "SlaveEdgeProcessor");
 		I_ASSIGN(m_featuresMapperCompPtr, "FeaturesMapper", "Calculate position from caliper extracted features", true, "FeaturesMapper");
 		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of area of interest in parameter set", true, "AoiParams");
+		I_ASSIGN(m_circleFinderParamsIdAttrPtr, "CircleFinderParamsId", "ID cirlcie finder parameters in parameter set", true, "CircleFinderParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
-		I_ASSIGN(m_maxRaysCountAttrPtr, "MaxRaysCount", "Maximal number of caliper using for the circle search", false, 16);
-		I_ASSIGN(m_removeOutlierAttrPtr, "RemoveOutliers", "Enable removing of the outlayers", false, false);
-		I_ASSIGN(m_minimalOutlierDistanceAttrPtr, "MinimalOutlierDistance", "Distance threshold in pixel for a point to be an outlayer", false, 5);
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
@@ -80,11 +78,12 @@ protected:
 				const istd::IChangeable& aoiObject,
 				const iprm::IParamsSet& params,
 				const iimg::IBitmap& image,
+				int maximalRaysCount,
 				Rays& inRays,
 				Rays& outRays,
 				i2d::CLine2d& projectionLine,
 				i2d::CVector2d& center);
-	bool CalculateCircle(const i2d::CVector2d& center, Rays& rays, CircleFeature& result);
+	bool CalculateCircle(const i2d::CVector2d& center, bool removeOutliers, double minOutliersDistance, Rays& rays, CircleFeature& result);
 	bool CalculateAnnulus(const i2d::CVector2d& center, Rays& inRays, Rays& outRays, AnnulusFeature& result);
 
 	void AddProjectionResultsToRays(
@@ -98,10 +97,8 @@ private:
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
 	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_slaveLineIdAttrPtr);
+	I_ATTR(istd::CString, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
-	I_ATTR(int, m_maxRaysCountAttrPtr);
-	I_ATTR(bool, m_removeOutlierAttrPtr);
-	I_ATTR(double, m_minimalOutlierDistanceAttrPtr);
 };
 
 

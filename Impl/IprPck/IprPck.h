@@ -27,6 +27,7 @@
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 #include "iipr/CLineProjectionSupplierComp.h"
 #include "iipr/CImageHistogramProcessorComp.h"
+#include "iipr/CCircleFinderParamsComp.h"
 
 
 /**
@@ -46,6 +47,7 @@ typedef iipr::CInvertOperatorComp InvertOperator;
 typedef iipr::CGaussianFilterComp GaussianFilter;
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams>, iser::ISerializable> GaussianFilterParams;
 typedef icomp::TModelCompWrap<iipr::CCaliperParamsComp> CaliperParams;
+typedef icomp::TModelCompWrap<iipr::CCircleFinderParamsComp> CircleFinderParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
 typedef iipr::CCircleFindProcessorComp CircleFindProcessor;

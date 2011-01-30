@@ -35,10 +35,6 @@ protected slots:
 	void on_ThresholdSB_valueChanged(int value);
 	void on_EdgePolarityCB_currentIndexChanged(int index);
 	void on_DirectionCB_currentIndexChanged(int index);
-
-private:
-	I_ATTR(istd::CString, m_unitNameAttrPtr);
-	I_ATTR(double, m_lineZValueAttrPtr);
 };
 
 

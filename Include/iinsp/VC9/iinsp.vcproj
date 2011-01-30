@@ -3,9 +3,8 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="iinsp"
-	ProjectGUID="{12C72A89-E132-4566-9667-078021D29D1C}"
+	ProjectGUID="{34125E03-433E-4FFE-8D7A-9833C6B3AAA9}"
 	RootNamespace="iinsp"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform

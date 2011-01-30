@@ -6,6 +6,9 @@
 #include "i2d/CAnnulusSegment.h"
 #include "iprm/CParamsSet.h"
 
+
+// IACF includes
+#include "iipr/ICircleFinderParams.h"
 #include "iipr/CCaliperFeature.h"
 #include "iipr/CFeaturesContainer.h"
 
@@ -33,6 +36,11 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 		return TS_INVALID;
 	}
 
+	const iipr::ICircleFinderParams* circleFinderParamsPtr = dynamic_cast<const iipr::ICircleFinderParams*>(paramsPtr->GetParameter((*m_circleFinderParamsIdAttrPtr).ToString()));
+	if (circleFinderParamsPtr == NULL){
+		return TS_INVALID;
+	}
+
 	i2d::CLine2d projectionLine;
 	iprm::CParamsSet extendedParamsSet;
 	extendedParamsSet.SetEditableParameter((*m_slaveLineIdAttrPtr).ToString(), &projectionLine);
@@ -40,7 +48,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	i2d::CVector2d center;
 
-	if (!AddAoiToRays(*aoiObjectPtr, extendedParamsSet, image, inRays, outRays, projectionLine, center)){
+	if (!AddAoiToRays(*aoiObjectPtr, extendedParamsSet, image, circleFinderParamsPtr->GetRaysCount(), inRays, outRays, projectionLine, center)){
 		return TS_INVALID;
 	}
 
@@ -55,7 +63,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 	else{
 		istd::TDelPtr<CircleFeature> featurePtr(new CircleFeature());
 		Rays& usedRays = (inRays.size() >= outRays.size())? inRays: outRays;
-		if (CalculateCircle(center, usedRays, *featurePtr)){
+		if (CalculateCircle(center, circleFinderParamsPtr->IsOutlierEliminationEnabled(), circleFinderParamsPtr->GetMinOutlierDistance(), usedRays, *featurePtr)){
 			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
@@ -96,6 +104,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			const istd::IChangeable& aoiObject,
 			const iprm::IParamsSet& params,
 			const iimg::IBitmap& image,
+			int maximalRaysCount,
 			Rays& inRays,
 			Rays& outRays,
 			i2d::CLine2d& projectionLine,
@@ -110,7 +119,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		for (int i = 0; i < paramsCount; ++i){
 			const iprm::CParamsSet::ParameterInfo* infoPtr = infos.GetAt(i);
 			if ((infoPtr != NULL) && infoPtr->parameterPtr.IsValid()){
-				if (!AddAoiToRays(*infoPtr->parameterPtr, params, image, inRays, outRays, projectionLine, center)){
+				if (!AddAoiToRays(*infoPtr->parameterPtr, params, image, maximalRaysCount, inRays, outRays, projectionLine, center)){
 					return false;
 				}
 
@@ -138,8 +147,8 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		CFeaturesContainer container;
 
 		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
-		if (m_maxRaysCountAttrPtr.IsValid()){
-			stepsCount = istd::Min(stepsCount, *m_maxRaysCountAttrPtr);
+		if (maximalRaysCount >= 3){
+			stepsCount = istd::Min(stepsCount, maximalRaysCount);
 		}
 
 		for (int i = 0; i < stepsCount; ++i){
@@ -165,7 +174,12 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 }
 
 
-bool CCircleFindProcessorComp::CalculateCircle(const i2d::CVector2d& center, Rays& rays, CircleFeature& result)
+bool CCircleFindProcessorComp::CalculateCircle(
+			const i2d::CVector2d& center,
+			bool removeOutliers,
+			double minOutliersDistance,
+			Rays& rays,
+			CircleFeature& result)
 {
 	int raysCount = int(rays.size());
 	if (raysCount < 3){
@@ -210,9 +224,7 @@ bool CCircleFindProcessorComp::CalculateCircle(const i2d::CVector2d& center, Ray
 
 	result.SetWeight(weightSum / raysCount);
 
-	if (m_removeOutlierAttrPtr.IsValid() && *m_removeOutlierAttrPtr){
-		double minimalOutlierDistance = m_minimalOutlierDistanceAttrPtr.IsValid() ? *m_minimalOutlierDistanceAttrPtr : 5.0;
-
+	if (removeOutliers){
 		Rays optimizedRays;
 
 		for (int i = 0; i < raysCount; ++i){
@@ -223,13 +235,13 @@ bool CCircleFindProcessorComp::CalculateCircle(const i2d::CVector2d& center, Ray
 
 			double foundRadius = result.GetRadius();
 
-			if (fabs(currentRadius - foundRadius) < minimalOutlierDistance){
+			if (fabs(currentRadius - foundRadius) < minOutliersDistance){
 				optimizedRays.push_back(ray);
 			}
 		}
 
 		if (optimizedRays.size() != rays.size() && optimizedRays.size() >= 3){
-			return CalculateCircle(center, optimizedRays, result);
+			return CalculateCircle(center, removeOutliers, minOutliersDistance, optimizedRays, result);
 		}
 	}
 
