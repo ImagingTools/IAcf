@@ -11,6 +11,7 @@
 #include "iipr/IImageToFeatureProcessor.h"
 #include "iipr/IFeaturesContainer.h"
 #include "iipr/IFeatureToImageMapper.h"
+#include "iipr/ICircleFinderParams.h"
 #include "iipr/TFeatureWrap.h"
 
 
@@ -78,7 +79,7 @@ protected:
 				const istd::IChangeable& aoiObject,
 				const iprm::IParamsSet& params,
 				const iimg::IBitmap& image,
-				int maximalRaysCount,
+				const iipr::ICircleFinderParams& circleFinderParams,
 				Rays& inRays,
 				Rays& outRays,
 				i2d::CLine2d& projectionLine,

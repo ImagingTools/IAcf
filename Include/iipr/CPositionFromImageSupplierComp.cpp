@@ -4,7 +4,7 @@
 // ACF includes
 #include "i2d/CCircle.h"
 
-#include "iipr/CHeaviestFeatureConsumer.h"
+#include "iipr/CSingleFeatureConsumer.h"
 
 
 namespace iipr
@@ -51,7 +51,7 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
-			CHeaviestFeatureConsumer consumer;
+			CSingleFeatureConsumer consumer(CSingleFeatureConsumer::FP_HEAVIEST);
 			int caliperState = m_processorCompPtr->DoProcessing(
 							paramsSetPtr,
 							bitmapPtr,

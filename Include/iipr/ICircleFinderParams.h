@@ -17,6 +17,36 @@ namespace iipr
 class ICircleFinderParams: virtual public iser::ISerializable
 {
 public:
+	
+	/**
+		Caliper mode. Control, which caliper is used for the circle calculation.
+	*/
+	enum CaliperMode
+	{
+		/**
+			The first found caliper is taked for circle calculation.
+		*/
+		CCM_FIRST,
+
+		/**
+			The best found caliper is taked for circle calculation.
+		*/	
+		CCM_BEST
+	};
+
+
+	/**
+		Get caliper mode.
+		\sa CaliperMode
+	*/
+	virtual int GetCaliperMode() const = 0;
+	
+	/**
+		Set caliper mode.
+		\sa CaliperMode
+	*/
+	virtual void SetCaliperMode(int caliperMode) = 0;
+
 	/**
 		Return \c true, if the outlier elimination is activated.
 	*/

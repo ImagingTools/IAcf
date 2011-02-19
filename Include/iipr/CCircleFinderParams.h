@@ -15,6 +15,8 @@ public:
 	CCircleFinderParams();
 
 	// reimplemented (iipr::ICircleFinderParams)
+	virtual int GetCaliperMode() const;
+	virtual void SetCaliperMode(int caliperMode);
 	virtual bool IsOutlierEliminationEnabled() const;
 	virtual void SetOutlierEliminationEnabled(bool isOutlierEliminationEnabled = true);
 	virtual double GetMinOutlierDistance() const;
@@ -29,6 +31,7 @@ private:
 	bool m_isOutlierEliminationEnabled;
 	double m_minOutlierDistance;
 	int m_raysCount;
+	int m_caliperMode;
 };
 
 

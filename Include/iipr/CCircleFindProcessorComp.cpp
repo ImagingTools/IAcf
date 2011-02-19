@@ -8,9 +8,9 @@
 
 
 // IACF includes
-#include "iipr/ICircleFinderParams.h"
 #include "iipr/CCaliperFeature.h"
 #include "iipr/CFeaturesContainer.h"
+#include "iipr/CSingleFeatureConsumer.h"
 
 
 namespace iipr
@@ -48,7 +48,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	i2d::CVector2d center;
 
-	if (!AddAoiToRays(*aoiObjectPtr, extendedParamsSet, image, circleFinderParamsPtr->GetRaysCount(), inRays, outRays, projectionLine, center)){
+	if (!AddAoiToRays(*aoiObjectPtr, extendedParamsSet, image, *circleFinderParamsPtr, inRays, outRays, projectionLine, center)){
 		return TS_INVALID;
 	}
 
@@ -63,7 +63,12 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 	else{
 		istd::TDelPtr<CircleFeature> featurePtr(new CircleFeature());
 		Rays& usedRays = (inRays.size() >= outRays.size())? inRays: outRays;
-		if (CalculateCircle(center, circleFinderParamsPtr->IsOutlierEliminationEnabled(), circleFinderParamsPtr->GetMinOutlierDistance(), usedRays, *featurePtr)){
+		if (		CalculateCircle(
+								center,
+								circleFinderParamsPtr->IsOutlierEliminationEnabled(),
+								circleFinderParamsPtr->GetMinOutlierDistance(),
+								usedRays,
+								*featurePtr)){
 			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
@@ -104,7 +109,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			const istd::IChangeable& aoiObject,
 			const iprm::IParamsSet& params,
 			const iimg::IBitmap& image,
-			int maximalRaysCount,
+			const iipr::ICircleFinderParams& circleFinderParams,
 			Rays& inRays,
 			Rays& outRays,
 			i2d::CLine2d& projectionLine,
@@ -119,7 +124,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		for (int i = 0; i < paramsCount; ++i){
 			const iprm::CParamsSet::ParameterInfo* infoPtr = infos.GetAt(i);
 			if ((infoPtr != NULL) && infoPtr->parameterPtr.IsValid()){
-				if (!AddAoiToRays(*infoPtr->parameterPtr, params, image, maximalRaysCount, inRays, outRays, projectionLine, center)){
+				if (!AddAoiToRays(*infoPtr->parameterPtr, params, image, circleFinderParams, inRays, outRays, projectionLine, center)){
 					return false;
 				}
 
@@ -144,11 +149,18 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		double maxRadius = annulusAoiPtr->GetOuterRadius();
 		center = annulusAoiPtr->GetPosition();
 
-		CFeaturesContainer container;
+		istd::TDelPtr<IFeaturesContainer> caliperFeaturesContainerPtr;
+
+		if (circleFinderParams.GetCaliperMode() == ICircleFinderParams::CCM_BEST){
+			caliperFeaturesContainerPtr.SetPtr(new CFeaturesContainer);
+		}
+		else{
+			caliperFeaturesContainerPtr.SetPtr(new CSingleFeatureConsumer(CSingleFeatureConsumer::FP_FIRST));
+		}
 
 		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
-		if (maximalRaysCount >= 3){
-			stepsCount = istd::Min(stepsCount, maximalRaysCount);
+		if (circleFinderParams.GetRaysCount() >= 3){
+			stepsCount = istd::Min(stepsCount, circleFinderParams.GetRaysCount());
 		}
 
 		for (int i = 0; i < stepsCount; ++i){
@@ -161,10 +173,10 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			projectionLine.SetPoint1(center + directionVector * annulusAoiPtr->GetInnerRadius());
 			projectionLine.SetPoint2(center + directionVector * annulusAoiPtr->GetOuterRadius());
 
-			container.ResetFeatures();
-			m_slaveProcessorCompPtr->DoProcessing(&params, &image, &container);
+			caliperFeaturesContainerPtr->ResetFeatures();
+			m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesContainerPtr.GetPtr());
 
-			AddProjectionResultsToRays(params, container, inRays, outRays);
+			AddProjectionResultsToRays(params, *caliperFeaturesContainerPtr.GetPtr(), inRays, outRays);
 		}
 
 		return true;

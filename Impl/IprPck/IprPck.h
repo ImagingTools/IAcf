@@ -22,7 +22,7 @@
 #include "iipr/CPositionFromImageSupplierComp.h"
 #include "iipr/CRectDerivativeProcessorComp.h"
 #include "iipr/CFeaturesContainer.h"
-#include "iipr/CHeaviestFeatureConsumer.h"
+#include "iipr/CSingleFeatureConsumer.h"
 #include "iipr/CFeatureToImageMapperProcessorComp.h"
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 #include "iipr/CLineProjectionSupplierComp.h"
@@ -58,13 +58,6 @@ typedef icomp::TMakeComponentWrap<
 			iser::ISerializable,
 			istd::IChangeable,
 			imod::IModel> FeaturesContainer;
-typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<iipr::CHeaviestFeatureConsumer>,
-			iipr::IFeaturesConsumer,
-			iipr::IFeaturesContainer,
-			iser::ISerializable,
-			istd::IChangeable,
-			imod::IModel> HeaviestFeatureConsumer;
 typedef iipr::CFeatureToImageMapperProcessorComp FeatureToImageMapperProcessor;
 typedef icomp::TModelCompWrap<iipr::CPositionFromImageSupplierComp> PositionFromImageSupplier;
 typedef icomp::TModelCompWrap<iipr::CSearchBasedFeaturesSupplierComp> SearchBasedFeaturesSupplier;

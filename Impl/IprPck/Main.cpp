@@ -85,11 +85,6 @@ I_EXPORT_COMPONENT(
 			"Model Caliper Search Feature Extraction Container");
 
 I_EXPORT_COMPONENT(
-			HeaviestFeatureConsumer,
-			"Features container storing the heaviest feature only",
-			"Model Caliper Search Feature Extraction Container");
-
-I_EXPORT_COMPONENT(
 			FeatureToImageMapperProcessor,
 			"Processor converting feature container to set of positions using mapper of features",
 			"Feature Position Processor Mapper Caliper Convertion");

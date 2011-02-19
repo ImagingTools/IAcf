@@ -35,6 +35,7 @@ protected Q_SLOTS:
 	void on_EnableOutliersElimination_toggled(bool value);
 	void on_MinOutliersDistance_valueChanged(double value);
 	void on_MaxRaysCount_valueChanged(int value);
+	void on_CaliperMode_currentIndexChanged(int index);
 };
 
 

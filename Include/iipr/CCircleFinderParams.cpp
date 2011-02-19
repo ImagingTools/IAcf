@@ -15,12 +15,29 @@ namespace iipr
 CCircleFinderParams::CCircleFinderParams()
 :	m_isOutlierEliminationEnabled(false),
 	m_minOutlierDistance(5),
-	m_raysCount(-1)
+	m_raysCount(-1),
+	m_caliperMode(CCM_FIRST)
 {
 }
 
 
 // reimplemented (iipr::ICircleFinderParams)
+
+int CCircleFinderParams::GetCaliperMode() const
+{
+	return m_caliperMode;
+}
+
+
+void CCircleFinderParams::SetCaliperMode(int caliperMode)
+{
+	if (caliperMode != m_caliperMode){
+		istd::CChangeNotifier notifier(this);
+
+		m_caliperMode = caliperMode;
+	}
+}
+
 
 bool CCircleFinderParams::IsOutlierEliminationEnabled() const
 {
@@ -76,6 +93,11 @@ bool CCircleFinderParams::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
+	static iser::CArchiveTag caliperModeTag("CaliperMode", "Caliper mode");
+	retVal = retVal && archive.BeginTag(caliperModeTag);
+	retVal = retVal && archive.Process(m_caliperMode);
+	retVal = retVal && archive.EndTag(caliperModeTag);
+
 	static iser::CArchiveTag isOutlierEliminationEnabledTag("OutlierEliminationEnabled", "Outliers elimination is enabled");
 	retVal = retVal && archive.BeginTag(isOutlierEliminationEnabledTag);
 	retVal = retVal && archive.Process(m_isOutlierEliminationEnabled);
@@ -90,7 +112,6 @@ bool CCircleFinderParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(raysCountTag);
 	retVal = retVal && archive.Process(m_raysCount);
 	retVal = retVal && archive.EndTag(raysCountTag);
-
 	return retVal;
 }
 

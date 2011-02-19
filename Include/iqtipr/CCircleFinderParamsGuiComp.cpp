@@ -19,6 +19,7 @@ void CCircleFinderParamsGuiComp::UpdateModel() const
 
 	objectPtr->SetOutlierEliminationEnabled(EnableOutliersElimination->isChecked());
 	objectPtr->SetMinOutlierDistance(MinOutliersDistance->value());
+	objectPtr->SetCaliperMode(CaliperMode->currentIndex());
 
 	if (MaxRaysCount->text() == MaxRaysCount->specialValueText()){
 		objectPtr->SetRaysCount(-1);
@@ -39,6 +40,7 @@ void CCircleFinderParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 
 		MinOutliersDistance->setVisible(objectPtr->IsOutlierEliminationEnabled());
 		MinOutliersDistanceLabel->setVisible(objectPtr->IsOutlierEliminationEnabled());
+		CaliperMode->setCurrentIndex(objectPtr->GetCaliperMode());
 
 		MinOutliersDistance->setValue(objectPtr->GetMinOutlierDistance());
 
@@ -75,6 +77,16 @@ void CCircleFinderParamsGuiComp::on_MinOutliersDistance_valueChanged(double /*va
 
 
 void CCircleFinderParamsGuiComp::on_MaxRaysCount_valueChanged(int /*value*/)
+{
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
+}
+
+
+void CCircleFinderParamsGuiComp::on_CaliperMode_currentIndexChanged(int /*index*/)
 {
 	if (!IsUpdateBlocked()){
 		UpdateBlocker blockUpdate(this);
