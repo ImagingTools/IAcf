@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1654
+          1672
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          295
+          301
         </Number>
         <Description>
           ACF-Solutions
@@ -171,10 +171,10 @@
         ParamsEditorGui
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        ModelEditorGui
+        SceneModelGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -183,7 +183,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Gui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ParamsSetGui
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Model

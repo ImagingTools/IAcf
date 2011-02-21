@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1672
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          301
         </Number>
         <Description>
           ACF-Solutions
@@ -65,10 +65,10 @@
         SnapParams
       </ComponentName>
       <X>
-        275
+        300
       </X>
       <X>
-        475
+        450
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        550
+        600
       </X>
       <X>
-        475
+        450
       </X>
     </Element>
   </PositionMap>
