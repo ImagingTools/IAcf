@@ -222,10 +222,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHeaviestFeatureConsumer.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
@@ -285,6 +281,10 @@
 				RelativePath="..\CSearchParams.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSingleFeatureConsumer.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -332,10 +332,6 @@
 			</File>
 			<File
 				RelativePath="..\CGaussian2dFilterParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHeaviestFeatureConsumer.h"
 				>
 			</File>
 			<File
@@ -396,6 +392,10 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSingleFeatureConsumer.h"
 				>
 			</File>
 			<File
