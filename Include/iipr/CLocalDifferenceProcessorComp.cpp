@@ -15,6 +15,15 @@ bool CLocalDifferenceProcessorComp::ProcessImage(
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
+	if ((inputImage.GetComponentsCount() != 1) || (inputImage.GetComponentBitsCount() != 8)){
+		return false;	// input image format is not supported
+	}
+
+	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
+	if (!outputImage.CreateBitmap(inputImageSize)){
+		return false;	// cannot create output image
+	}
+
 	const iprm::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
 	const IMultidimensionalFilterParams* filterParamsPtr = m_defaultFilterParamCompPtr.GetPtr();
 
@@ -42,8 +51,8 @@ bool CLocalDifferenceProcessorComp::ProcessImage(
 		}
 	}
 
-	int imageHeight = inputImage.GetImageSize().GetY();
-	int imageWidth = inputImage.GetImageSize().GetX();
+	int imageHeight = inputImageSize.GetY();
+	int imageWidth = inputImageSize.GetX();
 
 	for (int lineIndex = 0; lineIndex < imageHeight; ++lineIndex){
 		I_BYTE* inputLinePtr = (I_BYTE*)inputImage.GetLinePtr(lineIndex);

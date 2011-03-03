@@ -15,7 +15,6 @@ namespace iipr
 // public methods
 
 CImageProcessorCompBase::CImageProcessorCompBase()
-:	m_timerPtr(istd::CreateService<isys::ITimer>())
 {
 }
 
@@ -39,31 +38,9 @@ int CImageProcessorCompBase::DoProcessing(
 		return TS_INVALID;
 	}
 
-	if (m_timerPtr.IsValid()){
-		m_timerPtr->Start();
-	}
-
-	iimg::CGeneralBitmap bufferBitmap;
-
-	if (m_preprocessorCompPtr.IsValid()){
-		int retVal = m_preprocessorCompPtr->DoProcessing(paramsPtr, inputBitmapPtr, &bufferBitmap);
-		if (retVal == TS_OK){
-			inputBitmapPtr = &bufferBitmap;
-		}
-	}
-
-	// create output image:
-	outputBitmapPtr->CopyFrom(*inputBitmapPtr);
-
 	// do image processing:
 	if (!ProcessImage(paramsPtr, *inputBitmapPtr, *outputBitmapPtr)){
 		return TS_INVALID;
-	}
-	
-	if (m_timerPtr.IsValid()){
-		double processingTime = m_timerPtr->GetElapsed();
-
-		SendInfoMessage(0, istd::CString("Processed in ") + istd::CString::FromNumber(processingTime * 1000) + "ms");
 	}
 
 	return TS_OK;

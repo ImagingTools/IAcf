@@ -49,7 +49,7 @@ private:
 
 // public methods
 
-// reimplemented (iproc::IProcessor)
+// reimplemented (iipr::CImageProcessorCompBase)
 
 template <class ParameterType>
 bool TImageParamProcessorCompBase<ParameterType>::ProcessImage(

@@ -21,9 +21,8 @@ class CImageProcessorCompBase: public iproc::CSyncProcessorCompBase
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(CImageProcessorCompBase)
-		I_ASSIGN(m_preprocessorCompPtr, "Preprocessor", "Pre-processing operator", false, "Preprocessor");
-	I_END_COMPONENT
+	I_BEGIN_BASE_COMPONENT(CImageProcessorCompBase);
+	I_END_COMPONENT;
 
 	CImageProcessorCompBase();
 
@@ -40,11 +39,6 @@ protected:
 				const iprm::IParamsSet* paramsPtr, 
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage) = 0;
-
-private:
-	istd::TSmartPtr<isys::ITimer> m_timerPtr;
-
-	I_REF(iproc::IProcessor, m_preprocessorCompPtr);
 };
 
 

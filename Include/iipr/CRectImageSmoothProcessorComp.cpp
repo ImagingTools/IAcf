@@ -43,6 +43,22 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		return false;
 	}
 
+	if (inputImage.GetComponentBitsCount() != 8){
+		return false;	// Bad input image format
+	}
+
+	int componentsCount = inputImage.GetComponentsCount();
+	I_ASSERT(inputImage.GetPixelBitsCount() == componentsCount * 8);
+
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	if (imageSize.IsSizeEmpty()){
+		return false;
+	}
+
+	if (!outputImage.CreateBitmap(imageSize, componentsCount * 8, componentsCount)){
+		return false;	// cannot create output image
+	}
+
 	imath::CVarVector filterLengths = paramsPtr->GetFilterLengths();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
@@ -51,30 +67,61 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 	int kernelHalfWidth = int(filterLengths[0] * 0.5 - 0.5);
 	int kernelHalfHeight = (filterDimensionsCount < 2)? kernelHalfWidth: int(filterLengths[1] * 0.5 - 0.5);
-	int kernelWidth = kernelHalfWidth * 2 + 1;
 	int kernelHeight = kernelHalfHeight * 2 + 1;
-	int imageWidth = inputImage.GetImageSize().GetX();
-	int imageHeight = inputImage.GetImageSize().GetY();
+
+	int imageWidth = imageSize.GetX();
+	int imageHeight = imageSize.GetY();
 
 	if (kernelHalfWidth > 0){
 		for (int lineIndex = 0; lineIndex < imageHeight; ++lineIndex){
-			double meanValue = 0;
+			I_BYTE* outputPtr = (I_BYTE*)outputImage.GetLinePtr(lineIndex);
 
-			I_BYTE* beginImagePtr = (I_BYTE*)inputImage.GetLinePtr(lineIndex);
-			for (int x = 0; x < kernelWidth; ++x){
-				meanValue += beginImagePtr[x];
+			const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(lineIndex);
+			const I_BYTE* inputLineEndPtr = inputLinePtr + imageWidth;
+
+			const I_BYTE* posInputPtr = inputLinePtr;
+
+			int kernelWidth = 0;
+			int meanValue = 0;
+
+			for (int x = 0; (x < kernelHalfWidth) && (posInputPtr < inputLineEndPtr); ++x){
+				meanValue += *posInputPtr++;
+				++kernelWidth;
+
+				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+				if (posInputPtr >= inputLineEndPtr){
+					break;
+				}
+
+				meanValue += *posInputPtr++;
+				++kernelWidth;
 			}
 
-			I_BYTE* outputImageBufferPtr = (I_BYTE*)outputImage.GetLinePtr(lineIndex) + kernelHalfWidth + 1;
-			*(outputImageBufferPtr - 1) = I_BYTE(meanValue / kernelWidth);
+			++kernelWidth;
 
-			I_BYTE* beginKernelPtr = beginImagePtr;
-			I_BYTE* endKernelPtr = beginImagePtr + kernelWidth;
-			I_BYTE* endBufferPtr = beginImagePtr + imageWidth;
+			const I_BYTE* negInputPtr = inputLinePtr;
 
-			while (endKernelPtr < endBufferPtr){
-				meanValue += (*endKernelPtr++ - *beginKernelPtr++);
-				*outputImageBufferPtr++ = I_BYTE(meanValue / kernelWidth);
+			while (posInputPtr < inputLineEndPtr){
+				meanValue += *posInputPtr++;
+				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
+				meanValue -= *negInputPtr++;
+			}
+
+			--kernelWidth;
+
+			while (negInputPtr < inputLineEndPtr){
+				meanValue -= *negInputPtr++;
+				--kernelWidth;
+
+				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+				if  (negInputPtr >= inputLineEndPtr){
+					break;
+				}
+
+				meanValue -= *negInputPtr++;
+				--kernelWidth;
 			}
 		}
 	}
@@ -83,28 +130,31 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		iimg::CGeneralBitmap tempBitmap;
 		tempBitmap.CopyFrom(outputImage);
 
-		int lineDifference = tempBitmap.GetLinesDifference();
+		int inputLinesDifference = tempBitmap.GetLinesDifference();
+		int outputLinesDifference = outputImage.GetLinesDifference();
 
 		for (int x = 0; x < imageWidth; ++x){	
 			double meanValue = 0;
-			I_BYTE* beginImagePtr = ((I_BYTE*)tempBitmap.GetLinePtr(0)) + x;
+			I_BYTE* inputLinePtr = ((I_BYTE*)tempBitmap.GetLinePtr(0)) + x;
 
 			for (int y = 0; y < kernelHeight; ++y){
-				meanValue += beginImagePtr[y * lineDifference];
+				meanValue += inputLinePtr[y * inputLinesDifference];
 			}
 
 			*((I_BYTE*)(outputImage.GetLinePtr(kernelHalfHeight)) + x) = I_BYTE(meanValue / kernelHeight);
 
-			I_BYTE* outputImageBufferPtr = (I_BYTE*)(outputImage.GetLinePtr(kernelHalfHeight + 1)) + x;
-			I_BYTE* beginKernelPtr = beginImagePtr;
-			I_BYTE* endKernelPtr = beginImagePtr + kernelHeight * lineDifference;
-			I_BYTE* endBufferPtr = beginImagePtr + imageHeight * lineDifference;
+			I_BYTE* outputBufferPtr = (I_BYTE*)(outputImage.GetLinePtr(kernelHalfHeight + 1)) + x;
+			I_BYTE* beginKernelPtr = inputLinePtr;
+			I_BYTE* endKernelPtr = inputLinePtr + kernelHeight * inputLinesDifference;
+			I_BYTE* endBufferPtr = inputLinePtr + imageHeight * inputLinesDifference;
 
 			while (endKernelPtr < endBufferPtr){
 				meanValue += (*endKernelPtr - *beginKernelPtr);
-				*outputImageBufferPtr = I_BYTE(meanValue / kernelHeight);
+				*outputBufferPtr = I_BYTE(meanValue / kernelHeight);
 
-				endKernelPtr += lineDifference, beginKernelPtr += lineDifference, outputImageBufferPtr += lineDifference;
+				endKernelPtr += inputLinesDifference;
+				beginKernelPtr += inputLinesDifference;
+				outputBufferPtr += outputLinesDifference;
 			}
 		}
 	}

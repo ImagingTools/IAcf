@@ -62,8 +62,10 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	bool retVal = true;
-	
+	if (!outputImage.CreateBitmap(inputImage.GetImageSize(), inputImage.GetPixelBitsCount(), inputImage.GetComponentBitsCount())){
+		return false;	// cannot create output image
+	}
+
 	iimg::TBitmapIterator<PixelType> inputIterator(&inputImage);
 	iimg::TBitmapIterator<PixelType> outputIterator(&outputImage);
 
@@ -79,7 +81,7 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 		++outputIterator;
 	}
 
-	return retVal;
+	return true;
 }
 
 
