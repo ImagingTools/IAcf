@@ -140,13 +140,45 @@ int CRectDerivativeProcessor::GetFilterDimensionsCount() const
 }
 
 
-istd::CRange CRectDerivativeProcessor::GetFilterLengthRange(int /*dimension*/) const
+istd::CString CRectDerivativeProcessor::GetFilterDescription(int /*dimension*/) const
+{
+	return "Filter length";
+}
+
+
+const imeas::IUnitInfo& CRectDerivativeProcessor::GetFilterUnitInfo(int /*dimension*/) const
+{
+	return *this;
+}
+
+
+// reimplemented (imeas::IUnitInfo)
+
+int CRectDerivativeProcessor::GetUnitType() const
+{
+	return UT_TECHNICAL;
+}
+
+
+istd::CString CRectDerivativeProcessor::GetUnitName() const
+{
+	return "px";
+}
+
+
+double CRectDerivativeProcessor::GetDisplayMultiplicationFactor() const
+{
+	return 1;
+}
+
+
+istd::CRange CRectDerivativeProcessor::GetValueRange() const
 {
 	return istd::CRange(1, 100);
 }
 
 
-const imath::IDoubleManip& CRectDerivativeProcessor::GetFilterLengthManip(int /*dimension*/) const
+const imath::IDoubleManip& CRectDerivativeProcessor::GetValueManip() const
 {
 	static imath::CDoubleManip manip;
 

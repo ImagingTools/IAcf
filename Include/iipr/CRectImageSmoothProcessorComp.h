@@ -2,6 +2,9 @@
 #define iipr_CRectImageSmoothProcessorComp_included
 
 
+// ACF-Solutions includes
+#include "imeas/IUnitInfo.h"
+
 #include "iipr/IMultidimensionalFilterParams.h"
 #include "iipr/IMultidimensionalFilterConstraints.h"
 #include "iipr/TImageParamProcessorCompBase.h"
@@ -17,26 +20,52 @@ namespace iipr
 */
 class CRectImageSmoothProcessorComp:
 			public TImageParamProcessorCompBase<IMultidimensionalFilterParams>,
-			virtual public IMultidimensionalFilterConstraints
+			virtual public IMultidimensionalFilterConstraints,
+			virtual protected imeas::IUnitInfo
 {
 public:
 	typedef iipr::TImageParamProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CRectImageSmoothProcessorComp);
 		I_REGISTER_INTERFACE(IMultidimensionalFilterConstraints);
+		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units:\n\t0 - Pixels\n\t1 - Percent", true, 0);
+		I_ASSIGN(m_borderModeAttrPtr, "BorderMode", "Define used mode for border area:\n\t0 - Kernel will be stretched, original image size will be outputed\n\t1 - Border area removed, output image will be smaller", true, 0);
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IMultidimensionalFilterConstraints)
 	virtual int GetFilterDimensionsCount() const;
-	virtual istd::CRange GetFilterLengthRange(int dimension) const;
-	virtual const imath::IDoubleManip& GetFilterLengthManip(int dimension) const;
+	virtual istd::CString GetFilterDescription(int dimension) const;
+	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const;
+
+	// reimplemented (imeas::IUnitInfo)
+	virtual int GetUnitType() const;
+	virtual istd::CString GetUnitName() const;
+	virtual double GetDisplayMultiplicationFactor() const;
+	virtual istd::CRange GetValueRange() const;
+	virtual const imath::IDoubleManip& GetValueManip() const;
 
 protected:
+	enum UnitMode
+	{
+		UM_PIXEL,
+		UM_PERCENT
+	};
+
+	enum BorderMode
+	{
+		BM_STRETCH_KERNEL,
+		BM_REDUCE_OUTPUT
+	};
+
 	// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
 	virtual bool ParamProcessImage(
 				const IMultidimensionalFilterParams* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
+
+private:
+	I_ATTR(int, m_unitModeAttrPtr);
+	I_ATTR(int, m_borderModeAttrPtr);
 };
 
 

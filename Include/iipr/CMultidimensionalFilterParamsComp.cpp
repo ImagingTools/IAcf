@@ -62,13 +62,45 @@ int CMultidimensionalFilterParamsComp::GetFilterDimensionsCount() const
 }
 
 
-istd::CRange CMultidimensionalFilterParamsComp::GetFilterLengthRange(int /*dimension*/) const
+istd::CString CMultidimensionalFilterParamsComp::GetFilterDescription(int dimension) const
+{
+	return istd::CString("Axis ") + istd::CString::FromNumber(dimension + 1);
+}
+
+
+const imeas::IUnitInfo& CMultidimensionalFilterParamsComp::GetFilterUnitInfo(int /*dimension*/) const
+{
+	return *this;
+}
+
+
+// reimplemented (imeas::IUnitInfo)
+
+int CMultidimensionalFilterParamsComp::GetUnitType() const
+{
+	return UT_UNKNOWN;
+}
+
+
+istd::CString CMultidimensionalFilterParamsComp::GetUnitName() const
+{
+	return "";
+}
+
+
+double CMultidimensionalFilterParamsComp::GetDisplayMultiplicationFactor() const
+{
+	return 1;
+}
+
+
+istd::CRange CMultidimensionalFilterParamsComp::GetValueRange() const
 {
 	return istd::CRange(*m_minFilterLengthAttrPtr, *m_maxFilterLengthAttrPtr);
 }
 
 
-const imath::IDoubleManip& CMultidimensionalFilterParamsComp::GetFilterLengthManip(int /*dimension*/) const
+const imath::IDoubleManip& CMultidimensionalFilterParamsComp::GetValueManip() const
 {
 	static imath::CDoubleManip manip;
 

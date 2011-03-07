@@ -2,9 +2,12 @@
 #define iipr_CMultidimensionalFilterParamsComp_included
 
 
+// ACF includes
 #include "iser/ISerializable.h"
-
 #include "icomp/CComponentBase.h"
+
+// ACF-Solutions incldues
+#include "imeas/IUnitInfo.h"
 
 #include "iipr/IMultidimensionalFilterParams.h"
 #include "iipr/IMultidimensionalFilterConstraints.h"
@@ -21,7 +24,8 @@ namespace iipr
 class CMultidimensionalFilterParamsComp:
 			public icomp::CComponentBase,
 			virtual public IMultidimensionalFilterParams,
-			virtual protected IMultidimensionalFilterConstraints
+			virtual protected IMultidimensionalFilterConstraints,
+			virtual protected imeas::IUnitInfo
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -46,8 +50,15 @@ public:
 
 	// reimplemented (iipr::IMultidimensionalFilterConstraints)
 	virtual int GetFilterDimensionsCount() const;
-	virtual istd::CRange GetFilterLengthRange(int dimension) const;
-	virtual const imath::IDoubleManip& GetFilterLengthManip(int dimension) const;
+	virtual istd::CString GetFilterDescription(int dimension) const;
+	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const;
+
+	// reimplemented (imeas::IUnitInfo)
+	virtual int GetUnitType() const;
+	virtual istd::CString GetUnitName() const;
+	virtual double GetDisplayMultiplicationFactor() const;
+	virtual istd::CRange GetValueRange() const;
+	virtual const imath::IDoubleManip& GetValueManip() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

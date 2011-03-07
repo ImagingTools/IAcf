@@ -18,13 +18,78 @@ int CRectImageSmoothProcessorComp::GetFilterDimensionsCount() const
 }
 
 
-istd::CRange CRectImageSmoothProcessorComp::GetFilterLengthRange(int /*dimension*/) const
+istd::CString CRectImageSmoothProcessorComp::GetFilterDescription(int dimension) const
 {
-	return istd::CRange(1, 100);
+	switch (dimension){
+	case 0:
+		return "Filter width";
+
+	case 1:
+		return "Filter height";
+
+	default:
+		return "";
+	}
 }
 
 
-const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetFilterLengthManip(int /*dimension*/) const
+const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetFilterUnitInfo(int /*dimension*/) const
+{
+	return *this;
+}
+
+
+// reimplemented (imeas::IUnitInfo)
+
+int CRectImageSmoothProcessorComp::GetUnitType() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+		return UT_RELATIVE;
+
+	default:
+		return UT_TECHNICAL;
+	}
+}
+
+
+istd::CString CRectImageSmoothProcessorComp::GetUnitName() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+		return "%";
+
+	default:
+		return "px";
+	}
+}
+
+
+double CRectImageSmoothProcessorComp::GetDisplayMultiplicationFactor() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+		return 100;
+
+	default:
+		return 1;
+	}
+}
+
+
+istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+		return istd::CRange(0, 1);
+
+	default:
+		return istd::CRange(1, 100);
+	}
+}
+
+
+const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetValueManip() const
 {
 	static imath::CFixedPointManip manip(0);
 
@@ -55,106 +120,177 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		return false;
 	}
 
-	if (!outputImage.CreateBitmap(imageSize, componentsCount * 8, componentsCount)){
-		return false;	// cannot create output image
-	}
-
 	imath::CVarVector filterLengths = paramsPtr->GetFilterLengths();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
 		return false;
 	}
 
-	int kernelHalfWidth = int(filterLengths[0] * 0.5 - 0.5);
-	int kernelHalfHeight = (filterDimensionsCount < 2)? kernelHalfWidth: int(filterLengths[1] * 0.5 - 0.5);
-	int kernelHeight = kernelHalfHeight * 2 + 1;
-
 	int imageWidth = imageSize.GetX();
 	int imageHeight = imageSize.GetY();
 
-	if (kernelHalfWidth > 0){
-		for (int lineIndex = 0; lineIndex < imageHeight; ++lineIndex){
-			I_BYTE* outputPtr = (I_BYTE*)outputImage.GetLinePtr(lineIndex);
+	int kernelMaxWidth = 0;
+	int kernelMaxHeight = 0;
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+		kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0] * imageWidth), imageWidth));
+		kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * imageHeight), imageHeight));
+		break;
 
-			const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(lineIndex);
-			const I_BYTE* inputLineEndPtr = inputLinePtr + imageWidth;
+	default:
+		kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0]), imageWidth));
+		kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1]), imageHeight));
+		break;
+	}
 
-			const I_BYTE* posInputPtr = inputLinePtr;
+	I_ASSERT(kernelMaxWidth >= 1);
+	I_ASSERT(kernelMaxHeight >= 1);
 
-			int kernelWidth = 0;
+	istd::CIndex2d outputImageSize = imageSize;
+	if (*m_borderModeAttrPtr != BM_STRETCH_KERNEL){
+		outputImageSize[0] -= kernelMaxWidth - 1;
+		outputImageSize[1] -= kernelMaxHeight - 1;
+	}
+
+	if (!outputImage.CreateBitmap(outputImageSize, componentsCount * 8, componentsCount)){
+		return false;	// cannot create output image
+	}
+
+	iimg::IBitmap* firstPassOutputImagePtr = &outputImage;
+	const iimg::IBitmap* secondPassInputImagePtr = &inputImage;
+	int outputImageWidth = outputImageSize.GetX();
+
+	iimg::CGeneralBitmap tempBitmap;
+	if ((kernelMaxWidth > 1) && (kernelMaxHeight > 1)){
+		tempBitmap.CreateBitmap(istd::CIndex2d(outputImageWidth, imageHeight), componentsCount * 8, componentsCount);
+
+		firstPassOutputImagePtr = &tempBitmap;
+		secondPassInputImagePtr = &tempBitmap;
+	}
+	else if ((kernelMaxWidth <= 1) && (kernelMaxHeight <= 1)){
+		return outputImage.CopyFrom(inputImage);
+	}
+
+	if (kernelMaxWidth > 1){
+		I_ASSERT(firstPassOutputImagePtr != NULL);
+
+		for (int y = 0; y < imageHeight; ++y){
+			I_BYTE* outputPtr = (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y);
+
+			const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(y);
+
 			int meanValue = 0;
 
-			for (int x = 0; (x < kernelHalfWidth) && (posInputPtr < inputLineEndPtr); ++x){
-				meanValue += *posInputPtr++;
-				++kernelWidth;
+			int kernelWidth = 0;
+			while (kernelWidth < kernelMaxWidth){
+				meanValue += inputLinePtr[kernelWidth++];
 
-				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-
-				if (posInputPtr >= inputLineEndPtr){
+				if (kernelWidth >= kernelMaxWidth){
 					break;
 				}
 
-				meanValue += *posInputPtr++;
-				++kernelWidth;
-			}
-
-			++kernelWidth;
-
-			const I_BYTE* negInputPtr = inputLinePtr;
-
-			while (posInputPtr < inputLineEndPtr){
-				meanValue += *posInputPtr++;
-				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-				meanValue -= *negInputPtr++;
-			}
-
-			--kernelWidth;
-
-			while (negInputPtr < inputLineEndPtr){
-				meanValue -= *negInputPtr++;
-				--kernelWidth;
-
-				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-
-				if  (negInputPtr >= inputLineEndPtr){
-					break;
+				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+					*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
 				}
 
-				meanValue -= *negInputPtr++;
-				--kernelWidth;
+				meanValue += inputLinePtr[kernelWidth++];
 			}
+
+			int headX = kernelWidth;
+			int tailX = 0;
+			while (headX < imageWidth){
+				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+				meanValue += inputLinePtr[headX++];
+
+				I_ASSERT(tailX < imageWidth);
+				meanValue -= inputLinePtr[tailX++];
+			}
+
+			if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+				while (kernelWidth > 0){
+					*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+					I_ASSERT(tailX < imageWidth);
+					meanValue -= inputLinePtr[tailX++];
+					kernelWidth--;
+
+					if  (kernelWidth <= 0){
+						break;
+					}
+
+					I_ASSERT(tailX < imageWidth);
+					meanValue -= inputLinePtr[tailX++];
+					kernelWidth--;
+				}
+			}
+
+			I_ASSERT(outputPtr <= (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + outputImageWidth);
 		}
 	}
 
-	if (kernelHalfHeight > 0){
-		iimg::CGeneralBitmap tempBitmap;
-		tempBitmap.CopyFrom(outputImage);
+	if (kernelMaxHeight > 1){
+		I_ASSERT(secondPassInputImagePtr != NULL);
 
-		int inputLinesDifference = tempBitmap.GetLinesDifference();
+		int inputLinesDifference = secondPassInputImagePtr->GetLinesDifference();
 		int outputLinesDifference = outputImage.GetLinesDifference();
 
-		for (int x = 0; x < imageWidth; ++x){	
+		for (int x = 0; x < outputImageWidth; ++x){	
 			double meanValue = 0;
-			I_BYTE* inputLinePtr = ((I_BYTE*)tempBitmap.GetLinePtr(0)) + x;
+			const I_BYTE* inputHeadPixelPtr = ((const I_BYTE*)secondPassInputImagePtr->GetLinePtr(0)) + x;
+			const I_BYTE* inputTailPixelPtr = inputHeadPixelPtr;
+			I_BYTE* outputPixelPtr = (I_BYTE*)(outputImage.GetLinePtr(0)) + x;
 
-			for (int y = 0; y < kernelHeight; ++y){
-				meanValue += inputLinePtr[y * inputLinesDifference];
+			int kernelHeight = 0;
+			while (kernelHeight < kernelMaxHeight){
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
+				kernelHeight++;
+
+				if (kernelHeight >= kernelMaxHeight){
+					break;
+				}
+
+				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+					*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+					outputPixelPtr += outputLinesDifference;
+				}
+
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
+				kernelHeight++;
 			}
 
-			*((I_BYTE*)(outputImage.GetLinePtr(kernelHalfHeight)) + x) = I_BYTE(meanValue / kernelHeight);
+			int headY = kernelHeight;
 
-			I_BYTE* outputBufferPtr = (I_BYTE*)(outputImage.GetLinePtr(kernelHalfHeight + 1)) + x;
-			I_BYTE* beginKernelPtr = inputLinePtr;
-			I_BYTE* endKernelPtr = inputLinePtr + kernelHeight * inputLinesDifference;
-			I_BYTE* endBufferPtr = inputLinePtr + imageHeight * inputLinesDifference;
+			for (;headY < imageHeight; ++headY){
+				*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+				outputPixelPtr += outputLinesDifference;
 
-			while (endKernelPtr < endBufferPtr){
-				meanValue += (*endKernelPtr - *beginKernelPtr);
-				*outputBufferPtr = I_BYTE(meanValue / kernelHeight);
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
 
-				endKernelPtr += inputLinesDifference;
-				beginKernelPtr += inputLinesDifference;
-				outputBufferPtr += outputLinesDifference;
+				meanValue -= *inputTailPixelPtr;
+				inputTailPixelPtr += inputLinesDifference;
+			}
+
+			if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+				while (kernelHeight > 0){
+					*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+					outputPixelPtr += outputLinesDifference;
+
+					meanValue -= *inputTailPixelPtr;
+					inputTailPixelPtr += inputLinesDifference;
+					--kernelHeight;
+
+					if  (kernelHeight <= 0){
+						break;
+					}
+
+					meanValue -= *inputTailPixelPtr;
+					inputTailPixelPtr += inputLinesDifference;
+					--kernelHeight;
+				}
 			}
 		}
 	}

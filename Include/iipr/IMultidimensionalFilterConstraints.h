@@ -2,10 +2,11 @@
 #define iipr_IMultidimensionalFilterConstraints_included
 
 
+// ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CRange.h"
 
-#include "imath/TIValueManip.h"
+// ACF-Solutions includes
+#include "imeas/IUnitInfo.h"
 
 #include "iipr/iipr.h"
 
@@ -23,14 +24,14 @@ public:
 	virtual int GetFilterDimensionsCount() const = 0;
 
 	/**
-		Get range of possible filter value for specified dimension.
+		Get description of some filter element.
 	*/
-	virtual istd::CRange GetFilterLengthRange(int dimension) const = 0;
+	virtual istd::CString GetFilterDescription(int dimension) const = 0;
 
 	/**
-		Return number manipulator object for filter length value.
+		Get range of possible filter value for specified dimension.
 	*/
-	virtual const imath::IDoubleManip& GetFilterLengthManip(int dimension) const = 0;
+	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const = 0;
 };
 
 
