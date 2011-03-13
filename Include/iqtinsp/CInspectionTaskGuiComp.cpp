@@ -296,7 +296,7 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 	}
 
 	for (		GuiMap::const_iterator iter = m_stackIndexToTabMap.begin();
-				iter != m_stackIndexToTabMap.begin();
+				iter != m_stackIndexToTabMap.end();
 				++iter){
 		int guiIndex = iter->second;
 		I_ASSERT(guiIndex >= 0);
