@@ -11,8 +11,8 @@
 #include "iproc/IValueSupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtproc/TSupplierGuiCompBase.h"
 
+#include "iqtinsp/TSupplierGuiCompBase.h"
 
 #include "iqtipr/iqtipr.h"
 
@@ -23,14 +23,14 @@ namespace iqtipr
 {
 
 
-class CValueSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+class CValueSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
 			Ui::CValueSupplierGuiComp,
 			iproc::IValueSupplier>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtproc::TSupplierGuiCompBase<
+	typedef iqtinsp::TSupplierGuiCompBase<
 				Ui::CValueSupplierGuiComp,
 				iproc::IValueSupplier> BaseClass;
 
@@ -65,7 +65,7 @@ protected:
 		CValueSupplierGuiComp& m_parent;
 	};
 
-	// reimplemented (iqtproc::TSupplierGuiCompBase)
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)

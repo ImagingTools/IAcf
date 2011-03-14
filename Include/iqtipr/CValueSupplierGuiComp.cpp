@@ -111,7 +111,7 @@ void CValueSupplierGuiComp::on_SaveParamsButton_clicked()
 
 // protected methods
 
-// reimplemented (iqtproc::TSupplierGuiCompBase)
+// reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 {

@@ -8,6 +8,7 @@
 
 // ACF includes
 #include "istd/CString.h"
+#include "imod/CMultiModelObserverBase.h"
 #include "iser/IFileLoader.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqt2d/ISceneExtender.h"
@@ -60,17 +61,34 @@ public:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
+protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
+signals:
+	void DoAutoTest();
+
 protected slots:
 	void OnEditorChanged(int index);
+	void OnAutoTest();
 	void on_TestAllButton_clicked();
+	void on_AutoTestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 
 private:
+	class TasksObserver: public imod::CMultiModelObserverBase
+	{
+	public:
+		TasksObserver(CInspectionTaskGuiComp* parentPtr);
+	protected:
+		virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CInspectionTaskGuiComp& m_parent;
+	};
+
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
@@ -86,6 +104,8 @@ private:
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
+
+	TasksObserver m_tasksObserver;
 
 	int m_currentGuiIndex;
 	typedef std::map<int, int> GuiMap;

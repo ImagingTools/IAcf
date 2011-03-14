@@ -2,16 +2,9 @@
 #define iqtinsp_CGeneralSupplierGuiComp_included
 
 
-// ACF includes
-#include "iser/IFileLoader.h"
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
 #include "iproc/ISupplier.h"
-#include "iqt/CBitmap.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtproc/TSupplierGuiCompBase.h"
+#include "iqtinsp/TSupplierGuiCompBase.h"
 
 #include "iqtinsp/Generated/ui_CGeneralSupplierGuiComp.h"
 
@@ -20,14 +13,14 @@ namespace iqtinsp
 {
 
 
-class CGeneralSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+class CGeneralSupplierGuiComp: public TSupplierGuiCompBase<
 			Ui::CGeneralSupplierGuiComp,
 			iproc::ISupplier>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtproc::TSupplierGuiCompBase<
+	typedef TSupplierGuiCompBase<
 				Ui::CGeneralSupplierGuiComp,
 				iproc::ISupplier> BaseClass;
 
@@ -39,15 +32,12 @@ public:
 	virtual void UpdateEditor(int updateFlags = 0);
 
 protected slots:
-	void on_ProcessButton_clicked();
+	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 
 protected:
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-
-	// reimplemented (iqtproc::TSupplierGuiCompBase)
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)

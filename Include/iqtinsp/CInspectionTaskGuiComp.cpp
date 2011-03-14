@@ -20,8 +20,10 @@ namespace iqtinsp
 
 
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
-:	m_currentGuiIndex(-1)
+:	m_tasksObserver(this),
+	m_currentGuiIndex(-1)
 {
+	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
 }
 
 
@@ -54,6 +56,10 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 		
 		editorPtr->UpdateEditor(updateFlags);
 	}
+
+	if (AutoTestButton->isChecked()){
+		emit DoAutoTest();
+	}
 }
 
 
@@ -76,6 +82,8 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 		if (parameterModelPtr == NULL){
 			continue;
 		}
+
+		parameterModelPtr->AttachObserver(&m_tasksObserver);
 
 		if (i < m_observersCompPtr.GetCount()){
 			imod::IObserver* observerPtr = m_observersCompPtr[i];
@@ -125,6 +133,8 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 		if (parameterModelPtr == NULL){
 			continue;
 		}
+
+		parameterModelPtr->DetachObserver(&m_tasksObserver);
 
 		if (i < m_observersCompPtr.GetCount()){
 			imod::IObserver* observerPtr = m_observersCompPtr[i];
@@ -344,6 +354,26 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 
 		int stackIndex = m_tabToStackIndexMap[index];
 		PreviewStack->setCurrentIndex(stackIndex);
+
+		if (AutoTestButton->isChecked()){
+			DoAutoTest();
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnAutoTest()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		int subtasksCount = objectPtr->GetSubtasksCount();
+
+		if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < subtasksCount)){
+			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(m_currentGuiIndex);
+			if (subtaskPtr != NULL){
+				subtaskPtr->EnsureWorkFinished();
+			}
+		}
 	}
 }
 
@@ -375,6 +405,14 @@ void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 }
 
 
+void CInspectionTaskGuiComp::on_AutoTestButton_clicked()
+{
+	if (AutoTestButton->isChecked()){
+		OnAutoTest();
+	}
+}
+
+
 void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
 {
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
@@ -389,6 +427,27 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
+	}
+}
+
+
+// public methods of embedded class TasksObserver
+
+CInspectionTaskGuiComp::TasksObserver::TasksObserver(CInspectionTaskGuiComp* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class TasksObserver
+
+void CInspectionTaskGuiComp::TasksObserver::OnUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if (		m_parent.IsGuiCreated() &&
+				m_parent.AutoTestButton->isChecked() &&
+				((updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS) != 0)){
+		emit m_parent.DoAutoTest();
 	}
 }
 

@@ -85,7 +85,7 @@ void CBitmapSupplierGuiComp::OnGuiCreated()
 }
 
 
-// reimplemented (iqtproc::TSupplierGuiCompBase)
+// reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const
 {

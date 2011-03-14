@@ -1,12 +1,6 @@
 #include "iqtinsp/CGeneralSupplierGuiComp.h"
 
 
-// Qt includes
-#include <QMessageBox>
-
-#include "iqt2d/CImageShape.h"
-
-
 namespace iqtinsp
 {
 
@@ -27,6 +21,10 @@ void CGeneralSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
+		double inspectionTime = supplierPtr->GetWorkDurationTime();
+		QString inspectionText = tr("%1 ms").arg(inspectionTime * 1000);
+		InspectionTimeLabel->setText(inspectionText);
+
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
@@ -59,6 +57,9 @@ void CGeneralSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 			break;
 		}
 	}
+	else{
+		InspectionTimeLabel->setText(tr("-"));
+	}
 
 	StatusLabel->setText(statusText);
 }
@@ -66,7 +67,7 @@ void CGeneralSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
 
 // protected slots
 
-void CGeneralSupplierGuiComp::on_ProcessButton_clicked()
+void CGeneralSupplierGuiComp::on_TestButton_clicked()
 {
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
@@ -97,15 +98,7 @@ void CGeneralSupplierGuiComp::on_SaveParamsButton_clicked()
 
 // protected methods
 
-// reimplemented (iqtgui::CGuiComponentBase)
-
-void CGeneralSupplierGuiComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-}
-
-
-// reimplemented (iqtproc::TSupplierGuiCompBase)
+// reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CGeneralSupplierGuiComp::GetParamsWidget() const
 {

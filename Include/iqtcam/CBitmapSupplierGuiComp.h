@@ -11,7 +11,7 @@
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtproc/TSupplierGuiCompBase.h"
+#include "iqtinsp/TSupplierGuiCompBase.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -22,14 +22,14 @@ namespace iqtcam
 {
 
 
-class CBitmapSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+class CBitmapSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
 			Ui::CBitmapSupplierGuiComp,
 			iproc::IBitmapSupplier>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtproc::TSupplierGuiCompBase<
+	typedef iqtinsp::TSupplierGuiCompBase<
 				Ui::CBitmapSupplierGuiComp,
 				iproc::IBitmapSupplier> BaseClass;
 
@@ -51,7 +51,7 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
-	// reimplemented (iqtproc::TSupplierGuiCompBase)
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)

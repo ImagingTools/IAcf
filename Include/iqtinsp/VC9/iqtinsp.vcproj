@@ -208,6 +208,10 @@
 				RelativePath="..\iqtinsp.h"
 				>
 			</File>
+			<File
+				RelativePath="..\TSupplierGuiCompBase.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

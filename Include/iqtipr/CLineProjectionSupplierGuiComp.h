@@ -10,12 +10,13 @@
 #include "iproc/IValueSupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtproc/TSupplierGuiCompBase.h"
 
-// ACF-SOlutions includes
+// ACF-Solutions includes
 #include "imeas/CGeneralDataSequence.h"
 
 #include "iipr/ILineProjectionSupplier.h"
+
+#include "iqtinsp/TSupplierGuiCompBase.h"
 
 #include "iqtipr/iqtipr.h"
 
@@ -26,14 +27,14 @@ namespace iqtipr
 {
 
 
-class CLineProjectionSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+class CLineProjectionSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
 			Ui::CLineProjectionSupplierGuiComp,
 			iipr::ILineProjectionSupplier>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtproc::TSupplierGuiCompBase<
+	typedef iqtinsp::TSupplierGuiCompBase<
 				Ui::CLineProjectionSupplierGuiComp,
 				iipr::ILineProjectionSupplier> BaseClass;
 
@@ -52,7 +53,7 @@ protected slots:
 	void on_SaveParamsButton_clicked();
 
 protected:
-	// reimplemented (iqtproc::TSupplierGuiCompBase)
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)

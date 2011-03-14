@@ -69,7 +69,7 @@ void CLineProjectionSupplierGuiComp::on_SaveParamsButton_clicked()
 
 // protected methods
 
-// reimplemented (iqtproc::TSupplierGuiCompBase)
+// reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CLineProjectionSupplierGuiComp::GetParamsWidget() const
 {
