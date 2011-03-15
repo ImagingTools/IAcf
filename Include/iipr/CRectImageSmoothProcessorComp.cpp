@@ -45,6 +45,7 @@ int CRectImageSmoothProcessorComp::GetUnitType() const
 {
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
 		return UT_RELATIVE;
 
 	default:
@@ -57,6 +58,7 @@ istd::CString CRectImageSmoothProcessorComp::GetUnitName() const
 {
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
 		return "%";
 
 	default:
@@ -69,6 +71,7 @@ double CRectImageSmoothProcessorComp::GetDisplayMultiplicationFactor() const
 {
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
 		return 100;
 
 	default:
@@ -81,6 +84,7 @@ istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
 {
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
 		return istd::CRange(0, 1);
 
 	default:
@@ -134,7 +138,15 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
 		kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0] * imageWidth), imageWidth));
-		kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * imageHeight), imageHeight));
+		kernelMaxHeight = istd::Max(1, istd::Min(int((filterDimensionsCount < 2)? filterLengths[0]: filterLengths[1] * imageHeight), imageHeight));
+		break;
+
+	case UM_PERCENT_DIAG:
+		{
+			double diag = std::sqrt(double(imageWidth * imageWidth + imageHeight * imageHeight));
+			kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0] * diag), imageWidth));
+			kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * diag), imageHeight));
+		}
 		break;
 
 	default:

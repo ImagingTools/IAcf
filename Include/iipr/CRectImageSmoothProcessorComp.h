@@ -28,7 +28,7 @@ public:
 
 	I_BEGIN_COMPONENT(CRectImageSmoothProcessorComp);
 		I_REGISTER_INTERFACE(IMultidimensionalFilterConstraints);
-		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units:\n\t0 - Pixels\n\t1 - Percent", true, 0);
+		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units:\n\t0 - Pixels\n\t1 - Percent of width and height\n\t2 - Percent of diagonal", true, 0);
 		I_ASSIGN(m_borderModeAttrPtr, "BorderMode", "Define used mode for border area:\n\t0 - Kernel will be stretched, original image size will be outputed\n\t1 - Border area removed, output image will be smaller", true, 0);
 	I_END_COMPONENT;
 
@@ -48,7 +48,8 @@ protected:
 	enum UnitMode
 	{
 		UM_PIXEL,
-		UM_PERCENT
+		UM_PERCENT,
+		UM_PERCENT_DIAG
 	};
 
 	enum BorderMode
