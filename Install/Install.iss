@@ -19,9 +19,11 @@ UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
 UninstallDisplayName=$AcfProductName$ $AcfVersion:10$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
-VersionInfoDescription=$AcfProductName$ v. $AcfVersion:10$ ($AcfRawVersion:10$) by $AcfCompanyName$, compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$)
-AppCopyright=Copyright (C) 2007-2010 Witold Gantzke and Kirill Lepskiy
+VersionInfoDescription=$AcfProductName$ v. $AcfVersion:10$ ($AcfRawVersion:10$) by $AcfCompanyName$
+AppComments=compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$) and ACF-Solutions v. $AcfVersion:1$ ($AcfRawVersion:1$), see www.imagingtools.de to find out more about IACF
+AppCopyright=Copyright (C) 2007-2011 Witold Gantzke and Kirill Lepskiy
 VersionInfoVersion=$AcfVersion:10$
+ChangesEnvironment=yes
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: iacfComp
