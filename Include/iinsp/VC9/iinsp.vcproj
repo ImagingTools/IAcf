@@ -5,6 +5,7 @@
 	Name="iinsp"
 	ProjectGUID="{34125E03-433E-4FFE-8D7A-9833C6B3AAA9}"
 	RootNamespace="iinsp"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -220,6 +221,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CComposedInspectionTaskComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInspectionTaskComp.cpp"
 				>
 			</File>
@@ -228,6 +233,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CComposedInspectionTaskComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CInspectionTaskComp.h"
 				>

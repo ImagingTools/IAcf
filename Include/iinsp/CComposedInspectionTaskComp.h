@@ -1,5 +1,5 @@
-#ifndef iinsp_CInspectionTaskComp_included
-#define iinsp_CInspectionTaskComp_included
+#ifndef iinsp_CComposedInspectionTaskComp_included
+#define iinsp_CComposedInspectionTaskComp_included
 
 
 // ACF includes
@@ -17,7 +17,7 @@ namespace iinsp
 /**
 	Standard component implementation of interface iinsp::IInspectionTask.
 */
-class CInspectionTaskComp:
+class CComposedInspectionTaskComp:
 			public ibase::CLoggerComponentBase,
 			virtual public IInspectionTask,
 			protected imod::CMultiModelBridgeBase
@@ -27,16 +27,15 @@ public:
 
 	enum MessageId
 	{
-		MI_BAD_PARAMS_COUNT = 0x5af30,
-		MI_NO_SUBTASK
+		MI_BAD_TASKS_COUNT = 0x5af40,
+		MI_NO_TASK
 	};
 
-	I_BEGIN_COMPONENT(CInspectionTaskComp);
+	I_BEGIN_COMPONENT(CComposedInspectionTaskComp);
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_ASSIGN_MULTI_0(m_subtasksCompPtr, "Subtasks", "List of subtasks (suppliers)", true);
-		I_ASSIGN_MULTI_0(m_subtaskModelsCompPtr, "Subtasks", "List of subtasks (suppliers)", false);
-		I_ASSIGN(m_serialzeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
+		I_ASSIGN_MULTI_0(m_inspectionsCompPtr, "InspectionTasks", "List of subinspections", true);
+		I_ASSIGN_MULTI_0(m_inspectionModelsCompPtr, "InspectionTasks", "List of subinspections", false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
 	I_END_COMPONENT;
 
@@ -54,9 +53,8 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
-	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
-	I_ATTR(bool, m_serialzeSuppliersAttrPtr);
+	I_MULTIREF(IInspectionTask, m_inspectionsCompPtr);
+	I_MULTIREF(imod::IModel, m_inspectionModelsCompPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
 };
 
@@ -64,6 +62,6 @@ private:
 } // namespace iinsp
 
 
-#endif // !iinsp_CInspectionTaskComp_included
+#endif // !iinsp_CComposedInspectionTaskComp_included
 
 

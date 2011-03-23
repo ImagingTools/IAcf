@@ -81,6 +81,40 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 }
 
 
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CInspectionTaskComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	int modelsCount = m_subtaskModelsCompPtr.GetCount();
+
+	for (int i = 0; i < modelsCount; ++i){
+		imod::IModel* modelPtr = m_subtaskModelsCompPtr[i];
+		if (modelPtr != NULL){
+			modelPtr->AttachObserver(this);
+		}
+	}
+}
+
+
+void CInspectionTaskComp::OnComponentDestroyed()
+{
+	int modelsCount = m_subtaskModelsCompPtr.GetCount();
+
+	for (int i = 0; i < modelsCount; ++i){
+		imod::IModel* modelPtr = m_subtaskModelsCompPtr[i];
+		if ((modelPtr != NULL) && modelPtr->IsAttached(this)){
+			modelPtr->DetachObserver(this);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 } // namespace iinsp
 
 
