@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1627
+          1690
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          286
+          308
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         AboutGui
       </ComponentName>
       <X>
-        425
+        250
       </X>
       <X>
-        275
+        350
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         Info
       </ComponentName>
       <X>
-        425
+        250
       </X>
       <X>
-        75
+        150
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         InspectionGui
       </ComponentName>
       <X>
-        850
+        600
       </X>
       <X>
-        575
+        400
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         InspectionTask
       </ComponentName>
       <X>
-        1100
+        900
       </X>
       <X>
-        575
+        425
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         InspectionTaskEditor
       </ComponentName>
       <X>
-        875
+        600
       </X>
       <X>
-        725
+        550
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         LogDock
       </ComponentName>
       <X>
-        1050
+        875
       </X>
       <X>
-        175
+        250
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         StandaloneApp
       </ComponentName>
       <X>
-        750
+        575
       </X>
       <X>
-        175
+        250
       </X>
     </Element>
   </PositionMap>
