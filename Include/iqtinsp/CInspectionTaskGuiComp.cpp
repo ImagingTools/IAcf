@@ -374,6 +374,8 @@ void CInspectionTaskGuiComp::OnAutoTest()
 				subtaskPtr->EnsureWorkFinished();
 			}
 		}
+
+		UpdateProcessingState();
 	}
 }
 
@@ -401,6 +403,8 @@ void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 				subtaskPtr->EnsureWorkFinished();
 			}
 		}
+
+		UpdateProcessingState();
 	}
 }
 
@@ -427,6 +431,41 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
+	}
+}
+
+
+// private methods
+
+void CInspectionTaskGuiComp::UpdateProcessingState()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		int subtasksCount = objectPtr->GetSubtasksCount();
+
+		int workStatus = iproc::ISupplier::WS_NONE;
+		for (int invalidateIndex = 0; invalidateIndex < subtasksCount; ++invalidateIndex){
+			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(invalidateIndex);
+			if (subtaskPtr != NULL){
+				workStatus = istd::Max(workStatus, subtaskPtr->GetWorkStatus());
+			}
+		}
+
+		switch (workStatus){
+			case iproc::ISupplier::WS_OK:
+				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+				break;
+			case iproc::ISupplier::WS_ERROR:
+				StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+				break;
+			case iproc::ISupplier::WS_CRITICAL:
+				StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
+				break;
+			default:
+				StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+				break;
+		
+		}
 	}
 }
 

@@ -78,6 +78,9 @@ protected slots:
 	void on_SaveParamsButton_clicked();
 
 private:
+	void UpdateProcessingState();
+
+private:
 	class TasksObserver: public imod::CMultiModelObserverBase
 	{
 	public:

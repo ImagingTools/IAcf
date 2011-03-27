@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="9">
     <Element>
       <Id>
         AboutGui
@@ -94,6 +94,67 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileDialogLoader
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FileDialogLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Loaders
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  XmlFileSerializer
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogDock
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -306,7 +367,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DesignType
@@ -356,6 +417,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileDialogLoader
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -546,6 +626,67 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        XmlFileSerializer
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        XmlFileSerializer
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              FileExtensions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  xml
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogDock
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
