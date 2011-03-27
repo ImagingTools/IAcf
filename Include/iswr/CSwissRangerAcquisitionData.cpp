@@ -1,6 +1,9 @@
 #include "iswr/CSwissRangerAcquisitionData.h"
 
 
+// STL includes
+#include <cstring>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TDelPtr.h"
@@ -43,10 +46,10 @@ bool CSwissRangerAcquisitionData::CreateData(
 	int imageDataSize = m_depthImage.GetImageSize().GetX() * m_depthImage.GetImageSize().GetY();
 
 	m_xBuffer.resize(imageDataSize);
-	memcpy(&m_xBuffer[0], xBufferPtr, imageDataSize * sizeof(I_SWORD));
+	std::memcpy(&m_xBuffer[0], xBufferPtr, imageDataSize * sizeof(I_SWORD));
 
 	m_yBuffer.resize(imageDataSize);
-	memcpy(&m_yBuffer[0], yBufferPtr, imageDataSize * sizeof(I_SWORD));
+	std::memcpy(&m_yBuffer[0], yBufferPtr, imageDataSize * sizeof(I_SWORD));
 
 	return true;
 }

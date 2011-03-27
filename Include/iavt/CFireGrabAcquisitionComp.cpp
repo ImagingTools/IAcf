@@ -1,7 +1,8 @@
 #include "iavt/CFireGrabAcquisitionComp.h"
 
 
-#include <memory.h>
+// STL includes
+#include <cstring>
 
 #include "istd/TChangeNotifier.h"
 
@@ -74,7 +75,7 @@ int CFireGrabAcquisitionComp::DoProcessing(
 					I_ASSERT(bitmapPtr->GetLineBytesCount() >= size.GetX());
 
 					for (int y = 0; y < size.GetY(); ++y){
-						memcpy(bitmapPtr->GetLinePtr(y), frameInfo.pData + y * size.GetX(), size.GetX());
+						std::memcpy(bitmapPtr->GetLinePtr(y), frameInfo.pData + y * size.GetX(), size.GetX());
 					}
 
 					retVal = TS_OK;

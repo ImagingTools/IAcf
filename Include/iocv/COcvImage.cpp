@@ -31,7 +31,7 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 		case 3:
 			if (outputBitmap.CreateBitmap(istd::CIndex2d(image.width, image.height), 32, 4)){
 				I_BYTE* outputBitmapLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(0);
-				memset(outputBitmapLinePtr, 255, outputBitmap.GetLineBytesCount() * outputBitmap.GetImageSize().GetY());
+				std::memset(outputBitmapLinePtr, 255, outputBitmap.GetLineBytesCount() * outputBitmap.GetImageSize().GetY());
 
 				for (int y = 0; y < image.height; y++){
 					I_BYTE* outputBitmapLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(y);
@@ -40,7 +40,7 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 					for (int x = 0; x < outputBitmap.GetLineBytesCount(); x += 4){
 						int ix = (x >> 2) * 3;
 
-						memcpy(outputBitmapLinePtr + x,  inputBitmapLinePtr + ix, 3);
+						std::memcpy(outputBitmapLinePtr + x,  inputBitmapLinePtr + ix, 3);
 					}
 				}
 

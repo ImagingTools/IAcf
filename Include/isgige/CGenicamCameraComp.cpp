@@ -1,6 +1,9 @@
 #include "isgige/CGenicamCameraComp.h"
 
 
+// STL includes
+#include <cstring>
+
 // Qt includes
 #include <QHostAddress>
 
@@ -120,7 +123,7 @@ int CGenicamCameraComp::DoProcessing(
 			}
 
 			for (unsigned int i = 0; i < cy; i++){
-				::memcpy(resultBitmapPtr->GetLinePtr(i), imageInfoPtr->GetRawData(i), cx);
+				std::memcpy(resultBitmapPtr->GetLinePtr(i), imageInfoPtr->GetRawData(i), cx);
 			}
 		}
 

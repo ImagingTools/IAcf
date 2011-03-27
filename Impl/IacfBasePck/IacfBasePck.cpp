@@ -48,7 +48,12 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			InspectionTask,
 			"Group set of suppliers into single inspection task",
-			"Task Model Supplier Composite" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+			"Task Model Supplier Product Process Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+
+I_EXPORT_COMPONENT(
+			ComposedInspectionTask,
+			"Group set of inspection tasks into single one",
+			"Task Model Supplier Product Composite Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 
 } // namespace IacfBasePck

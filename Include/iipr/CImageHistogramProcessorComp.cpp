@@ -82,7 +82,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
 	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
 
-	memset(histogramDataBufferPtr, 0, histogramSize);
+	std::memset(histogramDataBufferPtr, 0, histogramSize);
 
 	for (int y = topArea; y <= bottomArea; y++){
 		I_BYTE* lineDataBeg = (I_BYTE*)input.GetLinePtr(y) + leftArea * componentsCount;
