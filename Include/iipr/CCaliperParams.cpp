@@ -81,12 +81,12 @@ bool CCaliperParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_weightThreshold);
 	retVal = retVal && archive.EndTag(weightThresholdTag);
 
-	static iser::CArchiveTag polarityModeTag("Polarity mode", "Polarity mode code");
+	static iser::CArchiveTag polarityModeTag("PolarityMode", "Polarity mode code");
 	retVal = retVal && archive.BeginTag(polarityModeTag);
 	retVal = retVal && archive.Process(m_polarityMode);
 	retVal = retVal && archive.EndTag(polarityModeTag);
 
-	static iser::CArchiveTag directionModeTag("Direction mode", "Direction mode code");
+	static iser::CArchiveTag directionModeTag("DirectionMode", "Direction mode code");
 	retVal = retVal && archive.BeginTag(directionModeTag);
 	retVal = retVal && archive.Process(m_directionMode);
 	retVal = retVal && archive.EndTag(directionModeTag);
