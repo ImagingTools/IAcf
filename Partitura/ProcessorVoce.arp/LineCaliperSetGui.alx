@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1508
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          212
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         CaliperLineGui
@@ -57,7 +57,18 @@
         300
       </X>
       <X>
-        200
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SmoothFilterParamsGui
+      </ComponentName>
+      <X>
+        687
+      </X>
+      <X>
+        432
       </X>
     </Element>
   </PositionMap>

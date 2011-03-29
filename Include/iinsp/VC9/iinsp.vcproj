@@ -254,10 +254,6 @@
 			Name="Other"
 			>
 			<File
-				RelativePath="..\IacfVersion.h.xtrsvn"
-				>
-			</File>
-			<File
 				RelativePath="..\VersionInfo.arx.xtrsvn"
 				>
 				<FileConfiguration

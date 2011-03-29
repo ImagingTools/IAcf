@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1508
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          212
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
         CaliperLineGui
@@ -120,12 +120,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   CaliperLineGui
                 </Value>
                 <Value>
                   CaliperParamsGui
+                </Value>
+                <Value>
+                  SmoothFilterParamsGui
                 </Value>
               </Values>
             </Data>
@@ -144,12 +147,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   Line
                 </Value>
                 <Value>
                   Caliper
+                </Value>
+                <Value>
+                  SmoothFilter
                 </Value>
               </Values>
             </Data>
@@ -168,12 +174,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   Geometry
                 </Value>
                 <Value>
                   Caliper
+                </Value>
+                <Value>
+                  Filter
                 </Value>
               </Values>
             </Data>
@@ -200,7 +209,30 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        SmoothFilterParamsGui
+      </Id>
+      <PackageId>
+        QtIprPck
+      </PackageId>
+      <ComponentId>
+        RectangularFilterParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1508
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          212
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -272,13 +272,23 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         iipr::IFeatureToImageMapper
       </InterfaceId>
       <ComponentId>
         LineProjection
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iipr::IMultidimensionalFilterConstraints
+      </InterfaceId>
+      <ComponentId>
+        DerivativeProcessor
       </ComponentId>
     </Interface>
     <Interface>

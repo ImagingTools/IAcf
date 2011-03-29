@@ -1,63 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1248
+          1705
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          313
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="14">
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        -487
-      </X>
-      <X>
-        -237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        112
-      </X>
-      <X>
-        -237
-      </X>
-    </Element>
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
-        341
+        1000
       </X>
       <X>
-        3
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapView
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        -237
+        650
       </X>
     </Element>
     <Element>
@@ -65,21 +43,10 @@
         FileAcquisition
       </ComponentName>
       <X>
-        47
+        675
       </X>
       <X>
-        -3
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileCamera
-      </ComponentName>
-      <X>
-        -325
-      </X>
-      <X>
-        -112
+        650
       </X>
     </Element>
     <Element>
@@ -87,10 +54,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -495
+        175
       </X>
       <X>
-        -156
+        300
       </X>
     </Element>
     <Element>
@@ -98,21 +65,10 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -495
+        125
       </X>
       <X>
-        -11
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParamGui2
-      </ComponentName>
-      <X>
-        -775
-      </X>
-      <X>
-        37
+        650
       </X>
     </Element>
     <Element>
@@ -120,32 +76,10 @@
         Framework
       </ComponentName>
       <X>
-        168
+        1000
       </X>
       <X>
-        -129
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageDialogLoader
-      </ComponentName>
-      <X>
-        212
-      </X>
-      <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapGui
-      </ComponentName>
-      <X>
-        50
-      </X>
-      <X>
-        -112
+        400
       </X>
     </Element>
     <Element>
@@ -153,10 +87,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -207
+        525
       </X>
       <X>
-        -157
+        300
       </X>
     </Element>
     <Element>
@@ -164,10 +98,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -208
+        400
       </X>
       <X>
-        -4
+        650
       </X>
     </Element>
   </PositionMap>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1666
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          299
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -72,12 +72,15 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              FilterParamsId
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                SmoothFilter
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -119,7 +122,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              SmoothFilterConstraints
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                CaliperProcessor
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

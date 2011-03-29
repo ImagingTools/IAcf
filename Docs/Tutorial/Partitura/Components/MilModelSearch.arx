@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1505
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          210
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -205,8 +205,8 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-							Processor
-						</Id>
+              Processor
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
@@ -218,8 +218,8 @@
                 true
               </IsEnabled>
               <Value>
-								Processor
-							</Value>
+                Processor
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -448,50 +448,8 @@
     </Element>
     <Element>
       <Id>
-        SearchParams
+        Processor
       </Id>
-      <PackageId>
-        MilPck
-      </PackageId>
-      <ComponentId>
-        MilSearchParams
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SearchParamsGui
-      </Id>
-      <PackageId>
-        QtIprPck
-      </PackageId>
-      <ComponentId>
-        SearchParamsGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-				Processor
-			</Id>
       <PackageId>
         MilPck
       </PackageId>
@@ -566,7 +524,51 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        SearchParams
+      </Id>
+      <PackageId>
+        MilPck
+      </PackageId>
+      <ComponentId>
+        MilSearchParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SearchParamsGui
+      </Id>
+      <PackageId>
+        QtIprPck
+      </PackageId>
+      <ComponentId>
+        SearchParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
