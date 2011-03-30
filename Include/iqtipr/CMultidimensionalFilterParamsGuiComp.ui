@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CRectangularFilterParamsGuiComp</class>
- <widget class="QWidget" name="CRectangularFilterParamsGuiComp">
+ <class>CMultidimensionalFilterParamsGuiComp</class>
+ <widget class="QWidget" name="CMultidimensionalFilterParamsGuiComp">
   <property name="geometry">
    <rect>
     <x>0</x>

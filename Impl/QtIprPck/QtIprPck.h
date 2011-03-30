@@ -6,7 +6,7 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "iqtipr/CRectangularFilterParamsGuiComp.h"
+#include "iqtipr/CMultidimensionalFilterParamsGuiComp.h"
 #include "iqtipr/CSearchGuiComp.h"
 #include "iqtipr/CSearchParamsGuiComp.h"
 #include "iqtipr/CValueSupplierGuiComp.h"
@@ -22,7 +22,7 @@ namespace QtIprPck
 {
 
 
-typedef iqtipr::CRectangularFilterParamsGuiComp RectangularFilterParamsGui;
+typedef iqtipr::CMultidimensionalFilterParamsGuiComp RectangularFilterParamsGui;
 typedef iqtipr::CSearchGuiComp SearchGui;
 typedef iqtipr::CSearchParamsGuiComp SearchParamsGui;
 typedef iqtipr::CValueSupplierGuiComp ValueSupplierGui;

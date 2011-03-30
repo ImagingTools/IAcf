@@ -1,33 +1,33 @@
-#ifndef iqt_CRectangularFilterParamsGuiComp_included
-#define iqt_CRectangularFilterParamsGuiComp_included
+#ifndef iqt_CMultidimensionalFilterParamsGuiComp_included
+#define iqt_CMultidimensionalFilterParamsGuiComp_included
 
 
 #include "iipr/IMultidimensionalFilterParams.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtipr/Generated/ui_CRectangularFilterParamsGuiComp.h"
+#include "iqtipr/Generated/ui_CMultidimensionalFilterParamsGuiComp.h"
 
 
 namespace iqtipr
 {
 
 
-class CRectangularFilterParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CRectangularFilterParamsGuiComp,
+class CMultidimensionalFilterParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
+			Ui::CMultidimensionalFilterParamsGuiComp,
 			iipr::IMultidimensionalFilterParams>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CRectangularFilterParamsGuiComp,
+				Ui::CMultidimensionalFilterParamsGuiComp,
 				iipr::IMultidimensionalFilterParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CRectangularFilterParamsGuiComp)
+	I_BEGIN_COMPONENT(CMultidimensionalFilterParamsGuiComp)
 	I_END_COMPONENT
 
-	CRectangularFilterParamsGuiComp();
+	CMultidimensionalFilterParamsGuiComp();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -52,6 +52,6 @@ private:
 } // namespace iqtipr
 
 
-#endif // !iqt_CRectangularFilterParamsGuiComp_included
+#endif // !iqt_CMultidimensionalFilterParamsGuiComp_included
 
 

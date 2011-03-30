@@ -1,4 +1,4 @@
-#include "iqtipr/CRectangularFilterParamsGuiComp.h"
+#include "iqtipr/CMultidimensionalFilterParamsGuiComp.h"
 
 
 // Qt includes
@@ -17,7 +17,7 @@ namespace iqtipr
 {
 
 
-CRectangularFilterParamsGuiComp::CRectangularFilterParamsGuiComp()
+CMultidimensionalFilterParamsGuiComp::CMultidimensionalFilterParamsGuiComp()
 :	m_widthScaleFactor(1),
 	m_heightScaleFactor(1)
 {
@@ -26,7 +26,7 @@ CRectangularFilterParamsGuiComp::CRectangularFilterParamsGuiComp()
 
 // reimplemented (imod::IModelEditor)
 
-void CRectangularFilterParamsGuiComp::UpdateModel() const
+void CMultidimensionalFilterParamsGuiComp::UpdateModel() const
 {
 	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
@@ -51,7 +51,7 @@ void CRectangularFilterParamsGuiComp::UpdateModel() const
 }
 
 
-void CRectangularFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+void CMultidimensionalFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -76,7 +76,7 @@ void CRectangularFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 
 // protected methods
 
-void CRectangularFilterParamsGuiComp::UpdateLabel()
+void CMultidimensionalFilterParamsGuiComp::UpdateLabel()
 {
 	FilterWidthValueLabel->setText(QString::number(FilterWidthSlider->value()));
 	FilterHeightValueLabel->setText(QString::number(FilterHeightSlider->value()));
@@ -85,7 +85,7 @@ void CRectangularFilterParamsGuiComp::UpdateLabel()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CRectangularFilterParamsGuiComp::OnGuiModelAttached()
+void CMultidimensionalFilterParamsGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
@@ -175,7 +175,7 @@ void CRectangularFilterParamsGuiComp::OnGuiModelAttached()
 
 // protected slots
 
-void CRectangularFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*value*/)
+void CMultidimensionalFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*value*/)
 {
 	if (!IsUpdateBlocked()){
 		UpdateBlocker blockUpdate(this);
@@ -187,7 +187,7 @@ void CRectangularFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*va
 }
 
 
-void CRectangularFilterParamsGuiComp::on_FilterHeightSlider_valueChanged(int /*value*/)
+void CMultidimensionalFilterParamsGuiComp::on_FilterHeightSlider_valueChanged(int /*value*/)
 {
 	if (!IsUpdateBlocked()){
 		UpdateBlocker blockUpdate(this);

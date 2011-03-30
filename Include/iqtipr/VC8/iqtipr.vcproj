@@ -202,11 +202,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.cpp"
+				RelativePath="..\CMultidimensionalFilterParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.moc"
+				RelativePath="..\CMultidimensionalFilterParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -260,7 +260,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.h"
+				RelativePath="..\CMultidimensionalFilterParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -369,7 +369,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParamsGuiComp.ui"
+				RelativePath="..\CMultidimensionalFilterParamsGuiComp.ui"
 				>
 			</File>
 			<File

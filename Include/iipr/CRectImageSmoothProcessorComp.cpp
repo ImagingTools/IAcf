@@ -39,68 +39,6 @@ const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetFilterUnitInfo(int /*d
 }
 
 
-// reimplemented (imeas::IUnitInfo)
-
-int CRectImageSmoothProcessorComp::GetUnitType() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return UT_RELATIVE;
-
-	default:
-		return UT_TECHNICAL;
-	}
-}
-
-
-istd::CString CRectImageSmoothProcessorComp::GetUnitName() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return "%";
-
-	default:
-		return "px";
-	}
-}
-
-
-double CRectImageSmoothProcessorComp::GetDisplayMultiplicationFactor() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return 100;
-
-	default:
-		return 1;
-	}
-}
-
-
-istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return istd::CRange(0, 1);
-
-	default:
-		return istd::CRange(1, 100);
-	}
-}
-
-
-const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetValueManip() const
-{
-	static imath::CFixedPointManip manip(0);
-
-	return manip;
-}
-
-
 // reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
@@ -311,5 +249,68 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 }
 
 
+// reimplemented (imeas::IUnitInfo)
+
+int CRectImageSmoothProcessorComp::GetUnitType() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
+		return UT_RELATIVE;
+
+	default:
+		return UT_TECHNICAL;
+	}
+}
+
+
+istd::CString CRectImageSmoothProcessorComp::GetUnitName() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
+		return "%";
+
+	default:
+		return "px";
+	}
+}
+
+
+double CRectImageSmoothProcessorComp::GetDisplayMultiplicationFactor() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
+		return 100;
+
+	default:
+		return 1;
+	}
+}
+
+
+istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
+{
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
+		return istd::CRange(0, 1);
+
+	default:
+		return istd::CRange(1, 100);
+	}
+}
+
+
+const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetValueManip() const
+{
+	static imath::CFixedPointManip manip(0);
+
+	return manip;
+}
+
+
 } // namespace iipr
+
 
