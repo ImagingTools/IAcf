@@ -6,6 +6,7 @@
 	ProjectGUID="{8E07BD6B-E26D-4643-ADB5-9E16C17B8EB5}"
 	RootNamespace="iqtipr"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -198,15 +199,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProjectionShape.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CMultidimensionalFilterParamsGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CMultidimensionalFilterParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CProjectionShape.cpp"
 				>
 			</File>
 			<File
@@ -256,11 +257,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProjectionShape.h"
+				RelativePath="..\CMultidimensionalFilterParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.h"
+				RelativePath="..\CProjectionShape.h"
 				>
 			</File>
 			<File
@@ -309,7 +310,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRectangularFilterParamsGuiComp.cpp"
+				RelativePath="..\generated\moc_CMultidimensionalFilterParamsGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -337,7 +338,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CRectangularFilterParamsGuiComp.h"
+				RelativePath="..\generated\ui_CMultidimensionalFilterParamsGuiComp.h"
 				>
 			</File>
 			<File

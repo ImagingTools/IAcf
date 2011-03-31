@@ -87,10 +87,10 @@ void CMultidimensionalFilterParamsGuiComp::UpdateLabel()
 
 void CMultidimensionalFilterParamsGuiComp::OnGuiModelAttached()
 {
-	BaseClass::OnGuiModelAttached();
-
 	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		UpdateBlocker blockUpdate(this);
+
 		const iipr::IMultidimensionalFilterConstraints* constraintsPtr = objectPtr->GetConstraints();
 
 		int filterDimensionsCount = 0;
@@ -170,6 +170,8 @@ void CMultidimensionalFilterParamsGuiComp::OnGuiModelAttached()
 			HeightUnitNameLabel->setVisible(false);
 		}
 	}
+
+	BaseClass::OnGuiModelAttached();
 }
 
 
