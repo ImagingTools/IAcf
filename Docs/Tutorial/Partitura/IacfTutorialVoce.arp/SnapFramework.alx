@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1502
+          1708
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          209
+          315
         </Number>
         <Description>
           ACF-Solutions
@@ -32,7 +32,7 @@
         Bitmap
       </ComponentName>
       <X>
-        550
+        575
       </X>
       <X>
         750
@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        1100
+        1050
       </X>
       <X>
-        475
+        750
       </X>
     </Element>
     <Element>
@@ -62,24 +62,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        275
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         Log
       </ComponentName>
       <X>
-        825
+        1050
       </X>
       <X>
-        300
+        100
       </X>
     </Element>
     <Element>
@@ -124,6 +113,17 @@
       </X>
       <X>
         100
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        750
+      </X>
+      <X>
+        275
       </X>
     </Element>
   </PositionMap>

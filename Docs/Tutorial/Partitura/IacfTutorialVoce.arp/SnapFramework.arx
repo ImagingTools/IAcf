@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1502
+          1708
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          209
+          315
         </Number>
         <Description>
           ACF-Solutions
@@ -151,65 +151,6 @@
     </Element>
     <Element>
       <Id>
-        Info
-      </Id>
-      <PackageId>
-        IacfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTest
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         Log
       </Id>
       <PackageId>
@@ -225,7 +166,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -468,7 +428,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -484,7 +444,7 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -528,10 +488,90 @@
               </Values>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        IacfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapTest
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
@@ -546,7 +586,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        Info
+        VersionInfo
       </ComponentId>
     </Interface>
     <Interface>
@@ -562,7 +602,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        Info
+        VersionInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

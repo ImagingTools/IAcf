@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1690
+          1708
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          308
+          315
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         AboutGui
       </ComponentName>
       <X>
-        636.314
+        575
       </X>
       <X>
-        275.549
+        275
       </X>
     </Element>
     <Element>
@@ -47,17 +47,6 @@
       </X>
       <X>
         125
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        350
-      </X>
-      <X>
-        275
       </X>
     </Element>
     <Element>
@@ -113,6 +102,17 @@
       </X>
       <X>
         400
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        250
       </X>
     </Element>
     <Element>

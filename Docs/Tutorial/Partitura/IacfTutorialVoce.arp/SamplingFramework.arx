@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1577
+          1708
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          259
+          315
         </Number>
         <Description>
           ACF-Solutions
@@ -60,7 +60,7 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                StandaloneApp
               </Value>
             </Data>
           </AttributeInfo>
@@ -182,46 +182,6 @@
           0
         </Flags>
         <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Info
-      </Id>
-      <PackageId>
-        IacfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ApplicationName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF Sampling Demo
-              </Value>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -543,7 +503,7 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                StandaloneApp
               </Value>
             </Data>
           </AttributeInfo>
@@ -605,7 +565,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="15">
           <AttributeInfo>
             <Id>
               AboutGui
@@ -640,8 +600,110 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                VersionInfo
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF Sampling Demo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationSubname
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationSubname
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationType
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              CompanyName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FrameSpaceSize
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              FrameSpaceSize
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              IconPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -661,6 +723,25 @@
               <Value>
                 true
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LegalCopyright
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              LegalCopyright
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+								&#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
+							</Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -705,6 +786,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProductName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProductName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                IACF
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SplashScreen
             </Id>
             <Type>
@@ -722,6 +822,46 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        IacfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -800,7 +940,7 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -808,6 +948,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
@@ -822,7 +964,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        Info
+        VersionInfo
       </ComponentId>
     </Interface>
     <Interface>
@@ -830,7 +972,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        Info
+        VersionInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
