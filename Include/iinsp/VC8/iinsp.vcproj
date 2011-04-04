@@ -5,7 +5,6 @@
 	Name="iinsp"
 	ProjectGUID="{34125E03-433E-4FFE-8D7A-9833C6B3AAA9}"
 	RootNamespace="iinsp"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -24,7 +23,6 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
@@ -74,11 +72,8 @@
 				Optimization="2"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
@@ -118,8 +113,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
@@ -170,15 +163,10 @@
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
-				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				BrowseInformation="1"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
-				CompileAs="0"
+				DebugInformationFormat="4"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -253,10 +241,6 @@
 		<Filter
 			Name="Other"
 			>
-			<File
-				RelativePath="..\IacfVersion.h.xtrsvn"
-				>
-			</File>
 			<File
 				RelativePath="..\VersionInfo.arx.xtrsvn"
 				>

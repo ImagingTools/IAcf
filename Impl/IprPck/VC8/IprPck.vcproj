@@ -18,7 +18,6 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="../../../Bin/$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			>
@@ -40,12 +39,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
 				WarningLevel="4"
 				DebugInformationFormat="0"
 				CompileAs="0"
@@ -63,7 +60,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfWin.lib imeas.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
@@ -95,8 +91,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Bin/$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			>
@@ -121,12 +115,8 @@
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				BrowseInformation="1"
-				WarningLevel="4"
-				DebugInformationFormat="3"
-				CompileAs="0"
+				DebugInformationFormat="4"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -141,7 +131,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfWin.lib imeas.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -218,4 +207,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
