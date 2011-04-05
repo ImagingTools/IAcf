@@ -5,6 +5,7 @@
 	Name="ilolv"
 	ProjectGUID="{A486CD55-2AA0-41FA-AAC9-34A8E112EE71}"
 	RootNamespace="ilolv"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -16,8 +17,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -94,8 +93,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -279,4 +276,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

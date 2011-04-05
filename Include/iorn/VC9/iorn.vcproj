@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="iorn"
 	ProjectGUID="{4896E719-0D0D-4822-AA84-8FE3DBE1D820}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -15,8 +16,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -93,8 +92,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -226,4 +223,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

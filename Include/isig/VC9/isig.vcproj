@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="isig"
 	ProjectGUID="{2C870C12-30D0-4E1E-9C52-4D4B14432B0A}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -15,8 +16,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -93,8 +92,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -206,4 +203,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
