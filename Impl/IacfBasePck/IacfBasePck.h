@@ -15,7 +15,7 @@
 #include "isig/CSamplingParamsComp.h"
 
 #include "iinsp/CInspectionTaskComp.h"
-#include "iinsp/CComposedInspectionTaskComp.h"
+#include "iinsp/CInspectionComp.h"
 
 
 /**
@@ -32,7 +32,7 @@ typedef icam::CMemoryAcquisitionComp MemoryAcquisition;
 typedef icam::CAcquisitionConstraintsComp AcquisitionConstraints;
 typedef icomp::TModelCompWrap<isig::CSamplingParamsComp> SamplingParams;
 typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
-typedef icomp::TModelCompWrap<iinsp::CComposedInspectionTaskComp> ComposedInspectionTask;
+typedef icomp::TModelCompWrap<iinsp::CInspectionComp> Inspection;
 
 
 } // namespace IacfBasePck

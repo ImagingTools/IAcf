@@ -217,7 +217,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CComposedInspectionTaskComp.cpp"
+				RelativePath="..\CInspectionComp.cpp"
 				>
 			</File>
 			<File
@@ -230,15 +230,15 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CComposedInspectionTaskComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CInspectionTaskComp.h"
+				RelativePath="..\CInspectionComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\iinsp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IInspection.h"
 				>
 			</File>
 			<File

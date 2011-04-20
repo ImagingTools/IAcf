@@ -110,7 +110,7 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 	}
 
 	if (m_generalParamsObserverCompPtr.IsValid()){
-		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetGeneralParams());
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetTaskParams());
 		if (generalParamsModelPtr != NULL){
 			generalParamsModelPtr->AttachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}
@@ -154,7 +154,7 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 	}
 
 	if (m_generalParamsObserverCompPtr.IsValid()){
-		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetGeneralParams());
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetTaskParams());
 		if ((generalParamsModelPtr != NULL) && generalParamsModelPtr->IsAttached(m_generalParamsObserverCompPtr.GetPtr())){
 			generalParamsModelPtr->DetachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}

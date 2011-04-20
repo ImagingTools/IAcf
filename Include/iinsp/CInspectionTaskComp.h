@@ -43,7 +43,7 @@ public:
 	// reimplemented (iinsp::IInspectionTask)
 	virtual int GetSubtasksCount() const;
 	virtual iproc::ISupplier* GetSubtask(int subtaskIndex) const;
-	virtual iprm::IParamsSet* GetGeneralParams() const;
+	virtual iprm::IParamsSet* GetTaskParams() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

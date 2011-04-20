@@ -1,5 +1,5 @@
-#ifndef iinsp_CComposedInspectionTaskComp_included
-#define iinsp_CComposedInspectionTaskComp_included
+#ifndef iinsp_CInspectionComp_included
+#define iinsp_CInspectionComp_included
 
 
 // ACF includes
@@ -7,7 +7,9 @@
 #include "imod/CMultiModelBridgeBase.h"
 #include "ibase/TLoggerCompWrap.h"
 
+// IACF includes
 #include "iinsp/IInspectionTask.h"
+#include "iinsp/IInspection.h"
 
 
 namespace iinsp
@@ -17,8 +19,9 @@ namespace iinsp
 /**
 	Standard component implementation of interface iinsp::IInspectionTask.
 */
-class CComposedInspectionTaskComp:
+class CInspectionComp:
 			public ibase::CLoggerComponentBase,
+			virtual public IInspection,
 			virtual public IInspectionTask,
 			protected imod::CMultiModelBridgeBase
 {
@@ -31,7 +34,7 @@ public:
 		MI_NO_TASK
 	};
 
-	I_BEGIN_COMPONENT(CComposedInspectionTaskComp);
+	I_BEGIN_COMPONENT(CInspectionComp);
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_inspectionsCompPtr, "InspectionTasks", "List of subinspections", true);
@@ -40,9 +43,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iinsp::IInspectionTask)
+	virtual int GetTasksCount() const;
+	virtual IInspectionTask* GetTask(int subtaskIndex) const;
+	virtual iprm::IParamsSet* GetInspectionParams() const;
+
+	// reimplemented (iinsp::IInspectionTask)
 	virtual int GetSubtasksCount() const;
 	virtual iproc::ISupplier* GetSubtask(int subtaskIndex) const;
-	virtual iprm::IParamsSet* GetGeneralParams() const;
+	virtual iprm::IParamsSet* GetTaskParams() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -62,6 +70,6 @@ private:
 } // namespace iinsp
 
 
-#endif // !iinsp_CComposedInspectionTaskComp_included
+#endif // !iinsp_CInspectionComp_included
 
 

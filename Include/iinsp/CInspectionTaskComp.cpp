@@ -24,7 +24,7 @@ iproc::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
 }
 
 
-iprm::IParamsSet* CInspectionTaskComp::GetGeneralParams() const
+iprm::IParamsSet* CInspectionTaskComp::GetTaskParams() const
 {
 	return m_generalParamsCompPtr.GetPtr();
 }

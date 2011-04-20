@@ -31,7 +31,7 @@ public:
 		Get access to global inspection parameters.
 		\return	parameter set describing global parameters or \c NULL if no global parameters are supported.
 	*/
-	virtual iprm::IParamsSet* GetGeneralParams() const = 0;
+	virtual iprm::IParamsSet* GetTaskParams() const = 0;
 };
 
 

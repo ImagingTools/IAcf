@@ -1,4 +1,4 @@
-#include "iinsp/CComposedInspectionTaskComp.h"
+#include "iinsp/CInspectionComp.h"
 
 
 // ACF includes
@@ -12,7 +12,30 @@ namespace iinsp
 
 // reimplemented (iinsp::IInspectionTask)
 
-int CComposedInspectionTaskComp::GetSubtasksCount() const
+int CInspectionComp::GetTasksCount() const
+{
+	return m_inspectionsCompPtr.GetCount();
+}
+
+
+IInspectionTask* CInspectionComp::GetTask(int subtaskIndex) const
+{
+	I_ASSERT(subtaskIndex >= 0);
+	I_ASSERT(subtaskIndex < m_inspectionsCompPtr.GetCount());
+
+	return m_inspectionsCompPtr[subtaskIndex];
+}
+
+
+iprm::IParamsSet* CInspectionComp::GetInspectionParams() const
+{
+	return m_generalParamsCompPtr.GetPtr();
+}
+
+
+// reimplemented (iinsp::IInspectionTask)
+
+int CInspectionComp::GetSubtasksCount() const
 {
 	int retVal = 0;
 
@@ -28,7 +51,7 @@ int CComposedInspectionTaskComp::GetSubtasksCount() const
 }
 
 
-iproc::ISupplier* CComposedInspectionTaskComp::GetSubtask(int subtaskIndex) const
+iproc::ISupplier* CInspectionComp::GetSubtask(int subtaskIndex) const
 {
 	int inspectionsCount = m_inspectionsCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
@@ -48,7 +71,7 @@ iproc::ISupplier* CComposedInspectionTaskComp::GetSubtask(int subtaskIndex) cons
 }
 
 
-iprm::IParamsSet* CComposedInspectionTaskComp::GetGeneralParams() const
+iprm::IParamsSet* CInspectionComp::GetTaskParams() const
 {
 	return m_generalParamsCompPtr.GetPtr();
 }
@@ -56,7 +79,7 @@ iprm::IParamsSet* CComposedInspectionTaskComp::GetGeneralParams() const
 
 // reimplemented (iser::ISerializable)
 
-bool CComposedInspectionTaskComp::Serialize(iser::IArchive& archive)
+bool CInspectionComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -104,7 +127,7 @@ bool CComposedInspectionTaskComp::Serialize(iser::IArchive& archive)
 
 // reimplemented (icomp::CComponentBase)
 
-void CComposedInspectionTaskComp::OnComponentCreated()
+void CInspectionComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -119,7 +142,7 @@ void CComposedInspectionTaskComp::OnComponentCreated()
 }
 
 
-void CComposedInspectionTaskComp::OnComponentDestroyed()
+void CInspectionComp::OnComponentDestroyed()
 {
 	int modelsCount = m_inspectionModelsCompPtr.GetCount();
 
