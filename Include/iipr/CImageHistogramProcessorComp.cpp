@@ -57,6 +57,8 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	ibase::CSize inputSize(input.GetImageSize());
 
+	inputSize -= ibase::CSize(1, 1);
+
 	i2d::CRectangle realArea = i2d::CRectangle(inputSize);
 	if (aoiPtr != NULL){
 		realArea  = aoiPtr->GetIntersection(i2d::CRectangle(inputSize));
