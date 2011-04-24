@@ -81,10 +81,12 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	int componentsCount = input.GetComponentsCount();
 	int histogramSize = 256 * componentsCount;
 
+	int pixelCount = (rightArea - leftArea + 1) * (bottomArea - topArea + 1);
+
 	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
 	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
 
-	std::memset(histogramDataBufferPtr, 0, histogramSize);
+	std::memset(histogramDataBufferPtr, 0, histogramSize * sizeof(I_DWORD));
 
 	for (int y = topArea; y <= bottomArea; y++){
 		I_BYTE* lineDataBeg = (I_BYTE*)input.GetLinePtr(y) + leftArea * componentsCount;
@@ -97,6 +99,14 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 				++histogramDataBufferPtr[pixelComponentValue + (componentIndex * 256)];
 			}
 		}
+	}
+
+	double normFactor = pow(2.0, histogram.GetSampleDepth());
+
+	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
+		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);
+
+		histogramDataBufferPtr[histIndex] = I_DWORD(normHist * normFactor);
 	}
 
 	istd::CChangeNotifier changePtr(&histogram);
