@@ -96,7 +96,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 				I_BYTE pixelComponentValue = *lineDataBeg++;
 
-				++histogramDataBufferPtr[pixelComponentValue + (componentIndex * 256)];
+				++histogramDataBufferPtr[componentIndex + pixelComponentValue * componentsCount];
 			}
 		}
 	}
@@ -106,7 +106,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
 		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);
 
-		histogramDataBufferPtr[histIndex] = I_DWORD(normHist * normFactor);
+		histogramDataBufferPtr[histIndex] = I_DWORD(normHist * normFactor + 0.5);
 	}
 
 	istd::CChangeNotifier changePtr(&histogram);
