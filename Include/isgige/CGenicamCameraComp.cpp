@@ -118,7 +118,7 @@ int CGenicamCameraComp::DoProcessing(
 				return TS_INVALID;
 			}
 			
-			if (!resultBitmapPtr->CreateBitmap(imageSize, 8)){
+			if (!resultBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 				SendErrorMessage(MI_CANNOT_CAPTURE, iqt::GetCString(tr("Camera %1: Cannot create 8 bit image with size %2 x %3").arg(iqt::GetQString(deviceInfoPtr->cameraId)).arg(cx).arg(cy)));
 			}
 

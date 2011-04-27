@@ -42,6 +42,9 @@ class TUnaryTransformProcessorComp: public iipr::CImageProcessorCompBase
 public:
 	typedef iipr::CImageProcessorCompBase BaseClass;
 
+	I_BEGIN_COMPONENT(TUnaryTransformProcessorComp);
+	I_END_COMPONENT;
+
 protected:		
 	// reimplemented (iipr::CImageProcessorCompBase)
 	virtual bool ProcessImage(
@@ -62,7 +65,7 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	if (!outputImage.CreateBitmap(inputImage.GetImageSize(), inputImage.GetPixelBitsCount(), inputImage.GetComponentBitsCount())){
+	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImage.GetImageSize())){
 		return false;	// cannot create output image
 	}
 

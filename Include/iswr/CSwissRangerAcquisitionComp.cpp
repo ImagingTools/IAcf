@@ -330,6 +330,7 @@ bool CSwissRangerAcquisitionComp::CreateFromCamera(iimg::IBitmap& image, const I
 	}
 
 	return image.CreateBitmap(
+				iimg::IBitmap::PF_GRAY,
 				istd::CIndex2d(imageEntry.width, imageEntry.height), 
 				imageDataPtr.PopPtr(),
 				true);

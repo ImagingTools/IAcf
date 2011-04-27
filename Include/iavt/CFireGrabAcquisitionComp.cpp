@@ -71,7 +71,7 @@ int CFireGrabAcquisitionComp::DoProcessing(
 			istd::CIndex2d size = GetBitmapSize(paramsPtr);
 			if (!size.IsSizeEmpty() && (int(frameInfo.Length) >= size.GetProductVolume())){
 				istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
-				if (bitmapPtr.IsValid() && bitmapPtr->CreateBitmap(size)){
+				if (bitmapPtr.IsValid() && bitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, size)){
 					I_ASSERT(bitmapPtr->GetLineBytesCount() >= size.GetX());
 
 					for (int y = 0; y < size.GetY(); ++y){

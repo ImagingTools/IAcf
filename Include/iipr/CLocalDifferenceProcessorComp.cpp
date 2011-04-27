@@ -20,7 +20,7 @@ bool CLocalDifferenceProcessorComp::ProcessImage(
 	}
 
 	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	if (!outputImage.CreateBitmap(inputImageSize)){
+	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImageSize)){
 		return false;	// cannot create output image
 	}
 

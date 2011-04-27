@@ -16,20 +16,17 @@ COcvImage::COcvImage(const IplImage& image)
 // public static methods
 
 bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitmap)
-{
-	int bitsPerPixel = image.depth * image.nChannels;
-	
+{	
 	switch (image.nChannels){
 		case 1:
 			return !outputBitmap.CreateBitmap(
+						iimg::IBitmap::PF_GRAY,
 						istd::CIndex2d(image.width, image.height),
 						image.imageData,
 						true,
-						image.widthStep,
-						bitsPerPixel, 
-						1);
+						image.widthStep);
 		case 3:
-			if (outputBitmap.CreateBitmap(istd::CIndex2d(image.width, image.height), 32, 4)){
+			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(image.width, image.height))){
 				I_BYTE* outputBitmapLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(0);
 				std::memset(outputBitmapLinePtr, 255, outputBitmap.GetLineBytesCount() * outputBitmap.GetImageSize().GetY());
 

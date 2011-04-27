@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "imath/CFixedPointManip.h"
+
 #include "iimg/CGeneralBitmap.h"
 
 
@@ -102,7 +103,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		outputImageSize[1] -= kernelMaxHeight - 1;
 	}
 
-	if (!outputImage.CreateBitmap(outputImageSize, componentsCount * 8, componentsCount)){
+	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), outputImageSize)){
 		return false;	// cannot create output image
 	}
 
@@ -112,7 +113,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 	iimg::CGeneralBitmap tempBitmap;
 	if ((kernelMaxWidth > 1) && (kernelMaxHeight > 1)){
-		tempBitmap.CreateBitmap(istd::CIndex2d(outputImageWidth, imageHeight), componentsCount * 8, componentsCount);
+		tempBitmap.CreateBitmap(inputImage.GetPixelFormat(), istd::CIndex2d(outputImageWidth, imageHeight));
 
 		firstPassOutputImagePtr = &tempBitmap;
 		secondPassInputImagePtr = &tempBitmap;
@@ -124,58 +125,67 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	if (kernelMaxWidth > 1){
 		I_ASSERT(firstPassOutputImagePtr != NULL);
 
-		for (int y = 0; y < imageHeight; ++y){
-			I_BYTE* outputPtr = (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y);
 
-			const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(y);
+		for(int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+			for (int y = 0; y < imageHeight; ++y){
+				I_BYTE* outputPtr = (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
 
-			int meanValue = 0;
+				const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(y);
 
-			int kernelWidth = 0;
-			while (kernelWidth < kernelMaxWidth){
-				meanValue += inputLinePtr[kernelWidth++];
+				int meanValue = 0;
 
-				if (kernelWidth >= kernelMaxWidth){
-					break;
-				}
+				int kernelWidth = 0;
+				while (kernelWidth < kernelMaxWidth){
+					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
 
-				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-					*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-				}
-
-				meanValue += inputLinePtr[kernelWidth++];
-			}
-
-			int headX = kernelWidth;
-			int tailX = 0;
-			while (headX < imageWidth){
-				*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-
-				meanValue += inputLinePtr[headX++];
-
-				I_ASSERT(tailX < imageWidth);
-				meanValue -= inputLinePtr[tailX++];
-			}
-
-			if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-				while (kernelWidth > 0){
-					*outputPtr++ = I_BYTE((meanValue + 0.5) / kernelWidth);
-
-					I_ASSERT(tailX < imageWidth);
-					meanValue -= inputLinePtr[tailX++];
-					kernelWidth--;
-
-					if  (kernelWidth <= 0){
+					if (kernelWidth >= kernelMaxWidth){
 						break;
 					}
 
-					I_ASSERT(tailX < imageWidth);
-					meanValue -= inputLinePtr[tailX++];
-					kernelWidth--;
-				}
-			}
+					if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+						*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
 
-			I_ASSERT(outputPtr <= (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + outputImageWidth);
+						outputPtr += componentsCount;
+					}
+
+					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
+				}
+
+				int headX = kernelWidth;
+				int tailX = 0;
+				while (headX < imageWidth){
+					*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+					outputPtr += componentsCount;
+
+					meanValue += inputLinePtr[componentIndex + componentsCount * headX++];
+
+					I_ASSERT(tailX < imageWidth);
+					meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+				}
+
+				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
+					while (kernelWidth > 0){
+						*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
+
+						outputPtr += componentsCount;
+
+						I_ASSERT(tailX < imageWidth);
+						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+						kernelWidth--;
+
+						if  (kernelWidth <= 0){
+							break;
+						}
+
+						I_ASSERT(tailX < imageWidth);
+						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+						kernelWidth--;
+					}
+				}
+
+				I_ASSERT(outputPtr <= (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
+			}
 		}
 	}
 
@@ -185,7 +195,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		int inputLinesDifference = secondPassInputImagePtr->GetLinesDifference();
 		int outputLinesDifference = outputImage.GetLinesDifference();
 
-		for (int x = 0; x < outputImageWidth; ++x){	
+		for (int x = 0; x < outputImageWidth * componentsCount; ++x){	
 			double meanValue = 0;
 			const I_BYTE* inputHeadPixelPtr = ((const I_BYTE*)secondPassInputImagePtr->GetLinePtr(0)) + x;
 			const I_BYTE* inputTailPixelPtr = inputHeadPixelPtr;
