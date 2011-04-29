@@ -75,11 +75,25 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	int componentsBitCount = input.GetComponentBitsCount();
 	if (componentsBitCount != 8){
+		SendWarningMessage(0, "Empty region for histogram calculation");
+
 		return false;
 	}
 
 	int componentsCount = input.GetComponentsCount();
-	int histogramSize = 256 * componentsCount;
+	int usedColorComponents = componentsCount;
+
+	iimg::IBitmap::PixelFormat pixelFormat = input.GetPixelFormat();
+	switch (pixelFormat){
+		case iimg::IBitmap::PF_RGB:
+			usedColorComponents = 3;
+			break;
+		case iimg::IBitmap::PF_RGBA:
+			usedColorComponents = 4;
+			break;
+	}
+
+	int histogramSize = 256 * usedColorComponents;
 
 	int pixelCount = (rightArea - leftArea + 1) * (bottomArea - topArea + 1);
 
@@ -96,12 +110,14 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 				I_BYTE pixelComponentValue = *lineDataBeg++;
 
-				++histogramDataBufferPtr[componentIndex + pixelComponentValue * componentsCount];
+				if (componentIndex < usedColorComponents){
+					++histogramDataBufferPtr[componentIndex + pixelComponentValue * usedColorComponents];
+				}
 			}
 		}
 	}
 
-	double normFactor = pow(2.0, histogram.GetSampleDepth());
+	double normFactor = pow(2.0, histogram.GetSampleDepth()) - 1;
 
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
 		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);
@@ -111,7 +127,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	istd::CChangeNotifier changePtr(&histogram);
 
-	return histogram.CreateDiscrSequence(histogramSize, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, componentsCount);
+	return histogram.CreateDiscrSequence(histogramSize, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, usedColorComponents);
 }
 
 
