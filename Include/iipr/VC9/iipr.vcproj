@@ -215,10 +215,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
@@ -236,10 +232,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLocalDifferenceProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -328,10 +320,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CImageHistogramProcessorComp.h"
 				>
 			</File>
@@ -349,10 +337,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLocalDifferenceProcessorComp.h"
 				>
 			</File>
 			<File
@@ -488,27 +472,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TGaussianKernel2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TGaussianProcessorComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TImageParamProcessorCompBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TKernel2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TLocalNeighborhood.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMorphoProcessorComp.h"
 				>
 			</File>
 			<File

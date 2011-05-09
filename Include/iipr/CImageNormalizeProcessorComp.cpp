@@ -60,7 +60,9 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 		brightness = adjustParamsPtr->GetOffsetFactor() * 255;
 	}
 
-	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), istd::CIndex2d(outputImageRight - outputImageLeft + 1, outputImageBottom - outputImageTop + 1))){
+	if (!outputImage.CreateBitmap(
+				inputImage.GetPixelFormat(),
+				istd::CIndex2d(outputImageRight - outputImageLeft + 1, outputImageBottom - outputImageTop + 1))){
 		SendWarningMessage(0, "Could not create output image");
 
 		return false;

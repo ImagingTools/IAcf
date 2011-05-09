@@ -2,10 +2,9 @@
 #define iipr_TConvolutionProcessorComp_included
 
 
-#include "iimg/TBitmapIterator.h"
-
 #include "iipr/TImageParamProcessorCompBase.h"
-#include "iipr/TLocalNeighborhood.h"
+
+#include "iipr/CConvolutionKernel2d.h"
 
 
 namespace iipr
@@ -15,16 +14,15 @@ namespace iipr
 /**
 	Implementation of general convolution operator.
 */
-template <typename PixelType, class ParameterType, class Kernel> 
+template <typename PixelType, class ParameterType> 
 class TConvolutionProcessorComp: public iipr::TImageParamProcessorCompBase<ParameterType>
 {
 public:
 	typedef iipr::TImageParamProcessorCompBase<ParameterType> BaseClass;
-	typedef iipr::TLocalNeighborhood<iimg::TBitmapIterator<PixelType>, Kernel> Neighborhood;
 
 protected:		
 	// abstract methods
-	virtual Kernel* CreateKernel(const ParameterType* paramsPtr) = 0;
+	virtual CConvolutionKernel2d* CreateKernel(const ParameterType* paramsPtr) = 0;
 
 	// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
 	virtual bool ParamProcessImage(
@@ -36,7 +34,7 @@ protected:
 
 // reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
 
-template <typename PixelType, class ParameterType, class Kernel> 
+template <typename PixelType, class ParameterType> 
 bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ParamProcessImage(
 			const ParameterType* paramsPtr,
 			const iimg::IBitmap& inputImage,
@@ -48,7 +46,7 @@ bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ParamProcessIm
 
 	bool retVal = true;
 
-	istd::TDelPtr<Kernel> filterKernelPtr(CreateKernel(paramsPtr));
+	istd::TDelPtr<CConvolutionKernel2d> filterKernelPtr(CreateKernel(paramsPtr));
 	if (!filterKernelPtr.IsValid()){
 		return false;
 	}
@@ -56,37 +54,7 @@ bool TConvolutionProcessorComp<PixelType, ParameterType, Kernel>::ParamProcessIm
 	// initialize kernel with input image:
 	filterKernelPtr->InitForBitmap(inputImage);
 
-	i2d::CRectangle kernelBoundingBox = filterKernelPtr->GetBoundingBox();
-	i2d::CRectangle bitmapRegion = i2d::CRectangle(inputImage.GetImageSize());
-	
-	bitmapRegion.Expand(i2d::CRectangle(
-				-kernelBoundingBox.GetWidth() * 0.5, 
-				-kernelBoundingBox.GetHeight() * 0.5,
-				kernelBoundingBox.GetWidth(),
-				kernelBoundingBox.GetHeight()));
-
-	iimg::TBitmapIterator<PixelType> inputIterator(&inputImage, &bitmapRegion);
-	iimg::TBitmapIterator<PixelType> outputIterator(&outputImage, &bitmapRegion);
-
-	while (!inputIterator.AtEnd()){
-		double outputValue = 0.0;
-
-		Neighborhood neighborhood(inputIterator, *filterKernelPtr); 
-		typename Neighborhood::Iterator neighIter = neighborhood.Begin();
-
-		for (		typename Kernel::Iterator kernelIter = filterKernelPtr->Begin();
-					kernelIter != filterKernelPtr->End();
-					++kernelIter){
-					
-			outputValue += (*kernelIter).second * (*neighIter);
-			++neighIter;
-		}
-
-		*outputIterator = PixelType(outputValue / filterKernelPtr->GetWeightsSum());
-
-		++inputIterator;
-		++outputIterator;
-	}
+	outputImage
 
 	return retVal;
 }

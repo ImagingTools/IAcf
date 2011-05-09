@@ -5,8 +5,6 @@
 #include <functional>
 
 
-#include "iimg/TBitmapIterator.h"
-
 #include "iipr/CImageProcessorCompBase.h"
 
 
@@ -66,22 +64,26 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 			iimg::IBitmap& outputImage)
 {
 	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImage.GetImageSize())){
+		SendErrorMessage(0, "Output bitmap could not be created");
+
 		return false;	// cannot create output image
 	}
 
-	iimg::TBitmapIterator<PixelType> inputIterator(&inputImage);
-	iimg::TBitmapIterator<PixelType> outputIterator(&outputImage);
+	int imageWidth = inputImage.GetImageSize().GetX();
+	int imageHeight = inputImage.GetImageSize().GetY();
+	int componentsCount = inputImage.GetComponentsCount();
 
-	while (inputIterator.IsValid()){
-		const iimg::TBitmapIterator<PixelType>::PixelAccessor& inputPixel = *inputIterator;
-		iimg::TBitmapIterator<PixelType>::PixelAccessor& outputPixel = *outputIterator;
+	for (int y = 0; y < imageHeight; y++){
+		PixelType* inputImageLinePtr = (PixelType*)inputImage.GetLinePtr(y);
+		PixelType* outputImageLinePtr = (PixelType*)outputImage.GetLinePtr(y);
 
-		for (int colorComponentIndex = 0; colorComponentIndex < inputPixel.GetComponentsCount(); colorComponentIndex++){
-			outputPixel[colorComponentIndex] = m_predicate(inputPixel[colorComponentIndex]);
+		for (int x = 0; x < imageWidth; x++){
+			for (int colorComponentIndex = 0; colorComponentIndex < componentsCount; colorComponentIndex++){
+				int pixelOffset = x * componentsCount + colorComponentIndex;
+
+				outputImageLinePtr[pixelOffset] = m_predicate(inputImageLinePtr[pixelOffset]);
+			}
 		}
-
-		++inputIterator;
-		++outputIterator;
 	}
 
 	return true;

@@ -7,14 +7,10 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "iipr/TMorphoProcessorComp.h"
 #include "iipr/CRectImageSmoothProcessorComp.h"
 #include "iipr/CMultidimensionalFilterParamsComp.h"
 #include "iipr/CProcessedAcquisitionComp.h"
-#include "iipr/CLocalDifferenceProcessorComp.h"
 #include "iipr/TUnaryTransformProcessorComp.h"
-#include "iipr/TGaussianProcessorComp.h"
-#include "iipr/CGaussian2dFilterParams.h"
 #include "iipr/CCaliperParamsComp.h"
 #include "iipr/CExtremumCaliperProcessorComp.h"
 #include "iipr/CLineProjectionProcessorComp.h"
@@ -40,12 +36,7 @@ namespace IprPck
 typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
 typedef iipr::CRectImageSmoothProcessorComp RectImageSmoothProcessor;
 typedef icomp::TModelCompWrap<iipr::CMultidimensionalFilterParamsComp> MultidimensionalFilterParams;
-typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
-typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
-typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
 typedef iipr::CInvertOperatorComp InvertOperator;
-typedef iipr::CGaussianFilterComp GaussianFilter;
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams>, iser::ISerializable> GaussianFilterParams;
 typedef icomp::TModelCompWrap<iipr::CCaliperParamsComp> CaliperParams;
 typedef icomp::TModelCompWrap<iipr::CCircleFinderParamsComp> CircleFinderParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;

@@ -25,39 +25,14 @@ I_EXPORT_COMPONENT(
 			"Filter Image Processing Parameter");
 
 I_EXPORT_COMPONENT(
-			LocalDifferenceProcessor,
-			"Line difference image processor",
-			"Image Processing");
-
-I_EXPORT_COMPONENT(
 			ProcessedCamera,
 			"Processed Camera",
 			"Image Bitmap Acquisition Snap Parameters Camera Processing");
 
 I_EXPORT_COMPONENT(
-			MorphoMinOperator,
-			"Morphological minimum operator with rectangular kernel",
-			"Morphological Operator Image Processing");
-
-I_EXPORT_COMPONENT(
-			MorphoMaxOperator,
-			"Morphological maximum operator with rectangular kernel",
-			"Morphological Operator Image Processing");
-
-I_EXPORT_COMPONENT(
 			InvertOperator,
 			"Invertation operator",
 			"Operator Image Processing");
-
-I_EXPORT_COMPONENT(
-			GaussianFilter,
-			"Gaussian filter",
-			"Filter Operator Gaussian Image Processing");
-
-I_EXPORT_COMPONENT(
-			GaussianFilterParams,
-			"Gaussian filter params",
-			"Filter Operator Gaussian Image Processing");
 
 I_EXPORT_COMPONENT(
 			CaliperParams,

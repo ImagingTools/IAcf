@@ -1,11 +1,12 @@
-#ifndef iipr_TKernel2d_included
-#define iipr_TKernel2d_included
+#ifndef iipr_CConvolutionKernel2d_included
+#define iipr_CConvolutionKernel2d_included
 
 
 // ACF includes
 #include "ibase/CSize.h"
-#include "iimg/TBitmapIterator2d.h"
 
+
+// IACF includes
 #include "iipr/iipr.h"
 
 
@@ -19,17 +20,26 @@ namespace iipr
 
 	For access and iterating through the kernel values you can use the Begin() and End() function, 
 	which returns an iterator/accessor.
-
-	\sa TLocalNeighborhood
 */
-template <typename PixelType, typename KernelType> 
-class TKernel2d
+class CConvolutionKernel2d
 {
 public:
-	typedef iimg::TBitmapIterator2d<PixelType> BitmapIterator;
-	typedef std::pair<int /*pixel offset*/, KernelType /*kernel weight*/> KernelValue;
+	struct KernelValue
+	{
+		int pixelOffset;
+		double kernelWeight;
+	};
+
 	typedef std::vector<KernelValue> KernelValues;
 	typedef typename KernelValues::const_iterator Iterator;
+
+	CConvolutionKernel2d();
+	CConvolutionKernel2d(const imath::ISampledFunction2d& function);
+
+	/**
+		Return \c true if the kernel was succesfully initialized for a bitmap.
+	*/
+	bool IsValid() const;
 
 	/**
 		Create kernel offsets with respect to image size.
@@ -50,8 +60,12 @@ protected:
 };
 
 
-template <typename PixelType, typename KernelType> 
-void TKernel2d<PixelType, KernelType>::InitForBitmap(const iimg::IBitmap& bitmap) const
+bool CConvolutionKernel2d::IsValid() const
+{
+	return !m_values.empty();
+}
+
+void CConvolutionKernel2d::InitForBitmap(const iimg::IBitmap& bitmap) const
 {
 	I_ASSERT(!m_kernelSize.IsNull());
 	if (m_kernelSize.IsNull()){
@@ -79,29 +93,25 @@ void TKernel2d<PixelType, KernelType>::InitForBitmap(const iimg::IBitmap& bitmap
 }
 
 
-template <typename PixelType, typename KernelType> 
-inline typename TKernel2d<PixelType, KernelType>::Iterator TKernel2d<PixelType, KernelType>::Begin() const
+inline typename CConvolutionKernel2d::Iterator CConvolutionKernel2d::Begin() const
 {
 	return m_values.begin();
 }
 
 
-template <typename PixelType, typename KernelType> 
-inline typename TKernel2d<PixelType, KernelType>::Iterator TKernel2d<PixelType, KernelType>::End() const
+inline typename CConvolutionKernel2d::Iterator CConvolutionKernel2d::End() const
 {
 	return m_values.end();
 }
 
 
-template <typename PixelType, typename KernelType> 
-inline double TKernel2d<PixelType, KernelType>::GetWeightsSum() const
+inline double CConvolutionKernel2d::GetWeightsSum() const
 {
 	return m_sumWeights;
 }
 
 
-template <typename PixelType, typename KernelType> 
-inline i2d::CRectangle TKernel2d<PixelType, KernelType>::GetBoundingBox() const
+inline i2d::CRectangle CConvolutionKernel2d::GetBoundingBox() const
 {
 	return i2d::CRectangle(m_kernelSize);
 }
@@ -110,5 +120,5 @@ inline i2d::CRectangle TKernel2d<PixelType, KernelType>::GetBoundingBox() const
 } // namespace iipr
 
 
-#endif // !iipr_TKernel2d_included
+#endif // !iipr_CConvolutionKernel2d_included
 

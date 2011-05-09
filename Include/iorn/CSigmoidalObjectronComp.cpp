@@ -56,15 +56,9 @@ bool CSigmoidalObjectronComp::ProcessHypotheses(
 		return false;
 	}
 
-	int outputChannelsCount = outputInfoPtr->GetActiveChannelsCount();
-	int outputElementsCount = outputChannelsCount * inputSamplesCount;
 	if (inputElementsCount != sizes[1]){
 		return false;
 	}
-
-	int hypothesisCount = inputSet.GetHypothesesCount();
-
-	// TODO: implement it
 
 	return false;
 }
