@@ -33,7 +33,7 @@ public:
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
-		I_ASSIGN(m_paramsSetExtenderCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
+		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetObserverCompPtr, false);
 	I_END_COMPONENT;
 
 	TSupplierGuiCompBase();

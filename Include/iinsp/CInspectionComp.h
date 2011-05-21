@@ -38,7 +38,7 @@ public:
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_inspectionsCompPtr, "InspectionTasks", "List of subinspections", true);
-		I_ASSIGN_MULTI_0(m_inspectionModelsCompPtr, "InspectionTasks", "List of subinspections", false);
+		I_ASSIGN_TO(m_inspectionModelsCompPtr, m_inspectionsCompPtr, false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
 	I_END_COMPONENT;
 

@@ -35,16 +35,16 @@ public:
 
 	I_BEGIN_COMPONENT(CInspectionTaskGuiComp);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
-		I_ASSIGN_MULTI_0(m_guisCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
-		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
-		I_ASSIGN_MULTI_0(m_extendersCompPtr, "Editors", "List of GUI's for subtask parameters edition", false);
+		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_extendersCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_previewGuisCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", true);
-		I_ASSIGN_MULTI_0(m_previewObserversCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", false);
-		I_ASSIGN_MULTI_0(m_previewSceneProvidersCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", false);
+		I_ASSIGN_TO(m_previewObserversCompPtr, m_previewGuisCompPtr, false);
+		I_ASSIGN_TO(m_previewSceneProvidersCompPtr, m_previewObserversCompPtr, false);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
 		I_ASSIGN(m_generalParamsGuiCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
-		I_ASSIGN(m_generalParamsObserverCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
-		I_ASSIGN(m_generalParamsEditorCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
+		I_ASSIGN_TO(m_generalParamsObserverCompPtr, m_generalParamsGuiCompPtr, false);
+		I_ASSIGN_TO(m_generalParamsEditorCompPtr, m_generalParamsGuiCompPtr, false);
 		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0)

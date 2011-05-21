@@ -24,7 +24,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSearchParamsGuiComp)
 		I_ASSIGN(m_modelViewCompPtr, "ModelView", "Model view", false, "ModelView");
-		I_ASSIGN(m_modelObserverCompPtr, "ModelView", "Model view", false, "ModelView");
+		I_ASSIGN_TO(m_modelObserverCompPtr, m_modelViewCompPtr, false);
 	I_END_COMPONENT
 
 		// reimplemented (imod::IModelEditor)

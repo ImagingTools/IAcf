@@ -30,15 +30,15 @@ public:
 
 	I_BEGIN_COMPONENT(CSearchGuiComp)
 		I_ASSIGN(m_searchResultsModelCompPtr, "SearchResults", "Search results model", true, "SearchResults");
-		I_ASSIGN(m_searchResultsCompPtr, "SearchResults", "Search results model", true, "SearchResults");
+		I_ASSIGN_TO(m_searchResultsCompPtr, m_searchResultsModelCompPtr, true);
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
-		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
+		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
-		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
+		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Gets image", true, "BitmapAcquisition");
 		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Does model search in an image", true, "Processor");
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap", true, "Bitmap");
-		I_ASSIGN(m_bitmapModelCompPtr, "Bitmap", "Bitmap", true, "Bitmap");
+		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, true);
 	I_END_COMPONENT
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)

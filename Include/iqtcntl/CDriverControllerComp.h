@@ -44,7 +44,7 @@ public:
 		I_REGISTER_INTERFACE(icntl::IAutomaticController);
 		I_REGISTER_INTERFACE(icntl::IMultiLineController);
 		I_ASSIGN(m_multiLineParamsCompPtr, "MultiLineParams", "Description of parameters for all production lines", true, "MultiLineParams");
-		I_ASSIGN(m_multiLineModelCompPtr, "MultiLineParams", "Description of parameters for all production lines", true, "MultiLineParams");
+		I_ASSIGN_TO(m_multiLineModelCompPtr, m_multiLineParamsCompPtr, true);
 		I_ASSIGN(m_commandCallerCompPtr, "CommandCaller", "Send low level commands to driver", true, "CommandCaller");
 		I_ASSIGN_MULTI_0(m_autonomeEjectorIndicesAttrPtr, "AutonomeEjectorIndices", "Indices of autonome ejectors for each line", false);
 		I_ASSIGN_MULTI_0(m_ejectionControlIndicesAttrPtr, "EjectionControlIndices", "Indices of ejection control light barrier or -1 if disabled (for each line)", false);

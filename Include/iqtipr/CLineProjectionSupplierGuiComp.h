@@ -40,7 +40,7 @@ public:
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierGuiComp);
 		I_ASSIGN(m_projectionObserverCompPtr, "ProjectionObserver", "Observer for the generated line projection", true, "ProjectionObserver");
-		I_ASSIGN(m_projectionObserverGuiCompPtr, "ProjectionObserver", "Observer for the generated line projection", true, "ProjectionObserver");
+		I_ASSIGN_TO(m_projectionObserverGuiCompPtr, m_projectionObserverCompPtr, true);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)

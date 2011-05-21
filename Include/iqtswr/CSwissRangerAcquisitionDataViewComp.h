@@ -29,16 +29,16 @@ public:
 				Ui::CSwissRangerAcquisitionDataViewComp,
 				iswr::ISwissRangerAcquisitionData> BaseClass;
 
-	I_BEGIN_COMPONENT(CSwissRangerAcquisitionDataViewComp)
-		I_ASSIGN(m_depthImageGuiCompPtr, "DepthImageView", "", true, "DepthImageView")
-		I_ASSIGN(m_depthImageObserverCompPtr, "DepthImageView", "", true, "DepthImageView")
-		I_ASSIGN(m_depthImageGui3dCompPtr, "DepthImageView3D", "", true, "DepthImageView3D")
-		I_ASSIGN(m_depthImageObserver3dCompPtr, "DepthImageView3D", "", true, "DepthImageView3D")
-		I_ASSIGN(m_amplitudeImageGuiCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
-		I_ASSIGN(m_amplitudeImageObserverCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView")
-		I_ASSIGN(m_confidenceMapGuiCompPtr, "ConfidenceMapView", "", true, "ConfidenceMapView")
-		I_ASSIGN(m_confidenceMapObserverCompPtr, "ConfidenceMapView", "", true, "ConfidenceMapView")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CSwissRangerAcquisitionDataViewComp);
+		I_ASSIGN(m_depthImageGuiCompPtr, "DepthImageView", "", true, "DepthImageView");
+		I_ASSIGN_TO(m_depthImageObserverCompPtr, m_depthImageGuiCompPtr, true);
+		I_ASSIGN(m_depthImageGui3dCompPtr, "DepthImageView3D", "", true, "DepthImageView3D");
+		I_ASSIGN_TO(m_depthImageObserver3dCompPtr, m_depthImageGui3dCompPtr, true);
+		I_ASSIGN(m_amplitudeImageGuiCompPtr, "AmplitudeImageView", "", true, "AmplitudeImageView");
+		I_ASSIGN_TO(m_amplitudeImageObserverCompPtr, m_amplitudeImageGuiCompPtr, true);
+		I_ASSIGN(m_confidenceMapGuiCompPtr, "ConfidenceMapView", "", true, "ConfidenceMapView");
+		I_ASSIGN_TO(m_confidenceMapObserverCompPtr, m_confidenceMapGuiCompPtr, true);
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
