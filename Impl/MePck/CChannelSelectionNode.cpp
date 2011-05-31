@@ -91,7 +91,7 @@ int CChannelSelectionNode::GetOptionsCount() const
 }
 
 
-const istd::CString& CChannelSelectionNode::GetOptionName(int index) const
+istd::CString CChannelSelectionNode::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < m_subselections.GetCount());

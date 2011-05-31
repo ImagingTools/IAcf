@@ -214,7 +214,7 @@ int CGenicamCameraComp::GetOptionsCount() const
 }
 
 
-const istd::CString& CGenicamCameraComp::GetOptionName(int index) const
+istd::CString CGenicamCameraComp::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < int(m_deviceInfos.size()));
