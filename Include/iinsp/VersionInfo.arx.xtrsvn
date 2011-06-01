@@ -30,7 +30,7 @@
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count="7">
+				<AttributeInfoMap count="8">
 					<AttributeInfo>
 						<Id>
 							KnownVersionNames
@@ -67,6 +67,9 @@
 								<Value>
 									0.3.1
 								</Value>
+								<Value>
+									0.3.2
+								</Value>
 							</Values>
 						</Data>
 					</AttributeInfo>
@@ -84,7 +87,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="7">
+							<Values count="8">
 								<Value>
 									122
 								</Value>
@@ -105,6 +108,9 @@
 								</Value>
 								<Value>
 									322
+								</Value>
+								<Value>
+									348
 								</Value>
 							</Values>
 						</Data>
