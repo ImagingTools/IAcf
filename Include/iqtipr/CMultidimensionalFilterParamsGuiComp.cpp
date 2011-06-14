@@ -51,29 +51,6 @@ void CMultidimensionalFilterParamsGuiComp::UpdateModel() const
 }
 
 
-void CMultidimensionalFilterParamsGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		const imath::CVarVector& filterLengths = objectPtr->GetFilterLengths();
-
-		int filterDimensionsCount = filterLengths.GetElementsCount();
-
-		if (filterDimensionsCount >= 1){
-			FilterWidthSlider->setValue(int(filterLengths[0] * m_widthScaleFactor + 0.5));
-		}
-
-		if (filterDimensionsCount >= 2){
-			FilterHeightSlider->setValue(int(filterLengths[1] * m_heightScaleFactor + 0.5));
-		}
-
-		UpdateLabel();
-	}
-}
-
-
 // protected methods
 
 void CMultidimensionalFilterParamsGuiComp::UpdateLabel()
@@ -89,7 +66,7 @@ void CMultidimensionalFilterParamsGuiComp::OnGuiModelAttached()
 {
 	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		const iipr::IMultidimensionalFilterConstraints* constraintsPtr = objectPtr->GetConstraints();
 
@@ -175,12 +152,35 @@ void CMultidimensionalFilterParamsGuiComp::OnGuiModelAttached()
 }
 
 
+void CMultidimensionalFilterParamsGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	iipr::IMultidimensionalFilterParams* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		const imath::CVarVector& filterLengths = objectPtr->GetFilterLengths();
+
+		int filterDimensionsCount = filterLengths.GetElementsCount();
+
+		if (filterDimensionsCount >= 1){
+			FilterWidthSlider->setValue(int(filterLengths[0] * m_widthScaleFactor + 0.5));
+		}
+
+		if (filterDimensionsCount >= 2){
+			FilterHeightSlider->setValue(int(filterLengths[1] * m_heightScaleFactor + 0.5));
+		}
+
+		UpdateLabel();
+	}
+}
+
+
 // protected slots
 
 void CMultidimensionalFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 
@@ -192,7 +192,7 @@ void CMultidimensionalFilterParamsGuiComp::on_FilterWidthSlider_valueChanged(int
 void CMultidimensionalFilterParamsGuiComp::on_FilterHeightSlider_valueChanged(int /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 

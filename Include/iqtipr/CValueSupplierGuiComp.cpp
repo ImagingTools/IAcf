@@ -20,75 +20,6 @@ CValueSupplierGuiComp::CValueSupplierGuiComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
-
-void CValueSupplierGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CValueSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		imath::CVarVector position;
-
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
-		}
-
-		if (workStatus >= iproc::ISupplier::WS_OK){
-			bool isResultVisible = false;
-			if (position.GetElementsCount() >= 2){
-				m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
-
-				isResultVisible = true;
-
-				if (IsGuiCreated()){
-					PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
-				}
-			}
-			else{
-				m_foundModel.SetPosition(i2d::CVector2d(0, 0));
-
-				if (IsGuiCreated()){
-					PositionLabel->setText("No position");
-				}
-			}
-
-			imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
-			if (radius.GetElementsCount() >= 1){
-				m_foundModel.SetRadius(radius[0]);
-			}
-			else{
-				m_foundModel.SetRadius(0);
-			}
-
-			int shapesCount = m_foundModel.GetObserverCount();
-			for (int i = 0; i < shapesCount; ++i){
-				QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
-				if (shapePtr != NULL){
-					shapePtr->setVisible(isResultVisible);
-				}
-			}
-
-			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
-			if (paramsModelPtr != NULL){
-				if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
-					m_paramsObserver.EnsureDetached();
-
-					paramsModelPtr->AttachObserver(&m_paramsObserver);
-				}
-			}
-		}
-	}
-}
-
-
 // protected slots
 
 void CValueSupplierGuiComp::on_TestButton_clicked()
@@ -156,6 +87,67 @@ void CValueSupplierGuiComp::OnGuiModelAttached()
 	ParamsGB->setVisible(AreParamsEditable() || IsLoadParamsSupported());
 	LoadParamsButton->setVisible(IsLoadParamsSupported());
 	SaveParamsButton->setVisible(IsSaveParamsSupported());
+}
+
+
+void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		imath::CVarVector position;
+
+		int workStatus = supplierPtr->GetWorkStatus();
+		if (workStatus == iproc::ISupplier::WS_OK){
+			position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
+		}
+
+		if (workStatus >= iproc::ISupplier::WS_OK){
+			bool isResultVisible = false;
+			if (position.GetElementsCount() >= 2){
+				m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+
+				isResultVisible = true;
+
+				if (IsGuiCreated()){
+					PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+				}
+			}
+			else{
+				m_foundModel.SetPosition(i2d::CVector2d(0, 0));
+
+				if (IsGuiCreated()){
+					PositionLabel->setText("No position");
+				}
+			}
+
+			imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
+			if (radius.GetElementsCount() >= 1){
+				m_foundModel.SetRadius(radius[0]);
+			}
+			else{
+				m_foundModel.SetRadius(0);
+			}
+
+			int shapesCount = m_foundModel.GetObserverCount();
+			for (int i = 0; i < shapesCount; ++i){
+				QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
+				if (shapePtr != NULL){
+					shapePtr->setVisible(isResultVisible);
+				}
+			}
+
+			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
+			if (paramsModelPtr != NULL){
+				if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
+					m_paramsObserver.EnsureDetached();
+
+					paramsModelPtr->AttachObserver(&m_paramsObserver);
+				}
+			}
+		}
+	}
 }
 
 

@@ -206,10 +206,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
@@ -227,10 +223,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLocalDifferenceProcessorComp.cpp"
 				>
 			</File>
 			<File

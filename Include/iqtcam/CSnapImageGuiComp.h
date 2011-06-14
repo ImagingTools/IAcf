@@ -74,7 +74,7 @@ protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
-protected slots:
+protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
 	void on_LiveImageButton_toggled(bool checked);
 	void on_SaveImageButton_clicked();

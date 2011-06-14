@@ -1,6 +1,7 @@
 #include "iqtipr/CCaliperParamsGuiComp.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 
@@ -39,7 +40,11 @@ void CCaliperParamsGuiComp::UpdateModel() const
 }
 
 
-void CCaliperParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CCaliperParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 

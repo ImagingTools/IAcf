@@ -43,11 +43,7 @@ public:
 		I_ASSIGN_TO(m_projectionObserverGuiCompPtr, m_projectionObserverCompPtr, true);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
-
-protected slots:
+protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
@@ -61,6 +57,7 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void UpdateGui(int updateFlags = 0);
 
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();

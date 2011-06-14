@@ -31,15 +31,15 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
 
 protected:
 	void UpdateLabel();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void UpdateGui(int updateFlags = 0);
 
-protected slots:
+protected Q_SLOTS:
 	void on_FilterWidthSlider_valueChanged(int value);
 	void on_FilterHeightSlider_valueChanged(int value);
 

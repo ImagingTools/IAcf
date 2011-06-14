@@ -30,9 +30,12 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
 
-protected slots:
+protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
+
+protected Q_SLOTS:
 	void on_AutomaticButton_toggled(bool checked);
 };
 

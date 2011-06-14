@@ -29,9 +29,12 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
 
-protected slots:
+protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
+
+protected Q_SLOTS:
 	void on_ThresholdSB_valueChanged(int value);
 	void on_EdgePolarityCB_currentIndexChanged(int index);
 	void on_DirectionCB_currentIndexChanged(int index);

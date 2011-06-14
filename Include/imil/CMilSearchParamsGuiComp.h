@@ -28,14 +28,16 @@ public:
 	CMilSearchParamsGuiComp();
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
-protected slots:
+protected Q_SLOTS:
 	void OnParameterChanged();
 	void OnFilterTypeChanged(int filterType);
 
 protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
+
 	// reimplemented (iqt::CGuiObjectBase)
 	virtual void OnGuiCreated();
 

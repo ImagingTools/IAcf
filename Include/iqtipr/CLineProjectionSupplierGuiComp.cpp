@@ -20,33 +20,6 @@ namespace iqtipr
 {
 
 
-// reimplemented (imod::IModelEditor)
-
-void CLineProjectionSupplierGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CLineProjectionSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		const imeas::IDataSequence* projectionPtr = supplierPtr->GetLineProjection();
-		if (projectionPtr != NULL){
-			istd::CChangeNotifier changePtr(&m_projectionData);
-
-			m_projectionData.CopyFrom(*projectionPtr);
-		}
-		else{
-			m_projectionData.ResetSequence();
-		}
-	}
-}
-
-
 // protected slots
 
 void CLineProjectionSupplierGuiComp::on_TestButton_clicked()
@@ -104,6 +77,25 @@ void CLineProjectionSupplierGuiComp::OnGuiModelAttached()
 
 	if (m_projectionObserverCompPtr.IsValid()){
 		m_projectionData.AttachObserver(m_projectionObserverCompPtr.GetPtr());
+	}
+}
+
+
+void CLineProjectionSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		const imeas::IDataSequence* projectionPtr = supplierPtr->GetLineProjection();
+		if (projectionPtr != NULL){
+			istd::CChangeNotifier changePtr(&m_projectionData);
+
+			m_projectionData.CopyFrom(*projectionPtr);
+		}
+		else{
+			m_projectionData.ResetSequence();
+		}
 	}
 }
 

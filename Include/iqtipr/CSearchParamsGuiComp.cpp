@@ -10,33 +10,6 @@ namespace iqtipr
 
 // reimplemented (imod::IModelEditor)
 
-void CSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	iipr::ISearchParams* paramsPtr = GetObjectPtr();
-	if (paramsPtr == NULL){
-		return;
-	}
-
-	m_spinMinimumAngle->setValue(int(paramsPtr->GetRotationRange().GetMinValue()));
-	m_spinMaximumAngle->setValue(int(paramsPtr->GetRotationRange().GetMaxValue()));
-	m_spinMinimumScale->setValue(int(paramsPtr->GetScaleRange().GetMinValue()));
-	m_spinMaximumScale->setValue(int(paramsPtr->GetScaleRange().GetMaxValue()));
-	m_spinMinimumScore->setValue(int(paramsPtr->GetMinScore()));
-	m_spinModelNumber->setValue(paramsPtr->GetNominalModelsCount());
-
-	m_checkEnableRotation->setChecked(paramsPtr->IsRotationEnabled());
-	m_checkEnableScale->setChecked(paramsPtr->IsScaleEnabled());
-
-	istd::TChangeNotifier<iimg::IBitmap> updatePtr(&m_modelBitmap);
-	const iimg::IBitmap* bitmapPtr = &paramsPtr->GetModelImage();
-	if (bitmapPtr != NULL){
-		updatePtr->CopyFrom(*bitmapPtr);
-	}
-}
-
-
 void CSearchParamsGuiComp::UpdateModel() const
 {
 	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
@@ -68,6 +41,35 @@ void CSearchParamsGuiComp::OnParameterChanged()
 
 
 // protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	iipr::ISearchParams* paramsPtr = GetObjectPtr();
+	if (paramsPtr == NULL){
+		return;
+	}
+
+	m_spinMinimumAngle->setValue(int(paramsPtr->GetRotationRange().GetMinValue()));
+	m_spinMaximumAngle->setValue(int(paramsPtr->GetRotationRange().GetMaxValue()));
+	m_spinMinimumScale->setValue(int(paramsPtr->GetScaleRange().GetMinValue()));
+	m_spinMaximumScale->setValue(int(paramsPtr->GetScaleRange().GetMaxValue()));
+	m_spinMinimumScore->setValue(int(paramsPtr->GetMinScore()));
+	m_spinModelNumber->setValue(paramsPtr->GetNominalModelsCount());
+
+	m_checkEnableRotation->setChecked(paramsPtr->IsRotationEnabled());
+	m_checkEnableScale->setChecked(paramsPtr->IsScaleEnabled());
+
+	istd::TChangeNotifier<iimg::IBitmap> updatePtr(&m_modelBitmap);
+	const iimg::IBitmap* bitmapPtr = &paramsPtr->GetModelImage();
+	if (bitmapPtr != NULL){
+		updatePtr->CopyFrom(*bitmapPtr);
+	}
+}
+
 
 // reimplemented (iqt::CGuiObjectBase)
 

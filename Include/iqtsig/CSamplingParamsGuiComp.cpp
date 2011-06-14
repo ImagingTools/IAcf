@@ -10,26 +10,6 @@ namespace iqtsig
 {
 
 
-// reimplemented (imod::IModelEditor)
-
-void CSamplingParamsGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CSamplingParamsGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	isig::ISamplingParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		IntervalSB->setValue(objectPtr->GetInterval() * 1000);
-		ModeCB->setCurrentIndex(objectPtr->GetSamplingMode());
-	}
-}
-
-
 // reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSamplingParamsGuiComp::OnGuiModelAttached()
@@ -47,6 +27,18 @@ void CSamplingParamsGuiComp::OnGuiModelAttached()
 
 	IntervalSB->setMinimum(range.GetMinValue() * 1000);
 	IntervalSB->setMaximum(range.GetMaxValue() * 1000);
+}
+
+
+void CSamplingParamsGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	isig::ISamplingParams* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		IntervalSB->setValue(objectPtr->GetInterval() * 1000);
+		ModeCB->setCurrentIndex(objectPtr->GetSamplingMode());
+	}
 }
 
 

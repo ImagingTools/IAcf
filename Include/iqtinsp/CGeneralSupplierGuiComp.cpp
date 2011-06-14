@@ -5,66 +5,6 @@ namespace iqtinsp
 {
 
 
-// reimplemented (imod::IModelEditor)
-
-void CGeneralSupplierGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CGeneralSupplierGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	QString statusText = tr("Unknown");
-
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		double inspectionTime = supplierPtr->GetWorkDurationTime();
-		QString inspectionText = tr("%1 ms").arg(inspectionTime * 1000);
-		InspectionTimeLabel->setText(inspectionText);
-
-		int workStatus = supplierPtr->GetWorkStatus();
-
-		switch (workStatus){
-		case iproc::ISupplier::WS_NONE:
-			statusText = tr("None");
-			break;
-
-		case iproc::ISupplier::WS_INIT:
-			statusText = tr("Init");
-			break;
-
-		case iproc::ISupplier::WS_LOCKED:
-			statusText = tr("Locked");
-			break;
-
-		case iproc::ISupplier::WS_OK:
-			statusText = tr("OK");
-			break;
-
-		case iproc::ISupplier::WS_CANCELED:
-			statusText = tr("Canceled");
-			break;
-
-		case iproc::ISupplier::WS_ERROR:
-			statusText = tr("Error");
-			break;
-
-		case iproc::ISupplier::WS_CRITICAL:
-			statusText = tr("Critical");
-			break;
-		}
-	}
-	else{
-		InspectionTimeLabel->setText(tr("-"));
-	}
-
-	StatusLabel->setText(statusText);
-}
-
-
 // protected slots
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()
@@ -118,6 +58,58 @@ void CGeneralSupplierGuiComp::OnGuiModelAttached()
 
 	LoadParamsButton->setVisible(IsLoadParamsSupported());
 	SaveParamsButton->setVisible(IsSaveParamsSupported());
+}
+
+
+void CGeneralSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	QString statusText = tr("Unknown");
+
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		double inspectionTime = supplierPtr->GetWorkDurationTime();
+		QString inspectionText = tr("%1 ms").arg(inspectionTime * 1000);
+		InspectionTimeLabel->setText(inspectionText);
+
+		int workStatus = supplierPtr->GetWorkStatus();
+
+		switch (workStatus){
+		case iproc::ISupplier::WS_NONE:
+			statusText = tr("None");
+			break;
+
+		case iproc::ISupplier::WS_INIT:
+			statusText = tr("Init");
+			break;
+
+		case iproc::ISupplier::WS_LOCKED:
+			statusText = tr("Locked");
+			break;
+
+		case iproc::ISupplier::WS_OK:
+			statusText = tr("OK");
+			break;
+
+		case iproc::ISupplier::WS_CANCELED:
+			statusText = tr("Canceled");
+			break;
+
+		case iproc::ISupplier::WS_ERROR:
+			statusText = tr("Error");
+			break;
+
+		case iproc::ISupplier::WS_CRITICAL:
+			statusText = tr("Critical");
+			break;
+		}
+	}
+	else{
+		InspectionTimeLabel->setText(tr("-"));
+	}
+
+	StatusLabel->setText(statusText);
 }
 
 

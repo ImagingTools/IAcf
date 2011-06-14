@@ -27,14 +27,16 @@ public:
 		I_ASSIGN_TO(m_modelObserverCompPtr, m_modelViewCompPtr, false);
 	I_END_COMPONENT
 
-		// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(int updateFlags = 0);
+	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 
-protected slots:
+protected Q_SLOTS:
 	void OnParameterChanged();
 
 protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
+
 	// reimplemented (iqt::CGuiObjectBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();

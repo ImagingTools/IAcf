@@ -28,7 +28,9 @@ void CSwissRangerParamsGuiComp::UpdateModel() const
 }
 
 
-void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CSwissRangerParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -42,13 +44,6 @@ void CSwissRangerParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 	}
 }
 
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CSwissRangerParamsGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-}
 
 
 // reimplemented (iqtgui::CComponentBase)

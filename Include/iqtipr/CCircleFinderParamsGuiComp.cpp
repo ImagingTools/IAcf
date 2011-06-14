@@ -1,6 +1,7 @@
 #include "iqtipr/CCircleFinderParamsGuiComp.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 
@@ -30,7 +31,11 @@ void CCircleFinderParamsGuiComp::UpdateModel() const
 }
 
 
-void CCircleFinderParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CCircleFinderParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -59,7 +64,7 @@ void CCircleFinderParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 void CCircleFinderParamsGuiComp::on_EnableOutliersElimination_toggled(bool /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 	}
@@ -69,7 +74,7 @@ void CCircleFinderParamsGuiComp::on_EnableOutliersElimination_toggled(bool /*val
 void CCircleFinderParamsGuiComp::on_MinOutliersDistance_valueChanged(double /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 	}
@@ -79,7 +84,7 @@ void CCircleFinderParamsGuiComp::on_MinOutliersDistance_valueChanged(double /*va
 void CCircleFinderParamsGuiComp::on_MaxRaysCount_valueChanged(int /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 	}
@@ -89,7 +94,7 @@ void CCircleFinderParamsGuiComp::on_MaxRaysCount_valueChanged(int /*value*/)
 void CCircleFinderParamsGuiComp::on_CaliperMode_currentIndexChanged(int /*index*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 	}

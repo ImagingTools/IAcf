@@ -31,12 +31,12 @@ public:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
+	virtual void UpdateGui(int updateFlags = 0);
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
 
-protected slots:
+protected Q_SLOTS:
 	void OnParamsChanged(double value);
 };
 

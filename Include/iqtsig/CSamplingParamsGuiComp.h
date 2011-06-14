@@ -29,14 +29,11 @@ public:
 	I_BEGIN_COMPONENT(CSamplingParamsGuiComp)
 	I_END_COMPONENT
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
-
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void UpdateGui(int updateFlags = 0);
 
-protected slots:
+protected Q_SLOTS:
 	void on_IntervalSB_valueChanged(double value);
 	void on_ModeCB_currentIndexChanged(int index);
 };

@@ -16,19 +16,6 @@ void CSwissRangerAcquisitionDataViewComp::UpdateModel() const
 }
 
 
-void CSwissRangerAcquisitionDataViewComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	CoherenceThresholdLabel->setText(QString("%1%").arg(CoherenceThresholdSlider->value()));
-	MinimalDistanceCropLabel->setText(QString("%1%").arg(MinimalDistanceCropSlider->value()));
-	MaximalDistanceCropLabel->setText(QString("%1%").arg(MaximalDistanceCropSlider->value()));
-	ResolutionLabel->setText(QString("%1%").arg(int(1.0 / double(ResolutionSlider->value()) * 100)));
-
-	Create3dModel();
-}
-
-
 // reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSwissRangerAcquisitionDataViewComp::OnGuiModelAttached()
@@ -80,6 +67,19 @@ void CSwissRangerAcquisitionDataViewComp::OnGuiModelDetached()
 	}
 
 	BaseClass::OnGuiModelDetached();
+}
+
+
+void CSwissRangerAcquisitionDataViewComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	CoherenceThresholdLabel->setText(QString("%1%").arg(CoherenceThresholdSlider->value()));
+	MinimalDistanceCropLabel->setText(QString("%1%").arg(MinimalDistanceCropSlider->value()));
+	MaximalDistanceCropLabel->setText(QString("%1%").arg(MaximalDistanceCropSlider->value()));
+	ResolutionLabel->setText(QString("%1%").arg(int(1.0 / double(ResolutionSlider->value()) * 100)));
+
+	Create3dModel();
 }
 
 
@@ -199,25 +199,25 @@ void CSwissRangerAcquisitionDataViewComp::Create3dModel()
 	
 void CSwissRangerAcquisitionDataViewComp::on_ResolutionSlider_valueChanged(int /*value*/)
 {
-	UpdateEditor();
+	UpdateGui();
 }
 
 
 void CSwissRangerAcquisitionDataViewComp::on_MaximalDistanceCropSlider_valueChanged(int /*value*/)
 {
-	UpdateEditor();
+	UpdateGui();
 }
 
 
 void CSwissRangerAcquisitionDataViewComp::on_MinimalDistanceCropSlider_valueChanged(int /*value*/)
 {
-	UpdateEditor();
+	UpdateGui();
 }
 
 
 void CSwissRangerAcquisitionDataViewComp::on_CoherenceThresholdSlider_valueChanged(int /*value*/)
 {
-	UpdateEditor();
+	UpdateGui();
 }
 
 

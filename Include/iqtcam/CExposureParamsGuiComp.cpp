@@ -70,6 +70,19 @@ void CExposureParamsGuiComp::OnGuiModelDetached()
 }
 
 
+void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
+{
+	I_ASSERT(IsGuiCreated());
+
+	icam::IExposureParams* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
+		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
+		EenDelayTimeSB->setValue(objectPtr->GetEenDelay() * 1000.0);
+	}
+}
+
+
 // reimplemented (imod::IModelEditor)
 
 void CExposureParamsGuiComp::UpdateModel() const
@@ -99,19 +112,6 @@ void CExposureParamsGuiComp::UpdateModel() const
 	if (EenDelayTimeSB->isVisible() && (fabs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetEenDelay(eenDelayTime);
-	}
-}
-
-
-void CExposureParamsGuiComp::UpdateEditor(int /*updateFlags*/)
-{
-	I_ASSERT(IsGuiCreated());
-
-	icam::IExposureParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
-		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
-		EenDelayTimeSB->setValue(objectPtr->GetEenDelay() * 1000.0);
 	}
 }
 

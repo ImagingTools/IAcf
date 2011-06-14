@@ -83,7 +83,7 @@ protected:
 signals:
 	void OutputChanged();
 
-protected slots:
+protected Q_SLOTS:
 	void OnPeriodicTimer();
 	void OnRunTimer();
 	void OnInputChanged();

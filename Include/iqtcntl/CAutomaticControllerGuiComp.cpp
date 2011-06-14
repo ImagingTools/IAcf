@@ -18,7 +18,11 @@ void CAutomaticControllerGuiComp::UpdateModel() const
 }
 
 
-void CAutomaticControllerGuiComp::UpdateEditor(int /*updateFlags*/)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CAutomaticControllerGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 

@@ -30,7 +30,70 @@ CMilSearchParamsGuiComp::CMilSearchParamsGuiComp()
 
 // reimplemented (imod::IModelEditor)
 
-void CMilSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
+void CMilSearchParamsGuiComp::UpdateModel() const
+{
+	I_ASSERT(IsGuiCreated());
+	imil::CMilSearchParams* paramsPtr = GetObjectPtr();
+	I_ASSERT(paramsPtr != NULL);
+
+	istd::TChangeNotifier<imil::CMilSearchParams> updatePtr(paramsPtr);
+
+	updatePtr->SetDownsamplingRange(istd::CRange(m_spinFirstLevel->value(), m_spinSecondLevel->value()));
+	updatePtr->SetTimeout(m_spinTimeout->value());
+	updatePtr->SetNominalScale(m_spinNominalScale->value());
+	updatePtr->SetNominalAngle(m_spinNominalAngle->value());
+	updatePtr->SetSmoothness(m_spinSmoothness->value());
+	updatePtr->SetAcceptanceTarget(m_spinAcceptanceTarget->value());
+	updatePtr->SetCertainty(m_spinCertainty->value());
+	updatePtr->SetCertaintyTarget(m_spinCertaintyTarget->value());
+	updatePtr->SetFitErrorWeight(m_spinFitErrorWeight->value());
+	updatePtr->SetKernelSize(m_spinKernelSize->value());
+	updatePtr->SetSpeed(m_speedMap[m_comboSpeed->currentIndex()]);
+	updatePtr->SetAccuracy(m_accuracyMap[m_comboAccuracy->currentIndex()]);
+	updatePtr->SetDetailLevel(m_detailLevelMap[m_comboDetailLevel->currentIndex()]);
+
+	int indexKey = m_comboPolarity->currentIndex();
+	int searchPolarity = m_polarityMap[indexKey];
+
+	updatePtr->SetPolarity(searchPolarity);
+
+	bool sharedEdgesEnabled = m_comboSharedEdges->currentIndex() == 0 ? false : true;
+	updatePtr->SetSharedEdgesEnabled(sharedEdgesEnabled);
+
+	bool targetCachingEnabled = m_comboTargetCaching->currentIndex() == 0 ? false : true;
+	updatePtr->SetTargetCachingEnabled(targetCachingEnabled);
+
+	int filterType = (m_comboFilterType->currentIndex() == 0) ? imil::CMilSearchParams::NonRecursiveFilter : imil::CMilSearchParams::RecursiveFilter;
+	updatePtr->SetFilterType(filterType);
+}
+
+
+// protected slots
+
+void CMilSearchParamsGuiComp::OnParameterChanged()
+{
+	if (!IsUpdateBlocked()){
+		UpdateBlocker updateBlocker(this);
+
+		UpdateModel();
+	}
+}
+
+
+void CMilSearchParamsGuiComp::OnFilterTypeChanged(int filterType)
+{
+	bool enableKernelSize = (filterType == 0);
+
+	m_labelKernelSize->setEnabled(enableKernelSize);
+	m_spinKernelSize->setEnabled(enableKernelSize);
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CMilSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -76,67 +139,6 @@ void CMilSearchParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 	}
 }
 
-
-void CMilSearchParamsGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated());
-	imil::CMilSearchParams* paramsPtr = GetObjectPtr();
-	I_ASSERT(paramsPtr != NULL);
-
-	istd::TChangeNotifier<imil::CMilSearchParams> updatePtr(paramsPtr);
-
-	updatePtr->SetDownsamplingRange(istd::CRange(m_spinFirstLevel->value(), m_spinSecondLevel->value()));
-	updatePtr->SetTimeout(m_spinTimeout->value());
-	updatePtr->SetNominalScale(m_spinNominalScale->value());
-	updatePtr->SetNominalAngle(m_spinNominalAngle->value());
-	updatePtr->SetSmoothness(m_spinSmoothness->value());
-	updatePtr->SetAcceptanceTarget(m_spinAcceptanceTarget->value());
-	updatePtr->SetCertainty(m_spinCertainty->value());
-	updatePtr->SetCertaintyTarget(m_spinCertaintyTarget->value());
-	updatePtr->SetFitErrorWeight(m_spinFitErrorWeight->value());
-	updatePtr->SetKernelSize(m_spinKernelSize->value());
-	updatePtr->SetSpeed(m_speedMap[m_comboSpeed->currentIndex()]);
-	updatePtr->SetAccuracy(m_accuracyMap[m_comboAccuracy->currentIndex()]);
-	updatePtr->SetDetailLevel(m_detailLevelMap[m_comboDetailLevel->currentIndex()]);
-
-	int indexKey = m_comboPolarity->currentIndex();
-	int searchPolarity = m_polarityMap[indexKey];
-
-	updatePtr->SetPolarity(searchPolarity);
-
-	bool sharedEdgesEnabled = m_comboSharedEdges->currentIndex() == 0 ? false : true;
-	updatePtr->SetSharedEdgesEnabled(sharedEdgesEnabled);
-
-	bool targetCachingEnabled = m_comboTargetCaching->currentIndex() == 0 ? false : true;
-	updatePtr->SetTargetCachingEnabled(targetCachingEnabled);
-
-	int filterType = (m_comboFilterType->currentIndex() == 0) ? imil::CMilSearchParams::NonRecursiveFilter : imil::CMilSearchParams::RecursiveFilter;
-	updatePtr->SetFilterType(filterType);
-}
-
-
-// protected slots
-
-void CMilSearchParamsGuiComp::OnParameterChanged()
-{
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
-
-		UpdateModel();
-	}
-}
-
-
-void CMilSearchParamsGuiComp::OnFilterTypeChanged(int filterType)
-{
-	bool enableKernelSize = (filterType == 0);
-
-	m_labelKernelSize->setEnabled(enableKernelSize);
-	m_spinKernelSize->setEnabled(enableKernelSize);
-}
-
-
-// protected methods
 
 // reimplemented (iqt::CGuiObjectBase)
 
