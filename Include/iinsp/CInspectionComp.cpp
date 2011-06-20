@@ -10,7 +10,7 @@ namespace iinsp
 {
 
 
-// reimplemented (iinsp::IInspectionTask)
+// reimplemented (iinsp::IInspection)
 
 int CInspectionComp::GetTasksCount() const
 {

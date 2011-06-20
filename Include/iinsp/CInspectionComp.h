@@ -42,7 +42,7 @@ public:
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
 	I_END_COMPONENT;
 
-	// reimplemented (iinsp::IInspectionTask)
+	// reimplemented (iinsp::IInspection)
 	virtual int GetTasksCount() const;
 	virtual IInspectionTask* GetTask(int subtaskIndex) const;
 	virtual iprm::IParamsSet* GetInspectionParams() const;
