@@ -215,11 +215,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageCropProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CImageInterpolationParams.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageNormalizeProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CImagePolarTransformProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -320,11 +332,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageCropProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageHistogramProcessorComp.h"
 				>
 			</File>
 			<File
+				RelativePath="..\CImageInterpolationParams.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageNormalizeProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImagePolarTransformProcessorComp.h"
 				>
 			</File>
 			<File
@@ -424,6 +448,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IInterpolationParams.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iipr.h"
 				>
 			</File>
@@ -473,6 +501,10 @@
 			</File>
 			<File
 				RelativePath="..\TImageParamProcessorCompBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TImagePixelInterpolator.h"
 				>
 			</File>
 			<File

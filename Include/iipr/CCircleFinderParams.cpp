@@ -112,6 +112,7 @@ bool CCircleFinderParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(raysCountTag);
 	retVal = retVal && archive.Process(m_raysCount);
 	retVal = retVal && archive.EndTag(raysCountTag);
+
 	return retVal;
 }
 

@@ -24,10 +24,13 @@
 #include "iipr/CLineProjectionSupplierComp.h"
 #include "iipr/CImageHistogramProcessorComp.h"
 #include "iipr/CCircleFinderParamsComp.h"
+#include "iipr/CImagePolarTransformProcessorComp.h"
+#include "iipr/CImageCropProcessorComp.h"
+#include "iipr/CImageInterpolationParams.h"
 
 
 /**
-	system-undependent image processing package.
+	System-undependent image processing package.
 */
 namespace IprPck
 {
@@ -56,6 +59,15 @@ typedef icomp::TModelCompWrap<iipr::CLineProjectionSupplierComp> ProjectionSuppl
 
 typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;
+typedef iipr::CImagePolarTransformProcessorComp ImagePolarTransformProcessor;
+typedef iipr::CImageCropProcessorComp ImageCropProcessor;
+
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<iipr::CImageInterpolationParams>,
+			iipr::IImageInterpolationParams,
+			iser::ISerializable,
+			istd::IChangeable,
+			imod::IModel> ImageInterpolationParams;
 
 
 } // namespace IprPck

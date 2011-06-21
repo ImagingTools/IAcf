@@ -95,6 +95,23 @@ I_EXPORT_COMPONENT(
 			"Circle finder parameters",
 			"Circle Finder Processor Parameters");
 
+I_EXPORT_COMPONENT(
+			ImagePolarTransformProcessor,
+			"Polar transformation",
+			"Processor Polar Transform");
+
+I_EXPORT_COMPONENT(
+			ImageCropProcessor,
+			"Image crop processor",
+			"Crop Region Processor Transform AOI ROI");
+
+I_EXPORT_COMPONENT(
+			ImageInterpolationParams,
+			"Parameter for image interpolation",
+			"Parameter Interpolation");
+
+
+
 } // namespace IprPck
 
 
