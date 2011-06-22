@@ -20,7 +20,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="FilterWidthLabel">
      <property name="text">
-      <string>Filter Width</string>
+      <string notr="true">Filter Width</string>
      </property>
     </widget>
    </item>
@@ -40,7 +40,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="FilterHeightLabel">
      <property name="text">
-      <string>Filter Height</string>
+      <string notr="true">Filter Height</string>
      </property>
     </widget>
    </item>
@@ -60,28 +60,28 @@
    <item row="0" column="2">
     <widget class="QLabel" name="FilterWidthValueLabel">
      <property name="text">
-      <string>1</string>
+      <string notr="true">1</string>
      </property>
     </widget>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="FilterHeightValueLabel">
      <property name="text">
-      <string>1</string>
+      <string notr="true">1</string>
      </property>
     </widget>
    </item>
    <item row="0" column="3">
     <widget class="QLabel" name="WidthUnitNameLabel">
      <property name="text">
-      <string>-</string>
+      <string notr="true">-</string>
      </property>
     </widget>
    </item>
    <item row="1" column="3">
     <widget class="QLabel" name="HeightUnitNameLabel">
      <property name="text">
-      <string>-</string>
+      <string notr="true">-</string>
      </property>
     </widget>
    </item>
