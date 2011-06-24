@@ -1,12 +1,16 @@
 #ifndef imebase_CMeilhausSimpleComp_included
 #define imebase_CMeilhausSimpleComp_included
 
-#include "iprm/ISelectionParam.h"
 
+// STL includes
+#include <map>
+
+// ACF includes
+#include "icomp/CComponentBase.h"
+#include "iprm/ISelectionParam.h"
 #include "iproc/IProcessor.h"
 
-#include "icomp/CComponentBase.h"
-
+// IACF includes
 #include "isig/ISamplingParams.h"
 #include "isig/ISamplingConstraints.h"
 
@@ -43,7 +47,6 @@ public:
 
 	// reimplemented (iproc::IProcessor)
 	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
-	virtual void ResetAllTasks();
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
@@ -62,6 +65,7 @@ public:
 				int taskId = -1,
 				double timeoutTime = -1,
 				bool killOnTimeout = true);
+	virtual void CancelTask(int taskId = -1);
 	virtual int GetReadyTask();
 	virtual int GetTaskState(int taskId = -1) const;
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
@@ -87,8 +91,7 @@ protected:
 	bool GetChannelAddress(const iprm::IParamsSet* paramsPtr, CMeAddr& result) const;
 	const isig::ISamplingParams* GetSamplingParams(const iprm::IParamsSet* paramsPtr) const;
 
-	virtual int WaitAllTasksFinished(double timeoutTime, bool killOnTimeout);
-	virtual int WaitSingleTaskFinished(int taskId, double timeoutTime, bool killOnTimeout);
+	virtual int WaitSingleTaskFinished(CMeContext& context, double timeoutTime, bool killOnTimeout);
 
 private:
 	I_ATTR(bool, m_isOutputAttrPtr);
@@ -96,8 +99,8 @@ private:
 	I_ATTR(istd::CString, m_addressParamIdAttrPtr);
 	I_ATTR(istd::CString, m_samplingParamsIdAttrPtr);
 
-	typedef QList<CMeContext*> CMeContextList;
-	CMeContextList m_activeTaskList;
+	typedef std::map<int, CMeContext*> TasksList;
+	TasksList m_activeTaskList;
 
 	int m_lastTaskId;
 };

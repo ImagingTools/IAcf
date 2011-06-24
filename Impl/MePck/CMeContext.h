@@ -20,7 +20,7 @@ namespace imebase
 class CMeContext
 {
 public:
-	CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::IDataSequence* containerPtr);
+	CMeContext(const CMeAddr& address, bool isOutput, imeas::IDataSequence* containerPtr);
 	~CMeContext();
 
 	/**
@@ -62,7 +62,6 @@ private:
 	QWaitCondition m_dataReadyCondition;
 
 	CMeAddr m_address;
-	int m_id;
 	int m_bufferCount;
 	std::vector<int> m_hwBuffer;
 	bool m_isOutput;

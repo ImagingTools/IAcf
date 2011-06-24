@@ -8,10 +8,9 @@ namespace imebase
 {
 
 
-CMeContext::CMeContext(const CMeAddr& address, int id, bool isOutput, imeas::IDataSequence* containerPtr)
+CMeContext::CMeContext(const CMeAddr& address, bool isOutput, imeas::IDataSequence* containerPtr)
 :	m_address(address),
 	m_isOutput(isOutput),
-	m_id(id),
 	m_samplesSequence(*containerPtr)
 {
 	I_ASSERT(containerPtr != NULL);
@@ -77,12 +76,6 @@ void CMeContext::Unregister()
 
 	meIOStreamStop(&stopList, 1, 0);
 	meIOStreamSetCallbacks(m_address.device, m_address.subdevice, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-}
-
-
-int CMeContext::GetId() const
-{
-	return m_id;
 }
 
 

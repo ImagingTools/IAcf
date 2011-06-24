@@ -26,15 +26,6 @@ int CMeilhausSimpleComp::GetProcessorState(const iprm::IParamsSet* /*paramsPtr*/
 }
 
 
-void CMeilhausSimpleComp::ResetAllTasks()
-{
-	for (int index = 0; index < m_activeTaskList.size(); index++) {
-		delete m_activeTaskList.at(index);
-		m_activeTaskList.removeAt(index);
-	}
-}
-
-
 bool CMeilhausSimpleComp::AreParamsAccepted(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
@@ -89,15 +80,15 @@ int CMeilhausSimpleComp::BeginTask(
 		return -1;
 	}
 
-	CMeContext* context = NULL;
+	CMeContext* contextPtr = NULL;
 	if (*m_isOutputAttrPtr){
 		if (inputContainerPtr == NULL){
 			return -1;
 		}
 
-		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, const_cast<imeas::IDataSequence*>(inputContainerPtr));
+		contextPtr = new CMeContext(address, *m_isOutputAttrPtr, const_cast<imeas::IDataSequence*>(inputContainerPtr));
 
-		context->CopyFromContainer();
+		contextPtr->CopyFromContainer();
 	}
 	else{
 		if (outputContainerPtr == NULL){
@@ -106,15 +97,17 @@ int CMeilhausSimpleComp::BeginTask(
 
 		outputContainerPtr->CreateSequence(1024, 1);
 
-		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, outputContainerPtr);
+		contextPtr = new CMeContext(address, *m_isOutputAttrPtr, outputContainerPtr);
 	}
 
-	if (!context->Register(samplingParamsPtr->GetInterval())){
-		delete context;
+	if (!contextPtr->Register(samplingParamsPtr->GetInterval())){
+		delete contextPtr;
+
 		return -1;
 	}
 
-	m_activeTaskList.append(context);
+	PullNextTaskId();
+	m_activeTaskList[m_lastTaskId] = contextPtr;
 
 	return m_lastTaskId;
 
@@ -123,45 +116,124 @@ int CMeilhausSimpleComp::BeginTask(
 
 int CMeilhausSimpleComp::WaitTaskFinished(int taskId, double timeoutTime, bool killOnTimeout)
 {
-	int ret;
-	if (taskId == -1){
-		ret  = this->WaitAllTasksFinished(timeoutTime, killOnTimeout);
+	int retVal = TS_OK;
+
+	if (taskId >= 0){
+		TasksList::iterator foundIter = m_activeTaskList.find(taskId);
+		if (foundIter != m_activeTaskList.end()){
+			CMeContext* contextPtr = foundIter->second;
+			I_ASSERT(contextPtr != NULL);
+
+			retVal = WaitSingleTaskFinished(*contextPtr, timeoutTime, killOnTimeout);
+			if (retVal != TS_WAIT){
+				delete contextPtr;
+
+				m_activeTaskList.erase(foundIter);
+			}
+		}
 	}
-	else
-		ret = this->WaitSingleTaskFinished(taskId, timeoutTime, killOnTimeout);
-	return ret;
+	else{
+		double localTimeout = timeoutTime;
+		QTime stopper;
+		stopper.start();
+
+		for (		TasksList::iterator iter = m_activeTaskList.begin();
+					iter != m_activeTaskList.end();){
+			CMeContext* contextPtr = iter->second;
+			I_ASSERT(contextPtr != NULL);
+
+			int taskState = WaitSingleTaskFinished(*contextPtr, localTimeout, killOnTimeout);
+			if (taskState != TS_OK){
+				retVal = taskState;
+			}
+
+			TasksList::iterator deleteIter = iter++;
+
+			if (taskState != TS_WAIT){
+				delete contextPtr;
+
+				m_activeTaskList.erase(deleteIter);
+			}
+
+			localTimeout -= (double)stopper.elapsed() / 1000;
+
+			if (localTimeout < 0){
+				localTimeout = 0;
+			}
+		}
+	}
+
+	return retVal;
+}
+
+
+void CMeilhausSimpleComp::CancelTask(int taskId)
+{
+	if (taskId >= 0){
+		TasksList::iterator foundIter = m_activeTaskList.find(taskId);
+		if (foundIter != m_activeTaskList.end()){
+			CMeContext* contextPtr = foundIter->second;
+			I_ASSERT(contextPtr != NULL);
+
+			delete contextPtr;
+
+			m_activeTaskList.erase(foundIter);
+		}
+	}
+	else{
+		for (		TasksList::const_iterator iter = m_activeTaskList.begin();
+					iter != m_activeTaskList.end();
+					++iter){
+			CMeContext* contextPtr = iter->second;
+			I_ASSERT(contextPtr != NULL);
+
+			delete contextPtr;
+		}
+
+		m_activeTaskList.clear();
+	}
 }
 
 
 int CMeilhausSimpleComp::GetReadyTask()
 {
-	for (int index = 0; index < m_activeTaskList.size(); index++) {
-		CMeContext* entry = m_activeTaskList.at(index);
-		if (entry->IsDone())
-			return entry->GetId();
+	for (		TasksList::const_iterator iter = m_activeTaskList.begin();
+				iter != m_activeTaskList.end();
+				++iter){
+		CMeContext* contextPtr = iter->second;
+		I_ASSERT(contextPtr != NULL);
+
+		if (contextPtr->IsDone()){
+			return iter->first;
+		}
 	}
+
 	return -1;
 }
 
 
 int CMeilhausSimpleComp::GetTaskState(int taskId) const
 {
-	for (int index = 0; index < m_activeTaskList.size(); index++) {
-		CMeContext* entry = m_activeTaskList.at(index);
-		if (taskId == -1){
-			if (!entry->IsDone())
-				break;
+	CMeContext* contextPtr = NULL;
 
-		}
-		else {
-			if (entry->GetId() == taskId)
-				if (entry->IsDone())
-					return TS_OK;
-				else
-					break;
+	if (taskId >= 0){
+		TasksList::const_iterator foundIter = m_activeTaskList.find(taskId);
+		if (foundIter != m_activeTaskList.end()){
+			contextPtr = foundIter->second;
 		}
 	}
-	return TS_WAIT;
+	else{
+		TasksList::const_reverse_iterator lastIter = m_activeTaskList.rbegin();
+		if (lastIter != m_activeTaskList.rend()){
+			contextPtr = lastIter->second;
+		}
+	}
+
+	if ((contextPtr != NULL) && !contextPtr->IsDone()){
+		return TS_WAIT;
+	}
+
+	return TS_OK;
 }
 
 
@@ -291,68 +363,27 @@ const isig::ISamplingParams* CMeilhausSimpleComp::GetSamplingParams(const iprm::
 }
 
 
-int CMeilhausSimpleComp::WaitAllTasksFinished(double timeoutTime, bool killOnTimeout)
+int CMeilhausSimpleComp::WaitSingleTaskFinished(CMeContext& context, double timeoutTime, bool killOnTimeout)
 {
-	if (m_activeTaskList.isEmpty()){
+	if (timeoutTime < 0){
+		timeoutTime = context.GetInterval() + 1;
+	}
+
+	if (context.Wait(timeoutTime)){
+		if (!*m_isOutputAttrPtr){
+			context.CopyToContainer();
+		}
+
 		return TS_OK;
 	}
-
-	int ret = TS_OK;
-	double localTimeout = timeoutTime;
-	QTime stopper;
-	stopper.start();
-	for (int index = 0; index < m_activeTaskList.size(); index++) {
-		CMeContext* entry = m_activeTaskList.at(index);
-		int lret = WaitSingleTaskFinished(entry->GetId(), localTimeout, killOnTimeout);
-		if (TS_OK != lret){
-			ret = lret;
+	else{
+		if (killOnTimeout){
+			return TS_INVALID;
 		}
-		localTimeout -= (double)stopper.elapsed() / 1000;
-		if (localTimeout < 0)
-			localTimeout = 0;
-	}
-	return ret;
-}
-
-
-int CMeilhausSimpleComp::WaitSingleTaskFinished(int taskId, double timeoutTime, bool killOnTimeout)
-{
-	for (int index = 0; index < m_activeTaskList.size(); index++) {
-		CMeContext* entry = m_activeTaskList.at(index);
-		if (entry->GetId() == taskId){
-			if (timeoutTime < 0){
-				timeoutTime = entry->GetInterval() + 1;
-			}
-
-			if (entry->Wait(timeoutTime)){
-				if (!*m_isOutputAttrPtr){
-					entry->CopyToContainer();
-				}
-
-				delete entry;
-				m_activeTaskList.removeAt(index);
-
-				return TS_OK;
-			}
-			else{
-				if (killOnTimeout){
-					delete entry;
-					m_activeTaskList.removeAt(index);
-
-					return TS_INVALID;
-				}
-				else{
-					return TS_WAIT;
-				}
-			}
-
-			break;
+		else{
+			return TS_WAIT;
 		}
 	}
-
-	I_CRITICAL();
-
-	return TS_NONE;//Not on list!
 }
 
 
