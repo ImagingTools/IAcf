@@ -141,6 +141,8 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 		}
 	}
 
+	pixelCount /= usedColorComponents;
+
 	double normFactor = pow(2.0, histogram.GetSampleDepth()) - 1;
 
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
