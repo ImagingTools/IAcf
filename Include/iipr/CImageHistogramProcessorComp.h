@@ -27,7 +27,7 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImageHistogramProcessorComp);
-		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI rectangle in the parameter set", false, "AoiParams");
+		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI parameter in the parameter set", false, "AoiParams");
 	I_END_COMPONENT
 
 	// reimplemented (iproc::IProcessor)
@@ -38,7 +38,10 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 private:
-	bool CalculateHistogramFromBitmap(const iimg::IBitmap& input, const i2d::CRectangle* aoiPtr, imeas::IDiscrDataSequence& histogram) const;
+	bool CalculateHistogramFromBitmap(
+					const iimg::IBitmap& input,
+					const i2d::IObject2d* aoiPtr,
+					imeas::IDiscrDataSequence& histogram) const;
 
 private:
 	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);

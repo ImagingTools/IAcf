@@ -10,6 +10,8 @@
 
 #include "ibase/CSize.h"
 
+#include "iimg/CBitmapRegion.h"
+
 
 namespace iipr
 {
@@ -33,9 +35,9 @@ int CImageHistogramProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const i2d::CRectangle* aoiPtr = NULL;
+	const i2d::IObject2d* aoiPtr = NULL;
 	if (paramsPtr != NULL && m_aoiParamsIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).ToString()));
+		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).ToString()));
 	}
 
 	return CalculateHistogramFromBitmap(*inputBitmapPtr, aoiPtr, *histogramPtr) ? TS_OK : TS_INVALID;
@@ -46,7 +48,7 @@ int CImageHistogramProcessorComp::DoProcessing(
 
 bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			const iimg::IBitmap& input,
-			const i2d::CRectangle* aoiPtr,
+			const i2d::IObject2d* aoiPtr,
 			imeas::IDiscrDataSequence& histogram) const
 {
 	if (input.IsEmpty()){
@@ -55,33 +57,38 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 		return true;
 	}
 
-	ibase::CSize inputSize(input.GetImageSize());
-
-	inputSize -= ibase::CSize(1, 1);
-
-	i2d::CRectangle realArea = i2d::CRectangle(inputSize);
-	if (aoiPtr != NULL){
-		realArea  = aoiPtr->GetIntersection(i2d::CRectangle(inputSize));
-	}
-
-	if (realArea.IsEmpty() || !realArea.IsValid()){
-		return false;
-	}
-
-	int leftArea = int(realArea.GetLeft());
-	int topArea = int(realArea.GetTop());
-	int bottomArea = int(realArea.GetBottom());
-	int rightArea = int(realArea.GetRight());
-
 	int componentsBitCount = input.GetComponentBitsCount();
 	if (componentsBitCount != 8){
-		SendWarningMessage(0, "Empty region for histogram calculation");
+		SendWarningMessage(0, "Only 8-bit images are supported");
 
 		return false;
 	}
 
-	int componentsCount = input.GetComponentsCount();
-	int usedColorComponents = componentsCount;
+	ibase::CSize inputSize(input.GetImageSize());
+	i2d::CRectangle realArea = i2d::CRectangle(inputSize);
+
+	const i2d::IObject2d* usedAoiPtr = (aoiPtr != NULL) ? aoiPtr : &realArea;
+
+	iimg::CBitmapRegion bitmapRegion(&input);
+
+	if (!bitmapRegion.CreateFromGeometry(*usedAoiPtr)){
+		SendWarningMessage(0, "Cannot create the region");
+
+		return false;
+	}
+
+	if (bitmapRegion.IsBitmapRegionEmpty()){
+		SendWarningMessage(0, "Cannot process an empty region");
+	
+		return false;
+	}
+
+	i2d::CRectangle regionRect = bitmapRegion.GetBoundingBox();
+	int regionTop = int(regionRect.GetTop());
+	int regionBottom = int(regionRect.GetBottom());
+
+	int pixelBytesCount = input.GetComponentsCount();
+	int usedColorComponents = pixelBytesCount;
 
 	iimg::IBitmap::PixelFormat pixelFormat = input.GetPixelFormat();
 	switch (pixelFormat){
@@ -95,23 +102,40 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	int histogramSize = 256 * usedColorComponents;
 
-	int pixelCount = (rightArea - leftArea + 1) * (bottomArea - topArea + 1);
-
 	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
 	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
 
 	std::memset(histogramDataBufferPtr, 0, histogramSize * sizeof(I_DWORD));
+	int pixelCount = 0;
 
-	for (int y = topArea; y <= bottomArea; y++){
-		I_BYTE* lineDataBeg = (I_BYTE*)input.GetLinePtr(y) + leftArea * componentsCount;
-		I_BYTE* lineDataEnd = (I_BYTE*)input.GetLinePtr(y) + rightArea * componentsCount;
+	for(int y = regionTop; y < regionBottom; y++){
+		const iimg::CBitmapRegion::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
+		if (rangesPtr == NULL){
+			continue;
+		}
 
-		while (lineDataBeg <= lineDataEnd){
-			for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-				I_BYTE pixelComponentValue = *lineDataBeg++;
+		I_ASSERT(y >= 0);
+		I_ASSERT(y < input.GetImageSize().GetY());
 
-				if (componentIndex < usedColorComponents){
-					++histogramDataBufferPtr[componentIndex + pixelComponentValue * usedColorComponents];
+		for (int rangeIndex = 0; rangeIndex < int(rangesPtr->size()); rangeIndex++){
+			const iimg::CBitmapRegion::PixelRange& pixelRange = rangesPtr->at(rangeIndex);
+
+			int rangeStart = int(pixelRange.range.GetMinValue());
+			int rangeEnd = int(pixelRange.range.GetMaxValue());
+
+			I_BYTE* inputImagePtr = ((I_BYTE*)pixelRange.pixelBufferPtr);
+			
+			for (int x = rangeStart; x < rangeEnd; x++){
+				I_ASSERT(x  < input.GetImageSize().GetX());
+				
+				for (int pixelByteIndex = 0; pixelByteIndex < pixelBytesCount; pixelByteIndex++){
+					I_BYTE pixelComponentValue = *inputImagePtr++;
+
+					if (pixelByteIndex < usedColorComponents){
+						++histogramDataBufferPtr[pixelByteIndex + pixelComponentValue * usedColorComponents];
+
+						pixelCount++;
+					}
 				}
 			}
 		}
