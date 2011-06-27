@@ -106,9 +106,19 @@ I_EXPORT_COMPONENT(
 			"Crop Region Processor Transform AOI ROI");
 
 I_EXPORT_COMPONENT(
+			RingPatternGenerator,
+			"Generator of the ring pattern image",
+			"Generator Pattern");
+
+I_EXPORT_COMPONENT(
 			ImageInterpolationParams,
 			"Parameter for image interpolation",
 			"Parameter Interpolation");
+
+I_EXPORT_COMPONENT(
+			RingPatternGeneratorParams,
+			"Parameter for the ring pattern generation",
+			"Parameter Ring Generator Test");
 
 
 

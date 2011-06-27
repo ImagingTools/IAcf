@@ -27,6 +27,8 @@
 #include "iipr/CImagePolarTransformProcessorComp.h"
 #include "iipr/CImageCropProcessorComp.h"
 #include "iipr/CImageInterpolationParams.h"
+#include "iipr/CRingPatternGeneratorComp.h"
+#include "iipr/CRingPatternGeneratorParamsComp.h"
 
 
 /**
@@ -61,6 +63,7 @@ typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;
 typedef iipr::CImagePolarTransformProcessorComp ImagePolarTransformProcessor;
 typedef iipr::CImageCropProcessorComp ImageCropProcessor;
+typedef iipr::CRingPatternGeneratorComp RingPatternGenerator;
 
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iipr::CImageInterpolationParams>,
@@ -68,6 +71,8 @@ typedef icomp::TMakeComponentWrap<
 			iser::ISerializable,
 			istd::IChangeable,
 			imod::IModel> ImageInterpolationParams;
+
+typedef icomp::TModelCompWrap<iipr::CRingPatternGeneratorParamsComp> RingPatternGeneratorParams;
 
 
 } // namespace IprPck
