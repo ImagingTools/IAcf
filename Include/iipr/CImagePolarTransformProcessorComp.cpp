@@ -72,23 +72,20 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 		return false;
 	}
 
-	int radiusScale = 4;
-	int angleScale = 4;
-
 	i2d::CRectangle regionRect = bitmapRegion.GetBoundingBox();
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - regionRect.GetTopLeft();
-	int radius = int(::ceil(diffVector.GetLength())) * radiusScale;
-	int angleRange = angleScale * 360;
+	int radius = int(::ceil(diffVector.GetLength()));
+	int angleRange = int(radius * I_PI + 0.5);
 
 	int r1 = 0;
 	int r2 = radius;
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(realAoiPtr);
 	if (annulusPtr != NULL){
-		r1 = int(::ceil(annulusPtr->GetInnerRadius())) * radiusScale;
-		r2 = int(::floor(annulusPtr->GetOuterRadius())) * radiusScale;
-		radius = r2 - r1;
+		r1 = int(::ceil(annulusPtr->GetInnerRadius()));
+		r2 = int(::floor(annulusPtr->GetOuterRadius()));
+		radius = (r2 - r1);
 	}
 
 	if (!outputBitmap.CreateBitmap(input.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
@@ -103,10 +100,10 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 			I_BYTE* outputImageBeginPtr = (I_BYTE*)outputBitmap.GetLinePtr(r);
 		
 			for (int alpha = 0; alpha < angleRange; alpha++){
-				double radian = imath::GetRadianFromDegree(alpha / angleScale);
+				double angle = alpha / double(angleRange) * I_2PI;
 		
-				double x = (r + r1) * cos(radian) / radiusScale; 			
-				double y = (r  + r1) * sin(radian) / radiusScale;
+				double x = (r + r1) * cos(angle); 			
+				double y = (r  + r1) * sin(angle);
 
 				x += aoiCenter.GetX();
 				y += aoiCenter.GetY();
@@ -119,58 +116,6 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 	return true;
 }
 
-/*
-I_BYTE CImagePolarTransformProcessorComp::GetInterpolatedValue(const iimg::IBitmap& bitmap, double x, double y) const
-{
-	int cx = int(::ceil(x));
-	int cy = int(::ceil(y));
-
-	int ix = int(::floor(x));
-	int iy = int(::floor(y));
-
-	double dx = cx - x;
-	double dy = cy - y;
-
-	double v1 = (1.0 - dx) * (1.0 - dy) * GetImageValue(bitmap, ix , iy);
-	double v2 = (dx) * (1.0 - dy) * GetImageValue(bitmap, cx , iy);
-	double v3 = (dy) * (1.0 - dx) * GetImageValue(bitmap, ix, cy);
-	double v4 = (dy) * (dx) * GetImageValue(bitmap, cx, cy);
-
-	int retVal = int(v1 + v2 + v3 + v4 + 0.5);
-	if (retVal > 255){
-		retVal = 255;
-	}
-
-	return I_BYTE(retVal);
-}
-
-
-I_BYTE CImagePolarTransformProcessorComp::GetImageValue(const iimg::IBitmap& bitmap, int x, int y) const
-{
-	I_BYTE* imageBufferPtr = (I_BYTE*)bitmap.GetLinePtr(0);
-	int imageLineDifference = bitmap.GetLinesDifference();
-	int inputImageHeight = bitmap.GetImageSize().GetY();
-	int inputImageWidth = bitmap.GetImageSize().GetX();
-
-	if (x < 0){
-		x = 0;
-	}
-
-	if (x >= inputImageWidth){
-		x = inputImageWidth - 1;
-	}
-
-	if (y < 0){
-		y = 0;
-	}
-
-	if (y >= inputImageHeight){
-		y = inputImageHeight - 1;
-	}
-
-	return *(imageBufferPtr + x + imageLineDifference * y);
-}
-*/
 
 } // namespace iipr
 
