@@ -206,11 +206,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageCropProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CImageInterpolationParams.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageNormalizeProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CImagePolarTransformProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -247,6 +259,14 @@
 			</File>
 			<File
 				RelativePath="..\CRectImageSmoothProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRingPatternGeneratorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRingPatternGeneratorParamsComp.cpp"
 				>
 			</File>
 			<File
@@ -311,7 +331,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.h"
+				RelativePath="..\CImageCropProcessorComp.h"
 				>
 			</File>
 			<File
@@ -319,7 +339,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageInterpolationParams.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageNormalizeProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImagePolarTransformProcessorComp.h"
 				>
 			</File>
 			<File
@@ -332,10 +360,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLocalDifferenceProcessorComp.h"
 				>
 			</File>
 			<File
@@ -360,6 +384,14 @@
 			</File>
 			<File
 				RelativePath="..\CRectImageSmoothProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRingPatternGeneratorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRingPatternGeneratorParamsComp.h"
 				>
 			</File>
 			<File
@@ -423,6 +455,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IInterpolationParams.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iipr.h"
 				>
 			</File>
@@ -451,6 +487,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IRingPatternGeneratorParams.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ISearchModel.h"
 				>
 			</File>
@@ -471,27 +511,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TGaussianKernel2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TGaussianProcessorComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TImageParamProcessorCompBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TKernel2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TLocalNeighborhood.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMorphoProcessorComp.h"
+				RelativePath="..\TImagePixelInterpolator.h"
 				>
 			</File>
 			<File

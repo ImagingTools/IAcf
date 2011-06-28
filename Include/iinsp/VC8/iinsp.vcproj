@@ -234,6 +234,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IInspection.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IInspectionTask.h"
 				>
 			</File>
