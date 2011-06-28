@@ -7,11 +7,11 @@
 #include "iprm/IParamsSet.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iproc/IBitmapSupplier.h"
 
 // ACF-Solutions includes
 #include "imeas/CGeneralDataSequence.h"
 
+#include "iipr/IBitmapSupplier.h"
 #include "iipr/ILineProjectionSupplier.h"
 #include "iipr/ILineProjectionProcessor.h"
 
@@ -42,7 +42,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iipr::IBitmapSupplier, m_bitmapSupplierCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 };
 

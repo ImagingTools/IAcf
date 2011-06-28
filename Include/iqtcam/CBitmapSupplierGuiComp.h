@@ -6,10 +6,11 @@
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
-#include "iproc/IBitmapSupplier.h"
 #include "iqt/CBitmap.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+#include "iipr/IBitmapSupplier.h"
 
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
@@ -24,14 +25,14 @@ namespace iqtcam
 
 class CBitmapSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
 			Ui::CBitmapSupplierGuiComp,
-			iproc::IBitmapSupplier>
+			iipr::IBitmapSupplier>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtinsp::TSupplierGuiCompBase<
 				Ui::CBitmapSupplierGuiComp,
-				iproc::IBitmapSupplier> BaseClass;
+				iipr::IBitmapSupplier> BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapSupplierGuiComp);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");

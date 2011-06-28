@@ -2,15 +2,13 @@
 #define iipr_CSearchBasedFeaturesSupplierComp_included
 
 
+// ACF includes
 #include "i2d/CVector2d.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 
-#include "iproc/IBitmapSupplier.h"
-
+#include "iipr/IBitmapSupplier.h"
 #include "iipr/IFeaturesSupplier.h"
 #include "iipr/CFeaturesContainer.h"
 
@@ -41,7 +39,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iproc::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iipr::IBitmapSupplier, m_bitmapSupplierCompPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 };
 

@@ -148,7 +148,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::IBitmapSupplier
+        iipr::IBitmapSupplier
       </InterfaceId>
       <ComponentId>
         ImageTask

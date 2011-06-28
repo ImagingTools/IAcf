@@ -120,7 +120,7 @@ void CBitmapSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	iproc::IBitmapSupplier* supplierPtr = GetObjectPtr();
+	iipr::IBitmapSupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		const iimg::IBitmap* bitmapPtr = NULL;
 

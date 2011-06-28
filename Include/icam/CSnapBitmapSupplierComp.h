@@ -2,16 +2,14 @@
 #define icam_CSnapBitmapSupplierComp_included
 
 
+// ACF includes
 #include "istd/TDelPtr.h"
-
 #include "iimg/IBitmap.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iproc/TSupplierCompWrap.h"
-
 #include "iproc/IBitmapAcquisition.h"
-#include "iproc/IBitmapSupplier.h"
+
+#include "iipr/IBitmapSupplier.h"
 
 
 namespace icam
@@ -21,17 +19,17 @@ namespace icam
 /**
 	Implementation of bitmap supplier based on image acquisition.
 */
-class CSnapBitmapSupplierComp: public iproc::TSupplierCompWrap<iproc::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> >
+class CSnapBitmapSupplierComp: public iproc::TSupplierCompWrap<iipr::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> >
 {
 public:
-	typedef iproc::TSupplierCompWrap<iproc::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> > BaseClass;
+	typedef iproc::TSupplierCompWrap<iipr::IBitmapSupplier, istd::TDelPtr<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision object for image snap", true, "BitmapAcquisition");
 	I_END_COMPONENT;
 
-	// reimplemented (iproc::IBitmapSupplier)
+	// reimplemented (iipr::IBitmapSupplier)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 protected:
