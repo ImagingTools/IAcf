@@ -25,7 +25,7 @@ public:
 		I_REGISTER_INTERFACE(iipr::IRingPatternGeneratorParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_defaultPatternModeAttrPtr, "DefaultPatternMode", "Default mode for ring pattern generation.\n0 - Fixed wavelength ist used\n1 - Dynamic wavelength is used", false, 0);
-		I_ASSIGN(m_defaultWaveLengthAttrPtr, "DefaultWaveLength", "Default wavelength used for generated ring patternin pixel", false, 4);
+		I_ASSIGN(m_defaultWaveLengthAttrPtr, "DefaultWaveLength", "Default wavelength used for generated ring pattern in pixel", false, 4);
 	I_END_COMPONENT;
 
 	CRingPatternGeneratorParamsComp();
