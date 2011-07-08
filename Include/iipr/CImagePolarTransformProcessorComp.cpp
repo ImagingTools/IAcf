@@ -88,6 +88,13 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 		radius = (r2 - r1);
 	}
 
+	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(realAoiPtr);
+	if (circlePtr != NULL){
+		r1 = 0;
+		r2 = int(::floor(circlePtr->GetRadius()));
+		radius = r2;
+	}
+
 	if (!outputBitmap.CreateBitmap(input.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
 		return false;
 	}

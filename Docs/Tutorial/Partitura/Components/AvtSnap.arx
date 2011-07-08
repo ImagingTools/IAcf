@@ -416,7 +416,7 @@
         BasePck
       </PackageId>
       <ComponentId>
-        AttributedRectangle
+        Rectangle
       </ComponentId>
       <Data>
         <IsEnabled>
