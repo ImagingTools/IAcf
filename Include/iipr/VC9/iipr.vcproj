@@ -324,6 +324,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConvolutionKernel2d.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
 				>
 			</File>
@@ -420,6 +424,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IBitmapSupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ICaliperParams.h"
 				>
 			</File>
@@ -457,6 +465,10 @@
 			</File>
 			<File
 				RelativePath="..\IFeatureToProjectionMapper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IImageInterpolationParams.h"
 				>
 			</File>
 			<File
