@@ -2,10 +2,8 @@
 #define iipr_IBitmapSupplier_included
 
 
-#include "istd/CIndex2d.h"
-
+// ACF includes
 #include "iimg/IBitmap.h"
-
 #include "iproc/ISupplier.h"
 
 
@@ -31,4 +29,5 @@ public:
 
 
 #endif // !iipr_IBitmapSupplier_included
+
 

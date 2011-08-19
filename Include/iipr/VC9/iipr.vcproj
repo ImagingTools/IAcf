@@ -492,6 +492,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IMultiBitmapSupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IMultidimensionalFilterConstraints.h"
 				>
 			</File>

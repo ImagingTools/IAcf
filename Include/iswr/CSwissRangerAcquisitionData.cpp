@@ -79,7 +79,7 @@ const iimg::IBitmap& CSwissRangerAcquisitionData::GetDistanceImage() const
 			}
 		}
 
-		m_distanceImage.CreateBitmap(m_depthImage.GetImageSize(), imageDataPtr.PopPtr(), true);
+		m_distanceImage.CreateBitmap(iimg::IBitmap::PF_GRAY, m_depthImage.GetImageSize(), imageDataPtr.PopPtr(), true);
 	}
 	
 	return m_distanceImage;

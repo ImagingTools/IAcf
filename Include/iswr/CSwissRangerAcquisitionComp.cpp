@@ -277,7 +277,7 @@ bool CSwissRangerAcquisitionComp::CreateSwissImage(
 		}
 
 		iimg::CGeneralBitmap depthImage;
-		if (!depthImage.CreateBitmap(size, imageDataPtr.PopPtr(), true, size.GetX() * 2, 16)){
+		if (!depthImage.CreateBitmap(iimg::IBitmap::PF_GRAY16, size, imageDataPtr.PopPtr(), true, size.GetX() * 2)){
 			return false;
 		}
 
