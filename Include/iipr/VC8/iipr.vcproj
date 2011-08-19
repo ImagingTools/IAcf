@@ -5,6 +5,7 @@
 	Name="iipr"
 	ProjectGUID="{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}"
 	RootNamespace="iipr"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -16,7 +17,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC8"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
@@ -47,10 +47,14 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				StringPooling="true"
 				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
@@ -121,10 +125,15 @@
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
+				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				BrowseInformation="1"
+				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
+				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -315,6 +324,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConvolutionKernel2d.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
 				>
 			</File>
@@ -411,6 +424,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IBitmapSupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ICaliperParams.h"
 				>
 			</File>
@@ -448,6 +465,10 @@
 			</File>
 			<File
 				RelativePath="..\IFeatureToProjectionMapper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IImageInterpolationParams.h"
 				>
 			</File>
 			<File
