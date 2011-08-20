@@ -141,7 +141,7 @@ void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
 			if (paramsModelPtr != NULL){
 				if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
-					m_paramsObserver.EnsureDetached();
+					m_paramsObserver.EnsureModelDetached();
 
 					paramsModelPtr->AttachObserver(&m_paramsObserver);
 				}

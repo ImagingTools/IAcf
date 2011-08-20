@@ -15,6 +15,8 @@
 #include "iipr/CExtremumCaliperProcessorComp.h"
 #include "iipr/CLineProjectionProcessorComp.h"
 #include "iipr/CCircleFindProcessorComp.h"
+#include "iipr/CDelegatedBitmapSupplierComp.h"
+#include "iipr/CProcessedBitmapSupplierComp.h"
 #include "iipr/CPositionFromImageSupplierComp.h"
 #include "iipr/CRectDerivativeProcessorComp.h"
 #include "iipr/CFeaturesContainer.h"
@@ -55,6 +57,8 @@ typedef icomp::TMakeComponentWrap<
 			istd::IChangeable,
 			imod::IModel> FeaturesContainer;
 typedef iipr::CFeatureToImageMapperProcessorComp FeatureToImageMapperProcessor;
+typedef icomp::TModelCompWrap<iipr::CDelegatedBitmapSupplierComp> DelegatedBitmapSupplier;
+typedef icomp::TModelCompWrap<iipr::CProcessedBitmapSupplierComp> ProcessedBitmapSupplier;
 typedef icomp::TModelCompWrap<iipr::CPositionFromImageSupplierComp> PositionFromImageSupplier;
 typedef icomp::TModelCompWrap<iipr::CSearchBasedFeaturesSupplierComp> SearchBasedFeaturesSupplier;
 typedef icomp::TModelCompWrap<iipr::CLineProjectionSupplierComp> ProjectionSupplier;

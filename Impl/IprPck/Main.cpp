@@ -32,7 +32,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			InvertOperator,
 			"Invertation operator",
-			"Operator Image Processing");
+			"Operator Image Processing" IM_TAG("Processor"));
 
 I_EXPORT_COMPONENT(
 			CaliperParams,
@@ -42,17 +42,17 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			ExtremumCaliperProcessor,
 			"Caliper implementation extracting projection extremums",
-			"Caliper Extremum Minimum Maximum Projection Processor");
+			"Caliper Extremum Minimum Maximum Projection Processor" IM_TAG("Processor"));
 
 I_EXPORT_COMPONENT(
 			LineProjectionProcessor,
 			"Line projection implementation for single line width",
-			"Projection Line Processor");
+			"Projection Line Processor" IM_TAG("Processor"));
 
 I_EXPORT_COMPONENT(
 			CircleFindProcessor,
 			"Circle finder processor",
-			"Circle Finder Annulus Caliper Processor");
+			"Circle Finder Annulus Caliper Processor" IM_TAG("Processor"));
 
 I_EXPORT_COMPONENT(
 			FeaturesContainer,
@@ -62,7 +62,17 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			FeatureToImageMapperProcessor,
 			"Processor converting feature container to set of positions using mapper of features",
-			"Feature Position Processor Mapper Caliper Convertion");
+			"Feature Position Mapper Caliper Convertion" IM_TAG("Processor"));
+
+I_EXPORT_COMPONENT(
+			DelegatedBitmapSupplier,
+			"Image supplier redirecting the image access to another supplier or image object",
+			"Supplier Image Bitmap Processing Identity Bridge Direct Identical Dummy Wrap Copy");
+
+I_EXPORT_COMPONENT(
+			ProcessedBitmapSupplier,
+			"Image supplier providing processed image from another one",
+			"Supplier Image Bitmap Processing Processor");
 
 I_EXPORT_COMPONENT(
 			PositionFromImageSupplier,

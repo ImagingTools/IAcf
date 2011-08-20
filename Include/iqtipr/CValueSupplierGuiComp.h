@@ -51,7 +51,7 @@ protected:
 	public:
 		ParamsObserver(CValueSupplierGuiComp* parentPtr);
 
-		using imod::CSingleModelObserverBase::EnsureDetached;
+		using imod::CSingleModelObserverBase::EnsureModelDetached;
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)

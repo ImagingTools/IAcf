@@ -164,7 +164,7 @@ void CDriverControllerComp::OnComponentCreated()
 
 void CDriverControllerComp::OnComponentDestroyed()
 {
-	EnsureDetached();
+	EnsureModelsDetached();
 }
 
 

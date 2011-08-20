@@ -215,6 +215,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageCropProcessorComp.cpp"
 				>
 			</File>
@@ -256,6 +260,10 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -344,6 +352,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageCropProcessorComp.h"
 				>
 			</File>
@@ -385,6 +397,10 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapSupplierComp.h"
 				>
 			</File>
 			<File
