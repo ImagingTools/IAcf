@@ -1,4 +1,4 @@
-#include "icam/CTriggerParamsComp.h"
+#include "isig/CTriggerParamsComp.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -7,7 +7,7 @@
 #include "iser/CArchiveTag.h"
 
 
-namespace icam
+namespace isig
 {
 
 
@@ -18,7 +18,7 @@ CTriggerParamsComp::CTriggerParamsComp()
 }
 
 
-// reimplemented (icam::ITriggerParams)
+// reimplemented (isig::ITriggerParams)
 
 const ITriggerConstraints* CTriggerParamsComp::GetConstraints() const
 {
@@ -95,6 +95,6 @@ void CTriggerParamsComp::OnComponentCreated()
 }
 
 
-} // namespace icam
+} // namespace isig
 
 

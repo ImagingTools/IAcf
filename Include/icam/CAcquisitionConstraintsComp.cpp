@@ -1,6 +1,8 @@
 #include "icam/CAcquisitionConstraintsComp.h"
 
-#include "icam/ITriggerParams.h"
+
+// IACF includes
+#include "isig/ITriggerParams.h"
 
 
 namespace icam
@@ -21,23 +23,23 @@ bool CAcquisitionConstraintsComp::IsTriggerSupported() const
 
 bool CAcquisitionConstraintsComp::IsTriggerModeSupported(int triggerMode) const
 {
-	if (triggerMode == icam::ITriggerParams::TM_DEFAULT){
+	if (triggerMode == isig::ITriggerParams::TM_DEFAULT){
 		return true;
 	}
 
-	if (triggerMode == icam::ITriggerParams::TM_RISING_EDGE && *m_isRisingEdgeTriggerSupportedAttrPtr){
+	if (triggerMode == isig::ITriggerParams::TM_RISING_EDGE && *m_isRisingEdgeTriggerSupportedAttrPtr){
 		return true;
 	}
 
-	if (triggerMode == icam::ITriggerParams::TM_FALLING_EDGE && *m_isFallingEdgeTriggerSupportedAttrPtr){
+	if (triggerMode == isig::ITriggerParams::TM_FALLING_EDGE && *m_isFallingEdgeTriggerSupportedAttrPtr){
 		return true;
 	}
 
-	if (triggerMode == icam::ITriggerParams::TM_NEGATIVE_LEVEL && *m_isNegativeLevelTriggerSupportedAttrPtr){
+	if (triggerMode == isig::ITriggerParams::TM_NEGATIVE_LEVEL && *m_isNegativeLevelTriggerSupportedAttrPtr){
 		return true;
 	}
 
-	if (triggerMode == icam::ITriggerParams::TM_POSITIVE_LEVEL && *m_isPositiveLevelTriggerSupportedAttrPtr){
+	if (triggerMode == isig::ITriggerParams::TM_POSITIVE_LEVEL && *m_isPositiveLevelTriggerSupportedAttrPtr){
 		return true;
 	}
 

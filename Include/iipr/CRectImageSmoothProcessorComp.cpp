@@ -63,7 +63,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		return false;
 	}
 
-	imath::CVarVector filterLengths = paramsPtr->GetFilterLengths();
+	imath::CVarVector filterLengths = paramsPtr->GetValues();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
 		return false;

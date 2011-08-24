@@ -1,13 +1,13 @@
-#ifndef icam_ITriggerParams_included
-#define icam_ITriggerParams_included
+#ifndef isig_ITriggerParams_included
+#define isig_ITriggerParams_included
 
 
 #include "iser/ISerializable.h"
 
-#include "icam/icam.h"
+#include "isig/isig.h"
 
 
-namespace icam
+namespace isig
 {
 
 
@@ -48,21 +48,21 @@ public:
 
 	/**
 		Get trigger mode.
-		Normal trigger modes are defined in \c icam::ITriggerParams::TriggerMode.
+		Normal trigger modes are defined in \c isig::ITriggerParams::TriggerMode.
 	*/
 	virtual int GetTriggerMode() const = 0;
 
 	/**
 		Set trigger mode.
-		Normal trigger modes are defined in \c icam::ITriggerParams::TriggerMode.
+		Normal trigger modes are defined in \c isig::ITriggerParams::TriggerMode.
 	*/
 	virtual void SetTriggerMode(int triggerMode) = 0;
 };
 
 
-} // namespace icam
+} // namespace isig
 
 
-#endif // !icam_ITriggerParams_included
+#endif // !isig_ITriggerParams_included
 
 

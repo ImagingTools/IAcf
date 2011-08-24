@@ -118,7 +118,7 @@ int CRectDerivativeProcessor::DoProcessing(
 		const imeas::INumericParams* filterParamsPtr = dynamic_cast<const imeas::INumericParams*>(
 					paramsPtr->GetParameter(m_filterParamsId));
 		if (filterParamsPtr != NULL){
-			imath::CVarVector filterLengths = filterParamsPtr->GetFilterLengths();
+			imath::CVarVector filterLengths = filterParamsPtr->GetValues();
 			if (filterLengths.GetElementsCount() > 0){
 				filterLength = filterLengths[0];
 			}

@@ -21,11 +21,6 @@ I_EXPORT_COMPONENT(
 			"Exposure Shutter Delay Time EEN Image Bitmap Acquisition Snap Parameters");
 
 I_EXPORT_COMPONENT(
-			TriggerParams,
-			"Trigger params for cameras",
-			"Camera Acquisition Trigger Parameters Snap");
-
-I_EXPORT_COMPONENT(
 			SnapBitmapSupplier,
 			"Implementation of bitmap supplier getting image from camera",
 			"Image Bitmap Acquisition Snap Supplier Parameters");
@@ -44,6 +39,11 @@ I_EXPORT_COMPONENT(
 			SamplingParams,
 			"Sampling params based on fixed boundary values",
 			"Sample Sampling Acquisition Model Parameters");
+
+I_EXPORT_COMPONENT(
+			TriggerParams,
+			"Trigger params for cameras",
+			"Camera Acquisition Trigger Parameters Snap");
 
 I_EXPORT_COMPONENT(
 			InspectionTask,

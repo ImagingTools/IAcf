@@ -1,21 +1,21 @@
-#ifndef icam_CTriggerParamsComp_included
-#define icam_CTriggerParamsComp_included
+#ifndef isig_CTriggerParamsComp_included
+#define isig_CTriggerParamsComp_included
 
 
 #include "icomp/CComponentBase.h"
 
-#include "icam/ITriggerConstraints.h"
-#include "icam/ITriggerParams.h"
+#include "isig/ITriggerConstraints.h"
+#include "isig/ITriggerParams.h"
 
 
-namespace icam
+namespace isig
 {
 
 
 /**
 	Implementatation of standard trigger parameters set.
 */
-class CTriggerParamsComp: public icomp::CComponentBase, virtual public icam::ITriggerParams
+class CTriggerParamsComp: public icomp::CComponentBase, virtual public isig::ITriggerParams
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -23,14 +23,14 @@ public:
 	CTriggerParamsComp();
 
 	I_BEGIN_COMPONENT(CTriggerParamsComp);
-		I_REGISTER_INTERFACE(icam::ITriggerParams);
+		I_REGISTER_INTERFACE(isig::ITriggerParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_triggerConstraintsCompPtr, "TriggerConstraints", "Describing allowed parameter state, typically implemented in camera component", false, "TriggerConstraints");
 		I_ASSIGN(m_isTriggerEnabledAttrPtr, "ExternalTriggerEnabled", "Enables external trigger", false, false);
 		I_ASSIGN(m_triggerModeAttrPtr, "TriggerMode", "Set trigger mode: 0 - Default, 1 - Rising edge, 2 - Falling edge, 3 - Positive level, 4 - Negative level", false, 0);
 	I_END_COMPONENT;
 
-	// reimplmented (icam::ITriggerParams)
+	// reimplmented (isig::ITriggerParams)
 	virtual const ITriggerConstraints* GetConstraints() const;
 	virtual bool IsTriggerEnabled() const;
 	virtual void SetTriggerEnabled(bool isEnabled);
@@ -48,15 +48,15 @@ private:
 	bool m_isTriggerEnabled;
 	int m_triggerMode;
 
-	I_REF(icam::ITriggerConstraints, m_triggerConstraintsCompPtr);
+	I_REF(isig::ITriggerConstraints, m_triggerConstraintsCompPtr);
 	I_ATTR(bool, m_isTriggerEnabledAttrPtr);
 	I_ATTR(int, m_triggerModeAttrPtr);
 };
 
 
-} // namespace icam
+} // namespace isig
 
 
-#endif // !icam_CTriggerParamsComp_included
+#endif // !isig_CTriggerParamsComp_included
 
 

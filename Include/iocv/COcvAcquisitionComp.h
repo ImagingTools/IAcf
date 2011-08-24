@@ -9,19 +9,18 @@
 
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
-
 #include "i2d/CRectangle.h"
-
-#include "iproc/TSyncProcessorWrap.h"
-
-#include "iproc/IBitmapAcquisition.h"
-#include "icam/IExposureConstraints.h"
-#include "icam/ITriggerConstraints.h"
-#include "icam/IExposureParams.h"
-#include "icam/ITriggerParams.h"
-
+#include "ibase/TLoggerCompWrap.h"
 #include "icomp/CComponentBase.h"
+#include "iproc/TSyncProcessorWrap.h"
+#include "iproc/IBitmapAcquisition.h"
+
+// IACF includes
+#include "icam/IExposureConstraints.h"
+#include "icam/IExposureParams.h"
+
+#include "isig/ITriggerParams.h"
+#include "isig/ITriggerConstraints.h"
 
 
 namespace iocv
@@ -33,7 +32,7 @@ namespace iocv
 */
 class COcvAcquisitionComp:
 			public ibase::CLoggerComponentBase,
-			virtual public icam::ITriggerConstraints,
+			virtual public isig::ITriggerConstraints,
 			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 {
 public:
@@ -41,7 +40,7 @@ public:
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
-		I_REGISTER_INTERFACE(icam::ITriggerConstraints);
+		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -62,7 +61,7 @@ public:
 	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
-	// reimplemented (icam::ITriggerConstraints)
+	// reimplemented (isig::ITriggerConstraints)
 	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
@@ -73,7 +72,7 @@ protected:
 	
 private:
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
-	I_REF(icam::ITriggerParams, m_triggerParamsCompPtr);
+	I_REF(isig::ITriggerParams, m_triggerParamsCompPtr);
 	I_REF(i2d::CRectangle, m_imageRegionParamsCompPtr);
 	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
 

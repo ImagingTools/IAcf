@@ -1,11 +1,11 @@
-#ifndef icam_ITriggerConstraints_included
-#define icam_ITriggerConstraints_included
+#ifndef isig_ITriggerConstraints_included
+#define isig_ITriggerConstraints_included
 
 
 #include "istd/IPolymorphic.h"
 
 
-namespace icam
+namespace isig
 {
 
 
@@ -24,15 +24,15 @@ public:
 	/**
 		Check if specified trigger mode is supported.
 		Default mode should be always supported.
-		Normal trigger modes are defined in \c icam::ITriggerParams::TriggerMode.
+		Normal trigger modes are defined in \c isig::ITriggerParams::TriggerMode.
 	*/
 	virtual bool IsTriggerModeSupported(int triggerMode) const = 0;
 };
 
 
-} // namespace icam
+} // namespace isig
 
 
-#endif // !icam_ITriggerConstraints_included
+#endif // !isig_ITriggerConstraints_included
 
 

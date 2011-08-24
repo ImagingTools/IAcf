@@ -10,7 +10,6 @@
 #include <vector>
 #include <map>
 
-
 // ACF includes
 #include "i2d/CRectangle.h"
 #include "icomp/CComponentBase.h"
@@ -21,10 +20,12 @@
 #include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorWrap.h"
 
+// IACF includes
 #include "icam/IExposureConstraints.h"
-#include "icam/ITriggerConstraints.h"
 #include "icam/IExposureParams.h"
-#include "icam/ITriggerParams.h"
+
+#include "isig/ITriggerParams.h"
+#include "isig/ITriggerConstraints.h"
 
 #include "isgige/CGenicamCameraSingleton.h"
 
@@ -40,7 +41,7 @@ class CGenicamCameraComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,
 			virtual public icam::IExposureConstraints,
-			virtual public icam::ITriggerConstraints,
+			virtual public isig::ITriggerConstraints,
 			virtual public iprm::ISelectionConstraints,
 			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
 {
@@ -52,7 +53,7 @@ public:
 	I_BEGIN_COMPONENT(CGenicamCameraComp);
 		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
-		I_REGISTER_INTERFACE(icam::ITriggerConstraints);
+		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
 		I_ASSIGN(m_defaultUrlParamCompPtr, "DefaultUrlParam", "Default camera URL used if no URL is defined", false, "DefaultUrlParam");
 		I_ASSIGN(m_defaultSelectionParamCompPtr, "DefaultSelectionParam", "Default camera selection params used if no selection nor URL is found", false, "DefaultSelectionParam");
@@ -101,7 +102,7 @@ public:
 	virtual istd::CRange GetDelayTimeRange() const;
 	virtual istd::CRange GetEenDelayRange() const;
 
-	// reimplemented (icam::ITriggerConstraints)
+	// reimplemented (isig::ITriggerConstraints)
 	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
@@ -155,7 +156,7 @@ private:
 	I_REF(iprm::IFileNameParam, m_defaultUrlParamCompPtr);
 	I_REF(iprm::ISelectionParam, m_defaultSelectionParamCompPtr);
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
-	I_REF(icam::ITriggerParams, m_defaultTriggerParamsCompPtr);
+	I_REF(isig::ITriggerParams, m_defaultTriggerParamsCompPtr);
 	I_REF(i2d::CRectangle, m_defaultRoiParamCompPtr);
 	I_ATTR(istd::CString, m_urlParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_selectionParamIdPtr);

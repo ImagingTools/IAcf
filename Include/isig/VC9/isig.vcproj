@@ -177,6 +177,10 @@
 				RelativePath="..\CSamplingParamsComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CTriggerParamsComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -184,6 +188,10 @@
 			>
 			<File
 				RelativePath="..\CSamplingParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTriggerParamsComp.h"
 				>
 			</File>
 			<File
@@ -196,6 +204,14 @@
 			</File>
 			<File
 				RelativePath="..\isig.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ITriggerConstraints.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ITriggerParams.h"
 				>
 			</File>
 		</Filter>
