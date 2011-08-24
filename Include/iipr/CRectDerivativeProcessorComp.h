@@ -24,7 +24,7 @@ public:
 
 	I_BEGIN_COMPONENT(CRectDerivativeProcessorComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(IMultidimensionalFilterConstraints);
+		I_REGISTER_INTERFACE(INumericConstraints);
 		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of filter parameters in parameter set", true, "FilterParams");
 	I_END_COMPONENT;
 

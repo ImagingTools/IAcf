@@ -195,14 +195,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CProjectionShape.cpp"
 				>
 			</File>
@@ -250,10 +242,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -306,10 +294,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CMultidimensionalFilterParamsGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\Generated\moc_CSearchGuiComp.cpp"
 				>
 			</File>
@@ -331,10 +315,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CLineProjectionSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CMultidimensionalFilterParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -363,10 +343,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.ui"
 				>
 			</File>
 			<File

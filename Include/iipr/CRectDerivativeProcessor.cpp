@@ -8,9 +8,8 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
+#include "imeas/INumericParams.h"
 #include "imeas/CSamplesInfo.h"
-
-#include "iipr/IMultidimensionalFilterParams.h"
 
 
 namespace iipr
@@ -116,7 +115,7 @@ int CRectDerivativeProcessor::DoProcessing(
 
 	double filterLength = 5.0;
 	if (paramsPtr != NULL){
-		const IMultidimensionalFilterParams* filterParamsPtr = dynamic_cast<const IMultidimensionalFilterParams*>(
+		const imeas::INumericParams* filterParamsPtr = dynamic_cast<const imeas::INumericParams*>(
 					paramsPtr->GetParameter(m_filterParamsId));
 		if (filterParamsPtr != NULL){
 			imath::CVarVector filterLengths = filterParamsPtr->GetFilterLengths();
@@ -132,7 +131,7 @@ int CRectDerivativeProcessor::DoProcessing(
 }
 
 
-// reimplemented (iipr::IMultidimensionalFilterConstraints)
+// reimplemented (imeas::INumericConstraints)
 
 int CRectDerivativeProcessor::GetFilterDimensionsCount() const
 {

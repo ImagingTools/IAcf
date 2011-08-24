@@ -4,9 +4,9 @@
 
 // ACF-Solutions includes
 #include "imeas/IUnitInfo.h"
+#include "imeas/INumericParams.h"
+#include "imeas/INumericConstraints.h"
 
-#include "iipr/IMultidimensionalFilterParams.h"
-#include "iipr/IMultidimensionalFilterConstraints.h"
 #include "iipr/TImageParamProcessorCompBase.h"
 
 
@@ -19,12 +19,12 @@ namespace iipr
 	This implementation uses moving average alghorithm.
 */
 class CRectImageSmoothProcessorComp:
-			public TImageParamProcessorCompBase<IMultidimensionalFilterParams>,
-			virtual public IMultidimensionalFilterConstraints,
+			public TImageParamProcessorCompBase<imeas::INumericParams>,
+			virtual public imeas::INumericConstraints,
 			virtual protected imeas::IUnitInfo
 {
 public:
-	typedef iipr::TImageParamProcessorCompBase<IMultidimensionalFilterParams> BaseClass;
+	typedef iipr::TImageParamProcessorCompBase<imeas::INumericParams> BaseClass;
 
 	enum UnitMode
 	{
@@ -40,20 +40,20 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CRectImageSmoothProcessorComp);
-		I_REGISTER_INTERFACE(IMultidimensionalFilterConstraints);
+		I_REGISTER_INTERFACE(imeas::INumericConstraints);
 		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units:\n\t0 - Pixels\n\t1 - Percent of width and height\n\t2 - Percent of diagonal", true, 0);
 		I_ASSIGN(m_borderModeAttrPtr, "BorderMode", "Define used mode for border area:\n\t0 - Kernel will be stretched, original image size will be outputed\n\t1 - Border area removed, output image will be smaller", true, 0);
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IMultidimensionalFilterConstraints)
+	// reimplemented (imeas::INumericConstraints)
 	virtual int GetFilterDimensionsCount() const;
 	virtual istd::CString GetFilterDescription(int dimension) const;
 	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const;
 
 protected:
-	// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
+	// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericParams>)
 	virtual bool ParamProcessImage(
-				const IMultidimensionalFilterParams* paramsPtr,
+				const imeas::INumericParams* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 

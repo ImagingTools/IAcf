@@ -107,10 +107,10 @@
         FilterParams
       </Id>
       <PackageId>
-        IprPck
-      </PackageId>
+				MeasPck
+			</PackageId>
       <ComponentId>
-        MultidimensionalFilterParams
+        NumericParams
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -152,10 +152,10 @@
         FilterParamsGui
       </Id>
       <PackageId>
-        QtIprPck
-      </PackageId>
+				QtMeasPck
+			</PackageId>
       <ComponentId>
-        RectangularFilterParamsGui
+        NumericParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>

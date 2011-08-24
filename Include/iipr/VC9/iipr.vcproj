@@ -199,6 +199,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.cpp"
 				>
 			</File>
@@ -212,10 +216,6 @@
 			</File>
 			<File
 				RelativePath="..\CFeatureToImageMapperProcessorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDelegatedBitmapSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -248,10 +248,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultidimensionalFilterParamsComp.cpp"
 				>
 			</File>
 			<File
@@ -336,6 +332,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
 				>
 			</File>
@@ -349,10 +349,6 @@
 			</File>
 			<File
 				RelativePath="..\CFeatureToImageMapperProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDelegatedBitmapSupplierComp.h"
 				>
 			</File>
 			<File
@@ -385,10 +381,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultidimensionalFilterParamsComp.h"
 				>
 			</File>
 			<File
@@ -509,14 +501,6 @@
 			</File>
 			<File
 				RelativePath="..\IMultiBitmapSupplier.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IMultidimensionalFilterConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IMultidimensionalFilterParams.h"
 				>
 			</File>
 			<File

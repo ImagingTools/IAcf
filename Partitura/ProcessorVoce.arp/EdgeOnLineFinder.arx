@@ -285,7 +285,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iipr::IMultidimensionalFilterConstraints
+        imeas::INumericConstraints
       </InterfaceId>
       <ComponentId>
         DerivativeProcessor

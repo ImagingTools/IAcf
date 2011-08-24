@@ -165,10 +165,10 @@
         SmoothFilterParams
       </Id>
       <PackageId>
-        IprPck
-      </PackageId>
+				MeasPck
+			</PackageId>
       <ComponentId>
-        MultidimensionalFilterParams
+        NumericParams
       </ComponentId>
       <Data>
         <IsEnabled>

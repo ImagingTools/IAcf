@@ -11,7 +11,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IMultidimensionalFilterConstraints)
+// reimplemented (imeas::INumericConstraints)
 
 int CRectImageSmoothProcessorComp::GetFilterDimensionsCount() const
 {
@@ -40,10 +40,10 @@ const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetFilterUnitInfo(int /*d
 }
 
 
-// reimplemented (iipr::TImageParamProcessorCompBase<iipr::IMultidimensionalFilterParams>)
+// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericParams>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
-			const IMultidimensionalFilterParams* paramsPtr,
+			const imeas::INumericParams* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {

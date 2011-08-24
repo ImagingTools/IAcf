@@ -32,10 +32,10 @@
         AverageParams
       </Id>
       <PackageId>
-        IprPck
-      </PackageId>
+				MeasPck
+			</PackageId>
       <ComponentId>
-        MultidimensionalFilterParams
+        NumericParams
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -53,10 +53,10 @@
         AverageParamsGui
       </Id>
       <PackageId>
-        QtIprPck
-      </PackageId>
+				QtMeasPck
+			</PackageId>
       <ComponentId>
-        RectangularFilterParamsGui
+        NumericParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>

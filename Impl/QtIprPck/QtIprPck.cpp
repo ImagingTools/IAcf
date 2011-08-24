@@ -19,11 +19,6 @@ I_EXPORT_PACKAGE(
 			"Qt \"Image Processing\"" IM_PROJECT("IACF") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			RectangularFilterParamsGui,
-			"Rectangular filter params",
-			"Filter Parameter Qt Image Processing");
-
-I_EXPORT_COMPONENT(
 			SearchGui,
 			"SearchGui",
 			"Model Search Qt Image Processing");

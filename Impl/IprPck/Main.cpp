@@ -20,11 +20,6 @@ I_EXPORT_COMPONENT(
 			"Image Processing Rectangle Kernel");
 
 I_EXPORT_COMPONENT(
-			MultidimensionalFilterParams,
-			"Rectangular filter parameter",
-			"Filter Image Processing Parameter");
-
-I_EXPORT_COMPONENT(
 			ProcessedCamera,
 			"Processed Camera",
 			"Image Bitmap Acquisition Snap Parameters Camera Processing");

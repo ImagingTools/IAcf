@@ -195,11 +195,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.cpp"
+				RelativePath="..\CNumericParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.moc"
+				RelativePath="..\CNumericParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -253,7 +253,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.h"
+				RelativePath="..\CNumericParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -366,7 +366,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultidimensionalFilterParamsGuiComp.ui"
+				RelativePath="..\CNumericParamsGuiComp.ui"
 				>
 			</File>
 			<File

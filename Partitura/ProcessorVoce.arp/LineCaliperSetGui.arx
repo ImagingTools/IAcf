@@ -214,10 +214,10 @@
         SmoothFilterParamsGui
       </Id>
       <PackageId>
-        QtIprPck
-      </PackageId>
+				QtMeasPck
+			</PackageId>
       <ComponentId>
-        RectangularFilterParamsGui
+        NumericParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
