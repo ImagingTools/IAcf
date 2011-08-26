@@ -25,26 +25,37 @@ public:
 	*/
 	enum TriggerMode
 	{
-		TM_DEFAULT,
+		/**
+			There is no trigger, no signal acquisition will be done.
+		*/
+		TM_NONE,
+		/**
+			There is no external trigger, permanently signal acquisition will be done.
+		*/
+		TM_CONTINUOUS,
+		/**
+			There external trigger with rising edge.
+		*/
 		TM_RISING_EDGE,
+		/**
+			There external trigger with falling edge.
+		*/
 		TM_FALLING_EDGE,
+		/**
+			There external trigger with positive edge control.
+		*/
 		TM_POSITIVE_LEVEL,
-		TM_NEGATIVE_LEVEL
+		/**
+			There external trigger with negative edge control.
+		*/
+		TM_NEGATIVE_LEVEL,
+		TM_SOFTWARE
 	};
 
 	/**
 		Get constrints describing supported parameter states.
 	*/
 	virtual const ITriggerConstraints* GetConstraints() const = 0;
-
-	/**
-		Check if trigger is enabled.
-	*/
-	virtual bool IsTriggerEnabled() const = 0;
-	/**
-		Set trigger enabling state.
-	*/
-	virtual void SetTriggerEnabled(bool isEnabled) = 0;
 
 	/**
 		Get trigger mode.

@@ -83,7 +83,6 @@ public:
 	virtual istd::CRange GetEenDelayRange() const;
 
 	// reimplemented (isig::ITriggerConstraints)
-	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
 protected:

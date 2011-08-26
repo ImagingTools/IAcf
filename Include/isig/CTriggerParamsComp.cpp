@@ -12,8 +12,7 @@ namespace isig
 
 
 CTriggerParamsComp::CTriggerParamsComp()
-:	m_isTriggerEnabled(false),
-	m_triggerMode(TM_RISING_EDGE)
+:	m_triggerMode(TM_NONE)
 {
 }
 
@@ -23,22 +22,6 @@ CTriggerParamsComp::CTriggerParamsComp()
 const ITriggerConstraints* CTriggerParamsComp::GetConstraints() const
 {
 	return m_triggerConstraintsCompPtr.GetPtr();
-}
-
-
-bool CTriggerParamsComp::IsTriggerEnabled() const
-{
-	return m_isTriggerEnabled;
-}
-
-
-void CTriggerParamsComp::SetTriggerEnabled(bool isEnabled)
-{
-	if (m_isTriggerEnabled != isEnabled){
-		istd::CChangeNotifier changePtr(this);
-
-		m_isTriggerEnabled = isEnabled;
-	}
 }
 
 
@@ -62,11 +45,7 @@ void CTriggerParamsComp::SetTriggerMode(int triggerMode)
 
 bool CTriggerParamsComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag isTriggerEnabledTag("TriggerEnabled", "Is external trigger enabled");
-
-	bool retVal = archive.BeginTag(isTriggerEnabledTag);
-	retVal = retVal && archive.Process(m_isTriggerEnabled);
-	retVal = retVal && archive.EndTag(isTriggerEnabledTag);
+	bool retVal = true;
 
 	static iser::CArchiveTag bottomTag("TriggerMode", "Trigger mode");
 	retVal = retVal && archive.BeginTag(bottomTag);
@@ -85,13 +64,7 @@ void CTriggerParamsComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_isTriggerEnabledAttrPtr.IsValid()){
-		m_isTriggerEnabled = *m_isTriggerEnabledAttrPtr;
-	}
-
-	if (m_triggerModeAttrPtr.IsValid()){
-		m_triggerMode = *m_triggerModeAttrPtr;
-	}
+	m_triggerMode = *m_triggerModeAttrPtr;
 }
 
 

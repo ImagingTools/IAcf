@@ -525,10 +525,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              ExternalTriggerEnabled
-            </Id>
+							TriggerMode
+						</Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -538,7 +538,7 @@
                 true
               </IsEnabled>
               <Value>
-                false
+                1
               </Value>
             </Data>
           </AttributeInfo>

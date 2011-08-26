@@ -62,7 +62,6 @@ public:
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (isig::ITriggerConstraints)
-	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
 protected:

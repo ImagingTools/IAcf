@@ -70,15 +70,9 @@ istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*para
 
 // reimplemented (isig::ITriggerConstraints)
 
-bool COcvAcquisitionComp::IsTriggerSupported() const
+bool COcvAcquisitionComp::IsTriggerModeSupported(int triggerMode) const
 {
-	return false;
-}
-
-
-bool COcvAcquisitionComp::IsTriggerModeSupported(int /*triggerMode*/) const
-{
-	return false;
+	return (triggerMode == isig::ITriggerParams::TM_CONTINUOUS);
 }
 
 

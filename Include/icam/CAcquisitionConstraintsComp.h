@@ -29,7 +29,8 @@ public:
 	I_BEGIN_COMPONENT(CAcquisitionConstraintsComp);
 		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 		I_REGISTER_INTERFACE(IExposureConstraints);
-		I_ASSIGN(m_isTriggerSupportedAttrPtr, "TriggerSupported", "Trigger mode is supported by the device", true, false);
+		I_ASSIGN(m_isNoAcquisitionSupportedAttrPtr, "NoAcquisitionSupported", "Enable to allow no acquisition", true, false);
+		I_ASSIGN(m_isContinuousAcqSupportedAttrPtr, "ContinuousSupported", "Enable to allow continuous acquisition mode", true, true);
 		I_ASSIGN(m_isRisingEdgeTriggerSupportedAttrPtr, "RisingEdgeTriggerSupported", "Rising edge trigger is supported by the device", true, false);
 		I_ASSIGN(m_isFallingEdgeTriggerSupportedAttrPtr, "FallingEdgeTriggerSupported", "Falling edge trigger is supported by the device", true, false);
 		I_ASSIGN(m_isNegativeLevelTriggerSupportedAttrPtr, "NegativeLevelTriggerSupported", "Negative level trigger is supported by the device", true, false);
@@ -43,7 +44,6 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (icam::IExposureConstraints)
-	virtual bool IsTriggerSupported() const;
 	virtual bool IsTriggerModeSupported(int triggerMode) const;
 
 	// reimplemented (icam::IExposureConstraints)
@@ -52,7 +52,8 @@ public:
 	virtual istd::CRange GetEenDelayRange() const;
 
 private:
-	I_ATTR(bool, m_isTriggerSupportedAttrPtr);
+	I_ATTR(bool, m_isNoAcquisitionSupportedAttrPtr);
+	I_ATTR(bool, m_isContinuousAcqSupportedAttrPtr);
 	I_ATTR(bool, m_isRisingEdgeTriggerSupportedAttrPtr);
 	I_ATTR(bool, m_isFallingEdgeTriggerSupportedAttrPtr);
 	I_ATTR(bool, m_isPositiveLevelTriggerSupportedAttrPtr);

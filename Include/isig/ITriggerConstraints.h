@@ -16,12 +16,6 @@ class ITriggerConstraints: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Check if trigger enabling/disabling is supported.
-		Please note, that for implementations using only triggered acuisition it should return also false.
-	*/
-	virtual bool IsTriggerSupported() const = 0;
-
-	/**
 		Check if specified trigger mode is supported.
 		Default mode should be always supported.
 		Normal trigger modes are defined in \c isig::ITriggerParams::TriggerMode.

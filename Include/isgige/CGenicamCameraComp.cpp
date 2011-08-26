@@ -194,15 +194,9 @@ istd::CRange CGenicamCameraComp::GetEenDelayRange() const
 
 // reimplemented (isig::ITriggerConstraints)
 
-bool CGenicamCameraComp::IsTriggerSupported() const
-{
-	return true;
-}
-
-
 bool CGenicamCameraComp::IsTriggerModeSupported(int triggerMode) const
 {
-	return (triggerMode >= isig::ITriggerParams::TM_DEFAULT) && (triggerMode <= isig::ITriggerParams::TM_FALLING_EDGE);
+	return (triggerMode >= isig::ITriggerParams::TM_CONTINUOUS) && (triggerMode <= isig::ITriggerParams::TM_FALLING_EDGE);
 }
 
 
@@ -317,19 +311,11 @@ int CGenicamCameraComp::GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr
 	if (m_triggerParamsIdAttrPtr.IsValid()){
 		const isig::ITriggerParams* triggerParamsPtr = dynamic_cast<const isig::ITriggerParams*>(paramsPtr->GetParameter((*m_triggerParamsIdAttrPtr).ToString()));
 		if (triggerParamsPtr != NULL){
-			if (!triggerParamsPtr->IsTriggerEnabled()){
-				return 0;
-			}
-
 			return triggerParamsPtr->GetTriggerMode();
 		}
 	}
 
 	if (m_defaultTriggerParamsCompPtr.IsValid()){
-		if (!m_defaultTriggerParamsCompPtr->IsTriggerEnabled()){
-			return 0;
-		}
-
 		return m_defaultTriggerParamsCompPtr->GetTriggerMode();
 	}
 
@@ -442,11 +428,15 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 	int triggerMode = GetTriggerModeByParams(paramsPtr);
 	if (!deviceInfo.isInitialized || (triggerMode != deviceInfo.triggerMode)){
 		bool setTriggerStatus = true;
+
 		switch (triggerMode){
+		case isig::ITriggerParams::TM_CONTINUOUS:
+			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "off") && setTriggerStatus;
+			break;
+
 		case isig::ITriggerParams::TM_RISING_EDGE:
 		case isig::ITriggerParams::TM_FALLING_EDGE:
 			{
-				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
 				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Line2") && setTriggerStatus;
 
 				if (triggerMode == isig::ITriggerParams::TM_FALLING_EDGE){
@@ -455,13 +445,17 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 				else{   
 					setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerActivation","RisingEdge") && setTriggerStatus;
 				}
+				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
 			}
 			break;
 
-		case isig::ITriggerParams::TM_DEFAULT:
-			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
+		case isig::ITriggerParams::TM_SOFTWARE:
 			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Software") && setTriggerStatus;
+			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
 			break;
+
+		default:
+			setTriggerStatus = false;
 		}
 
 		if (!setTriggerStatus){

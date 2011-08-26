@@ -388,26 +388,26 @@
           0
         </Flags>
         <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ExternalTriggerEnabled
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
+					<AttributeInfo>
+						<Id>
+							TriggerMode
+						</Id>
+						<Type>
+							icomp::TAttribute&lt;int&gt;
+						</Type>
+						<ExportId>
+
+						</ExportId>
+						<Data>
+							<IsEnabled>
+								true
+							</IsEnabled>
+							<Value>
+								1
+							</Value>
+						</Data>
+					</AttributeInfo>
+				</AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>

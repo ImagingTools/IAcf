@@ -13,17 +13,13 @@ namespace icam
 
 // reimplemented (icam::IExposureConstraints)
 	
-bool CAcquisitionConstraintsComp::IsTriggerSupported() const
-{
-	I_ASSERT(m_isTriggerSupportedAttrPtr.IsValid());
-
-	return *m_isTriggerSupportedAttrPtr;
-}
-
-
 bool CAcquisitionConstraintsComp::IsTriggerModeSupported(int triggerMode) const
 {
-	if (triggerMode == isig::ITriggerParams::TM_DEFAULT){
+	if (triggerMode == isig::ITriggerParams::TM_NONE && *m_isNoAcquisitionSupportedAttrPtr){
+		return true;
+	}
+
+	if (triggerMode == isig::ITriggerParams::TM_CONTINUOUS && *m_isContinuousAcqSupportedAttrPtr){
 		return true;
 	}
 

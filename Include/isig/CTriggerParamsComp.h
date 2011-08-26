@@ -26,14 +26,11 @@ public:
 		I_REGISTER_INTERFACE(isig::ITriggerParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_triggerConstraintsCompPtr, "TriggerConstraints", "Describing allowed parameter state, typically implemented in camera component", false, "TriggerConstraints");
-		I_ASSIGN(m_isTriggerEnabledAttrPtr, "ExternalTriggerEnabled", "Enables external trigger", false, false);
-		I_ASSIGN(m_triggerModeAttrPtr, "TriggerMode", "Set trigger mode: 0 - Default, 1 - Rising edge, 2 - Falling edge, 3 - Positive level, 4 - Negative level", false, 0);
+		I_ASSIGN(m_triggerModeAttrPtr, "TriggerMode", "Set trigger mode:\n\t0 - None\n\t1 - Continuous\n\t2 - Rising edge\n\t3 - Falling edge\n\t4 - Positive level\n\t5 - Negative level\n\t6 - Software", true, 0);
 	I_END_COMPONENT;
 
 	// reimplmented (isig::ITriggerParams)
 	virtual const ITriggerConstraints* GetConstraints() const;
-	virtual bool IsTriggerEnabled() const;
-	virtual void SetTriggerEnabled(bool isEnabled);
 	virtual int GetTriggerMode() const;
 	virtual void SetTriggerMode(int triggerMode);
 
@@ -45,11 +42,9 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	bool m_isTriggerEnabled;
 	int m_triggerMode;
 
 	I_REF(isig::ITriggerConstraints, m_triggerConstraintsCompPtr);
-	I_ATTR(bool, m_isTriggerEnabledAttrPtr);
 	I_ATTR(int, m_triggerModeAttrPtr);
 };
 
