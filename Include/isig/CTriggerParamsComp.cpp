@@ -19,7 +19,7 @@ CTriggerParamsComp::CTriggerParamsComp()
 
 // reimplemented (isig::ITriggerParams)
 
-const ITriggerConstraints* CTriggerParamsComp::GetConstraints() const
+const ITriggerConstraints* CTriggerParamsComp::GetTriggerConstraints() const
 {
 	return m_triggerConstraintsCompPtr.GetPtr();
 }

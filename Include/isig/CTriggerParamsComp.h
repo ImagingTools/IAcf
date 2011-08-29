@@ -30,7 +30,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplmented (isig::ITriggerParams)
-	virtual const ITriggerConstraints* GetConstraints() const;
+	virtual const ITriggerConstraints* GetTriggerConstraints() const;
 	virtual int GetTriggerMode() const;
 	virtual void SetTriggerMode(int triggerMode);
 

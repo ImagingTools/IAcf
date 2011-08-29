@@ -55,7 +55,7 @@ public:
 	/**
 		Get constrints describing supported parameter states.
 	*/
-	virtual const ITriggerConstraints* GetConstraints() const = 0;
+	virtual const ITriggerConstraints* GetTriggerConstraints() const = 0;
 
 	/**
 		Get trigger mode.

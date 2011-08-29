@@ -48,9 +48,9 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 	// reimplemented (imeas::INumericConstraints)
-	virtual int GetFilterDimensionsCount() const;
-	virtual istd::CString GetFilterDescription(int dimension) const;
-	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const;
+	virtual int GetNumericValuesCount() const;
+	virtual istd::CString GetNumericValueDescription(int index) const;
+	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (imeas::IUnitInfo)
 	virtual int GetUnitType() const;

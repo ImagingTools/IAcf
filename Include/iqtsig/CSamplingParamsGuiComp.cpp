@@ -20,7 +20,7 @@ void CSamplingParamsGuiComp::OnGuiModelAttached()
 
 	istd::CRange range(0, 0.1);
 
-	const isig::ISamplingConstraints* constraintsPtr = objectPtr->GetConstraints();
+	const isig::ISamplingConstraints* constraintsPtr = objectPtr->GetSamplingConstraints();
 	if (constraintsPtr != NULL){
 		range = constraintsPtr->GetIntervalRange();
 	}
@@ -66,7 +66,7 @@ void CSamplingParamsGuiComp::on_ModeCB_currentIndexChanged(int index)
 	}
 
 	if (index != objectPtr->GetSamplingMode()){
-		const isig::ISamplingConstraints* constraintsPtr = objectPtr->GetConstraints();
+		const isig::ISamplingConstraints* constraintsPtr = objectPtr->GetSamplingConstraints();
 		if (constraintsPtr != NULL){
 			if (!constraintsPtr->IsSamplingModeSupported(index)){
 				return;

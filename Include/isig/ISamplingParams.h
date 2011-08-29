@@ -33,7 +33,7 @@ public:
 	/**
 		Get access to constraints information about possible value ranges.
 	*/
-	virtual const ISamplingConstraints* GetConstraints() const = 0;
+	virtual const ISamplingConstraints* GetSamplingConstraints() const = 0;
 
 	/**
 		Get sampling interval in seconds.

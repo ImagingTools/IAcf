@@ -32,7 +32,7 @@ public:
 	CSamplingParamsComp();
 
 	// reimplemented (isig::ISamplingParams)
-	virtual const ISamplingConstraints* GetConstraints() const;
+	virtual const ISamplingConstraints* GetSamplingConstraints() const;
 	virtual double GetInterval() const;
 	virtual void SetInterval(double value);
 	virtual int GetSamplingMode() const;

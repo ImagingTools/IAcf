@@ -19,7 +19,7 @@ CExposureParamsComp::CExposureParamsComp()
 
 // reimplemented (icam::IExposureParams)
 
-const IExposureConstraints* CExposureParamsComp::GetConstraints() const
+const IExposureConstraints* CExposureParamsComp::GetExposureConstraints() const
 {
 	return m_exposureConstraintsCompPtr.GetPtr();
 }

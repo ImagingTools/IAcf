@@ -133,19 +133,19 @@ int CRectDerivativeProcessor::DoProcessing(
 
 // reimplemented (imeas::INumericConstraints)
 
-int CRectDerivativeProcessor::GetFilterDimensionsCount() const
+int CRectDerivativeProcessor::GetNumericValuesCount() const
 {
 	return 1;
 }
 
 
-istd::CString CRectDerivativeProcessor::GetFilterDescription(int /*dimension*/) const
+istd::CString CRectDerivativeProcessor::GetNumericValueDescription(int /*dimension*/) const
 {
 	return "Filter length";
 }
 
 
-const imeas::IUnitInfo& CRectDerivativeProcessor::GetFilterUnitInfo(int /*dimension*/) const
+const imeas::IUnitInfo& CRectDerivativeProcessor::GetNumericValueUnitInfo(int /*dimension*/) const
 {
 	return *this;
 }

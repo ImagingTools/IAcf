@@ -13,15 +13,15 @@ namespace iipr
 
 // reimplemented (imeas::INumericConstraints)
 
-int CRectImageSmoothProcessorComp::GetFilterDimensionsCount() const
+int CRectImageSmoothProcessorComp::GetNumericValuesCount() const
 {
 	return 2;
 }
 
 
-istd::CString CRectImageSmoothProcessorComp::GetFilterDescription(int dimension) const
+istd::CString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
 {
-	switch (dimension){
+	switch (index){
 	case 0:
 		return "Filter width";
 
@@ -34,7 +34,7 @@ istd::CString CRectImageSmoothProcessorComp::GetFilterDescription(int dimension)
 }
 
 
-const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetFilterUnitInfo(int /*dimension*/) const
+const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
 {
 	return *this;
 }

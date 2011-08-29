@@ -27,7 +27,7 @@ public:
 	CExposureParamsComp();
 
 	// reimplemented (icam::IExposureParams)
-	virtual const IExposureConstraints* GetConstraints() const;
+	virtual const IExposureConstraints* GetExposureConstraints() const;
 	virtual double GetShutterTime() const;
 	virtual bool SetShutterTime(double time);
 	virtual double GetDelayTime() const;

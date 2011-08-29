@@ -46,7 +46,7 @@ void CChannelSelectionNode::ResetNodes()
 
 // reimplemented (iser::ISelectionParam)
 
-const iprm::ISelectionConstraints* CChannelSelectionNode::GetConstraints() const
+const iprm::ISelectionConstraints* CChannelSelectionNode::GetSelectionConstraints() const
 {
 	return this;
 }

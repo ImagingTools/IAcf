@@ -22,7 +22,7 @@ CSamplingParamsComp::CSamplingParamsComp()
 
 // reimplemented (isig::ISamplingParams)
 
-const ISamplingConstraints* CSamplingParamsComp::GetConstraints() const
+const ISamplingConstraints* CSamplingParamsComp::GetSamplingConstraints() const
 {
 	return m_samplingConstraintsCompPtr.GetPtr();
 }

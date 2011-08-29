@@ -26,7 +26,7 @@ void CExposureParamsGuiComp::OnGuiModelAttached()
 
 	const icam::IExposureParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		const icam::IExposureConstraints* constraintsPtr = objectPtr->GetConstraints();
+		const icam::IExposureConstraints* constraintsPtr = objectPtr->GetExposureConstraints();
 		if (constraintsPtr != NULL){
 			isShutterTimeSupported = !constraintsPtr->GetShutterTimeRange().IsEmpty();
 			isDelayTimeSupported = !constraintsPtr->GetDelayTimeRange().IsEmpty();
