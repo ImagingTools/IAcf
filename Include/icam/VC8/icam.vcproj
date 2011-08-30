@@ -188,10 +188,6 @@
 				RelativePath="..\CSnapBitmapSupplierComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CTriggerParamsComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -214,10 +210,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTriggerParamsComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\icam.h"
 				>
 			</File>
@@ -227,14 +219,6 @@
 			</File>
 			<File
 				RelativePath="..\IExposureParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ITriggerConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ITriggerParams.h"
 				>
 			</File>
 		</Filter>

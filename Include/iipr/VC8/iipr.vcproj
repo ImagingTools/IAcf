@@ -199,6 +199,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.cpp"
 				>
 			</File>
@@ -247,15 +251,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPositionFromImageSupplierComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -328,6 +332,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
 				>
 			</File>
@@ -376,15 +384,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CPositionFromImageSupplierComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CProcessedAcquisitionComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapSupplierComp.h"
 				>
 			</File>
 			<File
@@ -492,11 +500,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\INumericConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\INumericParams.h"
+				RelativePath="..\IMultiBitmapSupplier.h"
 				>
 			</File>
 			<File
