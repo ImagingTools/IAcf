@@ -32,15 +32,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -111,7 +111,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -125,15 +125,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -205,7 +205,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -247,42 +247,6 @@
 			</File>
 			<File
 				RelativePath="..\IInspectionTask.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
-			</File>
-		</Filter>
-		<Filter
-			Name="Generated"
-			>
-			<File
-				RelativePath="..\generated\IacfVersion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Partitura\IacfVoce.arp\VersionInfo.arx"
 				>
 			</File>
 		</Filter>
