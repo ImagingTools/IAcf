@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -38,12 +38,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(OPENCVDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
-				RuntimeLibrary="2"
-				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				WarningLevel="4"
 				DebugInformationFormat="0"
@@ -62,10 +59,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib libhighgui200.dll.a"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR)\Lib&quot;"
-				GenerateDebugInformation="false"
-				SubSystem="1"
 				OptimizeReferences="1"
 			/>
 			<Tool
@@ -93,7 +87,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -115,7 +109,6 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(OPENCVDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
-				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"
@@ -136,10 +129,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib libhighgui200.dll.a"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR)\Lib&quot;"
-				GenerateDebugInformation="true"
-				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

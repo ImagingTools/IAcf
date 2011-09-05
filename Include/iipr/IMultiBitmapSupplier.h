@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "i2d/ITransformation2d.h"
 #include "iimg/IBitmap.h"
 #include "iproc/ISupplier.h"
 
