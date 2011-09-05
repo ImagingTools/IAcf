@@ -24,6 +24,8 @@ void CCircleFinderParamsComp::OnComponentCreated()
 	if (m_raysCountAttrPtr.IsValid()){
 		SetRaysCount(*m_raysCountAttrPtr);
 	}
+
+	SetCaliperMode(*m_caliperModeAttrPtr);
 }
 
 
