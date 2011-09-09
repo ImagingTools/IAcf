@@ -152,7 +152,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 			if (m_paramsLoaderCompPtr->IsOperationSupported(
 						paramsPtr,
 						NULL,
-						iser::IFileLoader::QF_NO_SAVING | iser::IFileLoader::QF_ANONYMOUS_ONLY)){
+						iser::IFileLoader::QF_LOAD | iser::IFileLoader::QF_ANONYMOUS)){
 				return true;
 			}
 		}
@@ -172,7 +172,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 			if (m_paramsLoaderCompPtr->IsOperationSupported(
 						paramsPtr,
 						NULL,
-						iser::IFileLoader::QF_NO_LOADING | iser::IFileLoader::QF_ANONYMOUS_ONLY)){
+						iser::IFileLoader::QF_SAVE | iser::IFileLoader::QF_ANONYMOUS)){
 				return true;
 			}
 		}
