@@ -171,6 +171,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCameraDelegatorBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsComp.cpp"
 				>
 			</File>
@@ -189,6 +193,10 @@
 			>
 			<File
 				RelativePath="..\CAcquisitionConstraintsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCameraDelegatorBase.h"
 				>
 			</File>
 			<File
