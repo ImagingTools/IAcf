@@ -41,7 +41,7 @@ public:
 		Get data info.
 		All depend hypothesis must use the same info.
 	*/
-	const istd::TSmartPtr<CHypothesisInfo>& GetInfo() const;
+	const istd::TTransPtr<CHypothesisInfo>& GetInfo() const;
 
 	/**
 		Get number of possible hypotheses.
