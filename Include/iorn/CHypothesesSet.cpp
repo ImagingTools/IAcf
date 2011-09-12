@@ -26,7 +26,7 @@ CHypothesesSet::CHypothesesSet(const imeas::IDataSequence* hypothesisPtr, double
 
 
 
-const istd::TTransPtr<CHypothesisInfo>& CHypothesesSet::GetInfo() const
+const istd::TSmartPtr<CHypothesisInfo>& CHypothesesSet::GetInfo() const
 {
 	return m_infoPtr;
 }
