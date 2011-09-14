@@ -19,7 +19,7 @@ class TImageParamProcessorCompBase: public CImageProcessorCompBase
 public:
 	typedef CImageProcessorCompBase BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(TImageParamProcessorCompBase)
+	I_BEGIN_BASE_COMPONENT(TImageParamProcessorCompBase);
 		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameters in the parameter set", false, "ParamsId");
 	I_END_COMPONENT;
 
