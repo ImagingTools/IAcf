@@ -40,7 +40,7 @@ class CSnapImageGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerG
 public:
 	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> > BaseClass;
 
-	I_BEGIN_COMPONENT(CSnapImageGuiComp)
+	I_BEGIN_COMPONENT(CSnapImageGuiComp);
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap will be shown", true, "Bitmap");
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, true);
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision obje for image snap", false, "BitmapAcquisition");
@@ -53,7 +53,7 @@ public:
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	CSnapImageGuiComp();
 

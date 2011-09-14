@@ -25,9 +25,9 @@ public:
 				Ui::CSwissRangerParamsGuiComp,
 				iswr::ISwissRangerParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CSwissRangerParamsGuiComp)
-		I_ASSIGN(m_swissRangerConstrainsCompPtr, "SwissRangerConstrains", "Constrains of the swiss ranger sensor", false, "SwissRangerConstrains")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CSwissRangerParamsGuiComp);
+		I_ASSIGN(m_swissRangerConstrainsCompPtr, "SwissRangerConstrains", "Constrains of the swiss ranger sensor", false, "SwissRangerConstrains");
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;

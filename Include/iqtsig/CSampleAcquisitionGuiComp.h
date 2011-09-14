@@ -36,7 +36,7 @@ class CSampleAcquisitionGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CSample
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget> BaseClass;
 
-	I_BEGIN_COMPONENT(CSampleAcquisitionGuiComp)
+	I_BEGIN_COMPONENT(CSampleAcquisitionGuiComp);
 		I_ASSIGN(m_sampleAcquisitionCompPtr, "SampleAcquisition", "Sample acquisiotion object used to fill sample container", true, "SampleAcquisition");
 		I_ASSIGN(m_sampleLoaderCompPtr, "SampleLoader", "Saves sample to file", false, "SampleLoader");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
@@ -49,7 +49,7 @@ public:
 		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
 		I_ASSIGN(m_acquisitionTimeoutAttrPtr, "AcquisitionTimeout", "Timeout of single acquisition in seconds", false, 1);
 		I_ASSIGN(m_startOnInitAttrPtr, "StartOnInit", "If it true acquisition start on initialization", true, false);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	CSampleAcquisitionGuiComp();
 

@@ -25,8 +25,8 @@ class CAutomaticControllerGuiComp:
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CAutomaticControllerGuiComp, icntl::IAutomaticController> BaseClass;
 
-	I_BEGIN_COMPONENT(CAutomaticControllerGuiComp)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CAutomaticControllerGuiComp);
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;

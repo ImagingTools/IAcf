@@ -29,7 +29,7 @@ public:
 	I_BEGIN_COMPONENT(CImagePolarTransformProcessorComp);
 		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI rectangle in the parameter set", false, "AoiParams");
 		I_ASSIGN(m_interpolationParamsIdAttrPtr, "InterpolationParamsId", "ID of the interpolation parameters in the parameter set", false, "InterpolationParams");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(

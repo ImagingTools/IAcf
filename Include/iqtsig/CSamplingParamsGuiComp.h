@@ -26,8 +26,8 @@ public:
 				Ui::CSamplingParamsGuiComp,
 				isig::ISamplingParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CSamplingParamsGuiComp)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CSamplingParamsGuiComp);
+	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

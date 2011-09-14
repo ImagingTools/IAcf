@@ -32,10 +32,10 @@ public:
 		FTI_MIL_SEARCH_FEATURE = 73731
 	};
 
-	I_BEGIN_COMPONENT(CMilSearchProcessorComp)
+	I_BEGIN_COMPONENT(CMilSearchProcessorComp);
 		I_ASSIGN(m_milParamsIdAttrPtr, "MilParamsId", "ID of MIL-specific parameters", true, "MilParamsId");
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamsId", "ID of rectangle area of interest", true, "AoiParamsId");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
 	virtual int DoExtractFeatures(

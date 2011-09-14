@@ -28,7 +28,7 @@ public:
 	
 	I_BEGIN_COMPONENT(CImageHistogramProcessorComp);
 		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI parameter in the parameter set", false, "AoiParams");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(

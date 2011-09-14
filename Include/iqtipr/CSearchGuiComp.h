@@ -28,7 +28,7 @@ class CSearchGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiC
 public:
 	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSearchGuiComp, QWidget> > BaseClass;
 
-	I_BEGIN_COMPONENT(CSearchGuiComp)
+	I_BEGIN_COMPONENT(CSearchGuiComp);
 		I_ASSIGN(m_searchResultsModelCompPtr, "SearchResults", "Search results model", true, "SearchResults");
 		I_ASSIGN_TO(m_searchResultsCompPtr, m_searchResultsModelCompPtr, true);
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
@@ -39,7 +39,7 @@ public:
 		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Does model search in an image", true, "Processor");
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap", true, "Bitmap");
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, true);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);

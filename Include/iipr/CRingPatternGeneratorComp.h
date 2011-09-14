@@ -19,7 +19,7 @@ public:
 	
 	I_BEGIN_COMPONENT(CRingPatternGeneratorComp);
 		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of the processor parameter in the parameter set", false, "ParamsId");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(

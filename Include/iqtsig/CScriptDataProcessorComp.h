@@ -33,15 +33,15 @@ class CScriptDataProcessorComp:
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CScriptDataProcessorComp)
-		I_REGISTER_INTERFACE(iproc::IProcessor)
+	I_BEGIN_COMPONENT(CScriptDataProcessorComp);
+		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_minValueAttrPtr, "MinValue", "Minimal value of sample", true, 0.0);
 		I_ASSIGN(m_maxValueAttrPtr, "MaxValue", "Maximal value of sample", true, 100.0);
 		I_ASSIGN(m_samplesCountAttrPtr, "SamplesCount", "Number of samples processed in single step", false, 100);
 		I_ASSIGN(m_channelsCountAttrPtr, "ChannelsCount", "Number of channels processed in single step", false, 100);
 		I_ASSIGN(m_defaultScriptAttrPtr, "DefaultScript", "Default script used to calculate sample output in 'Calc' function", false, "minValue");
 		I_ASSIGN(m_scriptParamIdAttrPtr, "ScriptParamId", "ID of script in parameter set (defined as ibase::ITextDocument)", false, "ScriptId");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	CScriptDataProcessorComp();
 

@@ -34,7 +34,7 @@ public:
 		I_REGISTER_INTERFACE(IFeatureToImageMapper);
 		I_ASSIGN(m_lineParamIdAttrPtr, "LineParamId", "ID of line parameter in parameter set", true, "LineParam");
 		I_ASSIGN(m_featureMapperCompPtr, "FeatureMapper", "Map result feature to projection position, it is needed for mapping operation", false, "FeatureMapper");
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	/**
 		Do projection along specified line with variable projection size.

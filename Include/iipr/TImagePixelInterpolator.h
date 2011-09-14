@@ -35,7 +35,7 @@ private:
 	PixelComponentType GetBitmapPixelValue(int x, int y, int componentIndex) const;
 
 private:
-	PixelComponentType* m_imageBufferPtr;;
+	PixelComponentType* m_imageBufferPtr;
 	int m_imageLineDifference;
 	int m_imageHeight;
 	int m_imageWidth;

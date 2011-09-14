@@ -22,10 +22,10 @@ class CSearchParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CSea
 public:
 	typedef  iqtgui::TDesignerGuiObserverCompBase<Ui::CSearchParamsGuiComp, iipr::ISearchParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CSearchParamsGuiComp)
+	I_BEGIN_COMPONENT(CSearchParamsGuiComp);
 		I_ASSIGN(m_modelViewCompPtr, "ModelView", "Model view", false, "ModelView");
 		I_ASSIGN_TO(m_modelObserverCompPtr, m_modelViewCompPtr, false);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;

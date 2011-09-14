@@ -22,8 +22,8 @@ class CMilSearchParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::C
 public:
 	typedef  iqtgui::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CMilSearchParamsGuiComp)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CMilSearchParamsGuiComp);
+	I_END_COMPONENT;
 
 	CMilSearchParamsGuiComp();
 
