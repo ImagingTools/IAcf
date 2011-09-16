@@ -3,6 +3,8 @@
 
 
 // ACF includes
+#include "istd/itr.h"
+
 #include "iimg/IBitmap.h"
 
 #include "iproc/TSyncProcessorCompBase.h"
@@ -18,6 +20,8 @@ namespace iipr
 class CRgbToGrayProcessorComp: public iproc::CSyncProcessorCompBase
 {
 public:
+	I_DECLARE_TR_FUNCTION(CRgbToGrayProcessorComp);
+
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CRgbToGrayProcessorComp);

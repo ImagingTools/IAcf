@@ -47,6 +47,16 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 		return true;
 	}
 
+	int inputFormat = inputBitmap.GetPixelFormat();
+	if (inputFormat == iimg::IBitmap::PF_GRAY){
+		return outputBitmap.CopyFrom(inputBitmap);
+	}
+	else if (inputFormat != iimg::IBitmap::PF_RGB && inputFormat != iimg::IBitmap::PF_RGBA){
+		SendErrorMessage(0, tr("Image format must be RGB(A)"), "RgbToGrayProcessor");
+
+		return false;
+	}
+
 	ibase::CSize imageSize = inputBitmap.GetImageSize();
 
 	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
@@ -65,6 +75,14 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 			I_BYTE r = pixelPtr[0];
 			I_BYTE g = pixelPtr[1];
 			I_BYTE b = pixelPtr[2];
+
+			if (inputFormat == iimg::IBitmap::PF_RGBA){
+				double alpha = pixelPtr[3] / 255.0;
+
+				r = I_BYTE(r * alpha);
+				g = I_BYTE(g * alpha);
+				b = I_BYTE(b * alpha);
+			}
 
 			outputImageLinePtr[x] = (77 * r + 151 * g + 28 * b) >> 8;
 
