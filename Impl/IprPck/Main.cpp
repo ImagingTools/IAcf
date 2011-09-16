@@ -125,6 +125,10 @@ I_EXPORT_COMPONENT(
 			"Parameter for the ring pattern generation",
 			"Parameter Ring Generator Test");
 
+I_EXPORT_COMPONENT(
+			RgbToGrayProcessor,
+			"RGB to Grayscale image conversion",
+			"RGB Grayscale Image Colorspace");
 
 
 } // namespace IprPck
