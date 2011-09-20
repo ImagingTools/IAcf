@@ -17,7 +17,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -44,18 +44,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
-				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
 				DisableSpecificWarnings="4355;4505;4510;4511;4512;4127;4702"
@@ -93,7 +86,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -120,20 +113,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
-				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
-				CompileAs="0"
-				DisableSpecificWarnings="4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

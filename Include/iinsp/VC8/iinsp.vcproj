@@ -24,7 +24,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -32,15 +32,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -69,16 +69,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
@@ -111,13 +105,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -125,15 +119,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -162,20 +156,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -205,7 +191,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -247,42 +233,6 @@
 			</File>
 			<File
 				RelativePath="..\IInspectionTask.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\IacfVoce.arp"
-					/>
-				</FileConfiguration>
-			</File>
-		</Filter>
-		<Filter
-			Name="Generated"
-			>
-			<File
-				RelativePath="..\generated\IacfVersion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Partitura\IacfVoce.arp\VersionInfo.arx"
 				>
 			</File>
 		</Filter>
