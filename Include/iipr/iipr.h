@@ -18,6 +18,10 @@
 */
 namespace iipr
 {
+	enum VersionId
+	{
+		IacfVersionId = 10
+	};
 } // namespace iipr
 
 

@@ -90,14 +90,15 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	int pixelBytesCount = input.GetComponentsCount();
 	int usedColorComponents = pixelBytesCount;
 
-	iimg::IBitmap::PixelFormat pixelFormat = input.GetPixelFormat();
+	int pixelFormat = input.GetPixelFormat();
 	switch (pixelFormat){
-		case iimg::IBitmap::PF_RGB:
-			usedColorComponents = 3;
-			break;
-		case iimg::IBitmap::PF_RGBA:
-			usedColorComponents = 4;
-			break;
+	case iimg::IBitmap::PF_RGB:
+		usedColorComponents = 3;
+		break;
+
+	case iimg::IBitmap::PF_RGBA:
+		usedColorComponents = 4;
+		break;
 	}
 
 	int histogramSize = 256 * usedColorComponents;
