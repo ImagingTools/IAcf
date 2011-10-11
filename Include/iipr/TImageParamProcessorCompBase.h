@@ -58,7 +58,7 @@ bool TImageParamProcessorCompBase<ParameterType>::ProcessImage(
 			iimg::IBitmap& outputImage)
 {
 	const ParameterType* processorParamsPtr = NULL;	
-	if (paramsPtr != NULL && m_paramsIdAttrPtr.IsValid()){
+	if ((paramsPtr != NULL) && m_paramsIdAttrPtr.IsValid()){
 		processorParamsPtr = dynamic_cast<const ParameterType*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
 	}
 	
