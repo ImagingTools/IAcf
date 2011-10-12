@@ -16,6 +16,7 @@ struct KernelElement
 	int alphaFactor;
 };
 
+
 template <	typename PixelType,
 			typename WorkingType,
 			int PixelSize,
