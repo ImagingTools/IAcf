@@ -1,5 +1,5 @@
-#ifndef iipr_ILineProjectionSupplier_included
-#define iipr_ILineProjectionSupplier_included
+#ifndef iipr_IDataSequenceProvider_included
+#define iipr_IDataSequenceProvider_included
 
 
 // ACF includes
@@ -29,6 +29,6 @@ public:
 } // namespace iipr
 
 
-#endif // !iipr_ILineProjectionSupplier_included
+#endif // !iipr_IDataSequenceProvider_included
 
 

@@ -1,5 +1,5 @@
-#ifndef iipr_IFeaturesSupplier_included
-#define iipr_IFeaturesSupplier_included
+#ifndef iipr_IFeaturesProvider_included
+#define iipr_IFeaturesProvider_included
 
 
 // STL includes
@@ -34,5 +34,5 @@ public:
 } // namespace iipr
 
 
-#endif // !iipr_IFeaturesSupplier_included
+#endif // !iipr_IFeaturesProvider_included
 
