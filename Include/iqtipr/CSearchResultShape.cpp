@@ -28,9 +28,9 @@ void CSearchResultShape::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFl
 
 void CSearchResultShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	const iipr::IFeaturesContainer* objectPtr = GetObjectPtr();
+	const iipr::IFeaturesProvider* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		iipr::IFeaturesContainer::Features features = objectPtr->GetFeatures();
+		iipr::IFeaturesProvider::Features features = objectPtr->GetFeatures();
 
 		for (int featureIndex = 0; featureIndex < int(features.size()); featureIndex++){
 			const iipr::IFeature* featurePtr = features[featureIndex];

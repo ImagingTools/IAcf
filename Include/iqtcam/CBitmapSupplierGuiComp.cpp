@@ -4,8 +4,8 @@
 // Qt includes
 #include <QMessageBox>
 
-
 // ACF includes
+#include "iproc/ISupplier.h"
 #include "iqt2d/CImageShape.h"
 
 
@@ -120,19 +120,20 @@ void CBitmapSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	iipr::IBitmapSupplier* supplierPtr = GetObjectPtr();
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		const iimg::IBitmap* bitmapPtr = NULL;
 
 		int workStatus = supplierPtr->GetWorkStatus();
 		if (workStatus == iproc::ISupplier::WS_OK){
-			bitmapPtr = supplierPtr->GetBitmap();
+			iipr::IBitmapProvider* providerPtr = dynamic_cast<iipr::IBitmapProvider*>(supplierPtr);
+			if (providerPtr != NULL){
+				bitmapPtr = providerPtr->GetBitmap();
+			}
 		}
 
-		if (workStatus >= iproc::ISupplier::WS_OK){
-			if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
-				m_bitmap.ResetImage();
-			}
+		if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
+			m_bitmap.ResetImage();
 		}
 	}
 	else{

@@ -425,7 +425,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IBitmapSupplier.h"
+				RelativePath="..\IBitmapProvider.h"
 				>
 			</File>
 			<File
@@ -453,7 +453,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFeaturesSupplier.h"
+				RelativePath="..\IFeaturesProvider.h"
 				>
 			</File>
 			<File
@@ -489,11 +489,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ILineProjectionSupplier.h"
+				RelativePath="..\IDataSequenceProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IMultiBitmapSupplier.h"
+				RelativePath="..\IMultiBitmapProvider.h"
 				>
 			</File>
 			<File
@@ -517,7 +517,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IValueSupplier.h"
+				RelativePath="..\IValueProvider.h"
 				>
 			</File>
 			<File

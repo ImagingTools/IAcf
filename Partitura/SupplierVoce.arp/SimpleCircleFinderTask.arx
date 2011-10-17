@@ -298,7 +298,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::IValueSupplier
+        iproc::IValueProvider
       </InterfaceId>
       <ComponentId>
         PositionTask

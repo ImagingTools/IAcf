@@ -10,7 +10,7 @@
 #include "imod/TSingleModelObserverBase.h"
 #include "i2d/CVector2d.h"
 
-#include "iipr/IFeaturesContainer.h"
+#include "iipr/IFeaturesProvider.h"
 
 
 namespace iqtipr
@@ -19,7 +19,7 @@ namespace iqtipr
 
 class CSearchResultShape: 
 			public QGraphicsItemGroup, 
-			public imod::TSingleModelObserverBase<iipr::IFeaturesContainer>
+			public imod::TSingleModelObserverBase<iipr::IFeaturesProvider>
 {
 public:
 	// reimplemented (imod::IObserver)

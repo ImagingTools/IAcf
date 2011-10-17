@@ -6,9 +6,9 @@
 #include "i2d/CVector2d.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iproc/IValueSupplier.h"
+#include "iproc/IValueProvider.h"
 
-#include "iipr/IBitmapSupplier.h"
+#include "iipr/IBitmapProvider.h"
 
 
 namespace iipr
@@ -21,17 +21,21 @@ namespace iipr
 	This processor must accept image object as input and produce some set of features containing position into feature consumer.
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
-class CPositionFromImageSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector>
+class CPositionFromImageSupplierComp:
+			public iproc::TSupplierCompWrap<imath::CVarVector>,
+			virtual public iproc::IValueProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector> BaseClass;
+	typedef iproc::TSupplierCompWrap<imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
-		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_REGISTER_INTERFACE(iproc::IValueProvider);
+		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
-	// reimplemented (iproc::IValueSupplier)
+	// reimplemented (iproc::IValueProvider)
 	virtual imath::CVarVector GetValue(int index = -1, int valueTypeId = VTI_AUTO) const;
 
 protected:
@@ -42,7 +46,8 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iipr::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 };
 

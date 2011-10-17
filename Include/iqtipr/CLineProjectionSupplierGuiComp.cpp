@@ -85,17 +85,26 @@ void CLineProjectionSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	iipr::ILineProjectionSupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		const imeas::IDataSequence* projectionPtr = supplierPtr->GetLineProjection();
-		if (projectionPtr != NULL){
-			istd::CChangeNotifier changePtr(&m_projectionData);
+	const imeas::IDataSequence* projectionPtr = NULL;
 
-			m_projectionData.CopyFrom(*projectionPtr);
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		int workStatus = supplierPtr->GetWorkStatus();
+		if (workStatus == iproc::ISupplier::WS_OK){
+			const iipr::IDataSequenceProvider* providerPtr = dynamic_cast<const iipr::IDataSequenceProvider*>(supplierPtr);
+			if (providerPtr != NULL){
+				projectionPtr = providerPtr->GetDataSequence();
+			}
 		}
-		else{
-			m_projectionData.ResetSequence();
-		}
+	}
+
+	if (projectionPtr != NULL){
+		istd::CChangeNotifier changePtr(&m_projectionData);
+
+		m_projectionData.CopyFrom(*projectionPtr);
+	}
+	else{
+		m_projectionData.ResetSequence();
 	}
 }
 

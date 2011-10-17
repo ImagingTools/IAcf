@@ -4,7 +4,8 @@
 
 #include "istd/TDelPtr.h"
 
-#include "iipr/IFeaturesContainer.h"
+#include "iipr/IFeaturesConsumer.h"
+#include "iipr/IFeaturesProvider.h"
 
 
 namespace iipr
@@ -14,7 +15,9 @@ namespace iipr
 /**
 	Feature consumer implmentation storing one feature only.
 */
-class CSingleFeatureConsumer: virtual public IFeaturesContainer
+class CSingleFeatureConsumer:
+			virtual public IFeaturesConsumer,
+			virtual public IFeaturesProvider
 {
 public:
 
@@ -59,7 +62,7 @@ public:
 	virtual void ResetFeatures();
 	virtual bool AddFeature(const IFeature* featurePtr, bool* isFullPtr = NULL);
 
-	// reimplemented (iipr::IFeaturesContainer)
+	// reimplemented (iipr::IFeaturesProvider)
 	virtual Features GetFeatures() const;
 
 private:

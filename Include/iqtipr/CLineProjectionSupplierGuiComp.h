@@ -7,14 +7,14 @@
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
 #include "i2d/CPosition2d.h"
-#include "iproc/IValueSupplier.h"
+#include "iproc/IValueProvider.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 // ACF-Solutions includes
 #include "imeas/CGeneralDataSequence.h"
 
-#include "iipr/ILineProjectionSupplier.h"
+#include "iipr/IDataSequenceProvider.h"
 
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
@@ -29,14 +29,14 @@ namespace iqtipr
 
 class CLineProjectionSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
 			Ui::CLineProjectionSupplierGuiComp,
-			iipr::ILineProjectionSupplier>
+			iipr::IDataSequenceProvider>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtinsp::TSupplierGuiCompBase<
 				Ui::CLineProjectionSupplierGuiComp,
-				iipr::ILineProjectionSupplier> BaseClass;
+				iipr::IDataSequenceProvider> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierGuiComp);
 		I_ASSIGN(m_projectionObserverCompPtr, "ProjectionObserver", "Observer for the generated line projection", true, "ProjectionObserver");

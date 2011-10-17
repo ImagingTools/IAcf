@@ -552,7 +552,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iipr::IFeaturesSupplier
+        iipr::IFeaturesProvider
       </InterfaceId>
       <ComponentId>
         SearchBasedTask
@@ -563,7 +563,7 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        SearchParamsSet
+        SearchBasedTask
       </ComponentId>
     </Interface>
     <Interface>

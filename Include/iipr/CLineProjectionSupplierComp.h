@@ -11,8 +11,8 @@
 // ACF-Solutions includes
 #include "imeas/CGeneralDataSequence.h"
 
-#include "iipr/IBitmapSupplier.h"
-#include "iipr/ILineProjectionSupplier.h"
+#include "iipr/IBitmapProvider.h"
+#include "iipr/IDataSequenceProvider.h"
 #include "iipr/ILineProjectionProcessor.h"
 
 
@@ -20,19 +20,22 @@ namespace iipr
 {
 
 
-class CLineProjectionSupplierComp: public iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, imeas::CGeneralDataSequence>
+class CLineProjectionSupplierComp:
+			public iproc::TSupplierCompWrap<imeas::CGeneralDataSequence>,
+			virtual public iipr::IDataSequenceProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<iipr::ILineProjectionSupplier, imeas::CGeneralDataSequence> BaseClass;
+	typedef iproc::TSupplierCompWrap<imeas::CGeneralDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
-		I_REGISTER_INTERFACE(CLineProjectionSupplierComp);
-		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_REGISTER_INTERFACE(iipr::IDataSequenceProvider);
+		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_projectionProcessorCompPtr, "ProjectionProcessor", "Processor for projection data generation", true, "ProjectionProcessor");
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::ILineProjectionSupplier)
-	virtual const imeas::IDataSequence* GetLineProjection() const;
+	// reimplemented (iipr::IDataSequenceProvider)
+	virtual const imeas::IDataSequence* GetDataSequence() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -42,7 +45,8 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iipr::IBitmapSupplier, m_bitmapSupplierCompPtr);
+	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 };
 

@@ -5,7 +5,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IBitmapSupplier)
+// reimplemented (iipr::IBitmapProvider)
 
 const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 {
@@ -36,11 +36,16 @@ const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetLogTransform() co
 
 int CDelegatedBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
-	if (m_inputBitmapSupplierCompPtr.IsValid()){
-		result.first = m_inputBitmapSupplierCompPtr->GetLogTransform();
-		result.second = m_inputBitmapSupplierCompPtr->GetBitmap();
+	if (m_inputBitmapProviderCompPtr.IsValid()){
+		result.first = m_inputBitmapProviderCompPtr->GetLogTransform();
+		result.second = m_inputBitmapProviderCompPtr->GetBitmap();
 
-		return m_inputBitmapSupplierCompPtr->GetWorkStatus();
+		if (result.second != NULL){
+			return ISupplier::WS_OK;
+		}
+		else{
+			return ISupplier::WS_ERROR;
+		}
 	}
 
 	if (m_bitmapCompPtr.IsValid()){
@@ -60,38 +65,19 @@ void CDelegatedBitmapSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_inputBitmapSupplierCompPtr.IsValid()){
-		AddInputSupplier(m_inputBitmapSupplierCompPtr.GetPtr());
+	if (m_inputBitmapProviderCompPtr.IsValid()){
+		if (m_inputBitmapProviderModelCompPtr.IsValid()){
+			RegisterSupplierInput(m_inputBitmapProviderModelCompPtr.GetPtr());
+		}
 	}
 	else{
 		if (m_bitmapModelCompPtr.IsValid()){
-			m_bitmapModelCompPtr->AttachObserver(this);
+			RegisterSupplierInput(m_bitmapModelCompPtr.GetPtr());
 		}
 		if (m_calibrationModelCompPtr.IsValid()){
-			m_calibrationModelCompPtr->AttachObserver(this);
+			RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
 		}
 	}
-}
-
-
-void CDelegatedBitmapSupplierComp::OnComponentDestroyed()
-{
-	if (m_inputBitmapSupplierCompPtr.IsValid()){
-		RemoveInputSupplier(m_inputBitmapSupplierCompPtr.GetPtr());
-	}
-	else{
-		EnsureModelsDetached();
-	}
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CDelegatedBitmapSupplierComp::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	InvalidateSupplier();
 }
 
 

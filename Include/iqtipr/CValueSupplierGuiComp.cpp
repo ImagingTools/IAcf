@@ -94,58 +94,60 @@ void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	iproc::IValueSupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		imath::CVarVector position;
+	imath::CVarVector position;
+	imath::CVarVector radius;
 
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
 		if (workStatus == iproc::ISupplier::WS_OK){
-			position = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_POSITION);
+			iproc::IValueProvider* providerPtr = dynamic_cast<iproc::IValueProvider*>(supplierPtr);
+			if (providerPtr != NULL){
+				position = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_POSITION);
+				radius = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_RADIUS);
+			}
 		}
 
-		if (workStatus >= iproc::ISupplier::WS_OK){
-			bool isResultVisible = false;
-			if (position.GetElementsCount() >= 2){
-				m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
+		if (paramsModelPtr != NULL){
+			if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
+				m_paramsObserver.EnsureModelDetached();
 
-				isResultVisible = true;
-
-				if (IsGuiCreated()){
-					PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
-				}
+				paramsModelPtr->AttachObserver(&m_paramsObserver);
 			}
-			else{
-				m_foundModel.SetPosition(i2d::CVector2d(0, 0));
+		}
+	}
 
-				if (IsGuiCreated()){
-					PositionLabel->setText("No position");
-				}
-			}
+	bool isResultVisible = false;
+	if (position.GetElementsCount() >= 2){
+		m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
 
-			imath::CVarVector radius = supplierPtr->GetValue(-1, iproc::IValueSupplier::VTI_RADIUS);
-			if (radius.GetElementsCount() >= 1){
-				m_foundModel.SetRadius(radius[0]);
-			}
-			else{
-				m_foundModel.SetRadius(0);
-			}
+		isResultVisible = true;
 
-			int shapesCount = m_foundModel.GetObserverCount();
-			for (int i = 0; i < shapesCount; ++i){
-				QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
-				if (shapePtr != NULL){
-					shapePtr->setVisible(isResultVisible);
-				}
-			}
+		if (IsGuiCreated()){
+			PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+		}
+	}
+	else{
+		m_foundModel.SetPosition(i2d::CVector2d(0, 0));
 
-			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
-			if (paramsModelPtr != NULL){
-				if (!paramsModelPtr->IsAttached(&m_paramsObserver)){
-					m_paramsObserver.EnsureModelDetached();
+		if (IsGuiCreated()){
+			PositionLabel->setText("No position");
+		}
+	}
 
-					paramsModelPtr->AttachObserver(&m_paramsObserver);
-				}
-			}
+	if (radius.GetElementsCount() >= 1){
+		m_foundModel.SetRadius(radius[0]);
+	}
+	else{
+		m_foundModel.SetRadius(0);
+	}
+
+	int shapesCount = m_foundModel.GetObserverCount();
+	for (int i = 0; i < shapesCount; ++i){
+		QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
+		if (shapePtr != NULL){
+			shapePtr->setVisible(isResultVisible);
 		}
 	}
 }
@@ -175,6 +177,16 @@ void CValueSupplierGuiComp::OnGuiDestroyed()
 	}
 	
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (icomp::IComponentBase)
+
+void CValueSupplierGuiComp::OnComponentDestroyed()
+{
+	m_paramsObserver.EnsureModelDetached();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

@@ -3,12 +3,10 @@
 
 
 // ACF includes
-#include "iproc/ISupplier.h"
+#include "istd/IChangeable.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
-
-#include "iipr/iipr.h"
 
 
 namespace iipr
@@ -18,13 +16,13 @@ namespace iipr
 /**
 	Image line projection supplier.
 */
-class ILineProjectionSupplier: virtual public iproc::ISupplier
+class IDataSequenceProvider: virtual public istd::IChangeable
 {
 public:
 	/**
 		Get access to produced line projection object.
 	*/
-	virtual const imeas::IDataSequence* GetLineProjection() const = 0;
+	virtual const imeas::IDataSequence* GetDataSequence() const = 0;
 };
 
 

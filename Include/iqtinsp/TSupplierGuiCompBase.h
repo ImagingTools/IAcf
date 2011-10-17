@@ -5,15 +5,13 @@
 // Qt includes
 #include <QMessageBox>
 
+// ACF includes
 #include "iser/IFileLoader.h"
-
 #include "imod/IObserver.h"
-
 #include "iprm/IParamsSet.h"
-
+#include "iproc/ISupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "iqt2d/TSceneExtenderCompBase.h"
 
 #include "iqtinsp/iqtinsp.h"
@@ -23,11 +21,11 @@ namespace iqtinsp
 {
 
 
-template <class UI, class Model, class WidgetType = QWidget>
-class TSupplierGuiCompBase: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, Model> >
+template <class UI, class WidgetType = QWidget>
+class TSupplierGuiCompBase: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >
 {
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, Model> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
@@ -102,8 +100,8 @@ private:
 
 // public methods
 
-template <class UI, class Model, class WidgetType>
-TSupplierGuiCompBase<UI, Model, WidgetType>::TSupplierGuiCompBase()
+template <class UI, class WidgetType>
+TSupplierGuiCompBase<UI, WidgetType>::TSupplierGuiCompBase()
 :	m_areParamsEditable(false)
 {
 }
@@ -111,8 +109,8 @@ TSupplierGuiCompBase<UI, Model, WidgetType>::TSupplierGuiCompBase()
 
 // reimplemented (iqt2d::ISceneExtender)
 
-template <class UI, class Model, class WidgetType>
-void TSupplierGuiCompBase<UI, Model, WidgetType>::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
 {
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
@@ -122,8 +120,8 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::AddItemsToScene(iqt2d::ISceneP
 }
 
 
-template <class UI, class Model, class WidgetType>
-void TSupplierGuiCompBase<UI, Model, WidgetType>::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
 {
 	if (m_paramsSetExtenderCompPtr.IsValid()){
 		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);
@@ -135,17 +133,17 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::RemoveItemsFromScene(iqt2d::IS
 
 // protected methods
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::AreParamsEditable() const
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::AreParamsEditable() const
 {
 	return m_areParamsEditable;
 }
 
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::IsLoadParamsSupported() const
 {
-	const Model* supplierPtr = BaseClass::GetObjectPtr();
+	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -162,10 +160,10 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 }
 
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::IsSaveParamsSupported() const
 {
-	const Model* supplierPtr = BaseClass::GetObjectPtr();
+	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -182,10 +180,10 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 }
 
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::LoadParams()
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::LoadParams()
 {
-	Model* supplierPtr = BaseClass::GetObjectPtr();
+	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -205,10 +203,10 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::LoadParams()
 }
 
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::SaveParams()
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::SaveParams()
 {
-	const Model* supplierPtr = BaseClass::GetObjectPtr();
+	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -228,8 +226,8 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::SaveParams()
 }
 
 
-template <class UI, class Model, class WidgetType>
-bool TSupplierGuiCompBase<UI, Model, WidgetType>::DoTest()
+template <class UI, class WidgetType>
+bool TSupplierGuiCompBase<UI, WidgetType>::DoTest()
 {
 	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
@@ -245,12 +243,12 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::DoTest()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-template <class UI, class Model, class WidgetType>
-void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	Model* supplierPtr = BaseClass::GetObjectPtr();
+	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
@@ -271,10 +269,10 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
 }
 
 
-template <class UI, class Model, class WidgetType>
-void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelDetached()
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelDetached()
 {
-	Model* supplierPtr = BaseClass::GetObjectPtr();
+	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
@@ -298,8 +296,8 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelDetached()
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-template <class UI, class Model, class WidgetType>
-void TSupplierGuiCompBase<UI, Model, WidgetType>::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& /*result*/)
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& /*result*/)
 {
 }
 

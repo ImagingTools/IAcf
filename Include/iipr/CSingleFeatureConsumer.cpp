@@ -1,6 +1,10 @@
 #include "iipr/CSingleFeatureConsumer.h"
 
 
+// IACF includes
+#include "iipr/IFeature.h"
+
+
 namespace iipr
 {
 
@@ -72,9 +76,9 @@ bool CSingleFeatureConsumer::AddFeature(const IFeature* featurePtr, bool* isFull
 }
 
 
-// reimplemented (iipr::IFeaturesContainer)
+// reimplemented (iipr::IFeaturesProvider)
 
-IFeaturesContainer::Features CSingleFeatureConsumer::GetFeatures() const
+IFeaturesProvider::Features CSingleFeatureConsumer::GetFeatures() const
 {
 	Features retVal;
 

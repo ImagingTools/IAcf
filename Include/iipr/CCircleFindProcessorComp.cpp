@@ -149,13 +149,20 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		double maxRadius = annulusAoiPtr->GetOuterRadius();
 		center = annulusAoiPtr->GetPosition();
 
-		istd::TDelPtr<IFeaturesContainer> caliperFeaturesContainerPtr;
+		istd::TDelPtr<IFeaturesProvider> caliperFeaturesProviderPtr;
+		IFeaturesConsumer* caliperFeaturesConsumerPtr;
 
 		if (circleFinderParams.GetCaliperMode() == ICircleFinderParams::CCM_BEST){
-			caliperFeaturesContainerPtr.SetPtr(new CFeaturesContainer);
+			CFeaturesContainer* containerPtr = new CFeaturesContainer;
+
+			caliperFeaturesProviderPtr.SetPtr(containerPtr);
+			caliperFeaturesConsumerPtr = containerPtr;
 		}
 		else{
-			caliperFeaturesContainerPtr.SetPtr(new CSingleFeatureConsumer(CSingleFeatureConsumer::FP_FIRST));
+			CSingleFeatureConsumer* containerPtr = new CSingleFeatureConsumer(CSingleFeatureConsumer::FP_FIRST);
+
+			caliperFeaturesProviderPtr.SetPtr(containerPtr);
+			caliperFeaturesConsumerPtr = containerPtr;
 		}
 
 		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
@@ -173,10 +180,10 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			projectionLine.SetPoint1(center + directionVector * annulusAoiPtr->GetInnerRadius());
 			projectionLine.SetPoint2(center + directionVector * annulusAoiPtr->GetOuterRadius());
 
-			caliperFeaturesContainerPtr->ResetFeatures();
-			m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesContainerPtr.GetPtr());
+			caliperFeaturesConsumerPtr->ResetFeatures();
+			m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesConsumerPtr);
 
-			AddProjectionResultsToRays(params, *caliperFeaturesContainerPtr.GetPtr(), inRays, outRays);
+			AddProjectionResultsToRays(params, *caliperFeaturesProviderPtr, inRays, outRays);
 		}
 
 		return true;
@@ -344,7 +351,7 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 void CCircleFindProcessorComp::AddProjectionResultsToRays(
 			const iprm::IParamsSet& params,
-			const iipr::IFeaturesContainer& container,
+			const iipr::IFeaturesProvider& container,
 			Rays& inRays,
 			Rays& outRays)
 {
@@ -356,8 +363,8 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 	double bestInWeight = -1;
 	double bestOutWeight = -1;
 
-	iipr::IFeaturesContainer::Features features = container.GetFeatures();
-	for (		iipr::IFeaturesContainer::Features::const_iterator iter = features.begin();
+	iipr::IFeaturesProvider::Features features = container.GetFeatures();
+	for (		iipr::IFeaturesProvider::Features::const_iterator iter = features.begin();
 				iter != features.end();
 				++iter){
 		const CCaliperFeature* featurePtr = dynamic_cast<const CCaliperFeature*>(*iter);

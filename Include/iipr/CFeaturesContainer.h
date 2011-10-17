@@ -3,9 +3,9 @@
 
 
 #include "istd/TPointerVector.h"
-#include "istd/TChangeNotifier.h"
 
-#include "iipr/IFeaturesContainer.h"
+#include "iipr/IFeaturesConsumer.h"
+#include "iipr/IFeaturesProvider.h"
 
 
 namespace iipr
@@ -15,14 +15,16 @@ namespace iipr
 /**
 	Basic implementation of a features container.
 */
-class CFeaturesContainer: public IFeaturesContainer
+class CFeaturesContainer:
+			virtual public IFeaturesConsumer,
+			virtual public IFeaturesProvider
 {
 public:
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
 	virtual bool AddFeature(const iipr::IFeature* featurePtr, bool* isFullPtr = NULL);
 
-	// reimplemented (iipr::IFeaturesContainer)
+	// reimplemented (iipr::IFeaturesProvider)
 	virtual Features GetFeatures() const;
 
 private:

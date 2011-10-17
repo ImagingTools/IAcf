@@ -9,16 +9,16 @@ namespace iipr
 
 int CFeatureToImageMapperProcessorComp::DoConvertFeatures(
 			const iprm::IParamsSet* paramsPtr,
-			const IFeaturesContainer& container,
+			const IFeaturesProvider& container,
 			IFeaturesConsumer& results)
 {
 	if (!m_featuresMapperCompPtr.IsValid()){
 		return TS_INVALID;
 	}
 
-	IFeaturesContainer::Features features = container.GetFeatures();
+	IFeaturesProvider::Features features = container.GetFeatures();
 
-	for (		IFeaturesContainer::Features::const_iterator iter = features.begin();
+	for (		IFeaturesProvider::Features::const_iterator iter = features.begin();
 				iter != features.end();
 				++iter){
 		const IFeature* featurePtr = *iter;
@@ -57,7 +57,7 @@ int CFeatureToImageMapperProcessorComp::DoProcessing(
 		return TS_OK;
 	}
 
-	const IFeaturesContainer* containerPtr = dynamic_cast<const IFeaturesContainer*>(inputPtr);
+	const IFeaturesProvider* containerPtr = dynamic_cast<const IFeaturesProvider*>(inputPtr);
 	IFeaturesConsumer* consumerPtr = dynamic_cast<IFeaturesConsumer*>(outputPtr);
 
 	if (		(containerPtr == NULL) ||

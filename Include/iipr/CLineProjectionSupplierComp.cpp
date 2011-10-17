@@ -10,9 +10,9 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IValueSupplier)
+// reimplemented (iproc::IValueProvider)
 
-const imeas::IDataSequence* CLineProjectionSupplierComp::GetLineProjection() const
+const imeas::IDataSequence* CLineProjectionSupplierComp::GetDataSequence() const
 {
 	return GetWorkProduct();
 }
@@ -24,9 +24,9 @@ const imeas::IDataSequence* CLineProjectionSupplierComp::GetLineProjection() con
 
 int CLineProjectionSupplierComp::ProduceObject(imeas::CGeneralDataSequence& result) const
 {
-	if (		m_bitmapSupplierCompPtr.IsValid() &&
+	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_projectionProcessorCompPtr.IsValid()){
-		const iimg::IBitmap* bitmapPtr = m_bitmapSupplierCompPtr->GetBitmap();
+		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
@@ -52,7 +52,9 @@ void CLineProjectionSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	AddInputSupplier(m_bitmapSupplierCompPtr.GetPtr());
+	if (m_bitmapProviderModelCompPtr.IsValid()){
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+	}
 }
 
 

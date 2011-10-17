@@ -9,7 +9,7 @@
 #include "iproc/TSyncProcessorWrap.h"
 
 #include "iipr/IImageToFeatureProcessor.h"
-#include "iipr/IFeaturesContainer.h"
+#include "iipr/IFeaturesProvider.h"
 #include "iipr/IFeatureToImageMapper.h"
 #include "iipr/ICircleFinderParams.h"
 #include "iipr/TFeatureWrap.h"
@@ -89,7 +89,7 @@ protected:
 
 	void AddProjectionResultsToRays(
 				const iprm::IParamsSet& params,
-				const IFeaturesContainer& container,
+				const IFeaturesProvider& container,
 				Rays& inRays,
 				Rays& outRays);
 

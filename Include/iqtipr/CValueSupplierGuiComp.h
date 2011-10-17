@@ -8,7 +8,7 @@
 #include "imod/TModelWrap.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "i2d/CCircle.h"
-#include "iproc/IValueSupplier.h"
+#include "iproc/IValueProvider.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -23,16 +23,12 @@ namespace iqtipr
 {
 
 
-class CValueSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
-			Ui::CValueSupplierGuiComp,
-			iproc::IValueSupplier>
+class CValueSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CValueSupplierGuiComp>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtinsp::TSupplierGuiCompBase<
-				Ui::CValueSupplierGuiComp,
-				iproc::IValueSupplier> BaseClass;
+	typedef iqtinsp::TSupplierGuiCompBase<Ui::CValueSupplierGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CValueSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
@@ -74,6 +70,9 @@ protected:
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+
+	// reimplemented (icomp::IComponentBase)
+	virtual void OnComponentDestroyed();
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);

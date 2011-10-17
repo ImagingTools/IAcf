@@ -3,9 +3,9 @@
 
 
 // ACF includes
+#include "istd/IChangeable.h"
 #include "i2d/ITransformation2d.h"
 #include "iimg/IBitmap.h"
-#include "iproc/ISupplier.h"
 
 
 namespace iipr
@@ -13,9 +13,9 @@ namespace iipr
 
 
 /**
-	Supplier allowing to access of multiple produced bitmap.
+	Supplier allowing to access of multiple produced bitmaps.
 */
-class IMultiBitmapSupplier: virtual public iproc::ISupplier
+class IMultiBitmapProvider: virtual public istd::IChangeable
 {
 public:
 	/**

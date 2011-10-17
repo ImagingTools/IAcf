@@ -1,11 +1,11 @@
-#ifndef iipr_IBitmapSupplier_included
-#define iipr_IBitmapSupplier_included
+#ifndef iipr_IBitmapProvider_included
+#define iipr_IBitmapProvider_included
 
 
 // ACF includes
+#include "istd/IChangeable.h"
 #include "i2d/ITransformation2d.h"
 #include "iimg/IBitmap.h"
-#include "iproc/ISupplier.h"
 
 
 namespace iipr
@@ -15,7 +15,7 @@ namespace iipr
 /**
 	Bitmap supplier allowing to access of produced bitmap.
 */
-class IBitmapSupplier: virtual public iproc::ISupplier
+class IBitmapProvider: virtual public istd::IChangeable
 {
 public:
 	/**
@@ -36,6 +36,6 @@ public:
 } // namespace iipr
 
 
-#endif // !iipr_IBitmapSupplier_included
+#endif // !iipr_IBitmapProvider_included
 
 

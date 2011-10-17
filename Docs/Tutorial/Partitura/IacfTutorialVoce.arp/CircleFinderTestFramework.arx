@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1656
+          1970
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          295
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -44,45 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
-          <AttributeInfo>
-            <Id>
-              AboutDescriptionText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                &#169; Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;&#10;All rights reserved
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicatioName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Circle Finder
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               CompanyName
@@ -122,30 +73,6 @@
                 </Value>
                 <Value>
                   SimpleCircleFinderTaskGui
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InspectionIds
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Image
-                </Value>
-                <Value>
-                  CircleFinder
                 </Value>
               </Values>
             </Data>
@@ -514,7 +441,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -542,14 +469,6 @@
     <Interface>
       <InterfaceId>
         ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         Framework
