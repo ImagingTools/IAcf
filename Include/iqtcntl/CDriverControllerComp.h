@@ -7,6 +7,8 @@
 #include "icomp/CComponentBase.h"
 #include "inat/CTimer.h"
 
+#include "iinsp/IIdProvider.h"
+
 #include "ilolv/ICommandCaller.h"
 #include "ilolv/CMultiTracerCommands.h"
 
@@ -74,7 +76,9 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected:
-	class ObjectInspection: virtual public icntl::IObjectInspection
+	class ObjectInspection:
+				virtual public iinsp::IIdProvider,
+				virtual public icntl::IObjectInspection
 	{
 	public:
 		ObjectInspection(
@@ -83,8 +87,11 @@ protected:
 					int stationIndex,
 					const ilolv::CMultiTracerCommands::PopId::Result& objectParams);
 
+		// reimplemented (iinsp::IIdProvider)
+		virtual I_DWORD GetCurrentId() const;
+		virtual bool SetCurrentId(I_DWORD id);
+
 		// reimplemented (icntl::IObjectInspection)
-		virtual I_DWORD GetObjectId() const;
 		virtual const isys::ITimer& GetTimestamp() const;
 		virtual bool SetEjector(int ejectorIndex);
 

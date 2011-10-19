@@ -399,13 +399,26 @@ CDriverControllerComp::ObjectInspection::ObjectInspection(
 }
 
 
-// reimplemented (icntl::IObjectInspection)
+// reimplemented (iinsp::IIdProvider)
 
-I_DWORD CDriverControllerComp::ObjectInspection::GetObjectId() const
+I_DWORD CDriverControllerComp::ObjectInspection::GetCurrentId() const
 {
 	return m_objectId;
 }
 
+
+bool CDriverControllerComp::ObjectInspection::SetCurrentId(I_DWORD id)
+{
+	if (id != m_objectId){
+		istd::CChangeNotifier notifier(this);
+		m_objectId = id;
+	}
+
+	return true;
+}
+
+
+// reimplemented (icntl::IObjectInspection)
 
 const isys::ITimer& CDriverControllerComp::ObjectInspection::GetTimestamp() const
 {

@@ -18,11 +18,6 @@ class IObjectInspection: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Get object ID identifying physical object.
-		This ID is identical for all inspections of the same physical object.
-	*/
-	virtual I_DWORD GetObjectId() const = 0;
-	/**
 		Get timestamp of this inspection.
 		Typically camera trigger timestamp is taken.
 	*/
