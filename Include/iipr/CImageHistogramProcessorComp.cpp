@@ -154,7 +154,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	istd::CChangeNotifier changePtr(&histogram);
 
-	return histogram.CreateDiscrSequence(histogramSize, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, usedColorComponents);
+	return histogram.CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, usedColorComponents);
 }
 
 
