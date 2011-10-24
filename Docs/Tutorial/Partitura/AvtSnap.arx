@@ -274,7 +274,7 @@
         ExposureParams
       </Id>
       <PackageId>
-        IacfBasePck
+        CameraPck
       </PackageId>
       <ComponentId>
         ExposureParams
@@ -314,7 +314,7 @@
         ExposureParamsGui
       </Id>
       <PackageId>
-        QtCamPck
+        QtCameraPck
       </PackageId>
       <ComponentId>
         ExposureParamsGui
@@ -510,8 +510,8 @@
         TriggerParams
       </Id>
       <PackageId>
-				IacfBasePck
-			</PackageId>
+        SignalPck
+      </PackageId>
       <ComponentId>
         TriggerParams
       </ComponentId>

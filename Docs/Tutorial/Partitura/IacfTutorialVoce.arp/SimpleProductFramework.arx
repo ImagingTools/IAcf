@@ -213,7 +213,7 @@
         InspectionTask
       </Id>
       <PackageId>
-        IacfBasePck
+        InspectionPck
       </PackageId>
       <ComponentId>
         InspectionTask
@@ -269,7 +269,7 @@
         InspectionTaskEditor
       </Id>
       <PackageId>
-        IacfQtPck
+        QtInspectionPck
       </PackageId>
       <ComponentId>
         InspectionTaskGui

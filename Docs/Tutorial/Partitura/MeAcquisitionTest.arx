@@ -377,8 +377,8 @@
         SamplingParams
       </Id>
       <PackageId>
-				IacfBasePck
-			</PackageId>
+        SignalPck
+      </PackageId>
       <ComponentId>
         SamplingParams
       </ComponentId>
@@ -414,8 +414,8 @@
         SamplingParamsGui
       </Id>
       <PackageId>
-				IacfQtPck
-			</PackageId>
+        QtSignalPck
+      </PackageId>
       <ComponentId>
         SamplingParamsGui
       </ComponentId>

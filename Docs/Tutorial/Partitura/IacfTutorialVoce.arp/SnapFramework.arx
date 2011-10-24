@@ -234,7 +234,7 @@
         SnapGui
       </Id>
       <PackageId>
-        QtCamPck
+        QtCameraPck
       </PackageId>
       <ComponentId>
         SnapImageGui

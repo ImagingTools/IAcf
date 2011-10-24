@@ -32,7 +32,7 @@
         BitmapAcquisition
       </Id>
       <PackageId>
-        QtCamPck
+        QtCameraPck
       </PackageId>
       <ComponentId>
         FileAcquisition

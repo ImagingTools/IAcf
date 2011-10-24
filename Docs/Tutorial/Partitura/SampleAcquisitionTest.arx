@@ -297,7 +297,7 @@
         TestSampleAcquisition
       </Id>
       <PackageId>
-        IacfQtPck
+        QtSignalPck
       </PackageId>
       <ComponentId>
         ScriptDataProcessor

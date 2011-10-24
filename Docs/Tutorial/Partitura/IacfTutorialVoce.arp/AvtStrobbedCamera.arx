@@ -74,7 +74,7 @@
         ExposureParams
       </Id>
       <PackageId>
-        IacfBasePck
+        CameraPck
       </PackageId>
       <ComponentId>
         ExposureParams
