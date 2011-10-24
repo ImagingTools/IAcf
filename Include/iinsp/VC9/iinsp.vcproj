@@ -239,6 +239,10 @@
 				RelativePath="..\IInspectionTask.h"
 				>
 			</File>
+			<File
+				RelativePath="..\ITimeStampProvider.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

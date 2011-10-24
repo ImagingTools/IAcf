@@ -213,6 +213,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IGeneralResultProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IInspectionUnitController.h"
 				>
 			</File>
