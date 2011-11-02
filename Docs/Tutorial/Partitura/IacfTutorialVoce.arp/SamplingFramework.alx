@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1708
+          2021
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          315
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -29,10 +18,10 @@
   <PositionMap count="11">
     <Element>
       <ComponentName>
-        AboutGui
+        AboutDialog
       </ComponentName>
       <X>
-        150
+        125
       </X>
       <X>
         75

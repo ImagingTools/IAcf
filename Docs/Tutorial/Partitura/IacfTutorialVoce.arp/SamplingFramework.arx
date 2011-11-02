@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1708
+          2021
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          315
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -29,13 +18,13 @@
   <ElementsList count="11">
     <Element>
       <Id>
-        AboutGui
+        AboutDialog
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        AboutGui
+        AboutDialog
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -568,7 +557,7 @@
         <AttributeInfoMap count="15">
           <AttributeInfo>
             <Id>
-              AboutGui
+              AboutDialog
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -581,7 +570,7 @@
                 true
               </IsEnabled>
               <Value>
-                AboutGui
+                AboutDialog
               </Value>
             </Data>
           </AttributeInfo>
@@ -740,8 +729,8 @@
                 true
               </IsEnabled>
               <Value>
-								&#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
-							</Value>
+                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

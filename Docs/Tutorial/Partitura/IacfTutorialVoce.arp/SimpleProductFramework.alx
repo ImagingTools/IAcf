@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1970
+          2021
         </Number>
         <Description>
           ACF
@@ -18,13 +18,13 @@
   <PositionMap count="9">
     <Element>
       <ComponentName>
-        AboutGui
+        AboutDialog
       </ComponentName>
       <X>
-        575
+        675
       </X>
       <X>
-        275
+        250
       </X>
     </Element>
     <Element>

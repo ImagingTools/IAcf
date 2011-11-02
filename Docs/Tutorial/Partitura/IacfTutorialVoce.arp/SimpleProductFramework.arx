@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1970
+          2021
         </Number>
         <Description>
           ACF
@@ -18,13 +18,13 @@
   <ElementsList count="9">
     <Element>
       <Id>
-        AboutGui
+        AboutDialog
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        AboutGui
+        AboutDialog
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -51,22 +51,6 @@
               <Value>
                 StandaloneApp
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DescriptionText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              AboutDescriptionText
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -450,7 +434,7 @@
         <AttributeInfoMap count="14">
           <AttributeInfo>
             <Id>
-              AboutGui
+              AboutDialog
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -463,7 +447,7 @@
                 true
               </IsEnabled>
               <Value>
-                AboutGui
+                AboutDialog
               </Value>
             </Data>
           </AttributeInfo>
