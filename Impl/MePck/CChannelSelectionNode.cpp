@@ -103,6 +103,12 @@ istd::CString CChannelSelectionNode::GetOptionName(int index) const
 }
 
 
+istd::CString CChannelSelectionNode::GetOptionDescription(int /*index*/) const
+{
+	return istd::CString();
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CChannelSelectionNode::Serialize(iser::IArchive& archive)

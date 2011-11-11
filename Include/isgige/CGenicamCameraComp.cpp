@@ -217,6 +217,12 @@ istd::CString CGenicamCameraComp::GetOptionName(int index) const
 }
 
 
+istd::CString CGenicamCameraComp::GetOptionDescription(int /*index*/) const
+{
+	return istd::CString();
+}
+
+
 // public slots
 
 void CGenicamCameraComp::OnCameraEventLog(int type, QString message)

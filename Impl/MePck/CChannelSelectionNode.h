@@ -48,6 +48,7 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetOptionsCount() const;
 	virtual istd::CString GetOptionName(int index) const;
+	virtual istd::CString GetOptionDescription(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
