@@ -48,7 +48,6 @@
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
 			/>
