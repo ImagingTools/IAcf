@@ -46,9 +46,11 @@ public:
 	virtual iprm::ISelectionParam* GetActiveSubselection() const;
 
 	// reimplemented (iprm::ISelectionConstraints)
+	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual istd::CString GetOptionName(int index) const;
 	virtual istd::CString GetOptionDescription(int index) const;
+	virtual std::string GetOptionId(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

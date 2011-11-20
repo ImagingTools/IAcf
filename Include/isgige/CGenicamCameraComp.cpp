@@ -202,6 +202,12 @@ bool CGenicamCameraComp::IsTriggerModeSupported(int triggerMode) const
 
 // reimplemented (iprm::ISelectionConstraints)
 
+int CGenicamCameraComp::GetConstraintsFlags() const
+{
+	return SCF_NONE;
+}
+
+
 int CGenicamCameraComp::GetOptionsCount() const
 {
 	return int(m_deviceInfos.size());
@@ -220,6 +226,12 @@ istd::CString CGenicamCameraComp::GetOptionName(int index) const
 istd::CString CGenicamCameraComp::GetOptionDescription(int /*index*/) const
 {
 	return istd::CString();
+}
+
+
+std::string CGenicamCameraComp::GetOptionId(int /*index*/) const
+{
+	return std::string();
 }
 
 
