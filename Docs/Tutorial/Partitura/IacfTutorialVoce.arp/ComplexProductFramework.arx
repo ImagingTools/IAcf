@@ -1,32 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1518
+          2088
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          219
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="15">
+  <ElementsList count="16">
     <Element>
       <Id>
         AnnulusSegmentTestTask
@@ -269,48 +258,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InspectionIds
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="8">
-                <Value>
-                  Image
-                </Value>
-                <Value>
-                  Line
-                </Value>
-                <Value>
-                  Rectangle
-                </Value>
-                <Value>
-                  Quadrangle
-                </Value>
-                <Value>
-                  Circle
-                </Value>
-                <Value>
-                  Annulus
-                </Value>
-                <Value>
-                  AnnulusSegment
-                </Value>
-                <Value>
-                  Position
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               InspectionNames
             </Id>
             <Type>
@@ -347,6 +294,42 @@
                 </Value>
                 <Value>
                   Position
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InspectionPreviews
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="6">
+                <Value>
+                  View
+                </Value>
+                <Value>
+                  View
+                </Value>
+                <Value>
+                  View
+                </Value>
+                <Value>
+                  View
+                </Value>
+                <Value>
+                  View
+                </Value>
+                <Value>
+                  View
                 </Value>
               </Values>
             </Data>
@@ -723,8 +706,31 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        View
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        ImageView
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -752,14 +758,6 @@
     <Interface>
       <InterfaceId>
         ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         Framework

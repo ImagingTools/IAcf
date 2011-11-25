@@ -1,38 +1,38 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1654
+          2088
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          295
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
         175
+      </X>
+      <X>
+        125
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        500
       </X>
       <X>
         125
@@ -47,17 +47,6 @@
       </X>
       <X>
         625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        125
       </X>
     </Element>
     <Element>
@@ -124,6 +113,17 @@
       </X>
       <X>
         275
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        125
       </X>
     </Element>
   </PositionMap>
