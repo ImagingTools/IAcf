@@ -2,9 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="SmaGigEPck"
-	ProjectGUID="{6B6B91A0-805A-4BF8-82C1-3B1F096A40AF}"
-	RootNamespace="SmaGigEPck"
+	Name="WinPck"
+	RootNamespace="WinPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
 	>
@@ -147,7 +146,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\SmaGigEPck.cpp"
+				RelativePath="..\WinPck.cpp"
 				>
 			</File>
 		</Filter>
@@ -157,7 +156,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\SmaGigEPck.h"
+				RelativePath="..\WinPck.h"
 				>
 			</File>
 		</Filter>

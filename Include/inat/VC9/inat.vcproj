@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
-	Name="iorn"
-	ProjectGUID="{4896E719-0D0D-4822-AA84-8FE3DBE1D820}"
+	Version="9,00"
+	Name="inat"
+	ProjectGUID="{91007D75-2F2B-4B26-A1BB-260181E8DAF3}"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -17,7 +17,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -43,14 +43,18 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../"
+				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				StringPooling="true"
+				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				WarningLevel="3"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -85,7 +89,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -111,12 +115,18 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
-				StringPooling="true"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../"
+				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="0"
 				BrowseInformation="1"
-				WarningLevel="4"
+				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -156,49 +166,29 @@
 			Name="Source Files"
 			Filter="cpp"
 			>
-			<File
-				RelativePath="..\CHypothesesSet.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHypothesisInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSigmoidalObjectronComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CHypothesesSet.h"
+				RelativePath="..\CCriticalSection.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CHypothesisInfo.h"
+				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSigmoidalObjectronComp.h"
+				RelativePath="..\CTimer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ILearnFeedback.h"
+				RelativePath="..\inat.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ILearningSet.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IObjectron.h"
-				>
-			</File>
-			<File
-				RelativePath="..\iorn.h"
+				RelativePath="..\TComPtr.h"
 				>
 			</File>
 		</Filter>

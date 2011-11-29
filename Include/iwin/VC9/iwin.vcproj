@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
-	Name="iorn"
-	ProjectGUID="{4896E719-0D0D-4822-AA84-8FE3DBE1D820}"
+	Version="9,00"
+	Name="iwin"
+	ProjectGUID="{633B67F7-B154-4A80-A651-1111D5EDF583}"
+	RootNamespace="iwin"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -17,7 +18,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -43,14 +44,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;"
+				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				EnableFunctionLevelLinking="true"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -85,7 +83,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -111,12 +109,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;"
+				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
-				BrowseInformation="1"
-				WarningLevel="4"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
+				BasicRuntimeChecks="3"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -157,15 +154,39 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CHypothesesSet.cpp"
+				RelativePath="..\CCriticalSection.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CHypothesisInfo.cpp"
+				RelativePath="..\CDefaultServicesProvider.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSigmoidalObjectronComp.cpp"
+				RelativePath="..\CDllFunctionsProvider.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessEnvironment.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemEnvironment.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTimeStampCacheComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -174,31 +195,47 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CHypothesesSet.h"
+				RelativePath="..\CCriticalSection.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CHypothesisInfo.h"
+				RelativePath="..\CDefaultServicesProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSigmoidalObjectronComp.h"
+				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ILearnFeedback.h"
+				RelativePath="..\CFileSystem.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ILearningSet.h"
+				RelativePath="..\CProcessEnvironment.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IObjectron.h"
+				RelativePath="..\CSystemEnvironment.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iorn.h"
+				RelativePath="..\CSystemInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTimer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTimeStampCacheComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iwin.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TComPtr.h"
 				>
 			</File>
 		</Filter>

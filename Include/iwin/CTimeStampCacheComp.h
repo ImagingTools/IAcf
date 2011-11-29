@@ -1,0 +1,47 @@
+#ifndef iwin_CTimeStampCacheComp_included
+#define iwin_CTimeStampCacheComp_included
+
+
+// ACF includes
+#include "icomp/CComponentBase.h"
+
+// ACF-Solutions includes
+#include "iinsp/ITimeStampProvider.h"
+
+// IACF includes
+#include "iwin/CTimer.h"
+
+
+namespace iwin
+{
+
+
+class CTimeStampCacheComp:
+			public icomp::CComponentBase,
+			virtual public iinsp::ITimeStampProvider
+{
+public:
+	typedef icomp::CComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CTimeStampCacheComp);
+		I_REGISTER_INTERFACE(iinsp::ITimeStampProvider);
+	I_END_COMPONENT;
+
+	// reimplemented (iinsp::ITimeStampProvider)
+	virtual const isys::ITimer* GetCurrentTimeStamp() const;
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object);
+
+private:
+	bool m_isTimerValid;
+	iwin::CTimer m_timer;
+};
+
+
+} // namespace iwin
+
+
+#endif // !iwin_CTimeStampCacheComp_included
+
+

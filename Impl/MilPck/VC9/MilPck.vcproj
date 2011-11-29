@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib AcfWin.lib iipr.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib Mil.lib milmod.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib iipr.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib Mil.lib milmod.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MILDIR)\Lib&quot;"
 			/>
 			<Tool
@@ -112,7 +112,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib AcfWin.lib iipr.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib Mil.lib milmod.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib iipr.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib Mil.lib milmod.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MILDIR)\Lib&quot;"
 			/>
 			<Tool
