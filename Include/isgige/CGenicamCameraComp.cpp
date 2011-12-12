@@ -235,29 +235,6 @@ std::string CGenicamCameraComp::GetOptionId(int /*index*/) const
 }
 
 
-// public slots
-
-void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
-{
-	istd::ILogger::MessageCategory category = istd::ILogger::MC_CRITICAL;
-	switch (type){
-	case gige_EM_TYPE_INFO:
-		category = istd::ILogger::MC_INFO;
-		break;
-
-	case gige_EM_TYPE_WARNING:
-		category = istd::ILogger::MC_WARNING;
-		break;
-
-	case gige_EM_TYPE_ERROR:
-		category = istd::ILogger::MC_ERROR;
-		break;
-	}
-
-	SendLogMessage(category, MI_DEVICE_INTERN, iqt::GetCString(message), "");
-}
-
-
 // protected methods
 
 CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const istd::CString& urlString) const
@@ -521,6 +498,29 @@ void CGenicamCameraComp::OnComponentCreated()
 
 		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
 	}
+}
+
+
+// protected slots
+
+void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
+{
+	istd::ILogger::MessageCategory category = istd::ILogger::MC_CRITICAL;
+	switch (type){
+	case gige_EM_TYPE_INFO:
+		category = istd::ILogger::MC_INFO;
+		break;
+
+	case gige_EM_TYPE_WARNING:
+		category = istd::ILogger::MC_WARNING;
+		break;
+
+	case gige_EM_TYPE_ERROR:
+		category = istd::ILogger::MC_ERROR;
+		break;
+	}
+
+	SendLogMessage(category, MI_DEVICE_INTERN, iqt::GetCString(message), "");
 }
 
 

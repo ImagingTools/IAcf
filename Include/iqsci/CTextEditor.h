@@ -45,6 +45,9 @@ public Q_SLOTS:
 	void SetLanguage(const QString& language);
 	void SetReadOnly(bool readOnly = true);
 
+protected:
+	void RegisterLexers();
+
 protected Q_SLOTS:
 	virtual void OnSelectionChanged();
 	virtual void OnTextChanged();
@@ -58,9 +61,6 @@ private:
 	typedef std::map<QString, QsciLexer*> LexerMap;
 
 	LexerMap m_languages;
-
-private:
-	void RegisterLexers();
 
 private:
 	enum MenuFlags
