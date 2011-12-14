@@ -57,7 +57,7 @@ int CGenicamCameraComp::DoProcessing(
 	}
 	I_ASSERT(deviceInfoPtr->devicePtr.IsValid());
 
-	if (deviceInfoPtr->triggerMode == 0){
+	if (deviceInfoPtr->triggerMode == isig::ITriggerParams::TM_SOFTWARE){
 		if (!deviceInfoPtr->devicePtr->CommandNodeExecute("TriggerSoftware")){
 			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot send software trigger").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
 
