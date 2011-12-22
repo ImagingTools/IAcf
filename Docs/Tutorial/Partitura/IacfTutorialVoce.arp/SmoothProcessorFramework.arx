@@ -181,7 +181,7 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              FilterLengths
+              Values
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;double&gt;
