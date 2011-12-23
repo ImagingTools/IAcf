@@ -48,7 +48,6 @@
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -111,9 +110,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
 				BasicRuntimeChecks="3"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
