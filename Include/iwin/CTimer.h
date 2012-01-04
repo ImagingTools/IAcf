@@ -27,20 +27,23 @@ public:
 
 	I_QWORD GetNativeRepresentation() const;
 	void SetNativeRepresentation(I_QWORD value);
-	void SetElapsed(double value);
 
 	// reimplemented (isys::ITimer)
-	virtual void Start();
+	virtual void Start(double elapsedTime = 0);
 	virtual double GetElapsed() const;
 	virtual double GetTimeTo(const ITimer& timer) const;
 	virtual void WaitTo(double time) const;
 	virtual double GetTimerResolution() const;
 
+	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const;
+	virtual bool CopyFrom(const istd::IChangeable& object);
+
 private:
-	long long m_startCounter;
+	I_SQWORD m_startCounter;
 
 	// static attributes
-	static I_QWORD s_timerFrequence;
+	static I_SQWORD s_timerFrequence;
 	static bool s_isTimerFrequenceValid;
 };
 

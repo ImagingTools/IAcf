@@ -25,13 +25,7 @@ bool CTimeStampCacheComp::CopyFrom(const IChangeable& object)
 	if (providerPtr != NULL){
 		const isys::ITimer* timerPtr = providerPtr->GetCurrentTimeStamp();
 		if (timerPtr != NULL){
-			const CTimer* nativeTimerPtr = dynamic_cast<const CTimer*>(timerPtr);
-			if (nativeTimerPtr != NULL){
-				m_timer.SetNativeRepresentation(nativeTimerPtr->GetNativeRepresentation());
-			}
-			else{
-				m_timer.SetElapsed(timerPtr->GetElapsed());
-			}
+			m_isTimerValid = m_timer.CopyFrom(*timerPtr);
 		}
 		else{
 			m_isTimerValid = false;

@@ -36,7 +36,7 @@ double CTimer::GetTimeTo(const CTimer& timer) const
 
 I_QWORD CTimer::GetNativeRepresentation() const
 {
-	return m_startCounter;
+	return I_QWORD(m_startCounter);
 }
 
 
@@ -44,41 +44,33 @@ void CTimer::SetNativeRepresentation(I_QWORD value)
 {
 	istd::CChangeNotifier notifier(this);
 
-	m_startCounter = value;
-}
-
-
-void CTimer::SetElapsed(double value)
-{
-	istd::CChangeNotifier notifier(this);
-
-	I_ASSERT(sizeof(unsigned long long) == sizeof(LARGE_INTEGER));
-
-	unsigned long long endCounter;
-	::QueryPerformanceCounter((LARGE_INTEGER*)&endCounter);
-
-	m_startCounter = I_QWORD(endCounter - value * s_timerFrequence);
+	m_startCounter = I_SQWORD(value);
 }
 
 
 // reimplemented (isys::ITimer)
 
-void CTimer::Start()
+void CTimer::Start(double elapsedTime)
 {
+	I_ASSERT(sizeof(I_SQWORD) == sizeof(LARGE_INTEGER));
+
 	istd::CChangeNotifier notifier(this);
 
-	::QueryPerformanceCounter((LARGE_INTEGER*)&m_startCounter);
+	LARGE_INTEGER currentCounter;
+	::QueryPerformanceCounter(&currentCounter);
+
+	m_startCounter = (I_SQWORD&)currentCounter - I_SQWORD(elapsedTime * s_timerFrequence);
 }
 
 
 double CTimer::GetElapsed() const
 {
-	I_ASSERT(sizeof(unsigned long long) == sizeof(LARGE_INTEGER));
+	I_ASSERT(sizeof(I_SQWORD) == sizeof(LARGE_INTEGER));
 
-	unsigned long long endCounter;
+	I_SQWORD endCounter;
 	::QueryPerformanceCounter((LARGE_INTEGER*)&endCounter);
 
-	return (long long)(endCounter - m_startCounter) / double(s_timerFrequence);
+	return double(endCounter - m_startCounter) / s_timerFrequence;
 }
 
 
@@ -109,10 +101,38 @@ double CTimer::GetTimerResolution() const
 }
 
 
+// reimplemented (istd::IChangeable)
+
+int CTimer::GetSupportedOperations() const
+{
+	return SO_COPY;
+}
+
+
+bool CTimer::CopyFrom(const istd::IChangeable& object)
+{
+	const CTimer* nativeTimerPtr = dynamic_cast<const CTimer*>(&object);
+	if (nativeTimerPtr != NULL){
+		SetNativeRepresentation(nativeTimerPtr->GetNativeRepresentation());
+
+		return true;
+	}
+	else{
+		const isys::ITimer* timerPtr = dynamic_cast<const isys::ITimer*>(&object);
+		if (timerPtr != NULL){
+			Start(timerPtr->GetElapsed());
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 // static attributes
 
-unsigned long long CTimer::s_timerFrequence;
+I_SQWORD CTimer::s_timerFrequence;
 bool CTimer::s_isTimerFrequenceValid = (::QueryPerformanceFrequency((LARGE_INTEGER*)&CTimer::s_timerFrequence) != 0);
 
 
