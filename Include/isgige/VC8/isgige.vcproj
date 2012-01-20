@@ -51,10 +51,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
 				RuntimeTypeInfo="true"
-				DebugInformationFormat="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -115,11 +113,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
-				StringPooling="true"
-				BrowseInformation="1"
-				WarningLevel="4"
-				DebugInformationFormat="3"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="WinPck"
+	ProjectGUID="{815C1F88-C157-43B0-8BB6-006FADFE2D80}"
 	RootNamespace="WinPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
@@ -37,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				AdditionalUsingDirectories=""
 			/>
 			<Tool
@@ -51,8 +52,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iwin.lib qtmain.lib QtCore4.lib QtNetwork4.lib GigEVisionSdk.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(GIGE_VISION_SDK_PATH)\lib\$(PlatformName)&quot;"
+				AdditionalDependencies="AcfStd.lib"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -98,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(GIGE_VISION_SDK_PATH)/include&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -111,8 +112,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iwin.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtNetworkd4.lib GigEVisionSdkD.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(GIGE_VISION_SDK_PATH)\lib\$(PlatformName)&quot;"
+				AdditionalDependencies="AcfStd.lib"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

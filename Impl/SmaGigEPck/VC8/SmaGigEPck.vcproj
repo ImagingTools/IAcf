@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iwin.lib qtmain.lib QtCore4.lib QtNetwork4.lib GigEVisionSdk.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtNetwork4.lib GigEVisionSdk.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(GIGE_VISION_SDK_PATH)\lib\$(PlatformName)&quot;"
 			/>
 			<Tool
@@ -112,7 +112,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iwin.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtNetworkd4.lib GigEVisionSdkD.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtNetworkd4.lib GigEVisionSdkD.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(GIGE_VISION_SDK_PATH)\lib\$(PlatformName)&quot;"
 			/>
 			<Tool

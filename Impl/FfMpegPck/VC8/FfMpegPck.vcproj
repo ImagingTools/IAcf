@@ -6,6 +6,7 @@
 	ProjectGUID="{D853FC62-AC4E-462B-BB37-1A6D308CC8E6}"
 	RootNamespace="FfMpegPck"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -73,9 +74,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -135,9 +133,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
