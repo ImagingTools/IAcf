@@ -40,10 +40,10 @@ namespace isgige
 class CGenicamCameraComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,
+			public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>,
 			virtual public icam::IExposureConstraints,
 			virtual public isig::ITriggerConstraints,
-			virtual public iprm::ISelectionConstraints,
-			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
+			virtual public iprm::ISelectionConstraints
 {
 	Q_OBJECT
 
@@ -85,16 +85,14 @@ public:
 	virtual ~CGenicamCameraComp();
 
 	// reimplemented (iproc::IBitmapAcquisition)
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+
+	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				iproc::IProgressManager* progressManagerPtr = NULL);
-
-	// reimplemented (iproc::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
-
-	// reimplemented (iproc::IProcessor)
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 	// reimplemented (icam::IExposureConstraints)

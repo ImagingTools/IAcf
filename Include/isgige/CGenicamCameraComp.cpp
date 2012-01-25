@@ -38,6 +38,31 @@ CGenicamCameraComp::~CGenicamCameraComp()
 
 // reimplemented (iproc::IBitmapAcquisition)
 
+istd::CIndex2d CGenicamCameraComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
+{
+	const i2d::CRectangle* roiPtr = GetRoiFromParams(paramsPtr);
+	if (roiPtr != NULL){
+		return istd::CIndex2d(int(roiPtr->GetWidth()), int(roiPtr->GetHeight()));
+	}
+
+	DeviceInfo* deviceInfoPtr = GetDeviceByParams(paramsPtr);
+	I_ASSERT((deviceInfoPtr == NULL) || deviceInfoPtr->devicePtr.IsValid());	// invalid devices cannot exist in device list
+
+	if (deviceInfoPtr != NULL){
+		INT64 width = 0;
+		INT64 height = 0;
+		if (		deviceInfoPtr->devicePtr->GetIntegerNodeValue("Width", width) &&
+					deviceInfoPtr->devicePtr->GetIntegerNodeValue("Height", height)){
+			return istd::CIndex2d(int(width), int(height));
+		}
+	}
+
+	return istd::CIndex2d(-1, -1);	// unknown size
+}
+
+
+// reimplemented (iproc::IProcessor)
+
 int CGenicamCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
@@ -138,33 +163,6 @@ int CGenicamCameraComp::DoProcessing(
 	return TS_INVALID;
 }
 
-
-// reimplemented (iproc::IBitmapAcquisition)
-
-istd::CIndex2d CGenicamCameraComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
-{
-	const i2d::CRectangle* roiPtr = GetRoiFromParams(paramsPtr);
-	if (roiPtr != NULL){
-		return istd::CIndex2d(int(roiPtr->GetWidth()), int(roiPtr->GetHeight()));
-	}
-
-	DeviceInfo* deviceInfoPtr = GetDeviceByParams(paramsPtr);
-	I_ASSERT((deviceInfoPtr == NULL) || deviceInfoPtr->devicePtr.IsValid());	// invalid devices cannot exist in device list
-
-	if (deviceInfoPtr != NULL){
-		INT64 width = 0;
-		INT64 height = 0;
-		if (		deviceInfoPtr->devicePtr->GetIntegerNodeValue("Width", width) &&
-					deviceInfoPtr->devicePtr->GetIntegerNodeValue("Height", height)){
-			return istd::CIndex2d(int(width), int(height));
-		}
-	}
-
-	return istd::CIndex2d(-1, -1);	// unknown size
-}
-
-
-// reimplemented (iproc::IProcessor)
 
 void CGenicamCameraComp::InitProcessor(const iprm::IParamsSet* paramsPtr)
 {
