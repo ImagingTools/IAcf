@@ -570,9 +570,11 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 			m_lastReadFrame = -1;
 			m_ignoreFirstAudioFrame = true;
 
-			ReadNextPacket();
+			if (!ReadNextPacket()){
+				return false;
+			}
 
-			TryTracePosition();
+			TryTracePosition(frameIndex);
 
 			return true;
 		}
@@ -715,7 +717,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 
 					if (minimalAudioFrame >= 0){
 						if (m_packet.dts == AV_NOPTS_VALUE){
-							return FT_SKIPPED_IMAGE;
+							return FT_SKIPPED_AUDIO_SAMPLE;
 						}
 
 						if (m_packet.dts < minimalAudioFrame){
@@ -900,7 +902,11 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 				I_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
-					if (task.outputPtr->CopyFrom(*m_bitmapObjectCompPtr)){
+					// Optimized for speed
+					if (task.outputPtr == m_bitmapObjectCompPtr.GetPtr()){
+						task.state = TS_OK;
+					}
+					else if (task.outputPtr->CopyFrom(*m_bitmapObjectCompPtr)){
 						task.state = TS_OK;
 					}
 					else{
@@ -924,7 +930,10 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 				I_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
-					if (task.outputPtr->CopyFrom(*m_audioSampleObjectCompPtr)){
+					if (task.outputPtr == m_audioSampleObjectCompPtr.GetPtr()){
+						task.state = TS_OK;
+					}
+					else if (task.outputPtr->CopyFrom(*m_audioSampleObjectCompPtr)){
 						task.state = TS_OK;
 					}
 					else{
@@ -979,7 +988,9 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 }
 
 
-bool CLibAvVideoDecoderComp::TryTracePosition()
+bool CLibAvVideoDecoderComp::TryTracePosition(
+				int minimalImageFrame,
+				int minimalAudioFrame)
 {
 	if (*m_tracePositionAttrPtr){
 		bool needReadImage = m_bitmapObjectCompPtr.IsValid();
@@ -987,7 +998,9 @@ bool CLibAvVideoDecoderComp::TryTracePosition()
 		while (needReadImage || needReadSequence){
 			FrameType readFrameType = ReadNextFrame(
 						needReadImage? m_bitmapObjectCompPtr.GetPtr(): NULL,
-						needReadSequence? m_audioSampleObjectCompPtr.GetPtr(): NULL);
+						needReadSequence? m_audioSampleObjectCompPtr.GetPtr(): NULL,
+						minimalImageFrame,
+						minimalAudioFrame);
 
 			switch (readFrameType){
 			case FT_ERROR:
