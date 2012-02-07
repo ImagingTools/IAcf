@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2165
         </Number>
         <Description>
           ACF
@@ -436,7 +436,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -473,6 +473,22 @@
               <Value>
                 ImagingTools
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsMenuVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              IsMenuVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
