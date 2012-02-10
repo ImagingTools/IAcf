@@ -84,6 +84,8 @@ int CGenicamCameraComp::DoProcessing(
 	I_ASSERT(deviceInfoPtr->devicePtr.IsValid());
 
 	if (deviceInfoPtr->triggerMode == isig::ITriggerParams::TM_SOFTWARE){
+		deviceInfoPtr->devicePtr->SetStringNodeValue("LineSource", "ExposureActive");
+
 		if (!deviceInfoPtr->devicePtr->CommandNodeExecute("TriggerSoftware")){
 			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot send software trigger").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
 
@@ -565,7 +567,7 @@ void CGenicamCameraComp::OnComponentCreated()
 
 		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
 
-		devicePtr->SetImageBufferFrameCount(20);
+		devicePtr->SetImageBufferFrameCount(10);
 
 		if (*m_connectOnStartAttrPtr){
 			deviceInfoPtr->EnsureConnected();
