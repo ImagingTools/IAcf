@@ -5,18 +5,17 @@
 // GigEVision includes
 #include "gige_cpp/IGigEVisionAPI.h"
 
-
 // STL includes
-#include <vector>
 #include <map>
 
 // ACF includes
+#include "istd/TPointerVector.h"
 #include "i2d/CRectangle.h"
-#include "icomp/CComponentBase.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "iprm/ISelectionConstraints.h"
 #include "iprm/ISelectionParam.h"
 #include "iprm/IFileNameParam.h"
+#include "iprm/ILinearAdjustParams.h"
 #include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -34,12 +33,36 @@ namespace isgige
 {
 
 
+class CGenicamCameraCompBase: public ibase::CLoggerComponentBase
+{
+public:
+	typedef ibase::CLoggerComponentBase BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CGenicamCameraCompBase);
+		I_ASSIGN(m_defaultUrlParamCompPtr, "DefaultUrlParam", "Default camera URL used if no URL is defined", false, "DefaultUrlParam");
+		I_ASSIGN(m_defaultSelectionParamCompPtr, "DefaultSelectionParam", "Default camera selection params used if no selection nor URL is found", false, "DefaultSelectionParam");
+		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
+		I_ASSIGN(m_defaultTriggerParamsCompPtr, "DefaultTriggerParams", "Default trigger parameters that will be used", false, "DefaultTriggerParams");
+		I_ASSIGN(m_defaultAdjustParamsCompPtr, "DefaultAdjustParams", "Default contrast and brightness adjust parameters that will be used", false, "DefaultAdjustParams");
+		I_ASSIGN(m_defaultRoiParamCompPtr, "DefaultRoiParam", "Default region of interest (ROI) that will be used if no defined", false, "DefaultImageRegionParams");
+	I_END_COMPONENT;
+
+protected:
+	I_REF(iprm::IFileNameParam, m_defaultUrlParamCompPtr);
+	I_REF(iprm::ISelectionParam, m_defaultSelectionParamCompPtr);
+	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
+	I_REF(isig::ITriggerParams, m_defaultTriggerParamsCompPtr);
+	I_REF(iprm::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
+	I_REF(i2d::CRectangle, m_defaultRoiParamCompPtr);
+};
+
+
 /**
 	Camera accessed over interface Genicam.
 */
 class CGenicamCameraComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public CGenicamCameraCompBase,
 			public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>,
 			virtual public icam::IExposureConstraints,
 			virtual public isig::ITriggerConstraints,
@@ -48,27 +71,24 @@ class CGenicamCameraComp:
 	Q_OBJECT
 
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef CGenicamCameraCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CGenicamCameraComp);
 		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
-		I_ASSIGN(m_defaultUrlParamCompPtr, "DefaultUrlParam", "Default camera URL used if no URL is defined", false, "DefaultUrlParam");
-		I_ASSIGN(m_defaultSelectionParamCompPtr, "DefaultSelectionParam", "Default camera selection params used if no selection nor URL is found", false, "DefaultSelectionParam");
-		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
-		I_ASSIGN(m_defaultTriggerParamsCompPtr, "DefaultTriggerParams", "Default trigger parameters that will be used", false, "DefaultTriggerParams");
-//		I_ASSIGN(m_defaultRoiParamCompPtr, "DefaultRoiParam", "Default region of interest (ROI) that will be used if no defined", false, "DefaultImageRegionParams");
 		I_ASSIGN(m_urlParamsIdAttrPtr, "UrlParamId", "ID used to get camera URL from the parameter set", false, "UrlParamId");
 		I_ASSIGN(m_selectionParamIdPtr, "SelectionParamId", "ID used to get selected camera index from the parameter set", false, "UrlParamId");
 		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "ID used to get exposure parameters from the parameter set", false, "ExposureParams");
 		I_ASSIGN(m_triggerParamsIdAttrPtr, "TriggerParamsId", "ID used to get trigger parameters from the parameter set", false, "TriggerParams");
+		I_ASSIGN(m_adjustParamsIdAttrPtr, "AdjustParamsId", "ID used to get brightness and contrast adjust parameters from the parameter set", false, "AdjustParams");
 		I_ASSIGN(m_roiParamIdPtr, "RoiParamId", "ID used to get region of interest (ROI) from the parameter set", false, "DefaultImageRegionParams");
 		I_ASSIGN(m_timeoutAttrPtr, "Timeout", "Acquisition timeout", true, 5.0);
 		I_ASSIGN(m_findDevicesTimeAttrPtr, "FindDevicesTime", "Time to search camera devices on start", true, 1.0);
 		I_ASSIGN(m_triggerDifferenceAttrPtr, "TriggerDifference", "Time difference between trigger signal and image time stamp used for synchronized trigger (in seconds)", true, 0.01);
 		I_ASSIGN(m_triggerToleranceAttrPtr, "TriggerTolerance", "Tolerance of trigger time difference used for synchronized trigger (in seconds)", true, 0.02);
+		I_ASSIGN(m_connectOnStartAttrPtr, "ConnectOnStart", "If true connection on start will be done, if false only connection on demand is done", true, true);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -113,15 +133,13 @@ public:
 protected:
 	struct DeviceInfo
 	{
-		DeviceInfo()
-		{
-			exposureTime = -10000;
-			brightness = -10000;
-			contrast = -10000;
-			triggerMode = -1;
+		DeviceInfo(CGenicamCameraComp* parentPtr);
+		~DeviceInfo();
 
-			isInitialized = false;
-		}
+		bool EnsureConnected();
+
+		bool EnsureStarted();
+		bool EnsureStopped();
 
 		double exposureTime;
 		double brightness;
@@ -133,13 +151,17 @@ protected:
 
 		istd::CString cameraId;
 
-		bool isInitialized;
+		bool isStarted;
+
+	private:
+		CGenicamCameraComp& m_parent;
 	};
 
 	DeviceInfo* GetDeviceByUrl(const istd::CString& urlString) const;
 	DeviceInfo* GetDeviceByParams(const iprm::IParamsSet* paramsPtr) const;
 
 	int GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr) const;
+	const iprm::ILinearAdjustParams* GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const;
 	const i2d::CRectangle* GetRoiFromParams(const iprm::IParamsSet* paramsPtr) const;
 	const icam::IExposureParams* GetEposureTimeFromParams(const iprm::IParamsSet* paramsPtr) const;
 
@@ -148,31 +170,25 @@ protected:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 protected Q_SLOTS:
 	void OnCameraEventLog(int type, QString message);
 
 private:
-	I_REF(iprm::IFileNameParam, m_defaultUrlParamCompPtr);
-	I_REF(iprm::ISelectionParam, m_defaultSelectionParamCompPtr);
-	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
-	I_REF(isig::ITriggerParams, m_defaultTriggerParamsCompPtr);
-	I_REF(i2d::CRectangle, m_defaultRoiParamCompPtr);
-	I_ATTR(istd::CString, m_urlParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_selectionParamIdPtr);
-	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_triggerParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_roiParamIdPtr);
-
+	I_ATTR(std::string, m_urlParamsIdAttrPtr);
+	I_ATTR(std::string, m_selectionParamIdPtr);
+	I_ATTR(std::string, m_exposureParamsIdAttrPtr);
+	I_ATTR(std::string, m_triggerParamsIdAttrPtr);
+	I_ATTR(std::string, m_adjustParamsIdAttrPtr);
+	I_ATTR(std::string, m_roiParamIdPtr);
 	I_ATTR(double, m_timeoutAttrPtr);
 	I_ATTR(double, m_findDevicesTimeAttrPtr);
-
 	I_ATTR(double, m_triggerToleranceAttrPtr);
 	I_ATTR(double, m_triggerDifferenceAttrPtr);
+	I_ATTR(bool, m_connectOnStartAttrPtr);
 
-	bool m_isCameraValid;
-
-	typedef std::vector<DeviceInfo> DeviceInfos;
+	typedef istd::TPointerVector<DeviceInfo> DeviceInfos;
 	DeviceInfos m_deviceInfos;
 	typedef std::map<I_DWORD, int> IpAddressToIndexMap;
 	IpAddressToIndexMap m_ipAddressToIndexMap;

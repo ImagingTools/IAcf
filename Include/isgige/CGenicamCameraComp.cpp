@@ -8,6 +8,7 @@
 #include <QHostAddress>
 
 // ACF includes
+#include "istd/TDelPtr.h"
 #include "istd/TChangeNotifier.h"
 #include "iprm/IParamsSet.h"
 #include "iqt/iqt.h"
@@ -208,16 +209,19 @@ int CGenicamCameraComp::GetConstraintsFlags() const
 
 int CGenicamCameraComp::GetOptionsCount() const
 {
-	return int(m_deviceInfos.size());
+	return int(m_deviceInfos.GetCount());
 }
 
 
 istd::CString CGenicamCameraComp::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_deviceInfos.size()));
+	I_ASSERT(index < int(m_deviceInfos.GetCount()));
 
-	return m_deviceInfos[index].cameraId;
+	const DeviceInfo* deviceInfoPtr = m_deviceInfos.GetAt(index);
+	I_ASSERT(deviceInfoPtr != NULL);
+
+	return deviceInfoPtr->cameraId;
 }
 
 
@@ -245,9 +249,9 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const istd::C
 		if (foundIter != m_ipAddressToIndexMap.end()){
 			int index = foundIter->second;
 			I_ASSERT(index >= 0);
-			I_ASSERT(index < int(m_deviceInfos.size()));
+			I_ASSERT(index < int(m_deviceInfos.GetCount()));
 
-			return const_cast<CGenicamCameraComp::DeviceInfo*>(&m_deviceInfos[index]);
+			return const_cast<DeviceInfo*>(m_deviceInfos.GetAt(index));
 		}
 	}
 
@@ -258,7 +262,7 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const istd::C
 CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm::IParamsSet* paramsPtr) const
 {
 	if (m_urlParamsIdAttrPtr.IsValid()){
-		const iprm::IFileNameParam* urlParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter((*m_urlParamsIdAttrPtr).ToString()));
+		const iprm::IFileNameParam* urlParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
 		if (urlParamPtr != NULL){
 			istd::CString urlString = urlParamPtr->GetPath();
 			if (!urlString.IsEmpty()){
@@ -268,11 +272,11 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm
 	}
 
 	if (m_selectionParamIdPtr.IsValid()){
-		const iprm::ISelectionParam* selectionParamPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter((*m_selectionParamIdPtr).ToString()));
+		const iprm::ISelectionParam* selectionParamPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter(*m_selectionParamIdPtr));
 		if (selectionParamPtr != NULL){
 			int index = selectionParamPtr->GetSelectedOptionIndex();
-			if ((index >= 0) && (index < int(m_deviceInfos.size()))){
-				return const_cast<CGenicamCameraComp::DeviceInfo*>(&m_deviceInfos[index]);
+			if ((index >= 0) && (index < int(m_deviceInfos.GetCount()))){
+				return const_cast<DeviceInfo*>(m_deviceInfos.GetAt(index));
 			}
 		}
 	}
@@ -286,13 +290,13 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm
 
 	if (m_defaultSelectionParamCompPtr.IsValid()){
 		int index = m_defaultSelectionParamCompPtr->GetSelectedOptionIndex();
-		if ((index >= 0) && (index < int(m_deviceInfos.size()))){
-			return const_cast<CGenicamCameraComp::DeviceInfo*>(&m_deviceInfos[index]);
+		if ((index >= 0) && (index < int(m_deviceInfos.GetCount()))){
+			return const_cast<DeviceInfo*>(m_deviceInfos.GetAt(index));
 		}
 	}
 
-	if (!m_deviceInfos.empty()){
-		return const_cast<CGenicamCameraComp::DeviceInfo*>(&m_deviceInfos.front());
+	if (!m_deviceInfos.IsEmpty()){
+		return const_cast<DeviceInfo*>(m_deviceInfos.GetAt(0));
 	}
 
 	return NULL;
@@ -302,7 +306,7 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm
 int CGenicamCameraComp::GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr) const
 {
 	if (m_triggerParamsIdAttrPtr.IsValid()){
-		const isig::ITriggerParams* triggerParamsPtr = dynamic_cast<const isig::ITriggerParams*>(paramsPtr->GetParameter((*m_triggerParamsIdAttrPtr).ToString()));
+		const isig::ITriggerParams* triggerParamsPtr = dynamic_cast<const isig::ITriggerParams*>(paramsPtr->GetParameter(*m_triggerParamsIdAttrPtr));
 		if (triggerParamsPtr != NULL){
 			return triggerParamsPtr->GetTriggerMode();
 		}
@@ -316,10 +320,27 @@ int CGenicamCameraComp::GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr
 }
 
 
+const iprm::ILinearAdjustParams* CGenicamCameraComp::GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const
+{
+	if (m_adjustParamsIdAttrPtr.IsValid()){
+		const iprm::ILinearAdjustParams* adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
+		if (adjustParamsPtr != NULL){
+			return adjustParamsPtr;
+		}
+	}
+
+	if (m_defaultAdjustParamsCompPtr.IsValid()){
+		return m_defaultAdjustParamsCompPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
 const i2d::CRectangle* CGenicamCameraComp::GetRoiFromParams(const iprm::IParamsSet* paramsPtr) const
 {
 	if (m_roiParamIdPtr.IsValid()){
-		const i2d::CRectangle* roiParamPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter((*m_roiParamIdPtr).ToString()));
+		const i2d::CRectangle* roiParamPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter(*m_roiParamIdPtr));
 		if (roiParamPtr != NULL){
 			return roiParamPtr;
 		}
@@ -336,7 +357,7 @@ const i2d::CRectangle* CGenicamCameraComp::GetRoiFromParams(const iprm::IParamsS
 const icam::IExposureParams* CGenicamCameraComp::GetEposureTimeFromParams(const iprm::IParamsSet* paramsPtr) const
 {
 	if (m_exposureParamsIdAttrPtr.IsValid()){
-		const icam::IExposureParams* exposureParamPtr = dynamic_cast<const icam::IExposureParams*>(paramsPtr->GetParameter((*m_exposureParamsIdAttrPtr).ToString()));
+		const icam::IExposureParams* exposureParamPtr = dynamic_cast<const icam::IExposureParams*>(paramsPtr->GetParameter(*m_exposureParamsIdAttrPtr));
 		if (exposureParamPtr != NULL){
 			return exposureParamPtr;
 		}
@@ -356,18 +377,11 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::EnsureDeviceSynchronized(con
 	if (deviceInfoPtr != NULL){
 		I_ASSERT(deviceInfoPtr->devicePtr.IsValid());
 
-		if (!deviceInfoPtr->devicePtr->IsConnected()){
-			deviceInfoPtr->devicePtr->SetImageBufferFrameCount(1);
-			if (!deviceInfoPtr->devicePtr->Connect()){
-				SendErrorMessage(MI_CANNOT_CONNECT, iqt::GetCString(tr("Camera %1: Cannot connect to camera").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
-				return NULL;
-			}
+		if (!SynchronizeCameraParams(paramsPtr, *deviceInfoPtr)){
+			return NULL;
 		}
 
-		if (SynchronizeCameraParams(paramsPtr, *deviceInfoPtr)){
-			deviceInfoPtr->isInitialized = true;
-			return deviceInfoPtr;
-		}
+		return deviceInfoPtr;
 	}
 	else{
 		SendErrorMessage(MI_DEVICE_INTERN, iqt::GetCString(tr("Cannot find camera")));
@@ -379,91 +393,147 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::EnsureDeviceSynchronized(con
 
 bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsPtr, DeviceInfo& deviceInfo)
 {
-	bool retVal = deviceInfo.devicePtr->CommandNodeExecute("AcquisitionStop");
-
-	retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 0) && retVal;
-	retVal = deviceInfo.devicePtr->SetStringNodeValue("AcquisitionMode", "Continuous") && retVal;
+	if (!deviceInfo.EnsureConnected()){
+		return NULL;
+	}
 
 	const i2d::CRectangle* roiParamsPtr = GetRoiFromParams(paramsPtr);
-	if (roiParamsPtr != NULL){
-		if (!deviceInfo.isInitialized || (*roiParamsPtr != deviceInfo.roi)){
-			if (		!deviceInfo.devicePtr->SetIntegerNodeValue("Width", int(roiParamsPtr->GetWidth())) ||
-						!deviceInfo.devicePtr->SetIntegerNodeValue("Height", int(roiParamsPtr->GetHeight())) ||
-						!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetX", int(roiParamsPtr->GetLeft())) ||
-						!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetY", int(roiParamsPtr->GetHeight()))){
-				SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set ROI").arg(iqt::GetQString(deviceInfo.cameraId))));
-			}
-
-			deviceInfo.roi = *roiParamsPtr;
-		}
-	}
-
 	const icam::IExposureParams* exposureParamsPtr = GetEposureTimeFromParams(paramsPtr);
-	if (exposureParamsPtr != NULL){
-		double exposureTime = exposureParamsPtr->GetShutterTime();
-		if (exposureTime >= 0){
-			if (!deviceInfo.isInitialized || (exposureTime != deviceInfo.exposureTime)){
-				if (!deviceInfo.devicePtr->SetFloatNodeValue("ExposureTimeAbs", exposureTime * 1000000 + 0.5)){
-					SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set exposure time").arg(iqt::GetQString(deviceInfo.cameraId))));
-				}
-			}
-		}
-	}
-/*
-	if (deviceInfo.devicePtr->SetStringNodeValue("GainSelector", "All")){
-		retVal = deviceInfo.devicePtr->SetFloatNodeValue("GainAbs", params.GetAnalogGain()) && retVal;
-	}
-    
-	if (deviceInfo.devicePtr->SetStringNodeValue("BlackLevelSelector", "All")){
-		retVal = deviceInfo.devicePtr->SetFloatNodeValue("BlackLevelAbs", params.GetAnalogOffset()) && retVal;
-	}
-*/
+	const iprm::ILinearAdjustParams* adjustParamsPtr = GetAdjustFromParams(paramsPtr);
 	int triggerMode = GetTriggerModeByParams(paramsPtr);
-	if (!deviceInfo.isInitialized || (triggerMode != deviceInfo.triggerMode)){
-		bool setTriggerStatus = true;
 
-		switch (triggerMode){
-		case isig::ITriggerParams::TM_CONTINUOUS:
-			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "off") && setTriggerStatus;
-			break;
-
-		case isig::ITriggerParams::TM_RISING_EDGE:
-		case isig::ITriggerParams::TM_FALLING_EDGE:
-			{
-				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Line2") && setTriggerStatus;
-
-				if (triggerMode == isig::ITriggerParams::TM_FALLING_EDGE){
-					setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerActivation","FallingEdge") && setTriggerStatus;
-				}
-				else{   
-					setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerActivation","RisingEdge") && setTriggerStatus;
-				}
-				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
+	bool needLock = false;
+	if (deviceInfo.isStarted){
+		if (roiParamsPtr != NULL){
+			if (*roiParamsPtr != deviceInfo.roi){
+				needLock = true;
 			}
-			break;
-
-		case isig::ITriggerParams::TM_SOFTWARE:
-			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Software") && setTriggerStatus;
-			setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
-			break;
-
-		default:
-			setTriggerStatus = false;
 		}
 
-		if (!setTriggerStatus){
-			SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set trigger mode").arg(iqt::GetQString(deviceInfo.cameraId))));
+		if (exposureParamsPtr != NULL){
+			double exposureTime = exposureParamsPtr->GetShutterTime();
+			if (exposureTime >= 0){
+				if (exposureTime != deviceInfo.exposureTime){
+					needLock = true;
+				}
+			}
 		}
 
-		deviceInfo.triggerMode = triggerMode;
+		if (adjustParamsPtr != NULL){
+			double brightness = adjustParamsPtr->GetOffsetFactor();
+			double contrast = adjustParamsPtr->GetScaleFactor();
+			if ((brightness != deviceInfo.brightness) || (contrast != deviceInfo.contrast)){
+				needLock = true;
+			}
+		}
+
+		if (triggerMode != deviceInfo.triggerMode){
+			needLock = true;
+		}
+	}
+	else{
+		needLock = true;
 	}
 
-	retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
-	retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSource", "ExposureActive") && retVal;
+	bool retVal = true;
+	if (needLock){
+		if (!deviceInfo.EnsureStopped()){
+			return false;
+		}
+		retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 0) && retVal;
 
-	retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 1) && retVal;
+		if (!deviceInfo.devicePtr->SetStringNodeValue("AcquisitionMode", "Continuous")){
+			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot set initial values").arg(iqt::GetQString(deviceInfo.cameraId))));
+		}
 
-	retVal = deviceInfo.devicePtr->CommandNodeExecute("AcquisitionStart") && retVal;
+		if (roiParamsPtr != NULL){
+			if (!deviceInfo.isStarted || (*roiParamsPtr != deviceInfo.roi)){
+				if (		!deviceInfo.devicePtr->SetIntegerNodeValue("Width", int(roiParamsPtr->GetWidth())) ||
+							!deviceInfo.devicePtr->SetIntegerNodeValue("Height", int(roiParamsPtr->GetHeight())) ||
+							!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetX", int(roiParamsPtr->GetLeft())) ||
+							!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetY", int(roiParamsPtr->GetHeight()))){
+					SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set ROI").arg(iqt::GetQString(deviceInfo.cameraId))));
+				}
+
+				deviceInfo.roi = *roiParamsPtr;
+			}
+		}
+
+		if (exposureParamsPtr != NULL){
+			double exposureTime = exposureParamsPtr->GetShutterTime();
+			if (exposureTime >= 0){
+				if (!deviceInfo.isStarted || (exposureTime != deviceInfo.exposureTime)){
+					if (!deviceInfo.devicePtr->SetFloatNodeValue("ExposureTimeAbs", exposureTime * 1000000 + 0.5)){
+						SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set exposure time").arg(iqt::GetQString(deviceInfo.cameraId))));
+					}
+
+					deviceInfo.exposureTime = exposureTime;
+				}
+			}
+		}
+
+		if (adjustParamsPtr != NULL){
+			double brightness = adjustParamsPtr->GetOffsetFactor();
+			double contrast = adjustParamsPtr->GetScaleFactor();
+			if (!deviceInfo.isStarted || (brightness != deviceInfo.brightness) || (contrast != deviceInfo.contrast)){
+				if (deviceInfo.devicePtr->SetStringNodeValue("GainSelector", "All")){
+					retVal = deviceInfo.devicePtr->SetFloatNodeValue("GainAbs", 0) && retVal;
+				}
+			    
+				if (deviceInfo.devicePtr->SetStringNodeValue("BlackLevelSelector", "All")){
+					retVal = deviceInfo.devicePtr->SetFloatNodeValue("BlackLevelAbs", 0) && retVal;
+				}
+			}
+		}
+
+		if (!deviceInfo.isStarted || (triggerMode != deviceInfo.triggerMode)){
+			bool setTriggerStatus = true;
+
+			switch (triggerMode){
+			case isig::ITriggerParams::TM_CONTINUOUS:
+				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "Off") && setTriggerStatus;
+				break;
+
+			case isig::ITriggerParams::TM_RISING_EDGE:
+			case isig::ITriggerParams::TM_FALLING_EDGE:
+				{
+					setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Line2") && setTriggerStatus;
+
+					if (triggerMode == isig::ITriggerParams::TM_FALLING_EDGE){
+						setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerActivation","FallingEdge") && setTriggerStatus;
+					}
+					else{   
+						setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerActivation","RisingEdge") && setTriggerStatus;
+					}
+					setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
+				}
+				break;
+
+			case isig::ITriggerParams::TM_SOFTWARE:
+				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Software") && setTriggerStatus;
+				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
+				break;
+
+			default:
+				setTriggerStatus = false;
+			}
+
+			if (!setTriggerStatus){
+				SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set trigger mode").arg(iqt::GetQString(deviceInfo.cameraId))));
+			}
+
+			deviceInfo.triggerMode = triggerMode;
+		}
+
+		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
+		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSource", "ExposureActive") && retVal;
+
+		retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 1) && retVal;
+
+		if (!deviceInfo.EnsureStarted()){
+			return false;
+		}
+	}
 
 	return retVal;
 }
@@ -482,20 +552,35 @@ void CGenicamCameraComp::OnComponentCreated()
 	s_cameraSigleton.gigeApi->FindAllDevices(*m_findDevicesTimeAttrPtr);
 
 	gige::DevicesList devicesList = s_cameraSigleton.gigeApi->GetAllDevices();
-	m_deviceInfos.resize(devicesList.size());
 
 	int devicesCount = int(devicesList.size());
 	for (int i = 0; i < devicesCount; ++i){
-		const gige::IDevice& devicePtr = devicesList[i];
-		DeviceInfo& deviceInfo = m_deviceInfos[i];
+		gige::IDevice& devicePtr = devicesList[i];
+		istd::TDelPtr<DeviceInfo> deviceInfoPtr(new DeviceInfo(this));
 
 		QHostAddress address(devicePtr->GetIpAddress());
 
-		deviceInfo.devicePtr = devicePtr;
-		deviceInfo.cameraId = iqt::GetCString(address.toString());
+		deviceInfoPtr->devicePtr = devicePtr;
+		deviceInfoPtr->cameraId = iqt::GetCString(address.toString());
 
 		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
+
+		devicePtr->SetImageBufferFrameCount(20);
+
+		if (*m_connectOnStartAttrPtr){
+			deviceInfoPtr->EnsureConnected();
+		}
+
+		m_deviceInfos.PushBack(deviceInfoPtr.PopPtr());
 	}
+}
+
+
+void CGenicamCameraComp::OnComponentDestroyed()
+{
+	m_deviceInfos.Reset();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
@@ -519,6 +604,84 @@ void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
 	}
 
 	SendLogMessage(category, MI_DEVICE_INTERN, iqt::GetCString(message), "");
+}
+
+
+// public methods of embedded class DeviceInfo
+
+CGenicamCameraComp::DeviceInfo::DeviceInfo(CGenicamCameraComp* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+
+	exposureTime = -10000;
+	brightness = -10000;
+	contrast = -10000;
+	triggerMode = -1;
+
+	isStarted = false;
+}
+
+
+CGenicamCameraComp::DeviceInfo::~DeviceInfo()
+{
+	EnsureStopped();
+}
+
+
+bool CGenicamCameraComp::DeviceInfo::EnsureConnected()
+{
+	if (!devicePtr.IsValid()){
+		return false;
+	}
+
+	if (!devicePtr->IsConnected()){
+		isStarted = false;
+
+		if (!devicePtr->Connect()){
+			m_parent.SendErrorMessage(MI_CANNOT_CONNECT, iqt::GetCString(tr("Camera %1: Cannot connect to camera").arg(iqt::GetQString(cameraId))));
+
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+bool CGenicamCameraComp::DeviceInfo::EnsureStarted()
+{
+	if (!devicePtr.IsValid()){
+		return false;
+	}
+
+	if (!isStarted && !devicePtr->CommandNodeExecute("AcquisitionStart")){
+		m_parent.SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot start acquisition").arg(iqt::GetQString(cameraId))));
+
+		return false;
+	}
+
+	isStarted = true;
+
+	return true;
+}
+
+
+bool CGenicamCameraComp::DeviceInfo::EnsureStopped()
+{
+	if (!devicePtr.IsValid()){
+		return false;
+	}
+
+	if (isStarted && !devicePtr->CommandNodeExecute("AcquisitionStop")){
+		m_parent.SendInfoMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot stop acquisition").arg(iqt::GetQString(cameraId))));
+
+		return false;
+	}
+
+	isStarted = false;
+
+	return true;
 }
 
 
