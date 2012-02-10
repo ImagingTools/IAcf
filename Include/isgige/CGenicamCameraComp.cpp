@@ -84,6 +84,7 @@ int CGenicamCameraComp::DoProcessing(
 	I_ASSERT(deviceInfoPtr->devicePtr.IsValid());
 
 	if (deviceInfoPtr->triggerMode == isig::ITriggerParams::TM_SOFTWARE){
+		deviceInfoPtr->devicePtr->SetStringNodeValue("LineSelector", "Line1");
 		deviceInfoPtr->devicePtr->SetStringNodeValue("LineSource", "ExposureActive");
 
 		if (!deviceInfoPtr->devicePtr->CommandNodeExecute("TriggerSoftware")){
