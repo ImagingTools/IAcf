@@ -449,6 +449,10 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot set initial values").arg(iqt::GetQString(deviceInfo.cameraId))));
 		}
 
+		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
+		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineMode", "Output") && retVal;
+		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSource", "ExposureActive") && retVal;
+
 		if (roiParamsPtr != NULL){
 			if (!deviceInfo.isStarted || (*roiParamsPtr != deviceInfo.roi)){
 				if (		!deviceInfo.devicePtr->SetIntegerNodeValue("Width", int(roiParamsPtr->GetWidth())) ||
@@ -482,7 +486,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 				if (deviceInfo.devicePtr->SetStringNodeValue("GainSelector", "All")){
 					retVal = deviceInfo.devicePtr->SetFloatNodeValue("GainAbs", 0) && retVal;
 				}
-			    
+
 				if (deviceInfo.devicePtr->SetStringNodeValue("BlackLevelSelector", "All")){
 					retVal = deviceInfo.devicePtr->SetFloatNodeValue("BlackLevelAbs", 0) && retVal;
 				}
@@ -490,7 +494,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 		}
 
 		if (!deviceInfo.isStarted || (triggerMode != deviceInfo.triggerMode)){
-			bool setTriggerStatus = true;
+			bool setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSelector", "AcquisitionStart");
 
 			switch (triggerMode){
 			case isig::ITriggerParams::TM_CONTINUOUS:
@@ -513,8 +517,8 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 				break;
 
 			case isig::ITriggerParams::TM_SOFTWARE:
-				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Software") && setTriggerStatus;
 				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerMode", "On") && setTriggerStatus;
+				setTriggerStatus = deviceInfo.devicePtr->SetStringNodeValue("TriggerSource", "Software") && setTriggerStatus;
 				break;
 
 			default:
@@ -527,9 +531,6 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 
 			deviceInfo.triggerMode = triggerMode;
 		}
-
-		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
-		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSource", "ExposureActive") && retVal;
 
 		retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 1) && retVal;
 
