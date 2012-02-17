@@ -93,7 +93,12 @@ private:
 	istd::CString m_mediumUrl;
 	bool m_isPlaying;
 
-	istd::TDelPtr<CvCapture> m_capturePtr;
+	struct CaptureAccessor: public istd::DefaultAccessor<CvCapture>
+	{
+		static void Delete(CvCapture* ptr){if (ptr != NULL) cvReleaseCapture(&ptr);}
+	};
+
+	istd::TDelPtr<CvCapture, CaptureAccessor> m_capturePtr;
 	mutable int m_currentFrameIndex;
 	int m_framesCount;
 };
