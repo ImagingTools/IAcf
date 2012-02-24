@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
+				AdditionalDependencies="AcfStd.lib QtCore4.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 			/>
 			<Tool
@@ -113,7 +113,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
+				AdditionalDependencies="AcfStd.lib QtCored4.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 			/>
 			<Tool
