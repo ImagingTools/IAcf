@@ -5,12 +5,12 @@ namespace izlib
 {
 
 
-CGzXmlReadArchive::CGzXmlReadArchive(const istd::CString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
+CGzXmlReadArchive::CGzXmlReadArchive(const QString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
 :	BaseClass(rootTag),
 	BaseClass2(filePath),
 	m_useLastReadChar(false)
 {
-	m_file = gzopen(filePath.ToString().c_str(), "rb");
+	m_file = gzopen(filePath.toStdString().c_str(), "rb");
 
 	SerializeXmlHeader();
 

@@ -48,7 +48,7 @@ public:
 	// reimplemented (ibase::IApplication)
 	virtual bool InitializeApplication(int argc, char** argv);
 	virtual int Execute(int argc, char** argv);
-	virtual istd::CString GetHelpText() const;
+	virtual QString GetHelpText() const;
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
@@ -88,8 +88,8 @@ protected:
 
 private:
 	I_REF(ibase::IApplication, m_applicationCompPtr);
-	I_ATTR(istd::CString, m_serviceDescriptionAttrPtr);
-	I_ATTR(istd::CString, m_serviceNameAttrPtr);
+	I_ATTR(QString, m_serviceDescriptionAttrPtr);
+	I_ATTR(QString, m_serviceNameAttrPtr);
 	I_ATTR(bool, m_manualStartupAttrPtr);
 
 	istd::TDelPtr<CService> m_servicePtr;

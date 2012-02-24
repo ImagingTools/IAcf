@@ -88,7 +88,7 @@ int CGenicamCameraComp::DoProcessing(
 		deviceInfoPtr->devicePtr->SetStringNodeValue("LineSource", "ExposureActive");
 
 		if (!deviceInfoPtr->devicePtr->CommandNodeExecute("TriggerSoftware")){
-			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot send software trigger").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
+			SendErrorMessage(MI_CANNOT_SET, tr("Camera %1: Cannot send software trigger").arg(deviceInfoPtr->cameraId));
 
 			return false;
 		}
@@ -109,7 +109,7 @@ int CGenicamCameraComp::DoProcessing(
 
 		gige::IImageInfo imageInfoPtr = NULL;
 		if (!deviceInfoPtr->devicePtr->GetImageInfo(&imageInfoPtr)) {
-			SendErrorMessage(MI_CANNOT_CAPTURE, iqt::GetCString(tr("Camera %1: GetImageInfo failed").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
+			SendErrorMessage(MI_CANNOT_CAPTURE, tr("Camera %1: GetImageInfo failed").arg(deviceInfoPtr->cameraId));
 
 			return TS_INVALID;
 		}
@@ -122,12 +122,12 @@ int CGenicamCameraComp::DoProcessing(
 			double timeDiff = imageTimestamp.GetTimeTo(*triggerTimerPtr) - *m_triggerDifferenceAttrPtr;
 
 			if (timeDiff < -*m_triggerToleranceAttrPtr){	// image older than trigger
-				SendWarningMessage(MI_DEVICE_INTERN, iqt::GetCString(tr("Camera %1: image dropped becouse of time difference %2 ms").arg(iqt::GetQString(deviceInfoPtr->cameraId)).arg(timeDiff * 1000)));
+				SendWarningMessage(MI_DEVICE_INTERN, tr("Camera %1: image dropped becouse of time difference %2 ms").arg(deviceInfoPtr->cameraId).arg(timeDiff * 1000));
 				deviceInfoPtr->devicePtr->PopImage(imageInfoPtr);	
 				continue;	// this frame was skipped, we have to get next one
 			}
 			else if (timeDiff > *m_triggerToleranceAttrPtr) {	// image newer, or tcp timestamp error
-				SendErrorMessage(MI_CANNOT_CAPTURE, iqt::GetCString(tr("Camera %1: Cannot capture image").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
+				SendErrorMessage(MI_CANNOT_CAPTURE, tr("Camera %1: Cannot capture image").arg(deviceInfoPtr->cameraId));
 				return TS_INVALID;
 			}
 		}
@@ -142,13 +142,13 @@ int CGenicamCameraComp::DoProcessing(
 			
 			UINT32 pixelType;
 			if (!imageInfoPtr->GetPixelType(pixelType) || (pixelType != GVSP_PIX_MONO8)){
-				SendErrorMessage(MI_CANNOT_CAPTURE, iqt::GetCString(tr("Camera %1: Only 8 bit images are supported").arg(iqt::GetQString(deviceInfoPtr->cameraId))));
+				SendErrorMessage(MI_CANNOT_CAPTURE, tr("Camera %1: Only 8 bit images are supported").arg(deviceInfoPtr->cameraId));
 
 				return TS_INVALID;
 			}
 			
 			if (!resultBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
-				SendErrorMessage(MI_CANNOT_CAPTURE, iqt::GetCString(tr("Camera %1: Cannot create 8 bit image with size %2 x %3").arg(iqt::GetQString(deviceInfoPtr->cameraId)).arg(cx).arg(cy)));
+				SendErrorMessage(MI_CANNOT_CAPTURE, tr("Camera %1: Cannot create 8 bit image with size %2 x %3").arg(deviceInfoPtr->cameraId).arg(cx).arg(cy));
 			}
 
 			for (unsigned int i = 0; i < cy; i++){
@@ -216,7 +216,7 @@ int CGenicamCameraComp::GetOptionsCount() const
 }
 
 
-istd::CString CGenicamCameraComp::GetOptionName(int index) const
+QString CGenicamCameraComp::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < int(m_deviceInfos.GetCount()));
@@ -228,9 +228,9 @@ istd::CString CGenicamCameraComp::GetOptionName(int index) const
 }
 
 
-istd::CString CGenicamCameraComp::GetOptionDescription(int /*index*/) const
+QString CGenicamCameraComp::GetOptionDescription(int /*index*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 
@@ -242,9 +242,9 @@ std::string CGenicamCameraComp::GetOptionId(int /*index*/) const
 
 // protected methods
 
-CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const istd::CString& urlString) const
+CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const QString& urlString) const
 {
-	QHostAddress url(iqt::GetQString(urlString));
+	QHostAddress url(urlString);
 	if (!url.isNull()){
 		quint32 ipAddress = url.toIPv4Address();
 
@@ -267,8 +267,8 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm
 	if (m_urlParamsIdAttrPtr.IsValid()){
 		const iprm::IFileNameParam* urlParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
 		if (urlParamPtr != NULL){
-			istd::CString urlString = urlParamPtr->GetPath();
-			if (!urlString.IsEmpty()){
+			QString urlString = urlParamPtr->GetPath();
+			if (!urlString.isEmpty()){
 				return GetDeviceByUrl(urlString);
 			}
 		}
@@ -285,8 +285,8 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByParams(const iprm
 	}
 
 	if (m_defaultUrlParamCompPtr.IsValid()){
-		istd::CString urlString = m_defaultUrlParamCompPtr->GetPath();
-		if (!urlString.IsEmpty()){
+		QString urlString = m_defaultUrlParamCompPtr->GetPath();
+		if (!urlString.isEmpty()){
 			return GetDeviceByUrl(urlString);
 		}
 	}
@@ -387,7 +387,7 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::EnsureDeviceSynchronized(con
 		return deviceInfoPtr;
 	}
 	else{
-		SendErrorMessage(MI_DEVICE_INTERN, iqt::GetCString(tr("Cannot find camera")));
+		SendErrorMessage(MI_DEVICE_INTERN, tr("Cannot find camera"));
 	}
 
 	return NULL;
@@ -446,7 +446,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 		retVal = deviceInfo.devicePtr->SetIntegerNodeValue("TLParamsLocked", 0) && retVal;
 
 		if (!deviceInfo.devicePtr->SetStringNodeValue("AcquisitionMode", "Continuous")){
-			SendErrorMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: Cannot set initial values").arg(iqt::GetQString(deviceInfo.cameraId))));
+			SendErrorMessage(MI_CANNOT_SET, tr("Camera %1: Cannot set initial values").arg(deviceInfo.cameraId));
 		}
 
 		retVal = deviceInfo.devicePtr->SetStringNodeValue("LineSelector", "Line1") && retVal;
@@ -459,7 +459,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 							!deviceInfo.devicePtr->SetIntegerNodeValue("Height", int(roiParamsPtr->GetHeight())) ||
 							!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetX", int(roiParamsPtr->GetLeft())) ||
 							!deviceInfo.devicePtr->SetIntegerNodeValue("OffsetY", int(roiParamsPtr->GetHeight()))){
-					SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set ROI").arg(iqt::GetQString(deviceInfo.cameraId))));
+					SendWarningMessage(MI_CANNOT_SET, tr("Camera %1: cannot set ROI").arg(deviceInfo.cameraId));
 				}
 
 				deviceInfo.roi = *roiParamsPtr;
@@ -471,7 +471,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 			if (exposureTime >= 0){
 				if (!deviceInfo.isStarted || (exposureTime != deviceInfo.exposureTime)){
 					if (!deviceInfo.devicePtr->SetFloatNodeValue("ExposureTimeAbs", exposureTime * 1000000 + 0.5)){
-						SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set exposure time").arg(iqt::GetQString(deviceInfo.cameraId))));
+						SendWarningMessage(MI_CANNOT_SET, tr("Camera %1: cannot set exposure time").arg(deviceInfo.cameraId));
 					}
 
 					deviceInfo.exposureTime = exposureTime;
@@ -526,7 +526,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 			}
 
 			if (!setTriggerStatus){
-				SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot set trigger mode").arg(iqt::GetQString(deviceInfo.cameraId))));
+				SendWarningMessage(MI_CANNOT_SET, tr("Camera %1: cannot set trigger mode").arg(deviceInfo.cameraId));
 			}
 
 			deviceInfo.triggerMode = triggerMode;
@@ -565,7 +565,7 @@ void CGenicamCameraComp::OnComponentCreated()
 		QHostAddress address(devicePtr->GetIpAddress());
 
 		deviceInfoPtr->devicePtr = devicePtr;
-		deviceInfoPtr->cameraId = iqt::GetCString(address.toString());
+		deviceInfoPtr->cameraId = address.toString();
 
 		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
 
@@ -607,7 +607,7 @@ void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
 		break;
 	}
 
-	SendLogMessage(category, MI_DEVICE_INTERN, iqt::GetCString(message), "");
+	SendLogMessage(category, MI_DEVICE_INTERN, message, "");
 }
 
 
@@ -643,7 +643,7 @@ bool CGenicamCameraComp::DeviceInfo::EnsureConnected()
 		isStarted = false;
 
 		if (!devicePtr->Connect()){
-			m_parent.SendErrorMessage(MI_CANNOT_CONNECT, iqt::GetCString(tr("Camera %1: Cannot connect to camera").arg(iqt::GetQString(cameraId))));
+			m_parent.SendErrorMessage(MI_CANNOT_CONNECT, tr("Camera %1: Cannot connect to camera").arg(cameraId));
 
 			return false;
 		}
@@ -660,7 +660,7 @@ bool CGenicamCameraComp::DeviceInfo::EnsureStarted()
 	}
 
 	if (!isStarted && !devicePtr->CommandNodeExecute("AcquisitionStart")){
-		m_parent.SendWarningMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot start acquisition").arg(iqt::GetQString(cameraId))));
+		m_parent.SendWarningMessage(MI_CANNOT_SET, tr("Camera %1: cannot start acquisition").arg(cameraId));
 
 		return false;
 	}
@@ -678,7 +678,7 @@ bool CGenicamCameraComp::DeviceInfo::EnsureStopped()
 	}
 
 	if (isStarted && !devicePtr->CommandNodeExecute("AcquisitionStop")){
-		m_parent.SendInfoMessage(MI_CANNOT_SET, iqt::GetCString(tr("Camera %1: cannot stop acquisition").arg(iqt::GetQString(cameraId))));
+		m_parent.SendInfoMessage(MI_CANNOT_SET, tr("Camera %1: cannot stop acquisition").arg(cameraId));
 
 		return false;
 	}

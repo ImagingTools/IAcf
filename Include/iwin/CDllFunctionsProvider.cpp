@@ -5,10 +5,10 @@ namespace iwin
 {
 
 
-CDllFunctionsProvider::CDllFunctionsProvider(const istd::CString& dllPath)
+CDllFunctionsProvider::CDllFunctionsProvider(const QString& dllPath)
 {
-	if (!dllPath.empty()){
-		m_handler = ::LoadLibraryW(dllPath.c_str());
+	if (!dllPath.isEmpty()){
+		m_handler = ::LoadLibraryW(dllPath.toStdWString().c_str());
 	}
 }
 
@@ -29,11 +29,11 @@ void CDllFunctionsProvider::Reset()
 }
 
 
-bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
+bool CDllFunctionsProvider::OpenDll(const QString& dllPath)
 {
 	Reset();
 
-	m_handler = ::LoadLibraryW(dllPath.c_str());
+	m_handler = ::LoadLibraryW(dllPath.toStdWString().c_str());
 
 	return IsValid();
 }

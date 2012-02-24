@@ -126,8 +126,8 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 protected:
@@ -149,7 +149,7 @@ protected:
 
 		gige::IDevice devicePtr;
 
-		istd::CString cameraId;
+		QString cameraId;
 
 		bool isStarted;
 
@@ -157,7 +157,7 @@ protected:
 		CGenicamCameraComp& m_parent;
 	};
 
-	DeviceInfo* GetDeviceByUrl(const istd::CString& urlString) const;
+	DeviceInfo* GetDeviceByUrl(const QString& urlString) const;
 	DeviceInfo* GetDeviceByParams(const iprm::IParamsSet* paramsPtr) const;
 
 	int GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr) const;

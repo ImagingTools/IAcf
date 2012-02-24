@@ -51,8 +51,8 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 	// reimplemented (imm::IMediaController)
-	virtual istd::CString GetOpenedMediumUrl() const;
-	virtual bool OpenMediumUrl(const istd::CString& url, bool autoPlay = true);
+	virtual QString GetOpenedMediumUrl() const;
+	virtual bool OpenMediumUrl(const QString& url, bool autoPlay = true);
 	virtual void CloseMedium();
 	virtual bool IsPlaying() const;
 	virtual bool SetPlaying(bool state = true);
@@ -72,8 +72,8 @@ public:
 	virtual bool SetCurrentFrame(int frameIndex);
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 protected:
 	virtual bool GrabCurrentFrame(iimg::IBitmap& result) const;
@@ -90,7 +90,7 @@ private:
 private:
 	I_REF(istd::IChangeable, m_frameDataCompPtr);
 
-	istd::CString m_mediumUrl;
+	QString m_mediumUrl;
 	bool m_isPlaying;
 
 	struct CaptureAccessor: public istd::DefaultAccessor<CvCapture>

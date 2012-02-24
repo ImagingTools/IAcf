@@ -4,6 +4,8 @@
 // Qwt3d includes
 #include "qwt3d_surfaceplot.h"
 
+#include <glu.h>
+
 
 // ACF includes
 #include "istd/TChangeNotifier.h"

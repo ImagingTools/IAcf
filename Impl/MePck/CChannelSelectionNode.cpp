@@ -14,7 +14,7 @@ CChannelSelectionNode::CChannelSelectionNode()
 }
 
 
-void CChannelSelectionNode::InsertNode(const istd::CString& name, int physicalAddress, CChannelSelectionNode* nodePtr)
+void CChannelSelectionNode::InsertNode(const QString& name, int physicalAddress, CChannelSelectionNode* nodePtr)
 {
 	SelectionInfo* newNodeInfoPtr = new SelectionInfo;
 	newNodeInfoPtr->name = name;
@@ -97,7 +97,7 @@ int CChannelSelectionNode::GetOptionsCount() const
 }
 
 
-istd::CString CChannelSelectionNode::GetOptionName(int index) const
+QString CChannelSelectionNode::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < m_subselections.GetCount());
@@ -109,9 +109,9 @@ istd::CString CChannelSelectionNode::GetOptionName(int index) const
 }
 
 
-istd::CString CChannelSelectionNode::GetOptionDescription(int /*index*/) const
+QString CChannelSelectionNode::GetOptionDescription(int /*index*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 

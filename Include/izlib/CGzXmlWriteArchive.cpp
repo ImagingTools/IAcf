@@ -6,14 +6,14 @@ namespace izlib
 
 
 CGzXmlWriteArchive::CGzXmlWriteArchive(
-			const istd::CString& filePath,
+			const QString& filePath,
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag),
 	BaseClass2(filePath)
 {
-	m_file = gzopen(filePath.ToString().c_str(), "wb");
+	m_file = gzopen(filePath.toStdString().c_str(), "wb");
 
 	SerializeXmlHeader();
 

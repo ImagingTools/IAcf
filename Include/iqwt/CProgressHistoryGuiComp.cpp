@@ -27,7 +27,7 @@ CProgressHistoryGuiComp::CProgressHistoryGuiComp()
 
 int CProgressHistoryGuiComp::BeginProgressSession(
 			const std::string& progressId,
-			const istd::CString& description,
+			const QString& description,
 			bool isCancelable)
 {
 	if (m_idToSessionMap.empty()){
@@ -48,7 +48,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	// setup current plot curve:
 	sessionPtr->axisY.clear();
 	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
-	sessionPtr->curve.setTitle(iqt::GetQString(description));
+	sessionPtr->curve.setTitle(description);
 	sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
 
@@ -56,8 +56,8 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 
 	int colorsCount = istd::Min(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
 	for (int i = 0; i < colorsCount; ++i){
-		if (m_progressIdsAttrPtr[i].ToString() == progressId){
-			lineColor = QColor(iqt::GetQString(m_progressColorsAttrPtr[i]));
+		if (m_progressIdsAttrPtr[i].toStdString() == progressId){
+			lineColor = QColor(m_progressColorsAttrPtr[i]);
 		}
 	}
 
@@ -156,7 +156,7 @@ void CProgressHistoryGuiComp::UpdateState()
 		SessionPtr& sessionPtr = m_idToSessionMap.begin()->second;
 		I_ASSERT(sessionPtr.IsValid());
 
-		DescriptionLabel->setText(iqt::GetQString(sessionPtr->description));
+		DescriptionLabel->setText(sessionPtr->description);
 	}
 	else{
 		DescriptionLabel->setText(tr("%1 Sessions").arg(sessionsCount));

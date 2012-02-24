@@ -58,7 +58,7 @@ protected Q_SLOTS:
 
 private:
 	I_ATTR(bool, m_useFoldingAttrPtr);
-	I_ATTR(istd::CString, m_languageAttrPtr);
+	I_ATTR(QString, m_languageAttrPtr);
 	I_ATTR(bool, m_readOnlyAttrPtr);
 };
 

@@ -6,7 +6,7 @@
 #include "zlib.h"
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "iser/CXmlReadArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 
@@ -32,7 +32,7 @@ public:
 	typedef iser::CXmlReadArchiveBase BaseClass;
 	typedef iser::CFileArchiveInfo BaseClass2;
 
-	CGzXmlReadArchive(const istd::CString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
+	CGzXmlReadArchive(const QString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
 	virtual ~CGzXmlReadArchive();
 
 	// reimplemented (iser::CXmlReadArchiveBase)

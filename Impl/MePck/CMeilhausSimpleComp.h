@@ -96,8 +96,8 @@ protected:
 private:
 	I_ATTR(bool, m_isOutputAttrPtr);
 
-	I_ATTR(istd::CString, m_addressParamIdAttrPtr);
-	I_ATTR(istd::CString, m_samplingParamsIdAttrPtr);
+	I_ATTR(QString, m_addressParamIdAttrPtr);
+	I_ATTR(QString, m_samplingParamsIdAttrPtr);
 
 	typedef std::map<int, CMeContext*> TasksList;
 	TasksList m_activeTaskList;

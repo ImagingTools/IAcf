@@ -11,19 +11,19 @@ namespace iwin
 
 // reimplemented (isys::ISystemEnvironment)
 
-istd::CString CSystemEnvironment::GetUser() const
+QString CSystemEnvironment::GetUser() const
 {
 	return GetSystemVariableValue("USER");
 }
 
 
-istd::CString CSystemEnvironment::GetTempDirPath() const
+QString CSystemEnvironment::GetTempDirPath() const
 {
 	return GetSystemVariableValue("TEMP");
 }
 
 
-istd::CString CSystemEnvironment::GetUniqueIdentifier() const
+QString CSystemEnvironment::GetUniqueIdentifier() const
 {
 	// TODO: move to basics
 	GUID guid;
@@ -31,7 +31,7 @@ istd::CString CSystemEnvironment::GetUniqueIdentifier() const
 	RPC_CSTR guidBstr = NULL;
 	::UuidToString(&guid, &guidBstr);
 
-	istd::CString uniqueIdentifier = istd::CString((char*)guidBstr);
+	QString uniqueIdentifier = QString((char*)guidBstr);
 	
 	::RpcStringFree(&guidBstr);
 

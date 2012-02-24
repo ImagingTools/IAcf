@@ -30,7 +30,7 @@ CMemoryBankSerializerComp::CMemoryBankSerializerComp()
 
 bool CMemoryBankSerializerComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool beQuiet) const
 {
@@ -65,11 +65,11 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 		return false;
 	}
 
-	return m_isOpened && ((filePathPtr == NULL) || filePathPtr->IsEmpty());
+	return m_isOpened && ((filePathPtr == NULL) || filePathPtr->isEmpty());
 }
 
 
-int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CString& /*filePath*/) const
+int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
@@ -98,7 +98,7 @@ int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const istd:
 }
 
 
-int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const istd::CString& /*filePath*/) const
+int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_SAVE | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<istd::IChangeable*>(&data));
@@ -125,15 +125,15 @@ int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const i
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CMemoryBankSerializerComp::GetFileExtensions(istd::CStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
+bool CMemoryBankSerializerComp::GetFileExtensions(QStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;
 }
 
 
-istd::CString CMemoryBankSerializerComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+QString CMemoryBankSerializerComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 
@@ -146,12 +146,12 @@ bool CMemoryBankSerializerComp::CheckError(I_DWORD errorCode) const
 	}
 
 	if (errorCode & CBIOS_WARNING_MASK){
-		SendWarningMessage(MI_CBIOS_ERROR, istd::CString("CBIOS Warning code ") + istd::CString::FromNumber(errorCode));
+		SendWarningMessage(MI_CBIOS_ERROR, QString("CBIOS Warning code ") + QString().setNum(errorCode));
 
 		return true;
 	}
 
-	SendErrorMessage(MI_CBIOS_ERROR, istd::CString("CBIOS Error code ") + istd::CString::FromNumber(errorCode));
+	SendErrorMessage(MI_CBIOS_ERROR, QString("CBIOS Error code ") + QString().setNum(errorCode));
 
 	return false;
 }
@@ -179,7 +179,7 @@ bool CMemoryBankSerializerComp::EnsurePartitionOpened() const
 
 	if (*m_memoryBankIdAttrPtr != 3){
 		I_BYTE password[16] = {0};
-		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
+		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
 		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (CheckError((*m_isAdminKeyAttrPtr)? ::CBIOS_APWLogin(password): ::CBIOS_UPWLogin(password))){
@@ -218,7 +218,7 @@ bool CMemoryBankSerializerComp::ReadFromMem(int offset, void* bufferPtr, int siz
 		return !CheckError(::CBIOS_ReadRAM3(offset, size, bufferPtr, password));
 	}
 	else{
-		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
+		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
 		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){
@@ -240,7 +240,7 @@ bool CMemoryBankSerializerComp::WriteToMem(int offset, const void* bufferPtr, in
 		return !CheckError(::CBIOS_WriteRAM3(offset, size, (PVOID)bufferPtr, password));
 	}
 	else{
-		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
+		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
 		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){

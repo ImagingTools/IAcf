@@ -47,7 +47,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 		return -1;
 	}
 
-	QString serviceName = iqt::GetQString(*m_serviceNameAttrPtr);
+	QString serviceName = *m_serviceNameAttrPtr;
 
 	if (m_applicationCompPtr.IsValid()){
 		// check whether the service already installed, if not, then install it:
@@ -81,7 +81,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 						instalArguments.data(),
 						serviceName));
 			
-			m_servicePtr->setServiceDescription(iqt::GetQString(*m_serviceDescriptionAttrPtr));
+			m_servicePtr->setServiceDescription(*m_serviceDescriptionAttrPtr);
 
 			QtServiceController::StartupType serviceStartUp = QtServiceController::AutoStartup;
 			if (m_manualStartupAttrPtr.IsValid() && *m_manualStartupAttrPtr){
@@ -100,7 +100,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 								QCoreApplication::tr("ACF Service Application"), installMessage);
 				}
 				else{
-					SendInfoMessage(0, iqt::GetCString(installMessage));
+					SendInfoMessage(0, installMessage);
 				}
 
 				// start the installed service:
@@ -110,7 +110,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 			return retVal;
 		}
 
-		SendInfoMessage(0, istd::CString("Application arguments: ") + iqt::GetCString(GetApplicationArguments(argc, argv).join(" ")));
+		SendInfoMessage(0, QString("Application arguments: ") + GetApplicationArguments(argc, argv).join(" "));
 
 		m_servicePtr.SetPtr(new CService(
 					*this,
@@ -126,14 +126,14 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 }
 
 
-istd::CString CServiceApplicationComp::GetHelpText() const
+QString CServiceApplicationComp::GetHelpText() const
 {
 	// TODO: Combine service and application related  usages.
 	if (m_applicationCompPtr.IsValid()){
 		return m_applicationCompPtr->GetHelpText();
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 

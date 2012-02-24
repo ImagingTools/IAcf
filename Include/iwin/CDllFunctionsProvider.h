@@ -9,7 +9,7 @@
 
 #include "isys/IFunctionsProvider.h"
 
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace iwin
@@ -28,10 +28,10 @@ public:
 		Construct this object opening specified DLL.
 		\param	dllPath	path to DLL or empty string if no DLL should be opened.
 	 */
-	CDllFunctionsProvider(const istd::CString& dllPath = "");
+	CDllFunctionsProvider(const QString& dllPath = "");
 	~CDllFunctionsProvider();
 
-	bool OpenDll(const istd::CString& dllPath);
+	bool OpenDll(const QString& dllPath);
 
 	void Reset();
 

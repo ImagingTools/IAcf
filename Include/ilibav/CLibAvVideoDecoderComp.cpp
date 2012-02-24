@@ -4,6 +4,11 @@
 // STL includes
 #include <cstring>
 
+
+// Qt includes
+#include <QStringList>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TSmartPtr.h"
@@ -292,27 +297,27 @@ void CLibAvVideoDecoderComp::InitProcessor(const iprm::IParamsSet* /*paramsPtr*/
 
 // reimplemented (imm::IMediaController)
 
-istd::CString CLibAvVideoDecoderComp::GetOpenedMediumUrl() const
+QString CLibAvVideoDecoderComp::GetOpenedMediumUrl() const
 {
 	return m_currentUrl;
 }
 
 
-bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*autoPlay*/)
+bool CLibAvVideoDecoderComp::OpenMediumUrl(const QString& url, bool /*autoPlay*/)
 {
 	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
 	CloseMedium();
 
-	if (		(av_open_input_file(&m_formatContextPtr, url.ToString().c_str(), NULL, 0, NULL) != 0) ||
+	if (		(av_open_input_file(&m_formatContextPtr, url.toStdString().c_str(), NULL, 0, NULL) != 0) ||
 				(m_formatContextPtr == NULL)){
-		SendInfoMessage(MI_CANNOT_OPEN, istd::CString("Cannot open media file ") + url);
+		SendInfoMessage(MI_CANNOT_OPEN, QString("Cannot open media file ") + url);
 
 		return false;
 	}
 
 	if (av_find_stream_info(m_formatContextPtr) < 0){
-		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No stream info for file ") + url);
+		SendInfoMessage(MI_FORMAT_PROBLEM, QString("No stream info for file ") + url);
 
 		return false;
 	}
@@ -359,7 +364,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 
 			// Open codec
 			if (avcodec_open(m_videoCodecContextPtr, m_videoCodecPtr) < 0){
-				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("Cannot open codec for file ") + url);
+				SendInfoMessage(MI_FORMAT_PROBLEM, QString("Cannot open codec for file ") + url);
 
 				m_videoCodecPtr = NULL;
 			}
@@ -385,7 +390,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 				m_ignoreFirstAudioFrame = false;
 			}
 			else{
-				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("Cannot open codec for file ") + url);
+				SendInfoMessage(MI_FORMAT_PROBLEM, QString("Cannot open codec for file ") + url);
 
 				m_audioCodecPtr = NULL;
 			}
@@ -393,11 +398,11 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 	}
 
 	if (m_bitmapObjectCompPtr.IsValid() && (m_videoCodecPtr == NULL)){
-		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No video decoder found for file ") + url);
+		SendInfoMessage(MI_FORMAT_PROBLEM, QString("No video decoder found for file ") + url);
 	}
 
 	if (m_audioSampleObjectCompPtr.IsValid() && (m_audioCodecPtr == NULL)){
-		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No audio decoder found for file ") + url);
+		SendInfoMessage(MI_FORMAT_PROBLEM, QString("No audio decoder found for file ") + url);
 	}
 
 	m_ignoreFirstAudioFrame = true;
@@ -586,7 +591,7 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CLibAvVideoDecoderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CLibAvVideoDecoderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -601,7 +606,7 @@ bool CLibAvVideoDecoderComp::GetFileExtensions(istd::CStringList& result, int fl
 }
 
 
-istd::CString CLibAvVideoDecoderComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+QString CLibAvVideoDecoderComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
 	return "Video files";
 }

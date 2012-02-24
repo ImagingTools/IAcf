@@ -265,18 +265,18 @@ bool CMeilhausSimpleComp::CreateSelectionTree(CChannelSelectionNode& result) con
 			meQueryNumberChannels(deviceIndex, subdeviceIndex, &channelsCount);
 
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-				istd::CString channelName = iqt::GetCString(QString::number(channelIndex));
+				QString channelName = QString::number(channelIndex);
 				subdeviceNodePtr->InsertNode(channelName, channelIndex, NULL);
 			}
 
 			if (subdeviceNodePtr->GetOptionsCount() > 0){
-				istd::CString subdeviceName = iqt::GetCString(QString::number(subdeviceIndex));
+				QString subdeviceName = QString::number(subdeviceIndex);
 				deviceNodePtr->InsertNode(subdeviceName, subdeviceIndex, subdeviceNodePtr.PopPtr());
 			}
 		}
 
 		if (deviceNodePtr->GetOptionsCount() > 0){
-			istd::CString deviceName = iqt::GetCString(QString::number(deviceIndex));
+			QString deviceName = QString::number(deviceIndex);
 			char buffer[256];
 			if (meQueryNameDevice(deviceIndex, buffer, 255) == 0){
 				deviceName = deviceName + ":" + buffer;
@@ -333,7 +333,7 @@ int CMeilhausSimpleComp::PullNextTaskId()
 
 bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, CMeAddr& result) const
 {
-	std::string selectionId = (*m_addressParamIdAttrPtr).ToString();
+	std::string selectionId = (*m_addressParamIdAttrPtr).toStdString();
 	const iprm::ISelectionParam* selectionPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter(selectionId));
 
 	const CChannelSelectionNode* deviceNodePtr = dynamic_cast<const CChannelSelectionNode*>(selectionPtr);
@@ -357,7 +357,7 @@ bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, C
 
 const isig::ISamplingParams* CMeilhausSimpleComp::GetSamplingParams(const iprm::IParamsSet* paramsPtr) const
 {
-	std::string samplingId = (*m_samplingParamsIdAttrPtr).ToString();
+	std::string samplingId = (*m_samplingParamsIdAttrPtr).toStdString();
 
 	return dynamic_cast<const isig::ISamplingParams*>(paramsPtr->GetParameter(samplingId));
 }

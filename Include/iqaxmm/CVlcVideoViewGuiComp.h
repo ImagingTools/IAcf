@@ -39,8 +39,8 @@ public:
 	void OnGuiDestroyed();
 
 	// reimplemented (imm::IMediaController)
-	virtual istd::CString GetOpenedMediumUrl() const;
-	virtual bool OpenMediumUrl(const istd::CString& url, bool autoPlay = true);
+	virtual QString GetOpenedMediumUrl() const;
+	virtual bool OpenMediumUrl(const QString& url, bool autoPlay = true);
 	virtual void CloseMedium();
 	virtual bool IsPlaying() const;
 	virtual bool SetPlaying(bool state = true);
@@ -60,15 +60,15 @@ public:
 	virtual bool SetCurrentFrame(int frameIndex);
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 private:
 	AXVLC::VLCPlugin2* m_vlcWidgetPtr;
 	AXVLC::IVLCInput* m_vlcInputPtr;
 	AXVLC::IVLCPlaylist* m_playlistPtr;
 
-	istd::CString m_currentUrl;
+	QString m_currentUrl;
 
 	I_ATTR(double, m_framesPerSecondAttrPtr);
 };

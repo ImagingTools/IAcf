@@ -44,7 +44,7 @@ public:
 	// reimplemented (iproc::IProgressManager)
 	virtual int BeginProgressSession(
 				const std::string& progressId,
-				const istd::CString& description,
+				const QString& description,
 				bool isCancelable = false);
 	virtual void EndProgressSession(int sessionId);
 	virtual void OnProgress(int sessionId, double currentProgress);
@@ -64,8 +64,8 @@ private:
 	I_ATTR(int, m_historyStepsCountAttrPtr);
 	I_ATTR(bool, m_showTaskDescriptionAttrPtr);
 	I_ATTR(bool, m_showCancelAttrPtr);
-	I_MULTIATTR(istd::CString, m_progressIdsAttrPtr);
-	I_MULTIATTR(istd::CString, m_progressColorsAttrPtr);
+	I_MULTIATTR(QString, m_progressIdsAttrPtr);
+	I_MULTIATTR(QString, m_progressColorsAttrPtr);
 
 	istd::TDelPtr<QwtPlot> m_plotPtr;
 	istd::TDelPtr<QwtPlotMarker> m_nowMarker;
@@ -77,7 +77,7 @@ private:
 		SingleData axisY;
 		QwtPlotCurve curve;
 		bool isCancelable;
-		istd::CString description;
+		QString description;
 	};
 
 	typedef istd::TDelPtr<Session> SessionPtr;
