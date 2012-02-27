@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtNetwork4.lib GigEVisionSdk.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib QtNetwork4.lib GigEVisionSdk.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(GIGEVISIONDIR_V2_5_4)\lib\$(PlatformName)&quot;"
 			/>
 			<Tool

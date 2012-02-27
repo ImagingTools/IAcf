@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtService.lib"
+				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib QtGui4.lib QtService.lib"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTSERVICEDIR)\Lib\$(ConfigurationName)VC8&quot;"
 			/>
 			<Tool

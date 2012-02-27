@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib meIDSmain.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib meIDSmain.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MEIDSDIR)\lib&quot;"
 			/>
 			<Tool
