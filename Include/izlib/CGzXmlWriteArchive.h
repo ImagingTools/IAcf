@@ -9,7 +9,7 @@
 #include <fstream>
 
 // ACF includes
-#include <QString>
+#include <QtCore/QString>
 #include "iser/CXmlWriteArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 

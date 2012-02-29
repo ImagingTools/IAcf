@@ -7,11 +7,11 @@
 #include <Qsci/qscilexerpostscript.h>
 #include <Qsci/qscilexerxml.h>
 
-
 // Qt includes
-#include <QTextEdit>
-#include <QApplication>
+#include <QtGui/QTextEdit>
+#include <QtGui/QApplication>
 
+// IACF includes
 #include "iqsci/iqsci.h"
 
 

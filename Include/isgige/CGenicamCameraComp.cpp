@@ -5,7 +5,7 @@
 #include <cstring>
 
 // Qt includes
-#include <QHostAddress>
+#include <QtNetwork/QHostAddress>
 
 // ACF includes
 #include "istd/TDelPtr.h"

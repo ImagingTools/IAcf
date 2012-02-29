@@ -3,20 +3,20 @@
 
 
 // Qt includes
-#include <QSystemTrayIcon>
+#include <QtGui/QSystemTrayIcon>
 
 // Qt Solutions
 #include "QtService.h"
 
 // ACF includes
-#include "iabc/iabc.h"
-
-
 #include "ibase/IApplication.h"
 #include "ibase/TLoggerCompWrap.h"
 
 #include "icomp/TAttribute.h"
 #include "icomp/CComponentBase.h"
+
+// IACF includes
+#include "iabc/iabc.h"
 
 
 namespace iabc

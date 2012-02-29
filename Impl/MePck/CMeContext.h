@@ -2,9 +2,11 @@
 #define imebase_CMeContext_included
 
 
-#include <QMutex>
-#include <QWaitCondition>
+// Qt includes
+#include <QtCore/QMutex>
+#include <QtCore/QWaitCondition>
 
+// ACF-Solutions includes
 #include "imeas/IDataSequence.h"
 
 #include "imebase.h"

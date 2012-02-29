@@ -1,8 +1,8 @@
 #ifndef imebase_included
 #define imebase_included
 
-#include <QList>
-#include <QVector>
+#include <QtCore/QList>
+#include <QtCore/QVector>
 
 #include "isig/isig.h"
 #include "iqt/iqt.h"

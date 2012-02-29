@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QHostAddress>
+#include <QtNetwork/QHostAddress>
 
 
 namespace isgige

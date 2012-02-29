@@ -2,10 +2,11 @@
 
 
 // Qt includes
-#include <QUrl>
-#include <QFrame>
-#include <QVBoxLayout>
+#include <QtCore/QUrl>
+#include <QtGui/QFrame>
+#include <QtGui/QVBoxLayout>
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "iqt/CTimer.h"

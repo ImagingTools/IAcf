@@ -6,7 +6,7 @@
 #include "zlib.h"
 
 // ACF includes
-#include <QString>
+#include <QtCore/QString>
 #include "iser/CXmlReadArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 

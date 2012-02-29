@@ -5,7 +5,7 @@
 #include <functional>
 
 // Qt includes
-#include <QCoreApplication>
+#include <QtCore/QCoreApplication>
 
 // Qwt includes
 #include "qwt_plot_layout.h"

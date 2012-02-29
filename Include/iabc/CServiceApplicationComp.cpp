@@ -2,10 +2,10 @@
 
 
 // Qt includes
-#include <QVector>
-#include <QMessageBox>
-#include <QApplication>
-#include <QSystemTrayIcon>
+#include <QtCore/QVector>
+#include <QtGui/QMessageBox>
+#include <QtGui/QApplication>
+#include <QtGui/QSystemTrayIcon>
 
 
 // ACF includes

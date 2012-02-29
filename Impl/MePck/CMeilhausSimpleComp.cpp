@@ -1,7 +1,7 @@
 #include "CMeilhausSimpleComp.h"
 
 
-#include <QTime>
+#include <QtCore/QTime>
 
 #include "CChannelSelectionNode.h"
 
