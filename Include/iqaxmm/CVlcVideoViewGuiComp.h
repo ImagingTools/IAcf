@@ -4,7 +4,7 @@
 
 // Qt includes
 #include <QtGui/QFrame>
-#include <QAxContainer/QAxWidget>
+#include <QAxWidget>
 
 // ACF includes
 #include "iqtgui/TGuiComponentBase.h"
