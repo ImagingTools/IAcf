@@ -333,8 +333,7 @@ int CMeilhausSimpleComp::PullNextTaskId()
 
 bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, CMeAddr& result) const
 {
-	std::string selectionId = (*m_addressParamIdAttrPtr).toStdString();
-	const iprm::ISelectionParam* selectionPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter(selectionId));
+	const iprm::ISelectionParam* selectionPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter(*m_addressParamIdAttrPtr));
 
 	const CChannelSelectionNode* deviceNodePtr = dynamic_cast<const CChannelSelectionNode*>(selectionPtr);
 	if (deviceNodePtr != NULL){
@@ -357,9 +356,7 @@ bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, C
 
 const isig::ISamplingParams* CMeilhausSimpleComp::GetSamplingParams(const iprm::IParamsSet* paramsPtr) const
 {
-	std::string samplingId = (*m_samplingParamsIdAttrPtr).toStdString();
-
-	return dynamic_cast<const isig::ISamplingParams*>(paramsPtr->GetParameter(samplingId));
+	return dynamic_cast<const isig::ISamplingParams*>(paramsPtr->GetParameter(*m_samplingParamsIdAttrPtr));
 }
 
 

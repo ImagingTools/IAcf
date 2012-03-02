@@ -38,8 +38,7 @@ int CFireGrabAcquisitionComp::DoProcessing(
 	const icam::IExposureParams* exposureParamsPtr = NULL;
 
 	if (paramsPtr != NULL && m_exposureParamsIdAttrPtr.IsValid()){
-		exposureParamsPtr = dynamic_cast<const icam::IExposureParams*>(
-					paramsPtr->GetParameter((*m_exposureParamsIdAttrPtr).toStdString()));
+		exposureParamsPtr = dynamic_cast<const icam::IExposureParams*>(paramsPtr->GetParameter(*m_exposureParamsIdAttrPtr));
 	}
 
 	if (m_defaultExposureParamsCompPtr.IsValid()){

@@ -39,7 +39,7 @@ public:
 		I_REGISTER_INTERFACE(isig::ISamplingConstraints);
 
 		I_ASSIGN(m_isOutputAttrPtr, "IsOutput", "If true this processor operate in output mode, otherwise input mode", true, false);
-		I_ASSIGN(m_addressParamIdAttrPtr, "AddressParamId", "ID of channel address in parameter set", true, "ChannelAddress");
+		I_ASSIGN(m_addressParamIdAttrPtr, "AddressParamId", "ID of channel address in parameter set (iprm::ISelectionParam)", true, "ChannelAddress");
 		I_ASSIGN(m_samplingParamsIdAttrPtr, "SamplingParamsId", "ID of sampling parameters in parameter set", true, "SamplingParams");
 	I_END_COMPONENT;
 
@@ -96,8 +96,8 @@ protected:
 private:
 	I_ATTR(bool, m_isOutputAttrPtr);
 
-	I_ATTR(QString, m_addressParamIdAttrPtr);
-	I_ATTR(QString, m_samplingParamsIdAttrPtr);
+	I_ATTR(std::string, m_addressParamIdAttrPtr);
+	I_ATTR(std::string, m_samplingParamsIdAttrPtr);
 
 	typedef std::map<int, CMeContext*> TasksList;
 	TasksList m_activeTaskList;
