@@ -56,7 +56,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 
 	int colorsCount = istd::Min(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
 	for (int i = 0; i < colorsCount; ++i){
-		if (m_progressIdsAttrPtr[i].toStdString() == progressId){
+		if (m_progressIdsAttrPtr[i] == progressId){
 			lineColor = QColor(m_progressColorsAttrPtr[i]);
 		}
 	}

@@ -64,7 +64,7 @@ private:
 	I_ATTR(int, m_historyStepsCountAttrPtr);
 	I_ATTR(bool, m_showTaskDescriptionAttrPtr);
 	I_ATTR(bool, m_showCancelAttrPtr);
-	I_MULTIATTR(QString, m_progressIdsAttrPtr);
+	I_MULTIATTR(std::string, m_progressIdsAttrPtr);
 	I_MULTIATTR(QString, m_progressColorsAttrPtr);
 
 	istd::TDelPtr<QwtPlot> m_plotPtr;
