@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2165
+          2211
         </Number>
         <Description>
           ACF
@@ -199,46 +199,6 @@
     </Element>
     <Element>
       <Id>
-        SceneGui
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneProvider
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         SnapGui
       </Id>
       <PackageId>
@@ -412,7 +372,7 @@
                 true
               </IsEnabled>
               <Value>
-                SceneGui
+                View
               </Value>
             </Data>
           </AttributeInfo>
@@ -581,6 +541,27 @@
       </PackageId>
       <ComponentId>
         VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        View
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        ViewProvider
       </ComponentId>
       <Data>
         <IsEnabled>

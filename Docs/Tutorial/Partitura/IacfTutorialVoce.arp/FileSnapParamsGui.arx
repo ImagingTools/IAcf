@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          2211
         </Number>
         <Description>
           ACF
@@ -30,6 +30,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -48,6 +51,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -95,6 +101,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>

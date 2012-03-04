@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2211
         </Number>
         <Description>
           ACF
@@ -164,27 +164,6 @@
       </PackageId>
       <ComponentId>
         Log
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SceneGui
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneProvider
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -409,7 +388,7 @@
                 true
               </IsEnabled>
               <Value>
-                SceneGui
+                View
               </Value>
             </Data>
           </AttributeInfo>
@@ -541,6 +520,27 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        View
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        ViewProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

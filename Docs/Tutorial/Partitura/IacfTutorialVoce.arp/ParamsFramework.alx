@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1672
+          2211
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          301
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -46,7 +35,7 @@
         325
       </X>
       <X>
-        350
+        325
       </X>
     </Element>
     <Element>
@@ -54,10 +43,10 @@
         LogTab
       </ComponentName>
       <X>
-        831
+        825
       </X>
       <X>
-        194
+        200
       </X>
     </Element>
     <Element>
@@ -65,10 +54,10 @@
         ParamsEditorGui
       </ComponentName>
       <X>
-        796
+        1000
       </X>
       <X>
-        354
+        325
       </X>
     </Element>
     <Element>
@@ -76,10 +65,10 @@
         ParamsSet
       </ComponentName>
       <X>
-        925
+        1100
       </X>
       <X>
-        525
+        425
       </X>
     </Element>
     <Element>
@@ -87,10 +76,10 @@
         ParamsSetGui
       </ComponentName>
       <X>
-        675
+        875
       </X>
       <X>
-        525
+        425
       </X>
     </Element>
     <Element>
@@ -98,21 +87,10 @@
         ParamsTab
       </ComponentName>
       <X>
-        575
+        600
       </X>
       <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SceneGui
-      </ComponentName>
-      <X>
-        450
-      </X>
-      <X>
-        525
+        325
       </X>
     </Element>
     <Element>
@@ -120,11 +98,24 @@
         Tabs
       </ComponentName>
       <X>
-        609
+        600
       </X>
       <X>
-        193
+        200
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ViewProvider
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        425
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>

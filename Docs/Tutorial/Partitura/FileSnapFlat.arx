@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1502
+          2211
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          209
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -323,31 +312,10 @@
                 true
               </IsEnabled>
               <Value>
-                Scene
+                ViewProvider
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Scene
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneProvider
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -593,7 +561,30 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        ViewProvider
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        ViewProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>

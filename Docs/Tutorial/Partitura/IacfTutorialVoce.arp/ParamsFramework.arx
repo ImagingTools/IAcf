@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1672
+          2211
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          301
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -103,45 +92,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTest
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -183,7 +134,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Gui
@@ -219,25 +170,6 @@
               </IsEnabled>
               <Value>
                 ParamsSet
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveEditorGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ParamsSetGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -437,47 +369,7 @@
                 true
               </IsEnabled>
               <Value>
-                SceneGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SceneGui
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneProvider
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              UseAntialiasing
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
+                ViewProvider
               </Value>
             </Data>
           </AttributeInfo>
@@ -553,24 +445,56 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        ViewProvider
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        ViewProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              UseAntialiasing
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="7">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Application
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IApplicationInfo
-      </InterfaceId>
-      <ComponentId>
-        Info
       </ComponentId>
     </Interface>
     <Interface>

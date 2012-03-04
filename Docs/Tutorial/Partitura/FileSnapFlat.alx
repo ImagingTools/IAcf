@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1502
+          2211
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          209
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -117,17 +106,6 @@
     </Element>
     <Element>
       <ComponentName>
-        Scene
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        75
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         SnapGui
       </ComponentName>
       <X>
@@ -159,5 +137,18 @@
         400
       </X>
     </Element>
+    <Element>
+      <ComponentName>
+        ViewProvider
+      </ComponentName>
+      <X>
+        782
+      </X>
+      <X>
+        77
+      </X>
+    </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>
