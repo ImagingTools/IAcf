@@ -16,6 +16,11 @@ namespace iwin
 {
 
 
+/**
+	Time stamp provider returning always stored time stamp.
+	Stored time stamp can be changed only copying their from another time stamp provider using CopyFrom method.
+	This object will be used to manage threading barrier for object supplier chain.
+*/
 class CTimeStampCacheComp:
 			public icomp::CComponentBase,
 			virtual public iinsp::ITimeStampProvider
