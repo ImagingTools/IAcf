@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2224
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         FileCamera
       </ComponentName>
       <X>
-        325
+        425
       </X>
       <X>
-        425
+        300
       </X>
     </Element>
     <Element>
@@ -39,4 +39,6 @@
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>
