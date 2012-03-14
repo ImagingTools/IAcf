@@ -592,18 +592,18 @@ void CGenicamCameraComp::OnComponentDestroyed()
 
 void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
 {
-	istd::ILogger::MessageCategory category = istd::ILogger::MC_CRITICAL;
+	istd::IInformation::InformationCategory category = istd::IInformation::IC_CRITICAL;
 	switch (type){
 	case gige_EM_TYPE_INFO:
-		category = istd::ILogger::MC_INFO;
+		category = istd::IInformation::IC_INFO;
 		break;
 
 	case gige_EM_TYPE_WARNING:
-		category = istd::ILogger::MC_WARNING;
+		category = istd::IInformation::IC_WARNING;
 		break;
 
 	case gige_EM_TYPE_ERROR:
-		category = istd::ILogger::MC_ERROR;
+		category = istd::IInformation::IC_ERROR;
 		break;
 	}
 
