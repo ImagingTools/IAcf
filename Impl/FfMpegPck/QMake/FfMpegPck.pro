@@ -3,8 +3,6 @@ include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = FfMpegPck
 
-QT -= gui core
-
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += $(FFMPEGDIR)/include $(FFMPEGDIR)/msinttypes
 

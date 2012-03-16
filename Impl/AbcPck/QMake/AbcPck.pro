@@ -7,6 +7,5 @@ TARGET = AbcPck
 
 INCLUDEPATH += ../../../Include
 
-LIBS += -L../../../Lib/$$COMPILER_DIR
-LIBS += -liabc
+LIBS += -L../../../Lib/$$COMPILER_DIR -liabc
 
