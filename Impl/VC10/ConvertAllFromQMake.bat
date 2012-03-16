@@ -5,7 +5,7 @@ call %ACFDIR%\Config\QMake\CopyProToSubdir.js VC10
 cd Impl\VC10
 
 set QMAKESPEC=%QTDIR%/mkspecs/win32-msvc2010
-qmake -recursive -tp vc IacfSlnAll.pro
+qmake -recursive -tp vc IacfAll.pro
 
 del /q Static.sln
 del /q Component.sln
