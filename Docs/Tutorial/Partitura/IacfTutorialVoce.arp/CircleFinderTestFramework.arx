@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1970
+          2240
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               CompanyName
@@ -145,6 +145,30 @@
                 </Value>
                 <Value>
                   SimpleCircleFinderTask
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  Framework/LogDock
+                </Value>
+                <Value>
+                  ImageView
                 </Value>
               </Values>
             </Data>

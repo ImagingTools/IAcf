@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2021
+          2240
         </Number>
         <Description>
           ACF
@@ -618,17 +618,12 @@
               icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              
+              MainWindowComponents
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LogDock
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -855,7 +850,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        LogDock
+      </ExportedId>
+      <ComponentId>
+        LogDock
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Simple framework allowing to test tasks
