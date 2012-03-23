@@ -2,7 +2,7 @@ echo off
 
 echo Building IACF
 
-cd ..\Impl\%COMPILER_EXT%
+cd ..\Build\%COMPILER_EXT%
 vcbuild /r IacfAll.sln $All
 
 echo Building ACF done
