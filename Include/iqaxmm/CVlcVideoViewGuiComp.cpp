@@ -8,8 +8,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
-#include "iqt/CTimer.h"
+#include "istd/CGeneralTimeStamp.h"
 
 
 namespace iqaxmm
@@ -95,7 +94,7 @@ bool CVlcVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 			m_playlistPtr->add(m_currentUrl);
 			m_playlistPtr->play();
 
-			iqt::CTimer timer;
+			istd::CGeneralTimeStamp timer;
 			timer.WaitTo(2);
 			if (!autoPlay){
 				m_playlistPtr->togglePause();

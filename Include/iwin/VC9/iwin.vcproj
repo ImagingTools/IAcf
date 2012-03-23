@@ -163,6 +163,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPerformanceTimeStamp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CProcessEnvironment.cpp"
 				>
 			</File>
@@ -172,10 +176,6 @@
 			</File>
 			<File
 				RelativePath="..\CSystemInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CTimer.cpp"
 				>
 			</File>
 			<File
@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPerformanceTimeStamp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CProcessEnvironment.h"
 				>
 			</File>
@@ -209,10 +213,6 @@
 			</File>
 			<File
 				RelativePath="..\CSystemInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTimer.h"
 				>
 			</File>
 			<File

@@ -1,10 +1,9 @@
-#ifndef iwin_CTimer_included
-#define iwin_CTimer_included
+#ifndef iwin_CPerformanceTimeStamp_included
+#define iwin_CPerformanceTimeStamp_included
 
 
-#include "istd/istd.h"
-
-#include "isys/ITimer.h"
+// ACF includes
+#include "istd/ITimeStamp.h"
 
 
 namespace iwin
@@ -12,26 +11,26 @@ namespace iwin
 
 
 /**
-	An timer implementation for the Windows plattform
+	High perfomance time stamp implementation.
 
 	\ingroup Windows
 */
-class CTimer: virtual public isys::ITimer
+class CPerformanceTimeStamp: virtual public istd::ITimeStamp
 {
 public:
-	CTimer();
+	CPerformanceTimeStamp();
 
 	bool IsVaild() const;
 
-	double GetTimeTo(const CTimer& timer) const;
+	double GetTimeTo(const CPerformanceTimeStamp& timeStamp) const;
 
 	I_QWORD GetNativeRepresentation() const;
 	void SetNativeRepresentation(I_QWORD value);
 
-	// reimplemented (isys::ITimer)
+	// reimplemented (istd::ITimeStamp)
 	virtual void Start(double elapsedTime = 0);
 	virtual double GetElapsed() const;
-	virtual double GetTimeTo(const ITimer& timer) const;
+	virtual double GetTimeTo(const istd::ITimeStamp& timeStamp) const;
 	virtual void WaitTo(double time) const;
 	virtual double GetTimerResolution() const;
 
@@ -53,4 +52,4 @@ private:
 } // namespace iwin
 
 
-#endif // !iwin_CTimer_included
+#endif // !iwin_CPerformanceTimeStamp_included

@@ -1,12 +1,12 @@
 #include "iwin/CDefaultServicesProvider.h"
 
 
+// Qt includes
+#include <QtCore/QDateTime>
+
 #include "istd/TSingleFactory.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "isys/CSimpleDateTime.h"
-
-#include "iwin/CTimer.h"
 #include "iwin/CProcessEnvironment.h"
 #include "iwin/CCriticalSection.h"
 #include "iwin/CSystemEnvironment.h"
@@ -28,10 +28,7 @@ void CDefaultServicesProvider::RegisterServices()
 	static iwin::CSystemEnvironment systemEnvironment;
 	istd::CStaticServicesProvider::RegisterService<isys::ISystemEnvironment>(&systemEnvironment);
 
-	static istd::TSingleFactory<isys::ITimer, iwin::CTimer> timerFactory("");
-	istd::CStaticServicesProvider::RegisterFactory(&timerFactory);
-
-	static istd::TSingleFactory<isys::IDateTime, isys::CSimpleDateTime> dateTimeFactory("");
+	static istd::TSingleFactory<QDateTime, QDateTime> dateTimeFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
 
 	static istd::TSingleFactory<isys::ISystemInfo, iwin::CSystemInfo> systemInfoFactory("");

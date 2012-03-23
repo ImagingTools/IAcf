@@ -7,7 +7,7 @@ namespace iwin
 
 // reimplemented (iinsp::ITimeStampProvider)
 
-const isys::ITimer* CTimeStampCacheComp::GetCurrentTimeStamp() const
+const istd::ITimeStamp* CTimeStampCacheComp::GetCurrentTimeStamp() const
 {
 	if (m_isTimerValid){
 		return &m_timer;
@@ -23,7 +23,7 @@ bool CTimeStampCacheComp::CopyFrom(const IChangeable& object)
 {
 	const iinsp::ITimeStampProvider* providerPtr = dynamic_cast<const iinsp::ITimeStampProvider*>(&object);
 	if (providerPtr != NULL){
-		const isys::ITimer* timerPtr = providerPtr->GetCurrentTimeStamp();
+		const istd::ITimeStamp* timerPtr = providerPtr->GetCurrentTimeStamp();
 		if (timerPtr != NULL){
 			m_isTimerValid = m_timer.CopyFrom(*timerPtr);
 		}
