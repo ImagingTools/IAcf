@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2240
+          2245
         </Number>
         <Description>
           ACF
@@ -26,6 +26,9 @@
       <X>
         350
       </X>
+      <Note>
+        General product framework
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -37,6 +40,9 @@
       <X>
         350
       </X>
+      <Note>
+        Main view window with 2D-console
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -48,6 +54,9 @@
       <X>
         225
       </X>
+      <Note>
+        Circle finding task
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,6 +68,9 @@
       <X>
         475
       </X>
+      <Note>
+        Parameter editor for cirlcie finding task
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -70,6 +82,9 @@
       <X>
         225
       </X>
+      <Note>
+        Image acquisition task
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -81,8 +96,9 @@
       <X>
         475
       </X>
+      <Note>
+        GUI for image acquisition task
+      </Note>
     </Element>
   </PositionMap>
-  <NotesMap count="0">
-  </NotesMap>
 </Acf>

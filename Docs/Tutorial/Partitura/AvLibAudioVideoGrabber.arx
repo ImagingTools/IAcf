@@ -174,7 +174,7 @@
         AcfGuiVoce
       </PackageId>
       <ComponentId>
-        ControlledBitmapView
+        BitmapView
       </ComponentId>
       <Data>
         <IsEnabled>

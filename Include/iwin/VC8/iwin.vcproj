@@ -5,7 +5,6 @@
 	Name="iwin"
 	ProjectGUID="{633B67F7-B154-4A80-A651-1111D5EDF583}"
 	RootNamespace="iwin"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -163,6 +162,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPerformanceTimeStamp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CProcessEnvironment.cpp"
 				>
 			</File>
@@ -197,6 +200,10 @@
 			</File>
 			<File
 				RelativePath="..\CDllFunctionsProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPerformanceTimeStamp.h"
 				>
 			</File>
 			<File
