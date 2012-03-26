@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        FileCamera
+        ControllerBinder
       </ComponentName>
       <X>
-        300
+        550
       </X>
       <X>
-        275
+        225
       </X>
       <Note>
         
@@ -32,13 +32,27 @@
     </Element>
     <Element>
       <ComponentName>
-        Framework
+        ControllerGui
       </ComponentName>
       <X>
-        775
+        300
       </X>
       <X>
-        475
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        VideoDecoder
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        350
       </X>
       <Note>
         
