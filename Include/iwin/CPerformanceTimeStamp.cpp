@@ -63,6 +63,16 @@ void CPerformanceTimeStamp::Start(double elapsedTime)
 }
 
 
+QDateTime CPerformanceTimeStamp::GetStartTime() const
+{
+	QDateTime retVal = QDateTime::currentDateTime();
+
+	retVal.addMSecs(quint64(GetElapsed() * 1000));
+
+	return retVal;
+}
+
+
 double CPerformanceTimeStamp::GetElapsed() const
 {
 	I_ASSERT(sizeof(I_SQWORD) == sizeof(LARGE_INTEGER));
