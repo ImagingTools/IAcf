@@ -180,10 +180,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTimer.h"
-				>
-			</File>
-			<File
 				RelativePath="..\inat.h"
 				>
 			</File>
