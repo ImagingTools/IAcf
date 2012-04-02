@@ -8,7 +8,6 @@
 #include "istd/CStaticServicesProvider.h"
 
 #include "iwin/CProcessEnvironment.h"
-#include "iwin/CSystemInfo.h"
 
 
 namespace iwin
@@ -22,9 +21,6 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static istd::TSingleFactory<QDateTime, QDateTime> dateTimeFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
-
-	static istd::TSingleFactory<isys::ISystemInfo, iwin::CSystemInfo> systemInfoFactory("");
-	istd::CStaticServicesProvider::RegisterFactory(&systemInfoFactory);
 }
 
 

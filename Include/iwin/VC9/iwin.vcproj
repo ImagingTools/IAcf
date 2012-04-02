@@ -167,10 +167,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystemInfo.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CTimeStampCacheComp.cpp"
 				>
 			</File>
@@ -193,10 +189,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessEnvironment.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSystemInfo.h"
 				>
 			</File>
 			<File
