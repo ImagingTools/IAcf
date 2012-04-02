@@ -151,10 +151,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CCriticalSection.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDefaultServicesProvider.cpp"
 				>
 			</File>
@@ -187,10 +183,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CCriticalSection.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CDefaultServicesProvider.h"
 				>

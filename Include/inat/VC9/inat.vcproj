@@ -172,10 +172,6 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CCriticalSection.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
