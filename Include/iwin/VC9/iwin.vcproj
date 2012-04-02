@@ -167,10 +167,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystemEnvironment.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSystemInfo.cpp"
 				>
 			</File>
@@ -197,10 +193,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessEnvironment.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSystemEnvironment.h"
 				>
 			</File>
 			<File

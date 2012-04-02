@@ -8,7 +8,6 @@
 #include "istd/CStaticServicesProvider.h"
 
 #include "iwin/CProcessEnvironment.h"
-#include "iwin/CSystemEnvironment.h"
 #include "iwin/CSystemInfo.h"
 
 
@@ -20,9 +19,6 @@ void CDefaultServicesProvider::RegisterServices()
 {
 	static iwin::CProcessEnvironment applicationEnvironment;
 	istd::CStaticServicesProvider::RegisterService<isys::IProcessEnvironment>(&applicationEnvironment);
-
-	static iwin::CSystemEnvironment systemEnvironment;
-	istd::CStaticServicesProvider::RegisterService<isys::ISystemEnvironment>(&systemEnvironment);
 
 	static istd::TSingleFactory<QDateTime, QDateTime> dateTimeFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
