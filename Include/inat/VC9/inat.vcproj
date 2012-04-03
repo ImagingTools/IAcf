@@ -172,10 +172,6 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CDllFunctionsProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\inat.h"
 				>
 			</File>

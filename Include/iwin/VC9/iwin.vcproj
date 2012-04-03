@@ -155,10 +155,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDllFunctionsProvider.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPerformanceTimeStamp.cpp"
 				>
 			</File>
@@ -177,10 +173,6 @@
 			>
 			<File
 				RelativePath="..\CDefaultServicesProvider.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
 			<File
