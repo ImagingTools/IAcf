@@ -7,8 +7,6 @@
 #include "istd/TSingleFactory.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "iwin/CProcessEnvironment.h"
-
 
 namespace iwin
 {
@@ -16,9 +14,6 @@ namespace iwin
 
 void CDefaultServicesProvider::RegisterServices()
 {
-	static iwin::CProcessEnvironment applicationEnvironment;
-	istd::CStaticServicesProvider::RegisterService<isys::IProcessEnvironment>(&applicationEnvironment);
-
 	static istd::TSingleFactory<QDateTime, QDateTime> dateTimeFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
 }
