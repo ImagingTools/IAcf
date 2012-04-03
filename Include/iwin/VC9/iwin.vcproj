@@ -151,10 +151,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CDefaultServicesProvider.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPerformanceTimeStamp.cpp"
 				>
 			</File>
@@ -167,10 +163,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CDefaultServicesProvider.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CPerformanceTimeStamp.h"
 				>

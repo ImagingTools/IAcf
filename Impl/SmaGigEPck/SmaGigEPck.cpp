@@ -7,9 +7,6 @@ namespace SmaGigEPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES
-
-
 I_EXPORT_PACKAGE(
 			"SmaGigEPck",
 			"GigE Vision camera package based on Smartek SDK",

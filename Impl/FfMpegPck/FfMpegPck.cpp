@@ -8,8 +8,6 @@ namespace FfMpegPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES
-
 I_EXPORT_PACKAGE(
 			"Acf/Sln/FfMpeg",
 			"Package based on FFMPEG library",

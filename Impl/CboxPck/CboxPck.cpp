@@ -8,8 +8,6 @@ namespace CboxPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES;
-
 I_EXPORT_PACKAGE(
 			"Cbox",
 			"Package based on Crypto Box library CBIOS",
