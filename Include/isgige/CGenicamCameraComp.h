@@ -190,7 +190,7 @@ private:
 
 	typedef istd::TPointerVector<DeviceInfo> DeviceInfos;
 	DeviceInfos m_deviceInfos;
-	typedef std::map<I_DWORD, int> IpAddressToIndexMap;
+	typedef std::map<quint32, int> IpAddressToIndexMap;
 	IpAddressToIndexMap m_ipAddressToIndexMap;
 
 	// static attributes

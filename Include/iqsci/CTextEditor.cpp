@@ -191,7 +191,7 @@ void CTextEditor::OnTextChanged()
 
 	if (m_scintilla->marginLineNumbers(1)){
 		m_scintilla->setMarginWidth(1, linesString);
-		m_scintilla->setMarginWidth(1, istd::Max(20, m_scintilla->marginWidth(1)));
+		m_scintilla->setMarginWidth(1, qMax(20, m_scintilla->marginWidth(1)));
 	}
 }
 

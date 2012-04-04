@@ -211,12 +211,12 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 		for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
 					iter != m_imageTasks.end();
 					++iter){
-			globalState = istd::Max(globalState, iter->first);
+			globalState = qMax(globalState, iter->first);
 		}
 		for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
 					iter != m_audioTasks.end();
 					++iter){
-			globalState = istd::Max(globalState, iter->first);
+			globalState = qMax(globalState, iter->first);
 		}
 
 		m_imageTasks.clear();
@@ -646,7 +646,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 			while ((m_rawDataPtr != NULL) && (m_bytesRemaining > 0)){
 				I_ASSERT(m_videoCodecContextPtr != NULL);
 
-				int bytesToCopy = istd::Min(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
+				int bytesToCopy = qMin(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
 				std::memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
 				std::memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
 
@@ -701,7 +701,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 			while ((m_rawDataPtr != NULL) && (m_bytesRemaining > 0)){
 				I_ASSERT(m_audioCodecContextPtr != NULL);
 
-				int bytesToCopy = istd::Min(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
+				int bytesToCopy = qMin(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
 				std::memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
 				std::memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
 
@@ -735,15 +735,15 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 
 						switch (m_audioCodecContextPtr->sample_fmt){
 						case SAMPLE_FMT_U8:
-							sampleRawSize = sizeof(I_BYTE);
+							sampleRawSize = sizeof(quint8);
 							break;
 
 						case SAMPLE_FMT_S16:
-							sampleRawSize = sizeof(I_SWORD);
+							sampleRawSize = sizeof(qint16);
 							break;
 
 						case SAMPLE_FMT_S32:
-							sampleRawSize = sizeof(I_SDWORD);
+							sampleRawSize = sizeof(qint32);
 							break;
 
 						case SAMPLE_FMT_FLT:
@@ -777,7 +777,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 						switch (m_audioCodecContextPtr->sample_fmt){
 						case SAMPLE_FMT_U8:
 							{
-								I_BYTE* samplesPtr = (I_BYTE*)m_audioOutputBuffer;
+								quint8* samplesPtr = (quint8*)m_audioOutputBuffer;
 								for (int i = 0; i < allSamplesCount; ++i){
 									audioSequencePtr->SetSample(i / channelsCount, i % channelsCount, samplesPtr[i] / 127.5 - 1);
 								}
@@ -786,7 +786,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 
 						case SAMPLE_FMT_S16:
 							{
-								I_SWORD* samplesPtr = (I_SWORD*)m_audioOutputBuffer;
+								qint16* samplesPtr = (qint16*)m_audioOutputBuffer;
 								for (int i = 0; i < allSamplesCount; ++i){
 									audioSequencePtr->SetSample(i / channelsCount, i % channelsCount, samplesPtr[i] / 32768.0);
 								}
@@ -795,7 +795,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 
 						case SAMPLE_FMT_S32:
 							{
-								I_SDWORD* samplesPtr = (I_SDWORD*)m_audioOutputBuffer;
+								qint32* samplesPtr = (qint32*)m_audioOutputBuffer;
 								for (int i = 0; i < allSamplesCount; ++i){
 									audioSequencePtr->SetSample(i / channelsCount, i % channelsCount, double(samplesPtr[i]) / 0x80000000);
 								}
@@ -960,7 +960,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 			if (m_minimalImageDistanceAttrPtr.IsValid() && (m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
 				AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
 				if (videoStreamPtr != NULL){
-					nextImageFrame = istd::Max(
+					nextImageFrame = qMax(
 								m_lastReadFrame + int(*m_minimalImageDistanceAttrPtr * videoStreamPtr->time_base.den / videoStreamPtr->time_base.num),
 								nextImageFrame);
 				}

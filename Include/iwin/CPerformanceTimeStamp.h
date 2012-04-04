@@ -24,8 +24,8 @@ public:
 
 	double GetTimeTo(const CPerformanceTimeStamp& timeStamp) const;
 
-	I_QWORD GetNativeRepresentation() const;
-	void SetNativeRepresentation(I_QWORD value);
+	quint64 GetNativeRepresentation() const;
+	void SetNativeRepresentation(quint64 value);
 
 	// reimplemented (istd::ITimeStamp)
 	virtual void Start(double elapsedTime = 0);
@@ -40,10 +40,10 @@ public:
 	virtual bool CopyFrom(const istd::IChangeable& object);
 
 private:
-	I_SQWORD m_startCounter;
+	qint64 m_startCounter;
 
 	// static attributes
-	static I_SQWORD s_timerFrequence;
+	static qint64 s_timerFrequence;
 	static bool s_isTimerFrequenceValid;
 };
 

@@ -54,7 +54,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 
 	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId.c_str())) % (Qt::transparent - Qt::red));
 
-	int colorsCount = istd::Min(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
+	int colorsCount = qMin(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
 	for (int i = 0; i < colorsCount; ++i){
 		if (m_progressIdsAttrPtr[i] == progressId){
 			lineColor = QColor(m_progressColorsAttrPtr[i]);

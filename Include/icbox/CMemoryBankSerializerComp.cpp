@@ -75,12 +75,12 @@ int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QStri
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
 		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
-		I_DWORD blockSize;
+		quint32 blockSize;
 		if (!ReadFromMem(0, &blockSize, sizeof(blockSize)) || (blockSize < 0) || (blockSize > 0xffff)){
 			return StateFailed;
 		}
 
-		std::vector<I_BYTE> buffer(blockSize, 0);
+		std::vector<quint8> buffer(blockSize, 0);
 		if (ReadFromMem(sizeof(blockSize), &buffer[0], blockSize) || (blockSize > 0xffff)){
 			iser::CMemoryReadArchive archive(&buffer, blockSize);
 
@@ -110,7 +110,7 @@ int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const Q
 			return StateFailed;
 		}
 
-		I_DWORD blockSize = I_DWORD(archive.GetBufferSize());
+		quint32 blockSize = quint32(archive.GetBufferSize());
 		if (WriteToMem(0, &blockSize, sizeof(blockSize)) && WriteToMem(sizeof(blockSize), archive.GetBuffer(), blockSize)){
 			return StateOk;
 		}
@@ -139,7 +139,7 @@ QString CMemoryBankSerializerComp::GetTypeDescription(const QString* /*extension
 
 // protected methods
 
-bool CMemoryBankSerializerComp::CheckError(I_DWORD errorCode) const
+bool CMemoryBankSerializerComp::CheckError(quint32 errorCode) const
 {
 	if (errorCode == 0){
 		return true;
@@ -167,7 +167,7 @@ bool CMemoryBankSerializerComp::EnsurePartitionOpened() const
 		return false;
 	}
 
-	if (CheckError(::CBIOS_OpenByApp(I_WORD(*m_partitionIdAttrPtr)))){
+	if (CheckError(::CBIOS_OpenByApp(quint16(*m_partitionIdAttrPtr)))){
 		return false;
 	}
 
@@ -178,9 +178,9 @@ bool CMemoryBankSerializerComp::EnsurePartitionOpened() const
 	}
 
 	if (*m_memoryBankIdAttrPtr != 3){
-		I_BYTE password[16] = {0};
+		quint8 password[16] = {0};
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
-		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), qMin(sizeof(password), passwordStr.size()));
 
 		if (CheckError((*m_isAdminKeyAttrPtr)? ::CBIOS_APWLogin(password): ::CBIOS_UPWLogin(password))){
 			return false;
@@ -213,13 +213,13 @@ bool CMemoryBankSerializerComp::EnsurePartitionClosed() const
 
 bool CMemoryBankSerializerComp::ReadFromMem(int offset, void* bufferPtr, int size) const
 {
-	I_BYTE password[16] = {0};
+	quint8 password[16] = {0};
 	if (*m_memoryBankIdAttrPtr == 3){
 		return !CheckError(::CBIOS_ReadRAM3(offset, size, bufferPtr, password));
 	}
 	else{
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
-		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), qMin(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){
 			return !CheckError(::CBIOS_ReadRAM1(offset, size, bufferPtr, password));
@@ -235,13 +235,13 @@ bool CMemoryBankSerializerComp::ReadFromMem(int offset, void* bufferPtr, int siz
 
 bool CMemoryBankSerializerComp::WriteToMem(int offset, const void* bufferPtr, int size) const
 {
-	I_BYTE password[16] = {0};
+	quint8 password[16] = {0};
 	if (*m_memoryBankIdAttrPtr == 3){
 		return !CheckError(::CBIOS_WriteRAM3(offset, size, (PVOID)bufferPtr, password));
 	}
 	else{
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).toStdString();
-		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), qMin(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){
 			return !CheckError(::CBIOS_WriteRAM1(offset, size, (PVOID)bufferPtr, password));

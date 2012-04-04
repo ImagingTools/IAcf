@@ -26,10 +26,10 @@ public:
 
 protected:
 	struct Rgba{
-		I_BYTE r;
-		I_BYTE g;
-		I_BYTE b;
-		I_BYTE a;
+		quint8 r;
+		quint8 g;
+		quint8 b;
+		quint8 a;
 	};
 };
 

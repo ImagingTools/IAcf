@@ -169,7 +169,7 @@ bool CChannelSelectionNode::SerializeNode(iser::IArchive& archive, const iser::C
 	retVal = retVal && archive.EndTag(nodeTag);
 
 	if (m_selectedIndex >= GetOptionsCount()){
-		m_selectedIndex = istd::Max(0, GetOptionsCount() - 1);
+		m_selectedIndex = qMax(0, GetOptionsCount() - 1);
 	}
 
 	if (!retVal){

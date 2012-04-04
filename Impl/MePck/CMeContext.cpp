@@ -103,7 +103,7 @@ bool CMeContext::Wait(double timeout)
 
 	m_activeTaskMutex.lock();
 	if (!IsDone()){
-		retVal = m_dataReadyCondition.wait(&m_activeTaskMutex, I_DWORD(timeout * 1000));
+		retVal = m_dataReadyCondition.wait(&m_activeTaskMutex, quint32(timeout * 1000));
 	}
 
 	m_activeTaskMutex.unlock();

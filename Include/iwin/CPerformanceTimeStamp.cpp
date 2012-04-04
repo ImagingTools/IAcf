@@ -34,17 +34,17 @@ double CPerformanceTimeStamp::GetTimeTo(const CPerformanceTimeStamp& timeStamp) 
 }
 
 
-I_QWORD CPerformanceTimeStamp::GetNativeRepresentation() const
+quint64 CPerformanceTimeStamp::GetNativeRepresentation() const
 {
-	return I_QWORD(m_startCounter);
+	return quint64(m_startCounter);
 }
 
 
-void CPerformanceTimeStamp::SetNativeRepresentation(I_QWORD value)
+void CPerformanceTimeStamp::SetNativeRepresentation(quint64 value)
 {
 	istd::CChangeNotifier notifier(this);
 
-	m_startCounter = I_SQWORD(value);
+	m_startCounter = qint64(value);
 }
 
 
@@ -52,14 +52,14 @@ void CPerformanceTimeStamp::SetNativeRepresentation(I_QWORD value)
 
 void CPerformanceTimeStamp::Start(double elapsedTime)
 {
-	I_ASSERT(sizeof(I_SQWORD) == sizeof(LARGE_INTEGER));
+	I_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
 
 	istd::CChangeNotifier notifier(this);
 
 	LARGE_INTEGER currentCounter;
 	::QueryPerformanceCounter(&currentCounter);
 
-	m_startCounter = (I_SQWORD&)currentCounter - I_SQWORD(elapsedTime * s_timerFrequence);
+	m_startCounter = (qint64&)currentCounter - qint64(elapsedTime * s_timerFrequence);
 }
 
 
@@ -75,9 +75,9 @@ QDateTime CPerformanceTimeStamp::GetStartTime() const
 
 double CPerformanceTimeStamp::GetElapsed() const
 {
-	I_ASSERT(sizeof(I_SQWORD) == sizeof(LARGE_INTEGER));
+	I_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
 
-	I_SQWORD endCounter;
+	qint64 endCounter;
 	::QueryPerformanceCounter((LARGE_INTEGER*)&endCounter);
 
 	return double(endCounter - m_startCounter) / s_timerFrequence;
@@ -100,7 +100,7 @@ void CPerformanceTimeStamp::WaitTo(double time) const
 {
 	int restMs;
 	while ((restMs = int((time - GetElapsed()) * 1000)) > 0){
-		::SleepEx(I_DWORD(restMs), FALSE);
+		::SleepEx(quint32(restMs), FALSE);
 	}
 }
 
@@ -142,7 +142,7 @@ bool CPerformanceTimeStamp::CopyFrom(const istd::IChangeable& object)
 
 // static attributes
 
-I_SQWORD CPerformanceTimeStamp::s_timerFrequence;
+qint64 CPerformanceTimeStamp::s_timerFrequence;
 bool CPerformanceTimeStamp::s_isTimerFrequenceValid = (::QueryPerformanceFrequency((LARGE_INTEGER*)&CPerformanceTimeStamp::s_timerFrequence) != 0);
 
 

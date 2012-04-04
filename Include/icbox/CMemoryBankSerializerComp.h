@@ -52,7 +52,7 @@ public:
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 protected:
-	bool CheckError(I_DWORD errorCode) const;
+	bool CheckError(quint32 errorCode) const;
 	bool EnsurePartitionOpened() const;
 	bool EnsurePartitionClosed() const;
 	bool ReadFromMem(int offset, void* bufferPtr, int size) const;

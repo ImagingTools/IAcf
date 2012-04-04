@@ -27,12 +27,12 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 						image.widthStep);
 		case 3:
 			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(image.width, image.height))){
-				I_BYTE* outputBitmapLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(0);
+				quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(0);
 				std::memset(outputBitmapLinePtr, 255, outputBitmap.GetLineBytesCount() * outputBitmap.GetImageSize().GetY());
 
 				for (int y = 0; y < image.height; y++){
-					I_BYTE* outputBitmapLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(y);
-					I_BYTE* inputBitmapLinePtr = (I_BYTE*)image.imageData + y * image.widthStep;
+					quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+					quint8* inputBitmapLinePtr = (quint8*)image.imageData + y * image.widthStep;
 
 					for (int x = 0; x < outputBitmap.GetLineBytesCount(); x += 4){
 						int ix = (x >> 2) * 3;

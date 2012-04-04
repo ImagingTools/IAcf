@@ -210,7 +210,7 @@ private:
 	int16_t* m_audioOutputBuffer;
 	bool m_ignoreFirstAudioFrame;
 
-	std::vector<I_BYTE> m_imageBuffer;
+	std::vector<quint8> m_imageBuffer;
 
 	AVPacket m_packet;
 	int m_bytesRemaining;

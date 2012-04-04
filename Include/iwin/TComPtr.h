@@ -42,7 +42,7 @@ public:
 	/**
 		Create instance of COM object using its CLSID.
 	*/
-	bool CoCreateInstance(REFCLSID rclsid, IUnknown* outerPtr = NULL, I_DWORD clsContext = CLSCTX_ALL);
+	bool CoCreateInstance(REFCLSID rclsid, IUnknown* outerPtr = NULL, quint32 clsContext = CLSCTX_ALL);
 
 	/**
 		It decreses COM reference pointer and set this pointer to NULL.
@@ -158,7 +158,7 @@ inline Type** TComPtr<Type>::operator&()
 // public methods
 
 template <class Type>
-bool TComPtr<Type>::CoCreateInstance(REFCLSID rclsid, IUnknown* outerPtr, I_DWORD clsContext)
+bool TComPtr<Type>::CoCreateInstance(REFCLSID rclsid, IUnknown* outerPtr, quint32 clsContext)
 {
 	Reset();
 
