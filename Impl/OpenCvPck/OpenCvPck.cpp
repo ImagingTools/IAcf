@@ -8,7 +8,7 @@ namespace OpenCvPck
 
 
 I_EXPORT_PACKAGE(
-			"OpenCvPck",
+			"Iacf/OpenCv",
 			"OpenCV integration",
 			"OpenCV" IM_PROJECT("IACF") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

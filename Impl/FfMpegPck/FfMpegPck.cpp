@@ -9,7 +9,7 @@ namespace FfMpegPck
 
 
 I_EXPORT_PACKAGE(
-			"Acf/Sln/FfMpeg",
+			"Iacf/FfMpeg",
 			"Package based on FFMPEG library",
 			"ACF Solutions MPEG Video Audio FFMPEG AvLib" IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

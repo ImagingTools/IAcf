@@ -8,7 +8,7 @@ namespace WinPck
 
 
 I_EXPORT_PACKAGE(
-			"WinPck",
+			"Iacf/Windows",
 			"Widows dependend standard package",
 			"Win32 Windows" IM_PROJECT("IACF") IM_TAG("General") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\""));
 

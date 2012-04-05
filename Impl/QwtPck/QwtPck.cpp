@@ -12,7 +12,7 @@ I_REGISTER_QT_RESOURCE(iqtgui);
 I_REGISTER_QT_RESOURCE(Qwt3d);
 
 I_EXPORT_PACKAGE(
-			"QwtPck",
+			"Iacf/Gui/Qwt",
 			"QWT and QWT3D based package",
 			"Qwt Qt 2D 3D View" IM_TAG("Qt") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

@@ -9,7 +9,7 @@ namespace QaxPck
 
 
 I_EXPORT_PACKAGE(
-			"Qax",
+			"Iacf/ActiveX",
 			"QActiveX based package",
 			"ActiveX QActiveX COM OLE" IM_TAG("Qt Windows") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

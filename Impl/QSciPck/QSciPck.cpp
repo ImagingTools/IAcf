@@ -10,7 +10,7 @@ namespace QsciPck
 
 
 I_EXPORT_PACKAGE(
-			"Qsci",
+			"Iacf/QScintilla",
 			"QScintilla package",
 			"QScintilla Text" IM_TAG("Qt") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
