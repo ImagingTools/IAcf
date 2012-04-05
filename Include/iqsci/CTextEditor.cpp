@@ -138,7 +138,7 @@ void CTextEditor::SetLanguage(const QString& language)
 
 	LexerMap::iterator foundIt = m_languages.find(language.toUpper());
 	if (foundIt != m_languages.end()){
-		m_scintilla->setLexer(foundIt->second);
+		m_scintilla->setLexer(foundIt.value());
 	}
 }
 

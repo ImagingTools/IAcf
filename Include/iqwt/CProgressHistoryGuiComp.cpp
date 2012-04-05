@@ -82,7 +82,7 @@ void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
 		return;
 	}
 
-	SessionPtr& sessionPtr = foundIter->second;
+	SessionPtr& sessionPtr = foundIter.value();
 	I_ASSERT(sessionPtr.IsValid());
 
 	sessionPtr->curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 0.5));
@@ -107,7 +107,7 @@ void CProgressHistoryGuiComp::OnProgress(int sessionId, double currentProgress)
 		return;
 	}
 
-	SessionPtr& sessionPtr = foundIter->second;
+	SessionPtr& sessionPtr = foundIter.value();
 
 	sessionPtr->axisY.insert(sessionPtr->axisY.begin(), currentProgress * 100);
 	while (sessionPtr->axisY.size() > m_axisXData.size()){
@@ -153,7 +153,7 @@ void CProgressHistoryGuiComp::UpdateState()
 		DescriptionLabel->setText(tr("Finished"));
 	}
 	else if (sessionsCount == 1){
-		SessionPtr& sessionPtr = m_idToSessionMap.begin()->second;
+		SessionPtr& sessionPtr = m_idToSessionMap.begin().value();
 		I_ASSERT(sessionPtr.IsValid());
 
 		DescriptionLabel->setText(sessionPtr->description);

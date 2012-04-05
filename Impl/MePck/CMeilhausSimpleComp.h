@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "icomp/CComponentBase.h"
@@ -99,7 +99,7 @@ private:
 	I_ATTR(std::string, m_addressParamIdAttrPtr);
 	I_ATTR(std::string, m_samplingParamsIdAttrPtr);
 
-	typedef std::map<int, CMeContext*> TasksList;
+	typedef QMap<int, CMeContext*> TasksList;
 	TasksList m_activeTaskList;
 
 	int m_lastTaskId;

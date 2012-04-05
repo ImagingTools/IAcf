@@ -250,7 +250,7 @@ CGenicamCameraComp::DeviceInfo* CGenicamCameraComp::GetDeviceByUrl(const QString
 
 		IpAddressToIndexMap::const_iterator foundIter = m_ipAddressToIndexMap.find(ipAddress);
 		if (foundIter != m_ipAddressToIndexMap.end()){
-			int index = foundIter->second;
+			int index = foundIter.value();
 			I_ASSERT(index >= 0);
 			I_ASSERT(index < int(m_deviceInfos.GetCount()));
 

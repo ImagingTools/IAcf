@@ -179,7 +179,7 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 
 		while (GetTaskState(taskId) == TS_WAIT){
 			if (FinishNextTask() < 0){
-				m_imageTasks.erase(taskId);
+				m_imageTasks.remove(taskId);
 
 				return TS_INVALID;
 			}
@@ -189,14 +189,14 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 
 		ImageTaskMap::iterator imageIter = m_imageTasks.find(taskId);
 		if (imageIter != m_imageTasks.end()){
-			taskState = imageIter->second.state;
+			taskState = imageIter.value().state;
 
 			m_imageTasks.erase(imageIter);
 		}
 		else{
 			AudioTaskMap::iterator audioIter = m_audioTasks.find(taskId);
 			if (audioIter != m_audioTasks.end()){
-				taskState = audioIter->second.state;
+				taskState = audioIter.value().state;
 
 				m_audioTasks.erase(audioIter);
 			}
@@ -211,12 +211,12 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 		for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
 					iter != m_imageTasks.end();
 					++iter){
-			globalState = qMax(globalState, iter->first);
+			globalState = qMax(globalState, iter.key());
 		}
 		for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
 					iter != m_audioTasks.end();
 					++iter){
-			globalState = qMax(globalState, iter->first);
+			globalState = qMax(globalState, iter.key());
 		}
 
 		m_imageTasks.clear();
@@ -230,8 +230,8 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 void CLibAvVideoDecoderComp::CancelTask(int taskId)
 {
 	if (taskId >= 0){
-		m_imageTasks.erase(taskId);
-		m_audioTasks.erase(taskId);
+		m_imageTasks.remove(taskId);
+		m_audioTasks.remove(taskId);
 
 		if (m_imageTasks.empty() && m_audioTasks.empty()){
 			m_nextTaskId = 0;
@@ -251,18 +251,18 @@ int CLibAvVideoDecoderComp::GetReadyTask()
 	for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
 				iter != m_imageTasks.end();
 				++iter){
-		const ImageTask& task = iter->second;
+		const ImageTask& task = iter.value();
 		if (task.state != TS_WAIT){
-			return iter->first;
+			return iter.key();
 		}
 	}
 
 	for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
 				iter != m_audioTasks.end();
 				++iter){
-		const AudioTask& task = iter->second;
+		const AudioTask& task = iter.value();
 		if (task.state != TS_WAIT){
-			return iter->first;
+			return iter.key();
 		}
 	}
 
@@ -274,14 +274,14 @@ int CLibAvVideoDecoderComp::GetTaskState(int taskId) const
 {
 	ImageTaskMap::const_iterator imageIter = m_imageTasks.find(taskId);
 	if (imageIter != m_imageTasks.end()){
-		const ImageTask& task = imageIter->second;
+		const ImageTask& task = imageIter.value();
 
 		return task.state;
 	}
 
 	AudioTaskMap::const_iterator audioIter = m_audioTasks.find(taskId);
 	if (audioIter != m_audioTasks.end()){
-		const AudioTask& task = audioIter->second;
+		const AudioTask& task = audioIter.value();
 
 		return task.state;
 	}
@@ -878,7 +878,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 		for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
 					iter != m_imageTasks.end();
 					++iter){
-			const ImageTask& task = iter->second;
+			const ImageTask& task = iter.value();
 			if (task.state == TS_WAIT){
 				++openTasksCount;
 			}
@@ -889,7 +889,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 		for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
 					iter != m_audioTasks.end();
 					++iter){
-			const AudioTask& task = iter->second;
+			const AudioTask& task = iter.value();
 			if (task.state == TS_WAIT){
 				++openTasksCount;
 			}
@@ -903,7 +903,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 			for (		ImageTaskMap::iterator iter = m_imageTasks.begin();
 						iter != m_imageTasks.end();
 						++iter){
-				ImageTask& task = iter->second;
+				ImageTask& task = iter.value();
 				I_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
@@ -920,7 +920,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 
 					m_isCurrentImageValid = false;
 
-					return iter->first;
+					return iter.key();
 				}
 			}
 		}
@@ -931,7 +931,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 			for (		AudioTaskMap::iterator iter = m_audioTasks.begin();
 						iter != m_audioTasks.end();
 						++iter){
-				AudioTask& task = iter->second;
+				AudioTask& task = iter.value();
 				I_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
@@ -947,7 +947,7 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 
 					m_isCurrentSampleValid = false;
 
-					return iter->first;
+					return iter.key();
 				}
 			}
 		}

@@ -184,7 +184,7 @@ private:
 		int state;
 		iimg::IBitmap* outputPtr;
 	};
-	typedef std::map<int, ImageTask> ImageTaskMap;
+	typedef QMap<int, ImageTask> ImageTaskMap;
 	ImageTaskMap m_imageTasks;
 
 	struct AudioTask
@@ -192,7 +192,7 @@ private:
 		int state;
 		imeas::IDataSequence* outputPtr;
 	};
-	typedef std::map<int, AudioTask> AudioTaskMap;
+	typedef QMap<int, AudioTask> AudioTaskMap;
 	AudioTaskMap m_audioTasks;
 
 	int m_videoStreamId;
