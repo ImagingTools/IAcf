@@ -5,7 +5,7 @@
 // GigEVision includes
 #include "gige_cpp/IGigEVisionAPI.h"
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
 
 // ACF includes
@@ -128,7 +128,7 @@ public:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 protected:
 	struct DeviceInfo
@@ -176,12 +176,12 @@ protected Q_SLOTS:
 	void OnCameraEventLog(int type, QString message);
 
 private:
-	I_ATTR(std::string, m_urlParamsIdAttrPtr);
-	I_ATTR(std::string, m_selectionParamIdPtr);
-	I_ATTR(std::string, m_exposureParamsIdAttrPtr);
-	I_ATTR(std::string, m_triggerParamsIdAttrPtr);
-	I_ATTR(std::string, m_adjustParamsIdAttrPtr);
-	I_ATTR(std::string, m_roiParamIdPtr);
+	I_ATTR(QByteArray, m_urlParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_selectionParamIdPtr);
+	I_ATTR(QByteArray, m_exposureParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_triggerParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_adjustParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_roiParamIdPtr);
 	I_ATTR(double, m_timeoutAttrPtr);
 	I_ATTR(double, m_findDevicesTimeAttrPtr);
 	I_ATTR(double, m_triggerToleranceAttrPtr);

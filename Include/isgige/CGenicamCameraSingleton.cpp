@@ -58,7 +58,7 @@ void CGenicamCameraSingleton::OnDisconnect(gige::IDevice devicePtr)
 
 void CGenicamCameraSingleton::OnLog(gige::IDevice /*devicePtr*/, gige::EventMessage eMessage)
 {
-	emit CameraEventLog(eMessage.messageType, "Internal: " + QString(eMessage.messageString.c_str()));
+	emit CameraEventLog(eMessage.messageType, "Internal: " + QString::fromStdString(eMessage.messageString));
 }
 
 

@@ -2,7 +2,7 @@
 #define imebase_CMeilhausSimpleComp_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
 
 // ACF includes
@@ -96,8 +96,8 @@ protected:
 private:
 	I_ATTR(bool, m_isOutputAttrPtr);
 
-	I_ATTR(std::string, m_addressParamIdAttrPtr);
-	I_ATTR(std::string, m_samplingParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_addressParamIdAttrPtr);
+	I_ATTR(QByteArray, m_samplingParamsIdAttrPtr);
 
 	typedef QMap<int, CMeContext*> TasksList;
 	TasksList m_activeTaskList;

@@ -1,9 +1,6 @@
 #include "isgige/CGenicamCameraComp.h"
 
 
-// STL includes
-#include <cstring>
-
 // Qt includes
 #include <QtNetwork/QHostAddress>
 
@@ -234,9 +231,9 @@ QString CGenicamCameraComp::GetOptionDescription(int /*index*/) const
 }
 
 
-std::string CGenicamCameraComp::GetOptionId(int /*index*/) const
+QByteArray CGenicamCameraComp::GetOptionId(int /*index*/) const
 {
-	return std::string();
+	return QByteArray();
 }
 
 

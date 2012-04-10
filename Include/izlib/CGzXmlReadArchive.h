@@ -37,8 +37,8 @@ public:
 
 	// reimplemented (iser::CXmlReadArchiveBase)
 	virtual bool ReadToDelimeter(
-				const std::string& delimeters,
-				std::string& result,
+				const QByteArray& delimeters,
+				QByteArray& result,
 				bool skipDelimeter = true,
 				char* foundDelimeterPtr = NULL);
 

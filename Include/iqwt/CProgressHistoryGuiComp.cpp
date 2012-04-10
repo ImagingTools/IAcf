@@ -1,9 +1,6 @@
 #include "iqwt/CProgressHistoryGuiComp.h"
 
 
-// STL includes
-#include <functional>
-
 // Qt includes
 #include <QtCore/QCoreApplication>
 
@@ -26,11 +23,11 @@ CProgressHistoryGuiComp::CProgressHistoryGuiComp()
 // reimplemented (iproc::IProgressManager)
 
 int CProgressHistoryGuiComp::BeginProgressSession(
-			const std::string& progressId,
+			const QByteArray& progressId,
 			const QString& description,
 			bool isCancelable)
 {
-	if (m_idToSessionMap.empty()){
+	if (m_idToSessionMap.isEmpty()){
 		m_currentId = 0;
 	}
 
@@ -52,7 +49,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
 
-	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId.c_str())) % (Qt::transparent - Qt::red));
+	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId)) % (Qt::transparent - Qt::red));
 
 	int colorsCount = qMin(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
 	for (int i = 0; i < colorsCount; ++i){

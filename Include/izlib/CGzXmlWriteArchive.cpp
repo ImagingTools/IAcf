@@ -13,7 +13,7 @@ CGzXmlWriteArchive::CGzXmlWriteArchive(
 :	BaseClass(versionInfoPtr, rootTag),
 	BaseClass2(filePath)
 {
-	m_file = gzopen(filePath.toStdString().c_str(), "wb");
+	m_file = gzopen(filePath.toLocal8Bit(), "wb");
 
 	SerializeXmlHeader();
 
@@ -37,10 +37,10 @@ CGzXmlWriteArchive::~CGzXmlWriteArchive()
 
 // reimplemented (iser::CXmlWriteArchiveBase)
 
-bool CGzXmlWriteArchive::WriteString(const std::string& value)
+bool CGzXmlWriteArchive::WriteString(const QByteArray& value)
 {
-	if (!value.empty()){
-		return (m_file != NULL) && gzwrite(m_file, value.c_str(), int(value.size())) != 0;
+	if (!value.isEmpty()){
+		return (m_file != NULL) && gzwrite(m_file, value, int(value.size())) != 0;
 	}
 	else{
 		return true;

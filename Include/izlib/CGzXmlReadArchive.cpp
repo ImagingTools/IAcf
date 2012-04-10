@@ -10,7 +10,7 @@ CGzXmlReadArchive::CGzXmlReadArchive(const QString& filePath, bool serializeHead
 	BaseClass2(filePath),
 	m_useLastReadChar(false)
 {
-	m_file = gzopen(filePath.toStdString().c_str(), "rb");
+	m_file = gzopen(filePath.toLocal8Bit(), "rb");
 
 	SerializeXmlHeader();
 
@@ -31,8 +31,8 @@ CGzXmlReadArchive::~CGzXmlReadArchive()
 // reimplemented (iser::CXmlReadArchiveBase)
 
 bool CGzXmlReadArchive::ReadToDelimeter(
-			const std::string& delimeters,
-			std::string& result,
+			const QByteArray& delimeters,
+			QByteArray& result,
 			bool skipDelimeter,
 			char* foundDelimeterPtr)
 {
@@ -43,15 +43,15 @@ bool CGzXmlReadArchive::ReadToDelimeter(
 	int cutFromPos = -2;
 	int cutToPos = -2;
 
-	std::string readString;
+	QByteArray readString;
 
 	if (!m_useLastReadChar){
 		m_lastReadChar = gzgetc(m_file);
 	}
 
 	while (m_lastReadChar >= 0){
-		std::string::size_type foundPosition = delimeters.find(char(m_lastReadChar));
-		if (foundPosition != std::string::npos){
+		int foundPosition = delimeters.indexOf(char(m_lastReadChar));
+		if (foundPosition >= 0){
 			m_useLastReadChar = !skipDelimeter;
 
 			if (cutFromPos < 0){
@@ -68,7 +68,7 @@ bool CGzXmlReadArchive::ReadToDelimeter(
 				cutToPos = int(readString.size());
 			}
 
-			result = readString.substr(cutFromPos, cutToPos - cutFromPos);
+			result = readString.mid(cutFromPos, cutToPos - cutFromPos);
 
 			if (foundDelimeterPtr != NULL){
 				*foundDelimeterPtr = delimeters.at(foundPosition);

@@ -36,7 +36,7 @@
 							KnownVersionNames
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;QString&gt;
+							String[]
 						</Type>
 						<ExportId>
 
@@ -78,7 +78,7 @@
 							KnownVersions
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;int&gt;
+							Integer[]
 						</Type>
 						<ExportId>
 
@@ -120,7 +120,7 @@
 							SlaveVersionInfo
 						</Id>
 						<Type>
-							icomp::CReferenceAttribute
+							Component
 						</Type>
 						<ExportId>
 							SlaveVersionInfo
@@ -136,7 +136,7 @@
 							VersionId
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 
@@ -155,7 +155,7 @@
 							VersionIdDesc
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;QString&gt;
+							String
 						</Type>
 						<ExportId>
 
@@ -174,7 +174,7 @@
 							VersionNumber
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 
@@ -193,7 +193,7 @@
 							IsExtensionUsed
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;bool&gt;
+							Boolean
 						</Type>
 						<ExportId>
 
@@ -230,7 +230,7 @@
 							IsExtensionUsed
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;bool&gt;
+							Boolean
 						</Type>
 						<ExportId>
 							IsExtensionUsed
@@ -246,7 +246,7 @@
 							KnownVersionNames
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;QString&gt;
+							String[]
 						</Type>
 						<ExportId>
 							KnownVersionNames
@@ -262,7 +262,7 @@
 							KnownVersions
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;int&gt;
+							Integer[]
 						</Type>
 						<ExportId>
 							KnownVersions
@@ -278,7 +278,7 @@
 							SlaveVersionInfo
 						</Id>
 						<Type>
-							icomp::CReferenceAttribute
+							Component
 						</Type>
 						<ExportId>
 
@@ -297,7 +297,7 @@
 							VersionId
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 							VersionId
@@ -313,7 +313,7 @@
 							VersionIdDesc
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;QString&gt;
+							String
 						</Type>
 						<ExportId>
 							VersionIdDesc
@@ -329,7 +329,7 @@
 							VersionNumber
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 							VersionNumber

@@ -65,7 +65,7 @@ private:
 
 	CMeAddr m_address;
 	int m_bufferCount;
-	std::vector<int> m_hwBuffer;
+	QVector<int> m_hwBuffer;
 	bool m_isOutput;
 	double m_interval;
 

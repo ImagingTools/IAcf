@@ -68,7 +68,7 @@ bool COcvVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPlay)
 	if (m_mediumUrl != url){
 		EnsureMediumClosed();
 
-		m_capturePtr.SetPtr(cvCreateFileCapture(url.toStdString().c_str()));
+		m_capturePtr.SetPtr(cvCreateFileCapture(url.toLocal8Bit()));
 		if (!m_capturePtr.IsValid()){
 			return false;
 		}
