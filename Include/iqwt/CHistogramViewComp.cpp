@@ -75,7 +75,7 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 			QwtPlotCurve* curvePtr = m_channelCurves.GetAt(channelIndex);
 			I_ASSERT(curvePtr != NULL);
 
-			maxValue = ::ceil(maxValue * 100) / 100.0;
+			maxValue = qCeil(maxValue * 100) / 100.0;
 
 			curvePtr->setSamples(xData, yData);
 
