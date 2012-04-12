@@ -12,10 +12,12 @@ CGzXmlReadArchive::CGzXmlReadArchive(const QString& filePath, bool serializeHead
 {
 	m_file = gzopen(filePath.toLocal8Bit(), "rb");
 
-	SerializeXmlHeader();
-
-	if (serializeHeader){
-		SerializeAcfHeader();
+	if (m_file != NULL){
+		ReadXmlHeader();
+	
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
 }
 
@@ -23,6 +25,8 @@ CGzXmlReadArchive::CGzXmlReadArchive(const QString& filePath, bool serializeHead
 CGzXmlReadArchive::~CGzXmlReadArchive()
 {
 	if (m_file != NULL){
+		ReadXmlFooter();
+
 		gzclose(m_file);
 	}
 }

@@ -15,19 +15,21 @@ CGzXmlWriteArchive::CGzXmlWriteArchive(
 {
 	m_file = gzopen(filePath.toLocal8Bit(), "wb");
 
-	SerializeXmlHeader();
-
-	if (serializeHeader){
-		SerializeAcfHeader();
+	if (m_file != NULL){
+		WriteXmlHeader();
+	
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
 }
 
 
 CGzXmlWriteArchive::~CGzXmlWriteArchive()
 {
-	Flush();
-
 	if (m_file != NULL){
+		WriteXmlFooter();
+
 		gzclose(m_file);
 	}
 }
