@@ -7,18 +7,16 @@
 #include "cv.h"
 #include "highgui.h"
 
-
 // ACF includes
 #include "i2d/CRectangle.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorWrap.h"
-#include "iproc/IBitmapAcquisition.h"
 
-// IACF includes
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
-
 #include "isig/ITriggerParams.h"
 #include "isig/ITriggerConstraints.h"
 
@@ -33,13 +31,13 @@ namespace iocv
 class COcvAcquisitionComp:
 			public ibase::CLoggerComponentBase,
 			virtual public isig::ITriggerConstraints,
-			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 	I_END_COMPONENT;
 
@@ -51,14 +49,14 @@ public:
 
 	bool IsCameraValid() const;
 
-	// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
+	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (isig::ITriggerConstraints)

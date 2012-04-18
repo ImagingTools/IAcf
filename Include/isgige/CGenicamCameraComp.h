@@ -16,16 +16,16 @@
 #include "iprm/ISelectionParam.h"
 #include "iprm/IFileNameParam.h"
 #include "iprm/ILinearAdjustParams.h"
-#include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorWrap.h"
 
-// IACF includes
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
-
 #include "isig/ITriggerParams.h"
 #include "isig/ITriggerConstraints.h"
 
+// IACF includes
 #include "isgige/CGenicamCameraSingleton.h"
 
 
@@ -63,7 +63,7 @@ protected:
 class CGenicamCameraComp:
 			public QObject,
 			public CGenicamCameraCompBase,
-			public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>,
+			public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>,
 			virtual public icam::IExposureConstraints,
 			virtual public isig::ITriggerConstraints,
 			virtual public iprm::ISelectionConstraints
@@ -74,7 +74,7 @@ public:
 	typedef CGenicamCameraCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CGenicamCameraComp);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
 		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
@@ -104,7 +104,7 @@ public:
 	CGenicamCameraComp();
 	virtual ~CGenicamCameraComp();
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)

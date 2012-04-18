@@ -27,7 +27,7 @@ bool COcvAcquisitionComp::IsCameraValid() const
 }
 
 
-// reimplemented (iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>)
+// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 
 int COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /* paramsPtr*/,
@@ -57,7 +57,7 @@ int COcvAcquisitionComp::DoProcessing(
 }
 
 
-// reimplemented (iproc::IBitmapAcquisition)
+// reimplemented (icam::IBitmapAcquisition)
 
 istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {

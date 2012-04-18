@@ -7,12 +7,13 @@
 #include "cv.h"
 #include "highgui.h"
 
-
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "icomp/CComponentBase.h"
-#include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorCompBase.h"
+
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 #include "imm/IVideoController.h"
 
 
@@ -24,11 +25,11 @@ namespace iocv
 	Component for video controlling using OpenCV API.
 */
 class COcvVideoControllerComp:
-			public iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition>,
+			public iproc::TSyncProcessorCompBase<icam::IBitmapAcquisition>,
 			virtual public imm::IVideoController
 {
 public:
-	typedef iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition> BaseClass;
+	typedef iproc::TSyncProcessorCompBase<icam::IBitmapAcquisition> BaseClass;
 
 	I_BEGIN_COMPONENT(COcvVideoControllerComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
@@ -40,7 +41,7 @@ public:
 
 	COcvVideoControllerComp();
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)

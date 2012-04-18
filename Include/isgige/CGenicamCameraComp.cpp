@@ -34,7 +34,7 @@ CGenicamCameraComp::~CGenicamCameraComp()
 }
 
 
-// reimplemented (iproc::IBitmapAcquisition)
+// reimplemented (icam::IBitmapAcquisition)
 
 istd::CIndex2d CGenicamCameraComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
 {
@@ -589,18 +589,18 @@ void CGenicamCameraComp::OnComponentDestroyed()
 
 void CGenicamCameraComp::OnCameraEventLog(int type, QString message)
 {
-	istd::IInformation::InformationCategory category = istd::IInformation::IC_CRITICAL;
+	istd::IInformationProvider::InformationCategory category = istd::IInformationProvider::IC_CRITICAL;
 	switch (type){
 	case gige_EM_TYPE_INFO:
-		category = istd::IInformation::IC_INFO;
+		category = istd::IInformationProvider::IC_INFO;
 		break;
 
 	case gige_EM_TYPE_WARNING:
-		category = istd::IInformation::IC_WARNING;
+		category = istd::IInformationProvider::IC_WARNING;
 		break;
 
 	case gige_EM_TYPE_ERROR:
-		category = istd::IInformation::IC_ERROR;
+		category = istd::IInformationProvider::IC_ERROR;
 		break;
 	}
 

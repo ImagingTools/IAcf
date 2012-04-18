@@ -37,12 +37,10 @@ extern "C"{
 
 // ACF includes
 #include "ibase/TLoggerCompWrap.h"
-#include "iproc/IBitmapAcquisition.h"
-
 
 // ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 #include "imm/IVideoController.h"
-
 #include "imeas/IDataSequence.h"
 #include "imeas/ISampleAcquisition.h"
 
@@ -52,11 +50,11 @@ namespace ilibav
 
 
 /**
-	Implementation of imm::IVideoController and iproc::IBitmapAcquisition interfaces using LibAv library.
+	Implementation of imm::IVideoController and icam::IBitmapAcquisition interfaces using LibAv library.
 */
 class CLibAvVideoDecoderComp:
 			public ibase::CLoggerComponentBase,
-			virtual public iproc::IBitmapAcquisition,
+			virtual public icam::IBitmapAcquisition,
 			virtual public imeas::ISampleAcquisition,
 			virtual public imm::IVideoController
 {
@@ -71,7 +69,7 @@ public:
 
 	I_BEGIN_COMPONENT(CLibAvVideoDecoderComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(imeas::ISampleAcquisition);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
@@ -87,7 +85,7 @@ public:
 	CLibAvVideoDecoderComp();
 	virtual ~CLibAvVideoDecoderComp();
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (imeas::ISampleAcquisition)
