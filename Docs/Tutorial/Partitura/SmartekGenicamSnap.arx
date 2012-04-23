@@ -149,7 +149,7 @@
               ParametersId
             </Id>
             <Type>
-              String[]
+              Id[]
             </Type>
             <ExportId>
               
@@ -212,7 +212,7 @@
               Ids
             </Id>
             <Type>
-              String[]
+              Id[]
             </Type>
             <ExportId>
               
