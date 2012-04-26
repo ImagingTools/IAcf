@@ -15,10 +15,10 @@
 #include "iprm/ISelectionConstraints.h"
 #include "iprm/ISelectionParam.h"
 #include "iprm/IFileNameParam.h"
-#include "iprm/ILinearAdjustParams.h"
 #include "iproc/TSyncProcessorWrap.h"
 
 // ACF-Solutions includes
+#include "imeas/ILinearAdjustParams.h"
 #include "icam/IBitmapAcquisition.h"
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
@@ -52,7 +52,7 @@ protected:
 	I_REF(iprm::ISelectionParam, m_defaultSelectionParamCompPtr);
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
 	I_REF(isig::ITriggerParams, m_defaultTriggerParamsCompPtr);
-	I_REF(iprm::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
+	I_REF(imeas::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 	I_REF(i2d::CRectangle, m_defaultRoiParamCompPtr);
 };
 
@@ -161,7 +161,7 @@ protected:
 	DeviceInfo* GetDeviceByParams(const iprm::IParamsSet* paramsPtr) const;
 
 	int GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr) const;
-	const iprm::ILinearAdjustParams* GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const;
+	const imeas::ILinearAdjustParams* GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const;
 	const i2d::CRectangle* GetRoiFromParams(const iprm::IParamsSet* paramsPtr) const;
 	const icam::IExposureParams* GetEposureTimeFromParams(const iprm::IParamsSet* paramsPtr) const;
 

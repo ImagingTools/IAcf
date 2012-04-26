@@ -320,10 +320,10 @@ int CGenicamCameraComp::GetTriggerModeByParams(const iprm::IParamsSet* paramsPtr
 }
 
 
-const iprm::ILinearAdjustParams* CGenicamCameraComp::GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const
+const imeas::ILinearAdjustParams* CGenicamCameraComp::GetAdjustFromParams(const iprm::IParamsSet* paramsPtr) const
 {
 	if (m_adjustParamsIdAttrPtr.IsValid()){
-		const iprm::ILinearAdjustParams* adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
+		const imeas::ILinearAdjustParams* adjustParamsPtr = dynamic_cast<const imeas::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
 		if (adjustParamsPtr != NULL){
 			return adjustParamsPtr;
 		}
@@ -399,7 +399,7 @@ bool CGenicamCameraComp::SynchronizeCameraParams(const iprm::IParamsSet* paramsP
 
 	const i2d::CRectangle* roiParamsPtr = GetRoiFromParams(paramsPtr);
 	const icam::IExposureParams* exposureParamsPtr = GetEposureTimeFromParams(paramsPtr);
-	const iprm::ILinearAdjustParams* adjustParamsPtr = GetAdjustFromParams(paramsPtr);
+	const imeas::ILinearAdjustParams* adjustParamsPtr = GetAdjustFromParams(paramsPtr);
 	int triggerMode = GetTriggerModeByParams(paramsPtr);
 
 	bool needLock = false;
