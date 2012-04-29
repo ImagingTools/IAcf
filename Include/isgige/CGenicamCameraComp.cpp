@@ -119,7 +119,7 @@ int CGenicamCameraComp::DoProcessing(
 			double timeDiff = imageTimestamp.GetTimeTo(*triggerTimerPtr) - *m_triggerDifferenceAttrPtr;
 
 			if (timeDiff < -*m_triggerToleranceAttrPtr){	// image older than trigger
-				SendWarningMessage(MI_DEVICE_INTERN, tr("Camera %1: image dropped becouse of time difference %2 ms").arg(deviceInfoPtr->cameraId).arg(timeDiff * 1000));
+				SendWarningMessage(MI_DEVICE_INTERN, tr("Camera %1: image dropped because of time difference %2 ms").arg(deviceInfoPtr->cameraId).arg(timeDiff * 1000));
 				deviceInfoPtr->devicePtr->PopImage(imageInfoPtr);	
 				continue;	// this frame was skipped, we have to get next one
 			}
@@ -195,7 +195,10 @@ istd::CRange CGenicamCameraComp::GetEenDelayRange() const
 
 bool CGenicamCameraComp::IsTriggerModeSupported(int triggerMode) const
 {
-	return (triggerMode >= isig::ITriggerParams::TM_CONTINUOUS) && (triggerMode <= isig::ITriggerParams::TM_FALLING_EDGE);
+	return 
+			(triggerMode == isig::ITriggerParams::TM_SOFTWARE) || 
+			(triggerMode >= isig::ITriggerParams::TM_CONTINUOUS) && 
+			(triggerMode <= isig::ITriggerParams::TM_FALLING_EDGE);
 }
 
 
@@ -566,7 +569,12 @@ void CGenicamCameraComp::OnComponentCreated()
 
 		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
 
-		devicePtr->SetImageBufferFrameCount(10);
+		if (m_imageBufferSizeAttrPtr.IsValid()){
+			devicePtr->SetImageBufferFrameCount(qMax(1, *m_imageBufferSizeAttrPtr));
+		}
+		else{
+			devicePtr->SetImageBufferFrameCount(1);
+		}
 
 		if (*m_connectOnStartAttrPtr){
 			deviceInfoPtr->EnsureConnected();

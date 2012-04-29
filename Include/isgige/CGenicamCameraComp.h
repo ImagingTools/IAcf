@@ -89,6 +89,7 @@ public:
 		I_ASSIGN(m_triggerDifferenceAttrPtr, "TriggerDifference", "Time difference between trigger signal and image time stamp used for synchronized trigger (in seconds)", true, 0.01);
 		I_ASSIGN(m_triggerToleranceAttrPtr, "TriggerTolerance", "Tolerance of trigger time difference used for synchronized trigger (in seconds)", true, 0.02);
 		I_ASSIGN(m_connectOnStartAttrPtr, "ConnectOnStart", "If true connection on start will be done, if false only connection on demand is done", true, true);
+		I_ASSIGN(m_imageBufferSizeAttrPtr, "BufferSize", "Size of the image buffer", false, 1);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -187,6 +188,7 @@ private:
 	I_ATTR(double, m_triggerToleranceAttrPtr);
 	I_ATTR(double, m_triggerDifferenceAttrPtr);
 	I_ATTR(bool, m_connectOnStartAttrPtr);
+	I_ATTR(int, m_imageBufferSizeAttrPtr);
 
 	typedef istd::TPointerVector<DeviceInfo> DeviceInfos;
 	DeviceInfos m_deviceInfos;
