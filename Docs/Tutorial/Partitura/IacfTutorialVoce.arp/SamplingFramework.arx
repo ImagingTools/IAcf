@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2317
         </Number>
         <Description>
           ACF
@@ -457,7 +457,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -474,25 +474,6 @@
               </IsEnabled>
               <Value>
                 StandaloneApp
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CopyrightText
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                &#169; 2010 Imagingtools&#10;&#10;All rights reseved
               </Value>
             </Data>
           </AttributeInfo>
@@ -691,7 +672,7 @@
                 true
               </IsEnabled>
               <Value>
-                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
+                &#169; Copyright 2012 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -920,21 +901,13 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         StandaloneApp
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IApplicationInfo
-      </InterfaceId>
-      <ComponentId>
-        VersionInfo
       </ComponentId>
     </Interface>
     <Interface>

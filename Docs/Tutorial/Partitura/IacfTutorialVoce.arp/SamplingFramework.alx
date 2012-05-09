@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2317
         </Number>
         <Description>
           ACF
@@ -18,36 +18,17 @@
   <PositionMap count="11">
     <Element>
       <ComponentName>
-        AboutDialog
+        XmlSerializer
       </ComponentName>
       <X>
-        125
+        1050
       </X>
       <X>
-        75
+        450
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DataSequenceView
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        600
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GeneralDataSequence
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        600
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,17 +40,9 @@
       <X>
         725
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessorControlDock
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        325
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -81,6 +54,23 @@
       <X>
         450
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        AboutDialog
+      </ComponentName>
+      <X>
+        125
+      </X>
+      <X>
+        75
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -92,17 +82,9 @@
       <X>
         375
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SplashScreen
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        75
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -114,6 +96,65 @@
       <X>
         225
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DataSequenceView
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        GeneralDataSequence
+      </ComponentName>
+      <X>
+        500
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProcessorControlDock
+      </ComponentName>
+      <X>
+        500
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SplashScreen
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        75
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -125,17 +166,9 @@
       <X>
         225
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlSerializer
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        450
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>
