@@ -558,16 +558,28 @@ void CGenicamCameraComp::OnComponentCreated()
 	gige::DevicesList devicesList = s_cameraSigleton.gigeApi->GetAllDevices();
 
 	int devicesCount = int(devicesList.size());
+
+	QMap<QString, int> sortedDeviceList;
 	for (int i = 0; i < devicesCount; ++i){
 		gige::IDevice& devicePtr = devicesList[i];
-		istd::TDelPtr<DeviceInfo> deviceInfoPtr(new DeviceInfo(this));
 
 		QHostAddress address(devicePtr->GetIpAddress());
+		sortedDeviceList[address.toString()] = i;
+	}
+
+	for (		QMap<QString, int>::ConstIterator iter = sortedDeviceList.begin();
+				iter != sortedDeviceList.begin();
+				++iter){
+		int deviceIndex = iter.value();
+		QString deviceAddress = iter.key();
+
+		gige::IDevice& devicePtr = devicesList[deviceIndex];
+		istd::TDelPtr<DeviceInfo> deviceInfoPtr(new DeviceInfo(this));
 
 		deviceInfoPtr->devicePtr = devicePtr;
-		deviceInfoPtr->cameraId = address.toString();
+		deviceInfoPtr->cameraId = deviceAddress;
 
-		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = i;
+		m_ipAddressToIndexMap[devicePtr->GetIpAddress()] = deviceIndex;
 
 		if (m_imageBufferSizeAttrPtr.IsValid()){
 			devicePtr->SetImageBufferFrameCount(qMax(1, *m_imageBufferSizeAttrPtr));
