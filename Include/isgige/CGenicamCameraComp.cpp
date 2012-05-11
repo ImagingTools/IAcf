@@ -568,7 +568,7 @@ void CGenicamCameraComp::OnComponentCreated()
 	}
 
 	for (		QMap<QString, int>::ConstIterator iter = sortedDeviceList.begin();
-				iter != sortedDeviceList.begin();
+				iter != sortedDeviceList.end();
 				++iter){
 		int deviceIndex = iter.value();
 		QString deviceAddress = iter.key();
