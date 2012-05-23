@@ -1,7 +1,11 @@
 #include "CChannelSelectionNode.h"
 
 
+// Qt includes
 #include <QtCore/QString>
+
+// ACF includes
+#include "istd/TChangeNotifier.h"
 
 
 namespace imebase
@@ -125,8 +129,10 @@ QByteArray CChannelSelectionNode::GetOptionId(int /*index*/) const
 
 bool CChannelSelectionNode::Serialize(iser::IArchive& archive)
 {
-	iser::CArchiveTag addressTag("Address", "Address of complete Meilhaus channel");
-	iser::CArchiveTag selectionTag("Selection", "Selected index of single Meilhaus channel node");
+	static iser::CArchiveTag addressTag("Address", "Address of complete Meilhaus channel");
+	static iser::CArchiveTag selectionTag("Selection", "Selected index of single Meilhaus channel node");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 
 	bool retVal = true;
 
