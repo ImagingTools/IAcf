@@ -89,7 +89,7 @@ public:
 		I_ASSIGN(m_triggerDifferenceAttrPtr, "TriggerDifference", "Time difference between trigger signal and image time stamp used for synchronized trigger (in seconds)", true, 0.01);
 		I_ASSIGN(m_triggerToleranceAttrPtr, "TriggerTolerance", "Tolerance of trigger time difference used for synchronized trigger (in seconds)", true, 0.02);
 		I_ASSIGN(m_connectOnStartAttrPtr, "ConnectOnStart", "If true connection on start will be done, if false only connection on demand is done", true, true);
-		I_ASSIGN(m_imageBufferSizeAttrPtr, "BufferSize", "Size of the image buffer", false, 1);
+		I_ASSIGN(m_imageBufferSizeAttrPtr, "BufferSize", "Size of the image buffer, if not set, no buffered mode will be used", false, 1);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -157,6 +157,8 @@ protected:
 	private:
 		CGenicamCameraComp& m_parent;
 	};
+
+	gige::INode GetWriteableNode(DeviceInfo& deviceInfo, const std::string& nodeName);
 
 	DeviceInfo* GetDeviceByUrl(const QString& urlString) const;
 	DeviceInfo* GetDeviceByParams(const iprm::IParamsSet* paramsPtr) const;
