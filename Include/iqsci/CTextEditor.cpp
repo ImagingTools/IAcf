@@ -52,8 +52,8 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 	m_rootCommand.InsertChild(&m_viewCommand, false);
 	m_rootCommand.InsertChild(&m_languageCommand, false);
 	
-	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
-	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
+	connect(&m_lowercaseCommand, SIGNAL(triggered()), this, SLOT(OnToLowercase()));
+	connect(&m_uppercaseCommand, SIGNAL(triggered()), this, SLOT(OnToUppercase()));
 	connect(m_scintilla, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
 	connect(m_scintilla, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
 	
