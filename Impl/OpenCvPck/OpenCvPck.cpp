@@ -15,12 +15,12 @@ I_EXPORT_PACKAGE(
 I_EXPORT_COMPONENT(
 			OpenCvAcquisition,
 			"Implementation of camera interface using OpenCV API",
-			"OpenCV Camera Acquisition Bitmap Image");
+			"OpenCV Camera Acquisition Bitmap Image" IM_TAG("Camera"));
 
 I_EXPORT_COMPONENT(
 			OpenCvVideoController,
 			"OpenCV-based video controller",
-			"OpenCV Video Multimedia Controller");
+			"OpenCV Video Multimedia Controller" IM_TAG("Multimedia"));
 
 
 } // namespace OpenCvPck

@@ -11,7 +11,7 @@ namespace ZlibPck
 I_EXPORT_PACKAGE(
 			"Iacf/Zlib",
 			"Package based on compression library ZLIB",
-			"ZLIB Compression File Archive Load Save" IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"ZLIB Compression File Archive Load Save" IM_PROJECT("IACF") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			GzXmlFileSerializer,

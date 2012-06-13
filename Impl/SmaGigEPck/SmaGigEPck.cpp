@@ -10,7 +10,7 @@ namespace SmaGigEPck
 I_EXPORT_PACKAGE(
 			"Iacf/Camera/GigE/Smartek",
 			"GigE Vision camera package based on Smartek SDK",
-			"GigE Vision Qt Standard" IM_PROJECT("IACF") IM_TAG("Qt \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\""));
+			"GigE Vision Qt Standard" IM_PROJECT("IACF") IM_TAG("Camera \"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\""));
 
 
 I_EXPORT_COMPONENT(
