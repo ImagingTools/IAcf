@@ -8,6 +8,7 @@
 #include "istd/TDelPtr.h"
 #include "istd/TChangeNotifier.h"
 #include "iprm/IParamsSet.h"
+#include "iimg/IBitmap.h"
 #include "iqt/iqt.h"
 
 // ACF-Solutions include
