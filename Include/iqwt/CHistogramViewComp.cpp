@@ -97,7 +97,7 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 	}
 
 	if (IsGuiCreated()){
-		ChannelCombo->setVisible(channelsCount > 1);
+		ChannelSelectorFrame->setVisible(channelsCount > 1);
 	}
 }
 

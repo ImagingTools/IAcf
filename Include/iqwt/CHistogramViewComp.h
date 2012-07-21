@@ -28,16 +28,15 @@ namespace iqwt
 /**
 	Component for visualization iof histogram data.
 */
-class CHistogramViewComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CHistogramViewComp,
-			imeas::IDataSequence>
+class CHistogramViewComp:
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CHistogramViewComp, imeas::IDataSequence>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CHistogramViewComp,
-				imeas::IDataSequence> BaseClass;
+				Ui::CHistogramViewComp, imeas::IDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CHistogramViewComp);
 		I_ASSIGN(m_dataStatisticsGuiCompPtr, "StatisticsGui", "GUI for the data statistics", false, "StatisticsGui");
