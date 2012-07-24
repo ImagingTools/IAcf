@@ -360,6 +360,6 @@
 		Version information for modules based directly on IACF
 	</Description>
 	<Keywords>
-		Application Tag=Version Info Author='"Witold Gantzke"'
-	</Keywords>
+    Application Tag=Version Info Author='"Witold Gantzke"'
+  </Keywords>
 </Acf>
