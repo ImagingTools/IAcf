@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2317
+          2415
         </Number>
         <Description>
           ACF
@@ -49,7 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                StandaloneApp
+                StandaloneApp/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -473,7 +473,7 @@
                 true
               </IsEnabled>
               <Value>
-                StandaloneApp
+                StandaloneApp/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
