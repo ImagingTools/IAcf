@@ -1,6 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS += iocv
 SUBDIRS += iabc
 SUBDIRS += icbox
 SUBDIRS += ilibav
@@ -10,7 +9,6 @@ SUBDIRS += iqwt
 SUBDIRS += iqwt3d
 SUBDIRS += izlib
 
-iocv.file = ../../Include/iocv/QMake/iocv.pro
 iabc.file = ../../Include/iabc/QMake/iabc.pro
 icbox.file = ../../Include/icbox/QMake/icbox.pro
 ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
