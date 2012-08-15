@@ -137,6 +137,16 @@ QString CServiceApplicationComp::GetHelpText() const
 }
 
 
+QStringList CServiceApplicationComp::GetCommandLine() const
+{
+	if (m_applicationCompPtr.IsValid()){
+		return m_applicationCompPtr->GetCommandLine();
+	}
+
+	return QStringList();
+}
+
+
 // reimplemented (QObject)
 	
 bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
