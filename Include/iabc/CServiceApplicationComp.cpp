@@ -137,10 +137,10 @@ QString CServiceApplicationComp::GetHelpText() const
 }
 
 
-QStringList CServiceApplicationComp::GetCommandLine() const
+QStringList CServiceApplicationComp::GetApplicationArguments() const
 {
 	if (m_applicationCompPtr.IsValid()){
-		return m_applicationCompPtr->GetCommandLine();
+		return m_applicationCompPtr->GetApplicationArguments();
 	}
 
 	return QStringList();

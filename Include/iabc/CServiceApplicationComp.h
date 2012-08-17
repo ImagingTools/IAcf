@@ -49,7 +49,7 @@ public:
 	virtual bool InitializeApplication(int argc, char** argv);
 	virtual int Execute(int argc, char** argv);
 	virtual QString GetHelpText() const;
-	virtual QStringList GetCommandLine() const;
+	virtual QStringList GetApplicationArguments() const;
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
