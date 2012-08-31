@@ -155,6 +155,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSystem.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTimeStampCacheComp.cpp"
 				>
 			</File>
@@ -165,6 +169,10 @@
 			>
 			<File
 				RelativePath="..\CPerformanceTimeStamp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystem.h"
 				>
 			</File>
 			<File
