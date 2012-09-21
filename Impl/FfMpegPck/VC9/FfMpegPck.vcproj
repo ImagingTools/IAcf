@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\include&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 			/>
 			<Tool
@@ -52,8 +52,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCore4.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
+				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\include&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 			/>
 			<Tool
@@ -113,8 +113,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCored4.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
+				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib imeas.lib"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;..\..\..\3rdParty\FFMpeg\ffmpeg-16573\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
