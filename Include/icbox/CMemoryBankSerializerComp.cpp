@@ -69,7 +69,7 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
-		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
+		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
 		quint32 blockSize;
@@ -98,7 +98,7 @@ int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QStri
 int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_SAVE | QF_ANONYMOUS, false)){
-		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<istd::IChangeable*>(&data));
+		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(const_cast<istd::IChangeable*>(&data));
 		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
 		iser::CMemoryWriteArchive archive(m_versionInfoCompPtr.GetPtr());
