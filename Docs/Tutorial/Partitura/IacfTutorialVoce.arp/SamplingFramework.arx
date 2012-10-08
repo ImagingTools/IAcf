@@ -280,7 +280,7 @@
         ProcessorControlGui
       </Id>
       <PackageId>
-        QtGuiPck
+        ProcessingGuiPck
       </PackageId>
       <ComponentId>
         ProcessorControlGui
