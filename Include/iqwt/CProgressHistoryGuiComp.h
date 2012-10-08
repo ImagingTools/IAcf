@@ -9,7 +9,7 @@
 #include "qwt_plot_marker.h"
 
 // ACF includes
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "Generated/ui_CProgressHistoryGuiComp.h"
@@ -25,13 +25,13 @@ namespace iqwt
 */
 class CProgressHistoryGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp>,
-			public iproc::IProgressManager
+			public ibase::IProgressManager
 {
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CProgressHistoryGuiComp);
-		I_REGISTER_INTERFACE(iproc::IProgressManager);
+		I_REGISTER_INTERFACE(ibase::IProgressManager);
 		I_ASSIGN(m_historyStepsCountAttrPtr, "HistoryStepsCount", "Number of steps shown in this history", true, 100);
 		I_ASSIGN(m_showTaskDescriptionAttrPtr, "ShowTaskDescription", "If true, description of current task will be shown", true, true);
 		I_ASSIGN(m_showCancelAttrPtr, "ShowCancel", "If true, cancel button will be shown", true, true);
@@ -41,7 +41,7 @@ public:
 
 	CProgressHistoryGuiComp();
 
-	// reimplemented (iproc::IProgressManager)
+	// reimplemented (ibase::IProgressManager)
 	virtual int BeginProgressSession(
 				const QByteArray& progressId,
 				const QString& description,

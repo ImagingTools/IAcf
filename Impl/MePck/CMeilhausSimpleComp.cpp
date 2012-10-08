@@ -51,7 +51,7 @@ int CMeilhausSimpleComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	int taskId = BeginTask(paramsPtr, inputPtr, outputPtr);
 
@@ -67,7 +67,7 @@ int CMeilhausSimpleComp::BeginTask(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	const imeas::IDataSequence* inputContainerPtr = dynamic_cast<const imeas::IDataSequence*>(inputPtr);
 	imeas::IDataSequence* outputContainerPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);

@@ -33,7 +33,7 @@ int COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /* paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	if (m_cameraPtr == NULL){
 		return TS_INVALID;
