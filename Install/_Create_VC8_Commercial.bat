@@ -14,10 +14,13 @@ mkdir Temp
 mkdir TempExcl
 
 set COMPILER_EXT=VC8
+set LICENSE_TYPE=Commercial
 
 call Rebuild.bat
 
 call CopyDlls.bat
+
+call CreateScripts.bat
 
 call Create_TechnicalDoc.bat
 
