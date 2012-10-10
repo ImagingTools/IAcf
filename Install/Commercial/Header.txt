@@ -14,7 +14,7 @@
 **	If you are unsure which license is appropriate for your use, please
 **	contact us at info@imagingtools.de.
 **
-** 	See http://www.imagingtools.de or email info@imagingtools.de for further
+** 	See http://www.ilena.org or email info@imagingtools.de for further
 ** 	information about the IACF.
 **
 ********************************************************************************/
