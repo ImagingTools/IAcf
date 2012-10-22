@@ -67,7 +67,7 @@ private:
 		HistogramPlotPicker(CHistogramViewComp& parent, int xAxis, int yAxis, QwtPlotCanvas* canvasPtr);
 
 		// reimplemented (QwtPlotPicker)
-	    virtual QwtText trackerText(const QPoint& position) const;
+		virtual QwtText trackerText(const QPoint& position) const;
 
 	private:
 		CHistogramViewComp& m_parent;

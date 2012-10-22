@@ -80,10 +80,10 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 			curvePtr->setSamples(xData, yData);
 
 			m_plotPtr->setAxisScale(QwtPlot::xBottom, 0.0, samplesCount, 16); 
-		    m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, 4);
+			m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, 4);
 
 			m_plotPtr->setAxisScale(QwtPlot::yLeft, 0.0, maxValue, maxValue / 10); 
-		    m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
+			m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
 
 			if (channelIndex != ChannelCombo->currentIndex()){
 				curvePtr->setVisible(false);

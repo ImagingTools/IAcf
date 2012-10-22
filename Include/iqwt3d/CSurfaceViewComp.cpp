@@ -115,7 +115,7 @@ void CSurfaceViewComp::SetupLighting()
 	m_surfacePlotPtr->setMaterialComponent(GL_EMISSION, 0.1);
 	m_surfacePlotPtr->setMaterialComponent(GL_SPECULAR, 0.1);
 	m_surfacePlotPtr->setMaterialComponent(GL_AMBIENT_AND_DIFFUSE, 0.1);
-    m_surfacePlotPtr->setCoordinateStyle(Qwt3D::BOX);
+	m_surfacePlotPtr->setCoordinateStyle(Qwt3D::BOX);
 
 	m_surfacePlotPtr->setLightShift(200, 0, 0, 0);
 	m_surfacePlotPtr->setLightShift(0, 200, 0, 1);
@@ -277,7 +277,7 @@ void CSurfaceViewComp::OnMeshEnabled(bool isMeshEnabled)
 	}
 
 	m_surfacePlotPtr->updateData();
-    m_surfacePlotPtr->updateGL();
+	m_surfacePlotPtr->updateGL();
 }
 
 
