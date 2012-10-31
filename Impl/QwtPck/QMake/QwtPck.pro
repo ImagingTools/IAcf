@@ -6,7 +6,7 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 TARGET = QwtPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqwt -liqwt3d
-LIBS += -L$(QWTDIR)/Lib/$$COMPILER_DIR -lQwt.lib
+LIBS += -L$(QWTDIR_6_0_0)/Lib/$$COMPILER_DIR -lQwt.lib
 LIBS += -L$(QWT3DDIR)/Lib/$$COMPILER_DIR -lqwt3dlib.lib
 
 INCLUDEPATH += ../../../Include
