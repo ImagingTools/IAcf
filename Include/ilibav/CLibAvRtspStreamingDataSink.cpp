@@ -68,7 +68,10 @@ CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(CLibAvRtspStreamingClie
 		return;
      }	
 
-	m_inputBuffer = (uint8_t*)av_malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE + FF_INPUT_BUFFER_PADDING_SIZE);
+	m_inputBuffer = (uint8_t*)av_malloc(DATA_SINK_RECEIVE_BUFFER_SIZE);
+
+	m_spsUnitBufferSize = 0;
+	m_ppsUnitBufferSize = 0;
 
 	av_init_packet(&m_packet);
 
@@ -77,10 +80,7 @@ CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(CLibAvRtspStreamingClie
 }
 
 CLibAvRtspStreamingDataSink::~CLibAvRtspStreamingDataSink() 
-{
-	delete[] m_fReceiveBuffer;
-	delete[] m_fStreamId;
-	
+{	
 	//free buffer
 	av_free(m_inputBuffer);	
 	
@@ -108,8 +108,24 @@ void CLibAvRtspStreamingDataSink::afterGettingFrame(void* clientData, unsigned f
 
 void CLibAvRtspStreamingDataSink::afterGettingFrame(unsigned frameSize, unsigned /*numTruncatedBytes*/,
 				  struct timeval /*presentationTime*/, unsigned /*durationInMicroseconds*/) 
-{	
-	decodeFrame(frameSize);
+{
+	//check frame type
+	int nal_unit_type = m_fReceiveBuffer[0] & 0x1f; 
+
+	if(nal_unit_type == 7){
+		//SPS NAL Unit
+		memcpy(m_spsUnitBuffer, m_fReceiveBuffer, frameSize);
+		m_spsUnitBufferSize = frameSize;
+	}
+	else if(nal_unit_type == 8){
+		//PPS NAL Unit
+		memcpy(m_ppsUnitBuffer, m_fReceiveBuffer, frameSize);
+		m_ppsUnitBufferSize = frameSize;
+	}
+	else{
+		//video frame
+		decodeFrame(frameSize);
+	}	
 	
 	// Then continue, to request the next frame of data:
 	continuePlaying();
@@ -117,17 +133,49 @@ void CLibAvRtspStreamingDataSink::afterGettingFrame(unsigned frameSize, unsigned
 
 void CLibAvRtspStreamingDataSink::decodeFrame(unsigned frameSize)
 {
-	int got_frame = 0, len = 0;
+	int got_frame = 0;
+	int len = 0;
+	int bytes_copied = 0;
 
+	if(m_spsUnitBuffer != 0){
+		//Adding SPS Unit
+		//first add 4 bytes for unit header 0x00000001
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
+
+		memcpy(m_inputBuffer + bytes_copied, m_spsUnitBuffer, m_spsUnitBufferSize);		
+		bytes_copied += m_spsUnitBufferSize;
+
+		m_spsUnitBufferSize = 0;
+	}
+
+	if(m_ppsUnitBufferSize != 0){
+		//Adding PPS Unit
+		//first add 4 bytes for unit header 0x00000001
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+		m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
+
+		memcpy(m_inputBuffer + bytes_copied, m_ppsUnitBuffer, m_ppsUnitBufferSize);		
+		bytes_copied += m_ppsUnitBufferSize;
+
+		m_ppsUnitBufferSize = 0;
+	}
+
+	//Add video frame data
 	//first add 4 bytes for unit header 0x00000001
-	m_inputBuffer[0] = 0x00;
-	m_inputBuffer[1] = 0x00;
-	m_inputBuffer[2] = 0x00;
-	m_inputBuffer[3] = 0x01;
+	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
+	m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
 	
-	memcpy(m_inputBuffer + 4, m_fReceiveBuffer, frameSize);
+	memcpy(m_inputBuffer + bytes_copied, m_fReceiveBuffer, frameSize);
+	bytes_copied += frameSize;
 
-	m_packet.size = frameSize + 4;
+	m_packet.size = bytes_copied;
 	m_packet.data = m_inputBuffer;
 	
 	while (m_packet.size > 0) {

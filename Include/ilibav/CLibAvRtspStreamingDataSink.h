@@ -89,15 +89,19 @@ private:
 	AVFrame *m_pFrame;	
 	AVPacket m_packet;
 		
-	//buffer for decoding
-	uint8_t *m_inputBuffer;	
+	//buffers for decoding
+	uint8_t *m_inputBuffer;
+	uint8_t m_spsUnitBuffer[20];	
+	int m_spsUnitBufferSize;
+	uint8_t m_ppsUnitBuffer[20];
+	int m_ppsUnitBufferSize;
 
 	CLibAvRtspStreamingClient *m_streamClient;
 
 	QMutex mutex;
 
   //max buffer for incoming data
-  static const int DATA_SINK_RECEIVE_BUFFER_SIZE = 300000;
+  static const int DATA_SINK_RECEIVE_BUFFER_SIZE = 500000;
 };
 
 }
