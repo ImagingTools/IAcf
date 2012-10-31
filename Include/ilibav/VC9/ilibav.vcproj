@@ -31,25 +31,28 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
 				Name="Arxc"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
 				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -62,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_16573)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 			/>
 			<Tool
@@ -102,25 +105,28 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
 				Name="Arxc"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
 				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -133,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_16573)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				WarningLevel="4"
 			/>
@@ -179,6 +185,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLibAvRtspStreamingCameraComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CLibAvRtspStreamingClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CLibAvRtspStreamingDataSink.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLibAvVideoDecoderComp.cpp"
 				>
 			</File>
@@ -193,11 +211,47 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLibAvRtspStreamingCameraComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLibAvRtspStreamingClient.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLibAvRtspStreamingDataSink.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLibAvVideoDecoderComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\ilibav.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CLibAvRtspStreamingCameraComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CLibAvRtspStreamingClient.moc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			>
+			<File
+				RelativePath="..\Generated\moc_CLibAvRtspStreamingCameraComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\moc_CLibAvRtspStreamingClient.cpp"
 				>
 			</File>
 		</Filter>

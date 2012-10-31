@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_16573)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 			/>
 			<Tool
@@ -52,8 +52,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCore4.lib swscale.lib avdevice.lib avformat.lib avcodec.lib avutil.lib imeas.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;"
+				AdditionalDependencies="AcfStd.lib QtCore4.lib QtNetwork4.lib imeas.lib avdevice.lib avformat.lib avcodec.lib avutil.lib swscale.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;;&quot;$(LIVE555DIR_20121024)/lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_16573)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 			/>
 			<Tool
@@ -113,8 +113,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCored4.lib swscale.lib avdevice.lib avformat.lib avcodec.lib avutil.lib imeas.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;"
+				AdditionalDependencies="AcfStd.lib QtCored4.lib QtNetworkd4.lib swscale.lib avdevice.lib avformat.lib avcodec.lib avutil.lib imeas.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;;&quot;$(LIVE555DIR_20121024)/lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
