@@ -6,7 +6,8 @@
 #include "cxtypes.h"
 #include "cv.h"
 #include "highgui.h"
-
+#undef min
+#undef max
 
 // ACF includes
 #include "iimg/CBitmapBase.h"

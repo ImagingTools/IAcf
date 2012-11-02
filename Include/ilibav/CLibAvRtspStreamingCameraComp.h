@@ -1,12 +1,18 @@
 #ifndef ilibav_CLibAvRtspStreamingCameraComp_included
 #define ilibav_CLibAvRtspStreamingCameraComp_included
 
+
 // LIBAV includes
 extern "C"{
 #define inline _inline
 #define __STDC_CONSTANT_MACROS
 #include <libavformat/avformat.h>
 #undef inline
+#undef __STDC_CONSTANT_MACROS
+#undef PixelFormat
+#undef BYTES_PER_SAMPLE
+#undef BITS_PER_SAMPLE
+#undef WAVE_FORMAT_PCM
 }
 
 // Qt includes
