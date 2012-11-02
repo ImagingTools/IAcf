@@ -26,7 +26,7 @@ win32{
 	ZlibPck.file = ../../Impl/ZlibPck/QMake/ZlibPck.pro
 }
 
-osx{
+macx{
 	SUBDIRS += Dc1394Pck
 
 	Dc1394Pck.file = ../../Impl/Dc1394Pck/QMake/Dc1394Pck.pro

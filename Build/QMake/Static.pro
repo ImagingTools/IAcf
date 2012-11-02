@@ -20,7 +20,7 @@ win32{
 	izlib.file = ../../Include/izlib/QMake/izlib.pro
 }
 
-osx{
+macx{
 	SUBDIRS += idc1394
 
 	idc1394.file = ../../Include/idc1394/QMake/idc1394.pro
