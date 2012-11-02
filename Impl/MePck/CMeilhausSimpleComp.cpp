@@ -219,8 +219,8 @@ int CMeilhausSimpleComp::GetTaskState(int taskId) const
 	CMeContext* contextPtr = NULL;
 
 	if (taskId >= 0){
-		TasksList::const_iterator foundIter = m_activeTaskList.find(taskId);
-		if (foundIter != m_activeTaskList.end()){
+		TasksList::ConstIterator foundIter = m_activeTaskList.constFind(taskId);
+		if (foundIter != m_activeTaskList.constEnd()){
 			contextPtr = foundIter.value();
 		}
 	}

@@ -290,15 +290,15 @@ int CLibAvVideoDecoderComp::GetReadyTask()
 
 int CLibAvVideoDecoderComp::GetTaskState(int taskId) const
 {
-	ImageTaskMap::const_iterator imageIter = m_imageTasks.find(taskId);
-	if (imageIter != m_imageTasks.end()){
+	ImageTaskMap::ConstIterator imageIter = m_imageTasks.constFind(taskId);
+	if (imageIter != m_imageTasks.constEnd()){
 		const ImageTask& task = imageIter.value();
 
 		return task.state;
 	}
 
-	AudioTaskMap::const_iterator audioIter = m_audioTasks.find(taskId);
-	if (audioIter != m_audioTasks.end()){
+	AudioTaskMap::ConstIterator audioIter = m_audioTasks.constFind(taskId);
+	if (audioIter != m_audioTasks.constEnd()){
 		const AudioTask& task = audioIter.value();
 
 		return task.state;
