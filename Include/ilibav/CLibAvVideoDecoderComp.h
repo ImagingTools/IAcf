@@ -186,15 +186,14 @@ private:
 
 	AVFrame* m_framePtr;
 	AVFrame* m_frameRgbPtr;
-
-	uint8_t* m_audioInputBuffer;
+	
 	int16_t* m_audioOutputBuffer;
 	bool m_ignoreFirstAudioFrame;
 
 	QVector<quint8> m_imageBuffer;
 
 	AVPacket m_packet;
-	int m_bytesRemaining;
+	int m_rawDataSize;
 	uint8_t* m_rawDataPtr;
 
 	QString m_currentUrl;
