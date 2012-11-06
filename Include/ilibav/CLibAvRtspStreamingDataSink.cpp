@@ -81,6 +81,9 @@ CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(CLibAvRtspStreamingClie
 
 CLibAvRtspStreamingDataSink::~CLibAvRtspStreamingDataSink() 
 {	
+	delete[] m_fStreamId;
+	delete[] m_fReceiveBuffer;
+
 	//free buffer
 	av_free(m_inputBuffer);	
 	
