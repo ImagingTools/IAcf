@@ -1,28 +1,8 @@
-/********************************************************************************
-**
-**	Copyright (C) 2007-2011 Witold Gantzke & Kirill Lepskiy
-**
-**	This file is part of the IACF Toolkit.
-**
-**	This file may be used under the terms of the GNU Lesser
-**	General Public License version 2.1 as published by the Free Software
-**	Foundation and appearing in the file LicenseLGPL.txt included in the
-**	packaging of this file.  Please review the following information to
-**	ensure the GNU Lesser General Public License version 2.1 requirements
-**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-**	If you are unsure which license is appropriate for your use, please
-**	contact us at info@imagingtools.de.
-**
-** 	See http://www.ilena.org, write info@imagingtools.de or contact
-**	by Skype to ACF_infoline for further information about the IACF.
-**
-********************************************************************************/
-
 // Qt includes
 
 #include <QUrl>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -33,38 +13,36 @@
 namespace ilibav
 {
 
+
 // public methods
 
 CLibAvRtspStreamingCameraComp::CLibAvRtspStreamingCameraComp()
 {	
 }
 
-CLibAvRtspStreamingCameraComp::~CLibAvRtspStreamingCameraComp()
-{	
-}
 
 void CLibAvRtspStreamingCameraComp::frameArrived(AVFrame* frame, int width, int height, int pixelformat)
 {
-	mutex.lock();
+	QMutexLocker locker(&m_mutex);
 
-	frameSize = istd::CIndex2d(width, height);
+	m_lastImageSize = istd::CIndex2d(width, height);
 
 	istd::CChangeNotifier notifier(m_frameBitmapPtr);
 
-	CLibAvConverter::ConvertBitmap(*frame, frameSize, (AVPixelFormat)pixelformat, *m_frameBitmapPtr);
-
-	mutex.unlock();
+	CLibAvConverter::ConvertBitmap(*frame, m_lastImageSize, (AVPixelFormat)pixelformat, *m_frameBitmapPtr);
 }
+
 
 void CLibAvRtspStreamingCameraComp::requestReceived(QNetworkReply* /*networkReply*/)
 {	
 }
 
+
 // reimplemented (icam::IBitmapAcquisition)
 
 istd::CIndex2d CLibAvRtspStreamingCameraComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {	
-	return frameSize;
+	return m_lastImageSize;
 }
 
 // reimplemented (iproc::IProcessor)
@@ -77,79 +55,53 @@ int CLibAvRtspStreamingCameraComp::DoProcessing(
 {
 	m_frameBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 
-	if(m_frameBitmapPtr == NULL){
+	if (m_frameBitmapPtr == NULL){
 		return TS_OK;
 	}
 
-	if(!m_networkAccessManagerPtr.IsValid()){
+	if (!m_networkAccessManagerPtr.IsValid()){
 		m_networkAccessManagerPtr.SetPtr(new QNetworkAccessManager());
 
-		connect(m_networkAccessManagerPtr.GetPtr(), SIGNAL(finished(QNetworkReply*)),
-			this, SLOT(requestReceived(QNetworkReply*)));
+		connect(	m_networkAccessManagerPtr.GetPtr(),
+					SIGNAL(finished(QNetworkReply*)),
+					this,
+					SLOT(requestReceived(QNetworkReply*)));
 	}
 
 	ReadParams(paramsPtr);	
 
-	if(!m_streamingClientPtr.IsValid()){
+	if (!m_streamingClientPtr.IsValid()){
 		m_streamingClientPtr.SetPtr(new CLibAvRtspStreamingClient());		
 
-		connect(m_streamingClientPtr.GetPtr(), SIGNAL(frameReady(AVFrame*, int, int, int)),
-			this, SLOT(frameArrived(AVFrame*, int , int, int)), Qt::QueuedConnection);		
+		connect(	m_streamingClientPtr.GetPtr(),
+					SIGNAL(frameReady(AVFrame*, int, int, int)),
+					this,
+					SLOT(frameArrived(AVFrame*, int , int, int)),
+					Qt::QueuedConnection);
 
 	}
-
-	if(m_streamingClientPtr->isRunning()){		
-		//stop streaming thread
-		m_streamingClientPtr->CloseConnection();		
-		
-		//wait till thread ends
-		while(m_streamingClientPtr->isRunning()) ;
-	}
-
-	m_streamingClientPtr->OpenConnection(m_rtspUrl);
 
 	return TS_OK;	
 }
 
+
 // protected methods
 
 void CLibAvRtspStreamingCameraComp::ReadParams(const iprm::IParamsSet* paramsPtr)
-{	
+{
+	QUrl cameraUrl;
+
 	//read stream path
 	if (m_urlParamsIdAttrPtr.IsValid()){
 		const iprm::IFileNameParam* urlParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
 		if (urlParamPtr != NULL){
-			m_rtspUrl = urlParamPtr->GetPath();
+			cameraUrl.setUrl(urlParamPtr->GetPath());
 		}
 	}
-	
-	if(m_rtspUrl.isEmpty() && m_defaultUrlParamCompPtr.IsValid()){
-		m_rtspUrl = m_defaultUrlParamCompPtr->GetPath();
+
+	if (cameraUrl.isValid() && m_defaultUrlParamCompPtr.IsValid()){
+		cameraUrl = m_defaultUrlParamCompPtr->GetPath();
 	}
-	
-
-	//create http path from rtsp path
-	QString urlString = m_rtspUrl;
-	if(!m_rtspUrl.isEmpty()){		
-
-		int index_start = urlString.indexOf("rtsp://");
-
-		int index_end = -1;
-		if(index_start != -1){
-			urlString = urlString.right(urlString.count() - 7);
-			index_end = urlString.indexOf('/');
-		}
-
-		if(index_end != -1){
-			urlString = urlString.left(index_end);
-
-			int index_port = urlString.indexOf(':');
-			if(index_port != -1)
-				urlString = urlString.left(index_port);
-
-			urlString = "http://" + urlString;
-		}		
-	}	
 
 	//read adjust params
 	int brightness = 0;
@@ -168,16 +120,29 @@ void CLibAvRtspStreamingCameraComp::ReadParams(const iprm::IParamsSet* paramsPtr
 	}
 
 	//set brightness using http
-	if(!urlString.isEmpty() && isBrightnessSet){
-		urlString.append("/set?brightness=");
-		urlString.append(QString::number(brightness));
+	if (!cameraUrl.isValid() && isBrightnessSet){
+		//create http path from rtsp path
+		QUrl httpUrl(cameraUrl.host());
+		httpUrl.setScheme("http");
+		httpUrl.setPath("/set?brightness=" + QString::number(brightness));
 
-		QUrl url(urlString);		
-		QNetworkRequest request(url);	
+		QNetworkRequest request(httpUrl);	
 		
 		m_networkAccessManagerPtr->get(request);
-	}	
+	}
+
+	if (cameraUrl != m_currentCameraUrl){
+		if (m_streamingClientPtr->isRunning()){		
+			//stop streaming thread
+			m_streamingClientPtr->CloseConnection(true);		
+		}
+
+		if (m_streamingClientPtr->OpenConnection(cameraUrl)){
+			m_currentCameraUrl = cameraUrl;
+		}
+	}
 }
+
 
 // reimplemented (icomp::CComponentBase)
 
@@ -189,20 +154,21 @@ void CLibAvRtspStreamingCameraComp::OnComponentCreated()
 
 void CLibAvRtspStreamingCameraComp::OnComponentDestroyed()
 {
-	if(m_streamingClientPtr.IsValid()){
-		if(m_streamingClientPtr->isRunning()){			
+	if (m_streamingClientPtr.IsValid()){
+		if (m_streamingClientPtr->isRunning()){			
 			//stop streaming thread
-			m_streamingClientPtr->CloseConnection();
-
-			//wait till thread ends
-			while(m_streamingClientPtr->isRunning()) ;
+			m_streamingClientPtr->CloseConnection(true);
 		}
 
-		disconnect(m_streamingClientPtr.GetPtr(), SIGNAL(frameReady(AVFrame*, int, int, int)),
-			this, SLOT(frameArrived(AVFrame*, int , int, int)));
+		disconnect(	m_streamingClientPtr.GetPtr(),
+					SIGNAL(frameReady(AVFrame*, int, int, int)),
+					this,
+					SLOT(frameArrived(AVFrame*, int , int, int)));
 
-		disconnect(m_networkAccessManagerPtr.GetPtr(), SIGNAL(finished(QNetworkReply*)),
-			this, SLOT(requestReceived(QNetworkReply*)));
+		disconnect(	m_networkAccessManagerPtr.GetPtr(),
+					SIGNAL(finished(QNetworkReply*)),
+					this,
+					SLOT(requestReceived(QNetworkReply*)));
 	}
 
 	BaseClass::OnComponentDestroyed();

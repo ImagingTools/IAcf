@@ -1,74 +1,58 @@
-/********************************************************************************
-**
-**	Copyright (C) 2007-2011 Witold Gantzke & Kirill Lepskiy
-**
-**	This file is part of the IACF Toolkit.
-**
-**	This file may be used under the terms of the GNU Lesser
-**	General Public License version 2.1 as published by the Free Software
-**	Foundation and appearing in the file LicenseLGPL.txt included in the
-**	packaging of this file.  Please review the following information to
-**	ensure the GNU Lesser General Public License version 2.1 requirements
-**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-**	If you are unsure which license is appropriate for your use, please
-**	contact us at info@imagingtools.de.
-**
-** 	See http://www.ilena.org, write info@imagingtools.de or contact
-**	by Skype to ACF_infoline for further information about the IACF.
-**
-********************************************************************************/
+#include "ilibav/CLibAvRtspStreamingDataSink.h"
 
 
-#include "CLibAvRtspStreamingDataSink.h"
-#include "CLibAvConverter.h"
+#include "ilibav/CLibAvConverter.h"
+
 
 namespace ilibav
 {
-	
-CLibAvRtspStreamingDataSink* CLibAvRtspStreamingDataSink::createNew(CLibAvRtspStreamingClient *streamClient,
-																	UsageEnvironment& env, MediaSubsession& subsession,
-																	char const* streamId) 
+
+
+CLibAvRtspStreamingDataSink* CLibAvRtspStreamingDataSink::createNew(
+			CLibAvRtspStreamingClient *streamClient,
+			UsageEnvironment& env,
+			MediaSubsession& subsession) 
 {	
-  return new CLibAvRtspStreamingDataSink(streamClient, env, subsession, streamId);
+  return new CLibAvRtspStreamingDataSink(streamClient, env, subsession);
 }
+
 
 // private methods
 
-CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(CLibAvRtspStreamingClient *streamClient, UsageEnvironment& env,
-														 MediaSubsession& subsession, char const* streamId)
-  : MediaSink(env),
-    m_fSubsession(subsession) 
+CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(
+			CLibAvRtspStreamingClient *streamClient,
+			UsageEnvironment& env,
+			MediaSubsession& subsession)
+:	MediaSink(env),
+	m_receiveBuffer(DATA_SINK_RECEIVE_BUFFER_SIZE),
+    m_subsession(subsession)
 {
-	m_streamClient = streamClient;
+	m_streamClientPtr = streamClient;
 
-	m_fStreamId = strDup(streamId);
-	m_fReceiveBuffer = new u_int8_t[DATA_SINK_RECEIVE_BUFFER_SIZE];
-	
 	//avlib codec initialization
-	m_pFormatCtx = NULL;
-	m_pCodecCtx = NULL;
-	m_pCodec = NULL;
-	m_pFrame = NULL;	
+	m_formatCtxPtr = NULL;
+	m_codecContextPtr = NULL;
+	m_codecPtr = NULL;
+	m_framePtr = NULL;	
 
 	av_register_all();	
 	
-	m_pCodec = avcodec_find_decoder(AV_CODEC_ID_H264);
-	if(!m_pCodec){
+	m_codecPtr = avcodec_find_decoder(AV_CODEC_ID_H264);
+	if (!m_codecPtr){
 		return;
 	}
 
-	m_pCodecCtx = avcodec_alloc_context3(m_pCodec);
-	if(!m_pCodecCtx){
+	m_codecContextPtr = avcodec_alloc_context3(m_codecPtr);
+	if (!m_codecContextPtr){
 		return;
 	}	
 
 	/* open it */
-	if (avcodec_open2(m_pCodecCtx, m_pCodec, NULL) < 0) {
+	if (avcodec_open2(m_codecContextPtr, m_codecPtr, NULL) < 0) {
 		return;
-     }	
+	}	
 
-	m_inputBuffer = (uint8_t*)av_malloc(DATA_SINK_RECEIVE_BUFFER_SIZE);
+	m_inputBufferPtr = (uint8_t*)av_malloc(DATA_SINK_RECEIVE_BUFFER_SIZE);
 
 	m_spsUnitBufferSize = 0;
 	m_ppsUnitBufferSize = 0;
@@ -76,53 +60,62 @@ CLibAvRtspStreamingDataSink::CLibAvRtspStreamingDataSink(CLibAvRtspStreamingClie
 	av_init_packet(&m_packet);
 
 	//allocate frame
-	m_pFrame = avcodec_alloc_frame();	
+	m_framePtr = avcodec_alloc_frame();	
 }
+
 
 CLibAvRtspStreamingDataSink::~CLibAvRtspStreamingDataSink() 
 {	
-	delete[] m_fStreamId;
-	delete[] m_fReceiveBuffer;
-
 	//free buffer
-	av_free(m_inputBuffer);	
+	av_free(m_inputBufferPtr);	
 	
 	//free the YUV frame
-	if(m_pFrame)
-		avcodec_free_frame(&m_pFrame);	
+	if (m_framePtr){
+		avcodec_free_frame(&m_framePtr);
+	}
 	
 	//close the codec
-	if(m_pCodecCtx){
-		avcodec_close(m_pCodecCtx);
-		av_free(m_pCodecCtx);
+	if (m_codecContextPtr){
+		avcodec_close(m_codecContextPtr);
+		av_free(m_codecContextPtr);
 	}
 	
 	//close the video file
-	if(m_pFormatCtx)
-		av_close_input_file(m_pFormatCtx);
+	if (m_formatCtxPtr){
+		av_close_input_file(m_formatCtxPtr);
+	}
 }
 
-void CLibAvRtspStreamingDataSink::afterGettingFrame(void* clientData, unsigned frameSize, unsigned numTruncatedBytes,
-				  struct timeval presentationTime, unsigned durationInMicroseconds) 
+
+void CLibAvRtspStreamingDataSink::afterGettingFrame(
+			void* clientData,
+			unsigned frameSize,
+			unsigned numTruncatedBytes,
+			struct timeval presentationTime,
+			unsigned durationInMicroseconds) 
 {
 	CLibAvRtspStreamingDataSink* sink = (CLibAvRtspStreamingDataSink*)clientData;
 	sink->afterGettingFrame(frameSize, numTruncatedBytes, presentationTime, durationInMicroseconds);
 }
 
-void CLibAvRtspStreamingDataSink::afterGettingFrame(unsigned frameSize, unsigned /*numTruncatedBytes*/,
-				  struct timeval /*presentationTime*/, unsigned /*durationInMicroseconds*/) 
+
+void CLibAvRtspStreamingDataSink::afterGettingFrame(
+			unsigned frameSize,
+			unsigned /*numTruncatedBytes*/,
+			struct timeval /*presentationTime*/,
+			unsigned /*durationInMicroseconds*/)
 {
 	//check frame type
-	int nal_unit_type = m_fReceiveBuffer[0] & 0x1f; 
+	int nalUnitType = m_receiveBuffer[0] & 0x1f; 
 
-	if(nal_unit_type == 7){
+	if (nalUnitType == 7){
 		//SPS NAL Unit
-		memcpy(m_spsUnitBuffer, m_fReceiveBuffer, frameSize);
+		std::memcpy(m_spsUnitBuffer, m_receiveBuffer.constData(), frameSize);
 		m_spsUnitBufferSize = frameSize;
 	}
-	else if(nal_unit_type == 8){
+	else if (nalUnitType == 8){
 		//PPS NAL Unit
-		memcpy(m_ppsUnitBuffer, m_fReceiveBuffer, frameSize);
+		std::memcpy(m_ppsUnitBuffer, m_receiveBuffer.constData(), frameSize);
 		m_ppsUnitBufferSize = frameSize;
 	}
 	else{
@@ -134,85 +127,93 @@ void CLibAvRtspStreamingDataSink::afterGettingFrame(unsigned frameSize, unsigned
 	continuePlaying();
 }
 
+
 void CLibAvRtspStreamingDataSink::decodeFrame(unsigned frameSize)
 {
-	int got_frame = 0;
-	int len = 0;
-	int bytes_copied = 0;
+	int usedBufferSize = 0;
 
-	if(m_spsUnitBuffer != 0){
+	if (m_spsUnitBufferSize != 0){
 		//Adding SPS Unit
 		//first add 4 bytes for unit header 0x00000001
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
+		m_inputBufferPtr[usedBufferSize++] = 0x00; 
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x01;
 
-		memcpy(m_inputBuffer + bytes_copied, m_spsUnitBuffer, m_spsUnitBufferSize);		
-		bytes_copied += m_spsUnitBufferSize;
+		std::memcpy(m_inputBufferPtr + usedBufferSize, m_spsUnitBuffer, m_spsUnitBufferSize);		
+		usedBufferSize += m_spsUnitBufferSize;
 
 		m_spsUnitBufferSize = 0;
 	}
 
-	if(m_ppsUnitBufferSize != 0){
+	if (m_ppsUnitBufferSize != 0){
 		//Adding PPS Unit
 		//first add 4 bytes for unit header 0x00000001
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-		m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x01;
 
-		memcpy(m_inputBuffer + bytes_copied, m_ppsUnitBuffer, m_ppsUnitBufferSize);		
-		bytes_copied += m_ppsUnitBufferSize;
+		std::memcpy(m_inputBufferPtr + usedBufferSize, m_ppsUnitBuffer, m_ppsUnitBufferSize);		
+		usedBufferSize += m_ppsUnitBufferSize;
 
 		m_ppsUnitBufferSize = 0;
 	}
 
 	//Add video frame data
 	//first add 4 bytes for unit header 0x00000001
-	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-	m_inputBuffer[bytes_copied] = 0x00; bytes_copied += 1;
-	m_inputBuffer[bytes_copied] = 0x01; bytes_copied += 1;
+	m_inputBufferPtr[usedBufferSize++] = 0x00;
+	m_inputBufferPtr[usedBufferSize++] = 0x00;
+	m_inputBufferPtr[usedBufferSize++] = 0x00;
+	m_inputBufferPtr[usedBufferSize++] = 0x01;
 	
-	memcpy(m_inputBuffer + bytes_copied, m_fReceiveBuffer, frameSize);
-	bytes_copied += frameSize;
+	std::memcpy(m_inputBufferPtr + usedBufferSize, m_receiveBuffer.constData(), frameSize);
+	usedBufferSize += frameSize;
 
-	m_packet.size = bytes_copied;
-	m_packet.data = m_inputBuffer;
-	
-	while (m_packet.size > 0) {
+	m_packet.size = usedBufferSize;
+	m_packet.data = m_inputBufferPtr;
+
+	while (m_packet.size > 0){
+		int gotFrame = 0;
+
+		m_mutex.lock();
+		int decodedLength = avcodec_decode_video2(m_codecContextPtr, m_framePtr, &gotFrame, &m_packet);
+		m_mutex.unlock();
 		
-		mutex.lock();
-		len = avcodec_decode_video2(m_pCodecCtx, m_pFrame, &got_frame, &m_packet);
-		mutex.unlock();
-		
-		if (len < 0) {
+		if (decodedLength < 0){
 			return;
 		}
-		
-		if (got_frame) {
 
-			m_streamClient->FrameArrived(m_pFrame, m_pCodecCtx->width,
-				m_pCodecCtx->height, (int)m_pCodecCtx->pix_fmt);
+		if (gotFrame){
+			m_streamClientPtr->FrameArrived(
+						m_framePtr,
+						m_codecContextPtr->width, m_codecContextPtr->height,
+						(int)m_codecContextPtr->pix_fmt);
 		}
 
-		m_packet.size -= len;
-		m_packet.data += len;
+		m_packet.size -= decodedLength;
+		m_packet.data += decodedLength;
 	}	
 }
+
 
 bool CLibAvRtspStreamingDataSink::continuePlaying() 
 {
 	
-	if (fSource == NULL) return False; // sanity check (should not happen)
+	if (fSource == NULL){
+		return false; // sanity check (should not happen)
+	}
 	
 	// Request the next frame of data from our input source.  "afterGettingFrame()" will get called later, when it arrives:
 	
-	fSource->getNextFrame(m_fReceiveBuffer, DATA_SINK_RECEIVE_BUFFER_SIZE,
-		afterGettingFrame, this, onSourceClosure, this);
-	
-	return True;
+	fSource->getNextFrame(
+				m_receiveBuffer.data(), m_receiveBuffer.size(),
+				afterGettingFrame, this, onSourceClosure, this);
+
+	return true;
 }
 
+
 }
+
+
