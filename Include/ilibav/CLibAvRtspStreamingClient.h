@@ -6,9 +6,22 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QUrl>
+#include <QMutex>
 
 // Live555 includes
 #include "liveMedia.hh"
+
+// LIBAV includes
+extern "C" {
+#define __STDC_CONSTANT_MACROS
+#include "libavcodec/avcodec.h"
+#include "libavformat/avformat.h"	
+#include "libswscale/swscale.h"
+#undef PixelFormat
+#undef BYTES_PER_SAMPLE
+#undef BITS_PER_SAMPLE
+#undef WAVE_FORMAT_PCM
+}
 
 #include "ilibav/CLibAvConverter.h"
 
@@ -40,7 +53,9 @@ public:
 	/**
 		New frame has arrived
 	*/
-	void FrameArrived(AVFrame* frame, int width, int height, int pixelformat);	
+	void DecodeFrame(u_int8_t* frameData, unsigned frameSize);	
+
+	QMutex& GetMutex();
 
 protected:
 	/**
@@ -105,7 +120,25 @@ private:
 		0 - in a loop and receiving
 		non-zero - ends loop (and connection)
 	*/
-	char m_eventLoopWatchVariable;
+	char m_eventLoopWatchVariable;	
+	
+	//for ffmpeg decoding
+	AVFormatContext* m_formatCtxPtr;	
+	AVCodecContext* m_codecContextPtr;
+	AVCodec* m_codecPtr;
+	AVFrame* m_framePtr;	
+	AVPacket m_packet;
+		
+	//buffers for decoding
+	uint8_t* m_inputBufferPtr;
+	uint8_t m_spsUnitBuffer[20];	
+	int m_spsUnitBufferSize;
+	uint8_t m_ppsUnitBuffer[20];
+	int m_ppsUnitBufferSize;
+
+	CLibAvRtspStreamingClient* m_streamClientPtr;
+
+	QMutex m_mutex;
 
 	static const int RTSP_CLIENT_VERBOSITY_LEVEL = 1;
 };

@@ -18,12 +18,13 @@ namespace ilibav
 
 CLibAvRtspStreamingCameraComp::CLibAvRtspStreamingCameraComp()
 {	
+	m_mutexPtr = NULL;
 }
 
 
 void CLibAvRtspStreamingCameraComp::frameArrived(AVFrame* frame, int width, int height, int pixelformat)
 {
-	QMutexLocker locker(&m_mutex);
+	QMutexLocker locker(m_mutexPtr);
 
 	m_lastImageSize = istd::CIndex2d(width, height);
 
@@ -65,10 +66,9 @@ int CLibAvRtspStreamingCameraComp::DoProcessing(
 		connect(	m_networkAccessManagerPtr.GetPtr(),
 					SIGNAL(finished(QNetworkReply*)),
 					this,
-					SLOT(requestReceived(QNetworkReply*)));
+					SLOT(requestReceived(QNetworkReply*)),
+					Qt::QueuedConnection);
 	}
-
-	ReadParams(paramsPtr);	
 
 	if (!m_streamingClientPtr.IsValid()){
 		m_streamingClientPtr.SetPtr(new CLibAvRtspStreamingClient());		
@@ -79,7 +79,9 @@ int CLibAvRtspStreamingCameraComp::DoProcessing(
 					SLOT(frameArrived(AVFrame*, int , int, int)),
 					Qt::QueuedConnection);
 
-	}
+	}	
+	
+	EnsureConnected(paramsPtr);	
 
 	return TS_OK;	
 }
@@ -87,7 +89,7 @@ int CLibAvRtspStreamingCameraComp::DoProcessing(
 
 // protected methods
 
-void CLibAvRtspStreamingCameraComp::ReadParams(const iprm::IParamsSet* paramsPtr)
+void CLibAvRtspStreamingCameraComp::EnsureConnected(const iprm::IParamsSet* paramsPtr)
 {
 	QUrl cameraUrl;
 
@@ -135,10 +137,14 @@ void CLibAvRtspStreamingCameraComp::ReadParams(const iprm::IParamsSet* paramsPtr
 		if (m_streamingClientPtr->isRunning()){		
 			//stop streaming thread
 			m_streamingClientPtr->CloseConnection(true);		
-		}
+		}		
 
 		if (m_streamingClientPtr->OpenConnection(cameraUrl)){
 			m_currentCameraUrl = cameraUrl;
+			
+			if(m_mutexPtr == NULL){
+				m_mutexPtr = &m_streamingClientPtr->GetMutex();
+			}
 		}
 	}
 }

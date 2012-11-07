@@ -14,16 +14,50 @@ namespace ilibav
 
 // public methods
 
-CLibAvRtspStreamingClient::CLibAvRtspStreamingClient()
+CLibAvRtspStreamingClient::CLibAvRtspStreamingClient()	
 {
 	m_schedulerPtr = BasicTaskScheduler::createNew();
 	m_environmentPtr = BasicUsageEnvironment::createNew(*m_schedulerPtr);
-}
 
+	//avlib codec initialization
+	m_formatCtxPtr = NULL;
+	m_codecContextPtr = NULL;
+	m_codecPtr = NULL;
+	m_framePtr = NULL;	
+
+	av_register_all();	
+	
+	m_codecPtr = avcodec_find_decoder(AV_CODEC_ID_H264);
+	if (!m_codecPtr){
+		return;
+	}
+
+	m_codecContextPtr = avcodec_alloc_context3(m_codecPtr);
+	if (!m_codecContextPtr){
+		return;
+	}	
+
+	/* open it */
+	if (avcodec_open2(m_codecContextPtr, m_codecPtr, NULL) < 0) {
+		return;
+	}	
+
+	m_inputBufferPtr = (uint8_t*)av_malloc(CLibAvRtspStreamingDataSink::DATA_SINK_RECEIVE_BUFFER_SIZE);
+
+	m_spsUnitBufferSize = 0;
+	m_ppsUnitBufferSize = 0;
+
+	av_init_packet(&m_packet);
+
+	//allocate frame
+	m_framePtr = avcodec_alloc_frame();	
+}
 
 bool CLibAvRtspStreamingClient::OpenConnection(const QUrl& url)
 {	
-	const char* urlText = url.toEncoded().constData();
+	QByteArray urlByteArray = url.toEncoded();
+	const char* urlText = urlByteArray.constData();
+	 
 	RTSPClient* rtspClientPtr = CLibAvRtspStreamingClient::CLibAvRtspConnection::createNew(this, *m_environmentPtr, urlText, RTSP_CLIENT_VERBOSITY_LEVEL, NULL, 0);	
 	if (rtspClientPtr == NULL){
 		//Failed to create a RTSP client for URL
@@ -55,14 +89,118 @@ void CLibAvRtspStreamingClient::CloseConnection(bool waitForClosed)
 }
 
 
-void CLibAvRtspStreamingClient::FrameArrived(AVFrame* frame, int width, int height, int pixelformat)
+void CLibAvRtspStreamingClient::DecodeFrame(u_int8_t* frameData, unsigned frameSize)
 {
-	Q_EMIT frameReady(frame, width, height, pixelformat);	
+	//check frame type
+	int nalUnitType = frameData[0] & 0x1f; 
+
+	if (nalUnitType == 7){
+		//SPS NAL Unit
+		std::memcpy(m_spsUnitBuffer, frameData, frameSize);
+		m_spsUnitBufferSize = frameSize;
+	}
+	else if (nalUnitType == 8){
+		//PPS NAL Unit
+		std::memcpy(m_ppsUnitBuffer, frameData, frameSize);
+		m_ppsUnitBufferSize = frameSize;
+	}
+	else{
+		//video frame
+		int usedBufferSize = 0;
+
+		if (m_spsUnitBufferSize != 0){
+			//Adding SPS Unit
+			//first add 4 bytes for unit header 0x00000001
+			m_inputBufferPtr[usedBufferSize++] = 0x00; 
+			m_inputBufferPtr[usedBufferSize++] = 0x00;
+			m_inputBufferPtr[usedBufferSize++] = 0x00;
+			m_inputBufferPtr[usedBufferSize++] = 0x01;
+
+			std::memcpy(m_inputBufferPtr + usedBufferSize, m_spsUnitBuffer, m_spsUnitBufferSize);		
+			usedBufferSize += m_spsUnitBufferSize;
+
+			m_spsUnitBufferSize = 0;
+		}
+
+		if (m_ppsUnitBufferSize != 0){
+			//Adding PPS Unit
+			//first add 4 bytes for unit header 0x00000001
+			m_inputBufferPtr[usedBufferSize++] = 0x00;
+			m_inputBufferPtr[usedBufferSize++] = 0x00;
+			m_inputBufferPtr[usedBufferSize++] = 0x00;
+			m_inputBufferPtr[usedBufferSize++] = 0x01;
+
+			std::memcpy(m_inputBufferPtr + usedBufferSize, m_ppsUnitBuffer, m_ppsUnitBufferSize);		
+			usedBufferSize += m_ppsUnitBufferSize;
+
+			m_ppsUnitBufferSize = 0;
+		}
+
+		//Add video frame data
+		//first add 4 bytes for unit header 0x00000001
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x00;
+		m_inputBufferPtr[usedBufferSize++] = 0x01;
+		
+		std::memcpy(m_inputBufferPtr + usedBufferSize, frameData, frameSize);
+		usedBufferSize += frameSize;
+
+		m_packet.size = usedBufferSize;
+		m_packet.data = m_inputBufferPtr;
+
+		while (m_packet.size > 0){
+			int gotFrame = 0;
+
+			m_mutex.lock();
+			int decodedLength = avcodec_decode_video2(m_codecContextPtr, m_framePtr, &gotFrame, &m_packet);
+			m_mutex.unlock();
+			
+			if (decodedLength < 0){
+				return;
+			}
+
+			if (gotFrame){
+								
+				Q_EMIT frameReady(
+					m_framePtr,
+					m_codecContextPtr->width,
+					m_codecContextPtr->height,
+					(int)m_codecContextPtr->pix_fmt);
+			}
+
+			m_packet.size -= decodedLength;
+			m_packet.data += decodedLength;
+		}
+	}		
 }
 
+QMutex& CLibAvRtspStreamingClient::GetMutex()
+{
+	return m_mutex;
+}
 
 CLibAvRtspStreamingClient::~CLibAvRtspStreamingClient()
 {
+	//free buffer
+	av_free(m_inputBufferPtr);	
+	
+	//free the YUV frame
+	if (m_framePtr){
+		avcodec_free_frame(&m_framePtr);
+	}
+	
+	//close the codec
+	if (m_codecContextPtr){
+		avcodec_close(m_codecContextPtr);
+		av_free(m_codecContextPtr);
+	}
+	
+	//close the video file
+	if (m_formatCtxPtr){
+		av_close_input_file(m_formatCtxPtr);
+	}
+	
 	m_environmentPtr->reclaim(); 
 	m_environmentPtr = NULL;
     delete m_schedulerPtr; 

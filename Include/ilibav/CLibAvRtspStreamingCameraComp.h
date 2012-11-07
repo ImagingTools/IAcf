@@ -2,19 +2,6 @@
 #define ilibav_CLibAvRtspStreamingCameraComp_included
 
 
-// LIBAV includes
-extern "C"{
-#define inline _inline
-#define __STDC_CONSTANT_MACROS
-#include <libavformat/avformat.h>
-#undef inline
-#undef __STDC_CONSTANT_MACROS
-#undef PixelFormat
-#undef BYTES_PER_SAMPLE
-#undef BITS_PER_SAMPLE
-#undef WAVE_FORMAT_PCM
-}
-
 // Qt includes
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
@@ -80,9 +67,9 @@ public Q_SLOTS:
 
 protected:
 	/**
-		Reads parameters from set 
+		Reads parameters from set and starts connection if not connected yet
 	*/
-	void ReadParams(const iprm::IParamsSet* paramsPtr);		
+	void EnsureConnected(const iprm::IParamsSet* paramsPtr);		
 
 	// reimplemented (icomp::CComponentBase)
 	void OnComponentCreated();
@@ -102,7 +89,7 @@ private:
 	
 	istd::TDelPtr<QNetworkAccessManager> m_networkAccessManagerPtr;
 
-	QMutex m_mutex;
+	QMutex *m_mutexPtr;
 };
 
 } // namespace ilibav
