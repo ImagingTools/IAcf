@@ -39,74 +39,113 @@ int CSimpleCameraComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	dc1394video_frame_t *frame=NULL;
+	dc1394video_frame_t* framePtr = NULL;
 	dc1394error_t err;
-	err = dc1394_capture_dequeue(m_cameraPtr, DC1394_CAPTURE_POLICY_WAIT, &frame);
+	err = dc1394_capture_dequeue(
+				m_cameraPtr,
+				*m_waitForFrameAttrPtr? DC1394_CAPTURE_POLICY_WAIT: DC1394_CAPTURE_POLICY_POLL,
+				&framePtr);
 	if (err != DC1394_SUCCESS){
 		SendErrorMessage(MI_CAMERA, "Could not capture a frame");
 
 		return TS_INVALID;
 	}
 
-	int width = int(frame->size[0]);
-	int height = int(frame->size[1]);
+	if (framePtr == NULL){
+		SendErrorMessage(MI_CAMERA, "No frames in buffer");
 
-	switch (frame->data_depth){
-	case 8:
-		if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, istd::CIndex2d(width, height))){
-			for (int y = 0; y < height; ++y){
-				const quint8* inputLinePtr = (const quint8*)bitmapPtr->GetLinePtr(y);
-				quint8* ouputLinePtr = frame->image + width * y;
-				std::memcpy(ouputLinePtr, inputLinePtr, width);
-			}
-
-			return TS_OK;
-		}
-		else{
-			SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (gray)"));
-		}
-		break;
-
-	case 24:
-		if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(width, height))){
-			for (int y = 0; y < height; ++y){
-				const quint8* inputLinePtr = (const quint8*)bitmapPtr->GetLinePtr(y);
-				quint8* ouputLinePtr = frame->image + width * y * 3;
-				for (int x = 0; x < width; ++x){
-					ouputLinePtr[x * 4 + 0] = 255;
-					ouputLinePtr[x * 4 + 1] = inputLinePtr[x * 3 + 0];
-					ouputLinePtr[x * 4 + 2] = inputLinePtr[x * 3 + 1];
-					ouputLinePtr[x * 4 + 3] = inputLinePtr[x * 3 + 2];
-				}
-			}
-
-			return TS_OK;
-		}
-		else{
-			SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (RGB)"));
-		}
-		break;
-
-	case 32:
-		if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_RGBA, istd::CIndex2d(width, height))){
-			for (int y = 0; y < height; ++y){
-				const quint8* inputLinePtr = (const quint8*)bitmapPtr->GetLinePtr(y);
-				quint8* ouputLinePtr = frame->image + width * y * 4;
-				std::memcpy(ouputLinePtr, inputLinePtr, width * 4);
-			}
-
-			return TS_OK;
-		}
-		else{
-			SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (RGB)"));
-		}
-		break;
-
-	default:
-		SendErrorMessage(MI_CAMERA, QObject::tr("Camera image format is not supported"));
+		return TS_INVALID;
 	}
 
-	return TS_INVALID;
+	int retVal = TS_INVALID;
+
+	if (dc1394_capture_is_frame_corrupt(m_cameraPtr, framePtr) == DC1394_FALSE){
+		int width = int(framePtr->size[0]);
+		int height = int(framePtr->size[1]);
+
+		switch (framePtr->color_coding){
+		case DC1394_COLOR_CODING_MONO8:
+		case DC1394_COLOR_CODING_RAW8:
+			if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, istd::CIndex2d(width, height))){
+				for (int y = 0; y < height; ++y){
+					const quint8* inputLinePtr = framePtr->image + width * y;
+					quint8* ouputLinePtr = (quint8*)bitmapPtr->GetLinePtr(y);
+					std::memcpy(ouputLinePtr, inputLinePtr, width);
+				}
+
+				retVal = TS_OK;
+			}
+			else{
+				SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (Gray)"));
+			}
+			break;
+
+		case DC1394_COLOR_CODING_RGB8:
+			if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(width, height))){
+				for (int y = 0; y < height; ++y){
+					const quint8* inputLinePtr = framePtr->image + width * y * 3;
+					quint8* ouputLinePtr = (quint8*)bitmapPtr->GetLinePtr(y);
+					for (int x = 0; x < width; ++x){
+						ouputLinePtr[x * 4 + 3] = 255;
+						ouputLinePtr[x * 4 + 2] = inputLinePtr[x * 3 + 0];
+						ouputLinePtr[x * 4 + 1] = inputLinePtr[x * 3 + 1];
+						ouputLinePtr[x * 4 + 0] = inputLinePtr[x * 3 + 2];
+					}
+				}
+
+				retVal = TS_OK;
+			}
+			else{
+				SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (RGB)"));
+			}
+			break;
+
+		case DC1394_COLOR_CODING_MONO16:
+		case DC1394_COLOR_CODING_RAW16:
+			if (*m_only8BitDepthAttrPtr){
+				int inputOffset = (framePtr->little_endian != 0)? 1: 0;
+				if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, istd::CIndex2d(width, height))){
+					for (int y = 0; y < height; ++y){
+						const quint8* inputLinePtr = framePtr->image + width * y * 2 + inputOffset;
+						quint8* ouputLinePtr = (quint8*)bitmapPtr->GetLinePtr(y);
+						for (int x = 0; x < width; ++x){
+							ouputLinePtr[x] = inputLinePtr[x * 2];
+						}
+					}
+
+					retVal = TS_OK;
+				}
+				else{
+					SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (Gray)"));
+				}
+			}
+			else{
+				if (bitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY16, istd::CIndex2d(width, height))){
+					for (int y = 0; y < height; ++y){
+						const quint8* inputLinePtr = framePtr->image + width * y * 2;
+						quint8* ouputLinePtr = (quint8*)bitmapPtr->GetLinePtr(y);
+						std::memcpy(ouputLinePtr, inputLinePtr, width * 2);
+					}
+
+					retVal = TS_OK;
+				}
+				else{
+					SendErrorMessage(MI_CAMERA, QObject::tr("Cannot create image in frame format (Gray16)"));
+				}
+			}
+			break;
+
+		default:
+			SendErrorMessage(MI_CAMERA, QObject::tr("Camera image format is not supported"));
+		}
+	}
+
+	err = dc1394_capture_enqueue(m_cameraPtr, framePtr);
+	if (err != DC1394_SUCCESS){
+		SendWarningMessage(MI_CAMERA, "Camera ring buffer error");
+	}
+
+	return retVal;
 }
 
 
@@ -142,6 +181,11 @@ void CSimpleCameraComp::OnComponentCreated()
 		if (list->num > 0){
 			m_cameraPtr = dc1394_camera_new (m_libraryPtr, list->ids[0].guid);
 			if (m_cameraPtr != NULL){
+				// turn automatic exposure off
+				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_FEATURE_MODE_MANUAL);
+				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_ON);
+				dc1394_feature_set_absolute_value(m_cameraPtr, DC1394_FEATURE_EXPOSURE, 2000.0);
+
 				// setup capture
 				err = dc1394_video_set_iso_speed(m_cameraPtr, DC1394_ISO_SPEED_400);
 				if (err != DC1394_SUCCESS){
@@ -158,20 +202,21 @@ void CSimpleCameraComp::OnComponentCreated()
 					SendWarningMessage(MI_CAMERA, QObject::tr("Could not set frame rate"));
 				}
 
-				err = dc1394_capture_setup(m_cameraPtr,4, DC1394_CAPTURE_FLAGS_DEFAULT);
+				err = dc1394_capture_setup(m_cameraPtr, *m_bufferSizeAttrPtr, DC1394_CAPTURE_FLAGS_DEFAULT);
 				if (err != DC1394_SUCCESS){
-					SendWarningMessage(MI_CAMERA, QObject::tr("Could not setup m_cameraPtr"));
-				}
-
-				// have the m_cameraPtr start sending us data
-				err = dc1394_video_set_transmission(m_cameraPtr, DC1394_ON);
-				if (err == DC1394_SUCCESS){
-					SendInfoMessage(MI_CAMERA,  QObject::tr("Using m_cameraPtr with GUID %1").arg(m_cameraPtr->guid));
-
-					return;
+					SendErrorMessage(MI_CAMERA, QObject::tr("Could not setup camera"));
 				}
 				else{
-					SendErrorMessage(MI_CAMERA, QObject::tr("Could not start m_cameraPtr iso transmission"));
+					// have the m_cameraPtr start sending us data
+					err = dc1394_video_set_transmission(m_cameraPtr, DC1394_ON);
+					if (err == DC1394_SUCCESS){
+						SendInfoMessage(MI_CAMERA,  QObject::tr("Using m_cameraPtr with GUID %1").arg(m_cameraPtr->guid));
+
+						return;
+					}
+					else{
+						SendErrorMessage(MI_CAMERA, QObject::tr("Could not start m_cameraPtr iso transmission"));
+					}
 				}
 
 				dc1394_camera_free(m_cameraPtr);

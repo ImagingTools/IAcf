@@ -31,6 +31,9 @@ public:
 
 	I_BEGIN_COMPONENT(CSimpleCameraComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_ASSIGN(m_waitForFrameAttrPtr, "WaitForFrames", "It allowing to waiting for images, if disabled only already taken images can be acquired", true, true);
+		I_ASSIGN(m_only8BitDepthAttrPtr, "Only8Bit", "Only modes with 8 bits will be accepted", true, true);
+		I_ASSIGN(m_bufferSizeAttrPtr, "BufferSize", "Number of frames in camera buffer", true, 1);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -57,6 +60,9 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
+	I_ATTR(bool, m_waitForFrameAttrPtr);
+	I_ATTR(bool, m_only8BitDepthAttrPtr);
+	I_ATTR(int, m_bufferSizeAttrPtr);
 	dc1394_t * m_libraryPtr;
 	dc1394camera_t *m_cameraPtr;
 };
