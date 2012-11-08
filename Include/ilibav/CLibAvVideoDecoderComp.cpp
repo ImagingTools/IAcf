@@ -8,7 +8,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TSmartPtr.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "imeas/CSamplesInfo.h"
 

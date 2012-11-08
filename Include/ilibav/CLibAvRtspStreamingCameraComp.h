@@ -12,7 +12,7 @@
 #include "istd/CIndex2d.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -78,7 +78,7 @@ protected:
 private:	
 	I_ATTR(QByteArray, m_urlParamsIdAttrPtr);
 	I_ATTR(QByteArray, m_adjustParamsIdAttrPtr);
-	I_REF(iprm::IFileNameParam, m_defaultUrlParamCompPtr);	
+	I_REF(ifile::IFileNameParam, m_defaultUrlParamCompPtr);	
 	I_REF(imeas::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 
 	QUrl m_currentCameraUrl;	

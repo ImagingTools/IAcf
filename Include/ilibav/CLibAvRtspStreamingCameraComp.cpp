@@ -95,7 +95,7 @@ void CLibAvRtspStreamingCameraComp::EnsureConnected(const iprm::IParamsSet* para
 
 	//read stream path
 	if (m_urlParamsIdAttrPtr.IsValid()){
-		const iprm::IFileNameParam* urlParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
+		const ifile::IFileNameParam* urlParamPtr = dynamic_cast<const ifile::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
 		if (urlParamPtr != NULL){
 			cameraUrl.setUrl(urlParamPtr->GetPath());
 		}
