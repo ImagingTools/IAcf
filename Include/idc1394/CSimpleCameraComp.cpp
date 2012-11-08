@@ -182,8 +182,12 @@ void CSimpleCameraComp::OnComponentCreated()
 			m_cameraPtr = dc1394_camera_new (m_libraryPtr, list->ids[0].guid);
 			if (m_cameraPtr != NULL){
 				// turn automatic exposure off
+				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_SHUTTER, DC1394_FEATURE_MODE_MANUAL);
 				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_FEATURE_MODE_MANUAL);
+				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_GAIN, DC1394_FEATURE_MODE_MANUAL);
+//				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_SHUTTER, DC1394_ON);
 				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_ON);
+//				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_GAIN, DC1394_ON);
 				dc1394_feature_set_absolute_value(m_cameraPtr, DC1394_FEATURE_EXPOSURE, 2000.0);
 
 				// setup capture
@@ -210,7 +214,7 @@ void CSimpleCameraComp::OnComponentCreated()
 					// have the m_cameraPtr start sending us data
 					err = dc1394_video_set_transmission(m_cameraPtr, DC1394_ON);
 					if (err == DC1394_SUCCESS){
-						SendInfoMessage(MI_CAMERA,  QObject::tr("Using m_cameraPtr with GUID %1").arg(m_cameraPtr->guid));
+						SendInfoMessage(MI_CAMERA, QObject::tr("Using camera with GUID %1").arg(m_cameraPtr->guid));
 
 						return;
 					}
