@@ -20,7 +20,7 @@
 #include "icam/IExposureParams.h"
 #include "imeas/ILinearAdjustParams.h"
 
-#include "CLibAvRtspStreamingClient.h"
+#include "ilibav/CLibAvRtspStreamingClient.h"
 
 
 namespace ilibav

@@ -21,6 +21,8 @@ extern "C" {
 #undef BYTES_PER_SAMPLE
 #undef BITS_PER_SAMPLE
 #undef WAVE_FORMAT_PCM
+#undef min
+#undef max
 }
 
 #include "ilibav/CLibAvConverter.h"
