@@ -7,6 +7,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iprm/IParamsSet.h"
+#include "iprm/TParamsPtr.h"
 #include "iimg/IBitmap.h"
 #include "istd/CSystem.h"
 
@@ -25,7 +26,7 @@ CSimpleCameraComp::CSimpleCameraComp()
 // reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 
 int CSimpleCameraComp::DoProcessing(
-			const iprm::IParamsSet* /* paramsPtr*/,
+			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
@@ -42,6 +43,8 @@ int CSimpleCameraComp::DoProcessing(
 	if (!bitmapPtr.IsValid()){
 		return TS_INVALID;
 	}
+
+	SetParametersToCamera(paramsPtr);
 
 	dc1394video_frame_t* framePtr = NULL;
 	dc1394error_t err;
@@ -172,7 +175,64 @@ istd::CIndex2d CSimpleCameraComp::GetBitmapSize(const iprm::IParamsSet* /*params
 }
 
 
+// reimplemented (iproc::IProcessor)
+
+void CSimpleCameraComp::InitProcessor(const iprm::IParamsSet* paramsPtr)
+{
+	SetParametersToCamera(paramsPtr);
+}
+
+
 // protected methods
+
+void CSimpleCameraComp::SetParametersToCamera(const iprm::IParamsSet* paramsPtr)
+{
+	if (m_cameraPtr != NULL){
+		iprm::TParamsPtr<imeas::ILinearAdjustParams> adjustParamsPtr(paramsPtr, m_adjustParamsIdAttrPtr, m_defaultAdjustParamsCompPtr, false);
+		if (adjustParamsPtr.IsValid()){
+			SetAbsoluteFeatureValue(*m_cameraPtr, DC1394_FEATURE_GAIN, adjustParamsPtr->GetScaleFactor());
+			SetAbsoluteFeatureValue(*m_cameraPtr, DC1394_FEATURE_BRIGHTNESS, adjustParamsPtr->GetOffsetFactor());
+		}
+
+		iprm::TParamsPtr<icam::IExposureParams> exposureParamsPtr(paramsPtr, m_exposureParamsIdAttrPtr, m_defaultExposureParamsCompPtr, false);
+		if (exposureParamsPtr.IsValid()){
+			SetAbsoluteFeatureValue(*m_cameraPtr, DC1394_FEATURE_SHUTTER, exposureParamsPtr->GetShutterTime());
+		}
+	}
+}
+
+
+bool CSimpleCameraComp::GetAbsoluteFeatureRange(dc1394camera_t& camera, dc1394feature_t feature, istd::CRange& range) const
+{
+	dc1394bool_t flag;
+	if (		(dc1394_feature_has_absolute_control(&camera, feature, &flag) == DC1394_SUCCESS) &&
+				(flag == DC1394_TRUE)){
+		float minValue = 0;
+		float maxValue = 0;
+		if (dc1394_feature_get_absolute_boundaries(&camera, feature, &minValue, &maxValue) == DC1394_SUCCESS){
+			range = istd::CRange(qMin(minValue, maxValue), qMax(minValue, maxValue));
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CSimpleCameraComp::SetAbsoluteFeatureValue(dc1394camera_t& camera, dc1394feature_t feature, double value)
+{
+	dc1394bool_t flag;
+	if (		(dc1394_feature_has_absolute_control(&camera, feature, &flag) == DC1394_SUCCESS) &&
+				(flag == DC1394_TRUE)){
+		if (dc1394_feature_set_absolute_value(&camera, feature, float(value)) == DC1394_SUCCESS){
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 // reimplemented (icomp::CComponentBase)
 
@@ -184,6 +244,11 @@ void CSimpleCameraComp::OnComponentCreated()
 
 	dc1394error_t err;
 
+	m_adjustConstraints.scaleRange = istd::CRange::GetNull();
+	m_adjustConstraints.offsetRange = istd::CRange::GetNull();
+
+	m_exposureConstraints.shutterTimeRange = istd::CRange::GetNull();
+
 	m_libraryPtr = dc1394_new ();
 	if (m_libraryPtr == NULL){
 		SendCriticalMessage(MI_CAMERA, QObject::tr("Could not initialize library"));
@@ -194,16 +259,20 @@ void CSimpleCameraComp::OnComponentCreated()
 	err = dc1394_camera_enumerate (m_libraryPtr, &list);
 	if (err == DC1394_SUCCESS){
 		if (list->num > 0){
-			m_cameraPtr = dc1394_camera_new (m_libraryPtr, list->ids[0].guid);
+			m_cameraPtr = dc1394_camera_new(m_libraryPtr, list->ids[0].guid);
 			if (m_cameraPtr != NULL){
+				GetAbsoluteFeatureRange(*m_cameraPtr, DC1394_FEATURE_SHUTTER, m_exposureConstraints.shutterTimeRange);
+				GetAbsoluteFeatureRange(*m_cameraPtr, DC1394_FEATURE_GAIN, m_adjustConstraints.scaleRange);
+				GetAbsoluteFeatureRange(*m_cameraPtr, DC1394_FEATURE_BRIGHTNESS, m_adjustConstraints.offsetRange);
+
 				// turn automatic exposure off
 				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_SHUTTER, DC1394_FEATURE_MODE_MANUAL);
 				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_FEATURE_MODE_MANUAL);
 				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_GAIN, DC1394_FEATURE_MODE_MANUAL);
-//				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_SHUTTER, DC1394_ON);
+				dc1394_feature_set_mode(m_cameraPtr, DC1394_FEATURE_BRIGHTNESS, DC1394_FEATURE_MODE_MANUAL);
 				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_EXPOSURE, DC1394_ON);
-//				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_GAIN, DC1394_ON);
-				dc1394_feature_set_absolute_value(m_cameraPtr, DC1394_FEATURE_EXPOSURE, 2000.0);
+				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_GAIN, DC1394_ON);
+				dc1394_feature_set_absolute_control(m_cameraPtr, DC1394_FEATURE_BRIGHTNESS, DC1394_ON);
 
 				// setup capture
 				err = dc1394_video_set_iso_speed(m_cameraPtr, DC1394_ISO_SPEED_400);
@@ -271,6 +340,44 @@ void CSimpleCameraComp::OnComponentDestroyed()
 	}
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// public methods of embedded class AdjustConstraints
+
+// reimplemented (imeas::ILinearAdjustConstraints)
+
+istd::CRange CSimpleCameraComp::AdjustConstraints::GetScaleFactorRange() const
+{
+	return scaleRange;
+}
+
+
+istd::CRange CSimpleCameraComp::AdjustConstraints::GetOffsetFactorRange() const
+{
+	return offsetRange;
+}
+
+
+// public methods of embedded class ExposureConstraints
+
+// reimplemented (icam::IExposureConstraints)
+
+istd::CRange CSimpleCameraComp::ExposureConstraints::GetShutterTimeRange() const
+{
+	return shutterTimeRange;
+}
+
+
+istd::CRange CSimpleCameraComp::ExposureConstraints::GetDelayTimeRange() const
+{
+	return istd::CRange::GetNull();
+}
+
+
+istd::CRange CSimpleCameraComp::ExposureConstraints::GetEenDelayRange() const
+{
+	return istd::CRange::GetNull();
 }
 
 
