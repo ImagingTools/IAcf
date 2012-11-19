@@ -125,6 +125,17 @@ QByteArray CChannelSelectionNode::GetOptionId(int /*index*/) const
 }
 
 
+bool CChannelSelectionNode::IsOptionEnabled(int /*index*/) const
+{
+	return true;
+}
+
+
+void CChannelSelectionNode::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
+{
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CChannelSelectionNode::Serialize(iser::IArchive& archive)
