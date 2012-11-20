@@ -8,6 +8,12 @@
 #include "istd/TChangeNotifier.h"
 #include "ilibav/CLibAvConverter.h"
 
+#include "i2d/CRectangle.h"
+
+// ACF-Solutions includes
+#include "imeas/CGeneralUnitInfo.h"
+
+
 #include "CLibAvRtspStreamingCameraComp.h"
 
 namespace ilibav
@@ -86,6 +92,51 @@ int CLibAvRtspStreamingCameraComp::DoProcessing(
 	return TS_OK;	
 }
 
+// reimplemented (imeas::INumericConstraints)
+
+int CLibAvRtspStreamingCameraComp::GetNumericValuesCount() const
+{
+	return 1;
+}
+
+
+QString CLibAvRtspStreamingCameraComp::GetNumericValueName(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Framerate", "Framerate");
+
+	default:
+		return "";
+	}
+}
+
+
+QString CLibAvRtspStreamingCameraComp::GetNumericValueDescription(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Framerate");
+	
+	default:
+		return "";
+	}
+}
+
+
+const imeas::IUnitInfo& CLibAvRtspStreamingCameraComp::GetNumericValueUnitInfo(int index) const
+{
+	static imeas::CGeneralUnitInfo frameRateUnitInfo(imeas::IUnitInfo::UT_TECHNICAL, "fps", 100, istd::CRange(1, 100));
+
+	switch (index){
+	case 0:
+		return frameRateUnitInfo;
+	
+	default:
+		return frameRateUnitInfo;
+	}	
+}
+
 
 // protected methods
 
@@ -99,11 +150,51 @@ void CLibAvRtspStreamingCameraComp::EnsureConnected(const iprm::IParamsSet* para
 		if (urlParamPtr != NULL){
 			cameraUrl.setUrl(urlParamPtr->GetPath());
 		}
-	}
+	}	
 
 	if (cameraUrl.isValid() && m_defaultUrlParamCompPtr.IsValid()){
 		cameraUrl = m_defaultUrlParamCompPtr->GetPath();
+	}	
+
+	//read AOI	
+	if (m_aoiParamsIdAttrPtr.IsValid()){
+		const i2d::CRectangle* aoiParamPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter(*m_aoiParamsIdAttrPtr));
+		if (aoiParamPtr != NULL && aoiParamPtr->IsValidNonEmpty()){
+			cameraUrl.addQueryItem("x0", QString::number(int(aoiParamPtr->GetLeft())));
+			cameraUrl.addQueryItem("y0", QString::number(int(aoiParamPtr->GetTop())));
+			cameraUrl.addQueryItem("x1", QString::number(int(aoiParamPtr->GetRight())));
+			cameraUrl.addQueryItem("y1", QString::number(int(aoiParamPtr->GetBottom())));			
+		}
 	}
+
+	//read framerate
+	if(m_framerateParamsIdAttrPtr.IsValid()){
+		const imeas::INumericValue* framerateParamPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_framerateParamsIdAttrPtr));
+		if (framerateParamPtr != NULL){
+			imath::CVarVector values = framerateParamPtr->GetValues();
+
+			if(values.GetElementsCount() >= 1){
+				cameraUrl.addQueryItem("fps", QString::number(int(values[0])));
+			}
+		}
+	}
+
+	//add suffix
+	if(m_urlSuffixAttrPtr.IsValid() && !(*m_urlSuffixAttrPtr).isEmpty()){
+		//splits into query item values 'key=value'
+		QList<QByteArray> suffixValues = (*m_urlSuffixAttrPtr).split('&');
+
+		for(		QList<QByteArray>::const_iterator iter = suffixValues.constBegin();
+					iter != suffixValues.constEnd();
+					++iter){
+
+			//splits into key/value pairs
+			QList<QByteArray> tuple = (*iter).split('=');
+			if(tuple.size() == 2){
+				cameraUrl.addQueryItem(tuple[0], tuple[1]);
+			}
+		}
+	}	
 
 	//read adjust params
 	int brightness = 0;
@@ -139,13 +230,13 @@ void CLibAvRtspStreamingCameraComp::EnsureConnected(const iprm::IParamsSet* para
 			m_streamingClientPtr->CloseConnection(true);		
 		}		
 
-		if (m_streamingClientPtr->OpenConnection(cameraUrl)){
+		/*if (m_streamingClientPtr->OpenConnection(cameraUrl)){
 			m_currentCameraUrl = cameraUrl;
 			
 			if(m_mutexPtr == NULL){
 				m_mutexPtr = &m_streamingClientPtr->GetMutex();
 			}
-		}
+		}*/
 	}
 }
 

@@ -19,6 +19,8 @@
 #include "icam/IExposureConstraints.h"
 #include "icam/IExposureParams.h"
 #include "imeas/ILinearAdjustParams.h"
+#include "imeas/INumericValue.h"
+#include "imeas/INumericConstraints.h"
 
 #include "ilibav/CLibAvRtspStreamingClient.h"
 
@@ -42,11 +44,15 @@ public:
 
 	I_BEGIN_COMPONENT(CLibAvRtspStreamingCameraComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
-		I_REGISTER_INTERFACE(icam::IExposureConstraints);
+		//I_REGISTER_INTERFACE(icam::IExposureConstraints);
+		I_REGISTER_INTERFACE(imeas::INumericConstraints);
 		I_ASSIGN(m_urlParamsIdAttrPtr, "UrlParamId", "ID used to get camera URL from the parameter set", false, "UrlParamId");
+		I_ASSIGN(m_urlSuffixAttrPtr, "UrlSuffixParam", "String added to the end of url string. Must be in format val1=1&val2=2&val3=3", false, "UrlSuffixParam");
 		I_ASSIGN(m_adjustParamsIdAttrPtr, "AdjustParamsId", "ID used to get brightness and contrast adjust parameters from the parameter set", false, "AdjustParams");
+		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamId", "ID used to get AOI from parameter set", false, "AoiParamId");
+		I_ASSIGN(m_framerateParamsIdAttrPtr, "FramerateParamId", "ID used to get framerate from parameter set", false, "FramerateParamId");		
 		I_ASSIGN(m_defaultUrlParamCompPtr, "DefaultUrlParam", "Default camera URL used if no URL is defined", false, "DefaultUrlParam");
-		I_ASSIGN(m_defaultAdjustParamsCompPtr, "DefaultAdjustParams", "Default contrast and brightness adjust parameters that will be used", false, "DefaultAdjustParams");
+		I_ASSIGN(m_defaultAdjustParamsCompPtr, "DefaultAdjustParams", "Default contrast and brightness adjust parameters that will be used", false, "DefaultAdjustParams");		
 	I_END_COMPONENT;
 
 	CLibAvRtspStreamingCameraComp();
@@ -60,6 +66,12 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
+
+	// reimplemented (imeas::INumericConstraints)
+	virtual int GetNumericValuesCount() const;
+	virtual QString GetNumericValueName(int index) const;
+	virtual QString GetNumericValueDescription(int index) const;
+	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 public Q_SLOTS:
 	void frameArrived(AVFrame*, int , int, int);
@@ -77,11 +89,15 @@ protected:
 
 private:
 	I_ATTR(QByteArray, m_urlParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_urlSuffixAttrPtr);
 	I_ATTR(QByteArray, m_adjustParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_aoiParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_framerateParamsIdAttrPtr);
 	I_REF(ifile::IFileNameParam, m_defaultUrlParamCompPtr);
 	I_REF(imeas::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 
-	QUrl m_currentCameraUrl;
+	QUrl m_currentCameraUrl;	
+
 	istd::TDelPtr<CLibAvRtspStreamingClient> m_streamingClientPtr;
 
 	istd::CIndex2d m_lastImageSize;
