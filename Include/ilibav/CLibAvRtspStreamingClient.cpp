@@ -1,5 +1,7 @@
 #include "ilibav/CLibAvRtspStreamingClient.h"
 
+// Qt includes
+#include <QtCore/QTime>
 
 // Live555 includes
 #include "BasicUsageEnvironment.hh"
@@ -18,6 +20,10 @@ CLibAvRtspStreamingClient::CLibAvRtspStreamingClient()
 {
 	m_schedulerPtr = BasicTaskScheduler::createNew();
 	m_environmentPtr = BasicUsageEnvironment::createNew(*m_schedulerPtr);
+	currentRtspConnectionPtr = NULL;
+	m_frameBitmapPtr = NULL;
+	m_frameRetrieved = false;
+	m_frameRetrieveTimeoutMs = 2000;
 
 	//avlib codec initialization
 	m_formatCtxPtr = NULL;
@@ -54,12 +60,17 @@ CLibAvRtspStreamingClient::CLibAvRtspStreamingClient()
 }
 
 bool CLibAvRtspStreamingClient::OpenConnection(const QUrl& url)
-{	
+{
+	//Close previous connection
+	if(currentRtspConnectionPtr != NULL){
+		shutdownStream(currentRtspConnectionPtr);
+	}
+
 	QByteArray urlByteArray = url.toEncoded();
-	const char* urlText = urlByteArray.constData();
+	const char* urlText = urlByteArray.constData();	
 	 
-	RTSPClient* rtspClientPtr = CLibAvRtspStreamingClient::CLibAvRtspConnection::createNew(this, *m_environmentPtr, urlText, RTSP_CLIENT_VERBOSITY_LEVEL, NULL, 0);	
-	if (rtspClientPtr == NULL){
+	currentRtspConnectionPtr = CLibAvRtspStreamingClient::CLibAvRtspConnection::createNew(this, *m_environmentPtr, urlText, RTSP_CLIENT_VERBOSITY_LEVEL, NULL, 0);	
+	if (currentRtspConnectionPtr == NULL){
 		//Failed to create a RTSP client for URL
 		return false; 		
 	}
@@ -67,7 +78,7 @@ bool CLibAvRtspStreamingClient::OpenConnection(const QUrl& url)
 	// Next, send a RTSP "DESCRIBE" command, to get a SDP description for the stream.
 	// Note that this command - like all RTSP commands - is sent asynchronously; we do not block, waiting for a response.
 	// Instead, the following function call returns immediately, and we handle the RTSP response later, from within the event loop:
-	rtspClientPtr->sendDescribeCommand(&continueAfterDESCRIBE);
+	currentRtspConnectionPtr->sendDescribeCommand(&continueAfterDESCRIBE);
 
 	// Start a new streaming thread
 	start();
@@ -76,15 +87,24 @@ bool CLibAvRtspStreamingClient::OpenConnection(const QUrl& url)
 }
 
 
-void CLibAvRtspStreamingClient::CloseConnection(bool waitForClosed)
+void CLibAvRtspStreamingClient::CloseConnection()
+{
+	//Close previous connection
+	if(currentRtspConnectionPtr != NULL){
+		shutdownStream(currentRtspConnectionPtr);
+		currentRtspConnectionPtr = NULL;
+	}
+}
+
+void CLibAvRtspStreamingClient::QuitStreaming()
 {
 	//Set loop variable to non-zero - end loop
 	m_eventLoopWatchVariable = 1;
 
-	if (waitForClosed){
+	if(isRunning()){
 		if (!wait(5000)){
 			terminate();
-		}
+		}		
 	}
 }
 
@@ -152,22 +172,26 @@ void CLibAvRtspStreamingClient::DecodeFrame(u_int8_t* frameData, unsigned frameS
 		while (m_packet.size > 0){
 			int gotFrame = 0;
 
-			m_mutex.lock();
-			int decodedLength = avcodec_decode_video2(m_codecContextPtr, m_framePtr, &gotFrame, &m_packet);
-			m_mutex.unlock();
+			int decodedLength = avcodec_decode_video2(m_codecContextPtr, m_framePtr, &gotFrame, &m_packet);			
 			
-			if (decodedLength < 0){
+			if (decodedLength < 0){				
 				return;
 			}
 
 			if (gotFrame){
-								
-				Q_EMIT frameReady(
-					m_framePtr,
-					m_codecContextPtr->width,
-					m_codecContextPtr->height,
-					(int)m_codecContextPtr->pix_fmt);
+				QMutexLocker locker(&m_mutex);
+
+				if(m_frameBitmapPtr != NULL){
+					CLibAvConverter::ConvertBitmap(
+						*m_framePtr,
+						istd::CIndex2d(m_codecContextPtr->width, m_codecContextPtr->height),
+						m_codecContextPtr->pix_fmt,
+						*m_frameBitmapPtr);
+
+					m_frameRetrieved = true;
+				}				
 			}
+			
 
 			m_packet.size -= decodedLength;
 			m_packet.data += decodedLength;
@@ -175,9 +199,33 @@ void CLibAvRtspStreamingClient::DecodeFrame(u_int8_t* frameData, unsigned frameS
 	}		
 }
 
-QMutex& CLibAvRtspStreamingClient::GetMutex()
-{
-	return m_mutex;
+bool CLibAvRtspStreamingClient::RetrieveFrame(iimg::IBitmap* frameBitmap)
+{	
+	m_mutex.lock();
+
+	m_frameRetrieved = false;
+	m_frameBitmapPtr = frameBitmap;
+	
+	m_mutex.unlock();
+
+	QTime timeoutTime = QTime::currentTime().addMSecs(m_frameRetrieveTimeoutMs);
+
+	while(1){
+		{
+			QMutexLocker locker(&m_mutex);		
+
+			if(m_frameRetrieved){
+				m_frameBitmapPtr = NULL;
+				return true;
+			}
+
+			//check for timeout
+			if(QTime::currentTime() > timeoutTime){
+				m_frameBitmapPtr = NULL;
+				return false;		
+			}
+		}
+	}
 }
 
 CLibAvRtspStreamingClient::~CLibAvRtspStreamingClient()
@@ -457,6 +505,7 @@ void CLibAvRtspStreamingClient::streamTimerHandler(void* clientData)
 void CLibAvRtspStreamingClient::shutdownStream(RTSPClient* rtspClientPtr, int /*exitCode*/) 
 {
 	CLibAvRtspConnection *conn = dynamic_cast<CLibAvRtspConnection*>(rtspClientPtr);
+	CLibAvRtspStreamingClient *client = conn->m_streamClientPtr;
 	
 	// First, check whether any subsessions have still to be closed:
 	if (conn->m_sessionPtr != NULL) {
@@ -482,16 +531,16 @@ void CLibAvRtspStreamingClient::shutdownStream(RTSPClient* rtspClientPtr, int /*
 			// Don't bother handling the response to the "TEARDOWN".
 			rtspClientPtr->sendTeardownCommand(*(conn->m_sessionPtr), NULL);
 		}
-	}
-
-	//leave LIVE555 event loop - end of streaming	
-	if (conn->m_streamClientPtr != NULL){
-		conn->m_streamClientPtr->CloseConnection(false);
-	}
+	}	
 
 	//Closing the stream
-	Medium::close(rtspClientPtr);
+	Medium::close(rtspClientPtr);	
 	// Note that this will also cause this stream's "StreamClientState" structure to get reclaimed.
+
+	//leave LIVE555 event loop - end of streaming	
+	if (client != NULL){
+		client->QuitStreaming();
+	}
 }
 
 

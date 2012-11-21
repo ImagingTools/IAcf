@@ -43,8 +43,7 @@ public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CLibAvRtspStreamingCameraComp);
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
-		//I_REGISTER_INTERFACE(icam::IExposureConstraints);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);		
 		I_REGISTER_INTERFACE(imeas::INumericConstraints);
 		I_ASSIGN(m_urlParamsIdAttrPtr, "UrlParamId", "ID used to get camera URL from the parameter set", false, "UrlParamId");
 		I_ASSIGN(m_urlSuffixAttrPtr, "UrlSuffixParam", "String added to the end of url string. Must be in format val1=1&val2=2&val3=3", false, "UrlSuffixParam");
@@ -73,8 +72,7 @@ public:
 	virtual QString GetNumericValueDescription(int index) const;
 	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
-public Q_SLOTS:
-	void frameArrived(AVFrame*, int , int, int);
+public Q_SLOTS:	
 	void requestReceived(QNetworkReply*);
 
 protected:
@@ -100,12 +98,11 @@ private:
 
 	istd::TDelPtr<CLibAvRtspStreamingClient> m_streamingClientPtr;
 
-	istd::CIndex2d m_lastImageSize;
-	iimg::IBitmap* m_frameBitmapPtr;
+	istd::CIndex2d m_lastImageSize;	
 
 	istd::TDelPtr<QNetworkAccessManager> m_networkAccessManagerPtr;
 
-	QMutex *m_mutexPtr;
+	QMutex *m_mutexPtr;	
 };
 
 } // namespace ilibav

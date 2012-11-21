@@ -48,16 +48,24 @@ public:
 	bool OpenConnection(const QUrl& url);
 
 	/**
-		Stops streaming loop (and connection)
+		Closes connection and stops streaming loop 
 	*/
-	void CloseConnection(bool waitForClosed);
+	void CloseConnection();
+
+	/** 
+		Stops streaming loop
+	*/
+	void QuitStreaming();	
 
 	/**
 		New frame has arrived
 	*/
-	void DecodeFrame(u_int8_t* frameData, unsigned frameSize);	
+	void DecodeFrame(u_int8_t* frameData, unsigned frameSize);
 
-	QMutex& GetMutex();
+	/**
+		Waits for frame to arrive and then convert to bitmap
+	*/
+	bool RetrieveFrame(iimg::IBitmap* frameBitmap);	
 
 protected:
 	/**
@@ -94,12 +102,6 @@ protected:
 		virtual ~CLibAvRtspConnection(); 
 	};
 
-Q_SIGNALS:
-	/**
-		New frame has arrived
-	*/
-	void frameReady(AVFrame*, int , int, int);
-
 protected:
 	void run();
 
@@ -115,7 +117,8 @@ protected:
 
 private:
 	TaskScheduler* m_schedulerPtr;
-	UsageEnvironment* m_environmentPtr;	
+	UsageEnvironment* m_environmentPtr;
+	CLibAvRtspConnection* currentRtspConnectionPtr;
 
 	/** 
 		Indicates state of streaming loop:
@@ -139,6 +142,10 @@ private:
 	int m_ppsUnitBufferSize;
 
 	CLibAvRtspStreamingClient* m_streamClientPtr;
+
+	iimg::IBitmap* m_frameBitmapPtr;
+	bool m_frameRetrieved;
+	int m_frameRetrieveTimeoutMs;
 
 	QMutex m_mutex;
 
