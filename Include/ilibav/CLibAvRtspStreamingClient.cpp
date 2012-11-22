@@ -21,8 +21,7 @@ CLibAvRtspStreamingClient::CLibAvRtspStreamingClient()
 	m_schedulerPtr = BasicTaskScheduler::createNew();
 	m_environmentPtr = BasicUsageEnvironment::createNew(*m_schedulerPtr);
 	currentRtspConnectionPtr = NULL;
-	m_frameBitmapPtr = NULL;
-	m_frameRetrieved = false;
+	m_frameBitmapPtr = NULL;	
 	m_frameRetrieveTimeoutMs = 2000;
 
 	//avlib codec initialization
@@ -179,16 +178,16 @@ void CLibAvRtspStreamingClient::DecodeFrame(u_int8_t* frameData, unsigned frameS
 			}
 
 			if (gotFrame){
-				QMutexLocker locker(&m_mutex);
-
+				QMutexLocker locker(&m_mutex);				
 				if(m_frameBitmapPtr != NULL){
+					//convert frame
 					CLibAvConverter::ConvertBitmap(
 						*m_framePtr,
 						istd::CIndex2d(m_codecContextPtr->width, m_codecContextPtr->height),
 						m_codecContextPtr->pix_fmt,
 						*m_frameBitmapPtr);
-
-					m_frameRetrieved = true;
+					//indicate that frame retrieved
+					m_frameBitmapPtr = NULL;
 				}				
 			}
 			
@@ -202,20 +201,18 @@ void CLibAvRtspStreamingClient::DecodeFrame(u_int8_t* frameData, unsigned frameS
 bool CLibAvRtspStreamingClient::RetrieveFrame(iimg::IBitmap* frameBitmap)
 {	
 	m_mutex.lock();
-
-	m_frameRetrieved = false;
-	m_frameBitmapPtr = frameBitmap;
-	
+	m_frameBitmapPtr = frameBitmap;	
 	m_mutex.unlock();
 
+	//set timeout in ms
 	QTime timeoutTime = QTime::currentTime().addMSecs(m_frameRetrieveTimeoutMs);
 
 	while(1){
 		{
 			QMutexLocker locker(&m_mutex);		
 
-			if(m_frameRetrieved){
-				m_frameBitmapPtr = NULL;
+			//check for retrieved frame
+			if(m_frameBitmapPtr == NULL){				
 				return true;
 			}
 
@@ -224,7 +221,7 @@ bool CLibAvRtspStreamingClient::RetrieveFrame(iimg::IBitmap* frameBitmap)
 				m_frameBitmapPtr = NULL;
 				return false;		
 			}
-		}
+		}		
 	}
 }
 
