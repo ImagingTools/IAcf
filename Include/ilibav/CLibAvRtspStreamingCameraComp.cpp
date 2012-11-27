@@ -1,20 +1,19 @@
-// Qt includes
+#include "ilibav/CLibAvRtspStreamingCameraComp.h"
 
-#include <QUrl>
+
+// Qt includes
+#include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "ilibav/CLibAvConverter.h"
-
+#include "imath/CGeneralUnitInfo.h"
 #include "i2d/CRectangle.h"
 
-// ACF-Solutions includes
-#include "imeas/CGeneralUnitInfo.h"
+// IACF includes
+#include "ilibav/CLibAvConverter.h"
 
-
-#include "CLibAvRtspStreamingCameraComp.h"
 
 namespace ilibav
 {
@@ -108,9 +107,9 @@ QString CLibAvRtspStreamingCameraComp::GetNumericValueDescription(int index) con
 }
 
 
-const imeas::IUnitInfo& CLibAvRtspStreamingCameraComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo& CLibAvRtspStreamingCameraComp::GetNumericValueUnitInfo(int index) const
 {
-	static imeas::CGeneralUnitInfo frameRateUnitInfo(imeas::IUnitInfo::UT_TECHNICAL, "fps", 100, istd::CRange(1, 100));
+	static imath::CGeneralUnitInfo frameRateUnitInfo(imath::IUnitInfo::UT_TECHNICAL, "fps", 100, istd::CRange(1, 100));
 
 	switch (index){
 	case 0:
