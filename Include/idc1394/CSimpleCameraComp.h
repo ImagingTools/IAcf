@@ -37,8 +37,10 @@ public:
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_REGISTER_SUBELEMENT(AdjustConstraints);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(AdjustConstraints, imeas::ILinearAdjustConstraints, ExtractAdjustContraints);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(AdjustConstraints, istd::IChangeable, ExtractAdjustContraints);
 		I_REGISTER_SUBELEMENT(ExposureConstraints);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(ExposureConstraints, icam::IExposureConstraints, ExtractExposureContraints);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(ExposureConstraints, istd::IChangeable, ExtractExposureContraints);
 		I_ASSIGN(m_adjustParamsIdAttrPtr, "AdjustParamsId", "ID used to get brightness and contrast adjust parameters from the parameter set", false, "AdjustParams");
 		I_ASSIGN(m_defaultAdjustParamsCompPtr, "DefaultAdjustParams", "Default contrast and brightness adjust parameters that will be used", false, "DefaultAdjustParams");
 		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "ID used to exposure parameters from the parameter set", false, "ExposureParams");
