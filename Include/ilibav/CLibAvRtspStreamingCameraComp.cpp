@@ -9,6 +9,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "imath/CGeneralUnitInfo.h"
+#include "iprm/TParamsPtr.h"
 #include "i2d/CRectangle.h"
 
 // IACF includes
@@ -125,19 +126,12 @@ const imath::IUnitInfo& CLibAvRtspStreamingCameraComp::GetNumericValueUnitInfo(i
 
 void CLibAvRtspStreamingCameraComp::EnsureConnected(const iprm::IParamsSet* paramsPtr)
 {
-	QUrl cameraUrl;
+	iprm::TParamsPtr<ifile::IFileNameParam> urlParamPtr(paramsPtr, m_urlParamsIdAttrPtr, m_defaultUrlParamCompPtr, true);
+	if (!urlParamPtr.IsValid()){
+		return;
+	}
 
-	//read stream path
-	if (m_urlParamsIdAttrPtr.IsValid()){
-		const ifile::IFileNameParam* urlParamPtr = dynamic_cast<const ifile::IFileNameParam*>(paramsPtr->GetParameter(*m_urlParamsIdAttrPtr));
-		if (urlParamPtr != NULL){
-			cameraUrl.setUrl(urlParamPtr->GetPath());
-		}
-	}	
-
-	if (cameraUrl.isValid() && m_defaultUrlParamCompPtr.IsValid()){
-		cameraUrl = m_defaultUrlParamCompPtr->GetPath();
-	}	
+	QUrl cameraUrl(urlParamPtr->GetPath());
 
 	//read AOI	
 	if (m_aoiParamsIdAttrPtr.IsValid()){
