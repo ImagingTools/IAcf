@@ -341,10 +341,10 @@ bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, C
 	const CChannelSelectionNode* deviceNodePtr = dynamic_cast<const CChannelSelectionNode*>(selectionPtr);
 	if (deviceNodePtr != NULL){
 		result.device = deviceNodePtr->GetActivePhysicalAddress();
-		const CChannelSelectionNode* subdeviceNodePtr = dynamic_cast<const CChannelSelectionNode*>(deviceNodePtr->GetActiveSubselection());
+		const CChannelSelectionNode* subdeviceNodePtr = dynamic_cast<const CChannelSelectionNode*>(deviceNodePtr->GetSubselection(deviceNodePtr->GetSelectedOptionIndex()));
 		if (subdeviceNodePtr != NULL){
 			result.subdevice = subdeviceNodePtr->GetActivePhysicalAddress();
-			const CChannelSelectionNode* channelNodePtr = dynamic_cast<const CChannelSelectionNode*>(subdeviceNodePtr->GetActiveSubselection());
+			const CChannelSelectionNode* channelNodePtr = dynamic_cast<const CChannelSelectionNode*>(subdeviceNodePtr->GetSubselection(subdeviceNodePtr->GetSelectedOptionIndex()));
 			if (channelNodePtr != NULL){
 				result.channel = channelNodePtr->GetActivePhysicalAddress();
 
