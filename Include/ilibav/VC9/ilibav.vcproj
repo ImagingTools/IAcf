@@ -185,18 +185,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLibAvRtspStreamingCameraComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvRtspStreamingClient.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvRtspStreamingDataSink.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CLibAvVideoDecoderComp.cpp"
 				>
 			</File>
@@ -211,18 +199,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLibAvRtspStreamingCameraComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvRtspStreamingClient.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvRtspStreamingDataSink.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CLibAvVideoDecoderComp.h"
 				>
 			</File>
@@ -234,26 +210,10 @@
 		<Filter
 			Name="Moc Files"
 			>
-			<File
-				RelativePath="..\CLibAvRtspStreamingCameraComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvRtspStreamingClient.moc"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			>
-			<File
-				RelativePath="..\Generated\moc_CLibAvRtspStreamingCameraComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CLibAvRtspStreamingClient.cpp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
