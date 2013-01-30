@@ -8,7 +8,7 @@
 #include "iser/CArchiveTag.h"
 
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "imebase.h"
 
@@ -19,7 +19,7 @@ namespace imebase
 
 class CChannelSelectionNode:
 			virtual public iprm::ISelectionParam,
-			virtual public iprm::ISelectionConstraints
+			virtual public iprm::IOptionsList
 {
 public:
 	CChannelSelectionNode();
@@ -40,13 +40,13 @@ public:
 	void ResetNodes();
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+	virtual const iprm::IOptionsList* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
 	virtual iprm::ISelectionParam* GetSubselection(int index) const;
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
