@@ -36,7 +36,7 @@ int CChannelSelectionNode::GetActivePhysicalAddress() const
 	}
 
 	const SelectionInfo* infoPtr = m_subselections.GetAt(m_selectedIndex);
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	return infoPtr->physicalIndex;
 }
@@ -81,7 +81,7 @@ iprm::ISelectionParam* CChannelSelectionNode::GetSubselection(int /*index*/) con
 	}
 
 	const SelectionInfo* infoPtr = m_subselections.GetAt(m_selectedIndex);
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	return infoPtr->selectionPtr.GetPtr();
 }
@@ -103,11 +103,11 @@ int CChannelSelectionNode::GetOptionsCount() const
 
 QString CChannelSelectionNode::GetOptionName(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_subselections.GetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_subselections.GetCount());
 
 	const SelectionInfo* infoPtr = m_subselections.GetAt(index);
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	return infoPtr->name;
 }

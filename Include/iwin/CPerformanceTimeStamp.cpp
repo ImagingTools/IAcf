@@ -52,7 +52,7 @@ void CPerformanceTimeStamp::SetNativeRepresentation(quint64 value)
 
 void CPerformanceTimeStamp::Start(double elapsedTime)
 {
-	I_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
+	Q_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
 
 	istd::CChangeNotifier notifier(this);
 
@@ -75,7 +75,7 @@ QDateTime CPerformanceTimeStamp::GetStartTime() const
 
 double CPerformanceTimeStamp::GetElapsed() const
 {
-	I_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
+	Q_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
 
 	qint64 endCounter;
 	::QueryPerformanceCounter((LARGE_INTEGER*)&endCounter);

@@ -48,12 +48,12 @@ CSurfaceViewComp::CSurfaceViewComp()
 
 void CSurfaceViewComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	imath::ISampledFunction2d* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		I_ASSERT(objectPtr->GetArgumentDimensionality() == 2);
-		I_ASSERT(objectPtr->GetResultDimensionality() == 1);
+		Q_ASSERT(objectPtr->GetArgumentDimensionality() == 2);
+		Q_ASSERT(objectPtr->GetResultDimensionality() == 1);
 
 		int width = objectPtr->GetGridSize(0);
 		int height = objectPtr->GetGridSize(1);
@@ -245,7 +245,7 @@ void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 
 void CSurfaceViewComp::OnToggleAutoScale(bool value)
 {
-	I_ASSERT(m_surfacePlotPtr != NULL);
+	Q_ASSERT(m_surfacePlotPtr != NULL);
 
 	m_surfacePlotPtr->coordinates()->setAutoScale(value);
 
@@ -255,7 +255,7 @@ void CSurfaceViewComp::OnToggleAutoScale(bool value)
 
 void CSurfaceViewComp::OnToggleShader(bool value)
 {
-	I_ASSERT(m_surfacePlotPtr != NULL);
+	Q_ASSERT(m_surfacePlotPtr != NULL);
 
 	Qwt3D::SHADINGSTYLE shadingStyle = value ? Qwt3D::GOURAUD : Qwt3D::FLAT;
 
@@ -265,7 +265,7 @@ void CSurfaceViewComp::OnToggleShader(bool value)
 
 void CSurfaceViewComp::OnMeshEnabled(bool isMeshEnabled)
 {
-	I_ASSERT(m_surfacePlotPtr != NULL);
+	Q_ASSERT(m_surfacePlotPtr != NULL);
 
 	m_surfacePlotPtr->setSmoothMesh(isMeshEnabled);
 
@@ -283,7 +283,7 @@ void CSurfaceViewComp::OnMeshEnabled(bool isMeshEnabled)
 
 void CSurfaceViewComp::OnShowColorLegend(bool showColorLegend)
 {
-	I_ASSERT(m_surfacePlotPtr != NULL);
+	Q_ASSERT(m_surfacePlotPtr != NULL);
 
 	m_surfacePlotPtr->showColorLegend(showColorLegend);
 }

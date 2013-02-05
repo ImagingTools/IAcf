@@ -169,7 +169,7 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 				bool /*killOnTimeout*/)
 {
 	if (taskId >= 0){
-		I_ASSERT(GetTaskState(taskId) != TS_NONE);	// task exists
+		Q_ASSERT(GetTaskState(taskId) != TS_NONE);	// task exists
 
 		while (GetTaskState(taskId) == TS_WAIT){
 			if (FinishNextTask() < 0){
@@ -638,7 +638,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 	while (true){
 		if (m_packet.stream_index == m_videoStreamId){
 			while ((m_rawDataPtr != NULL) && (m_packet.size > 0)){
-				I_ASSERT(m_videoCodecContextPtr != NULL);
+				Q_ASSERT(m_videoCodecContextPtr != NULL);
 
 				// Decode the next chunk of data
 				int frameFinished = 0;				
@@ -690,7 +690,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 		}
 		else if (m_packet.stream_index == m_audioStreamId){
 			while ((m_rawDataPtr != NULL) && (m_packet.size > 0)){
-				I_ASSERT(m_audioCodecContextPtr != NULL);
+				Q_ASSERT(m_audioCodecContextPtr != NULL);
 				
 				// Decode the next chunk of data
 				int audioBufferSize = AVCODEC_MAX_AUDIO_FRAME_SIZE;				
@@ -886,13 +886,13 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 
 	while (openTasksCount > 0){
 		if (m_isCurrentImageValid){
-			I_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+			Q_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
 
 			for (		ImageTaskMap::iterator iter = m_imageTasks.begin();
 						iter != m_imageTasks.end();
 						++iter){
 				ImageTask& task = iter.value();
-				I_ASSERT(task.outputPtr != NULL);
+				Q_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
 					// Optimized for speed
@@ -914,13 +914,13 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 		}
 
 		if (m_isCurrentSampleValid){
-			I_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+			Q_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
 
 			for (		AudioTaskMap::iterator iter = m_audioTasks.begin();
 						iter != m_audioTasks.end();
 						++iter){
 				AudioTask& task = iter.value();
-				I_ASSERT(task.outputPtr != NULL);
+				Q_ASSERT(task.outputPtr != NULL);
 
 				if (task.state == TS_WAIT){
 					if (task.outputPtr == m_audioSampleObjectCompPtr.GetPtr()){
@@ -961,14 +961,14 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 					nextImageFrame);
 
 		if (readFrameType == FT_IMAGE){
-			I_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+			Q_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
 
 			m_isCurrentImageValid = true;
 
 			m_lastReadFrame = m_currentFrame;
 		}
 		else if (readFrameType == FT_AUDIO_SAMPLE){
-			I_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+			Q_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
 
 			m_isCurrentSampleValid = true;
 		}

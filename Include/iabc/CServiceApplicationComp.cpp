@@ -40,8 +40,8 @@ bool CServiceApplicationComp::InitializeApplication(int/* argc*/, char** /* argv
 
 int CServiceApplicationComp::Execute(int argc, char** argv)
 {
-	I_ASSERT(m_serviceNameAttrPtr.IsValid());
-	I_ASSERT(m_serviceDescriptionAttrPtr.IsValid());
+	Q_ASSERT(m_serviceNameAttrPtr.IsValid());
+	Q_ASSERT(m_serviceDescriptionAttrPtr.IsValid());
 
 	if (!m_serviceDescriptionAttrPtr.IsValid() || !m_serviceNameAttrPtr.IsValid()){
 		return -1;
@@ -151,13 +151,13 @@ QStringList CServiceApplicationComp::GetApplicationArguments() const
 	
 bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	I_ASSERT(m_applicationCompPtr.IsValid());
+	Q_ASSERT(m_applicationCompPtr.IsValid());
 	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_applicationCompPtr.GetPtr());
 	if (guiAppPtr != NULL){
 		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
 		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
 			QWidget* widgetPtr = mainWdigetPtr->GetWidget();
-			I_ASSERT(widgetPtr != NULL);
+			Q_ASSERT(widgetPtr != NULL);
 
 			// prevent closing of the main widget:
 			if ((widgetPtr == sourcePtr) && eventPtr->type() == QEvent::Close){
@@ -178,7 +178,7 @@ bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 
 void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
-	I_ASSERT(m_applicationCompPtr.IsValid());
+	Q_ASSERT(m_applicationCompPtr.IsValid());
 
 	if (reason == QSystemTrayIcon::DoubleClick){
 		iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_applicationCompPtr.GetPtr());
@@ -186,7 +186,7 @@ void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationRea
 			const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
 			if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
 				QWidget* widgetPtr = mainWdigetPtr->GetWidget();
-				I_ASSERT(widgetPtr != NULL);
+				Q_ASSERT(widgetPtr != NULL);
 				
 				if (widgetPtr->isHidden()){
 					widgetPtr->show();
@@ -229,7 +229,7 @@ void CServiceApplicationComp::CService::start()
 		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
 		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
 			QWidget* widgetPtr = mainWdigetPtr->GetWidget();
-			I_ASSERT(widgetPtr != NULL);
+			Q_ASSERT(widgetPtr != NULL);
 			QSystemTrayIcon* trayIcon = new QSystemTrayIcon(widgetPtr);
 			connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), &m_parent, SLOT(OnTrayIconActivated(QSystemTrayIcon::ActivationReason)));
 

@@ -20,7 +20,7 @@ namespace iqwt
 
 void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	int channelsCount = 0;
 
@@ -73,7 +73,7 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 			}
 
 			QwtPlotCurve* curvePtr = m_channelCurves.GetAt(channelIndex);
-			I_ASSERT(curvePtr != NULL);
+			Q_ASSERT(curvePtr != NULL);
 
 			maxValue = qCeil(maxValue * 100) / 100.0;
 
@@ -218,7 +218,7 @@ QwtText CHistogramViewComp::HistogramPlotPicker::trackerText(const QPoint& posit
 		return QwtText();
 	}
 
-	I_ASSERT(m_parent.IsGuiCreated());
+	Q_ASSERT(m_parent.IsGuiCreated());
 
 	int sampleIndex = int(invTransform(position).x() + 0.5);
 

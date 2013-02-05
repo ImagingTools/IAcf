@@ -75,7 +75,7 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 
 QString CTextEditor::GetText() const
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	return m_scintilla->text();
 }
@@ -83,7 +83,7 @@ QString CTextEditor::GetText() const
 
 void CTextEditor::SetText(const QString& text)
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	m_scintilla->setText(text);
 }
@@ -113,7 +113,7 @@ const ibase::IHierarchicalCommand* CTextEditor::GetCommands() const
 
 void CTextEditor::SetFoldingEnabled(bool useFoldingEnabled)
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	if (useFoldingEnabled){
 		m_scintilla->setFolding(QsciScintilla::BoxedTreeFoldStyle); 
@@ -126,7 +126,7 @@ void CTextEditor::SetFoldingEnabled(bool useFoldingEnabled)
 
 void CTextEditor::SetLineNumberEnabled(bool showLineNumber)
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	m_scintilla->setMarginLineNumbers(1, showLineNumber);
 }
@@ -134,7 +134,7 @@ void CTextEditor::SetLineNumberEnabled(bool showLineNumber)
 
 void CTextEditor::SetLanguage(const QString& language)
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	LexerMap::iterator foundIt = m_languages.find(language.toUpper());
 	if (foundIt != m_languages.end()){
@@ -145,7 +145,7 @@ void CTextEditor::SetLanguage(const QString& language)
 
 void CTextEditor::SetReadOnly(bool readOnly)
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	m_scintilla->setReadOnly(readOnly);
 }
@@ -187,7 +187,7 @@ void CTextEditor::OnTextChanged()
 	emit DataChanged();
 
 	QString linesString = QString("%1").arg(m_scintilla->lines());
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	if (m_scintilla->marginLineNumbers(1)){
 		m_scintilla->setMarginWidth(1, linesString);
@@ -198,7 +198,7 @@ void CTextEditor::OnTextChanged()
 
 void CTextEditor::OnToLowercase()
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	QString selectedText = m_scintilla->selectedText();
 
@@ -219,7 +219,7 @@ void CTextEditor::OnToLowercase()
 
 void CTextEditor::OnToUppercase()
 {
-	I_ASSERT(m_scintilla != NULL);
+	Q_ASSERT(m_scintilla != NULL);
 
 	QString selectedText = m_scintilla->selectedText();
 

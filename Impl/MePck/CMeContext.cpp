@@ -13,7 +13,7 @@ CMeContext::CMeContext(const CMeAddr& address, bool isOutput, imeas::IDataSequen
 	m_isOutput(isOutput),
 	m_samplesSequence(*containerPtr)
 {
-	I_ASSERT(containerPtr != NULL);
+	Q_ASSERT(containerPtr != NULL);
 
 	m_hwBuffer.resize(m_samplesSequence.GetSamplesCount());
 
@@ -121,7 +121,7 @@ void CMeContext::CopyToContainer()
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
 	int samplesCount = m_samplesSequence.GetSamplesCount();
-	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
+	Q_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
 	istd::CChangeNotifier notifier(&m_samplesSequence);
 
@@ -145,7 +145,7 @@ void CMeContext::CopyFromContainer()
 	meQueryRangeInfo(m_address.device, m_address.subdevice, 0, &unit, &minVoltage, &maxVoltage, &maxData);
 
 	int samplesCount = m_samplesSequence.GetSamplesCount();
-	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
+	Q_ASSERT(samplesCount == int(m_hwBuffer.size()));
 
 	for (int index = 0; index < samplesCount; index++){
 		double sample = m_samplesSequence.GetSample(index);
