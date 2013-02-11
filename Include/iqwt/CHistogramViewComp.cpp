@@ -26,7 +26,19 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 
 	imeas::IDataSequence* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		QStringList channelNames;
+		const imeas::IDataSequenceInfo* sequenceInfoPtr = objectPtr->GetSequenceInfo();
+		
 		channelsCount = objectPtr->GetChannelsCount();
+
+		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
+			if (sequenceInfoPtr != NULL){
+				channelNames << sequenceInfoPtr->GetNumericValueName(channelIndex);
+			}
+			else{
+				channelNames << QString("Channel %1").arg(channelIndex + 1);
+			}
+		}
 
 		if (objectPtr->GetChannelsCount() != m_channelCurves.GetCount()){
 			ClearPlot();
@@ -49,7 +61,7 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 				curvePtr->attach(m_plotPtr.GetPtr());
 				m_channelCurves.PushBack(curvePtr);
 
-				ChannelCombo->addItem(QString("Channel %1").arg(channelIndex + 1));
+				ChannelCombo->addItem(channelNames[channelIndex]);
 			}
 		}
 		
