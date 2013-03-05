@@ -36,7 +36,7 @@ public:
 	virtual const istd::ITimeStamp* GetCurrentTimeStamp() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	bool m_isTimerValid;

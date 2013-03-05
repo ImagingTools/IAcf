@@ -37,7 +37,7 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	qint64 m_startCounter;

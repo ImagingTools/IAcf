@@ -119,7 +119,7 @@ int CPerformanceTimeStamp::GetSupportedOperations() const
 }
 
 
-bool CPerformanceTimeStamp::CopyFrom(const istd::IChangeable& object)
+bool CPerformanceTimeStamp::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const CPerformanceTimeStamp* nativeTimerPtr = dynamic_cast<const CPerformanceTimeStamp*>(&object);
 	if (nativeTimerPtr != NULL){

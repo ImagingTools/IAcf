@@ -19,7 +19,7 @@ const istd::ITimeStamp* CTimeStampCacheComp::GetCurrentTimeStamp() const
 
 // reimplemented (istd::IChangeable)
 
-bool CTimeStampCacheComp::CopyFrom(const IChangeable& object)
+bool CTimeStampCacheComp::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const iinsp::ITimeStampProvider* providerPtr = dynamic_cast<const iinsp::ITimeStampProvider*>(&object);
 	if (providerPtr != NULL){
