@@ -6,7 +6,6 @@
 
 // Qwt includes
 #include "qwt_plot_layout.h"
-#include "qwt_plot_grid.h"
 
 
 namespace iqwt
@@ -46,8 +45,10 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	sessionPtr->axisY.clear();
 	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
 	sessionPtr->curve.setTitle(description);
-	sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
+	if (m_plotPtr.IsValid()){
+		sessionPtr->curve.attach(m_plotPtr.GetPtr());
+	}
 
 	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId)) % (Qt::transparent - Qt::red));
 
@@ -89,7 +90,9 @@ void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
 		Q_ASSERT(m_cancelsCount >= 0);	// number of all cancelable sessions cannot be negative
 	}
 
-	sessionPtr->curve.detach();
+	if (m_plotPtr.IsValid()){
+		sessionPtr->curve.detach();
+	}
 
 	m_idToSessionMap.erase(foundIter);
 
@@ -180,17 +183,17 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	m_plotPtr->setEnabled(false);
 
 	// setup the plot grid:
-	QwtPlotGrid* gridPtr = new QwtPlotGrid();
+	m_gridPtr.SetPtr(new QwtPlotGrid());
 	QPen gridPen(QBrush(Qt::gray), 0, Qt::DashLine);
-	gridPtr->setMajPen(gridPen);
-	gridPtr->attach(m_plotPtr.GetPtr());
+	m_gridPtr->setMajPen(gridPen);
+	m_gridPtr->attach(m_plotPtr.GetPtr());
 
-	m_nowMarker.SetPtr(new QwtPlotMarker());
-	m_nowMarker->setValue(0.0, 0.0);
-	m_nowMarker->setLineStyle(QwtPlotMarker::VLine);
-	m_nowMarker->setLabelAlignment(Qt::AlignRight | Qt::AlignBottom);
-	m_nowMarker->setLinePen(QPen(Qt::darkMagenta, 2, Qt::DotLine));
-	m_nowMarker->attach(m_plotPtr.GetPtr());
+	m_nowMarkerPtr.SetPtr(new QwtPlotMarker());
+	m_nowMarkerPtr->setValue(0.0, 0.0);
+	m_nowMarkerPtr->setLineStyle(QwtPlotMarker::VLine);
+	m_nowMarkerPtr->setLabelAlignment(Qt::AlignRight | Qt::AlignBottom);
+	m_nowMarkerPtr->setLinePen(QPen(Qt::darkMagenta, 2, Qt::DotLine));
+	m_nowMarkerPtr->attach(m_plotPtr.GetPtr());
 
 	// add plot view to frame layout
 	QLayout* layoutPtr = DiagramFrame->layout();
@@ -202,14 +205,35 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	CancelButton->setVisible(*m_showCancelAttrPtr);
 	StatusFrame->setVisible(*m_showTaskDescriptionAttrPtr || *m_showCancelAttrPtr);
 
+	// attach all open sessions
+	for (		IdToSessionMap::ConstIterator sessionIter = m_idToSessionMap.constBegin();
+				sessionIter != m_idToSessionMap.constEnd();
+				++sessionIter){
+		const SessionPtr& sessionPtr = *sessionIter;
+
+		sessionPtr->curve.attach(m_plotPtr.GetPtr());
+	}
+
 	UpdateState();
 }
 
 
 void CProgressHistoryGuiComp::OnGuiDestroyed()
 {
-	m_nowMarker->detach();
-	m_nowMarker.Reset();
+	m_nowMarkerPtr->detach();
+	m_nowMarkerPtr.Reset();
+
+	m_gridPtr->detach();
+	m_gridPtr.Reset();
+
+	// detach all open sessions
+	for (		IdToSessionMap::ConstIterator sessionIter = m_idToSessionMap.constBegin();
+				sessionIter != m_idToSessionMap.constEnd();
+				++sessionIter){
+		const SessionPtr& sessionPtr = *sessionIter;
+
+		sessionPtr->curve.detach();
+	}
 
 	m_plotPtr.Reset();
 

@@ -7,6 +7,7 @@
 #include "qwt_plot_curve.h"
 #include "qwt_scale_draw.h"
 #include "qwt_plot_marker.h"
+#include "qwt_plot_grid.h"
 
 // ACF includes
 #include "ibase/IProgressManager.h"
@@ -68,7 +69,8 @@ private:
 	I_MULTIATTR(QString, m_progressColorsAttrPtr);
 
 	istd::TDelPtr<QwtPlot> m_plotPtr;
-	istd::TDelPtr<QwtPlotMarker> m_nowMarker;
+	istd::TDelPtr<QwtPlotMarker> m_nowMarkerPtr;
+	istd::TDelPtr<QwtPlotGrid> m_gridPtr;
 
 	typedef QVector<double> SingleData;
 
