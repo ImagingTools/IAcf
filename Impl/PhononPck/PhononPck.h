@@ -1,35 +1,25 @@
-#ifndef QtMmPck_included
-#define QtMmPck_included
+#ifndef PhononPck_included
+#define PhononPck_included
 
 
 #include "icomp/TModelCompWrap.h"
 
-#include "iqtmm/CVideoPlayerGuiComp.h"
 #include "iqtmm/CPhononVideoViewGuiComp.h"
-#include "iqtmm/CMediaLoaderComp.h"
-#include "iqtmm/CPlaybackControllerGuiComp.h"
-#include "iqtmm/CFrameSeqVideoControllerComp.h"
-#include "iqtmm/CSvgBitmapLoaderComp.h"
 
 
 /**
 	Qt based multimedia package.
 */
-namespace QtMmPck
+namespace PhononPck
 {
 
 
-typedef iqtmm::CVideoPlayerGuiComp VideoPlayerGui;
 typedef iqtmm::CPhononVideoViewGuiComp PhononVideoViewGui;
-typedef iqtmm::CMediaLoaderComp MediaLoader;
-typedef iqtmm::CPlaybackControllerGuiComp PlaybackControllerGui;
-typedef icomp::TModelCompWrap<iqtmm::CFrameSeqVideoControllerComp> FrameSeqVideoController;
-typedef iqtmm::CSvgBitmapLoaderComp SvgBitmapLoader;
 
 
-} // namespace QtMmPck
+} // namespace PhononPck
 
 
-#endif // !QtMmPck_included
+#endif // !PhononPck_included
 
 

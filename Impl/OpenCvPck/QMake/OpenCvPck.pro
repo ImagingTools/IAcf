@@ -3,9 +3,9 @@ include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = OpenCvPck
 
-INCLUDEPATH += ../../../Include
+INCLUDEPATH += $(ACFSLNDIR)/Include
 INCLUDEPATH += $(OPENCVDIR)/Include
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liocv
-LIBS += -L$(OPENCVDIR)/Lib -llibhighgui200.dll.a
+LIBS += -L$(OPENCVDIR)/x86/$$COMPILER_NAME/lib -lopencv_highgui242
 

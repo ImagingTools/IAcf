@@ -1,4 +1,4 @@
-#include "iqtmm/CPhononVideoViewGuiComp.h"
+#include "iphonon/CPhononVideoViewGuiComp.h"
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include <istd/TChangeNotifier.h>
 
 
-namespace iqtmm
+namespace iphonon
 {
 
 
@@ -231,6 +231,6 @@ void CPhononVideoViewGuiComp::OnGuiDestroyed()
 }
 
 
-} // namespace iqtmm
+} // namespace iphonon
 
 

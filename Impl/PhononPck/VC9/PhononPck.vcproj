@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="PhononPck"
+	ProjectGUID="{FB9DB436-B89D-4850-B696-44007ED5C714}"
 	RootNamespace="PhononPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
@@ -38,7 +39,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)/include/phonon&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -60,7 +61,7 @@
 				AdditionalDependencies="AcfStd.lib AcfQt.lib ifile.lib QtGui4.lib QtSvg4.lib phonon4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -109,7 +110,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)/include/phonon&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""

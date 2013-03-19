@@ -3,7 +3,7 @@ include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = MePck
 
-INCLUDEPATH += ../../../Include
+INCLUDEPATH += $(ACFSLNDIR)/Include
 INCLUDEPATH += $(MEIDSDIR)/include
 
 LIBS += -L$(MEIDSDIR)/lib -lmeIDSmain

@@ -8,8 +8,8 @@ TARGET = QsciPck
 QT += xml
 
 INCLUDEPATH += ../../../Include
-INCLUDEPATH += "$(QScintilla)/Include"
+INCLUDEPATH += "$(QSCINTILLA)/Include"
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqsci
-LIBS += -L$(QScintilla)/Lib/$$COMPILER_DIR -lQScintilla
+LIBS += -L$(QSCINTILLA)/Lib/$$COMPILER_DIR -lQScintilla
 

@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="iphonon"
+	ProjectGUID="{DD623E55-D20F-4254-84DA-0FD6E5F7ACF3}"
 	RootNamespace="iphonon"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
@@ -64,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -145,7 +146,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(QTDIR)\include\phonon&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -189,39 +190,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CFrameSeqVideoControllerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFrameSeqVideoControllerComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CMediaLoaderComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPhononVideoViewGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CPhononVideoViewGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CPlaybackControllerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CPlaybackControllerGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSvgBitmapLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CVideoPlayerGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -231,27 +204,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CFrameSeqVideoControllerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMediaLoaderComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CPhononVideoViewGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CPlaybackControllerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSvgBitmapLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CVideoPlayerGuiComp.h"
 				>
 			</File>
 			<File
@@ -272,23 +225,7 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CFrameSeqVideoControllerComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CPhononVideoViewGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CPlaybackControllerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CPlaybackControllerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CVideoPlayerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -296,14 +233,6 @@
 			Name="Qt Designer Files"
 			Filter="ui"
 			>
-			<File
-				RelativePath="..\CPlaybackControllerGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CVideoPlayerGuiComp.ui"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

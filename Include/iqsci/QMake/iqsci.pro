@@ -5,5 +5,5 @@ TARGET = iqsci
 
 QT += xml
 
-INCLUDEPATH += $(QScintilla)/Include
+INCLUDEPATH += $(QSCINTILLA)/Include
 

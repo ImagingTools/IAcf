@@ -9,6 +9,7 @@ CONFIG += ordered
 #Static
 
 win32{
+	SUBDIRS += iocv
 	SUBDIRS += ilibav
 	SUBDIRS += iqaxmm
 	SUBDIRS += iqwt
@@ -16,6 +17,7 @@ win32{
 	SUBDIRS += izlib
 	SUBDIRS += iwin
 
+	iocv.file = ../../Include/iocv/QMake/iocv.pro
 	ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
 	iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
 	iqwt.file = ../../Include/iqwt/QMake/iqwt.pro

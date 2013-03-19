@@ -1,17 +1,17 @@
-#ifndef iqtmm_CPhononVideoViewGuiComp_included
-#define iqtmm_CPhononVideoViewGuiComp_included
+#ifndef iphonon_CPhononVideoViewGuiComp_included
+#define iphonon_CPhononVideoViewGuiComp_included
 
 
 // Qt includes
 #include <Phonon/VideoWidget>
 #include <Phonon/MediaObject>
 
+// ACF includes
 #include "imm/IVideoController.h"
-
 #include "iqtgui/TGuiComponentBase.h"
 
 
-namespace iqtmm
+namespace iphonon
 {
 
 
@@ -74,8 +74,8 @@ private:
 };
 
 
-} // namespace iqtmm
+} // namespace iphonon
 
 
-#endif // !iqtmm_CPhononVideoViewGuiComp_included
+#endif // !iphonon_CPhononVideoViewGuiComp_included
 

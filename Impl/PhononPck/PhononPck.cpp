@@ -1,10 +1,10 @@
-#include "QtMmPck.h"
+#include "PhononPck.h"
 
 
 #include "icomp/export.h"
 
 
-namespace QtMmPck
+namespace PhononPck
 {
 
 
@@ -22,6 +22,6 @@ I_EXPORT_COMPONENT(
 			"Phonon Widget Video Play" IM_TAG("GUI"));
 
 
-} // namespace QtMmPck
+} // namespace PhononPck
 
 
