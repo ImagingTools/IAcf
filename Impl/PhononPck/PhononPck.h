@@ -4,7 +4,7 @@
 
 #include "icomp/TModelCompWrap.h"
 
-#include "iqtmm/CPhononVideoViewGuiComp.h"
+#include "iphonon/CPhononVideoViewGuiComp.h"
 
 
 /**
@@ -14,7 +14,7 @@ namespace PhononPck
 {
 
 
-typedef iqtmm::CPhononVideoViewGuiComp PhononVideoViewGui;
+typedef iphonon::CPhononVideoViewGuiComp PhononVideoViewGui;
 
 
 } // namespace PhononPck
