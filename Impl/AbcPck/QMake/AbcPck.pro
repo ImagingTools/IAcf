@@ -5,7 +5,8 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = AbcPck
 
-INCLUDEPATH += ../../../Include
+INCLUDEPATH += $(QTSERVICEDIR)/Src
 
+LIBS += -L$(QTSERVICEDIR)/Lib/$$COMPILER_DIR -lQtService
 LIBS += -L../../../Lib/$$COMPILER_DIR -liabc
 

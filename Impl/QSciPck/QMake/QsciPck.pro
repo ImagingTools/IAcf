@@ -8,15 +8,8 @@ TARGET = QsciPck
 QT += xml
 
 INCLUDEPATH += ../../../Include
-INCLUDEPATH += "$(QScintilla)/include" 
+INCLUDEPATH += "$(QScintilla)/Include"
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqsci
 LIBS += -L$(QScintilla)/Lib/$$COMPILER_DIR -lQScintilla
-
-CONFIG(debug, debug|release){
-	LIBS += QAxContainerd
-}
-CONFIG(release, debug|release){
-	LIBS += QAxContainer
-}
 

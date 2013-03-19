@@ -5,16 +5,15 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QaxPck
 
-QT += phonon
+INCLUDEPATH += $(ACFSLNDIR)/Include
 
-INCLUDEPATH += ../../../Include
-
+#LIBS += -L$(ACFSLNDIR)/Lib/$$COMPILER_DIR -limm
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqaxmm
 
 CONFIG(debug, debug|release){
-	LIBS += QAxContainerd
+	LIBS += -lqaxcontainerd
 }
 CONFIG(release, debug|release){
-	LIBS += QAxContainer
+	LIBS += -lqaxcontainer
 }
 
