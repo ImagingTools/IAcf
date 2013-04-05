@@ -8,7 +8,7 @@
 // ACF includes
 #include <QtCore/QString>
 #include "iser/CXmlReadArchiveBase.h"
-#include "iser/CFileArchiveInfo.h"
+#include "ifile/CFileArchiveInfo.h"
 
 
 namespace izlib
@@ -26,11 +26,11 @@ namespace izlib
 */
 class CGzXmlReadArchive:
 			public iser::CXmlReadArchiveBase,
-			public iser::CFileArchiveInfo
+			public ifile::CFileArchiveInfo
 {
 public:
 	typedef iser::CXmlReadArchiveBase BaseClass;
-	typedef iser::CFileArchiveInfo BaseClass2;
+	typedef ifile::CFileArchiveInfo BaseClass2;
 
 	CGzXmlReadArchive(const QString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
 	virtual ~CGzXmlReadArchive();

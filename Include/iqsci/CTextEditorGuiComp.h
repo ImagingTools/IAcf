@@ -5,7 +5,7 @@
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
-#include "ibase/ITextDocument.h"
+#include "idoc/ITextDocument.h"
 
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TGuiObserverWrap.h"
@@ -20,7 +20,7 @@ namespace iqsci
 class CTextEditorGuiComp:
 			public iqtgui::TGuiObserverWrap<
 					iqtgui::TGuiComponentBase<CTextEditor>,
-					imod::TSingleModelObserverBase<ibase::ITextDocument> >,
+					imod::TSingleModelObserverBase<idoc::ITextDocument> >,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
@@ -28,7 +28,7 @@ class CTextEditorGuiComp:
 public:
 	typedef iqtgui::TGuiObserverWrap<
 				iqtgui::TGuiComponentBase<CTextEditor>,
-				imod::TSingleModelObserverBase<ibase::ITextDocument> > BaseClass;
+				imod::TSingleModelObserverBase<idoc::ITextDocument> > BaseClass;
 
 	I_BEGIN_COMPONENT(CTextEditorGuiComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);

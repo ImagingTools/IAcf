@@ -5,7 +5,7 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "ibase/TFileSerializerComp.h"
+#include "ifile/TFileSerializerComp.h"
 
 #include "izlib/CGzXmlReadArchive.h"
 #include "izlib/CGzXmlWriteArchive.h"
@@ -18,7 +18,7 @@ namespace ZlibPck
 {
 
 
-typedef ibase::TFileSerializerComp<izlib::CGzXmlReadArchive, izlib::CGzXmlWriteArchive> GzXmlFileSerializer;
+typedef ifile::TFileSerializerComp<izlib::CGzXmlReadArchive, izlib::CGzXmlWriteArchive> GzXmlFileSerializer;
 
 
 } // namespace ZlibPck

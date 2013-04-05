@@ -169,7 +169,7 @@ bool CPhononVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 }
 
 
-// reimplemented (iser::IFileTypeInfo)
+// reimplemented (ifile::IFileTypeInfo)
 
 bool CPhononVideoViewGuiComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {

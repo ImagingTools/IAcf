@@ -208,7 +208,7 @@ bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 }
 
 
-// reimplemented (iser::IFileTypeInfo)
+// reimplemented (ifile::IFileTypeInfo)
 
 bool COcvVideoControllerComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {

@@ -225,7 +225,7 @@ bool CVlcVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 }
 
 
-// reimplemented (iser::IFileTypeInfo)
+// reimplemented (ifile::IFileTypeInfo)
 
 bool CVlcVideoViewGuiComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {

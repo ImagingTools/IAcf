@@ -23,7 +23,7 @@ CMemoryBankSerializerComp::CMemoryBankSerializerComp()
 }
 
 
-// reimplemented (iser::IFileLoader)
+// reimplemented (ifile::IFilePersistence)
 
 bool CMemoryBankSerializerComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
@@ -120,7 +120,7 @@ int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const Q
 }
 
 
-// reimplemented (iser::IFileTypeInfo)
+// reimplemented (ifile::IFileTypeInfo)
 
 bool CMemoryBankSerializerComp::GetFileExtensions(QStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {

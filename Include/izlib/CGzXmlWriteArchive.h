@@ -2,13 +2,15 @@
 #define zlib_CGzXmlWriteArchive_included
 
 
+// Qt includes
+#include <QtCore/QString>
+
 // ZLIB includes
 #include "zlib.h"
 
 // ACF includes
-#include <QtCore/QString>
 #include "iser/CXmlWriteArchiveBase.h"
-#include "iser/CFileArchiveInfo.h"
+#include "ifile/CFileArchiveInfo.h"
 
 
 namespace izlib
@@ -25,11 +27,11 @@ namespace izlib
 */
 class CGzXmlWriteArchive:
 			public iser::CXmlWriteArchiveBase,
-			public iser::CFileArchiveInfo
+			public ifile::CFileArchiveInfo
 {
 public:
 	typedef iser::CXmlWriteArchiveBase BaseClass;
-	typedef iser::CFileArchiveInfo BaseClass2;
+	typedef ifile::CFileArchiveInfo BaseClass2;
 
 	CGzXmlWriteArchive(
 				const QString& filePath,

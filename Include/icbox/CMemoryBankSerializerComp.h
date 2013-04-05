@@ -3,7 +3,7 @@
 
 
 #include "iser/IVersionInfo.h"
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -16,7 +16,7 @@ namespace icbox
 
 class CMemoryBankSerializerComp:
 			public ibase::CLoggerComponentBase,
-			virtual public iser::IFileLoader
+			virtual public ifile::IFilePersistence
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -27,7 +27,7 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CMemoryBankSerializerComp);
-		I_REGISTER_INTERFACE(iser::IFileLoader);
+		I_REGISTER_INTERFACE(ifile::IFilePersistence);
 
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 		I_ASSIGN(m_memoryBankIdAttrPtr, "MemoryBank", "Memory bank of Crypto Box", true, 1);
@@ -38,7 +38,7 @@ public:
 
 	CMemoryBankSerializerComp();
 
-	// reimplemented (iser::IFileLoader)
+	// reimplemented (ifile::IFilePersistence)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
 				const QString* filePathPtr = NULL,
@@ -47,7 +47,7 @@ public:
 	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 
-	// reimplemented (iser::IFileTypeInfo)
+	// reimplemented (ifile::IFileTypeInfo)
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
