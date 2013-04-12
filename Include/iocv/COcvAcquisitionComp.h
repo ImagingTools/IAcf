@@ -10,7 +10,7 @@
 
 // ACF includes
 #include "i2d/CRectangle.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -30,12 +30,12 @@ namespace iocv
 	Open CV based camera component implementation.
 */
 class COcvAcquisitionComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public isig::ITriggerConstraints,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);

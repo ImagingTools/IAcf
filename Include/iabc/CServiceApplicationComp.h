@@ -10,7 +10,7 @@
 
 // ACF includes
 #include "ibase/IApplication.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "icomp/TAttribute.h"
 #include "icomp/CComponentBase.h"
@@ -28,12 +28,12 @@ namespace iabc
 */
 class CServiceApplicationComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public ibase::IApplication
 {
 	Q_OBJECT
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CServiceApplicationComp);
 		I_REGISTER_INTERFACE(ibase::IApplication);

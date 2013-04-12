@@ -19,7 +19,7 @@ extern "C"{
 #include <QtCore/QVector>
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -36,13 +36,13 @@ namespace ilibav
 	Implementation of imm::IVideoController and icam::IBitmapAcquisition interfaces using LibAv library.
 */
 class CLibAvVideoDecoderComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public icam::IBitmapAcquisition,
 			virtual public imeas::ISampleAcquisition,
 			virtual public imm::IVideoController
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	enum MessageId
 	{
