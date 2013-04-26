@@ -1,76 +1,43 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2088
+          2934
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="8">
-    <Element>
-      <ComponentName>
-        ChannelAddress
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        300
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ChannelAddressGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        525
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HardwareAcquisition
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSet
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSetGui
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        600
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         SamplingFramework
@@ -81,17 +48,9 @@
       <X>
         175
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SamplingParams
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        425
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -103,6 +62,95 @@
       <X>
         700
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HardwareAcquisition
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SamplingParams
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ChannelAddress
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        300
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ChannelAddressGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        525
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>
