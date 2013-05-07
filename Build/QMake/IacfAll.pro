@@ -55,8 +55,8 @@ win32{
 	SUBDIRS += OpenCvPck
 	OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
 
-	SUBDIRS += MePck
-	MePck.file = ../../Impl/MePck/QMake/MePck.pro
+//	SUBDIRS += MePck
+//	MePck.file = ../../Impl/MePck/QMake/MePck.pro
 
 	SUBDIRS += FfMpegPck
 	FfMpegPck.file = ../../Impl/FfMpegPck/QMake/FfMpegPck.pro
