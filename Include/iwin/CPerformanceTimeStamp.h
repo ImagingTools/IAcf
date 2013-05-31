@@ -19,6 +19,7 @@ class CPerformanceTimeStamp: virtual public istd::ITimeStamp
 {
 public:
 	CPerformanceTimeStamp();
+	explicit CPerformanceTimeStamp(quint64 nativeValue);
 
 	bool IsVaild() const;
 

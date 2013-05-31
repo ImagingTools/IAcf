@@ -22,6 +22,12 @@ CPerformanceTimeStamp::CPerformanceTimeStamp()
 }
 
 
+CPerformanceTimeStamp::CPerformanceTimeStamp(quint64 nativeValue)
+{
+	m_startCounter = qint64(nativeValue);
+}
+
+
 bool CPerformanceTimeStamp::IsVaild() const
 {
 	return s_isTimerFrequenceValid;
