@@ -5,6 +5,7 @@
 // Qt includes
 #include <QtCore/QString>
 
+
 namespace iwin
 {
 
@@ -21,6 +22,11 @@ public:
 		Get path of the executable module.
 	*/
 	static QString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false);
+
+	/**
+		Enable LFH (Low Fragmentation Heap).
+	*/
+	static bool EnableLowFragmentationHeap();
 };
 
 

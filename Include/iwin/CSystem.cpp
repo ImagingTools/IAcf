@@ -39,6 +39,28 @@ QString CSystem::GetModulePath(bool useApplicationModule, bool onlyDirectory)
 }
 
 
+bool CSystem::EnableLowFragmentationHeap()
+{
+	bool result = true;
+
+	ULONG enableLFH = 2;
+	HANDLE heaps[1025];
+	DWORD nheaps = GetProcessHeaps((sizeof(heaps) / sizeof(HANDLE)) - 1, heaps);
+	for (DWORD i = 0; i < nheaps; ++i) {
+		BOOL ok = HeapSetInformation(heaps[i], HeapCompatibilityInformation, &enableLFH, sizeof(enableLFH));
+		if (ok == FALSE){
+			result = false;
+
+			printf("Low Fragmentation failed for Heap %x\n", heaps[i]);
+		} else {
+			printf("Low Fragmentation enabled for Heap %x\n", heaps[i]);
+		}
+	}
+
+	return result;
+}
+
+
 } // namespace iwin
 
 
