@@ -21,7 +21,7 @@
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="10"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -44,7 +44,7 @@
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="10"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
