@@ -1,1 +1,2 @@
-SubWCRev %IACFDIR% %IACFDIR%\Partitura\IacfVoce.arp\VersionInfo.arx.xtrsvn %IACFDIR%\Partitura\IacfVoce.arp\VersionInfo.arx
+cd /d %~dp0
+SubWCRev ..\.. ..\..\Partitura\IacfVoce.arp\VersionInfo.arx.xtrsvn ..\..\Partitura\IacfVoce.arp\VersionInfo.arx
