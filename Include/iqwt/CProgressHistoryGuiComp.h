@@ -13,7 +13,7 @@
 #include "ibase/IProgressManager.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "Generated/ui_CProgressHistoryGuiComp.h"
+#include "iqwt/Generated/ui_CProgressHistoryGuiComp.h"
 
 
 namespace iqwt
