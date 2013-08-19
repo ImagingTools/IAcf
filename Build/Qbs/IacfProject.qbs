@@ -1,7 +1,7 @@
 import qbs.base 1.0
 
 Project{
-	name: "IacfAll"
+	name: "IACF"
 
 	Project{
 		name: "IACF-Static"
