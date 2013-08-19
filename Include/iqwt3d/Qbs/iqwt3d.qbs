@@ -11,6 +11,7 @@ StaticProduct{
 	Depends{ name: "imath" }
 	Depends{ name: "qwt3d" }
 	Depends{ name: "Qt.gui" }
+	Depends{ name: "Qt.opengl" }
 
 	Export{
 		Depends{ name: "iqtgui" }
@@ -18,5 +19,6 @@ StaticProduct{
 		Depends{ name: "imath" }
 		Depends{ name: "qwt3d" }
 		Depends{ name: "Qt.gui" }
+		Depends{ name: "Qt.opengl" }
 	}
 }
