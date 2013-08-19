@@ -7,7 +7,8 @@ Project{
 		name: "IACF-Static"
 
 		references: [
-			"../../Include/iqwt/Qbs/iqwt.qbs"
+			"../../Include/iqwt/Qbs/iqwt.qbs",
+			"../../Include/iqwt3d/Qbs/iqwt3d.qbs"
 		]
 	}
 
