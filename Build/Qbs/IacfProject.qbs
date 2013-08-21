@@ -28,4 +28,17 @@ Project{
 		]
 	}
 */
+
+	Product{
+		name: "IacfConfig"
+		type: ["xpc", "acf_share"]
+
+		files: ["../../Config/PartituraOnly.xpc"]
+
+		destinationDirectory: "Config"
+
+		Depends{ name: "QwtPck" }
+		Depends{ name: "AcfSlnConfig" }
+		Depends{ name: "acf" }
+	}
 }
