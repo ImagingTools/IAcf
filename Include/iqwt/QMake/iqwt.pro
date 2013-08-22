@@ -5,3 +5,6 @@ TARGET = iqwt
 
 INCLUDEPATH += $(ACFSLNDIR)/Include
 INCLUDEPATH += "$(QWTDIR_6_0_0)/Include"
+
+FORMS += ../*.ui
+UI_DIR = ../../GeneratedFiles/iqwt

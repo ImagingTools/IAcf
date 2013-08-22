@@ -11,7 +11,7 @@
 
 
 // Project includes
-#include "iqsci/Generated/ui_CTextEditor.h"
+#include "GeneratedFiles/iqsci/ui_CTextEditor.h"
 
 
 class QsciScintilla;

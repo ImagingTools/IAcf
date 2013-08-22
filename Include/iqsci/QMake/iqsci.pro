@@ -7,3 +7,5 @@ QT += xml
 
 INCLUDEPATH += $(QSCINTILLA)/Include
 
+FORMS += ../*.ui
+UI_DIR = ../../GeneratedFiles/iqsci
