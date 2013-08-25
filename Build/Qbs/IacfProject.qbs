@@ -6,18 +6,28 @@ Project{
 	Project{
 		name: "IACF-Static"
 
-		references: [
-			"../../Include/iqwt/Qbs/iqwt.qbs",
-			"../../Include/iqwt3d/Qbs/iqwt3d.qbs"
-		]
+		Project{
+			name: "VC"
+			condition: qbs.toolchain.contains("msvc")
+			references: [
+				"../../Include/iqwt/Qbs/iqwt.qbs",
+				"../../Include/iqwt3d/Qbs/iqwt3d.qbs",
+				"../../Include/ilibav/Qbs/ilibav.qbs"
+			]
+		}
 	}
 
 	Project{
 		name: "IACF-Component"
 
-		references: [
-			"../../Impl/QwtPck/Qbs/QwtPck.qbs"
-		]
+		Project{
+			name: "VC"
+			condition: qbs.toolchain.contains("msvc")
+			references: [
+				"../../Impl/QwtPck/Qbs/QwtPck.qbs",
+				"../../Impl/FfMpegPck/Qbs/FfMpegPck.qbs"
+			]
+		}
 	}
 /*
 	Project{
@@ -30,7 +40,8 @@ Project{
 */
 
 	Product{
-		name: "IacfConfig"
+		name: "IacfConfig-VC"
+		condition: qbs.toolchain.contains("msvc")
 		type: ["xpc", "acf_share"]
 
 		files: ["../../Config/PartituraOnly.xpc"]
@@ -38,6 +49,7 @@ Project{
 		destinationDirectory: "Config"
 
 		Depends{ name: "QwtPck" }
+		Depends{ name: "FfMpegPck" }
 		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "acf" }
 	}
