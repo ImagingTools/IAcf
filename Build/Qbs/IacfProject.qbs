@@ -40,7 +40,7 @@ Project{
 */
 
 	Product{
-		name: "IacfConfig-VC"
+		name: "IacfConfig"
 		condition: qbs.toolchain.contains("msvc")
 		type: ["xpc", "acf_share"]
 
