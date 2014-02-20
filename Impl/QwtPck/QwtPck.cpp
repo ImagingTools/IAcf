@@ -28,6 +28,11 @@ I_EXPORT_COMPONENT(
 			"Histogram Statistics" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
+		   DataSequenceView,
+		   "Data sequence view",
+		   "Data Sequence View" IM_TAG("GUI") IM_AUTHOR("\"Alexander Duda\"") IM_COMPANY("QUISS GmbH"));
+
+I_EXPORT_COMPONENT(
 			SurfaceView,
 			"3D-View component",
 			"Model Observer Parameter GUI Qt 3D Surface" IM_TAG("Image 3D"));

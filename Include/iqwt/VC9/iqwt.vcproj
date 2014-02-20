@@ -167,6 +167,10 @@
 				RelativePath="..\CProgressHistoryGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CQwtDataSequenceViewComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -179,6 +183,10 @@
 			</File>
 			<File
 				RelativePath="..\CProgressHistoryGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CQwtDataSequenceViewComp.h"
 				>
 			</File>
 			<File
@@ -203,11 +211,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqwt\moc_CQwtDataSequenceViewComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqwt\ui_CHistogramViewComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\GeneratedFiles\iqwt\ui_CProgressHistoryGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\GeneratedFiles\iqwt\ui_CQwtDataSequenceViewComp.h"
 				>
 			</File>
 		</Filter>
@@ -223,12 +239,20 @@
 				RelativePath="..\CProgressHistoryGuiComp.ui"
 				>
 			</File>
+			<File
+				RelativePath="..\CQwtDataSequenceViewComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CHistogramViewComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CQwtDataSequenceViewComp.moc"
 				>
 			</File>
 		</Filter>
