@@ -104,7 +104,7 @@
         BitmapPersistenceGui
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FilePersistenceGui
@@ -326,7 +326,7 @@
         MediaDialogLoader
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader
@@ -446,7 +446,7 @@
         MediaPersistenceGui
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FilePersistenceGui
