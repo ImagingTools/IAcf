@@ -30,7 +30,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 		   DataSequenceView,
 		   "Data sequence view",
-		   "Data Sequence View" IM_TAG("GUI") IM_AUTHOR("\"Alexander Duda\"") IM_COMPANY("QUISS GmbH"));
+		   "Data Sequence View" IM_TAG("GUI") IM_AUTHOR("\"Alexander Duda\""));
 
 I_EXPORT_COMPONENT(
 			SurfaceView,
