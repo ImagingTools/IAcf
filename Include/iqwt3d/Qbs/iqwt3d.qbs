@@ -3,6 +3,7 @@ import AcfStaticLibrary as AcfStaticLibrary
 
 AcfStaticLibrary{
 	name: "iqwt3d"
+	condition: Qt.core.qtConfig.contains("opengl")
 
 	files: ["../*.h", "../*.cpp", "../*.ui"]
 
