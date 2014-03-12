@@ -18,7 +18,7 @@ AcfPackage{
 		Depends{ name: "iqwt3d" }
 
 		Export{
-			Depends{ name: "iqwt" }
+			Depends{ name: "iqwt3d" }
 		}
 	}
 }
