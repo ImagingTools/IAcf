@@ -7,18 +7,10 @@ AcfPackage{
 	files: ["../*.h", "../*.cpp"]
 
 	Depends{ name: "iqwt" }
+	Depends{ name: "iqwt3d" }
 
 	Export{
 		Depends{ name: "iqwt" }
-	}
-
-	Group{
-		condition: Qt.core.qtConfig.contains("opengl")
-
 		Depends{ name: "iqwt3d" }
-
-		Export{
-			Depends{ name: "iqwt3d" }
-		}
 	}
 }
