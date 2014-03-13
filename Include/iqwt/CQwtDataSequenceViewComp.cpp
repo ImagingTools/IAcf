@@ -1,6 +1,9 @@
 #include "iqwt/CQwtDataSequenceViewComp.h"
 
 
+// ACF includes
+#include "imath/CVarVector.h"
+
 // Qwt includes
 #include "qwt_plot_grid.h"
 #include "qwt_scale_draw.h"
@@ -56,6 +59,53 @@ void CQwtDataSequenceViewComp::UpdateGui(int /*updateFlags*/)
 				ChannelCombo->addItem(channelNames[channelIndex]);
 			}
 		}
+
+		if (m_verticalMarkers.GetCount() != m_verticalLinesCompPtr.GetCount() || m_horizontalMarkers.GetCount() != m_horizontalLinesCompPtr.GetCount()) {
+			ClearMarkers();
+
+			int verticalCount = m_verticalLinesCompPtr.GetCount();
+			for (int verticalIndex = 0; verticalIndex < verticalCount; ++verticalIndex) {
+				imeas::INumericValue* value = m_verticalLinesCompPtr[verticalIndex];
+				if (value != NULL) {
+					imath::CVarVector values = value->GetValues();
+					int valueCount = values.GetElementsCount();
+					for (int valueIndex = 0; valueIndex < valueCount; ++valueIndex) {
+						double XVal = values.GetElement(valueIndex);
+						QString name = value->GetNumericConstraints()->GetNumericValueName(valueIndex);
+						QwtPlotMarker* marker = new QwtPlotMarker();
+						marker->setLabel(QwtText(name));
+						marker->setLabelOrientation(Qt::Vertical);
+						marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
+						//marker->setSpacing(50);
+						//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
+						marker->setLineStyle(QwtPlotMarker::VLine);
+						marker->setXValue(XVal);
+						marker->attach(m_plotPtr.GetPtr());
+						m_verticalMarkers.PushBack(marker);
+					}
+				}
+			}
+
+			int horizontalCount = m_horizontalLinesCompPtr.GetCount();
+			for (int horizontalIndex = 0; horizontalIndex < horizontalCount; ++horizontalIndex) {
+				imeas::INumericValue* value = m_horizontalLinesCompPtr[horizontalIndex];
+				if (value != NULL) {
+					imath::CVarVector values = value->GetValues();
+					int valueCount = values.GetElementsCount();
+					for (int valueIndex = 0; valueIndex < valueCount; ++valueIndex) {
+						double YVal = values.GetElement(valueIndex);
+						QString name = value->GetNumericConstraints()->GetNumericValueName(valueIndex);
+						QwtPlotMarker* marker = new QwtPlotMarker();
+						marker->setLabel(QwtText(name));
+						//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
+						marker->setLineStyle(QwtPlotMarker::HLine);
+						marker->setYValue(YVal);
+						marker->attach(m_plotPtr.GetPtr());
+						m_horizontalMarkers.PushBack(marker);
+					}
+				}
+			}
+		}
 		
 		double maxValue = 0.0;
 		double minValue = 0.0;
@@ -101,6 +151,7 @@ void CQwtDataSequenceViewComp::UpdateGui(int /*updateFlags*/)
 	}
 	else{
 		ClearPlot();
+		ClearMarkers();
 		
 		ChannelCombo->clear();
 	}
@@ -149,6 +200,7 @@ void CQwtDataSequenceViewComp::OnGuiCreated()
 void CQwtDataSequenceViewComp::OnGuiDestroyed()
 {
 	ClearPlot();
+	ClearMarkers();
 
 	m_plotPtr.Reset();
 
@@ -178,6 +230,23 @@ void CQwtDataSequenceViewComp::ClearPlot()
 		m_channelCurves.Reset();
 	}
 }
+
+
+void CQwtDataSequenceViewComp::ClearMarkers()
+{
+	if (IsGuiCreated()){
+		for (int markerIndex = 0; markerIndex < m_horizontalMarkers.GetCount(); markerIndex++){
+			m_horizontalMarkers.GetAt(markerIndex)->detach();
+		}
+		for (int markerIndex = 0; markerIndex < m_verticalMarkers.GetCount(); markerIndex++){
+			m_verticalMarkers.GetAt(markerIndex)->detach();
+		}
+
+		m_horizontalMarkers.Reset();
+		m_verticalMarkers.Reset();
+	}
+}
+
 
 
 // public methods of the embedded class DataSequencePlotPicker
@@ -210,6 +279,10 @@ QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoi
 		return QwtText();
 	}
 
+	if (sampleIndex < 0){
+		return QwtText();
+	}
+
 	double positionY = (double)position.y();
 
 	int currentCurveIndex = m_parent.ChannelCombo->currentIndex();
@@ -228,7 +301,7 @@ QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoi
 		}
 	}
 	else{
-		sample = objectPtr->GetSample(sampleIndex, currentCurveIndex);
+		sample = objectPtr->GetSample(sampleIndex, currentCurveIndex-1);
 	}
 
 	QString text = QString("%1: %2").arg(sampleIndex).arg(sample);
