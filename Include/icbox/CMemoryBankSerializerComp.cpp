@@ -66,7 +66,10 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 }
 
 
-int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& /*filePath*/) const
+int CMemoryBankSerializerComp::LoadFromFile(
+			istd::IChangeable& data,
+			const QString& /*filePath*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
@@ -95,7 +98,10 @@ int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const QStri
 }
 
 
-int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& /*filePath*/) const
+int CMemoryBankSerializerComp::SaveToFile(
+			const istd::IChangeable& data,
+			const QString& /*filePath*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_SAVE | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(const_cast<istd::IChangeable*>(&data));
