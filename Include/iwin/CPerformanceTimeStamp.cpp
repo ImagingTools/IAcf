@@ -5,7 +5,7 @@
 #include <windows.h>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace iwin
@@ -48,7 +48,8 @@ quint64 CPerformanceTimeStamp::GetNativeRepresentation() const
 
 void CPerformanceTimeStamp::SetNativeRepresentation(quint64 value)
 {
-	istd::CChangeNotifier notifier(this);
+	static ChangeSet changeSet(CF_START_SET);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	m_startCounter = qint64(value);
 }
@@ -60,12 +61,10 @@ void CPerformanceTimeStamp::Start(double elapsedTime)
 {
 	Q_ASSERT(sizeof(qint64) == sizeof(LARGE_INTEGER));
 
-	istd::CChangeNotifier notifier(this);
-
 	LARGE_INTEGER currentCounter;
 	::QueryPerformanceCounter(&currentCounter);
 
-	m_startCounter = (qint64&)currentCounter - qint64(elapsedTime * s_timerFrequence);
+	SetNativeRepresentation((quint64&)currentCounter - quint64(elapsedTime * s_timerFrequence));
 }
 
 

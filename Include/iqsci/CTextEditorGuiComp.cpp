@@ -23,7 +23,7 @@ void CTextEditorGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CTextEditorGuiComp::UpdateGui(int /*updateFlags*/)
+void CTextEditorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	CTextEditor* textEditPtr = GetQtWidget();
 	Q_ASSERT(textEditPtr != NULL);

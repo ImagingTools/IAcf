@@ -18,7 +18,7 @@ namespace iqwt
 
 // reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
+void CHistogramViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

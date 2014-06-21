@@ -42,7 +42,7 @@ public:
 	virtual void UpdateModel() const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 	virtual void OnGuiModelDetached();
 
 	// reimplemented (ibase::ICommandsProvider)

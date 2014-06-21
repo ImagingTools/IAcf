@@ -2,7 +2,7 @@
 
 
 // ACF includes 
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iprm/IParamsSet.h"
 
 // IACF includes
@@ -37,17 +37,19 @@ int COcvAcquisitionComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	istd::TChangeNotifier<iimg::IBitmap> bitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
-	if (!bitmapPtr.IsValid()){
+	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if (bitmapPtr == NULL){
 		return TS_INVALID;
 	}
+
+	istd::CChangeNotifier notifier(bitmapPtr);
 
 	IplImage* iplImagePtr = cvQueryFrame(m_cameraPtr);
 	if (iplImagePtr == NULL){
 		return TS_INVALID;
 	}
 
-	if (iocv::COcvImage::ConvertToBitmap(*iplImagePtr, *bitmapPtr.GetPtr())){
+	if (iocv::COcvImage::ConvertToBitmap(*iplImagePtr, *bitmapPtr)){
 		return TS_OK;
 	}
 

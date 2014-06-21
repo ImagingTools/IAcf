@@ -7,7 +7,7 @@
 #include <QtCore/QUrl>
 
 // ACF includes
-#include <istd/TChangeNotifier.h>
+#include "istd/CChangeNotifier.h"
 
 
 namespace iphonon
@@ -34,7 +34,8 @@ QString CPhononVideoViewGuiComp::GetOpenedMediumUrl() const
 
 bool CPhononVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS | CF_MEDIA_POSITION);
+	static ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	m_mediaObject.setCurrentSource(url);
 
@@ -51,7 +52,8 @@ bool CPhononVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 
 void CPhononVideoViewGuiComp::CloseMedium()
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
+	static ChangeSet changeSet(CF_STATUS);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	m_mediaObject.stop();
 	m_mediaObject.clearQueue();
@@ -70,7 +72,8 @@ bool CPhononVideoViewGuiComp::IsPlaying() const
 
 bool CPhononVideoViewGuiComp::SetPlaying(bool state)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
+	static ChangeSet changeSet(CF_STATUS);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	if (state){
 		m_mediaObject.play();
@@ -104,7 +107,8 @@ bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 	}
 
 	if (m_mediaObject.isSeekable()){
-		istd::CChangeNotifier notifier(this, CF_MODEL | CF_MEDIA_POSITION);
+		static ChangeSet changeSet(CF_MEDIA_POSITION);
+		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_mediaObject.seek(qint64(position * 1000));
 
