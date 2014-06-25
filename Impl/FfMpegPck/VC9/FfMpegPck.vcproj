@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCore4.lib QtNetwork4.lib imeas.lib avdevice.lib avformat.lib avcodec.lib avutil.lib swscale.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
+				AdditionalDependencies="AcfStd.lib Qt5Core.lib Qt5Network.lib imeas.lib avdevice.lib avformat.lib avcodec.lib avutil.lib swscale.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;;&quot;$(LIVE555DIR_20121024)/lib&quot;"
 			/>
 			<Tool
@@ -113,7 +113,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCored4.lib QtNetworkd4.lib swscale.lib avdevice.lib avformat.lib avcodec.lib avutil.lib imeas.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
+				AdditionalDependencies="AcfStd.lib Qt5Cored.lib Qt5Networkd.lib swscale.lib avdevice.lib avformat.lib avcodec.lib avutil.lib imeas.lib ws2_32.lib libUsageEnvironment.lib libliveMedia.lib libgroupsock.lib libBasicUsageEnvironment.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)/Lib/$(ConfigurationName)VC9&quot;;&quot;$(FFMPEGDIR_20121010)/lib&quot;;&quot;$(LIVE555DIR_20121024)/lib&quot;"
 			/>
 			<Tool

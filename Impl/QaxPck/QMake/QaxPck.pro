@@ -5,15 +5,17 @@ include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
 
 TARGET = QaxPck
 
+QT += multimedia axcontainer
+
 INCLUDEPATH += $(ACFSLNDIR)/Include
 
 #LIBS += -L$(ACFSLNDIR)/Lib/$$COMPILER_DIR -limm
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqaxmm
 
 CONFIG(debug, debug|release){
-	LIBS += -lqaxcontainerd
+        LIBS += -lQt5AxContainerd -lQt5AxBased
 }
 CONFIG(release, debug|release){
-	LIBS += -lqaxcontainer
+        LIBS += -lQt5AxContainer -lQt5AxBase
 }
 

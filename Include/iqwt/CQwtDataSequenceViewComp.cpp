@@ -49,7 +49,7 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 			for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 				QwtPlotCurve* curvePtr = new QwtPlotCurve();
 
-				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::cyan + channelIndex)));
+				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex)));
 				
 				curvePtr->setStyle(QwtPlotCurve::Steps);
 			

@@ -3,8 +3,8 @@
 
 
 // Qt includes
-#include <Phonon/VideoWidget>
-#include <Phonon/MediaObject>
+#include <QtMultiMediaWidgets/QVideoWidget>
+#include <QtMultiMedia/QMediaPlayer>
 
 // ACF includes
 #include "imm/IVideoController.h"
@@ -16,12 +16,12 @@ namespace iphonon
 
 
 class CPhononVideoViewGuiComp:
-			public iqtgui::TGuiComponentBase<Phonon::VideoWidget>,
+			public iqtgui::TGuiComponentBase<QVideoWidget>,
 			virtual public imm::IVideoController
 {
 	Q_OBJECT
 public:
-	typedef iqtgui::TGuiComponentBase<Phonon::VideoWidget> BaseClass;
+	typedef iqtgui::TGuiComponentBase<QVideoWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CPhononVideoViewGuiComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
@@ -66,7 +66,7 @@ protected:
 	virtual void OnGuiDestroyed();
 
 private:
-	Phonon::MediaObject m_mediaObject;
+	QMediaPlayer m_mediaPlayer;
 
 	double m_currentPosition;
 

@@ -8,8 +8,13 @@
 #include <Qsci/qscilexerxml.h>
 
 // Qt includes
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QApplication>
+#else
 #include <QtGui/QTextEdit>
 #include <QtGui/QApplication>
+#endif
 
 // IACF includes
 #include "iqsci/iqsci.h"

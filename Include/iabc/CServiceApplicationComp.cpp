@@ -3,10 +3,15 @@
 
 // Qt includes
 #include <QtCore/QVector>
+#if QT_VERSION < 0x050000
 #include <QtGui/QMessageBox>
 #include <QtGui/QApplication>
 #include <QtGui/QSystemTrayIcon>
-
+#else
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QSystemTrayIcon>
+#endif
 
 // ACF includes
 #include "iqtgui/IGuiApplication.h"

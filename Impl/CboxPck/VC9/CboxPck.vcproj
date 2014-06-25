@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCore4.lib cbios.lib wsock32.lib"
+				AdditionalDependencies="AcfStd.lib Qt5Core.lib cbios.lib wsock32.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(CBIOSDIR)\lib\VC9&quot;"
 				IgnoreDefaultLibraryNames="libc.lib, libcmt.lib, libcd.lib, libcmtd.lib, msvcrtd.lib"
 			/>
@@ -114,7 +114,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib QtCored4.lib cbios.lib wsock32.lib"
+				AdditionalDependencies="AcfStd.lib cbios.lib wsock32.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(CBIOSDIR)\lib\VC9&quot;"
 				IgnoreDefaultLibraryNames="libc.lib, libcmt.lib, msvcrt.lib, libcd.lib, libcmtd.lib"
 			/>

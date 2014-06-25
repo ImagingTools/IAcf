@@ -15,8 +15,8 @@ win32{
 	SUBDIRS += ilibav
 	ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
 
-	SUBDIRS += iqaxmm
-	iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
+        SUBDIRS += iqaxmm
+        iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
 
 	SUBDIRS += iqwt
 	iqwt.file = ../../Include/iqwt/QMake/iqwt.pro
@@ -32,11 +32,11 @@ win32{
 
 
 	win32-msvc2005 | win32-msvc2008{
-		SUBDIRS += iabc
-		iabc.file = ../../Include/iabc/QMake/iabc.pro
+#		SUBDIRS += iabc
+#		iabc.file = ../../Include/iabc/QMake/iabc.pro
 
-		SUBDIRS += icbox
-		icbox.file = ../../Include/icbox/QMake/icbox.pro
+#		SUBDIRS += icbox
+#		icbox.file = ../../Include/icbox/QMake/icbox.pro
 
 		SUBDIRS += iqsci
 		iqsci.file = ../../Include/iqsci/QMake/iqsci.pro
@@ -55,14 +55,11 @@ win32{
 	SUBDIRS += OpenCvPck
 	OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
 
-#	SUBDIRS += MePck
-#	MePck.file = ../../Impl/MePck/QMake/MePck.pro
-
 	SUBDIRS += FfMpegPck
 	FfMpegPck.file = ../../Impl/FfMpegPck/QMake/FfMpegPck.pro
 
-	SUBDIRS += QaxPck
-	QaxPck.file = ../../Impl/QaxPck/QMake/QaxPck.pro
+        SUBDIRS += QaxPck
+        QaxPck.file = ../../Impl/QaxPck/QMake/QaxPck.pro
 
 	SUBDIRS += QwtPck
 	QwtPck.file = ../../Impl/QwtPck/QMake/QwtPck.pro
@@ -74,11 +71,11 @@ win32{
 	WinPck.file = ../../Impl/WinPck/QMake/WinPck.pro
 
 	win32-msvc2005 | win32-msvc2008{
-		SUBDIRS += AbcPck
-		AbcPck.file = ../../Impl/AbcPck/QMake/AbcPck.pro
+#		SUBDIRS += AbcPck
+#		AbcPck.file = ../../Impl/AbcPck/QMake/AbcPck.pro
 
-		SUBDIRS += CboxPck
-		CboxPck.file = ../../Impl/CboxPck/QMake/CboxPck.pro
+#		SUBDIRS += CboxPck
+#		CboxPck.file = ../../Impl/CboxPck/QMake/CboxPck.pro
 
 		SUBDIRS += QsciPck
 		QsciPck.file = ../../Impl/QsciPck/QMake/QsciPck.pro

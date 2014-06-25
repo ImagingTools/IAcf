@@ -3,7 +3,13 @@
 
 
 // Qt includes
+#include <QtCore/QtGLobal>
+#if QT_VERSION < 0x050000
 #include <QtGui/QFrame>
+#else
+#include <QtWidgets/QFrame>
+#endif
+
 #include <ActiveQt/QAxWidget>
 
 // ACF includes

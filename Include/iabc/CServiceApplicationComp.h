@@ -3,7 +3,12 @@
 
 
 // Qt includes
+#include <QtGui/QIcon>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QSystemTrayIcon>
+#else
 #include <QtGui/QSystemTrayIcon>
+#endif
 
 // Qt Solutions
 #include "QtService.h"

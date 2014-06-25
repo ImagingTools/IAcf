@@ -1,7 +1,7 @@
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
 TARGET = iqaxmm
-QT += phonon
+QT += multimedia axcontainer
 
 INCLUDEPATH += $(ACFSLNDIR)/Include
 
