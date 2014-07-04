@@ -3,7 +3,7 @@ import qbs.base 1.0
 Project{
 	name: "IACF"
 
-	property string projectName: "IACF"
+	property string projectSubDir: "Iacf"
 	property string projectRoot: path + "/../../.."
 
 	Project{
