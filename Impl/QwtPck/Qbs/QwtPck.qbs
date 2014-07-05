@@ -7,10 +7,16 @@ AcfPackage{
 	files: ["../*.h", "../*.cpp"]
 
 	Depends{ name: "iqwt" }
-	Depends{ name: "iqwt3d" }
+	Depends{
+		name: "iqwt3d"
+		required: false
+	}
 
 	Export{
 		Depends{ name: "iqwt" }
-		Depends{ name: "iqwt3d" }
+		Depends{
+			name: "iqwt3d"
+			required: false
+		}
 	}
 }
