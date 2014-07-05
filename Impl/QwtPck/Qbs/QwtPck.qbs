@@ -3,6 +3,7 @@ import AcfPackage as AcfPackage
 
 AcfPackage{
 	name: "QwtPck"
+	condition: Qt.core.qtConfig.contains("opengl")
 
 	files: ["../*.h", "../*.cpp"]
 

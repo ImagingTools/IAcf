@@ -51,7 +51,10 @@ Project{
 
 		destinationDirectory: "Config"
 
-		Depends{ name: "QwtPck" }
+		Depends{
+			name: "QwtPck"
+			required: false
+		}
 		Depends{ name: "FfMpegPck" }
 		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "acf" }
