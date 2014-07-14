@@ -64,7 +64,7 @@ private:
 	public:
 		typedef QwtPlotPicker BaseClass;
 
-		HistogramPlotPicker(CHistogramViewComp& parent, int xAxis, int yAxis, QwtPlotCanvas* canvasPtr);
+		HistogramPlotPicker(CHistogramViewComp& parent, int xAxis, int yAxis, QWidget* canvasPtr);
 
 		// reimplemented (QwtPlotPicker)
 		virtual QwtText trackerText(const QPoint& position) const;

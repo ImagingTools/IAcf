@@ -66,7 +66,7 @@ private:
 	public:
 		typedef QwtPlotPicker BaseClass;
 
-		DataSequencePlotPicker(CQwtDataSequenceViewComp& parent, int xAxis, int yAxis, QwtPlotCanvas* canvasPtr);
+		DataSequencePlotPicker(CQwtDataSequenceViewComp& parent, int xAxis, int yAxis, QWidget* canvasPtr);
 
 		// reimplemented (QwtPlotPicker)
 		virtual QwtText trackerText(const QPoint& position) const;

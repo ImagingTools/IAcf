@@ -4,7 +4,7 @@ include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
 TARGET = iqwt
 
 INCLUDEPATH += $(ACFSLNDIR)/Include
-INCLUDEPATH += "$(QWTDIR_6_0_0)/Include"
+INCLUDEPATH += "$(QPATH_QWT_0_6_1)/Src"
 
 FORMS += ../*.ui
 UI_DIR = ../../GeneratedFiles/iqwt

@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_0_0)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;;&quot;$(QWT3DDIR)\Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 			/>
 			<Tool
@@ -52,8 +52,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib Qt5Gui.lib"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_0_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalDependencies="qwt.lib qwt3dlib.lib AcfStd.lib AcfQt.lib Qt5Gui.lib"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_0_0)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;;&quot;$(QWT3DDIR)\Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 			/>
 			<Tool
@@ -113,8 +113,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_0_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalDependencies="qwt.lib qwt3dlib.lib AcfStd.lib AcfQt.lib"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

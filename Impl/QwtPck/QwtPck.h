@@ -8,6 +8,7 @@
 #include "iqwt/CProgressHistoryGuiComp.h"
 #include "iqwt/CHistogramViewComp.h"
 #include "iqwt/CQwtDataSequenceViewComp.h"
+
 #include "iqwt3d/CSurfaceViewComp.h"
 
 

@@ -175,7 +175,7 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 		return;
 	}
 	m_plotPtr.SetPtr(new QwtPlot(DiagramFrame));
-	m_plotPtr->setCanvasLineWidth(1);
+	m_plotPtr->setLineWidth(1);
 	m_plotPtr->setAxisScale(QwtPlot::yLeft, 0, 100);
 	m_plotPtr->setAxisScale(QwtPlot::xBottom, *m_historyStepsCountAttrPtr, 0);
 	m_plotPtr->plotLayout()->setAlignCanvasToScales(true);
@@ -185,7 +185,7 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	// setup the plot grid:
 	m_gridPtr.SetPtr(new QwtPlotGrid());
 	QPen gridPen(QBrush(Qt::gray), 0, Qt::DashLine);
-	m_gridPtr->setMajPen(gridPen);
+	m_gridPtr->setMajorPen(gridPen);
 	m_gridPtr->attach(m_plotPtr.GetPtr());
 
 	m_nowMarkerPtr.SetPtr(new QwtPlotMarker());

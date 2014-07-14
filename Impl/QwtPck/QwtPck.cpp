@@ -5,7 +5,7 @@
 
 
 I_REGISTER_QT_RESOURCE(iqtgui);
-//I_REGISTER_QT_RESOURCE(Qwt3d);
+I_REGISTER_QT_RESOURCE(Qwt3d);
 
 
 namespace QwtPck
