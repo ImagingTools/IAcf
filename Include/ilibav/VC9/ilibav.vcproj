@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 			/>
 			<Tool
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(ACFSLNDIR)/include&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(FFMPEGDIR_20121010)/include&quot;;&quot;$(FFMPEGDIR_20121010)/msinttypes&quot;;&quot;$(LIVE555DIR_20121024)/BasicUsageEnvironment/include&quot;;&quot;$(LIVE555DIR_20121024)/groupsock/include&quot;;&quot;$(LIVE555DIR_20121024)/liveMedia/include&quot;;&quot;$(LIVE555DIR_20121024)/UsageEnvironment/include/&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				WarningLevel="4"
 			/>

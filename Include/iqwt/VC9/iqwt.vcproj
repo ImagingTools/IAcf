@@ -53,7 +53,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 			/>
 			<Tool
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(QTDIR)\include\QtWidgets&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR_6_1_0)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				WarningLevel="4"
 			/>
@@ -207,23 +207,23 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqwt\moc_CHistogramViewComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqwt\moc_CHistogramViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqwt\moc_CQwtDataSequenceViewComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqwt\moc_CQwtDataSequenceViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqwt\ui_CHistogramViewComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqwt\ui_CHistogramViewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqwt\ui_CProgressHistoryGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqwt\ui_CProgressHistoryGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqwt\ui_CQwtDataSequenceViewComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqwt\ui_CQwtDataSequenceViewComp.h"
 				>
 			</File>
 		</Filter>
