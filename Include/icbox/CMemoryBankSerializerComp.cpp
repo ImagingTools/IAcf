@@ -128,7 +128,7 @@ int CMemoryBankSerializerComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CMemoryBankSerializerComp::GetFileExtensions(QStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
+bool CMemoryBankSerializerComp::GetFileExtensions(QStringList& /*result*/, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;
 }

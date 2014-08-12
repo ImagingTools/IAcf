@@ -214,7 +214,7 @@ bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool COcvVideoControllerComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool COcvVideoControllerComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

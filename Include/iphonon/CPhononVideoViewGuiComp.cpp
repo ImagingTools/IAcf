@@ -175,7 +175,7 @@ bool CPhononVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CPhononVideoViewGuiComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CPhononVideoViewGuiComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

@@ -588,7 +588,7 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CLibAvVideoDecoderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CLibAvVideoDecoderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
