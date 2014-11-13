@@ -17,7 +17,6 @@
 #include "ibase/IApplication.h"
 #include "ilog/TLoggerCompWrap.h"
 
-#include "icomp/TAttribute.h"
 #include "icomp/CComponentBase.h"
 
 // IACF includes
