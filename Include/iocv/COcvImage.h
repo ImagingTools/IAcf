@@ -15,6 +15,7 @@
 namespace iocv
 {
 
+
 /**
 	Wrapper for Ipl image.
 	This implementation can be used for conversion from OpenCV image structure to standard ACF bitmap.
