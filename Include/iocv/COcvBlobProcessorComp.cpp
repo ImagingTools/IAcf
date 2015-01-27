@@ -98,11 +98,28 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		double area = moms.m00;
 		double perimeter = cv::arcLength(cv::Mat(contours[contourIndex]), true);
 		cv::Point2d location = cv::Point2d(moms.m10 / moms.m00, moms.m01 / moms.m00);
+		double circularity = 4 * I_PI * area / (perimeter * perimeter);
 
 		bool passedByFilter = true;
 
 		if ((blobFilterParamsPtr != NULL) && blobFilterParamsPtr->IsFiltersEnabled()){
-			
+			int filtersCount = blobFilterParamsPtr->GetFiltersCount();
+
+			for (int filterIndex = 0; filterIndex < filtersCount; ++filterIndex){
+				iblob::IBlobFilterParams::Filter filter = blobFilterParamsPtr->GetFilterAt(filterIndex);
+
+				if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_CIRCULARITY){
+					passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, circularity);
+				}
+
+				if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_AREA){
+					passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, area);
+				}
+
+				if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_PERIMETER){
+					passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, perimeter);
+				}
+			}
 		}
 
 		if (passedByFilter){
@@ -110,6 +127,41 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 			result.AddFeature(blobFeaturePtr);
 		}
+	}
+
+	return true;
+}
+
+
+// private static methods
+
+bool COcvBlobProcessorComp::IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value)
+{
+	bool valueInRange = filter.valueRange.Contains(value);
+	bool isGreater = value > filter.valueRange.GetMinValue();
+	bool isLess = value > filter.valueRange.GetMinValue();
+	bool isEqual = qFuzzyCompare(value, filter.valueRange.GetMinValue());
+	bool isGreaterEqual = isGreater || isEqual;
+	bool isLessEqual = isLess || isEqual;
+
+	switch(filter.condition)
+	{
+	case iblob::IBlobFilterParams::FC_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isEqual : !isEqual;
+	case iblob::IBlobFilterParams::FC_NOT_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !isEqual : isEqual;
+	case iblob::IBlobFilterParams::FC_BETWEEN:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? valueInRange : !valueInRange;
+	case iblob::IBlobFilterParams::FC_OUTSIDE:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !valueInRange : valueInRange;
+	case iblob::IBlobFilterParams::FC_GREATER:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreater : !isGreater;
+	case iblob::IBlobFilterParams::FC_GREATER_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreaterEqual : !isGreaterEqual;
+	case iblob::IBlobFilterParams::FC_LESS:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLess : !isLess;
+	case iblob::IBlobFilterParams::FC_LESS_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLessEqual : !isLessEqual;
 	}
 
 	return true;
