@@ -1,0 +1,121 @@
+#include "iocv/COcvBlobProcessorComp.h"
+
+
+// OpenCV includes
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/types_c.h>
+
+// ACF includes
+#include "istd/CChangeNotifier.h"
+#include "iimg/CBitmapBase.h"
+#include "iprm/TParamsPtr.h"
+#include "i2d/CPolygon.h"
+
+// ACF-Solutions includes
+#include "iblob/CBlobFeature.h"
+
+
+namespace iocv
+{
+
+
+// public methods
+
+// reimplemented (iipr::IImageToFeatureProcessor)
+
+int COcvBlobProcessorComp::DoExtractFeatures(
+			const iprm::IParamsSet* paramsPtr,
+			const iimg::IBitmap& image,
+			iipr::IFeaturesConsumer& results)
+{
+	if (paramsPtr == NULL){
+		return TS_INVALID;
+	}
+
+	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, *m_filterParamsIdAttrPtr);
+
+	bool retVal = CalculateBlobs(image, filterParamsPtr.GetPtr(), results)? TS_OK: TS_INVALID;
+	if (!retVal){
+		return TS_INVALID;
+	}
+
+	return retVal ? TS_OK: TS_INVALID;
+}
+
+
+// reimplemented (iproc::IProcessor)
+
+int COcvBlobProcessorComp::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const istd::IPolymorphic* inputPtr,
+			istd::IChangeable* outputPtr,
+			ibase::IProgressManager* /*progressManagerPtr*/)
+{
+	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
+	if (inputBitmapPtr == NULL){
+		return TS_INVALID;
+	}
+
+	if (outputPtr == NULL){
+		return TS_OK;
+	}
+
+	iipr::IFeaturesConsumer* outputConsumerPtr = dynamic_cast<iipr::IFeaturesConsumer*>(outputPtr);
+	if (outputConsumerPtr == NULL){
+		return TS_INVALID;
+	}
+
+	return DoExtractFeatures(paramsPtr, *inputBitmapPtr, *outputConsumerPtr);
+}
+
+
+// protected methods
+
+bool COcvBlobProcessorComp::CalculateBlobs(
+			const iimg::IBitmap& bitmap,
+			const iblob::IBlobFilterParams* blobFilterParamsPtr,
+			iipr::IFeaturesConsumer& result)
+{
+	istd::CChangeNotifier resultNotifier(&result);
+
+	result.ResetFeatures();
+
+	// Initialize input bitmap:
+	void* imageDataBufferPtr = const_cast<void*>(bitmap.GetLinePtr(0));
+	cv::Mat inputBitmap(bitmap.GetImageSize().GetY(), bitmap.GetImageSize().GetX(), CV_8UC1, imageDataBufferPtr, bitmap.GetLineBytesCount());
+
+	// Get contours from the binary image:
+	cv::Mat tmpBinaryImage = inputBitmap.clone();
+	std::vector<std::vector<cv::Point> > contours;
+	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+
+	// Get found blobs:
+	for (size_t contourIndex = 0; contourIndex < contours.size(); contourIndex++)
+	{
+		cv::Moments moms = cv::moments(cv::Mat(contours[contourIndex]));
+
+		double area = moms.m00;
+		double perimeter = cv::arcLength(cv::Mat(contours[contourIndex]), true);
+		cv::Point2d location = cv::Point2d(moms.m10 / moms.m00, moms.m01 / moms.m00);
+
+		bool passedByFilter = true;
+
+		if ((blobFilterParamsPtr != NULL) && blobFilterParamsPtr->IsFiltersEnabled()){
+			
+		}
+
+		if (passedByFilter){
+			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, i2d::CVector2d(location.x, location.y));
+
+			result.AddFeature(blobFeaturePtr);
+		}
+	}
+
+	return true;
+}
+
+
+} // namespace iocv
+
+

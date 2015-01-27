@@ -137,6 +137,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COcvBlobProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\COcvImage.cpp"
 				>
 			</File>
@@ -152,6 +156,10 @@
 			>
 			<File
 				RelativePath="..\COcvAcquisitionComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COcvBlobProcessorComp.h"
 				>
 			</File>
 			<File

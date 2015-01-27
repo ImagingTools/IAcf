@@ -22,6 +22,11 @@ I_EXPORT_COMPONENT(
 			"OpenCV-based video controller",
 			"OpenCV Video Multimedia Controller" IM_TAG("Multimedia"));
 
+I_EXPORT_COMPONENT(
+			OpenCvBlobExtractor,
+			"OpenCV-based blob extraction",
+			"OpenCV Blob Search Object");
+
 
 } // namespace OpenCvPck
 
