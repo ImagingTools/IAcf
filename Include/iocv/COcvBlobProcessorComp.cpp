@@ -91,8 +91,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
 	// Get found blobs:
-	for (size_t contourIndex = 0; contourIndex < contours.size(); contourIndex++)
-	{
+	for (int contourIndex = 0; contourIndex < int(contours.size()); contourIndex++){
 		cv::Moments moms = cv::moments(cv::Mat(contours[contourIndex]));
 
 		double area = moms.m00;
