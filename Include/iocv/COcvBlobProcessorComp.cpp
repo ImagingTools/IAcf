@@ -95,9 +95,18 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		cv::Moments moms = cv::moments(cv::Mat(contours[contourIndex]));
 
 		double area = moms.m00;
+		if (qFuzzyCompare(area, 0.0)){
+			continue;
+		}
+
 		double perimeter = cv::arcLength(cv::Mat(contours[contourIndex]), true);
+
 		cv::Point2d location = cv::Point2d(moms.m10 / moms.m00, moms.m01 / moms.m00);
-		double circularity = 4 * I_PI * area / (perimeter * perimeter);
+		double circularity = 0.0;
+		
+		if (perimeter > 0){
+			circularity = 4 * I_PI * area / (perimeter * perimeter);
+		}
 
 		bool passedByFilter = true;
 
