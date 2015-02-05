@@ -41,6 +41,7 @@ QString CSystem::GetModulePath(bool useApplicationModule, bool onlyDirectory)
 
 bool CSystem::EnableLowFragmentationHeap()
 {
+#if defined(_MSC_VER)
 	bool result = true;
 
 	ULONG enableLFH = 2;
@@ -52,12 +53,16 @@ bool CSystem::EnableLowFragmentationHeap()
 			result = false;
 
 			printf("Low Fragmentation failed for Heap %x\n", heaps[i]);
-		} else {
+		}
+		else{
 			printf("Low Fragmentation enabled for Heap %x\n", heaps[i]);
 		}
 	}
 
 	return result;
+#endif
+
+	return false;
 }
 
 

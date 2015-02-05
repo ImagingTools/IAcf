@@ -15,3 +15,6 @@ LIBS += -L$(QWT3DDIR)/Lib/$$COMPILER_DIR -lqwt3dlib
 
 INCLUDEPATH += ../../../Include
 
+QT += opengl
+LIBS += -L$(ACFDIR)/Lib/$$COMPILER_DIR -liprm
+
