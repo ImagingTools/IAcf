@@ -299,7 +299,7 @@ QString CLibAvVideoDecoderComp::GetOpenedMediumUrl() const
 
 bool CLibAvVideoDecoderComp::OpenMediumUrl(const QString& url, bool /*autoPlay*/)
 {
-	static ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
+	ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
 	istd::CChangeNotifier notifier(this, changeSet);
 
 	CloseMedium();
@@ -410,7 +410,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const QString& url, bool /*autoPlay*/
 
 void CLibAvVideoDecoderComp::CloseMedium()
 {
-	static ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
+	ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
 	istd::CChangeNotifier notifier(this, changeSet);
 
 	if (m_formatContextPtr != NULL){
@@ -561,7 +561,7 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 	}
 
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
-		static ChangeSet changeSet(CF_MEDIA_POSITION);
+		ChangeSet changeSet(CF_MEDIA_POSITION);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		if (av_seek_frame(
@@ -845,7 +845,7 @@ bool CLibAvVideoDecoderComp::ReadNextPacket()
 	if ((av_read_frame(m_formatContextPtr, &m_packet) >= 0) && (m_packet.data != NULL)){
 		int processedFrame = int(m_packet.dts);
 		if (processedFrame != m_currentFrame){
-			static ChangeSet changeSet(CF_MEDIA_POSITION);
+			ChangeSet changeSet(CF_MEDIA_POSITION);
 			istd::CChangeNotifier posNotifier(this, changeSet);
 
 			m_currentFrame = processedFrame;

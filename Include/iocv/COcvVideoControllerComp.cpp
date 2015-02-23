@@ -77,7 +77,7 @@ bool COcvVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPlay)
 
 		m_framesCount = (int)cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FRAME_COUNT);
 
-		static ChangeSet changeSet(CF_STATUS);
+		ChangeSet changeSet(CF_STATUS);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_mediumUrl = url;
@@ -93,7 +93,7 @@ void COcvVideoControllerComp::CloseMedium()
 {
 	EnsureMediumClosed();
 
-	static ChangeSet changeSet(CF_STATUS);
+	ChangeSet changeSet(CF_STATUS);
 	istd::CChangeNotifier notifier(this, changeSet);
 
 	SetPlaying(false);
@@ -109,7 +109,7 @@ bool COcvVideoControllerComp::IsPlaying() const
 bool COcvVideoControllerComp::SetPlaying(bool state)
 {
 	if (m_isPlaying != state){
-		static ChangeSet changeSet(CF_STATUS);
+		ChangeSet changeSet(CF_STATUS);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_isPlaying = state;
@@ -198,7 +198,7 @@ bool COcvVideoControllerComp::SetCurrentFrame(int frameIndex)
 	if (m_capturePtr.IsValid()){
 		bool retVal = SeekToPosition(frameIndex);
 		if (retVal){
-			static ChangeSet changeSet(CF_MEDIA_POSITION);
+			ChangeSet changeSet(CF_MEDIA_POSITION);
 			istd::CChangeNotifier notifier(this, changeSet);
 
 			iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(m_frameDataCompPtr.GetPtr());
