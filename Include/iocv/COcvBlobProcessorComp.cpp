@@ -145,7 +145,6 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 bool COcvBlobProcessorComp::IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value)
 {
-	bool valueInRange = filter.valueRange.Contains(value);
 	bool isGreater = value > filter.valueRange.GetMinValue();
 	bool isLess = value > filter.valueRange.GetMinValue();
 	bool isEqual = qFuzzyCompare(value, filter.valueRange.GetMinValue());
@@ -159,9 +158,15 @@ bool COcvBlobProcessorComp::IsValueAcceptedByFilter(const iblob::IBlobFilterPara
 	case iblob::IBlobFilterParams::FC_NOT_EQUAL:
 		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !isEqual : isEqual;
 	case iblob::IBlobFilterParams::FC_BETWEEN:
+	{
+		bool valueInRange = filter.valueRange.Contains(value);
 		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? valueInRange : !valueInRange;
+	}
 	case iblob::IBlobFilterParams::FC_OUTSIDE:
+	{
+		bool valueInRange = filter.valueRange.Contains(value);
 		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !valueInRange : valueInRange;
+	}
 	case iblob::IBlobFilterParams::FC_GREATER:
 		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreater : !isGreater;
 	case iblob::IBlobFilterParams::FC_GREATER_EQUAL:
