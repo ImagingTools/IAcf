@@ -85,8 +85,9 @@ bool CVlcVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 			layoutPtr->addWidget(m_vlcWidgetPtr);
 		}
 
-		ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_vlcInputPtr = m_vlcWidgetPtr->input();
 
@@ -115,8 +116,9 @@ bool CVlcVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 void CVlcVideoViewGuiComp::CloseMedium()
 {
 	if (m_playlistPtr != NULL){
-		ChangeSet changeSet(CF_STATUS);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_STATUS);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_playlistPtr->stop();
 		m_playlistPtr->clear();
@@ -137,8 +139,9 @@ bool CVlcVideoViewGuiComp::IsPlaying() const
 bool CVlcVideoViewGuiComp::SetPlaying(bool state)
 {
 	if (state != IsPlaying()){
-		ChangeSet changeSet(CF_STATUS);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_STATUS);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		if (m_playlistPtr != NULL){
 			m_playlistPtr->togglePause();
@@ -174,8 +177,9 @@ double CVlcVideoViewGuiComp::GetCurrentPosition() const
 bool CVlcVideoViewGuiComp::SetCurrentPosition(double position)
 {
 	if (m_vlcInputPtr != NULL){
-		ChangeSet changeSet(CF_MEDIA_POSITION);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_MEDIA_POSITION);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_vlcInputPtr->SetTime(int(position * 1000));
 
