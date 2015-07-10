@@ -279,7 +279,7 @@ void CSimpleCameraComp::OnComponentCreated()
 				// setup capture
 				err = dc1394_video_set_iso_speed(m_cameraPtr, DC1394_ISO_SPEED_400);
 				if (err != DC1394_SUCCESS){
-					SendWarningMessage(MI_CAMERA, QObject::tr("Could not set iso speed"));
+					SendWarningMessage(MI_CAMERA, QObject::tr("Could not set ISO speed"));
 				}
 
 				err = dc1394_video_set_mode(m_cameraPtr, DC1394_VIDEO_MODE_640x480_RGB8);
@@ -305,7 +305,7 @@ void CSimpleCameraComp::OnComponentCreated()
 						return;
 					}
 					else{
-						SendErrorMessage(MI_CAMERA, QObject::tr("Could not start m_cameraPtr iso transmission"));
+						SendErrorMessage(MI_CAMERA, QObject::tr("Could not start camera ISO transmission"));
 					}
 				}
 
@@ -314,7 +314,7 @@ void CSimpleCameraComp::OnComponentCreated()
 				m_cameraPtr = NULL;
 			}
 			else{
-				SendErrorMessage(MI_CAMERA, QObject::tr("Failed to initialize m_cameraPtr with guid %1").arg(list->ids[0].guid));
+				SendErrorMessage(MI_CAMERA, QObject::tr("Failed to initialize camera with guid %1").arg(list->ids[0].guid));
 			}
 		}
 		else{
