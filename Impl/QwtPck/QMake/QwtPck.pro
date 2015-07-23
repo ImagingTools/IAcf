@@ -7,11 +7,11 @@ TARGET = QwtPck
 
 INCLUDEPATH += $(ACFSLNDIR)/Include
 INCLUDEPATH += "$(QWTDIR_6_1_0)/Src"
-INCLUDEPATH += "$(QWT3DDIR)/Include"
+INCLUDEPATH += "$(QWT3DDIR_0_3_1)/Include"
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqwt -liqwt3d
 LIBS += -L$(QWTDIR_6_1_0)/Lib/$$COMPILER_DIR -lqwt
-LIBS += -L$(QWT3DDIR)/Lib/$$COMPILER_DIR -lqwt3dlib
+LIBS += -L$(QWT3DDIR_0_3_1)/Lib/$$COMPILER_DIR -lqwt3d
 
 INCLUDEPATH += ../../../Include
 
