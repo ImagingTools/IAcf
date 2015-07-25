@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt.lib qwt3d.lib AcfStd.lib AcfQt.lib Qt5OpenGl.lib OpenGL32.lib Glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -118,7 +118,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt.lib qwt3d.lib AcfStd.lib AcfQt.lib Qt5OpenGl.lib OpenGL32.lib Glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -180,7 +180,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt.lib qwt3d.lib AcfStd.lib AcfQt.lib Qt5OpenGld.lib OpenGL32.lib Glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -242,7 +242,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt.lib qwt3d.lib AcfStd.lib AcfQt.lib Qt5OpenGld.lib OpenGL32.lib Glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWTDIR_6_1_0)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QWT3DDIR_0_3_1)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				TargetMachine="17"
 			/>
 			<Tool

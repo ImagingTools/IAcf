@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib Qt5Core.lib  zlib.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -117,7 +117,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib Qt5Cored.lib d_zlib.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -179,7 +179,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib Qt5Core.lib  zlib.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -242,7 +242,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib Qt5Cored.lib d_zlib.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ZLIBDIR)\lib&quot;;&quot;$(INTELCDIR)\lib&quot;"
 				TargetMachine="17"
 			/>
 			<Tool

@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib iipr.lib iblob.lib opencv_core2410.lib opencv_imgproc2410.lib opencv_highgui2410.lib opencv_features2d2410.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9&quot;"
 				OptimizeReferences="1"
 			/>
 			<Tool
@@ -119,7 +119,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib iipr.lib iblob.lib opencv_core2410.lib opencv_imgproc2410.lib opencv_highgui2410.lib opencv_features2d2410.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9_64&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9_64&quot;"
 				OptimizeReferences="1"
 				TargetMachine="17"
 			/>
@@ -181,7 +181,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib iipr.lib iblob.lib opencv_core2410d.lib opencv_imgproc2410d.lib opencv_highgui2410d.lib opencv_features2d2410d.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -242,7 +242,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib iipr.lib iblob.lib opencv_core2410d.lib opencv_imgproc2410d.lib opencv_highgui2410d.lib opencv_features2d2410d.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9_64&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9_64&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(OPENCVDIR_2_4_10)\lib\ReleaseVC9_64&quot;"
 				TargetMachine="17"
 			/>
 			<Tool

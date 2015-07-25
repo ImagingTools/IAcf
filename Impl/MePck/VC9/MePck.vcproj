@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIG)\VC9\Win32.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -53,7 +53,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib meIDSmain.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MEIDSDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MEIDSDIR)\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -80,7 +80,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIG)\VC9\Win32.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -113,7 +113,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib meIDSmain.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MEIDSDIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(MEIDSDIR)\lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
