@@ -46,15 +46,6 @@ Project{
             ]
         }
     }
-/*
-	Project{
-		name: "IACF-Tool"
-
-		references: [
-//			"../../Impl/AcfStarterExe/Qbs/AcfStarter.qbs"
-		]
-	}
-*/
 
 	Product{
 		name: "IacfConfig"
