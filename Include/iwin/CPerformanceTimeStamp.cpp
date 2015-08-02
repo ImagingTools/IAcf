@@ -48,7 +48,8 @@ quint64 CPerformanceTimeStamp::GetNativeRepresentation() const
 
 void CPerformanceTimeStamp::SetNativeRepresentation(quint64 value)
 {
-	istd::CChangeNotifier notifier(this, &s_startChangeSet);
+	ChangeSet startChangeSet(CF_START_SET);
+	istd::CChangeNotifier notifier(this, &startChangeSet);
 	Q_UNUSED(notifier);
 
 	m_startCounter = qint64(value);
@@ -149,7 +150,6 @@ bool CPerformanceTimeStamp::CopyFrom(const istd::IChangeable& object, Compatibil
 
 qint64 CPerformanceTimeStamp::s_timerFrequence;
 bool CPerformanceTimeStamp::s_isTimerFrequenceValid = (::QueryPerformanceFrequency((LARGE_INTEGER*)&CPerformanceTimeStamp::s_timerFrequence) != 0);
-const CPerformanceTimeStamp::ChangeSet CPerformanceTimeStamp::s_startChangeSet(CF_START_SET);
 
 
 } // namespace iwin

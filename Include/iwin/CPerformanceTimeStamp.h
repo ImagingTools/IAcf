@@ -46,7 +46,6 @@ private:
 	// static attributes
 	static qint64 s_timerFrequence;
 	static bool s_isTimerFrequenceValid;
-	static const ChangeSet s_startChangeSet;
 };
 
 
