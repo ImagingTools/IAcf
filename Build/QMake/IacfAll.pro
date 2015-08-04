@@ -1,7 +1,5 @@
 # Root of IACF project
 
-include ($(ACFCONFIGDIR)/QMake/GeneralConfig.pri)
-
 TEMPLATE = subdirs
 CONFIG += ordered
 
