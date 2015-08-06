@@ -1,7 +1,7 @@
 import qbs.base 1.0
-import AcfStaticLibrary as AcfStaticLibrary
+import AcfLibrary as AcfLibrary
 
-AcfStaticLibrary{
+AcfLibrary{
 	name: "iqwt3d"
 	condition: Qt.core.qtConfig.contains("opengl")
 
