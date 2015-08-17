@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          2934
+          3814
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          920
+          1355
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -211,7 +211,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -245,48 +245,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LicensePath
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ../LGPL/LicenseLGPL.txt
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
