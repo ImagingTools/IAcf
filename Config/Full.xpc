@@ -33,13 +33,13 @@
   </ConfigFiles>
   <PackageDirs count="4">
     <Dir>
-      ../Bin/$(ConfigurationDir)
+      ../Bin/$(ConfigurationName)
     </Dir>
     <Dir>
       ../Partitura
     </Dir>
     <Dir>
-      ../Bin/$(ConfigurationDir)Tutorial
+      ../Bin/$(ConfigurationName)/Tutorial
     </Dir>
     <Dir>
       ../Docs/Tutorial/Partitura

@@ -6,4 +6,4 @@ include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
 INCLUDEPATH += ../..
 INCLUDEPATH += "$(QWT3DDIR_0_3_1)/Include"
 
-FORMS += ../*.ui
+FORMS += $$_PRO_FILE_PWD_/../*.ui
