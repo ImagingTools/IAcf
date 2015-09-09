@@ -25,7 +25,7 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 
 	int channelsCount = 0;
 
-	imeas::IDataSequence* objectPtr = GetObjectPtr();
+	imeas::IDataSequence* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		QStringList channelNames;
 		const imeas::IDataSequenceInfo* sequenceInfoPtr = objectPtr->GetSequenceInfo();
@@ -264,7 +264,7 @@ CQwtDataSequenceViewComp::DataSequencePlotPicker::DataSequencePlotPicker(CQwtDat
 
 QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoint& position) const
 {
-	imeas::IDataSequence* objectPtr = m_parent.GetObjectPtr();
+	imeas::IDataSequence* objectPtr = m_parent.GetObservedObject();
 	if (objectPtr == NULL){
 		return QwtText();
 	}

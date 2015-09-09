@@ -50,7 +50,7 @@ void CSurfaceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet
 {
 	Q_ASSERT(IsGuiCreated());
 
-	imath::ISampledFunction2d* objectPtr = GetObjectPtr();
+	imath::ISampledFunction2d* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		Q_ASSERT(objectPtr->GetArgumentDimensionality() == 2);
 		Q_ASSERT(objectPtr->GetResultDimensionality() == 1);
