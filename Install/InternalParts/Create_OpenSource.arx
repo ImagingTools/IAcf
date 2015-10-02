@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3887
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1023
         </Id>
         <Number>
-          328706
+          328960
         </Number>
         <Description>
           Qt Framework
@@ -29,10 +18,21 @@
           1
         </Id>
         <Number>
-          1400
+          1423
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3915
+        </Number>
+        <Description>
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -211,7 +211,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -342,7 +342,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   ACFDIR
                 </Value>
@@ -351,6 +351,9 @@
                 </Value>
                 <Value>
                   ACFSLNDIR
+                </Value>
+                <Value>
+                  IACFDIR
                 </Value>
               </Values>
             </Data>
@@ -369,7 +372,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   $RelativeToInputFile:$(ACFDIR)
                 </Value>
@@ -378,6 +381,9 @@
                 </Value>
                 <Value>
                   $RelativeToInputFile:$(ACFSLNDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(IACFDIR)
                 </Value>
               </Values>
             </Data>
@@ -402,6 +408,66 @@
                 </Value>
                 <Value>
                   generated
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="4">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+                <Value>
+                  ACFSLNDIR
+                </Value>
+                <Value>
+                  IACFDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="4">
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)/Config
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFSLNDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(IACFDIR)
                 </Value>
               </Values>
             </Data>

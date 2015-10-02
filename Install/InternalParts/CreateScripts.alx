@@ -7,7 +7,7 @@
           1023
         </Id>
         <Number>
-          328449
+          328706
         </Number>
         <Description>
           Qt Framework
@@ -18,7 +18,7 @@
           0
         </Id>
         <Number>
-          3814
+          3909
         </Number>
         <Description>
           ACF
@@ -29,7 +29,7 @@
           1
         </Id>
         <Number>
-          1355
+          1415
         </Number>
         <Description>
           ACF-Solutions
@@ -40,13 +40,13 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        VersionInfo
+        CopyScriptFiles
       </ComponentName>
       <X>
-        425
+        725
       </X>
       <Y>
-        100
+        500
       </Y>
       <Note>
         
@@ -68,13 +68,13 @@
     </Element>
     <Element>
       <ComponentName>
-        ScriptFilesCopy
+        VersionInfo
       </ComponentName>
       <X>
-        700
+        950
       </X>
       <Y>
-        450
+        300
       </Y>
       <Note>
         
