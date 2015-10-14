@@ -19,6 +19,11 @@ namespace ilibav
 {
 
 
+const istd::IChangeable::ChangeSet s_openMediaChangeSet(imm::IMediaController::CF_STATUS, imm::IMediaController::CF_MEDIA_POSITION);
+const istd::IChangeable::ChangeSet s_closeMediaChangeSet(imm::IMediaController::CF_STATUS);
+const istd::IChangeable::ChangeSet s_setPositionChangeSet(imm::IMediaController::CF_MEDIA_POSITION);
+
+
 // public methods
 
 CLibAvVideoDecoderComp::CLibAvVideoDecoderComp()
@@ -299,8 +304,7 @@ QString CLibAvVideoDecoderComp::GetOpenedMediumUrl() const
 
 bool CLibAvVideoDecoderComp::OpenMediumUrl(const QString& url, bool /*autoPlay*/)
 {
-	ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_openMediaChangeSet);
 	Q_UNUSED(notifier);
 
 	CloseMedium();
@@ -411,8 +415,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const QString& url, bool /*autoPlay*/
 
 void CLibAvVideoDecoderComp::CloseMedium()
 {
-	ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_closeMediaChangeSet);
 	Q_UNUSED(notifier);
 
 	if (m_formatContextPtr != NULL){
@@ -563,8 +566,7 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 	}
 
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
-		ChangeSet changeSet(CF_MEDIA_POSITION);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_setPositionChangeSet);
 		Q_UNUSED(notifier);
 
 		if (av_seek_frame(
@@ -848,8 +850,7 @@ bool CLibAvVideoDecoderComp::ReadNextPacket()
 	if ((av_read_frame(m_formatContextPtr, &m_packet) >= 0) && (m_packet.data != NULL)){
 		int processedFrame = int(m_packet.dts);
 		if (processedFrame != m_currentFrame){
-			ChangeSet changeSet(CF_MEDIA_POSITION);
-			istd::CChangeNotifier notifier(this, &changeSet);
+			istd::CChangeNotifier notifier(this, &s_setPositionChangeSet);
 			Q_UNUSED(notifier);
 
 			m_currentFrame = processedFrame;
