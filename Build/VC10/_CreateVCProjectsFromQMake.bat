@@ -10,7 +10,7 @@ cd Build/QMake
 qmake -recursive -tp vc IacfAll.pro
 cd ../..
 
-call %ACFDIR%/Config/QMake/CopyVCProjToSubdir.js %COMPILER_EXT%
+call %ACFDIR%/Config/QMake/CopyVCProjToSubdir.js %COMPILER_EXT% -replace%QTDIR%=$(QTDIR) -replace%ACFDIR%\=$(ACFDIR)\ -replace%ACFSLNDIR%\=$(ACFSLNDIR)\ -replace%CD%\=$(RelativePath)\
 
 
 cd Build\VC10
