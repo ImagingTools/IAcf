@@ -1,0 +1,113 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="MePck" Id="ChannelAddress" ComponentId="ChannelAddressParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="MeilhausAccess" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HardwareAcquisition"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ChannelAddressGui" ComponentId="SelectionParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="MePck" Id="HardwareAcquisition" ComponentId="MeilhausSimpleAcquisition">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AddressParamId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="ChannelAddress"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsOutput" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="ParamsSet" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ChannelAddress</Value>
+                                <Value>SamplingParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ChannelAddress</Value>
+                                <Value>SamplingParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ChannelAddressGui</Value>
+                                <Value>SamplingParamsGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ChannelAddress</Value>
+                                <Value>SamplingParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IacfTutorialVoce" Id="SamplingFramework" ComponentId="SamplingFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsSet"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SampleAcquisition" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HardwareAcquisition"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="SignalPck" Id="SamplingParams" ComponentId="SamplingParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HardwareAcquisition"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtSignalPck" Id="SamplingParamsGui" ComponentId="SamplingParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="SamplingFramework"/>
+        <Interface InterfaceId="ibase::IApplicationInfo" ComponentId="SamplingFramework"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="SamplingFramework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

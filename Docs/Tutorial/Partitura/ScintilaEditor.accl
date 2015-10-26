@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="200" Y="550" ComponentName="VersionInfo"/>
+        <Element Note="" X="900" Y="550" ComponentName="DocumentLoader"/>
+        <Element Note="" X="200" Y="375" ComponentName="App"/>
+        <Element Note="" X="475" Y="375" ComponentName="DocumentTemplate"/>
+        <Element Note="" X="475" Y="175" ComponentName="ViewFactory"/>
+        <Element Note="" X="900" Y="175" ComponentName="DocumentFactory"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,22 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="675" ComponentName="VersionInfo"/>
+        <Element Note="" X="475" Y="375" ComponentName="VideoGrabber"/>
+        <Element Note="" X="675" Y="500" ComponentName="ImageGui"/>
+        <Element Note="" X="1050" Y="650" ComponentName="LogDock"/>
+        <Element Note="" X="125" Y="550" ComponentName="MediaDialogLoader"/>
+        <Element Note="" X="375" Y="475" ComponentName="AudioDock"/>
+        <Element Note="" X="125" Y="775" ComponentName="MediaLoader"/>
+        <Element Note="" X="275" Y="125" ComponentName="PersistenceGui"/>
+        <Element Note="" X="650" Y="650" ComponentName="StandaloneApp"/>
+        <Element Note="" X="700" Y="150" ComponentName="BitmapPersistenceGui"/>
+        <Element Note="" X="900" Y="50" ComponentName="PersistenceDock"/>
+        <Element Note="" X="1050" Y="325" ComponentName="BitmapDialogLoader"/>
+        <Element Note="" X="525" Y="250" ComponentName="BitmapView"/>
+        <Element Note="" X="150" Y="375" ComponentName="MediaPersistenceGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

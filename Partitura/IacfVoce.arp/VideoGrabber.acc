@@ -1,0 +1,71 @@
+<Acf Keywords="Video Camera Grabber Bitmap Acquisition MPEG AVI" Description="Allow to grab single image from video">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BasePck" Id="ControllerBinder" ComponentId="ModelBinder">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VideoDecoder"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Observers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ControllerGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMmPck" Id="ControllerGui" ComponentId="PlaybackControllerGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ShowFrameIndex" ExportId="ShowFrameIndex" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowPlayButton" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowPositionSlider" ExportId="ShowPositionSlider" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowRepeatButton" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowTimePosition" ExportId="ShowTimePosition" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FfMpegPck" Id="VideoDecoder" ComponentId="LibAvVideoDecoder">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AudioSampleObject" ExportId="CurrentAudio" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapObject" ExportId="CurrentBitmap" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="icam::IBitmapAcquisition" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="imm::IMediaController" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="imm::IVideoController" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="imm::IVideoInfo" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="iproc::IProcessor" ComponentId="VideoDecoder"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ControllerGui"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="VideoDecoder"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

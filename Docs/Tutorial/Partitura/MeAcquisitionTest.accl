@@ -1,0 +1,16 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="575" Y="525" ComponentName="ChannelAddressGui"/>
+        <Element Note="" X="875" Y="600" ComponentName="ParamsSetGui"/>
+        <Element Note="" X="550" Y="300" ComponentName="ChannelAddress"/>
+        <Element Note="" X="325" Y="175" ComponentName="ParamsSet"/>
+        <Element Note="" X="575" Y="700" ComponentName="SamplingParamsGui"/>
+        <Element Note="" X="875" Y="175" ComponentName="SamplingFramework"/>
+        <Element Note="" X="325" Y="425" ComponentName="SamplingParams"/>
+        <Element Note="" X="675" Y="425" ComponentName="HardwareAcquisition"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

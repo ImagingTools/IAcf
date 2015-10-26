@@ -1,0 +1,19 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="500" Y="450" ComponentName="ProcessorControlGui"/>
+        <Element Note="" X="1050" Y="225" ComponentName="VersionInfo"/>
+        <Element Note="" X="150" Y="600" ComponentName="DataSequenceView"/>
+        <Element Note="" X="125" Y="75" ComponentName="AboutDialog"/>
+        <Element Note="" X="500" Y="600" ComponentName="GeneralDataSequence"/>
+        <Element Note="" X="500" Y="325" ComponentName="ProcessorControlDock"/>
+        <Element Note="" X="325" Y="725" ComponentName="ModelBinder"/>
+        <Element Note="" X="225" Y="225" ComponentName="StandaloneApp"/>
+        <Element Note="" X="825" Y="375" ComponentName="SampleLoader"/>
+        <Element Note="" X="1050" Y="450" ComponentName="XmlSerializer"/>
+        <Element Note="" X="325" Y="75" ComponentName="SplashScreen"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

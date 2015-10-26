@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="950" Y="300" ComponentName="VersionInfo"/>
+        <Element Note="" X="725" Y="500" ComponentName="CopyScriptFiles"/>
+        <Element Note="" X="425" Y="300" ComponentName="Application"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

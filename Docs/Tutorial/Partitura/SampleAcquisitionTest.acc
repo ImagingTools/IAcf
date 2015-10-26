@@ -1,0 +1,133 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>TextFileLoader</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="ParamsSet" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>TextDocument</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Script</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>TextEditor</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Script</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileDialogLoader"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IacfTutorialVoce" Id="SamplingFramework" ComponentId="SamplingFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsSet"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SampleAcquisition" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="TestSampleAcquisition"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtSignalPck" Id="TestSampleAcquisition" ComponentId="ScriptDataProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ChannelsCount" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SamplesCount" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ScriptParamId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="Script"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="TextDocument" ComponentId="TextDocument">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultText" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="var now = new Date();offset = now.valueOf() * 0.001;function Calc(x){return (Math.sin(x * 0.1 + offset) + 1) * (maxValue - minValue) * 0.5 + minValue;}"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="TutorialPck" Id="TextEditor" ComponentId="TextEditor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="TextFileLoader" ComponentId="TextFileLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>js</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeDescriptions" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>JavaScript file</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="SamplingFramework"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="SamplingFramework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

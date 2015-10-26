@@ -1,0 +1,15 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="150" Y="375" ComponentName="VersionInfo"/>
+        <Element Note="" X="450" Y="375" ComponentName="VideoView"/>
+        <Element Note="" X="825" Y="375" ComponentName="LoadGui"/>
+        <Element Note="" X="825" Y="625" ComponentName="MediaLoader"/>
+        <Element Note="" X="450" Y="175" ComponentName="StandaloneApp"/>
+        <Element Note="" X="825" Y="175" ComponentName="ToolBarWidgetGui"/>
+        <Element Note="" X="825" Y="500" ComponentName="FileDialogLoader"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

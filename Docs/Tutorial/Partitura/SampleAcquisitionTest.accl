@@ -1,0 +1,16 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="600" Y="450" ComponentName="ParamsSetGui"/>
+        <Element Note="" X="950" Y="575" ComponentName="TextFileLoader"/>
+        <Element Note="" X="975" Y="275" ComponentName="TestSampleAcquisition"/>
+        <Element Note="" X="275" Y="575" ComponentName="TextDocument"/>
+        <Element Note="" X="275" Y="450" ComponentName="ParamsSet"/>
+        <Element Note="" X="600" Y="575" ComponentName="TextEditor"/>
+        <Element Note="" X="950" Y="450" ComponentName="FileDialogLoader"/>
+        <Element Note="" X="600" Y="275" ComponentName="SamplingFramework"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

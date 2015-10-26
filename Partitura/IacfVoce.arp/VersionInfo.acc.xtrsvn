@@ -1,0 +1,94 @@
+<Acf Keywords="Application Tag=Version Info Author='&quot;Witold Gantzke&quot;'" Description="Version information for modules based directly on IACF">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="AcfSlnVoce" Id="BaseInfo" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IsExtensionUsed" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="KnownVersionNames" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0.1.0</Value>
+                                <Value>0.1.1</Value>
+                                <Value>0.1.2</Value>
+                                <Value>0.1.3</Value>
+                                <Value>0.2.0</Value>
+                                <Value>0.3.0</Value>
+                                <Value>0.3.1</Value>
+                                <Value>0.3.2</Value>
+                                <Value>0.3.3</Value>
+                                <Value>0.3.4</Value>
+                                <Value>0.4.0</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="KnownVersions" ExportId="" Type="Integer[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>122</Value>
+                                <Value>152</Value>
+                                <Value>169</Value>
+                                <Value>200</Value>
+                                <Value>233</Value>
+                                <Value>299</Value>
+                                <Value>322</Value>
+                                <Value>348</Value>
+                                <Value>529</Value>
+                                <Value>588</Value>
+                                <Value>631</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveVersionInfo" ExportId="SlaveVersionInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionId" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="10"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionIdDesc" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="IACF"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionNumber" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="$WCREV$"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="VersionInfo" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IsExtensionUsed" ExportId="IsExtensionUsed" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="KnownVersionNames" ExportId="KnownVersionNames" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="KnownVersions" ExportId="KnownVersions" Type="Integer[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveVersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BaseInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionId" ExportId="VersionId" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionIdDesc" ExportId="VersionIdDesc" Type="String">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionNumber" ExportId="VersionNumber" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="VersionInfo"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>
