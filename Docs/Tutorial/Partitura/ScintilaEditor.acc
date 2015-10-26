@@ -55,7 +55,7 @@
                     <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>arx</Value>
+                                <Value>acc</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
