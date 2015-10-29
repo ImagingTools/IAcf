@@ -27,9 +27,6 @@ win32{
 
 
 	win32-msvc2005 | win32-msvc2008{
-		SUBDIRS += izlib
-		izlib.file = ../../Include/izlib/QMake/izlib.pro
-
 #		SUBDIRS += icbox
 #		icbox.file = ../../Include/icbox/QMake/icbox.pro
 
@@ -58,9 +55,6 @@ win32{
 	WinPck.file = ../../Impl/WinPck/QMake/WinPck.pro
 
 	win32-msvc2005 | win32-msvc2008{
-		SUBDIRS += ZlibPck
-		ZlibPck.file = ../../Impl/ZlibPck/QMake/ZlibPck.pro
-
 		SUBDIRS += FfMpegPck
 		FfMpegPck.file = ../../Impl/FfMpegPck/QMake/FfMpegPck.pro
 
