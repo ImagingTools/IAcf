@@ -51,9 +51,9 @@ Project{
 		name: "IacfConfig"
 
 		condition: qbs.toolchain.contains("msvc")
-		type: ["xpc", "acf_share"]
+		type: ["awc", "acf_share"]
 
-		files: ["../../Config/PartituraOnly.xpc"]
+		files: ["../../Config/PartituraOnly.awc"]
 
 		destinationDirectory: "Config"
 

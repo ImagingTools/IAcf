@@ -1,0 +1,24 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Number="4005" Id="0" Description="ACF"/>
+            <Version Number="328706" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles>
+        <FilePath>$(ACFSLNDIR)/Config/AcfSlnConfig.awc</FilePath>
+        <FilePath>../../../Config/IacfConfig.awc</FilePath>
+    </ConfigFiles>
+    <PackageDirs>
+        <Dir>../../../Bin/$(ConfigurationName)/Tutorial</Dir>
+        <Dir>../Partitura</Dir>
+    </PackageDirs>
+    <PackageFiles/>
+    <RegistryFiles>
+        <FilePath>../Partitura/AvLibAudioVideoGrabber.acc</FilePath>
+        <FilePath>../Partitura/MeAcquisitionTest.acc</FilePath>
+        <FilePath>../Partitura/SampleAcquisitionTest.acc</FilePath>
+        <FilePath>../Partitura/ScintilaEditor.acc</FilePath>
+        <FilePath>../Partitura/VLCPlayer.acc</FilePath>
+    </RegistryFiles>
+</Acf>
