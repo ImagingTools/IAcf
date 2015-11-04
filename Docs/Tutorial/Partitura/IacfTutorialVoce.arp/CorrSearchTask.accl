@@ -1,0 +1,17 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="1023" Number="328449" Description="Qt Framework"/>
+            <Version Id="1" Number="1479" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4014" Description="ACF"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element X="925" Y="175" Note="" ComponentName="SearchTask"/>
+        <Element X="1100" Y="675" Note="" ComponentName="SearchParams"/>
+        <Element X="925" Y="475" Note="" ComponentName="SearchParamsSet"/>
+        <Element X="350" Y="175" Note="" ComponentName="SearchProcessor"/>
+        <Element X="750" Y="675" Note="" ComponentName="AOI"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

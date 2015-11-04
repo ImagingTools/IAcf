@@ -10,6 +10,7 @@
 #include "iocv/COcvAcquisitionComp.h"
 #include "iocv/COcvVideoControllerComp.h"
 #include "iocv/COcvBlobProcessorComp.h"
+#include "iocv/CCorrSearchProcessorComp.h"
 
 
 /**
@@ -22,6 +23,7 @@ namespace OpenCvPck
 typedef iocv::COcvAcquisitionComp OpenCvAcquisition;
 typedef icomp::TModelCompWrap<iocv::COcvVideoControllerComp> OpenCvVideoController;
 typedef iocv::COcvBlobProcessorComp OpenCvBlobExtractor;
+typedef iocv::CCorrSearchProcessorComp CorrSearchProcessor;
 
 
 } // namespace OpenCvPck

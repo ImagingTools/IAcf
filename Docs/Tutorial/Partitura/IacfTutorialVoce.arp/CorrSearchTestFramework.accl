@@ -1,0 +1,27 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="1023" Number="328449" Description="Qt Framework"/>
+            <Version Id="1" Number="1479" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4014" Description="ACF"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element X="225" Y="225" Note="" ComponentName="SnapTask"/>
+        <Element X="600" Y="150" Note="" ComponentName="ModelDock"/>
+        <Element X="125" Y="400" Note="" ComponentName="ImageView"/>
+        <Element X="225" Y="575" Note="" ComponentName="SnapTaskGui"/>
+        <Element X="600" Y="400" Note="" ComponentName="Framework"/>
+        <Element X="1000" Y="575" Note="" ComponentName="SimpleCircleFinderTaskGui"/>
+        <Element X="1000" Y="225" Note="" ComponentName="SimpleCircleFinderTask"/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="ModelDock">
+            <PositionMap>
+                <Element X="575" Y="150" Note="" ComponentName="DockWidgetGui"/>
+                <Element X="575" Y="275" Note="" ComponentName="ModelPreview"/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

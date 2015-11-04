@@ -1,0 +1,16 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="1023" Number="328449" Description="Qt Framework"/>
+            <Version Id="1" Number="1479" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4014" Description="ACF"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element X="625" Y="575" Note="" ComponentName="SearchParamsEditor"/>
+        <Element X="750" Y="300" Note="" ComponentName="ParamsEditor"/>
+        <Element X="325" Y="300" Note="" ComponentName="ValueSupplierGui"/>
+        <Element X="925" Y="575" Note="" ComponentName="AoiEditor"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

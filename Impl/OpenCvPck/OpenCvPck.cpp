@@ -27,6 +27,11 @@ I_EXPORT_COMPONENT(
 			"OpenCV-based blob extraction",
 			"OpenCV Blob Search Object");
 
+I_EXPORT_COMPONENT(
+			CorrSearchProcessor,
+			"OpenCV-based normalized correlation search processor",
+			"OpenCV Normalized Correlation Search Processor Model Image Find Pattern Matching");
+
 
 } // namespace OpenCvPck
 
