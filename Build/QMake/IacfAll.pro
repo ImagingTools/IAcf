@@ -41,6 +41,12 @@ macx{
 }
 
 
+# Translations
+
+SUBDIRS += IacfLoc
+IacfLoc.file = ../../Impl/IacfLoc/QMake/IacfLoc.pro
+
+
 #Component
 
 win32{

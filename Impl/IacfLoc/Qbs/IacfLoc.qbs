@@ -2,18 +2,10 @@ import qbs.base 1.0
 import AcfLibrary as AcfLibrary
 
 AcfLibrary{
-	name: "IacfLoc"
-
 	Group{
 		name: "Translations"
-		files: ["../*.ts"]
+		files: ["../Translations/*.ts"]
 	}
 
-	Group{
-		name: "Resources"
-		files: ["../*.qrc"]
-		fileTags: ["qrc_generated"]
-	}
-
-    Qt.core.qmFilesDir: 'GeneratedFiles/' + product.name
+	files: ["../*.qrc"]
 }
