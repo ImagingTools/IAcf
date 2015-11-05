@@ -2,7 +2,6 @@ import qbs.base 1.0
 import AcfLibrary as AcfLibrary
 
 AcfLibrary{
-	name: "iqwt3d"
 	condition: Qt.core.qtConfig.contains("opengl")
 
 	files: ["../*.h", "../*.cpp", "../*.ui"]
