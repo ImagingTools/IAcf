@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="400" Y="425" ComponentName="VideoView"/>
-        <Element Note="" X="725" Y="425" ComponentName="Application"/>
-        <Element Note="" X="475" Y="300" ComponentName="MediaLoader"/>
-        <Element Note="" X="275" Y="125" ComponentName="AutoPersistence"/>
-        <Element Note="" X="725" Y="300" ComponentName="FileDialogLoader"/>
+        <Element ComponentName="MediaLoader" Y="300" X="475" Note=""/>
+        <Element ComponentName="VideoView" Y="425" X="400" Note=""/>
+        <Element ComponentName="AutoPersistence" Y="125" X="275" Note=""/>
+        <Element ComponentName="Application" Y="425" X="725" Note=""/>
+        <Element ComponentName="FileDialogLoader" Y="300" X="725" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

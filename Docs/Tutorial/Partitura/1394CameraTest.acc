@@ -1,6 +1,10 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="Dc1394Pck" Id="Camera" ComponentId="SimpleCamera">
@@ -11,11 +15,11 @@
         <Element PackageId="SnapTutorialVoce" Id="Framework" ComponentId="SnapFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Streaming Camera Test"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
+                        <Data Value="Streaming Camera Test" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Camera"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="BitmapAcquisition">
+                        <Data Value="Camera" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

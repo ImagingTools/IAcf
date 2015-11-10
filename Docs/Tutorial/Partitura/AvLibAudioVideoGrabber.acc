@@ -1,6 +1,10 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="AcfSlnVoce" Id="AudioDock" ComponentId="AudioDock">
@@ -11,8 +15,8 @@
         <Element PackageId="AcfGuiVoce" Id="BitmapDialogLoader" ComponentId="BitmapDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogDock"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Log">
+                        <Data Value="LogDock" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -20,14 +24,14 @@
         <Element PackageId="FileGuiPck" Id="BitmapPersistenceGui" ComponentId="FilePersistenceGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapDialogLoader"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="FileLoader">
+                        <Data Value="BitmapDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapView/Bitmap"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Object">
+                        <Data Value="BitmapView/Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowLoad" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="ShowLoad">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -35,11 +39,11 @@
         <Element PackageId="AcfGuiVoce" Id="BitmapView" ComponentId="BitmapView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FitMode" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="5"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="FitMode">
+                        <Data Value="5" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="ZoomToFitEnabled">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -47,7 +51,7 @@
         <Element PackageId="QtGuiPck" Id="ImageGui" ComponentId="ComposedGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Guis" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Guis">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>BitmapView</Value>
@@ -61,8 +65,8 @@
         <Element PackageId="AcfGuiVoce" Id="LogDock" ComponentId="LogDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ApplicationInfo">
+                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -70,15 +74,15 @@
         <Element PackageId="FileGuiPck" Id="MediaDialogLoader" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MediaLoader</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogDock"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Log">
+                        <Data Value="LogDock" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -86,11 +90,11 @@
         <Element PackageId="QtMmPck" Id="MediaLoader" ComponentId="MediaLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AutoPlay" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="AutoPlay">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogDock"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Log">
+                        <Data Value="LogDock" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -98,14 +102,14 @@
         <Element PackageId="FileGuiPck" Id="MediaPersistenceGui" ComponentId="FilePersistenceGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="MediaDialogLoader"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="FileLoader">
+                        <Data Value="MediaDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoGrabber"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Object">
+                        <Data Value="VideoGrabber" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowSave" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="ShowSave">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -113,17 +117,17 @@
         <Element PackageId="QtGuiPck" Id="PersistenceDock" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowedDockAreas" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="AllowedDockAreas">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockArea" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="DockArea">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Load and Save"/>
+                    <AttributeInfo Type="String" ExportId="" Id="DockTitle">
+                        <Data Value="Load and Save" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="PersistenceGui"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="SlaveGui">
+                        <Data Value="PersistenceGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -131,7 +135,7 @@
         <Element PackageId="QtGuiPck" Id="PersistenceGui" ComponentId="ComposedGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Guis" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Guis">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>BitmapPersistenceGui</Value>
@@ -139,7 +143,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="Names">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Bitmap</Value>
@@ -153,22 +157,22 @@
         <Element PackageId="AcfGuiVoce" Id="StandaloneApp" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="AV Grabber"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
+                        <Data Value="AV Grabber" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Tutorial"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationType">
+                        <Data Value="Tutorial" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo Type="String" ExportId="" Id="CompanyName">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF Solutions project&#xa;See 'License.txt' for license information"/>
+                    <AttributeInfo Type="String" ExportId="" Id="LegalCopyright">
+                        <Data Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF Solutions project&#xa;See 'License.txt' for license information" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainView" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageGui"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="MainView">
+                        <Data Value="ImageGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainWindowComponents" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="MainWindowComponents">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>PersistenceDock</Value>
@@ -177,11 +181,11 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="IACF"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ProductName">
+                        <Data Value="IACF" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="VersionInfo">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -189,8 +193,8 @@
         <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="AvLib Demo"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
+                        <Data Value="AvLib Demo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -198,14 +202,14 @@
         <Element PackageId="IacfVoce" Id="VideoGrabber" ComponentId="VideoGrabber">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CurrentAudio" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AudioDock"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="CurrentAudio">
+                        <Data Value="AudioDock" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CurrentBitmap" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapView/Bitmap"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="CurrentBitmap">
+                        <Data Value="BitmapView/Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogDock"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Log">
+                        <Data Value="LogDock" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

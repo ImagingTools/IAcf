@@ -1,25 +1,25 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="1023" Number="328449" Description="Qt Framework"/>
-            <Version Id="1" Number="1479" Description="ACF-Solutions"/>
-            <Version Id="0" Number="4014" Description="ACF"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="225" Y="225" Note="" ComponentName="SnapTask"/>
-        <Element X="600" Y="150" Note="" ComponentName="ModelDock"/>
-        <Element X="125" Y="400" Note="" ComponentName="ImageView"/>
-        <Element X="225" Y="575" Note="" ComponentName="SnapTaskGui"/>
-        <Element X="600" Y="400" Note="" ComponentName="Framework"/>
-        <Element X="1000" Y="575" Note="" ComponentName="SimpleCircleFinderTaskGui"/>
-        <Element X="1000" Y="225" Note="" ComponentName="SimpleCircleFinderTask"/>
+        <Element ComponentName="Framework" Y="400" X="600" Note=""/>
+        <Element ComponentName="ModelDock" Y="150" X="600" Note=""/>
+        <Element ComponentName="SnapTaskGui" Y="575" X="225" Note=""/>
+        <Element ComponentName="SimpleCircleFinderTaskGui" Y="575" X="1000" Note=""/>
+        <Element ComponentName="SimpleCircleFinderTask" Y="225" X="1000" Note=""/>
+        <Element ComponentName="SnapTask" Y="225" X="225" Note=""/>
+        <Element ComponentName="ImageView" Y="400" X="125" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="ModelDock">
             <PositionMap>
-                <Element X="575" Y="150" Note="" ComponentName="DockWidgetGui"/>
-                <Element X="575" Y="275" Note="" ComponentName="ModelPreview"/>
+                <Element ComponentName="DockWidgetGui" Y="150" X="575" Note=""/>
+                <Element ComponentName="ModelPreview" Y="275" X="575" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

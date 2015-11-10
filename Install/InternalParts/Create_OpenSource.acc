@@ -1,35 +1,39 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="InstallVoce" Id="Application" ComponentId="ComplexCopyApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="IACF"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
+                        <Data Value="IACF" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="OpenSource"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationType">
+                        <Data Value="OpenSource" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo Type="String" ExportId="" Id="CompanyName">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileCopiers" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="FileCopiers">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CopyAll</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="10"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="MainVersionId">
+                        <Data Value="10" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="IACF"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ProductName">
+                        <Data Value="IACF" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="VersionInfo">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -37,19 +41,19 @@
         <Element PackageId="InstallVoce" Id="CopyAll" ComponentId="CopyOpenSources">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Application/ApplicationInfo"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ApplicationInfo">
+                        <Data Value="Application/ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Type="Boolean" ExportId="EnableVerbose" Id="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Install/LGPL/Header.txt"/>
+                    <AttributeInfo Type="String" ExportId="" Id="LicensePath">
+                        <Data Value="Install/LGPL/Header.txt" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Application/Log"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Log">
+                        <Data Value="Application/Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OtherExcludeFilters" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="OtherExcludeFilters">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>GeneratedFiles</Value>
@@ -57,10 +61,10 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTagExpr" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="\$\((.+)\)"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ProjectsSubstitutionTagExpr">
+                        <Data Value="\$\((.+)\)" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="ProjectsSubstitutionTags">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACFDIR</Value>
@@ -70,7 +74,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="ProjectsSubstitutionValues">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>$RelativeToInputFile:$(ACFDIR)</Value>
@@ -80,7 +84,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SourceExcludeFilters" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="SourceExcludeFilters">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>GeneratedFiles</Value>
@@ -88,7 +92,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="WinProjectsSubstitutionTags">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACFDIR</Value>
@@ -98,7 +102,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="WinProjectsSubstitutionValues">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>$RelativeToInputFileWin:$(ACFDIR)</Value>
@@ -114,8 +118,8 @@
         <Element PackageId="IacfVoce" Id="VersionInfo" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="IsExtensionUsed" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="IsExtensionUsed">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

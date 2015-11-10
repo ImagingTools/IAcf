@@ -1,16 +1,20 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="600" Y="450" ComponentName="ParamsSetGui"/>
-        <Element Note="" X="950" Y="575" ComponentName="TextFileLoader"/>
-        <Element Note="" X="975" Y="275" ComponentName="TestSampleAcquisition"/>
-        <Element Note="" X="275" Y="575" ComponentName="TextDocument"/>
-        <Element Note="" X="275" Y="450" ComponentName="ParamsSet"/>
-        <Element Note="" X="600" Y="575" ComponentName="TextEditor"/>
-        <Element Note="" X="950" Y="450" ComponentName="FileDialogLoader"/>
-        <Element Note="" X="600" Y="275" ComponentName="SamplingFramework"/>
+        <Element ComponentName="SamplingFramework" Y="275" X="600" Note=""/>
+        <Element ComponentName="TextDocument" Y="575" X="275" Note=""/>
+        <Element ComponentName="ParamsSet" Y="450" X="275" Note=""/>
+        <Element ComponentName="TextEditor" Y="575" X="600" Note=""/>
+        <Element ComponentName="TextFileLoader" Y="575" X="950" Note=""/>
+        <Element ComponentName="ParamsSetGui" Y="450" X="600" Note=""/>
+        <Element ComponentName="TestSampleAcquisition" Y="275" X="975" Note=""/>
+        <Element ComponentName="FileDialogLoader" Y="450" X="950" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,15 +1,19 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="150" Y="375" ComponentName="VersionInfo"/>
-        <Element Note="" X="450" Y="375" ComponentName="VideoView"/>
-        <Element Note="" X="825" Y="375" ComponentName="LoadGui"/>
-        <Element Note="" X="825" Y="625" ComponentName="MediaLoader"/>
-        <Element Note="" X="450" Y="175" ComponentName="StandaloneApp"/>
-        <Element Note="" X="825" Y="175" ComponentName="ToolBarWidgetGui"/>
-        <Element Note="" X="825" Y="500" ComponentName="FileDialogLoader"/>
+        <Element ComponentName="StandaloneApp" Y="175" X="450" Note=""/>
+        <Element ComponentName="ToolBarWidgetGui" Y="175" X="825" Note=""/>
+        <Element ComponentName="MediaLoader" Y="625" X="825" Note=""/>
+        <Element ComponentName="VideoView" Y="375" X="450" Note=""/>
+        <Element ComponentName="LoadGui" Y="375" X="825" Note=""/>
+        <Element ComponentName="VersionInfo" Y="375" X="150" Note=""/>
+        <Element ComponentName="FileDialogLoader" Y="500" X="825" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

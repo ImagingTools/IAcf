@@ -1,22 +1,26 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="350" Y="675" ComponentName="VersionInfo"/>
-        <Element Note="" X="475" Y="375" ComponentName="VideoGrabber"/>
-        <Element Note="" X="675" Y="500" ComponentName="ImageGui"/>
-        <Element Note="" X="1050" Y="650" ComponentName="LogDock"/>
-        <Element Note="" X="125" Y="550" ComponentName="MediaDialogLoader"/>
-        <Element Note="" X="375" Y="475" ComponentName="AudioDock"/>
-        <Element Note="" X="125" Y="775" ComponentName="MediaLoader"/>
-        <Element Note="" X="275" Y="125" ComponentName="PersistenceGui"/>
-        <Element Note="" X="650" Y="650" ComponentName="StandaloneApp"/>
-        <Element Note="" X="700" Y="150" ComponentName="BitmapPersistenceGui"/>
-        <Element Note="" X="900" Y="50" ComponentName="PersistenceDock"/>
-        <Element Note="" X="1050" Y="325" ComponentName="BitmapDialogLoader"/>
-        <Element Note="" X="525" Y="250" ComponentName="BitmapView"/>
-        <Element Note="" X="150" Y="375" ComponentName="MediaPersistenceGui"/>
+        <Element ComponentName="LogDock" Y="650" X="1050" Note=""/>
+        <Element ComponentName="BitmapPersistenceGui" Y="150" X="700" Note=""/>
+        <Element ComponentName="MediaDialogLoader" Y="550" X="125" Note=""/>
+        <Element ComponentName="StandaloneApp" Y="650" X="650" Note=""/>
+        <Element ComponentName="BitmapDialogLoader" Y="325" X="1050" Note=""/>
+        <Element ComponentName="MediaPersistenceGui" Y="375" X="150" Note=""/>
+        <Element ComponentName="MediaLoader" Y="775" X="125" Note=""/>
+        <Element ComponentName="PersistenceDock" Y="50" X="900" Note=""/>
+        <Element ComponentName="BitmapView" Y="250" X="525" Note=""/>
+        <Element ComponentName="AudioDock" Y="475" X="375" Note=""/>
+        <Element ComponentName="ImageGui" Y="500" X="675" Note=""/>
+        <Element ComponentName="PersistenceGui" Y="125" X="275" Note=""/>
+        <Element ComponentName="VideoGrabber" Y="375" X="475" Note=""/>
+        <Element ComponentName="VersionInfo" Y="675" X="350" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

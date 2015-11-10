@@ -1,12 +1,16 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>TextFileLoader</Value>
@@ -19,14 +23,14 @@
         <Element PackageId="BasePck" Id="ParamsSet" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Parameters">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>TextDocument</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo Type="Id[]" ExportId="" Id="ParametersId">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Script</Value>
@@ -39,22 +43,22 @@
         <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Editors">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>TextEditor</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo Type="Id[]" ExportId="" Id="Ids">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Script</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileDialogLoader"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ParamsLoader">
+                        <Data Value="FileDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -62,14 +66,14 @@
         <Element PackageId="IacfTutorialVoce" Id="SamplingFramework" ComponentId="SamplingFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsSet"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ParamsSet">
+                        <Data Value="ParamsSet" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ParamsSetGui">
+                        <Data Value="ParamsSetGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SampleAcquisition" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="TestSampleAcquisition"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="SampleAcquisition">
+                        <Data Value="TestSampleAcquisition" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -77,14 +81,14 @@
         <Element PackageId="QtSignalPck" Id="TestSampleAcquisition" ComponentId="ScriptDataProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ChannelsCount" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="ChannelsCount">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SamplesCount" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="SamplesCount">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ScriptParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Script"/>
+                    <AttributeInfo Type="Id" ExportId="" Id="ScriptParamId">
+                        <Data Value="Script" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -92,8 +96,8 @@
         <Element PackageId="BasePck" Id="TextDocument" ComponentId="TextDocument">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultText" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="var now = new Date();offset = now.valueOf() * 0.001;function Calc(x){return (Math.sin(x * 0.1 + offset) + 1) * (maxValue - minValue) * 0.5 + minValue;}"/>
+                    <AttributeInfo Type="String" ExportId="" Id="DefaultText">
+                        <Data Value="var now = new Date();offset = now.valueOf() * 0.001;function Calc(x){return (Math.sin(x * 0.1 + offset) + 1) * (maxValue - minValue) * 0.5 + minValue;}" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -106,14 +110,14 @@
         <Element PackageId="BasePck" Id="TextFileLoader" ComponentId="TextFileLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="FileExtensions">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>js</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="TypeDescriptions">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>JavaScript file</Value>

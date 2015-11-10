@@ -1,13 +1,17 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="QtGuiPck" Id="Application" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoView"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="MainGui">
+                        <Data Value="VideoView" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -15,14 +19,14 @@
         <Element PackageId="FilePck" Id="AutoPersistence" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileDialogLoader"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="FileLoader">
+                        <Data Value="FileDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoView"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Object">
+                        <Data Value="VideoView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StoreOnEnd" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="StoreOnEnd">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -30,7 +34,7 @@
         <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MediaLoader</Value>

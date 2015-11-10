@@ -1,31 +1,31 @@
-<Acf Keywords="Circle Finder Task Annulus GUI" Description="GUI for circle finder using annulus segment to speciffy AOI">
+<Acf Description="GUI for circle finder using annulus segment to speciffy AOI" Keywords="Circle Finder Task Annulus GUI">
     <AcfHeader>
         <VersionInfos>
-            <Version Id="1023" Number="328449" Description="Qt Framework"/>
-            <Version Id="1" Number="1479" Description="ACF-Solutions"/>
-            <Version Id="0" Number="4014" Description="ACF"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
         </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element Id="AoiEditor" ComponentId="RectangleParamsGui" PackageId="QtViewPck">
+        <Element PackageId="QtViewPck" Id="AoiEditor" ComponentId="RectangleParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultUnitInfo" ExportId="UnitInfo" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="UnitInfo" Id="DefaultUnitInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShapeColorSchema" ExportId="ShapeColorSchema" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="ShapeColorSchema" Id="ShapeColorSchema">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="ParamsEditor" ComponentId="ComposedParamsSetGui" PackageId="QtGuiPck">
+        <Element PackageId="QtGuiPck" Id="ParamsEditor" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" ExportId="DesignType" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo Type="Integer" ExportId="DesignType" Id="DesignType">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Editors">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>AoiEditor</Value>
@@ -33,7 +33,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo Type="Id[]" ExportId="" Id="Ids">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>AOI</Value>
@@ -41,7 +41,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo Type="String[]" ExportId="" Id="Names">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>AOI</Value>
@@ -49,40 +49,40 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="ShowAllShapes">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseVerticalSpacer" ExportId="UseVerticalSpacer" Type="Boolean">
+                    <AttributeInfo Type="Boolean" ExportId="UseVerticalSpacer" Id="UseVerticalSpacer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SearchParamsEditor" ComponentId="GeneralSearchParamsGui" PackageId="QtIprPck">
+        <Element PackageId="QtIprPck" Id="SearchParamsEditor" ComponentId="GeneralSearchParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element Id="ValueSupplierGui" ComponentId="ValueSupplierGui" PackageId="QtIprPck">
+        <Element PackageId="QtIprPck" Id="ValueSupplierGui" ComponentId="ValueSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="DefaultModel" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="DefaultModel" Id="DefaultModel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsLoader" ExportId="ParamsLoader" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="ParamsLoader" Id="ParamsLoader">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsEditor"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ParamsSetGui">
+                        <Data Value="ParamsEditor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SceneIdFilters" ExportId="SceneIdFilters" Type="Integer[]">
+                    <AttributeInfo Type="Integer[]" ExportId="SceneIdFilters" Id="SceneIdFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="SlaveSceneExtender" Id="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ViewCalibrationMode" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="ViewCalibrationMode">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -96,6 +96,6 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ValueSupplierGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="ValueSupplierGui/VisualStatus" ExportedId="VisualStatus"/>
+        <Component ExportedId="VisualStatus" ComponentId="ValueSupplierGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>

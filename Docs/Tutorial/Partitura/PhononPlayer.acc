@@ -1,12 +1,16 @@
-<Acf Keywords="ACF Tutorial Application PHONON Video Player" Description="Video player using Qt PHONON background">
+<Acf Description="Video player using Qt PHONON background" Keywords="ACF Tutorial Application PHONON Video Player">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
         <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MediaLoader</Value>
@@ -19,14 +23,14 @@
         <Element PackageId="FileGuiPck" Id="LoadGui" ComponentId="FilePersistenceGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileDialogLoader"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="FileLoader">
+                        <Data Value="FileDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoView"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="Object">
+                        <Data Value="VideoView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowSave" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo Type="Boolean" ExportId="" Id="ShowSave">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -39,27 +43,27 @@
         <Element PackageId="AcfGuiVoce" Id="StandaloneApp" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="PhononPlayer"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
+                        <Data Value="PhononPlayer" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Tutorial"/>
+                    <AttributeInfo Type="String" ExportId="" Id="ApplicationType">
+                        <Data Value="Tutorial" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo Type="String" ExportId="" Id="CompanyName">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainView" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoView"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="MainView">
+                        <Data Value="VideoView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainWindowComponents" ExportId="" Type="Reference[]">
+                    <AttributeInfo Type="Reference[]" ExportId="" Id="MainWindowComponents">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ToolBarWidgetGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="VersionInfo">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -67,14 +71,14 @@
         <Element PackageId="QtGuiPck" Id="ToolBarWidgetGui" ComponentId="ToolBarWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Title" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Persistence"/>
+                    <AttributeInfo Type="String" ExportId="" Id="Title">
+                        <Data Value="Persistence" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ToolBarArea" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo Type="Integer" ExportId="" Id="ToolBarArea">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ToolBarWidget" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LoadGui"/>
+                    <AttributeInfo Type="Reference" ExportId="" Id="ToolBarWidget">
+                        <Data Value="LoadGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
