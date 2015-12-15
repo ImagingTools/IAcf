@@ -1,25 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="Framework" Y="400" X="600" Note=""/>
-        <Element ComponentName="ModelDock" Y="150" X="600" Note=""/>
-        <Element ComponentName="SnapTaskGui" Y="575" X="225" Note=""/>
-        <Element ComponentName="SimpleCircleFinderTaskGui" Y="575" X="1000" Note=""/>
-        <Element ComponentName="SimpleCircleFinderTask" Y="225" X="1000" Note=""/>
-        <Element ComponentName="SnapTask" Y="225" X="225" Note=""/>
-        <Element ComponentName="ImageView" Y="400" X="125" Note=""/>
+        <Element ComponentName="SimpleCircleFinderTaskGui" X="1000" Y="575" Note=""/>
+        <Element ComponentName="Framework" X="600" Y="400" Note=""/>
+        <Element ComponentName="ModelDock" X="600" Y="150" Note=""/>
+        <Element ComponentName="SnapTaskGui" X="225" Y="575" Note=""/>
+        <Element ComponentName="SimpleCircleFinderTask" X="1000" Y="225" Note=""/>
+        <Element ComponentName="ImageView" X="125" Y="400" Note=""/>
+        <Element ComponentName="SnapTask" X="225" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="ModelDock">
             <PositionMap>
-                <Element ComponentName="DockWidgetGui" Y="150" X="575" Note=""/>
-                <Element ComponentName="ModelPreview" Y="275" X="575" Note=""/>
+                <Element ComponentName="DockWidgetGui" X="575" Y="150" Note=""/>
+                <Element ComponentName="ModelPreview" X="575" Y="275" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

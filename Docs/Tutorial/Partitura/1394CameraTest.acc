@@ -1,25 +1,28 @@
-<Acf Description="" Keywords="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element PackageId="Dc1394Pck" Id="Camera" ComponentId="SimpleCamera">
+        <Element Id="Camera" PackageId="Dc1394Pck" ComponentId="SimpleCamera">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="SnapTutorialVoce" Id="Framework" ComponentId="SnapFramework">
+        <Element Id="Framework" PackageId="SnapTutorialVoce" ComponentId="SnapFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="String" ExportId="" Id="ApplicationName">
-                        <Data Value="Streaming Camera Test" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Streaming Camera Test"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="BitmapAcquisition">
-                        <Data Value="Camera" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapAcquisition" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Camera"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

@@ -1,40 +1,43 @@
-<Acf Description="" Keywords="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="Application" ComponentId="GuiApplication">
+        <Element Id="Application" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="MainGui">
-                        <Data Value="VideoView" IsEnabled="true"/>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VideoView"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="AutoPersistence" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="FileLoader">
-                        <Data Value="FileDialogLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="Object">
-                        <Data Value="VideoView" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VideoView"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Boolean" ExportId="" Id="StoreOnEnd">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="StoreOnEnd" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
+        <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MediaLoader</Value>
@@ -44,12 +47,12 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtMmPck" Id="MediaLoader" ComponentId="MediaLoader">
+        <Element Id="MediaLoader" PackageId="QtMmPck" ComponentId="MediaLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QaxPck" Id="VideoView" ComponentId="VlcVideoViewGui">
+        <Element Id="VideoView" PackageId="QaxPck" ComponentId="VlcVideoViewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

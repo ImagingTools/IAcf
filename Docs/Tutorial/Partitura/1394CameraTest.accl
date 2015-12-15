@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="Framework" Y="225" X="725" Note=""/>
-        <Element ComponentName="Camera" Y="450" X="725" Note=""/>
+        <Element ComponentName="Framework" X="725" Y="225" Note=""/>
+        <Element ComponentName="Camera" X="725" Y="450" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

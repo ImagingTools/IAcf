@@ -1,48 +1,51 @@
-<Acf Description="" Keywords="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element PackageId="AcfGuiVoce" Id="AboutDialog" ComponentId="AboutDialog">
+        <Element Id="AboutDialog" PackageId="AcfGuiVoce" ComponentId="AboutDialog">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="ApplicationInfo">
-                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="DataSequenceView" ComponentId="DataSequenceView">
+        <Element Id="DataSequenceView" PackageId="QtMeasPck" ComponentId="DataSequenceView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Boolean" ExportId="" Id="IsChannelPanelVisible">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsChannelPanelVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Boolean" ExportId="" Id="IsScalePanelVisible">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsScalePanelVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Boolean" ExportId="IsTimeSpanVisible" Id="IsTimeSpanPanelVisible">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsTimeSpanPanelVisible" Type="Boolean" ExportId="IsTimeSpanVisible">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="GeneralDataSequence" ComponentId="GeneralDataSequence">
+        <Element Id="GeneralDataSequence" PackageId="MeasPck" ComponentId="GeneralDataSequence">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ModelBinder" ComponentId="ModelBinder">
+        <Element Id="ModelBinder" PackageId="BasePck" ComponentId="ModelBinder">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="Model">
-                        <Data Value="GeneralDataSequence" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GeneralDataSequence"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference[]" ExportId="" Id="Observers">
+                    <AttributeInfo Id="Observers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DataSequenceView</Value>
@@ -52,46 +55,46 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ProcessorControlDock" ComponentId="DockWidgetGui">
+        <Element Id="ProcessorControlDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="String" ExportId="" Id="DockTitle">
-                        <Data Value="Script Processor" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Script Processor"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="SlaveGui">
-                        <Data Value="ProcessorControlGui" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessorControlGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessingGuiPck" Id="ProcessorControlGui" ComponentId="ProcessorControlGui">
+        <Element Id="ProcessorControlGui" PackageId="ProcessingGuiPck" ComponentId="ProcessorControlGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="OutputData">
-                        <Data Value="GeneralDataSequence" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputData" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GeneralDataSequence"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="OutputDataLoader">
-                        <Data Value="SampleLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputDataLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SampleLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="ParamsLoader" Id="ParamsLoader">
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="ParamsLoader">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="ParamsSet" Id="ParamsSet">
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="ParamsSetGui" Id="ParamsSetGui">
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="ParamsSetGui">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="SampleAcquisition" Id="Processor">
+                    <AttributeInfo Id="Processor" Type="Reference" ExportId="SampleAcquisition">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FileGuiPck" Id="SampleLoader" ComponentId="FileDialogLoader">
+        <Element Id="SampleLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference[]" ExportId="" Id="Loaders">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XmlSerializer</Value>
@@ -101,97 +104,97 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SplashScreen" ComponentId="SplashScreen">
+        <Element Id="SplashScreen" PackageId="QtGuiPck" ComponentId="SplashScreen">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="ApplicationInfo">
-                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="" Id="ImagePath">
-                        <Data Value="$(ACFDIR)/Docs/Images/AcfSplashScreen.png" IsEnabled="true"/>
+                    <AttributeInfo Id="ImagePath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="$(ACFDIR)/Docs/Images/AcfSplashScreen.png"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="StandaloneApp" ComponentId="StandaloneApp">
+        <Element Id="StandaloneApp" PackageId="AcfGuiVoce" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="Reference" ExportId="" Id="AboutDialog">
-                        <Data Value="AboutDialog" IsEnabled="true"/>
+                    <AttributeInfo Id="AboutDialog" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AboutDialog"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="ApplicationName" Id="ApplicationName">
-                        <Data Value="ACF Sampling Demo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="ApplicationName">
+                        <Data IsEnabled="true" Value="ACF Sampling Demo"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="ApplicationSubname" Id="ApplicationSubname">
+                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="ApplicationType" Id="ApplicationType">
+                    <AttributeInfo Id="ApplicationType" Type="String" ExportId="ApplicationType">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="CompanyName" Id="CompanyName">
-                        <Data Value="ImagingTools" IsEnabled="true"/>
+                    <AttributeInfo Id="CompanyName" Type="String" ExportId="CompanyName">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Integer" ExportId="FrameSpaceSize" Id="FrameSpaceSize">
+                    <AttributeInfo Id="FrameSpaceSize" Type="Integer" ExportId="FrameSpaceSize">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="IconPath" Id="IconPath">
+                    <AttributeInfo Id="IconPath" Type="String" ExportId="IconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Boolean" ExportId="" Id="IsMenuVisible">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsMenuVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="LegalCopyright" Id="LegalCopyright">
-                        <Data Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of IACF project&#xa;See 'License.txt' for license information" IsEnabled="true"/>
+                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="LegalCopyright">
+                        <Data IsEnabled="true" Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Integer" ExportId="MainVersionId" Id="MainVersionId">
-                        <Data Value="10" IsEnabled="true"/>
+                    <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="MainVersionId">
+                        <Data IsEnabled="true" Value="10"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="MainView">
-                        <Data Value="DataSequenceView" IsEnabled="true"/>
+                    <AttributeInfo Id="MainView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DataSequenceView"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference[]" ExportId="" Id="MainWindowComponents">
+                    <AttributeInfo Id="MainWindowComponents" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ProcessorControlDock</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Type="String" ExportId="ProductName" Id="ProductName">
-                        <Data Value="IACF" IsEnabled="true"/>
+                    <AttributeInfo Id="ProductName" Type="String" ExportId="ProductName">
+                        <Data IsEnabled="true" Value="IACF"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="SplashScreen">
-                        <Data Value="SplashScreen" IsEnabled="true"/>
+                    <AttributeInfo Id="SplashScreen" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SplashScreen"/>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="VersionInfo">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IacfVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element Id="VersionInfo" PackageId="IacfVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="XmlSerializer" ComponentId="SimpleXmlFileSerializer">
+        <Element Id="XmlSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Type="String[]" ExportId="" Id="FileExtensions">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>xsmp</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Type="String[]" ExportId="" Id="TypeDescriptions">
+                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XML Samples</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Type="Reference" ExportId="" Id="VersionInfo">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
