@@ -2,15 +2,17 @@ rem echo off
 
 set COMPILER_EXT=VC10
 set QMAKESPEC=%QTDIR%/mkspecs/win32-msvc2010
+set path=%path%;%QTDIR%\bin
 
-cd ..\..
+cd %~dp0\..\..
 
 echo Generating %COMPILER_EXT% projects...
 cd Build/QMake
-qmake -recursive -tp vc IacfAll.pro
-cd ../..
+%QTDIR%\bin\qmake -recursive -tp vc
+cd %~dp0\..\..
 
-call %ACFDIR%/Config/QMake/CopyVCProjToSubdir.js %COMPILER_EXT% -replace%QTDIR%=$(QTDIR) -replace%ACFDIR%\=$(ACFDIR)\ -replace%ACFSLNDIR%\=$(ACFSLNDIR)\ -replace%CD%\=$(RelativePath)\
+call %ACFDIR%\Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT% -replace%QTDIR%=$(QTDIR) -replace%ACFDIR%\=$(ACFDIR)\ -replace%ACFSLNDIR%\=$(ACFSLNDIR)\ -replace%ACF_TOOLS_BIN%\=$(ACF_TOOLS_BIN)\ -replace%CD%\=$(RelativePath)\
 
 
-cd Build\VC10
+cd %~dp0\
+
