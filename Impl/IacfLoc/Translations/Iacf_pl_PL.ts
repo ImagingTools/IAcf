@@ -4,8 +4,8 @@
 <context>
     <name>CHistogramViewComp</name>
     <message>
-        <location filename="../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
         <source>Statistics</source>
         <translation>Statystyka</translation>
     </message>
@@ -13,14 +13,14 @@
 <context>
     <name>CProgressHistoryGuiComp</name>
     <message>
-        <location filename="../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
+        <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation>Przerwij</translation>
     </message>
@@ -28,7 +28,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Include/idc1394/CSimpleCameraComp.cpp" line="+99"/>
+        <location filename="../../../Include/idc1394/CSimpleCameraComp.cpp" line="+99"/>
         <location line="+40"/>
         <source>Cannot create image in frame format (Gray)</source>
         <translation>Nie mogę stworzyć obrazu w formacie klatki (Gray)</translation>
@@ -55,11 +55,21 @@
     </message>
     <message>
         <location line="+26"/>
-        <source>Could not set iso speed</source>
-        <translation type="unfinished"></translation>
+        <source>Could not set ISO speed</source>
+        <translation>Nie można ustawić prędkości transferu ISO</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+26"/>
+        <source>Could not start camera ISO transmission</source>
+        <translation>Nie można wystartować transmisji ISO</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Failed to initialize camera with guid %1</source>
+        <translation>Inicjacja kamery z GUID %1 nie powiodła się</translation>
+    </message>
+    <message>
+        <location line="-30"/>
         <source>Could not set video mode</source>
         <translation>Nie mogę ustawić trybu video</translation>
     </message>
@@ -79,17 +89,7 @@
         <translation>Używana kamera z GUID %1</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Could not start m_cameraPtr iso transmission</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Failed to initialize m_cameraPtr with guid %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+18"/>
         <source>No cameras found</source>
         <translation>Nie znaleziono kamer</translation>
     </message>
@@ -98,11 +98,21 @@
         <source>Failed to enumerate cameras</source>
         <translation>Nie można wyliczyć kamer</translation>
     </message>
+    <message>
+        <location filename="../../../Include/iocv/CCorrSearchProcessorComp.cpp" line="+198"/>
+        <source>Found model, %1% score</source>
+        <translation>Znaleziono model, zgodność %1%</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Model search took %1 ms</source>
+        <translation>Szukanie modelu trwało %1 ms</translation>
+    </message>
 </context>
 <context>
     <name>iqsci::CTextEditor</name>
     <message>
-        <location filename="../../Include/iqsci/CTextEditor.cpp" line="+100"/>
+        <location filename="../../../Include/iqsci/CTextEditor.cpp" line="+100"/>
         <source>To &amp;Lowercase</source>
         <translation>Do &amp;małych liter</translation>
     </message>
@@ -149,17 +159,17 @@
     <message>
         <location line="+1"/>
         <source>Show &amp;Indentation Guides</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż &amp;Wcięcia</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show Indentation Guides</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż Wcięcia</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show indentation guides</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż wcięcia</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -195,7 +205,7 @@
 <context>
     <name>iqwt3d::CSurfaceViewComp</name>
     <message>
-        <location filename="../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+34"/>
+        <location filename="../../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+34"/>
         <source>&amp;View</source>
         <translation>&amp;Widok</translation>
     </message>
@@ -268,7 +278,7 @@
 <context>
     <name>iqwt::CProgressHistoryGuiComp</name>
     <message>
-        <location filename="../../Include/iqwt/CProgressHistoryGuiComp.cpp" line="+153"/>
+        <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.cpp" line="+153"/>
         <source>Finished</source>
         <translation>Skończone</translation>
     </message>
@@ -281,7 +291,7 @@
 <context>
     <name>iqwt::CQwtDataSequenceViewComp</name>
     <message>
-        <location filename="../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+40"/>
+        <location filename="../../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+40"/>
         <source>Channel %1</source>
         <translation>Kanał %1</translation>
     </message>
