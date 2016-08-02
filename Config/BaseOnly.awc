@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4005" Id="0" Description="ACF"/>
-            <Version Number="328706" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4243" Description="ACF"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles>
@@ -10,7 +11,7 @@
     </ConfigFiles>
     <PackageDirs/>
     <PackageFiles>
-        <FilePath>../Partitura/IAcfVoce.arp</FilePath>
+        <FilePath>../Partitura/IacfVoce.arp</FilePath>
     </PackageFiles>
     <RegistryFiles/>
 </Acf>
