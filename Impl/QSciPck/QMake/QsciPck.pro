@@ -9,6 +9,7 @@ QT += xml
 
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += "$(QSCINTILLA)/Include"
+INCLUDEPATH += $(QSCINTILLA)/Qt4Qt5
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqsci
 LIBS += -L$(QSCINTILLA)/Lib/$$COMPILER_DIR -lQScintilla
