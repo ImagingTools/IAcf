@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
 // IACF includes
-#include "iocv/COcvAcquisitionComp.h"
-#include "iocv/COcvVideoControllerComp.h"
-#include "iocv/COcvBlobProcessorComp.h"
-#include "iocv/CCorrSearchProcessorComp.h"
+#include <iocv/COcvAcquisitionComp.h>
+#include <iocv/COcvVideoControllerComp.h>
+#include <iocv/COcvBlobProcessorComp.h>
+#include <iocv/CCorrSearchProcessorComp.h>
 
 
 /**

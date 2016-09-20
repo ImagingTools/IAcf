@@ -1,4 +1,4 @@
-#include "iocv/COcvImage.h"
+#include <iocv/COcvImage.h>
 
 
 // STL includes

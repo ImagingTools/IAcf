@@ -7,9 +7,9 @@
 #include <QtCore/QWaitCondition>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
-#include "imebase.h"
+#include <imebase.h>
 
 
 namespace imebase

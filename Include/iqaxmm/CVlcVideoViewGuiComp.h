@@ -13,13 +13,13 @@
 #include <ActiveQt/QAxWidget>
 
 // ACF includes
-#include "iqtgui/TGuiComponentBase.h"
+#include <iqtgui/TGuiComponentBase.h>
 
 // ACF-Solutions includes
-#include "imm/IVideoController.h"
+#include <imm/IVideoController.h>
 
 // IACF includes
-#include "iqaxmm/Wrapped/axvlc.h"
+#include <iqaxmm/Wrapped/axvlc.h>
 
 
 namespace iqaxmm

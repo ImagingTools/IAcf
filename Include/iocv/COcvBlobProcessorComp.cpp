@@ -1,4 +1,4 @@
-#include "iocv/COcvBlobProcessorComp.h"
+#include <iocv/COcvBlobProcessorComp.h>
 
 
 // OpenCV includes
@@ -7,13 +7,13 @@
 #include <opencv2/imgproc/types_c.h>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iimg/CBitmapBase.h"
-#include "iprm/TParamsPtr.h"
-#include "i2d/CPolygon.h"
+#include <istd/CChangeNotifier.h>
+#include <iimg/CBitmapBase.h>
+#include <iprm/TParamsPtr.h>
+#include <i2d/CPolygon.h>
 
 // ACF-Solutions includes
-#include "iblob/CBlobFeature.h"
+#include <iblob/CBlobFeature.h>
 
 
 namespace iocv

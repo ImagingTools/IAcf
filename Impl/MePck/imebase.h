@@ -4,13 +4,13 @@
 #include <QtCore/QList>
 #include <QtCore/QVector>
 
-#include "isig/isig.h"
-#include "iqt/iqt.h"
+#include <isig/isig.h>
+#include <iqt/iqt.h>
 
-#include "medriver.h"
-#include "medefines.h"
-#include "metypes.h"
-#include "meerror.h"
+#include <medriver.h>
+#include <medefines.h>
+#include <metypes.h>
+#include <meerror.h>
 
 
 

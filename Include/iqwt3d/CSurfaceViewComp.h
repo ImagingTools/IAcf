@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "imath/TISampledFunction.h"
+#include <imath/TISampledFunction.h>
 
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
-#include "GeneratedFiles/iqwt3d/ui_CSurfaceViewComp.h"
+#include <GeneratedFiles/iqwt3d/ui_CSurfaceViewComp.h>
 
 
 namespace Qwt3D

@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iimg/IBitmap.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "iipr/IFeaturesConsumer.h"
-#include "iipr/IImageToFeatureProcessor.h"
-#include "iipr/ISearchParams.h"
-#include "iipr/ISearchConstraints.h"
+#include <iipr/IFeaturesConsumer.h>
+#include <iipr/IImageToFeatureProcessor.h>
+#include <iipr/ISearchParams.h>
+#include <iipr/ISearchConstraints.h>
 
 
 namespace iocv

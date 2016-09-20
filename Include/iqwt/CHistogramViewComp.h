@@ -3,22 +3,20 @@
 
 
 // Qwt includes
-#include "qwt_plot.h"
-#include "qwt_plot_curve.h"
-#include "qwt_plot_picker.h"
-
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+#include <qwt_plot_picker.h>
 
 // ACF includes
-#include "istd/TPointerVector.h"
+#include <istd/TPointerVector.h>
+#include <imod/CModelProxy.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "imod/CModelProxy.h"
+// ACF-Solutions includes
+#include <imeas/IDataSequence.h>
+#include <imeas/IDataSequenceStatistics.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-
-#include "imeas/IDataSequence.h"
-#include "imeas/IDataSequenceStatistics.h"
-
-#include "GeneratedFiles/iqwt/ui_CHistogramViewComp.h"
+#include <GeneratedFiles/iqwt/ui_CHistogramViewComp.h>
 
 
 namespace iqwt

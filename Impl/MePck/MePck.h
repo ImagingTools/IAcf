@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "CMeilhausSimpleComp.h"
-#include "CChannelAddressParamComp.h"
+#include <MePck/CMeilhausSimpleComp.h>
+#include <MePck/CChannelAddressParamComp.h>
 
 
 

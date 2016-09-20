@@ -2,12 +2,12 @@
 #define icbox_CMemoryBankSerializerComp_included
 
 
-#include "iser/IVersionInfo.h"
-#include "ifile/IFilePersistence.h"
+#include <iser/IVersionInfo.h>
+#include <ifile/IFilePersistence.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "ilog/TLoggerCompWrap.h"
+#include <ilog/TLoggerCompWrap.h>
 
 
 namespace icbox

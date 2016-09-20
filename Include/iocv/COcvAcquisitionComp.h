@@ -9,17 +9,17 @@
 #undef max
 
 // ACF includes
-#include "i2d/CRectangle.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <i2d/CRectangle.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorWrap.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
-#include "icam/IExposureConstraints.h"
-#include "icam/IExposureParams.h"
-#include "isig/ITriggerParams.h"
-#include "isig/ITriggerConstraints.h"
+#include <icam/IBitmapAcquisition.h>
+#include <icam/IExposureConstraints.h>
+#include <icam/IExposureParams.h>
+#include <isig/ITriggerParams.h>
+#include <isig/ITriggerConstraints.h>
 
 
 namespace iocv

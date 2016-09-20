@@ -2,9 +2,9 @@
 #define FfMpegPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "ilibav/CLibAvVideoDecoderComp.h"
+#include <ilibav/CLibAvVideoDecoderComp.h>
 
 
 /**

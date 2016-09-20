@@ -6,17 +6,17 @@
 #include <dc1394/dc1394.h>
 
 // ACF includes
-#include "i2d/CRectangle.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "icomp/CComponentBase.h"
+#include <i2d/CRectangle.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iproc/TSyncProcessorWrap.h"
-#include "icam/IBitmapAcquisition.h"
-#include "icam/IExposureConstraints.h"
-#include "icam/IExposureParams.h"
-#include "imeas/ILinearAdjustParams.h"
-#include "imeas/ILinearAdjustConstraints.h"
+#include <iproc/TSyncProcessorWrap.h>
+#include <icam/IBitmapAcquisition.h>
+#include <icam/IExposureConstraints.h>
+#include <icam/IExposureParams.h>
+#include <imeas/ILinearAdjustParams.h>
+#include <imeas/ILinearAdjustConstraints.h>
 
 
 namespace idc1394

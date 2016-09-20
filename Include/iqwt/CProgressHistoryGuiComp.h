@@ -3,17 +3,17 @@
 
 
 // Qwt includes
-#include "qwt_plot.h"
-#include "qwt_plot_curve.h"
-#include "qwt_scale_draw.h"
-#include "qwt_plot_marker.h"
-#include "qwt_plot_grid.h"
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+#include <qwt_scale_draw.h>
+#include <qwt_plot_marker.h>
+#include <qwt_plot_grid.h>
 
 // ACF includes
-#include "ibase/IProgressManager.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <ibase/IProgressManager.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h"
+#include <GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h>
 
 
 namespace iqwt

@@ -6,16 +6,16 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "iprm/ISelectionParam.h"
-#include "iproc/IProcessor.h"
+#include <icomp/CComponentBase.h>
+#include <iprm/ISelectionParam.h>
+#include <iproc/IProcessor.h>
 
 // IACF includes
-#include "isig/ISamplingParams.h"
-#include "isig/ISamplingConstraints.h"
+#include <isig/ISamplingParams.h>
+#include <isig/ISamplingConstraints.h>
 
-#include "IMeilhausAccess.h"
-#include "CMeContext.h"
+#include <MePck/IMeilhausAccess.h>
+#include <MePck/CMeContext.h>
 
 
 namespace imebase

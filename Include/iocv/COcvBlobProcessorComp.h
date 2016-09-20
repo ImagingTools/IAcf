@@ -2,12 +2,12 @@
 
 
 // ACF includes
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "iipr/IFeaturesConsumer.h"
-#include "iipr/IImageToFeatureProcessor.h"
-#include "iblob/IBlobFilterParams.h"
+#include <iipr/IFeaturesConsumer.h>
+#include <iipr/IImageToFeatureProcessor.h>
+#include <iblob/IBlobFilterParams.h>
 
 
 namespace iocv

@@ -19,13 +19,13 @@ extern "C"{
 #include <QtCore/QVector>
 
 // ACF includes
-#include "ilog/TLoggerCompWrap.h"
+#include <ilog/TLoggerCompWrap.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
-#include "imm/IVideoController.h"
-#include "imeas/IDataSequence.h"
-#include "imeas/ISampleAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
+#include <imm/IVideoController.h>
+#include <imeas/IDataSequence.h>
+#include <imeas/ISampleAcquisition.h>
 
 
 namespace ilibav

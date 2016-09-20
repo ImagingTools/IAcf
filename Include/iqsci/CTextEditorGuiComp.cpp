@@ -1,4 +1,4 @@
-#include "iqsci/CTextEditorGuiComp.h"
+#include <iqsci/CTextEditorGuiComp.h>
 
 
 namespace iqsci

@@ -2,10 +2,12 @@
 #define imebase_CChannelAddressParamComp_included
 
 
-#include "icomp/CComponentBase.h"
+// ACF includes
+#include <icomp/CComponentBase.h>
 
-#include "IMeilhausAccess.h"
-#include "CChannelSelectionNode.h"
+// IACF includes
+#include <MePck/IMeilhausAccess.h>
+#include <MePck/CChannelSelectionNode.h>
 
 
 namespace imebase

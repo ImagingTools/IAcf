@@ -1,11 +1,11 @@
-#include "CMeilhausSimpleComp.h"
+#include <MePck/CMeilhausSimpleComp.h>
 
 
 // Qt includes
 #include <QtCore/QTime>
 #include <QtCore/QMapIterator>
 
-#include "CChannelSelectionNode.h"
+#include <MePck/CChannelSelectionNode.h>
 
 
 namespace imebase

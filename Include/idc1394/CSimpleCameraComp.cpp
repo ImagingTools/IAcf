@@ -1,15 +1,15 @@
-#include "idc1394/CSimpleCameraComp.h"
+#include <idc1394/CSimpleCameraComp.h>
 
 
 // Qt includes
 #include <QtCore/QElapsedTimer>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/TParamsPtr.h"
-#include "iimg/IBitmap.h"
-#include "istd/CSystem.h"
+#include <istd/CChangeNotifier.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/TParamsPtr.h>
+#include <iimg/IBitmap.h>
+#include <istd/CSystem.h>
 
 
 namespace idc1394

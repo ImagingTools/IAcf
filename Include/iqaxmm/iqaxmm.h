@@ -2,7 +2,7 @@
 #define iqaxmm_included
 
 
-#include "iqtmm/iqtmm.h"
+#include <iqtmm/iqtmm.h>
 
 
 /**

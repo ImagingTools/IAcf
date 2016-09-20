@@ -1,7 +1,7 @@
 #include "Dc1394Pck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace Dc1394Pck

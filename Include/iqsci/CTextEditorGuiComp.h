@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
+#include <imod/TSingleModelObserverBase.h>
 
-#include "idoc/ITextDocument.h"
+#include <idoc/ITextDocument.h>
 
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TGuiObserverWrap.h"
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TGuiObserverWrap.h>
 
-#include "iqsci/CTextEditor.h"
+#include <iqsci/CTextEditor.h>
 
 
 namespace iqsci

@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iinsp/ITimeStampProvider.h"
+#include <iinsp/ITimeStampProvider.h>
 
 // IACF includes
-#include "iwin/CPerformanceTimeStamp.h"
+#include <iwin/CPerformanceTimeStamp.h>
 
 
 namespace iwin

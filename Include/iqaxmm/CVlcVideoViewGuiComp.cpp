@@ -1,4 +1,4 @@
-#include "iqaxmm/CVlcVideoViewGuiComp.h"
+#include <iqaxmm/CVlcVideoViewGuiComp.h>
 
 
 // Qt includes
@@ -11,8 +11,8 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CGeneralTimeStamp.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CGeneralTimeStamp.h>
 
 
 namespace iqaxmm

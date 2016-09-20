@@ -2,14 +2,14 @@
 #define QwtPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iqwt/CProgressHistoryGuiComp.h"
-#include "iqwt/CHistogramViewComp.h"
-#include "iqwt/CQwtDataSequenceViewComp.h"
+#include <iqwt/CProgressHistoryGuiComp.h>
+#include <iqwt/CHistogramViewComp.h>
+#include <iqwt/CQwtDataSequenceViewComp.h>
 
-#include "iqwt3d/CSurfaceViewComp.h"
+#include <iqwt3d/CSurfaceViewComp.h>
 
 
 /**

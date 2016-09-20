@@ -2,10 +2,10 @@
 #define IMeilhausAccess_included
 
 
-#include "istd/IPolymorphic.h"
-#include "istd/TRange.h"
+#include <istd/IPolymorphic.h>
+#include <istd/TRange.h>
 
-#include "isig/ISamplingConstraints.h"
+#include <isig/ISamplingConstraints.h>
 
 
 namespace imebase

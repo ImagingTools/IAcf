@@ -2,9 +2,9 @@
 #define QaxPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "iqaxmm/CVlcVideoViewGuiComp.h"
+#include <iqaxmm/CVlcVideoViewGuiComp.h>
 
 
 /**

@@ -2,15 +2,15 @@
 #define imebase_CChannelSelectionNode_included
 
 
-#include "istd/TDelPtr.h"
-#include "istd/TPointerVector.h"
+#include <istd/TDelPtr.h>
+#include <istd/TPointerVector.h>
 
-#include "iser/CArchiveTag.h"
+#include <iser/CArchiveTag.h>
 
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsList.h"
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsList.h>
 
-#include "imebase.h"
+#include <imebase.h>
 
 
 namespace imebase

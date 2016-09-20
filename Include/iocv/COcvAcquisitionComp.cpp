@@ -1,12 +1,12 @@
-#include "iocv/COcvAcquisitionComp.h"
+#include <iocv/COcvAcquisitionComp.h>
 
 
 // ACF includes 
-#include "istd/CChangeNotifier.h"
-#include "iprm/IParamsSet.h"
+#include <istd/CChangeNotifier.h>
+#include <iprm/IParamsSet.h>
 
 // IACF includes
-#include "iocv/COcvImage.h"
+#include <iocv/COcvImage.h>
 
 
 namespace iocv

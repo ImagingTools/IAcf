@@ -1,11 +1,11 @@
-#include "iwin/CPerformanceTimeStamp.h"
+#include <iwin/CPerformanceTimeStamp.h>
 
 
 // Windows includes
 #include <windows.h>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iwin

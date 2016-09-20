@@ -1,7 +1,7 @@
 #include "PhononPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace PhononPck

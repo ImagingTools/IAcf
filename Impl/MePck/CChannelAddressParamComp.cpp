@@ -1,4 +1,4 @@
-#include "CChannelAddressParamComp.h"
+#include <MePck/CChannelAddressParamComp.h>
 
 
 namespace imebase

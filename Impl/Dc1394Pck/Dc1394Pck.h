@@ -2,9 +2,9 @@
 #define Dc1394Pck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "idc1394/CSimpleCameraComp.h"
+#include <idc1394/CSimpleCameraComp.h>
 
 
 /**

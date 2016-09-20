@@ -2,9 +2,9 @@
 #define PhononPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "iphonon/CPhononVideoViewGuiComp.h"
+#include <iphonon/CPhononVideoViewGuiComp.h>
 
 
 /**

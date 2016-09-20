@@ -1,14 +1,14 @@
-#include "iqwt/CQwtDataSequenceViewComp.h"
+#include <iqwt/CQwtDataSequenceViewComp.h>
 
 // for DBL_MAX
 #include <float.h>
 
 // ACF includes
-#include "imath/CVarVector.h"
+#include <imath/CVarVector.h>
 
 // Qwt includes
-#include "qwt_plot_grid.h"
-#include "qwt_scale_draw.h"
+#include <qwt_plot_grid.h>
+#include <qwt_scale_draw.h>
 
 
 namespace iqwt

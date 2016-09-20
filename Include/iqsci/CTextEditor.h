@@ -3,15 +3,15 @@
 
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 // Project includes
-#include "GeneratedFiles/iqsci/ui_CTextEditor.h"
+#include <GeneratedFiles/iqsci/ui_CTextEditor.h>
 
 
 class QsciScintilla;

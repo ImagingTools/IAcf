@@ -1,11 +1,11 @@
-#include "iqwt/CProgressHistoryGuiComp.h"
+#include <iqwt/CProgressHistoryGuiComp.h>
 
 
 // Qt includes
 #include <QtCore/QCoreApplication>
 
 // Qwt includes
-#include "qwt_plot_layout.h"
+#include <qwt_plot_layout.h>
 
 
 namespace iqwt

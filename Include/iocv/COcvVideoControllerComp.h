@@ -9,13 +9,13 @@
 #undef max
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <istd/TDelPtr.h>
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
-#include "imm/IVideoController.h"
+#include <icam/IBitmapAcquisition.h>
+#include <imm/IVideoController.h>
 
 
 namespace iocv

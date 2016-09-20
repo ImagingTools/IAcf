@@ -1,4 +1,4 @@
-#include "iphonon/CPhononVideoViewGuiComp.h"
+#include <iphonon/CPhononVideoViewGuiComp.h>
 
 
 // Qt includes
@@ -7,7 +7,7 @@
 #include <QtCore/QUrl>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iphonon
