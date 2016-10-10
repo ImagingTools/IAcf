@@ -75,9 +75,7 @@ QDateTime CPerformanceTimeStamp::GetStartTime() const
 {
 	QDateTime retVal = QDateTime::currentDateTime();
 
-	retVal.addMSecs(quint64(GetElapsed() * 1000));
-
-	return retVal;
+	return retVal.addMSecs(int(-GetElapsed() * 1000));
 }
 
 
