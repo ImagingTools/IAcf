@@ -5,7 +5,8 @@
     <name>CHistogramViewComp</name>
     <message>
         <location filename="../../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
         <source>Statistics</source>
         <translation>Statystyka</translation>
     </message>
@@ -14,13 +15,15 @@
     <name>CProgressHistoryGuiComp</name>
     <message>
         <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation>Przerwij</translation>
     </message>
@@ -205,7 +208,7 @@
 <context>
     <name>iqwt3d::CSurfaceViewComp</name>
     <message>
-        <location filename="../../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+34"/>
+        <location filename="../../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+33"/>
         <source>&amp;View</source>
         <translation>&amp;Widok</translation>
     </message>
