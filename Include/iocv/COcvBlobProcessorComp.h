@@ -14,14 +14,13 @@ namespace iocv
 {
 
 
-class COcvBlobProcessorComp:
-			public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>
+class COcvBlobProcessorComp: public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>
 {
 public:
 	typedef iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor> BaseClass;
 
 	I_BEGIN_COMPONENT(COcvBlobProcessorComp);
-		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set", true, "FilterParams");
+		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set (iblob::IBlobFilterParams)", true, "FilterParams");
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
@@ -37,6 +36,7 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
+
 protected:
 	bool CalculateBlobs(
 				const iimg::IBitmap& bitmap,
