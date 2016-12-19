@@ -2,6 +2,69 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl_PL">
 <context>
+    <name>Attribute</name>
+    <message>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+28"/>
+        <source>IACF</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.1.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.1.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.1.2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.1.3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.2.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.3.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.3.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.3.2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.3.3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.3.4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>0.4.0</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>CHistogramViewComp</name>
     <message>
         <location filename="../../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
