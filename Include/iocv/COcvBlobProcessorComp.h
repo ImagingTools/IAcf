@@ -42,7 +42,6 @@ protected:
 				const iimg::IBitmap& bitmap,
 				const iblob::IBlobFilterParams* filterParamsPtr,
 				iipr::IFeaturesConsumer& result);
-	static bool IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value);
 
 private:
 	I_ATTR(QByteArray, m_filterParamsIdAttrPtr);
