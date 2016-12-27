@@ -20,62 +20,14 @@ namespace iocv
 {
 
 
-// public methods
-
-// reimplemented (iipr::IImageToFeatureProcessor)
-
-int COcvBlobProcessorComp::DoExtractFeatures(
-			const iprm::IParamsSet* paramsPtr,
-			const iimg::IBitmap& image,
-			iipr::IFeaturesConsumer& results,
-			ibase::IProgressManager* /*progressManagerPtr*/)
-{
-	if (paramsPtr == NULL){
-		return TS_INVALID;
-	}
-
-	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, *m_filterParamsIdAttrPtr);
-
-	bool retVal = CalculateBlobs(image, filterParamsPtr.GetPtr(), results)? TS_OK: TS_INVALID;
-	if (!retVal){
-		return TS_INVALID;
-	}
-
-	return retVal ? TS_OK: TS_INVALID;
-}
-
-
-// reimplemented (iproc::IProcessor)
-
-int COcvBlobProcessorComp::DoProcessing(
-			const iprm::IParamsSet* paramsPtr,
-			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* progressManagerPtr)
-{
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
-	if (outputPtr == NULL){
-		return TS_OK;
-	}
-
-	iipr::IFeaturesConsumer* outputConsumerPtr = dynamic_cast<iipr::IFeaturesConsumer*>(outputPtr);
-	if (outputConsumerPtr == NULL){
-		return TS_INVALID;
-	}
-
-	return DoExtractFeatures(paramsPtr, *inputBitmapPtr, *outputConsumerPtr, progressManagerPtr);
-}
-
-
 // protected methods
 
+// reimplemented (iblob::CBlobProcessorCompBase)
+
 bool COcvBlobProcessorComp::CalculateBlobs(
-			const iimg::IBitmap& bitmap,
-			const iblob::IBlobFilterParams* blobFilterParamsPtr,
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const iblob::IBlobFilterParams* filterParamsPtr,
+			const iimg::IBitmap& image,
 			iipr::IFeaturesConsumer& result)
 {
 	istd::CChangeNotifier resultNotifier(&result);
@@ -83,8 +35,8 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 	result.ResetFeatures();
 
 	// Initialize input bitmap:
-	void* imageDataBufferPtr = const_cast<void*>(bitmap.GetLinePtr(0));
-	cv::Mat inputBitmap(bitmap.GetImageSize().GetY(), bitmap.GetImageSize().GetX(), CV_8UC1, imageDataBufferPtr, bitmap.GetLineBytesCount());
+	void* imageDataBufferPtr = const_cast<void*>(image.GetLinePtr(0));
+	cv::Mat inputBitmap(image.GetImageSize().GetY(), image.GetImageSize().GetX(), CV_8UC1, imageDataBufferPtr, image.GetLineBytesCount());
 
 	// Get contours from the binary image:
 	cv::Mat tmpBinaryImage = inputBitmap.clone();
