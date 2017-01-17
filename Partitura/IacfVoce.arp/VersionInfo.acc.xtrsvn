@@ -56,7 +56,7 @@
                     <AttributeInfo Id="VersionId" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="10"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionIdDesc" Type="String" ExportId="">
+                    <AttributeInfo Id="VersionIdDesc" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="IACF"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionNumber" Type="Integer" ExportId="">
@@ -83,7 +83,7 @@
                     <AttributeInfo Id="VersionId" Type="Integer" ExportId="VersionId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionIdDesc" Type="String" ExportId="VersionIdDesc">
+                    <AttributeInfo Id="VersionIdDesc" Type="Text" ExportId="VersionIdDesc">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionNumber" Type="Integer" ExportId="VersionNumber">
