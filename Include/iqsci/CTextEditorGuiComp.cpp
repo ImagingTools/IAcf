@@ -106,9 +106,7 @@ void CTextEditorGuiComp::OnGuiRetranslate()
 
 void CTextEditorGuiComp::OnTextChanged()
 {
-	UpdateBlocker updateBlocker(this);
-
-	UpdateModel();
+	DoUpdateModel();
 }
 
 
