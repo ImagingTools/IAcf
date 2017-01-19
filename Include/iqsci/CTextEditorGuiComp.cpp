@@ -5,7 +5,24 @@ namespace iqsci
 {
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (ibase::ICommandsProvider)
+
+const ibase::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
+{
+	if (IsGuiCreated()){
+		CTextEditor* textEditPtr = GetQtWidget();
+		Q_ASSERT(textEditPtr != NULL);
+		
+		return textEditPtr->GetCommands();
+	}
+
+	return NULL;
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CTextEditorGuiComp::UpdateModel() const
 {
@@ -20,8 +37,6 @@ void CTextEditorGuiComp::UpdateModel() const
 	objectPtr->SetText(textEditPtr->GetText());
 }
 
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CTextEditorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
@@ -45,23 +60,6 @@ void CTextEditorGuiComp::OnGuiModelDetached()
 	BaseClass::OnGuiModelDetached();
 }
 
-
-// reimplemented (ibase::ICommandsProvider)
-
-const ibase::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
-{
-	if (IsGuiCreated()){
-		CTextEditor* textEditPtr = GetQtWidget();
-		Q_ASSERT(textEditPtr != NULL);
-		
-		return textEditPtr->GetCommands();
-	}
-
-	return NULL;
-}
-
-
-// protected methods
 
 // reimplemented (iqtgui::CGuiComponentBase)
 

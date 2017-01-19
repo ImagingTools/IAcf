@@ -38,17 +38,15 @@ public:
 		I_ASSIGN(m_readOnlyAttrPtr, "ReadOnly", "Document view is read only", false, false);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiModelDetached();
-
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelDetached();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiRetranslate();
