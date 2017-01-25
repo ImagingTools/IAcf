@@ -35,7 +35,7 @@ void CHistogramViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeS
 				channelNames << sequenceInfoPtr->GetNumericValueName(channelIndex);
 			}
 			else{
-				channelNames << QString("Channel %1").arg(channelIndex + 1);
+				channelNames << QObject::tr("Channel %1").arg(channelIndex + 1);
 			}
 		}
 
