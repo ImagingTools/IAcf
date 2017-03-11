@@ -32,20 +32,20 @@ int COcvMedianProcessorComp::DoProcessing(
 	if (inputBitmapPtr == NULL){
 		SendWarningMessage(0, "Input bitmap is not set");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	if (inputBitmapPtr->IsEmpty()){
 		SendWarningMessage(0, "Input bitmap is empty.");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (outputBitmapPtr == NULL){
 		SendWarningMessage(0, "Output bitmap is not set");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	istd::CIndex2d inputBitmapSize = inputBitmapPtr->GetImageSize();
@@ -53,14 +53,14 @@ int COcvMedianProcessorComp::DoProcessing(
 	if (!outputBitmapPtr->CopyFrom(*inputBitmapPtr)){
 		SendErrorMessage(0, "Data could not be copied from input bitmap to the output");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	iprm::TParamsPtr<imeas::INumericValue> filterSizePtr(paramsPtr, *m_filterSizeParamsIdAttrPtr);
 	if (filterSizePtr == NULL){
 		SendErrorMessage(0, "No fiter dimension was set");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	imath::CVarVector filterLengths = filterSizePtr->GetValues();
@@ -68,7 +68,7 @@ int COcvMedianProcessorComp::DoProcessing(
 	if (filterDimensionsCount < 1){
 		SendErrorMessage(0, "Processing filter can't have dimension smaller 1");
 
-		return false;
+		return TS_INVALID;
 	}
 
 	int imageWidth = inputBitmapSize.GetX();
@@ -76,9 +76,13 @@ int COcvMedianProcessorComp::DoProcessing(
 
 	int kernelMaxWidth = qMax(1, qMin(int(filterLengths[0]), imageWidth));
 	int kernelMaxHeight = qMax(1, qMin((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1]), imageHeight));
-
 	Q_ASSERT(kernelMaxWidth >= 1);
 	Q_ASSERT(kernelMaxHeight >= 1);
+
+	int kernelSize =  qMax(kernelMaxWidth, kernelMaxHeight);
+	if ((kernelSize & 1) == 0){
+		++kernelSize;
+	}
 
 	cv::Mat inputMatrix(inputBitmapPtr->GetImageSize().GetY(), inputBitmapPtr->GetImageSize().GetX(), CV_8UC1, (qint8*)inputBitmapPtr->GetLinePtr(0));
 	cv::Mat outputMatrix(outputBitmapPtr->GetImageSize().GetY(), outputBitmapPtr->GetImageSize().GetX(), CV_8UC1, (qint8*)outputBitmapPtr->GetLinePtr(0));
@@ -86,9 +90,9 @@ int COcvMedianProcessorComp::DoProcessing(
 	cv::_InputArray input(inputMatrix);
 	cv::_OutputArray output(outputMatrix);
 
-	cv::medianBlur(input, output, qMax(kernelMaxWidth, kernelMaxHeight));
+	cv::medianBlur(input, output, kernelSize);
 
-	return true;
+	return TS_OK;
 }
 
 
