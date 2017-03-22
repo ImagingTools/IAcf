@@ -76,7 +76,7 @@ int CMemoryBankSerializerComp::LoadFromFile(
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		Q_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
-		quint32 blockSize;
+		quint32 blockSize = 0;
 		if (!ReadFromMem(0, &blockSize, sizeof(blockSize)) || (blockSize < 0) || (blockSize > 0xffff)){
 			return OS_FAILED;
 		}
