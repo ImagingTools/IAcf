@@ -1,5 +1,6 @@
 #include <iqwt/CQwtDataSequenceViewComp.h>
 
+
 // for DBL_MAX
 #include <float.h>
 
@@ -53,7 +54,7 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 
 				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex)));
 				
-				curvePtr->setStyle(QwtPlotCurve::Steps);
+				curvePtr->setStyle(GetQwtPlotStyle()/*QwtPlotCurve::Steps*/);
 			
 				curvePtr->attach(m_plotPtr.GetPtr());
 				m_channelCurves.PushBack(curvePtr);
@@ -62,90 +63,32 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 			}
 		}
 
-		if (m_verticalMarkers.GetCount() != m_verticalLinesCompPtr.GetCount() || m_horizontalMarkers.GetCount() != m_horizontalLinesCompPtr.GetCount()) {
-			ClearMarkers();
+		int horizontalCount = 0;
+		int verticalCount = 0;
+		MakeValueLines(horizontalCount, false, m_horizontalLinesCompPtr.GetPtr(), m_horizontalMarkers);
+		MakeValueLines(verticalCount, true, m_verticalLinesCompPtr.GetPtr(), m_verticalMarkers);
 
-			int verticalCount = m_verticalLinesCompPtr.GetCount();
-			for (int verticalIndex = 0; verticalIndex < verticalCount; ++verticalIndex) {
-				imeas::INumericValue* value = m_verticalLinesCompPtr[verticalIndex];
-				if (value != NULL) {
-					imath::CVarVector values = value->GetValues();
-					int valueCount = values.GetElementsCount();
-					for (int valueIndex = 0; valueIndex < valueCount; ++valueIndex) {
-						double XVal = values.GetElement(valueIndex);
-						QString name = value->GetNumericConstraints()->GetNumericValueName(valueIndex);
-						QwtPlotMarker* marker = new QwtPlotMarker();
-						marker->setLabel(QwtText(name));
-						marker->setLabelOrientation(Qt::Vertical);
-						marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
-						//marker->setSpacing(50);
-						//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
-						marker->setLineStyle(QwtPlotMarker::VLine);
-						marker->setXValue(XVal);
-						marker->attach(m_plotPtr.GetPtr());
-						m_verticalMarkers.PushBack(marker);
-					}
-				}
-			}
-
-			int horizontalCount = m_horizontalLinesCompPtr.GetCount();
-			for (int horizontalIndex = 0; horizontalIndex < horizontalCount; ++horizontalIndex) {
-				imeas::INumericValue* value = m_horizontalLinesCompPtr[horizontalIndex];
-				if (value != NULL) {
-					imath::CVarVector values = value->GetValues();
-					int valueCount = values.GetElementsCount();
-					for (int valueIndex = 0; valueIndex < valueCount; ++valueIndex) {
-						double YVal = values.GetElement(valueIndex);
-						QString name = value->GetNumericConstraints()->GetNumericValueName(valueIndex);
-						QwtPlotMarker* marker = new QwtPlotMarker();
-						marker->setLabel(QwtText(name));
-						//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
-						marker->setLineStyle(QwtPlotMarker::HLine);
-						marker->setYValue(YVal);
-						marker->attach(m_plotPtr.GetPtr());
-						m_horizontalMarkers.PushBack(marker);
-					}
-				}
-			}
-		}
-		
+		int samplesCount = objectPtr->GetSamplesCount();
 		double maxValue = 0.0;
 		double minValue = 0.0;
 
+		// Horizontal axis limits:
+		double hMinValue = 0.0;
+		double hMaxValue = samplesCount-1;
+		MakeHorizontalAxisLimits(hMinValue, hMaxValue);
+
+		// Fill data:
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
-			int samplesCount = objectPtr->GetSamplesCount();
-	
 			QVector<double> xData(samplesCount);
 			QVector<double> yData(samplesCount);
-
-			for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
-				double sample = objectPtr->GetSample(sampleIndex, channelIndex);
-
-				xData[sampleIndex] = sampleIndex;
-				yData[sampleIndex] = sample;
-
-				if (sample > maxValue){
-					maxValue = sample;
-				}
-
-				if (sample < minValue){
-					minValue = sample;
-				}
-			}
+			FillChannelData(xData, yData, minValue, maxValue, channelIndex, hMinValue, hMaxValue, objectPtr);
 
 			QwtPlotCurve* curvePtr = m_channelCurves.GetAt(channelIndex);
 			Q_ASSERT(curvePtr != NULL);
 
-			maxValue = qCeil(maxValue * 100) / 100.0;
-
 			curvePtr->setSamples(xData, yData);
 
-			m_plotPtr->setAxisScale(QwtPlot::xBottom, 0.0, samplesCount, 16); 
-			m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, 4);
-
-			m_plotPtr->setAxisScale(QwtPlot::yLeft, minValue, maxValue, (maxValue-minValue) / 10); 
-			m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
-
+			SetAxisLimits(hMinValue, hMaxValue, minValue, maxValue);
 			if (channelIndex != ChannelCombo->currentIndex() && ChannelCombo->currentIndex() != 0){
 				curvePtr->setVisible(false);
 			}
@@ -153,7 +96,8 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 	}
 	else{
 		ClearPlot();
-		ClearMarkers();
+		ClearMarkers(m_horizontalMarkers);
+		ClearMarkers(m_verticalMarkers);
 		
 		ChannelCombo->clear();
 	}
@@ -202,7 +146,8 @@ void CQwtDataSequenceViewComp::OnGuiCreated()
 void CQwtDataSequenceViewComp::OnGuiDestroyed()
 {
 	ClearPlot();
-	ClearMarkers();
+	ClearMarkers(m_horizontalMarkers);
+	ClearMarkers(m_verticalMarkers);
 
 	m_plotPtr.Reset();
 
@@ -234,21 +179,180 @@ void CQwtDataSequenceViewComp::ClearPlot()
 }
 
 
-void CQwtDataSequenceViewComp::ClearMarkers()
+void CQwtDataSequenceViewComp::ClearMarkers(istd::TPointerVector<QwtPlotMarker>& markers)
 {
 	if (IsGuiCreated()){
-		for (int markerIndex = 0; markerIndex < m_horizontalMarkers.GetCount(); markerIndex++){
-			m_horizontalMarkers.GetAt(markerIndex)->detach();
+		for (int markerIndex = 0; markerIndex < markers.GetCount(); markerIndex++){
+			markers.GetAt(markerIndex)->detach();
 		}
-		for (int markerIndex = 0; markerIndex < m_verticalMarkers.GetCount(); markerIndex++){
-			m_verticalMarkers.GetAt(markerIndex)->detach();
-		}
-
-		m_horizontalMarkers.Reset();
-		m_verticalMarkers.Reset();
+		markers.Reset();
 	}
 }
 
+
+void CQwtDataSequenceViewComp::MakeHorizontalAxisLimits(double& minValue, double& maxValue) const
+{
+	if (m_verticalLinesCompPtr.IsValid()){
+		imath::CVarVector verticalLinesValues = m_verticalLinesCompPtr->GetValues();
+		const int verticalCount = verticalLinesValues.GetElementsCount();
+
+		if (verticalCount > 1) {
+			int valuesCount = verticalLinesValues.GetElementsCount();
+			minValue = verticalLinesValues.GetElement(0);
+			maxValue = verticalLinesValues.GetElement(valuesCount - 1);
+
+			if (minValue > maxValue) {//swap
+				double temp = minValue;
+				minValue = maxValue;
+				maxValue = temp;
+			}
+		}
+	}
+}
+
+
+void CQwtDataSequenceViewComp::MakeValueLines(int& linesCount, const bool isVertical, const imeas::INumericValue* linesCompPtr, istd::TPointerVector<QwtPlotMarker>& markers)
+{
+	if (linesCompPtr != NULL){
+		linesCount = linesCompPtr->GetValues().GetElementsCount();
+	}
+
+	if (markers.GetCount() != linesCount){
+		ClearMarkers(markers);
+
+			imath::CVarVector values = linesCompPtr->GetValues();
+			for (int valueIndex = 0; valueIndex < linesCount; ++valueIndex) {
+				double axisVal = values.GetElement(valueIndex);
+				QString name = linesCompPtr->GetNumericConstraints()->GetNumericValueName(valueIndex);
+				QwtPlotMarker* marker = new QwtPlotMarker();
+				marker->setLabel(QwtText(name));
+
+				if (isVertical){
+					marker->setLabelOrientation(Qt::Vertical);
+					marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
+					//marker->setSpacing(50);
+					//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
+					marker->setLineStyle(QwtPlotMarker::VLine);
+				}
+				else{
+					marker->setLineStyle(QwtPlotMarker::HLine);
+				}
+
+				marker->setXValue(axisVal);
+				marker->attach(m_plotPtr.GetPtr());
+				markers.PushBack(marker);
+			}
+	}
+}
+
+
+/*
+	if samples count fits the count of lines, it is assumed that datapoints lie exactly on these lines.
+	otherwise if there are less lines than samples, the samples would be equidistantly drawn withing the range of Lines
+	notice: if there were no lines provided, the range [hMinValue, hMaxValue] is set as [0, samplesCount -1] (see MakeHorizontalAxisLimits)
+*/
+void CQwtDataSequenceViewComp::FillChannelData(
+			QVector<double>& xData, QVector<double>& yData,
+			double& minValue, double& maxValue,
+			const int channelIndex, const double& hMinValue, const double& hMaxValue,
+			const imeas::IDataSequence* dataSequencePtr) const
+{
+	const int samplesCount = dataSequencePtr->GetSamplesCount();
+
+	imath::CVarVector verticalLinesValues;
+	bool isEquidistant = true;
+	int verticalCount = 0;
+
+	const double sampleStep = (hMaxValue - hMinValue) / (samplesCount - 1);
+
+	if (m_verticalLinesCompPtr.IsValid()){
+		verticalCount = m_verticalLinesCompPtr->GetValues().GetElementsCount();
+		verticalLinesValues = m_verticalLinesCompPtr->GetValues();
+		isEquidistant = (samplesCount != verticalCount);
+	}
+
+	if (dataSequencePtr != NULL){
+		const int samplesCount = dataSequencePtr->GetSamplesCount();
+
+			for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
+				double sample = dataSequencePtr->GetSample(sampleIndex, channelIndex);
+
+				if (isEquidistant){
+					xData[sampleIndex] = hMinValue + sampleIndex * sampleStep;
+				}
+				else{
+					xData[sampleIndex] = verticalLinesValues.GetElement(sampleIndex);
+				}
+
+				yData[sampleIndex] = sample;
+
+				if (sample > maxValue){
+					maxValue = sample;
+				}
+
+				if (sample < minValue){
+					minValue = sample;
+				}
+			}
+		maxValue = qCeil(maxValue * 100) / 100.0;
+	}
+}
+
+
+void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const double hMaxValue, const double vMinValue, const double vMaxValue)
+{
+
+// HORIzONTAL axis
+	double hMin = hMinValue;
+	double hMax = hMaxValue;
+	if (m_horizontalAxisStartAttrPtr.IsValid()) {
+		const double hStartValue = *m_horizontalAxisStartAttrPtr;
+		hMin = (hStartValue < hMinValue) ? hStartValue : hMinValue;
+		const double delta = qAbs(hMin - hMinValue);
+		hMax = hMaxValue + delta;
+	}
+
+	/*const int hStep = (int)((hMaxValue - hMinValue) / verticalCount);*/
+	m_plotPtr->setAxisScale(QwtPlot::xBottom, hMin, hMax/*, hStep*/);
+	m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, 4);
+	
+	//VERTICAL axis
+	double vMin = vMinValue;
+	double vMax = vMaxValue;
+	if (m_verticalAxisStartAttrPtr.IsValid()) {
+		const double vStartValue = *m_verticalAxisStartAttrPtr;
+		vMin = (vMinValue < vStartValue) ? vMinValue : vStartValue;
+		const double delta = qAbs(vMin - vMinValue);
+		vMax = vMaxValue + delta;
+	}
+
+	m_plotPtr->setAxisScale(QwtPlot::yLeft, vMin, vMax, (vMaxValue - vMinValue) / 10);
+	m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
+}
+
+/*Style of the data plot: 0 No curve; 1 - Lines; 2 - Sticks; 3 - Steps; 4 - Dots*/
+QwtPlotCurve::CurveStyle CQwtDataSequenceViewComp::GetQwtPlotStyle() const
+{
+	if (m_plotStyleAttrPtr.IsValid()){
+		const int choice = *m_plotStyleAttrPtr;
+		switch(choice){
+		case 0:
+			return QwtPlotCurve::NoCurve;
+		case 1:
+			return QwtPlotCurve::Lines;
+		case 2:
+			return QwtPlotCurve::Sticks;
+		case 3:
+			return QwtPlotCurve::Steps;
+		case 4:
+			return QwtPlotCurve::Dots;
+		default:
+			return QwtPlotCurve::Steps;
+		}
+	}
+
+	return QwtPlotCurve::Steps;
+}
 
 
 // public methods of the embedded class DataSequencePlotPicker
