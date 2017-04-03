@@ -7,8 +7,9 @@
 #include <opencv2/imgproc/types_c.h>
 
 // ACF includes
-#include <istd/CChangeNotifier.h>
+#include <istd/CChangeGroup.h>
 #include <iimg/CBitmapBase.h>
+#include <iimg/CScanlineMask.h>
 #include <iprm/TParamsPtr.h>
 #include <i2d/CPolygon.h>
 
@@ -27,16 +28,35 @@ namespace iocv
 bool COcvBlobProcessorComp::CalculateBlobs(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const iblob::IBlobFilterParams* filterParamsPtr,
+			const i2d::IObject2d* aoiPtr,
 			const iimg::IBitmap& image,
 			iipr::IFeaturesConsumer& result)
 {
-	istd::CChangeNotifier resultNotifier(&result);
+	istd::CChangeGroup resultNotifier(&result);
 
 	result.ResetFeatures();
 
+	ibase::CSize size = image.GetImageSize();
+
+	// create image mask
+	i2d::CRect clipArea(size);
+	iimg::CScanlineMask mask;
+	if (aoiPtr != NULL){
+		mask.SetCalibration(image.GetCalibration());
+
+		if (!mask.CreateFromGeometry(*aoiPtr, &clipArea)){
+			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
+
+			return false;
+		}
+	}
+	else{
+		mask.CreateFilled(clipArea);
+	}
+
 	// Initialize input bitmap:
 	void* imageDataBufferPtr = const_cast<void*>(image.GetLinePtr(0));
-	cv::Mat inputBitmap(image.GetImageSize().GetY(), image.GetImageSize().GetX(), CV_8UC1, imageDataBufferPtr, image.GetLineBytesCount());
+	cv::Mat inputBitmap(image.GetImageSize().GetY(), image.GetImageSize().GetX(), CV_8UC1, imageDataBufferPtr, image .GetLineBytesCount());
 
 	// Get contours from the binary image:
 	cv::Mat tmpBinaryImage = inputBitmap.clone();
@@ -67,7 +87,13 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 			passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, area, perimeter, circularity);
 		}
 
-		if (passedByFilter){
+		bool passedByMask = true;
+
+		if (aoiPtr != NULL){
+			passedByMask = aoiPtr->GetBoundingBox().Contains(istd::CIndex2d(location.x, location.y));
+		}
+
+		if (passedByFilter && passedByMask){
 			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, i2d::CVector2d(location.x, location.y));
 
 			result.AddFeature(blobFeaturePtr);

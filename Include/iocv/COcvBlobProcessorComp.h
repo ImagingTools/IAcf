@@ -22,6 +22,7 @@ protected:
 	virtual bool CalculateBlobs(
 				const iprm::IParamsSet* paramsPtr,
 				const iblob::IBlobFilterParams* filterParamsPtr,
+				const i2d::IObject2d* aoiPtr,
 				const iimg::IBitmap& image,
 				iipr::IFeaturesConsumer& result);
 };
