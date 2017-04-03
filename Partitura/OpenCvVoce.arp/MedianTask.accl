@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4468" Description="ACF"/>
+            <Version Id="1" Number="1811" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="Bitmap" X="825" Y="325" Note=""/>
+        <Element ComponentName="FilterSize" X="500" Y="75" Note=""/>
+        <Element ComponentName="NumericConstraints" X="750" Y="75" Note=""/>
+        <Element ComponentName="OpenCvMedianProcessor" X="525" Y="475" Note=""/>
+        <Element ComponentName="Params" X="500" Y="200" Note=""/>
+        <Element ComponentName="Task" X="500" Y="325" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

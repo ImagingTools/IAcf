@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4468" Description="ACF"/>
+            <Version Id="1" Number="1811" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="NumericConstraints"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterSize">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>5</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="NumericConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="300"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter Size</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="OpenCvMedianProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMedianProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowEmptyAoi" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterSize"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Task" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AdditionalTriggerInputs" Type="Reference[]" ExportId="AdditionalTriggerInputs">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OpenCvMedianProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
+                        <Data IsEnabled="true" Value="Median"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="Task"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="Task"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Task"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="Task"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
+    </ExportedComponents>
+</Acf>
