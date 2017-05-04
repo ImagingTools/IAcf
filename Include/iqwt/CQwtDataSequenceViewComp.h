@@ -7,6 +7,7 @@
 #include <qwt_plot_curve.h>
 #include <qwt_plot_picker.h>
 #include <qwt_plot_marker.h>
+#include <qwt_symbol.h>
 
 // ACF includes
 #include <istd/TPointerVector.h>
@@ -21,9 +22,12 @@
 #include <GeneratedFiles/iqwt/ui_CQwtDataSequenceViewComp.h>
 
 
+class QwtSymbol;
+
 namespace iqwt
 {
 
+	
 
 /**
 	Component for visualization of histogram data.
@@ -44,6 +48,9 @@ public:
 		I_ASSIGN(m_verticalLinesCompPtr, "VerticalLines", "List of x-coordinates of vertical lines", false, "VerticalLines");
 		I_ASSIGN(m_horizontalAxisStartAttrPtr, "HorizontalStartValue", "Horizontal axis start value", false, 0.0);
 		I_ASSIGN(m_plotStyleAttrPtr, "DataPlotStyle", "Style of the data plot\n0 - No curve\n1 - Lines\n2 - Sticks\n3 - Steps\n4 - Dots", true, 3);
+		I_ASSIGN(m_symbolStyleAttrPtr, 
+			"DataSymbolStyle", "Style of the point symbol \n0 - No symbol\n1 - Ellipse\n2 - Rect\n3 - Diamond\n4 - Triangle\n5 - Cross\n6 - XCross\n7 - Star2",
+			true, 0);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
@@ -66,6 +73,7 @@ private:
 	void FillChannelData(QVector<double>& xData, QVector<double>& yData, double& minValue, double& maxValue, const int channelIndex, const double& hMinValue, const double& hMaxValue, const imeas::IDataSequence* dataSequence) const;
 	void SetAxisLimits(const double hMinValue, const double hMaxValue, const double vMinValue, const double vMaxValue);
 	QwtPlotCurve::CurveStyle GetQwtPlotStyle() const;
+	QwtSymbol::Style GetQwtSymbolStyle() const;
 
 private:
 	class DataSequencePlotPicker: public QwtPlotPicker
@@ -95,6 +103,7 @@ private:
 	I_ATTR(double, m_horizontalAxisStartAttrPtr);
 
 	I_ATTR(int, m_plotStyleAttrPtr);
+	I_ATTR(int, m_symbolStyleAttrPtr);
 };
 
 

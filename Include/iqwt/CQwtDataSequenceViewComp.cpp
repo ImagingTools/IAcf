@@ -10,6 +10,7 @@
 // Qwt includes
 #include <qwt_plot_grid.h>
 #include <qwt_scale_draw.h>
+#include <qwt_symbol.h>
 
 
 namespace iqwt
@@ -55,7 +56,9 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex)));
 				
 				curvePtr->setStyle(GetQwtPlotStyle()/*QwtPlotCurve::Steps*/);
-			
+				QwtSymbol* pointSymbolPtr = new QwtSymbol(GetQwtSymbolStyle());
+
+				curvePtr->setSymbol(pointSymbolPtr);
 				curvePtr->attach(m_plotPtr.GetPtr());
 				m_channelCurves.PushBack(curvePtr);
 
@@ -231,7 +234,7 @@ void CQwtDataSequenceViewComp::MakeValueLines(int& linesCount, const bool isVert
 					marker->setLabelOrientation(Qt::Vertical);
 					marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
 					//marker->setSpacing(50);
-					//marker->setLinePen(QPen(Qt::GlobalColor(colorIndex++)));
+					marker->setLinePen(QPen(Qt::lightGray));
 					marker->setLineStyle(QwtPlotMarker::VLine);
 				}
 				else{
@@ -352,6 +355,44 @@ QwtPlotCurve::CurveStyle CQwtDataSequenceViewComp::GetQwtPlotStyle() const
 	}
 
 	return QwtPlotCurve::Steps;
+}
+
+
+QwtSymbol::Style CQwtDataSequenceViewComp::GetQwtSymbolStyle() const
+{
+	if (m_symbolStyleAttrPtr.IsValid()){
+		const int choice = *m_symbolStyleAttrPtr;
+
+		switch (choice){
+		case 0:
+			return QwtSymbol::NoSymbol;
+		case 1:
+			//! Ellipse or circle
+			return QwtSymbol::Ellipse;
+		case 2:
+			//! Rectangle
+			return QwtSymbol::Rect;
+		case 3:
+			//!  Diamond
+			return QwtSymbol::Diamond;
+		case 4:
+			//! Triangle pointing upwards
+			return QwtSymbol::Triangle;
+		case 5:
+			//! Cross (+)
+			return QwtSymbol::Cross;
+		case 6:
+			//! Diagonal cross (X)
+			return QwtSymbol::XCross;
+		case 7:
+			//! Six-pointed star
+			return QwtSymbol::Star2;
+		default:
+			return QwtSymbol::NoSymbol;
+		}
+	}
+
+	return QwtSymbol::NoSymbol;
 }
 
 
