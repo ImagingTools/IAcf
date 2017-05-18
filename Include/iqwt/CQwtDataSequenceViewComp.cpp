@@ -53,9 +53,9 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 			for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 				QwtPlotCurve* curvePtr = new QwtPlotCurve();
 
-				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex)));
+				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex), 2, Qt::SolidLine));
 				
-				curvePtr->setStyle(GetQwtPlotStyle()/*QwtPlotCurve::Steps*/);
+				curvePtr->setStyle(GetQwtPlotStyle());
 				QwtSymbol* pointSymbolPtr = new QwtSymbol(GetQwtSymbolStyle());
 
 				curvePtr->setSymbol(pointSymbolPtr);
@@ -223,28 +223,27 @@ void CQwtDataSequenceViewComp::MakeValueLines(int& linesCount, const bool isVert
 	if (markers.GetCount() != linesCount){
 		ClearMarkers(markers);
 
-			imath::CVarVector values = linesCompPtr->GetValues();
-			for (int valueIndex = 0; valueIndex < linesCount; ++valueIndex) {
-				double axisVal = values.GetElement(valueIndex);
-				QString name = linesCompPtr->GetNumericConstraints()->GetNumericValueName(valueIndex);
-				QwtPlotMarker* marker = new QwtPlotMarker();
-				marker->setLabel(QwtText(name));
+		imath::CVarVector values = linesCompPtr->GetValues();
+		for (int valueIndex = 0; valueIndex < linesCount; ++valueIndex) {
+			double axisVal = values.GetElement(valueIndex);
+			QString name = linesCompPtr->GetNumericConstraints()->GetNumericValueName(valueIndex);
+			QwtPlotMarker* marker = new QwtPlotMarker();
+			marker->setLabel(QwtText(name));
 
-				if (isVertical){
-					marker->setLabelOrientation(Qt::Vertical);
-					marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
-					//marker->setSpacing(50);
-					marker->setLinePen(QPen(Qt::lightGray));
-					marker->setLineStyle(QwtPlotMarker::VLine);
-				}
-				else{
-					marker->setLineStyle(QwtPlotMarker::HLine);
-				}
-
-				marker->setXValue(axisVal);
-				marker->attach(m_plotPtr.GetPtr());
-				markers.PushBack(marker);
+			if (isVertical){
+				marker->setLabelOrientation(Qt::Vertical);
+				marker->setLabelAlignment(Qt::AlignBottom | Qt::AlignLeft);
+				marker->setLinePen(QPen(Qt::magenta, 2, Qt::DotLine));
+				marker->setLineStyle(QwtPlotMarker::VLine);
 			}
+			else{
+				marker->setLineStyle(QwtPlotMarker::HLine);
+			}
+
+			marker->setXValue(axisVal);
+			marker->attach(m_plotPtr.GetPtr());
+			markers.PushBack(marker);
+		}
 	}
 }
 
@@ -311,8 +310,14 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	if (m_horizontalAxisStartAttrPtr.IsValid()) {
 		const double hStartValue = *m_horizontalAxisStartAttrPtr;
 		hMin = (hStartValue < hMinValue) ? hStartValue : hMinValue;
+	}
+
+	if (m_horizontalAxisEndAttrPtr.IsValid()){
+
+		const double userMax = *m_horizontalAxisEndAttrPtr;
 		const double delta = qAbs(hMin - hMinValue);
-		hMax = hMaxValue + delta;
+
+		hMax = (hMaxValue < userMax) ? userMax : hMaxValue + delta;
 	}
 
 	/*const int hStep = (int)((hMaxValue - hMinValue) / verticalCount);*/
@@ -322,14 +327,18 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	//VERTICAL axis
 	double vMin = vMinValue;
 	double vMax = vMaxValue;
+	double userMax = 0;
+	if (m_verticalAxisEndAttrPtr.IsValid()){
+		userMax = *m_verticalAxisEndAttrPtr;
+	}
 	if (m_verticalAxisStartAttrPtr.IsValid()) {
 		const double vStartValue = *m_verticalAxisStartAttrPtr;
 		vMin = (vMinValue < vStartValue) ? vMinValue : vStartValue;
 		const double delta = qAbs(vMin - vMinValue);
-		vMax = vMaxValue + delta;
+		vMax = (vMaxValue < userMax) ? userMax : vMaxValue + delta;
 	}
 
-	m_plotPtr->setAxisScale(QwtPlot::yLeft, vMin, vMax, (vMaxValue - vMinValue) / 10);
+	m_plotPtr->setAxisScale(QwtPlot::yLeft, vMin, vMax, (vMax - vMin) / 10);
 	m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
 }
 
@@ -435,7 +444,7 @@ QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoi
 	int currentCurveIndex = m_parent.ChannelCombo->currentIndex();
 	double sample = 0.0;
 
-	if (currentCurveIndex == 0) {
+	if (currentCurveIndex <= 0) {
 		double distance = DBL_MAX;
 		int channelsCount = objectPtr->GetChannelsCount();
 		for (int channelsIndex = 0;channelsIndex < channelsCount; ++channelsIndex) {
@@ -448,7 +457,7 @@ QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoi
 		}
 	}
 	else{
-		sample = objectPtr->GetSample(sampleIndex, currentCurveIndex-1);
+		sample = objectPtr->GetSample(sampleIndex, currentCurveIndex - 1);
 	}
 
 	QString text = QString("%1: %2").arg(sampleIndex).arg(sample);

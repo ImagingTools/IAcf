@@ -45,8 +45,10 @@ public:
 	I_BEGIN_COMPONENT(CQwtDataSequenceViewComp);
 		I_ASSIGN(m_horizontalLinesCompPtr, "HorizontalLines", "List of y-coordinates of horizontal lines", false, "HorizontalLines")
 		I_ASSIGN(m_verticalAxisStartAttrPtr, "VerticalStartValue", "Vertical axis start value", false, 0.0);
+		I_ASSIGN(m_verticalAxisEndAttrPtr, "VerticalEndValue", "Vertical axis end (max) value", false, 100.0);
 		I_ASSIGN(m_verticalLinesCompPtr, "VerticalLines", "List of x-coordinates of vertical lines", false, "VerticalLines");
 		I_ASSIGN(m_horizontalAxisStartAttrPtr, "HorizontalStartValue", "Horizontal axis start value", false, 0.0);
+		I_ASSIGN(m_horizontalAxisEndAttrPtr, "HorizontalEndValue", "Horizontal axis end (max) value", false, 100.0);
 		I_ASSIGN(m_plotStyleAttrPtr, "DataPlotStyle", "Style of the data plot\n0 - No curve\n1 - Lines\n2 - Sticks\n3 - Steps\n4 - Dots", true, 3);
 		I_ASSIGN(m_symbolStyleAttrPtr, "DataSymbolStyle", "Style of the point symbol \n0 - No symbol\n1 - Ellipse\n2 - Rect\n3 - Diamond\n4 - Triangle\n5 - Cross\n6 - XCross\n7 - Star2", true, 0);
 	I_END_COMPONENT;
@@ -96,9 +98,11 @@ private:
 
 	I_REF(imeas::INumericValue, m_horizontalLinesCompPtr);
 	I_ATTR(double, m_verticalAxisStartAttrPtr);
+	I_ATTR(double, m_verticalAxisEndAttrPtr);
 
 	I_REF(imeas::INumericValue, m_verticalLinesCompPtr);
 	I_ATTR(double, m_horizontalAxisStartAttrPtr);
+	I_ATTR(double, m_horizontalAxisEndAttrPtr);
 
 	I_ATTR(int, m_plotStyleAttrPtr);
 	I_ATTR(int, m_symbolStyleAttrPtr);
