@@ -29,6 +29,11 @@ public:
 		Convert OpenCV image to standard ACF bitmap.
 	*/
 	static bool ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitmap);
+
+	/**
+		Convert OpenCV image to standard ACF bitmap.
+	*/
+	static bool ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitmap);
 };
 
 

@@ -56,6 +56,14 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 }
 
 
+bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitmap)
+{
+	const IplImage& iplImage = IplImage(image);
+
+	return ConvertToBitmap(iplImage, outputBitmap);
+}
+
+
 } // namespace iocv
 
 

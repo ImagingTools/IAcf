@@ -4,6 +4,8 @@
 // ACF includes 
 #include <istd/CChangeNotifier.h>
 #include <iprm/IParamsSet.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/TParamsPtr.h>
 
 // IACF includes
 #include <iocv/COcvImage.h>
@@ -14,26 +16,36 @@ namespace iocv
 
 
 COcvAcquisitionComp::COcvAcquisitionComp()
-:	m_cameraPtr(NULL)
 {
-}
+	m_supportedCameraDriversMap[CV_CAP_MIL] = "Matrox Image Library";
+	m_supportedCameraDriversMap[CV_CAP_VFW] = "Video for Windows";
+	m_supportedCameraDriversMap[CV_CAP_IEEE1394] = "FireWire (IEEE 1394)";
+	m_supportedCameraDriversMap[CV_CAP_TYZX] = "TYZX (Stereo)";
+	m_supportedCameraDriversMap[CV_CAP_QT] = "Quick Time";
+	m_supportedCameraDriversMap[CV_CAP_UNICAP] = "Unicap";
+	m_supportedCameraDriversMap[CV_CAP_DSHOW] = "DirectShow";
+	m_supportedCameraDriversMap[CV_CAP_MSMF] = "Microsoft Media Foundation";
+	m_supportedCameraDriversMap[CV_CAP_PVAPI] = "Prosilica GigE SDK";
+	m_supportedCameraDriversMap[CV_CAP_OPENNI] = "OpenNI (Kinect)";
+	m_supportedCameraDriversMap[CV_CAP_ANDROID] = "Android Capture";
+	m_supportedCameraDriversMap[CV_CAP_XIAPI] = "XIMEA";
+	m_supportedCameraDriversMap[CV_CAP_AVFOUNDATION] = "AVFoundation framework for iOS";
+	m_supportedCameraDriversMap[CV_CAP_GIGANETIX] = "Smartek Giganetix";
+	m_supportedCameraDriversMap[CV_CAP_INTELPERC] = "Intel Perceptual Computing";
 
-
-bool COcvAcquisitionComp::IsCameraValid() const
-{
-	return (m_cameraPtr != NULL);
+	m_deviceInfoList.SetParent(this);
 }
 
 
 // reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 
 int COcvAcquisitionComp::DoProcessing(
-			const iprm::IParamsSet* /* paramsPtr*/,
+			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
-	if (m_cameraPtr == NULL){
+	if (m_deviceList.IsEmpty()){
 		return TS_INVALID;
 	}
 
@@ -44,13 +56,15 @@ int COcvAcquisitionComp::DoProcessing(
 
 	istd::CChangeNotifier notifier(bitmapPtr);
 
-	IplImage* iplImagePtr = cvQueryFrame(m_cameraPtr);
-	if (iplImagePtr == NULL){
-		return TS_INVALID;
-	}
+	CameraDevice* selectedDevicePtr = GetSelectedCameraDevice(paramsPtr);
+	if (selectedDevicePtr != NULL){
+		cv::Mat cameraImage;
 
-	if (iocv::COcvImage::ConvertToBitmap(*iplImagePtr, *bitmapPtr)){
-		return TS_OK;
+		if (selectedDevicePtr->retrieve(cameraImage)){
+			if (iocv::COcvImage::ConvertToBitmap(cameraImage, *bitmapPtr)){
+				return TS_OK;
+			}
+		}
 	}
 
 	return TS_INVALID;
@@ -59,20 +73,17 @@ int COcvAcquisitionComp::DoProcessing(
 
 // reimplemented (icam::IBitmapAcquisition)
 
-istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
+istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
 {
-	int imageWidth = (int)cvGetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_WIDTH);
-	int imageHeight = (int)cvGetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_HEIGHT);
+	CameraDevice* selectedDevicePtr = GetSelectedCameraDevice(paramsPtr);
+	if (selectedDevicePtr != NULL){
+		int imageWidth = (int)selectedDevicePtr->get(CV_CAP_PROP_FRAME_WIDTH);
+		int imageHeight = (int)(int)selectedDevicePtr->get(CV_CAP_PROP_FRAME_HEIGHT);
+	
+		return istd::CIndex2d(imageWidth, imageHeight);
+	}
 
-	return istd::CIndex2d(imageWidth, imageHeight);
-}
-
-
-// reimplemented (isig::ITriggerConstraints)
-
-bool COcvAcquisitionComp::IsTriggerModeSupported(int triggerMode) const
-{
-	return (triggerMode == isig::ITriggerParams::TM_CONTINUOUS);
+	return istd::CIndex2d(-1, -1);
 }
 
 
@@ -82,26 +93,150 @@ bool COcvAcquisitionComp::IsTriggerModeSupported(int triggerMode) const
 
 void COcvAcquisitionComp::OnComponentCreated()
 {
-	BaseClass::OnComponentCreated();
+	EnumerateCameraDevices();
 
-	m_cameraPtr = cvCreateCameraCapture(CV_CAP_ANY);
-	if (m_cameraPtr != NULL){
-		cvSetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_WIDTH, 640);
-		cvSetCaptureProperty(m_cameraPtr, CV_CAP_PROP_FRAME_HEIGHT, 480);
-	}
+	BaseClass::OnComponentCreated();
 }
 
 
 void COcvAcquisitionComp::OnComponentDestroyed()
 {
-	if (m_cameraPtr != NULL){
-		cvReleaseCapture(&m_cameraPtr);
-	}
+	m_deviceList.Reset();
 
 	BaseClass::OnComponentDestroyed();
 }
 
 
+// private methods
+	
+void COcvAcquisitionComp::EnumerateCameraDevices()
+{
+	for (		CameraDriversMap::ConstIterator cameraDriverIter = m_supportedCameraDriversMap.constBegin(); 
+				cameraDriverIter != m_supportedCameraDriversMap.constEnd();
+				++cameraDriverIter){
+		int cameraDriverId = cameraDriverIter.key();
+
+		istd::TDelPtr<CameraDevice> devicePtr = new CameraDevice(cameraDriverId, cameraDriverIter.value());
+		if (devicePtr.IsValid() && devicePtr->isOpened()){
+			m_deviceList.PushBack(devicePtr.PopPtr());
+		}
+	}
+}
+
+
+COcvAcquisitionComp::CameraDevice* COcvAcquisitionComp::GetSelectedCameraDevice(const iprm::IParamsSet* paramsPtr) const
+{
+	if ((paramsPtr == NULL) && !m_deviceList.IsEmpty()){
+		return m_deviceList.GetElementAt(0);
+	}
+
+	iprm::TParamsPtr<iprm::ISelectionParam> cameraIndexParamPtr(paramsPtr, *m_cameraIndexAttrPtr);
+	if (cameraIndexParamPtr.IsValid()){
+		int cameraIndex = cameraIndexParamPtr->GetSelectedOptionIndex();
+		if ((cameraIndex >= 0) && (cameraIndex < m_deviceList.GetCount())){
+			return m_deviceList.GetElementAt(cameraIndex);
+		}
+	}
+
+	return NULL;
+}
+
+
+// public methods of the embedded class CameraDevice
+
+COcvAcquisitionComp::CameraDevice::CameraDevice(int cameraDriverId, const QString& deviceName)
+	:BaseClass(cameraDriverId),
+	m_deviceName(deviceName)
+{
+}
+
+
+COcvAcquisitionComp::CameraDevice::CameraDevice(const QString& streamUrl, const QString& deviceName)
+	:BaseClass(),
+	m_deviceName(deviceName)
+{
+	BaseClass::open(streamUrl.toStdString());
+}
+
+
+QString COcvAcquisitionComp::CameraDevice::GetDeviceName() const
+{
+	return m_deviceName;
+}
+
+
+// public methods of the embedded class DeviceInfoList
+
+COcvAcquisitionComp::DeviceInfoList::DeviceInfoList()
+	:m_parentPtr(NULL)
+{
+}
+
+
+void COcvAcquisitionComp::DeviceInfoList::SetParent(COcvAcquisitionComp* parentPtr)
+{
+	m_parentPtr = parentPtr;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int COcvAcquisitionComp::DeviceInfoList::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int COcvAcquisitionComp::DeviceInfoList::GetOptionsCount() const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	return m_parentPtr->m_deviceList.GetCount();
+}
+
+
+QString COcvAcquisitionComp::DeviceInfoList::GetOptionName(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+	Q_ASSERT(index >= 0);
+
+	if (index < m_parentPtr->m_deviceList.GetCount()){
+		return m_parentPtr->m_deviceList.GetAt(index)->GetDeviceName();
+	}
+	else{
+		return "Unnamed";
+	}
+}
+
+
+QString COcvAcquisitionComp::DeviceInfoList::GetOptionDescription(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+	Q_ASSERT(index >= 0);
+	Q_UNUSED(index);
+
+	return QString();
+}
+
+
+QByteArray COcvAcquisitionComp::DeviceInfoList::GetOptionId(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+	Q_ASSERT(index >= 0);
+
+	return QString("Camera-%1").arg(index + 1).toUtf8();
+}
+
+
+bool COcvAcquisitionComp::DeviceInfoList::IsOptionEnabled(int index) const
+{
+	Q_UNUSED(index);
+
+	return true;
+}
+		
+
 } // namespace iocv
 
 
+// rtsp://admin:cnb0onj4@192.168.2.122/h264_vga.sdp

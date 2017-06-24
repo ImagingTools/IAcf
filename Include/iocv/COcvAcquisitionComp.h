@@ -9,17 +9,15 @@
 #undef max
 
 // ACF includes
-#include <i2d/CRectangle.h>
+#include <istd/TPointerVector.h>
+#include <imod/TModelWrap.h>
+#include <iprm/IOptionsList.h>
 #include <ilog/TLoggerCompWrap.h>
 #include <icomp/CComponentBase.h>
 #include <iproc/TSyncProcessorWrap.h>
 
 // ACF-Solutions includes
 #include <icam/IBitmapAcquisition.h>
-#include <icam/IExposureConstraints.h>
-#include <icam/IExposureParams.h>
-#include <isig/ITriggerParams.h>
-#include <isig/ITriggerConstraints.h>
 
 
 namespace iocv
@@ -31,24 +29,21 @@ namespace iocv
 */
 class COcvAcquisitionComp:
 			public ilog::CLoggerComponentBase,
-			virtual public isig::ITriggerConstraints,
-			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
+			public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
-		I_REGISTER_INTERFACE(isig::ITriggerConstraints);
+		I_REGISTER_SUBELEMENT(DeviceList);
+		I_REGISTER_SUBELEMENT_INTERFACE(DeviceList, iprm::IOptionsList, ExtractDeviceList);
+		I_REGISTER_SUBELEMENT_INTERFACE(DeviceList, istd::IChangeable, ExtractDeviceList);
+		I_REGISTER_SUBELEMENT_INTERFACE(DeviceList, imod::IModel, ExtractDeviceList);
+		I_ASSIGN(m_cameraIndexAttrPtr, "CameraSelectionId", "ID of the camera selector in the parameter set", true, "CameraIndex");
 	I_END_COMPONENT;
 
-	enum MessageId
-	{
-	};
-
 	COcvAcquisitionComp();
-
-	bool IsCameraValid() const;
 
 	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 	virtual int DoProcessing(
@@ -60,23 +55,83 @@ public:
 	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
-	// reimplemented (isig::ITriggerConstraints)
-	virtual bool IsTriggerModeSupported(int triggerMode) const;
-
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
+
+private:
+	class CameraDevice: public cv::VideoCapture
+	{
+	public:
+		typedef cv::VideoCapture BaseClass;
+
+		CameraDevice(int cameraDriverId, const QString& deviceName);
+		CameraDevice(const QString& streamUrl, const QString& deviceName);
+
+		QString GetDeviceName() const;
+
+	private:
+		QString m_deviceName;
+	};
+
+
+	typedef istd::TPointerVector<CameraDevice> CameraDeviceList;
+
+	/**
+		Enumerate all connnected camera devices.
+	*/
+	void EnumerateCameraDevices();
+
+	/**
+		Get currently selected camera according to given parameters.
+	*/
+	CameraDevice* GetSelectedCameraDevice(const iprm::IParamsSet* paramsPtr) const;
 	
 private:
-	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
-	I_REF(isig::ITriggerParams, m_triggerParamsCompPtr);
-	I_REF(i2d::CRectangle, m_imageRegionParamsCompPtr);
+	class DeviceInfoList: virtual public iprm::IOptionsList
+	{
+	public:
+		DeviceInfoList();
 
-	I_ATTR(bool, m_singleShootAttrPtr);
-	I_ATTR(double, m_timeoutAttrPtr);
+		void SetParent(COcvAcquisitionComp* parentPtr);
 
-	CvCapture* m_cameraPtr;
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
+		
+	private:
+		COcvAcquisitionComp* m_parentPtr;
+	};
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractDeviceList(COcvAcquisitionComp& component)
+	{
+		return &component.m_deviceInfoList;
+	}
+
+	/**
+		Current available devices.
+	*/
+	CameraDeviceList m_deviceList;
+
+	typedef QMap<int /*OpenCV ID*/, QString /*Driver name*/> CameraDriversMap;
+
+	/**
+		All supported camera backends.
+	*/
+	CameraDriversMap m_supportedCameraDriversMap;
+
+	/**
+		ID of the camera selector in the parameter set.
+	*/
+	I_ATTR(QByteArray, m_cameraIndexAttrPtr);
+
+	imod::TModelWrap<DeviceInfoList> m_deviceInfoList;
 };
 
 
