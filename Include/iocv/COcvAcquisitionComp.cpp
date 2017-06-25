@@ -37,7 +37,7 @@ COcvAcquisitionComp::COcvAcquisitionComp()
 }
 
 
-// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+// reimplemented (iproc::IProcessor)
 
 int COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
@@ -239,4 +239,3 @@ bool COcvAcquisitionComp::DeviceInfoList::IsOptionEnabled(int index) const
 } // namespace iocv
 
 
-// rtsp://admin:cnb0onj4@192.168.2.122/h264_vga.sdp
