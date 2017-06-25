@@ -29,7 +29,7 @@ COcvAcquisitionComp::COcvAcquisitionComp()
 	m_supportedCameraDriversMap[CV_CAP_OPENNI] = "OpenNI (Kinect)";
 	m_supportedCameraDriversMap[CV_CAP_ANDROID] = "Android Capture";
 	m_supportedCameraDriversMap[CV_CAP_XIAPI] = "XIMEA";
-	m_supportedCameraDriversMap[CV_CAP_AVFOUNDATION] = "AVFoundation framework for iOS";
+	m_supportedCameraDriversMap[CV_CAP_AVFOUNDATION] = "AVFoundation Framework for iOS";
 	m_supportedCameraDriversMap[CV_CAP_GIGANETIX] = "Smartek Giganetix";
 	m_supportedCameraDriversMap[CV_CAP_INTELPERC] = "Intel Perceptual Computing";
 
