@@ -10,9 +10,6 @@ win32{
 	SUBDIRS += iocv
 	iocv.file = ../../Include/iocv/QMake/iocv.pro
 
-	SUBDIRS += ilibav
-	ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
-
     SUBDIRS += iqaxmm
     iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
 
@@ -25,6 +22,10 @@ win32{
 	SUBDIRS += iwin
 	iwin.file = ../../Include/iwin/QMake/iwin.pro
 
+	!contains(PLATFORM_CODE, x64){
+		SUBDIRS += ilibav
+		ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
+	}
 
 	win32-msvc2005 | win32-msvc2008{
 #		SUBDIRS += icbox
@@ -60,10 +61,12 @@ win32{
 	SUBDIRS += WinPck
 	WinPck.file = ../../Impl/WinPck/QMake/WinPck.pro
 
-	win32-msvc2005 | win32-msvc2008{
+	!contains(PLATFORM_CODE, x64){
 		SUBDIRS += FfMpegPck
 		FfMpegPck.file = ../../Impl/FfMpegPck/QMake/FfMpegPck.pro
+	}
 
+	win32-msvc2005 | win32-msvc2008{
         SUBDIRS += QaxPck
         QaxPck.file = ../../Impl/QaxPck/QMake/QaxPck.pro
 
