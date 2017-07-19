@@ -22,7 +22,7 @@ win32{
 	SUBDIRS += iwin
 	iwin.file = ../../Include/iwin/QMake/iwin.pro
 
-	!contains(PLATFORM_CODE, x64){
+	!contains(QMAKE_HOST.arch, x86_64){
 		SUBDIRS += ilibav
 		ilibav.file = ../../Include/ilibav/QMake/ilibav.pro
 	}
@@ -61,7 +61,7 @@ win32{
 	SUBDIRS += WinPck
 	WinPck.file = ../../Impl/WinPck/QMake/WinPck.pro
 
-	!contains(PLATFORM_CODE, x64){
+	!contains(QMAKE_HOST.arch, x86_64){
 		SUBDIRS += FfMpegPck
 		FfMpegPck.file = ../../Impl/FfMpegPck/QMake/FfMpegPck.pro
 	}
