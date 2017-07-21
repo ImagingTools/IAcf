@@ -32,7 +32,9 @@ void CHistogramViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeS
 
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 			if (sequenceInfoPtr != NULL){
-				channelNames << sequenceInfoPtr->GetNumericValueName(channelIndex);
+				const iprm::IOptionsList& valueListInfo = sequenceInfoPtr->GetValueListInfo();
+
+				channelNames << valueListInfo.GetOptionName(channelIndex);
 			}
 			else{
 				channelNames << QObject::tr("Channel %1").arg(channelIndex + 1);

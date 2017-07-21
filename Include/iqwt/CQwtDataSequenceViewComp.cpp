@@ -36,7 +36,9 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 			if (sequenceInfoPtr != NULL){
-				channelNames << sequenceInfoPtr->GetNumericValueName(channelIndex);
+				const iprm::IOptionsList& valueListInfo = sequenceInfoPtr->GetValueListInfo();
+
+				channelNames << valueListInfo.GetOptionName(channelIndex);
 			}
 			else{
 				channelNames << tr("Channel %1").arg(channelIndex + 1);
@@ -224,9 +226,21 @@ void CQwtDataSequenceViewComp::MakeValueLines(int& linesCount, const bool isVert
 		ClearMarkers(markers);
 
 		imath::CVarVector values = linesCompPtr->GetValues();
-		for (int valueIndex = 0; valueIndex < linesCount; ++valueIndex) {
+		for (int valueIndex = 0; valueIndex < linesCount; ++valueIndex){
 			double axisVal = values.GetElement(valueIndex);
-			QString name = linesCompPtr->GetNumericConstraints()->GetNumericValueName(valueIndex);
+
+			QString name;
+
+			const imeas::INumericConstraints* constraintsPtr = linesCompPtr->GetNumericConstraints();
+			if (constraintsPtr != NULL){
+				const iprm::IOptionsList& valueListInfo = constraintsPtr->GetValueListInfo();
+
+				name = valueListInfo.GetOptionName(valueIndex);
+			}
+			else{
+				name = QString("Channel-%1").arg(valueIndex + 1);
+			}
+			
 			QwtPlotMarker* marker = new QwtPlotMarker();
 			marker->setLabel(QwtText(name));
 
