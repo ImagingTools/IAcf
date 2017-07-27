@@ -51,6 +51,8 @@ public:
 		I_ASSIGN(m_horizontalAxisEndAttrPtr, "HorizontalEndValue", "Horizontal axis end (max) value", false, 100.0);
 		I_ASSIGN(m_plotStyleAttrPtr, "DataPlotStyle", "Style of the data plot\n0 - No curve\n1 - Lines\n2 - Sticks\n3 - Steps\n4 - Dots", true, 3);
 		I_ASSIGN(m_symbolStyleAttrPtr, "DataSymbolStyle", "Style of the point symbol \n0 - No symbol\n1 - Ellipse\n2 - Rect\n3 - Diamond\n4 - Triangle\n5 - Cross\n6 - XCross\n7 - Star2", true, 0);
+		I_ASSIGN_MULTI_0(m_channelColorIdsAttrPtr, "ChannelColorIds", "List of channel IDs used for curve color assignment", true);
+		I_ASSIGN_MULTI_0(m_channelColorsAttrPtr, "ChannelColors", "List of curve colors assigned to corresponding channel IDs", true);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
@@ -99,13 +101,13 @@ private:
 	I_REF(imeas::INumericValue, m_horizontalLinesCompPtr);
 	I_ATTR(double, m_verticalAxisStartAttrPtr);
 	I_ATTR(double, m_verticalAxisEndAttrPtr);
-
 	I_REF(imeas::INumericValue, m_verticalLinesCompPtr);
 	I_ATTR(double, m_horizontalAxisStartAttrPtr);
 	I_ATTR(double, m_horizontalAxisEndAttrPtr);
-
 	I_ATTR(int, m_plotStyleAttrPtr);
 	I_ATTR(int, m_symbolStyleAttrPtr);
+	I_MULTIATTR(QByteArray, m_channelColorIdsAttrPtr);
+	I_MULTIATTR(QString, m_channelColorsAttrPtr);
 };
 
 

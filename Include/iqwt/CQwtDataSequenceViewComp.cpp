@@ -55,7 +55,22 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 			for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 				QwtPlotCurve* curvePtr = new QwtPlotCurve();
 
-				curvePtr->setPen(QPen(Qt::GlobalColor(Qt::red + channelIndex), 2, Qt::SolidLine));
+				// Random color:
+				QColor curveColor = Qt::GlobalColor(Qt::red + channelIndex);
+
+				// Try to get staticaly defined color for the current channel:
+				if (sequenceInfoPtr != NULL){
+					const iprm::IOptionsList& valueListInfo = sequenceInfoPtr->GetValueListInfo();
+
+					QByteArray channelId = valueListInfo.GetOptionId(channelIndex);
+
+					int staticColorIndex = m_channelColorIdsAttrPtr.FindValue(channelId);
+					if ((staticColorIndex >= 0) && (staticColorIndex < m_channelColorsAttrPtr.GetCount())){
+						curveColor = QColor(m_channelColorsAttrPtr[staticColorIndex]);
+					}
+				}
+
+				curvePtr->setPen(QPen(curveColor, 2, Qt::SolidLine));
 				
 				curvePtr->setStyle(GetQwtPlotStyle());
 				QwtSymbol* pointSymbolPtr = new QwtSymbol(GetQwtSymbolStyle());
