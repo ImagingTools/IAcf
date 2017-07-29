@@ -13,13 +13,13 @@
         <Element Id="App" PackageId="AcfGuiVoce" ComponentId="MultiDocApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ScintilaEditor"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationType" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Tutorial"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DocumentTemplates" Type="Reference[]" ExportId="">

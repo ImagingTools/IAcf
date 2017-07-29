@@ -126,7 +126,7 @@
                     <AttributeInfo Id="DockArea" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                    <AttributeInfo Id="DockTitle" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Load and Save"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
@@ -146,7 +146,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Bitmap</Value>
@@ -160,16 +160,16 @@
         <Element Id="StandaloneApp" PackageId="AcfGuiVoce" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="AV Grabber"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationType" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Tutorial"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="">
+                    <AttributeInfo Id="LegalCopyright" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MainView" Type="Reference" ExportId="">
@@ -184,7 +184,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                    <AttributeInfo Id="ProductName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="IACF"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
@@ -196,7 +196,7 @@
         <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="AvLib Demo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

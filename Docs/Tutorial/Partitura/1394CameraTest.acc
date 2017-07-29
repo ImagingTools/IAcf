@@ -18,7 +18,7 @@
         <Element Id="Framework" PackageId="SnapTutorialVoce" ComponentId="SnapFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Streaming Camera Test"/>
                     </AttributeInfo>
                     <AttributeInfo Id="BitmapAcquisition" Type="Reference" ExportId="">
