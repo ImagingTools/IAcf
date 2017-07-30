@@ -50,7 +50,7 @@
         <Element Id="DocumentFactory" PackageId="BasePck" ComponentId="TextDocument">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultText" Type="String" ExportId="">
+                    <AttributeInfo Id="DefaultText" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="void main(){}"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

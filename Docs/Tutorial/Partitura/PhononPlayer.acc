@@ -74,7 +74,7 @@
         <Element Id="ToolBarWidgetGui" PackageId="QtGuiPck" ComponentId="ToolBarWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Title" Type="String" ExportId="">
+                    <AttributeInfo Id="Title" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Persistence"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ToolBarArea" Type="Integer" ExportId="">
