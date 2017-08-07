@@ -234,7 +234,7 @@ bool COcvAcquisitionComp::DeviceInfoList::IsOptionEnabled(int index) const
 
 	return true;
 }
-		
+
 
 } // namespace iocv
 
