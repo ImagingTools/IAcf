@@ -6,8 +6,6 @@
 #include <iprm/IParamsSet.h>
 #include <iprm/ISelectionParam.h>
 #include <iprm/TParamsPtr.h>
-
-// IACF includes
 #include <iocv/COcvImage.h>
 
 

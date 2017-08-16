@@ -109,9 +109,6 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 			curvePtr->setSamples(xData, yData);
 
 			SetAxisLimits(hMinValue, hMaxValue, minValue, maxValue);
-			if (channelIndex != ChannelCombo->currentIndex() && ChannelCombo->currentIndex() != 0){
-				curvePtr->setVisible(false);
-			}
 		}
 	}
 	else{
