@@ -16,27 +16,32 @@ I_EXPORT_PACKAGE(
 I_EXPORT_COMPONENT(
 			OpenCvAcquisition,
 			"Implementation of camera interface using OpenCV API",
-			"OpenCV Camera Acquisition Bitmap Image" IM_TAG("Camera"));
+			"Camera Acquisition Bitmap Image" IM_TAG("Camera"));
 
 I_EXPORT_COMPONENT(
 			OpenCvVideoController,
 			"OpenCV-based video controller",
-			"OpenCV Video Multimedia Controller" IM_TAG("Multimedia"));
+			"Video Multimedia Controller" IM_TAG("Multimedia"));
 
 I_EXPORT_COMPONENT(
 			OpenCvBlobExtractor,
 			"OpenCV-based blob extraction",
-			"OpenCV Blob Search Object");
+			"Blob Search Object");
 
 I_EXPORT_COMPONENT(
 			CorrSearchProcessor,
 			"OpenCV-based normalized correlation search processor",
-			"OpenCV Normalized Correlation Search Processor Model Image Find Pattern Matching");
+			"Normalized Correlation Search Processor Model Image Find Pattern Matching");
 
 I_EXPORT_COMPONENT(
 			OpenCvMedianProcessor,
 			"OpenCV-based median blur processor",
-			"OpenCV Median Blue Smoothing Processor");
+			"Median Blue Smoothing Processor");
+
+I_EXPORT_COMPONENT(
+			HoughBasedSearchProcessor,
+			"OpenCV-based search processor based on hough transformation",
+			"Search Circle Line Processor Feature Hough");
 
 
 } // namespace OpenCvPck

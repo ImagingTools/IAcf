@@ -2,10 +2,8 @@
 
 
 // OpenCV includes
-#include <opencv/cv.h>
+#include "opencv2/opencv.hpp"
 #include <opencv/highgui.h>
-#undef min
-#undef max
 
 // Qt includes
 #include <QtCore/QElapsedTimer>
@@ -168,7 +166,7 @@ int CCorrSearchProcessorComp::DoModelSearch(
 
 	QElapsedTimer timer;
 
-	cv::Mat cvImage(aoi.GetWidth(), aoi.GetHeight(), CV_8UC1, (quint8*)image.GetLinePtr(aoi.GetTop()) + aoi.GetLeft(), image.GetLineBytesCount());
+	cv::Mat cvImage(aoi.GetHeight(), aoi.GetWidth(), CV_8UC1, (quint8*)image.GetLinePtr(aoi.GetTop()) + aoi.GetLeft(), image.GetLineBytesCount());
 
 	istd::CIndex2d modelSize = modelImage.GetImageSize();
 	cv::Mat cvModel(modelSize.GetX(), modelSize.GetY(), CV_8UC1, (quint8*)modelImage.GetLinePtr(0), modelImage.GetLineBytesCount());
@@ -189,11 +187,13 @@ int CCorrSearchProcessorComp::DoModelSearch(
 
 	result.ResetFeatures();
 
+	i2d::CVector2d regionOffset(aoi.GetLeft(), aoi.GetTop());
+
 	if (maxVal >= minScore){
 		i2d::CVector2d position(maxLoc.x + aoi.GetLeft() + 0.5, maxLoc.y + aoi.GetTop() + 0.5);
 
 		// return results
-		result.AddFeature(new iipr::CSearchFeature(maxVal, position, 0, i2d::CVector2d(1, 1)));
+		result.AddFeature(new iipr::CSearchFeature(maxVal, regionOffset + position, 0, i2d::CVector2d(1, 1)));
 
 		SendInfoMessage(0, QObject::tr("Found model, %1% score").arg(maxVal * 100));
 
