@@ -4,14 +4,16 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 
-#Static
+# Static libraries
 
 win32{
-	SUBDIRS += iocv
-	iocv.file = ../../Include/iocv/QMake/iocv.pro
+	win32-msvc2013{
+		SUBDIRS += iocv
+		iocv.file = ../../Include/iocv/QMake/iocv.pro
+	}
 
-    SUBDIRS += iqaxmm
-    iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
+	SUBDIRS += iqaxmm
+	iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
 
 	SUBDIRS += iqwt
 	iqwt.file = ../../Include/iqwt/QMake/iqwt.pro
@@ -48,12 +50,13 @@ SUBDIRS += IacfLoc
 IacfLoc.file = ../../Impl/IacfLoc/QMake/IacfLoc.pro
 
 
-#Component
+# Component packages
 
 win32{
-	SUBDIRS += OpenCvPck
-	OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
-	
+	win32-msvc2013{
+		SUBDIRS += OpenCvPck
+		OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
+	}
 
 	SUBDIRS += QwtPck
 	QwtPck.file = ../../Impl/QwtPck/QMake/QwtPck.pro
@@ -67,8 +70,8 @@ win32{
 	}
 
 	win32-msvc2005 | win32-msvc2008{
-        SUBDIRS += QaxPck
-        QaxPck.file = ../../Impl/QaxPck/QMake/QaxPck.pro
+		SUBDIRS += QaxPck
+		QaxPck.file = ../../Impl/QaxPck/QMake/QaxPck.pro
 
 #		SUBDIRS += CboxPck
 #		CboxPck.file = ../../Impl/CboxPck/QMake/CboxPck.pro

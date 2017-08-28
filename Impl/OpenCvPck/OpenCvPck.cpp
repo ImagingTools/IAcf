@@ -29,7 +29,7 @@ I_EXPORT_COMPONENT(
 			"Blob Search Object");
 
 I_EXPORT_COMPONENT(
-			CorrSearchProcessor,
+			OpenCvCorrSearchProcessor,
 			"OpenCV-based normalized correlation search processor",
 			"Normalized Correlation Search Processor Model Image Find Pattern Matching");
 
@@ -39,9 +39,14 @@ I_EXPORT_COMPONENT(
 			"Median Blue Smoothing Processor");
 
 I_EXPORT_COMPONENT(
-			HoughBasedSearchProcessor,
+			OpenCvHoughBasedSearchProcessor,
 			"OpenCV-based search processor based on hough transformation",
 			"Search Circle Line Processor Feature Hough");
+
+I_EXPORT_COMPONENT(
+			OpenCvResamplingProcessor,
+			"OpenCV-based resampling processor",
+			"Size Resampling Interpolation Processor Transformation");
 
 
 } // namespace OpenCvPck

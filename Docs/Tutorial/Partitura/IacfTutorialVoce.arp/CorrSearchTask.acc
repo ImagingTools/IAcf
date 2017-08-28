@@ -60,7 +60,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SearchProcessor" PackageId="OpenCvPck" ComponentId="CorrSearchProcessor">
+        <Element Id="SearchProcessor" PackageId="OpenCvPck" ComponentId="OpenCvCorrSearchProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">

@@ -13,6 +13,7 @@
 #include <iocv/CCorrSearchProcessorComp.h>
 #include <iocv/COcvMedianProcessorComp.h>
 #include <iocv/CHoughBasedSearchProcessorComp.h>
+#include <iocv/COcvResamplingProcessorComp.h>
 
 
 /**
@@ -25,9 +26,10 @@ namespace OpenCvPck
 typedef iocv::COcvAcquisitionComp OpenCvAcquisition;
 typedef icomp::TModelCompWrap<iocv::COcvVideoControllerComp> OpenCvVideoController;
 typedef iocv::COcvBlobProcessorComp OpenCvBlobExtractor;
-typedef iocv::CCorrSearchProcessorComp CorrSearchProcessor;
+typedef iocv::CCorrSearchProcessorComp OpenCvCorrSearchProcessor;
 typedef iocv::COcvMedianProcessorComp OpenCvMedianProcessor;
-typedef iocv::CHoughBasedSearchProcessorComp HoughBasedSearchProcessor;
+typedef iocv::CHoughBasedSearchProcessorComp OpenCvHoughBasedSearchProcessor;
+typedef iocv::COcvResamplingProcessorComp OpenCvResamplingProcessor;
 
 
 } // namespace OpenCvPck
