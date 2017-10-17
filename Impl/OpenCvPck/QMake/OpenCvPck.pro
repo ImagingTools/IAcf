@@ -6,7 +6,7 @@ TARGET = OpenCvPck
 INCLUDEPATH += $(ACFSLNDIR)/Include
 INCLUDEPATH += $(OPENCVDIR_3_3_0)/Include
 
-LIBS += -L$(ACFSLNDIR)/Lib/$$COMPILER_DIR -liblob -limeas -liipr -licalib
+LIBS += -L$(ACFSLNDIR)/Lib/$$COMPILER_DIR -liblob -limeas -liipr -licalib -liedge
 LIBS += -L../../../Lib/$$COMPILER_DIR -liocv
 LIBS += -L$(OPENCVDIR_3_3_0)/lib/$$COMPILER_DIR
 

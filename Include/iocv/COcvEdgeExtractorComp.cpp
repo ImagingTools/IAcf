@@ -1,0 +1,163 @@
+#include <iocv/COcvEdgeExtractorComp.h>
+
+
+// OpenCV includes
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/types_c.h>
+#include <opencv2/opencv.hpp>
+
+// ACF includes
+#include <istd/CChangeGroup.h>
+#include <iimg/CBitmapBase.h>
+#include <iimg/CScanlineMask.h>
+#include <iprm/TParamsPtr.h>
+#include <i2d/CPolygon.h>
+#include <ilog/CExtMessage.h>
+#include <iimg/CBitmap.h>
+
+// ACF-Solutions includes
+#include <iedge/CEdgeLineContainer.h>
+
+
+namespace iocv
+{
+
+
+// public methods
+
+// reimplemented (iedge::IEdgesExtractor)
+
+bool COcvEdgeExtractorComp::DoContourExtraction(
+			const iprm::IParamsSet* paramsPtr,
+			const iimg::IBitmap& bitmap,
+			iedge::CEdgeLineContainer& result) const
+{
+	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
+
+	iedge::CEdgeLineContainer* edgesContainerPtr = dynamic_cast<iedge::CEdgeLineContainer*>(&result);
+	if (edgesContainerPtr == NULL){
+		return false;
+	}
+
+	istd::CChangeGroup resultNotifier(edgesContainerPtr);
+
+	edgesContainerPtr->Reset();
+
+	ibase::CSize size = bitmap.GetImageSize();
+
+	// Initialize input bitmap:
+	cv::Mat tmpBinaryImage;
+
+	// Filter out masked points:
+	if (aoiPtr.IsValid()){
+		iimg::CScanlineMask mask;
+		mask.SetCalibration(bitmap.GetCalibration());
+
+		i2d::CRect clipArea(size);
+		if (!mask.CreateFromGeometry(*aoiPtr, &clipArea)){
+			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
+
+			return false;
+		}
+
+		mask.Invert(clipArea);
+
+		iimg::CBitmap maskedBitmap;
+		maskedBitmap.CopyFrom(bitmap);
+
+		istd::CIntRange lineRange(0, size.GetX());
+
+		for (int y = 0; y < size.GetY(); ++y){
+			const istd::CIntRanges* outputRangesPtr = mask.GetPixelRanges(y);
+			if (outputRangesPtr != NULL){
+				quint8* inputLinePtr = static_cast<quint8*>(maskedBitmap.GetLinePtr(y));
+
+				istd::CIntRanges::RangeList rangeList;
+				outputRangesPtr->GetAsList(lineRange, rangeList);
+				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+					iter != rangeList.constEnd();
+					++iter){
+					const istd::CIntRange& rangeH = *iter;
+					Q_ASSERT(rangeH.GetMinValue() >= 0);
+					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
+
+					for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
+						inputLinePtr[x] = 0;
+					}
+				}
+			}
+		}
+
+		void* imageDataBufferPtr = const_cast<void*>(maskedBitmap.GetLinePtr(0));
+		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, maskedBitmap.GetLineBytesCount());
+		tmpBinaryImage = inputBitmap.clone();
+	}
+	else{
+		void* imageDataBufferPtr = const_cast<void*>(bitmap.GetLinePtr(0));
+		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, bitmap.GetLineBytesCount());
+
+		tmpBinaryImage = inputBitmap.clone();
+	}
+
+	// Get contours from the binary image:
+	std::vector<std::vector<cv::Point> > contours;
+	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_TC89_L1);
+
+	for (int contourIndex = 0; contourIndex < int(contours.size()); ++contourIndex){
+		iedge::CEdgeLine& resultLine = edgesContainerPtr->PushBack(iedge::CEdgeLine());
+
+		const std::vector<cv::Point>& contour = contours[contourIndex];
+
+		resultLine.SetNodesCount(int(contour.size()));
+
+		for (int nodeIndex = 0; nodeIndex < int(contour.size()); ++nodeIndex){
+			iedge::CEdgeNode& nodeRef = resultLine.GetNodeRef(nodeIndex);
+
+			nodeRef.SetPosition(i2d::CVector2d(contour[nodeIndex].x + 0.5, contour[nodeIndex].y + 0.5));
+			nodeRef.SetWeight(0.5);
+		}
+
+		resultLine.SetClosed(true);
+
+		edgesContainerPtr->PushBack(resultLine);
+	}
+
+
+	return true;
+}
+
+
+// reimplemented (iproc::IProcessor)
+
+int COcvEdgeExtractorComp::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const istd::IPolymorphic* inputPtr,
+			istd::IChangeable* result,
+			ibase::IProgressManager* /*progressManagerPtr*/)
+{
+	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
+	if (inputBitmapPtr == NULL){
+		SendWarningMessage(0, "Input bitmap is not set");
+
+		return TS_INVALID;
+	}
+
+	if (inputBitmapPtr->IsEmpty()){
+		SendWarningMessage(0, "Input bitmap is empty.");
+
+		return TS_INVALID;
+	}
+
+	iedge::CEdgeLineContainer* edgesContainerPtr = dynamic_cast<iedge::CEdgeLineContainer*>(result);
+	if (edgesContainerPtr == NULL){
+		return TS_INVALID;
+	}
+
+	return DoContourExtraction(paramsPtr, *inputBitmapPtr, *edgesContainerPtr) ? TS_OK : TS_INVALID;
+}
+
+
+} // namespace iocv
+
+

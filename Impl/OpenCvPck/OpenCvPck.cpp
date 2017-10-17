@@ -48,6 +48,11 @@ I_EXPORT_COMPONENT(
 			"OpenCV-based resampling processor",
 			"Size Resampling Interpolation Processor Transformation");
 
+I_EXPORT_COMPONENT(
+			OpenCvEdgeExtractor,
+			"OpenCV-based edge extractor",
+			"Edge Contour Extractor Object Model");
+
 
 } // namespace OpenCvPck
 

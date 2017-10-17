@@ -15,8 +15,8 @@ public:
 	typedef iblob::CBlobProcessorCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvBlobProcessorComp);
-	I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
-	I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
+		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
+		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
 	I_END_COMPONENT;
 
 	enum MessageId
