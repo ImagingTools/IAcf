@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="BinarizationTask" X="825" Y="550" Note=""/>
+        <Element ComponentName="EdgeExtractor" X="1075" Y="675" Note=""/>
+        <Element ComponentName="GrayImageSupplier" X="300" Y="200" Note=""/>
+        <Element ComponentName="InspectionTask" X="150" Y="50" Note=""/>
+        <Element ComponentName="ProcessingParams" X="150" Y="675" Note=""/>
+        <Element ComponentName="SmoothedImageSupplier" X="525" Y="375" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="EdgeExtractor">
+            <PositionMap>
+                <Element ComponentName="ExtractedEdgesSupplier" X="525" Y="250" Note=""/>
+                <Element ComponentName="OpenCvEdgeExtractor" X="525" Y="425" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="GrayImageSupplier">
+            <PositionMap>
+                <Element ComponentName="BitmapGray" X="825" Y="125" Note=""/>
+                <Element ComponentName="GrayImageSupplier" X="500" Y="125" Note=""/>
+                <Element ComponentName="RgbToGrayProcessor" X="500" Y="275" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="SmoothedImageSupplier">
+            <PositionMap>
+                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
+                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
+                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="ProcessingParams">
+            <PositionMap>
+                <Element ComponentName="EdgeExtractionParams" X="525" Y="450" Note=""/>
+                <Element ComponentName="ProcessingParams" X="525" Y="200" Note=""/>
+                <Element ComponentName="SmoothParams" X="175" Y="450" Note=""/>
+                <Element ComponentName="ThresholdConstraints" X="525" Y="600" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>
