@@ -10,26 +10,24 @@
     <Description>Extracts edges from image</Description>
     <Keywords>Supplier Edge Contour Extraction Processing Get Provider Task Category='&quot;Data Processing&quot;'</Keywords>
     <ElementsList>
-        <Element Id="BinarizationTask" PackageId="ImageProcessingVoce" ComponentId="BinarizationTask">
+        <Element Id="BinarizationTask" PackageId="OpenCvVoce" ComponentId="AdaptiveBinarizationTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BinarizationParameterId" Type="Id" ExportId="">
-                        <Data IsEnabled="true" Value="EdgeThreshold"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SmoothedImageSupplier"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultFilterSize" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>7</Value>
+                            </Values>
+                        </Data>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InverseMode" Type="Boolean" ExportId="InverseMode">
-                        <Data IsEnabled="true" Value="true"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -76,14 +74,8 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="GeneralParams" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ProcessingParams"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="SerializeSuppliers" Type="Boolean" ExportId="">
-                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Subtasks" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
@@ -94,18 +86,6 @@
                                 <Value>EdgeExtractor</Value>
                             </Values>
                         </Data>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="ProcessingParams" PackageId="" ComponentId="ProcessingParams">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultEdgeExtractionThreshold" Type="Real[]" ExportId="DefaultEdgeExtractionThreshold">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="SmoothFilterConstraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="SmoothedImageSupplier/SmoothFilterContraints"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -121,9 +101,6 @@
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -157,8 +134,8 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
-                                    <Data IsEnabled="false"/>
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ProcessingParams"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -166,6 +143,20 @@
                     <Element Id="OpenCvEdgeExtractor" PackageId="OpenCvPck" ComponentId="OpenCvEdgeExtractor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values/>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="ContourExtraction"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                 </ElementsList>
@@ -238,55 +229,19 @@
                 <ExportedComponents/>
             </Data>
         </EmbeddedRegistry>
-        <EmbeddedRegistry Id="ProcessingParams">
+        <EmbeddedRegistry Id="SmoothedImageSupplier">
             <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element Id="EdgeExtractionParams" PackageId="MeasPck" ComponentId="NumericParams">
-                        <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap>
-                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="ThresholdConstraints"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultEdgeExtractionThreshold">
-                                    <Data IsEnabled="true">
-                                        <Values>
-                                            <Value>0.1</Value>
-                                        </Values>
-                                    </Data>
-                                </AttributeInfo>
-                            </AttributeInfoMap>
+                    <Element Id="BitmapSmooth" PackageId="BitmapPck" ComponentId="Bitmap">
+                        <Data IsEnabled="true" Flags="2">
+                            <AttributeInfoMap/>
                         </Data>
                     </Element>
-                    <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
-                        <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap>
-                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
-                                    <Data IsEnabled="true">
-                                        <Values>
-                                            <Value>SmoothParams</Value>
-                                            <Value>EdgeExtractionParams</Value>
-                                        </Values>
-                                    </Data>
-                                </AttributeInfo>
-                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
-                                    <Data IsEnabled="true">
-                                        <Values>
-                                            <Value>SmoothFilter</Value>
-                                            <Value>EdgeThreshold</Value>
-                                        </Values>
-                                    </Data>
-                                </AttributeInfo>
-                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
-                                    <Data IsEnabled="true" Value="ContourExtraction"/>
-                                </AttributeInfo>
-                            </AttributeInfoMap>
-                        </Data>
-                    </Element>
-                    <Element Id="SmoothParams" PackageId="MeasPck" ComponentId="NumericParams">
+                    <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="Constraints" Type="Reference" ExportId="SmoothFilterConstraints">
-                                    <Data IsEnabled="false"/>
+                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor/FilterContraints"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                                     <Data IsEnabled="true">
@@ -299,43 +254,39 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="ThresholdConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+                    <Element Id="OpenCvMedianProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMedianProcessor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
-                                    <Data IsEnabled="true" Value="100"/>
+                                <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="FilterSize"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
-                                    <Data IsEnabled="true" Value="1"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="UnitName" Type="Text" ExportId="">
-                                    <Data IsEnabled="true" Value="%"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
-                                    <Data IsEnabled="true" Value="3"/>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SmoothedImageSupplier/TaskLog"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                </ElementsList>
-                <EmbeddedRegistriesList/>
-                <ExportedInterfaces>
-                    <Interface InterfaceId="imod::IModel" ComponentId="ProcessingParams"/>
-                    <Interface InterfaceId="iprm::IParamsSet" ComponentId="ProcessingParams"/>
-                    <Interface InterfaceId="iser::ISerializable" ComponentId="ProcessingParams"/>
-                    <Interface InterfaceId="istd::IChangeable" ComponentId="ProcessingParams"/>
-                </ExportedInterfaces>
-                <ExportedComponents>
-                    <Component ExportedId="ThresholdParam" ComponentId="EdgeExtractionParams"/>
-                </ExportedComponents>
-            </Data>
-        </EmbeddedRegistry>
-        <EmbeddedRegistry Id="SmoothedImageSupplier">
-            <Data Description="" Keywords="">
-                <ElementsList>
-                    <Element Id="BitmapSmooth" PackageId="BitmapPck" ComponentId="Bitmap">
-                        <Data IsEnabled="true" Flags="2">
-                            <AttributeInfoMap/>
+                    <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="ContourExtraction"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                     <Element Id="RectImageSmoothProcessor" PackageId="IprPck" ComponentId="RectImageSmoothProcessor">
@@ -345,10 +296,10 @@
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
-                                    <Data IsEnabled="true" Value="SmoothFilter"/>
+                                    <Data IsEnabled="true" Value="FilterSize"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
-                                    <Data IsEnabled="false"/>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SmoothedImageSupplier/TaskLog"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -363,7 +314,7 @@
                                     <Data IsEnabled="true" Value="BitmapSmooth"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor"/>
+                                    <Data IsEnabled="true" Value="OpenCvMedianProcessor"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
@@ -377,8 +328,8 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
-                                    <Data IsEnabled="false"/>
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ProcessingParams"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>

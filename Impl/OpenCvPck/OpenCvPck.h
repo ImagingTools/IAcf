@@ -15,6 +15,7 @@
 #include <iocv/CHoughBasedSearchProcessorComp.h>
 #include <iocv/COcvResamplingProcessorComp.h>
 #include <iocv/COcvEdgeExtractorComp.h>
+#include <iocv/COcvAdaptiveBinarizationComp.h>
 
 
 /**
@@ -32,6 +33,8 @@ typedef iocv::COcvMedianProcessorComp OpenCvMedianProcessor;
 typedef iocv::CHoughBasedSearchProcessorComp OpenCvHoughBasedSearchProcessor;
 typedef iocv::COcvResamplingProcessorComp OpenCvResamplingProcessor;
 typedef iocv::COcvEdgeExtractorComp OpenCvEdgeExtractor;
+typedef iocv::COcvAdaptiveBinarizationComp OpenCvAdaptiveBinarization;
+
 
 
 } // namespace OpenCvPck

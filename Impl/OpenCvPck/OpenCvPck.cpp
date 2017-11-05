@@ -53,6 +53,11 @@ I_EXPORT_COMPONENT(
 			"OpenCV-based edge extractor",
 			"Edge Contour Extractor Object Model");
 
+I_EXPORT_COMPONENT(
+			OpenCvAdaptiveBinarization,
+			"OpenCV-based adaptive binaraization",
+			"Threshold Binarization Segmentation");
+
 
 } // namespace OpenCvPck
 

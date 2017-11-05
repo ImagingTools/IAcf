@@ -6,9 +6,11 @@
 #include <ibase/CSize.h>
 #include <iprm/TParamsPtr.h>
 #include <iimg/IBitmap.h>
+#include <icalib/CAffineCalibration2d.h>
 
 // OpenCV includes
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
 
 namespace iocv
@@ -33,7 +35,7 @@ int COcvResamplingProcessorComp::DoProcessing(
 	}
 
 	if (inputBitmapPtr->IsEmpty()){
-		SendWarningMessage(0, "Input bitmap is empty.");
+		SendWarningMessage(0, "Input bitmap is empty");
 
 		return TS_INVALID;
 	}
@@ -67,11 +69,14 @@ int COcvResamplingProcessorComp::DoProcessing(
 	double scaleX = scales[0];
 	double scaleY = scaleX;
 	if (scalesCount > 1){
-		scaleY = scales[1];
+		scaleY = scales[1]; 
 	}
 
 	int outputImageWidth = inputImageWidth * scaleX;
 	int outputImageHeight = inputImageHeight * scaleY;
+
+	// 8-byte alignment needed for OpenCV implementation:
+	outputImageWidth = ((outputImageWidth << 3) + 63) >> 3;
 
 	if (!outputBitmapPtr->CreateBitmap(
 					inputBitmapPtr->GetPixelFormat(),
@@ -89,7 +94,15 @@ int COcvResamplingProcessorComp::DoProcessing(
 	cv::_InputArray input(inputMatrix);
 	cv::_OutputArray output(outputMatrix);
 
-	cv::resize(input, output, cv::Size(outputImageWidth, outputImageHeight), 0.0, 0.0, cv::INTER_LINEAR);
+	cv::resize(input, output, cv::Size(outputImageWidth, outputImageHeight), 0.0, 0.0, cv::INTER_CUBIC);
+
+	i2d::CMatrix2d deform;
+	deform.Reset();
+	deform.SetAt(i2d::CMatrix2d::IndexType(0, 0), inputImageWidth / double(outputImageWidth ));
+	deform.SetAt(i2d::CMatrix2d::IndexType(1, 1), inputImageHeight / double(outputImageHeight));
+
+	icalib::CAffineCalibration2d* calibrationPtr = new icalib::CAffineCalibration2d(i2d::CAffine2d(deform));
+	outputBitmapPtr->SetCalibration(calibrationPtr, true);
 
 	return TS_OK;
 }

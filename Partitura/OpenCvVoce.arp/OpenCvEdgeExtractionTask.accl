@@ -8,21 +8,13 @@
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="BinarizationTask" X="825" Y="550" Note=""/>
-        <Element ComponentName="EdgeExtractor" X="1075" Y="675" Note=""/>
-        <Element ComponentName="GrayImageSupplier" X="300" Y="200" Note=""/>
+        <Element ComponentName="BinarizationTask" X="800" Y="550" Note=""/>
+        <Element ComponentName="EdgeExtractor" X="1025" Y="675" Note=""/>
+        <Element ComponentName="GrayImageSupplier" X="250" Y="200" Note=""/>
         <Element ComponentName="InspectionTask" X="150" Y="50" Note=""/>
-        <Element ComponentName="ProcessingParams" X="150" Y="675" Note=""/>
         <Element ComponentName="SmoothedImageSupplier" X="525" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
-        <EmbededRegistry Id="EdgeExtractor">
-            <PositionMap>
-                <Element ComponentName="ExtractedEdgesSupplier" X="525" Y="250" Note=""/>
-                <Element ComponentName="OpenCvEdgeExtractor" X="525" Y="425" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="GrayImageSupplier">
             <PositionMap>
                 <Element ComponentName="BitmapGray" X="825" Y="125" Note=""/>
@@ -31,20 +23,22 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="SmoothedImageSupplier">
+        <EmbededRegistry Id="EdgeExtractor">
             <PositionMap>
-                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
-                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
-                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
+                <Element ComponentName="ExtractedEdgesSupplier" X="525" Y="250" Note=""/>
+                <Element ComponentName="OpenCvEdgeExtractor" X="525" Y="425" Note=""/>
+                <Element ComponentName="ProcessingParams" X="925" Y="250" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="ProcessingParams">
+        <EmbededRegistry Id="SmoothedImageSupplier">
             <PositionMap>
-                <Element ComponentName="EdgeExtractionParams" X="525" Y="450" Note=""/>
-                <Element ComponentName="ProcessingParams" X="525" Y="200" Note=""/>
-                <Element ComponentName="SmoothParams" X="175" Y="450" Note=""/>
-                <Element ComponentName="ThresholdConstraints" X="525" Y="600" Note=""/>
+                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
+                <Element ComponentName="FilterSize" X="275" Y="550" Note=""/>
+                <Element ComponentName="OpenCvMedianProcessor" X="825" Y="475" Note=""/>
+                <Element ComponentName="ProcessingParams" X="275" Y="400" Note=""/>
+                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="675" Note=""/>
+                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
