@@ -100,9 +100,19 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 		tmpBinaryImage = inputBitmap.clone();
 	}
 
+	int aproximationMode = CV_CHAIN_APPROX_NONE;
+
+	iprm::TParamsPtr<iprm::ISelectionParam> approximationModeParamPtr(paramsPtr, m_approxModeParamIdAttrPtr, m_defaultApproxModeCompPtr);
+	if (approximationModeParamPtr.IsValid()){
+		int selectedMode = approximationModeParamPtr->GetSelectedOptionIndex();
+		if (selectedMode >= 0){
+			aproximationMode = m_approxModeList.GetOpenCvMode(selectedMode);
+		}
+	}
+
 	// Get contours from the binary image:
 	std::vector<std::vector<cv::Point> > contours;
-	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_TC89_L1);
+	findContours(tmpBinaryImage, contours, CV_RETR_LIST, aproximationMode);
 
 	for (int contourIndex = 0; contourIndex < int(contours.size()); ++contourIndex){
 		iedge::CEdgeLine& resultLine = edgesContainerPtr->PushBack(iedge::CEdgeLine());
@@ -155,6 +165,61 @@ int COcvEdgeExtractorComp::DoProcessing(
 	}
 
 	return DoContourExtraction(paramsPtr, *inputBitmapPtr, *edgesContainerPtr) ? TS_OK : TS_INVALID;
+}
+
+
+// public methods of the embedded class ApproxModeList
+
+COcvEdgeExtractorComp::ApproxModeList::ApproxModeList()
+{
+	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_NONE, "None", "No contour approximation used"));
+	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_SIMPLE, "Simple", "Reduce contour to vertical, horizontal and diagonal line segments"));
+	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_TC89_L1, "Teh-Chin-L1", "Teh-Chin chain approximation algorithm"));
+	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_TC89_KCOS, "Teh-Chin-KCOS", "Teh-Chin chain approximation algorithm"));
+}
+
+
+int COcvEdgeExtractorComp::ApproxModeList::GetOpenCvMode(int index) const
+{
+	return m_supportedApproxModes[index].cvMode;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int COcvEdgeExtractorComp::ApproxModeList::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int COcvEdgeExtractorComp::ApproxModeList::GetOptionsCount() const
+{
+	return m_supportedApproxModes.count();
+}
+
+
+QString COcvEdgeExtractorComp::ApproxModeList::GetOptionName(int index) const
+{
+	return m_supportedApproxModes[index].name;
+}
+
+
+QString COcvEdgeExtractorComp::ApproxModeList::GetOptionDescription(int index) const
+{
+	return m_supportedApproxModes[index].description;
+}
+
+
+QByteArray COcvEdgeExtractorComp::ApproxModeList::GetOptionId(int index) const
+{
+	return m_supportedApproxModes[index].name.toUtf8();
+}
+
+
+bool COcvEdgeExtractorComp::ApproxModeList::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

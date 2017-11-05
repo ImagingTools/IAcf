@@ -25,8 +25,9 @@
         </EmbededRegistry>
         <EmbededRegistry Id="EdgeExtractor">
             <PositionMap>
+                <Element ComponentName="ApproxMode" X="925" Y="425" Note=""/>
                 <Element ComponentName="ExtractedEdgesSupplier" X="525" Y="250" Note=""/>
-                <Element ComponentName="OpenCvEdgeExtractor" X="525" Y="425" Note=""/>
+                <Element ComponentName="OpenCvEdgeExtractor" X="200" Y="425" Note=""/>
                 <Element ComponentName="ProcessingParams" X="925" Y="250" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>

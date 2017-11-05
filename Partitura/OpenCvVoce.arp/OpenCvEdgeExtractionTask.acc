@@ -110,6 +110,18 @@
         <EmbeddedRegistry Id="EdgeExtractor">
             <Data Description="" Keywords="">
                 <ElementsList>
+                    <Element Id="ApproxMode" PackageId="BasePck" ComponentId="SelectionParam">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="OpenCvEdgeExtractor/ApproxModeList"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
                     <Element Id="ExtractedEdgesSupplier" PackageId="EdgePck" ComponentId="ExtractedEdgeLinesSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -142,7 +154,14 @@
                     </Element>
                     <Element Id="OpenCvEdgeExtractor" PackageId="OpenCvPck" ComponentId="OpenCvEdgeExtractor">
                         <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap/>
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApproxModeParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="ApproxMode"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ExtractedEdgesSupplier/TaskLog"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                     <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
@@ -150,7 +169,16 @@
                             <AttributeInfoMap>
                                 <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                                     <Data IsEnabled="true">
-                                        <Values/>
+                                        <Values>
+                                            <Value>ApproxMode</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>ApproxMode</Value>
+                                        </Values>
                                     </Data>
                                 </AttributeInfo>
                                 <AttributeInfo Id="TypeId" Type="Id" ExportId="">
