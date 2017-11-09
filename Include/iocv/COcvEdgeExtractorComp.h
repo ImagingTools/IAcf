@@ -26,10 +26,16 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(ApproxModeList, iprm::IOptionsList, ExtractApproxModeList);
 		I_REGISTER_SUBELEMENT_INTERFACE(ApproxModeList, istd::IChangeable, ExtractApproxModeList);
 		I_REGISTER_SUBELEMENT_INTERFACE(ApproxModeList, imod::IModel, ExtractApproxModeList);
+		I_REGISTER_SUBELEMENT(ContourModeList);
+		I_REGISTER_SUBELEMENT_INTERFACE(ContourModeList, iprm::IOptionsList, ExtractContourModeList);
+		I_REGISTER_SUBELEMENT_INTERFACE(ContourModeList, istd::IChangeable, ExtractContourModeList);
+		I_REGISTER_SUBELEMENT_INTERFACE(ContourModeList, imod::IModel, ExtractContourModeList);
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_approxModeParamIdAttrPtr, "ApproxModeParamId", "ID of contour approximation mode parameter in parameter set", false, "ApproxMode");
-		I_ASSIGN(m_defaultApproxModeCompPtr, "DefaultApproxMode", "Default contour approximation model used if not specified in parameters", false, "DefaultApproxMode");
+		I_ASSIGN(m_defaultApproxModeCompPtr, "DefaultApproxMode", "Default contour approximation mode used if not specified in parameters", false, "DefaultApproxMode");
+		I_ASSIGN(m_contourModeParamIdAttrPtr, "ContourModeParamId", "ID of contour mode parameter in parameter set", false, "ContourMode");
+		I_ASSIGN(m_defaultContourModeCompPtr, "DefaultContourMode", "Default contour mode used if not specified in parameters", false, "DefaultContourMode");
 	I_END_COMPONENT;
 
 public:
@@ -50,7 +56,13 @@ private:
 	template <class InterfaceType>
 	static InterfaceType* ExtractApproxModeList(COcvEdgeExtractorComp& component)
 	{
-		return &component.m_approxModeList;
+		return &component.m_approxModes;
+	}
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractContourModeList(COcvEdgeExtractorComp& component)
+	{
+		return &component.m_contourModes;
 	}
 
 private:
@@ -60,9 +72,12 @@ private:
 	I_ATTR(QByteArray, m_approxModeParamIdAttrPtr);
 	I_REF(iprm::ISelectionParam, m_defaultApproxModeCompPtr);
 
-	struct ApproxMode
+	I_ATTR(QByteArray, m_contourModeParamIdAttrPtr);
+	I_REF(iprm::ISelectionParam, m_defaultContourModeCompPtr);
+
+	struct OpenCvOption
 	{
-		ApproxMode(int cvMode = CV_CHAIN_APPROX_NONE, const QString& name = QString(), const QString& description = QString())
+		OpenCvOption(int cvMode = CV_CHAIN_APPROX_NONE, const QString& name = QString(), const QString& description = QString())
 		{
 			this->cvMode = cvMode;
 			this->name = name;
@@ -74,14 +89,11 @@ private:
 		QString description;
 	};
 
-	typedef QVector<ApproxMode> ApproxModes;
+	typedef QVector<OpenCvOption> ApproxModes;
 
-
-	class ApproxModeList: virtual public iprm::IOptionsList
+	class OpenCvOptionsList: virtual public iprm::IOptionsList
 	{
 	public:
-		ApproxModeList();
-
 		int GetOpenCvMode(int index) const;
 
 		// reimplemented (iprm::IOptionsList)
@@ -92,11 +104,24 @@ private:
 		virtual QByteArray GetOptionId(int index) const;
 		virtual bool IsOptionEnabled(int index) const;
 
-	private:
-		ApproxModes m_supportedApproxModes;
+	protected:
+		ApproxModes m_options;
 	};
 
-	imod::TModelWrap<ApproxModeList> m_approxModeList;
+	class ApproxModeList: public OpenCvOptionsList
+	{
+	public:
+		ApproxModeList();
+	};
+
+	class ContourModeList: public OpenCvOptionsList
+	{
+	public:
+		ContourModeList();
+	};
+
+	imod::TModelWrap<ApproxModeList> m_approxModes;
+	imod::TModelWrap<ContourModeList> m_contourModes;
 };
 
 

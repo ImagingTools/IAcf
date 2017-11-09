@@ -33,12 +33,20 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 			const iimg::IBitmap& bitmap,
 			iedge::CEdgeLineContainer& result) const
 {
-	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
+	if (bitmap.GetPixelFormat() != iimg::IBitmap::PF_GRAY){
+		SendErrorMessage(0, "Invalid input image format. Expected is a 8-bit-grayscale image");
+
+		return false;
+	}
 
 	iedge::CEdgeLineContainer* edgesContainerPtr = dynamic_cast<iedge::CEdgeLineContainer*>(&result);
 	if (edgesContainerPtr == NULL){
+		SendErrorMessage(0, "Edge container not defined");
+
 		return false;
 	}
+
+	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
 
 	istd::CChangeGroup resultNotifier(edgesContainerPtr);
 
@@ -75,9 +83,9 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 
 				istd::CIntRanges::RangeList rangeList;
 				outputRangesPtr->GetAsList(lineRange, rangeList);
-				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-					iter != rangeList.constEnd();
-					++iter){
+				for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+							iter != rangeList.constEnd();
+							++iter){
 					const istd::CIntRange& rangeH = *iter;
 					Q_ASSERT(rangeH.GetMinValue() >= 0);
 					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
@@ -90,12 +98,12 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 		}
 
 		void* imageDataBufferPtr = const_cast<void*>(maskedBitmap.GetLinePtr(0));
-		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, maskedBitmap.GetLineBytesCount());
+		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, maskedBitmap.GetLinesDifference());
 		tmpBinaryImage = inputBitmap.clone();
 	}
 	else{
 		void* imageDataBufferPtr = const_cast<void*>(bitmap.GetLinePtr(0));
-		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, bitmap.GetLineBytesCount());
+		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, bitmap.GetLinesDifference());
 
 		tmpBinaryImage = inputBitmap.clone();
 	}
@@ -106,13 +114,22 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 	if (approximationModeParamPtr.IsValid()){
 		int selectedMode = approximationModeParamPtr->GetSelectedOptionIndex();
 		if (selectedMode >= 0){
-			aproximationMode = m_approxModeList.GetOpenCvMode(selectedMode);
+			aproximationMode = m_approxModes.GetOpenCvMode(selectedMode);
+		}
+	}
+
+	int contourMode = CV_RETR_LIST;
+	iprm::TParamsPtr<iprm::ISelectionParam> contourModeParamPtr(paramsPtr, m_contourModeParamIdAttrPtr, m_defaultContourModeCompPtr);
+	if (contourModeParamPtr.IsValid()){
+		int selectedMode = contourModeParamPtr->GetSelectedOptionIndex();
+		if (selectedMode >= 0){
+			contourMode = m_contourModes.GetOpenCvMode(selectedMode);
 		}
 	}
 
 	// Get contours from the binary image:
 	std::vector<std::vector<cv::Point> > contours;
-	findContours(tmpBinaryImage, contours, CV_RETR_LIST, aproximationMode);
+	findContours(tmpBinaryImage, contours, contourMode, aproximationMode);
 
 	for (int contourIndex = 0; contourIndex < int(contours.size()); ++contourIndex){
 		iedge::CEdgeLine& resultLine = edgesContainerPtr->PushBack(iedge::CEdgeLine());
@@ -132,7 +149,6 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 
 		edgesContainerPtr->PushBack(resultLine);
 	}
-
 
 	return true;
 }
@@ -168,59 +184,73 @@ int COcvEdgeExtractorComp::DoProcessing(
 }
 
 
-// public methods of the embedded class ApproxModeList
+// public methods of the embedded class OpenCvOptionsList
 
-COcvEdgeExtractorComp::ApproxModeList::ApproxModeList()
+int COcvEdgeExtractorComp::OpenCvOptionsList::GetOpenCvMode(int index) const
 {
-	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_NONE, "None", "No contour approximation used"));
-	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_SIMPLE, "Simple", "Reduce contour to vertical, horizontal and diagonal line segments"));
-	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_TC89_L1, "Teh-Chin-L1", "Teh-Chin chain approximation algorithm"));
-	m_supportedApproxModes.push_back(ApproxMode(CV_CHAIN_APPROX_TC89_KCOS, "Teh-Chin-KCOS", "Teh-Chin chain approximation algorithm"));
-}
-
-
-int COcvEdgeExtractorComp::ApproxModeList::GetOpenCvMode(int index) const
-{
-	return m_supportedApproxModes[index].cvMode;
+	return m_options[index].cvMode;
 }
 
 
 // reimplemented (iprm::IOptionsList)
 
-int COcvEdgeExtractorComp::ApproxModeList::GetOptionsFlags() const
+int COcvEdgeExtractorComp::OpenCvOptionsList::GetOptionsFlags() const
 {
 	return SCF_SUPPORT_UNIQUE_ID;
 }
 
 
-int COcvEdgeExtractorComp::ApproxModeList::GetOptionsCount() const
+int COcvEdgeExtractorComp::OpenCvOptionsList::GetOptionsCount() const
 {
-	return m_supportedApproxModes.count();
+	return m_options.count();
 }
 
 
-QString COcvEdgeExtractorComp::ApproxModeList::GetOptionName(int index) const
+QString COcvEdgeExtractorComp::OpenCvOptionsList::GetOptionName(int index) const
 {
-	return m_supportedApproxModes[index].name;
+	return m_options[index].name;
 }
 
 
-QString COcvEdgeExtractorComp::ApproxModeList::GetOptionDescription(int index) const
+QString COcvEdgeExtractorComp::OpenCvOptionsList::GetOptionDescription(int index) const
 {
-	return m_supportedApproxModes[index].description;
+	return m_options[index].description;
 }
 
 
-QByteArray COcvEdgeExtractorComp::ApproxModeList::GetOptionId(int index) const
+QByteArray COcvEdgeExtractorComp::OpenCvOptionsList::GetOptionId(int index) const
 {
-	return m_supportedApproxModes[index].name.toUtf8();
+	return m_options[index].name.toUtf8();
 }
 
 
-bool COcvEdgeExtractorComp::ApproxModeList::IsOptionEnabled(int /*index*/) const
+bool COcvEdgeExtractorComp::OpenCvOptionsList::IsOptionEnabled(int /*index*/) const
 {
 	return true;
 }
+
+
+// public methods of the embedded class ApproxModeList
+
+COcvEdgeExtractorComp::ApproxModeList::ApproxModeList()
+{
+	m_options.push_back(OpenCvOption(CV_CHAIN_APPROX_NONE, "None", "No contour approximation used"));
+	m_options.push_back(OpenCvOption(CV_CHAIN_APPROX_SIMPLE, "Simple", "Reduce contour to vertical, horizontal and diagonal line segments"));
+	m_options.push_back(OpenCvOption(CV_CHAIN_APPROX_TC89_L1, "Teh-Chin-L1", "Teh-Chin chain approximation algorithm"));
+	m_options.push_back(OpenCvOption(CV_CHAIN_APPROX_TC89_KCOS, "Teh-Chin-KCOS", "Teh-Chin chain approximation algorithm"));
+}
+
+
+// public methods of the embedded class ContourModeList
+
+COcvEdgeExtractorComp::ContourModeList::ContourModeList()
+{
+	m_options.push_back(OpenCvOption(CV_RETR_LIST, "No Hierarchy", "Retrieve all contours without creation of the parent-child relationship"));
+	m_options.push_back(OpenCvOption(CV_RETR_EXTERNAL, "Outer-Contours", "Retrieve extreme outer-contours only"));
+	m_options.push_back(OpenCvOption(CV_RETR_CCOMP, "Two-Level-Hierarchy", "Retrieve contours arranged in two-level-hierarchy (parent-child)"));
+	m_options.push_back(OpenCvOption(CV_RETR_TREE, "Full Hierarchy", "Retrieve contours arranged as a tree"));
+}
+
 
 
 } // namespace iocv
