@@ -10,20 +10,19 @@
     <Description>Extracts edges from image</Description>
     <Keywords>Supplier Edge Contour Extraction Processing Get Provider Task Category='&quot;Data Processing&quot;'</Keywords>
     <ElementsList>
-        <Element Id="BinarizationTask" PackageId="OpenCvVoce" ComponentId="AdaptiveBinarizationTask">
+        <Element Id="BinarizationTask" PackageId="ImageProcessingVoce" ComponentId="BinarizationTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SmoothedImageSupplier"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultFilterSize" Type="Real[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>7</Value>
-                            </Values>
-                        </Data>
+                    <AttributeInfo Id="DefaultThreshold" Type="Real[]" ExportId="DefaultEdgeExtractionThreshold">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InverseMode" Type="Boolean" ExportId="InverseMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
