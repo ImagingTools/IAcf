@@ -20,7 +20,11 @@ namespace iocv
 
 
 /**
-	Gray scale correlation processor using simple OpenCV correlation engine.
+	Search of patterns based on hough transformation.
+	Three processing modes are supported:
+	* Search of lines
+	* Search of circles
+	* Generalized search of any shapes based on model template given by image
 */
 class CHoughBasedSearchProcessorComp:
 			public iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor>,
@@ -32,7 +36,8 @@ public:
 	enum ModelType
 	{
 		MT_CIRCLE,
-		MT_LINE
+		MT_LINE,
+		MT_TEMPLATE
 	};
 
 	I_BEGIN_COMPONENT(CHoughBasedSearchProcessorComp);
@@ -49,7 +54,8 @@ public:
 		I_ASSIGN(m_defaultHoughThresholdCompPtr, "DefaultHoughThreshold", "Default hough threshold parameter, if not taken from parameter set", false, "DefaultHoughThreshold");
 		I_ASSIGN(m_radiusRangeParamIdAttrPtr, "RadiusRangeParamId", "ID of radius range parameter (used for circle search only) in the parameter set", true, "RadiusRange");
 		I_ASSIGN(m_defaultRadiusRangeCompPtr, "DefaultRadiusRange", "Default radius range parameter (used for circle search only), if not taken from parameter set", false, "DefaultRadiusRange");
-		I_ASSIGN(m_searchModelTypeAttrPtr, "SearchModelType", "Type of the search model.\n0 - circle\n1 - line", true, MT_CIRCLE);
+		I_ASSIGN(m_searchModelTypeAttrPtr, "SearchModelType", "Type of the search model.\n0 - circle\n1 - line\n2 - general model template", true, MT_CIRCLE);
+		I_ASSIGN(m_modelImagePathAttrPtr, "ModelImagePathId", "ID of model image path parameter (used for template search only) in the parameter set", true, "ModelImagePath");
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
@@ -76,7 +82,7 @@ protected:
 	/**
 		Returns -1 if there was an error during processing, or number of models found if search succeeded.
 	*/
-	virtual int DoModelSearch(
+	virtual int DoCircleSearch(
 				const iimg::IBitmap& image,
 				const i2d::CRect& aoi,
 				int scale,
@@ -86,6 +92,32 @@ protected:
 				int minRadius,
 				int maxRadius,
 				iipr::IFeaturesConsumer& result);
+	/**
+		Returns -1 if there was an error during processing, or number of models found if search succeeded.
+	*/
+	virtual int DoLineSearch(
+				const iimg::IBitmap& image,
+				const i2d::CRect& aoi,
+				int scale,
+				int minDistance,
+				int edgeThreshold,
+				int houghThreshold,
+				iipr::IFeaturesConsumer& result);
+	/**
+		Returns -1 if there was an error during processing, or number of models found if search succeeded.
+	*/
+	virtual int DoTemplateSearch(
+			const iimg::IBitmap& image,
+			const iimg::IBitmap& modelImage,
+			const i2d::CRect& aoi,
+			const istd::CRange& scaleRange,
+			double scaleStep,
+			const istd::CRange& angleRange,
+			double angleStep,
+			int minDistance,
+			int levels,
+			const istd::CRange& cannyEdgeThreshold,
+			iipr::IFeaturesConsumer& result);
 
 private:
 	typedef iipr::TWeightedFeatureWrap<i2d::CCircle> CircleFeature;
@@ -107,6 +139,8 @@ private:
 
 	I_ATTR(QByteArray, m_radiusRangeParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultRadiusRangeCompPtr);
+
+	I_ATTR(QByteArray, m_modelImagePathAttrPtr);
 
 	I_ATTR(int, m_searchModelTypeAttrPtr); 
 };

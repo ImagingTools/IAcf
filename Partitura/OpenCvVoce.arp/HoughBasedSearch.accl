@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="EdgeThreshold" X="150" Y="625" Note=""/>
+        <Element ComponentName="EdgeThresholdConstraints" X="150" Y="750" Note=""/>
+        <Element ComponentName="HoughThreshold" X="800" Y="625" Note=""/>
+        <Element ComponentName="HoughThresholdConstraints" X="825" Y="750" Note=""/>
+        <Element ComponentName="MinDistance" X="425" Y="625" Note=""/>
+        <Element ComponentName="MinDistanceConstraints" X="450" Y="750" Note=""/>
+        <Element ComponentName="ModelImagePath" X="1050" Y="625" Note=""/>
+        <Element ComponentName="OpenCvHoughBasedSearchProcessor" X="200" Y="250" Note=""/>
+        <Element ComponentName="Params" X="800" Y="500" Note=""/>
+        <Element ComponentName="SearchBasedFeaturesSupplier" X="525" Y="75" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

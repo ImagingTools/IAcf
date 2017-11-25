@@ -90,7 +90,7 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 	cv::_InputArray input(inputMatrix);
 	cv::_OutputArray output(outputMatrix);
 
-	cv::adaptiveThreshold(input, output, 255, cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY, kernelSize, 0);
+	cv::adaptiveThreshold(input, output, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, kernelSize, 0);
 
 	return TS_OK;
 }

@@ -2,14 +2,41 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4606" Description="ACF"/>
-            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
     <Keywords></Keywords>
     <ElementsList>
+        <Element Id="BinaryImageSupplier" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageBinarizeProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
+                        <Data IsEnabled="true" Value="Image Binarization"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
@@ -19,29 +46,32 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="NumericConstraints"/>
+                        <Data IsEnabled="true" Value="FilterSizeConstraints"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterSize">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>5</Value>
+                                <Value>15</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="NumericConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+        <Element Id="FilterSizeConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="300"/>
+                        <Data IsEnabled="true" Value="500"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MinValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="1"/>
+                        <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Precision" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
@@ -53,11 +83,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="OpenCvMedianProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMedianProcessor">
+        <Element Id="ImageBinarizeProcessor" PackageId="OpenCvPck" ComponentId="OpenCvAdaptiveBinarization">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowEmptyAoi" Type="Boolean" ExportId="">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="FilterSize"/>
@@ -85,52 +115,19 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeId" Type="Id" ExportId="">
-                        <Data IsEnabled="true" Value="Median"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="Task" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalTriggerInputs" Type="Reference[]" ExportId="AdditionalTriggerInputs">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
-                        <Data IsEnabled="true" Value="Bitmap"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="OpenCvMedianProcessor"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
-                        <Data IsEnabled="true" Value="Median"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
-                        <Data IsEnabled="true" Value="Params"/>
-                    </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces>
-        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
-        <Interface InterfaceId="iinsp::ISupplier" ComponentId="Task"/>
-        <Interface InterfaceId="imod::IModel" ComponentId="Task"/>
-        <Interface InterfaceId="istd::IChangeable" ComponentId="Task"/>
-        <Interface InterfaceId="istd::IPolymorphic" ComponentId="Task"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="BinaryImageSupplier"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Params" ComponentId="Params"/>
+        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
     </ExportedComponents>
 </Acf>
