@@ -56,10 +56,10 @@
         <Element Id="OpenCvMedianProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMedianProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowEmptyAoi" Type="Boolean" ExportId="">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
+                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="FilterSizeParamsId">
                         <Data IsEnabled="true" Value="FilterSize"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
@@ -78,7 +78,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="ParametersId">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterSize</Value>

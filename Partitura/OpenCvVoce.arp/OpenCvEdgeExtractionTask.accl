@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4606" Description="ACF"/>
+            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -15,11 +15,13 @@
         <Element ComponentName="SmoothedImageSupplier" X="525" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
-        <EmbededRegistry Id="GrayImageSupplier">
+        <EmbededRegistry Id="SmoothedImageSupplier">
             <PositionMap>
-                <Element ComponentName="BitmapGray" X="825" Y="125" Note=""/>
-                <Element ComponentName="GrayImageSupplier" X="500" Y="125" Note=""/>
-                <Element ComponentName="RgbToGrayProcessor" X="500" Y="275" Note=""/>
+                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
+                <Element ComponentName="FilterSize" X="275" Y="600" Note=""/>
+                <Element ComponentName="ProcessingParams" X="275" Y="400" Note=""/>
+                <Element ComponentName="RectImageSmoothProcessor" X="875" Y="475" Note=""/>
+                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
@@ -32,14 +34,11 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="SmoothedImageSupplier">
+        <EmbededRegistry Id="GrayImageSupplier">
             <PositionMap>
-                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
-                <Element ComponentName="FilterSize" X="275" Y="550" Note=""/>
-                <Element ComponentName="OpenCvMedianProcessor" X="825" Y="475" Note=""/>
-                <Element ComponentName="ProcessingParams" X="275" Y="400" Note=""/>
-                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="675" Note=""/>
-                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
+                <Element ComponentName="BitmapGray" X="825" Y="125" Note=""/>
+                <Element ComponentName="GrayImageSupplier" X="500" Y="125" Note=""/>
+                <Element ComponentName="RgbToGrayProcessor" X="500" Y="275" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4606" Description="ACF"/>
+            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -45,9 +45,6 @@
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -145,7 +142,7 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
                                     <Data IsEnabled="true" Value="ProcessingParams"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
@@ -154,8 +151,14 @@
                     <Element Id="OpenCvEdgeExtractor" PackageId="OpenCvPck" ComponentId="OpenCvEdgeExtractor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="ApproxModeParamId" Type="Id" ExportId="">
+                                <AttributeInfo Id="AoiParamId" Type="Id" ExportId="AoiParamId">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ApproxModeParamId" Type="Id" ExportId="ApproxModeParamId">
                                     <Data IsEnabled="true" Value="ApproxMode"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ContourModeParamId" Type="Id" ExportId="ContourModeParamId">
+                                    <Data IsEnabled="false"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="">
                                     <Data IsEnabled="true" Value="ExtractedEdgesSupplier/TaskLog"/>
@@ -281,18 +284,6 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="OpenCvMedianProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMedianProcessor">
-                        <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap>
-                                <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
-                                    <Data IsEnabled="true" Value="FilterSize"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="SmoothedImageSupplier/TaskLog"/>
-                                </AttributeInfo>
-                            </AttributeInfoMap>
-                        </Data>
-                    </Element>
                     <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -341,7 +332,7 @@
                                     <Data IsEnabled="true" Value="BitmapSmooth"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="OpenCvMedianProcessor"/>
+                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
