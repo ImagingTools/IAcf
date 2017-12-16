@@ -4,64 +4,82 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+28"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+29"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+29"/>
         <source>IACF</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>0.1.0</source>
-        <translation></translation>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+2"/>
+        <location line="+12"/>
+        <source>Filter Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-10"/>
+        <source>Image Binarization</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>0.1.1</source>
-        <translation></translation>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+2"/>
+        <source>pix</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>0.1.2</source>
-        <translation></translation>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-4"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>0.1.3</source>
-        <translation></translation>
+        <location line="+6"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+6"/>
+        <location line="+4"/>
+        <location line="+4"/>
+        <source>Median</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-6"/>
+        <location line="+12"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <source>GrayImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-18"/>
+        <location line="+4"/>
+        <source>Morphological</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>0.2.0</source>
-        <translation></translation>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+6"/>
+        <source>EdgeExtractor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>0.3.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>0.3.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>0.3.2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>0.3.3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>0.3.4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>0.4.0</source>
-        <translation></translation>
+        <location line="-2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-4"/>
+        <location line="+6"/>
+        <source>SmoothedImage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -173,6 +191,32 @@
         <location line="+6"/>
         <source>Model search took %1 ms</source>
         <translation>Szukanie modelu trwało %1 ms</translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iocv/CHoughBasedSearchProcessorComp.cpp" line="+285"/>
+        <source>Circle search took %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iocv/COcvBlobProcessorComp.cpp" line="+54"/>
+        <location filename="../../../Include/iocv/COcvEdgeExtractorComp.cpp" line="+67"/>
+        <source>AOI type is not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
+        <source>Blob %1, Pos.: (%2; %3), Area: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Found %1 blob(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+40"/>
+        <source>Channel %1</source>
+        <translation type="unfinished">Kanał %1</translation>
     </message>
 </context>
 <context>
@@ -357,7 +401,7 @@
 <context>
     <name>iqwt::CQwtDataSequenceViewComp</name>
     <message>
-        <location filename="../../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+40"/>
+        <location filename="../../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+44"/>
         <source>Channel %1</source>
         <translation>Kanał %1</translation>
     </message>

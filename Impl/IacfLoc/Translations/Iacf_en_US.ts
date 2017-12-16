@@ -2,10 +2,92 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>Attribute</name>
+    <message>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+29"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+29"/>
+        <source>IACF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+2"/>
+        <location line="+12"/>
+        <source>Filter Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-10"/>
+        <source>Image Binarization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+2"/>
+        <source>pix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-4"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+6"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+6"/>
+        <location line="+4"/>
+        <location line="+4"/>
+        <source>Median</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-6"/>
+        <location line="+12"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <source>GrayImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-18"/>
+        <location line="+4"/>
+        <source>Morphological</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+4"/>
+        <location line="+6"/>
+        <source>EdgeExtractor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="-4"/>
+        <location line="+6"/>
+        <source>SmoothedImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CHistogramViewComp</name>
     <message>
-        <location filename="../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+98"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13,14 +95,16 @@
 <context>
     <name>CProgressHistoryGuiComp</name>
     <message>
-        <location filename="../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
+        <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+84"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28,7 +112,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Include/idc1394/CSimpleCameraComp.cpp" line="+99"/>
+        <location filename="../../../Include/idc1394/CSimpleCameraComp.cpp" line="+99"/>
         <location line="+40"/>
         <source>Cannot create image in frame format (Gray)</source>
         <translation type="unfinished"></translation>
@@ -98,11 +182,47 @@
         <source>Failed to enumerate cameras</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../../Include/iocv/CCorrSearchProcessorComp.cpp" line="+198"/>
+        <source>Found model, %1% score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Model search took %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iocv/CHoughBasedSearchProcessorComp.cpp" line="+285"/>
+        <source>Circle search took %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iocv/COcvBlobProcessorComp.cpp" line="+54"/>
+        <location filename="../../../Include/iocv/COcvEdgeExtractorComp.cpp" line="+67"/>
+        <source>AOI type is not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
+        <source>Blob %1, Pos.: (%2; %3), Area: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Found %1 blob(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+40"/>
+        <source>Channel %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>iqsci::CTextEditor</name>
     <message>
-        <location filename="../../Include/iqsci/CTextEditor.cpp" line="+100"/>
+        <location filename="../../../Include/iqsci/CTextEditor.cpp" line="+100"/>
         <source>To &amp;Lowercase</source>
         <translation type="unfinished"></translation>
     </message>
@@ -195,7 +315,7 @@
 <context>
     <name>iqwt3d::CSurfaceViewComp</name>
     <message>
-        <location filename="../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+34"/>
+        <location filename="../../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+33"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -268,7 +388,7 @@
 <context>
     <name>iqwt::CProgressHistoryGuiComp</name>
     <message>
-        <location filename="../../Include/iqwt/CProgressHistoryGuiComp.cpp" line="+153"/>
+        <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.cpp" line="+153"/>
         <source>Finished</source>
         <translation type="unfinished"></translation>
     </message>
@@ -281,7 +401,7 @@
 <context>
     <name>iqwt::CQwtDataSequenceViewComp</name>
     <message>
-        <location filename="../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+40"/>
+        <location filename="../../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+44"/>
         <source>Channel %1</source>
         <translation type="unfinished"></translation>
     </message>
