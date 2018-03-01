@@ -291,13 +291,13 @@ int CHoughBasedSearchProcessorComp::DoCircleSearch(
 
 
 int CHoughBasedSearchProcessorComp::DoLineSearch(
-			const iimg::IBitmap& image,
-			const i2d::CRect& aoi,
-			int scale,
-			int minDistance,
-			int edgeThreshold,
-			int houghThreshold,
-			iipr::IFeaturesConsumer& result)
+			const iimg::IBitmap& /*image*/,
+			const i2d::CRect& /*aoi*/,
+			int /*scale*/,
+			int /*minDistance*/,
+			int /*edgeThreshold*/,
+			int /*houghThreshold*/,
+			iipr::IFeaturesConsumer& /*result*/)
 {
 	return -1;
 }
