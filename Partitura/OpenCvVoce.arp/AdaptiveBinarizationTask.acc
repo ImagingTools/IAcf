@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4650" Description="ACF"/>
+            <Version Id="1" Number="1955" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -92,8 +92,8 @@
                     <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="FilterSize"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
-                        <Data IsEnabled="false"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BinaryImageSupplier/TaskLog"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
