@@ -118,6 +118,12 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 		}
 	}
 
+	double reduceFactor = 0.0;
+	iprm::TParamsPtr<imeas::INumericValue> reduceFactorParamPtr(paramsPtr, m_reduceFactorParamIdAttrPtr, m_defaultReduceFactorCompPtr);
+	if (reduceFactorParamPtr.IsValid()){
+		reduceFactor = reduceFactorParamPtr->GetValues()[0];
+	}
+
 	int contourMode = CV_RETR_LIST;
 	iprm::TParamsPtr<iprm::ISelectionParam> contourModeParamPtr(paramsPtr, m_contourModeParamIdAttrPtr, m_defaultContourModeCompPtr);
 	if (contourModeParamPtr.IsValid()){
@@ -135,13 +141,18 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 		iedge::CEdgeLine& resultLine = edgesContainerPtr->PushBack(iedge::CEdgeLine());
 
 		const std::vector<cv::Point>& contour = contours[contourIndex];
+		std::vector<cv::Point> approxContour;
 
-		resultLine.SetNodesCount(int(contour.size()));
+		double arcLength = cv::arcLength(cv::Mat(contour), true);
 
-		for (int nodeIndex = 0; nodeIndex < int(contour.size()); ++nodeIndex){
+		cv::approxPolyDP(contour, approxContour,  arcLength * reduceFactor, true);
+
+		resultLine.SetNodesCount(int(approxContour.size()));
+
+		for (int nodeIndex = 0; nodeIndex < int(approxContour.size()); ++nodeIndex){
 			iedge::CEdgeNode& nodeRef = resultLine.GetNodeRef(nodeIndex);
 
-			nodeRef.SetPosition(i2d::CVector2d(contour[nodeIndex].x + 0.5, contour[nodeIndex].y + 0.5));
+			nodeRef.SetPosition(i2d::CVector2d(approxContour[nodeIndex].x + 0.5, approxContour[nodeIndex].y + 0.5));
 			nodeRef.SetWeight(0.5);
 		}
 
