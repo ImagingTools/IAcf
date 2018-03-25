@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4650" Description="ACF"/>
-            <Version Id="1" Number="1955" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4663" Description="ACF"/>
+            <Version Id="1" Number="1960" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -95,6 +95,9 @@
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="BinaryImageSupplier/TaskLog"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="SegmentationOffsetParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="SegmentationOffset"/>
+                    </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
@@ -105,6 +108,7 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterSize</Value>
+                                <Value>SegmentationOffset</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -112,6 +116,54 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterSize</Value>
+                                <Value>SegmentationOffset</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SegmentationOffset" PackageId="MeasPck" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SegmentationOffsetConstraints"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SegmentationOffsetConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="0.5"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="-0.5"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="%"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Segmentation Offset</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>

@@ -2,18 +2,20 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4650" Description="ACF"/>
-            <Version Id="1" Number="1955" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4663" Description="ACF"/>
+            <Version Id="1" Number="1960" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="BinaryImageSupplier" X="500" Y="325" Note=""/>
-        <Element ComponentName="Bitmap" X="825" Y="325" Note=""/>
-        <Element ComponentName="FilterSize" X="775" Y="125" Note=""/>
-        <Element ComponentName="FilterSizeConstraints" X="1050" Y="125" Note=""/>
-        <Element ComponentName="ImageBinarizeProcessor" X="200" Y="500" Note=""/>
-        <Element ComponentName="Params" X="500" Y="125" Note=""/>
+        <Element ComponentName="BinaryImageSupplier" X="500" Y="425" Note=""/>
+        <Element ComponentName="Bitmap" X="825" Y="425" Note=""/>
+        <Element ComponentName="FilterSize" X="150" Y="150" Note=""/>
+        <Element ComponentName="FilterSizeConstraints" X="125" Y="50" Note=""/>
+        <Element ComponentName="ImageBinarizeProcessor" X="150" Y="600" Note=""/>
+        <Element ComponentName="Params" X="500" Y="250" Note=""/>
+        <Element ComponentName="SegmentationOffset" X="500" Y="150" Note=""/>
+        <Element ComponentName="SegmentationOffsetConstraints" X="500" Y="50" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

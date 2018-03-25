@@ -56,14 +56,14 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	iprm::TParamsPtr<imeas::INumericValue> filterSizePtr(paramsPtr, *m_filterSizeParamsIdAttrPtr);
-	if (filterSizePtr == NULL){
-		SendErrorMessage(0, "No fiter dimension was set");
+	iprm::TParamsPtr<imeas::INumericValue> filterSizeParamPtr(paramsPtr, *m_filterSizeParamsIdAttrPtr);
+	if (!filterSizeParamPtr.IsValid()){
+		SendErrorMessage(0, "No fiter dimension was set, processing failed");
 
 		return TS_INVALID;
 	}
 
-	imath::CVarVector filterLengths = filterSizePtr->GetValues();
+	imath::CVarVector filterLengths = filterSizeParamPtr->GetValues();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
 		SendErrorMessage(0, "Processing filter can't have dimension smaller 1");
@@ -90,7 +90,13 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 	cv::_InputArray input(inputMatrix);
 	cv::_OutputArray output(outputMatrix);
 
-	cv::adaptiveThreshold(input, output, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, kernelSize, 0);
+	int segmentationOffset = 0;
+	iprm::TParamsPtr<imeas::INumericValue> segmentationOffsetParamPtr(paramsPtr, *m_segmentationOffsetIdAttrPtr);
+	if (segmentationOffsetParamPtr.IsValid()){
+		segmentationOffset = 255 * segmentationOffsetParamPtr->GetValues()[0];
+	}
+
+	cv::adaptiveThreshold(input, output, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, kernelSize, segmentationOffset);
 
 	return TS_OK;
 }
