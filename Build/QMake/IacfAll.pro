@@ -12,6 +12,13 @@ win32{
 		iocv.file = ../../Include/iocv/QMake/iocv.pro
 	}
 
+	!isEmpty(MSVC_VER){
+		contains(MSVC_VER, "15.0"){
+			SUBDIRS += iocv
+			iocv.file = ../../Include/iocv/QMake/iocv.pro
+		}
+	}
+
 	SUBDIRS += iqaxmm
 	iqaxmm.file = ../../Include/iqaxmm/QMake/iqaxmm.pro
 
@@ -56,6 +63,13 @@ win32{
 	win32-msvc2013{
 		SUBDIRS += OpenCvPck
 		OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
+	}
+	
+	!isEmpty(MSVC_VER){
+		contains(MSVC_VER, "15.0"){
+			SUBDIRS += OpenCvPck
+			OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
+		}
 	}
 
 	SUBDIRS += QwtPck
