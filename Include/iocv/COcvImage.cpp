@@ -23,7 +23,7 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 {	
 	switch (image.nChannels){
 		case 1:
-			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(image.width, image.height))){
+			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, istd::CIndex2d(image.width, image.height))){
 				for (int y = 0; y < image.height; ++y){
 					quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 					quint8* inputBitmapLinePtr = (quint8*)image.imageData + y * image.widthStep;
