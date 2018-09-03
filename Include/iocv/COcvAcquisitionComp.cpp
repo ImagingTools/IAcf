@@ -30,6 +30,9 @@ COcvAcquisitionComp::COcvAcquisitionComp()
 	m_supportedCameraDriversMap[CV_CAP_AVFOUNDATION] = "AVFoundation Framework for iOS";
 	m_supportedCameraDriversMap[CV_CAP_GIGANETIX] = "Smartek Giganetix";
 	m_supportedCameraDriversMap[CV_CAP_INTELPERC] = "Intel Perceptual Computing";
+	m_supportedCameraDriversMap[CV_CAP_ARAVIS] = "Aravis GigE";
+	m_supportedCameraDriversMap[CV_CAP_OPENNI2] = "Open NI2";
+	m_supportedCameraDriversMap[CV_CAP_FFMPEG] = "FFMPEG";
 
 	m_deviceInfoList.SetParent(this);
 }
@@ -106,16 +109,21 @@ void COcvAcquisitionComp::OnComponentDestroyed()
 
 
 // private methods
-	
+
 void COcvAcquisitionComp::EnumerateCameraDevices()
 {
-	for (		CameraDriversMap::ConstIterator cameraDriverIter = m_supportedCameraDriversMap.constBegin(); 
+	istd::TDelPtr<CameraDevice> devicePtr = new CameraDevice(0, "Auto-detected");
+	if (devicePtr.IsValid() && devicePtr->isOpened()){
+		m_deviceList.PushBack(devicePtr.PopPtr());
+	}
+
+	for (		CameraDriversMap::ConstIterator cameraDriverIter = m_supportedCameraDriversMap.constBegin();
 				cameraDriverIter != m_supportedCameraDriversMap.constEnd();
-				++cameraDriverIter){
+				++cameraDriverIter) {
 		int cameraDriverId = cameraDriverIter.key();
 
 		istd::TDelPtr<CameraDevice> devicePtr = new CameraDevice(cameraDriverId, cameraDriverIter.value());
-		if (devicePtr.IsValid() && devicePtr->isOpened()){
+		if (devicePtr.IsValid() && devicePtr->isOpened()) {
 			m_deviceList.PushBack(devicePtr.PopPtr());
 		}
 	}

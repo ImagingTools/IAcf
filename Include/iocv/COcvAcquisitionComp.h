@@ -36,6 +36,7 @@ public:
 
 	I_BEGIN_COMPONENT(COcvAcquisitionComp);
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_REGISTER_SUBELEMENT(DeviceList);
 		I_REGISTER_SUBELEMENT_INTERFACE(DeviceList, iprm::IOptionsList, ExtractDeviceList);
 		I_REGISTER_SUBELEMENT_INTERFACE(DeviceList, istd::IChangeable, ExtractDeviceList);
