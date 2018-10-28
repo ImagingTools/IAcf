@@ -147,7 +147,7 @@ int CPhononVideoViewGuiComp::GetFramesCount() const
 }
 
 
-double CPhononVideoViewGuiComp::GetFrameIntervall() const
+double CPhononVideoViewGuiComp::GetFrameInterval() const
 {
 	return 1.0 / *m_framesPerSecondAttrPtr;
 }

@@ -138,13 +138,13 @@ double COcvVideoControllerComp::GetMediumLength() const
 
 double COcvVideoControllerComp::GetCurrentPosition() const
 {
-	return GetCurrentFrame() * GetFrameIntervall();
+	return GetCurrentFrame() * GetFrameInterval();
 }
 
 
 bool COcvVideoControllerComp::SetCurrentPosition(double position)
 {
-	return SetCurrentFrame(int(position / GetFrameIntervall() + 0.5));
+	return SetCurrentFrame(int(position / GetFrameInterval() + 0.5));
 }
 
 
@@ -162,7 +162,7 @@ int COcvVideoControllerComp::GetFramesCount() const
 }
 
 
-double COcvVideoControllerComp::GetFrameIntervall() const
+double COcvVideoControllerComp::GetFrameInterval() const
 {
 	if (m_capturePtr.IsValid()){
 		return 1.0 / cvGetCaptureProperty(m_capturePtr.GetPtr(), CV_CAP_PROP_FPS);

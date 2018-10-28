@@ -515,7 +515,7 @@ int CLibAvVideoDecoderComp::GetFramesCount() const
 }
 
 
-double CLibAvVideoDecoderComp::GetFrameIntervall() const
+double CLibAvVideoDecoderComp::GetFrameInterval() const
 {
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
 		AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
