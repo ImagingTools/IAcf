@@ -285,43 +285,42 @@ void CQwtDataSequenceViewComp::FillChannelData(
 			const int channelIndex, const double& hMinValue, const double& hMaxValue,
 			const imeas::IDataSequence* dataSequencePtr) const
 {
-	const int samplesCount = dataSequencePtr->GetSamplesCount();
-
-	imath::CVarVector verticalLinesValues;
-	bool isEquidistant = true;
-	int verticalCount = 0;
-
-	const double sampleStep = (hMaxValue - hMinValue) / (samplesCount - 1);
-
-	if (m_verticalLinesCompPtr.IsValid()){
-		verticalCount = m_verticalLinesCompPtr->GetValues().GetElementsCount();
-		verticalLinesValues = m_verticalLinesCompPtr->GetValues();
-		isEquidistant = (samplesCount != verticalCount);
-	}
-
 	if (dataSequencePtr != NULL){
 		const int samplesCount = dataSequencePtr->GetSamplesCount();
 
-			for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
-				double sample = dataSequencePtr->GetSample(sampleIndex, channelIndex);
+		imath::CVarVector verticalLinesValues;
+		bool isEquidistant = true;
+		int verticalCount = 0;
 
-				if (isEquidistant){
-					xData[sampleIndex] = hMinValue + sampleIndex * sampleStep;
-				}
-				else{
-					xData[sampleIndex] = verticalLinesValues.GetElement(sampleIndex);
-				}
+		const double sampleStep = (hMaxValue - hMinValue) / (samplesCount - 1);
 
-				yData[sampleIndex] = sample;
+		if (m_verticalLinesCompPtr.IsValid()) {
+			verticalCount = m_verticalLinesCompPtr->GetValues().GetElementsCount();
+			verticalLinesValues = m_verticalLinesCompPtr->GetValues();
+			isEquidistant = (samplesCount != verticalCount);
+		}
 
-				if (sample > maxValue){
-					maxValue = sample;
-				}
+		for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
+			double sample = dataSequencePtr->GetSample(sampleIndex, channelIndex);
 
-				if (sample < minValue){
-					minValue = sample;
-				}
+			if (isEquidistant){
+				xData[sampleIndex] = hMinValue + sampleIndex * sampleStep;
 			}
+			else{
+				xData[sampleIndex] = verticalLinesValues.GetElement(sampleIndex);
+			}
+
+			yData[sampleIndex] = sample;
+
+			if (sample > maxValue){
+				maxValue = sample;
+			}
+
+			if (sample < minValue){
+				minValue = sample;
+			}
+		}
+
 		maxValue = qCeil(maxValue * 100) / 100.0;
 	}
 }
@@ -329,8 +328,7 @@ void CQwtDataSequenceViewComp::FillChannelData(
 
 void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const double hMaxValue, const double vMinValue, const double vMaxValue)
 {
-
-// HORIzONTAL axis
+	// HORIzONTAL axis
 	double hMin = hMinValue;
 	double hMax = hMaxValue;
 	if (m_horizontalAxisStartAttrPtr.IsValid()) {
@@ -367,6 +365,7 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	m_plotPtr->setAxisScale(QwtPlot::yLeft, vMin, vMax, (vMax - vMin) / 10);
 	m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
 }
+
 
 /*Style of the data plot: 0 No curve; 1 - Lines; 2 - Sticks; 3 - Steps; 4 - Dots*/
 QwtPlotCurve::CurveStyle CQwtDataSequenceViewComp::GetQwtPlotStyle() const
