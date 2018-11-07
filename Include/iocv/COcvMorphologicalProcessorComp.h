@@ -1,0 +1,113 @@
+#pragma once
+
+
+// ACF includes
+#include <iprm/COptionsManager.h>
+#include <imod/TModelWrap.h>
+#include <iipr/CImageRegionProcessorCompBase.h>
+
+
+namespace iocv
+{
+
+
+class COcvMorphologicalProcessorAttr: public iipr::CImageRegionProcessorCompBase
+{
+public:
+	typedef iipr::CImageRegionProcessorCompBase BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(COcvMorphologicalProcessorAttr);
+		I_ASSIGN(m_erosionEnableAttrPtr, "ErosionEnable", "If this attribute is true then erosion filter is available", false, true);
+		I_ASSIGN(m_dilatationEnableAttrPtr, "DilatationEnable", "If this attribute is true then dilatation filter is available", false, true);
+		I_ASSIGN(m_openingEnableAttrPtr, "OpeningEnable", "If this attribute is true then opening filter is available", false, true);
+		I_ASSIGN(m_closingEnableAttrPtr, "ClosingEnable", "If this attribute is true then closing filter is available", false, true);
+		I_ASSIGN(m_whiteTopEnableAttrPtr, "WhiteTopEnable", "If this attribute is true then white-top filter is available", false, true);
+		I_ASSIGN(m_blackTopEnableAttrPtr, "BlackTopEnable", "If this attribute is true then black-top filter is available", false, true);
+		I_ASSIGN(m_morthoGradientEnableAttrPtr, "MorthoGradientEnable", "If this attribute is true then morthological-gradient filter is available", false, true);
+		I_ASSIGN(m_rectangleFormEnableAttrPtr, "RectangleFormEnable", "If this attribute is true then rectangle filter form is available", false, true);
+		I_ASSIGN(m_circleFormEnableAttrPtr, "CircleFormEnable", "If this attribute is true then circle filter form is available", false, true);
+		I_ASSIGN(m_crossFormEnableAttrPtr, "CrossFormEnable", "If this attribute is true then cross filter form is available", false, true);
+	I_END_COMPONENT;
+protected:
+	I_ATTR(bool, m_erosionEnableAttrPtr);
+	I_ATTR(bool, m_dilatationEnableAttrPtr);
+	I_ATTR(bool, m_openingEnableAttrPtr);
+	I_ATTR(bool, m_closingEnableAttrPtr);
+	I_ATTR(bool, m_whiteTopEnableAttrPtr);
+	I_ATTR(bool, m_blackTopEnableAttrPtr);
+	I_ATTR(bool, m_morthoGradientEnableAttrPtr);
+	I_ATTR(bool, m_rectangleFormEnableAttrPtr);
+	I_ATTR(bool, m_circleFormEnableAttrPtr);
+	I_ATTR(bool, m_crossFormEnableAttrPtr);
+};
+
+
+/**	
+	Processor for morphological filtering.
+*/
+class COcvMorphologicalProcessorComp : public COcvMorphologicalProcessorAttr
+{
+public:
+	typedef COcvMorphologicalProcessorAttr BaseClass;
+
+	I_BEGIN_COMPONENT(COcvMorphologicalProcessorComp);
+		I_REGISTER_SUBELEMENT(ProcessingModes);
+		I_REGISTER_SUBELEMENT_INTERFACE(ProcessingModes, istd::IChangeable, ExtractProcessingModes);
+		I_REGISTER_SUBELEMENT_INTERFACE(ProcessingModes, iprm::IOptionsList, ExtractProcessingModes);
+		I_REGISTER_SUBELEMENT(FilterForms);
+		I_REGISTER_SUBELEMENT_INTERFACE(FilterForms, istd::IChangeable, ExtractFilterForms);
+		I_REGISTER_SUBELEMENT_INTERFACE(FilterForms, iprm::IOptionsList, ExtractFilterForms);
+		I_ASSIGN(m_filterSizeParamsIdAttrPtr, "FilterSizeParamsId", "ID of the filter dimension parameter in the processing parameter set", true, "FilterSizeParamsId");
+		I_ASSIGN(m_defaultProcessingModeAttrPtr, "ProcessingMode", "Filter processing mode\n0 - Erosion\n1 - Dilatation\n2 - Opening\n3 - Closing\n4 - Morphological Gradient\n5 - White Top Hat\n6 - Black Top Hat", true, 0);
+		I_ASSIGN(m_processingModeIdAttrPtr, "ProcessingModeId", "ID of the the procesing mode parameter in the processing parameter set", false, "ProcessingMode");
+		I_ASSIGN(m_defaultFilterFormTypeAttrPtr, "FilterFormType", "Type of filter form:\n0 - Rectangular([n, m])\n1 - Cross([n, n])\n2 - Circular([n, n])", true, 0);
+		I_ASSIGN(m_filterFormTypeIdAttrPtr, "FilterFormTypeParamId", "ID of the filter form type parameter in the processing parameter set", false, "FilterFormType");
+	I_END_COMPONENT;
+
+protected:
+	// reimplemented (CImageRegionProcessorCompBase)
+	virtual bool ProcessImageRegion(
+				const iimg::IBitmap& inputBitmap,
+				const iprm::IParamsSet* paramsPtr,
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr) const;
+
+	// reimplemented (icomp::CComponentBase)
+	void OnComponentCreated();
+
+private:
+	int GetProcessingMode(const iprm::IParamsSet* paramsPtr) const;
+	int GetKernelType(const iprm::IParamsSet* paramsPtr) const;
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractProcessingModes(COcvMorphologicalProcessorComp& component)
+	{
+		return &component.m_processingModes;
+	}
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractFilterForms(COcvMorphologicalProcessorComp& component)
+	{
+		return &component.m_filterForms;
+	}
+
+private:
+	I_ATTR(QByteArray, m_filterSizeParamsIdAttrPtr);
+	I_ATTR(int, m_defaultProcessingModeAttrPtr);
+	I_ATTR(QByteArray, m_processingModeIdAttrPtr);
+
+	I_ATTR(int, m_defaultFilterFormTypeAttrPtr);
+	I_ATTR(QByteArray, m_filterFormTypeIdAttrPtr);
+
+	imod::TModelWrap<iprm::COptionsManager> m_processingModes;
+	imod::TModelWrap<iprm::COptionsManager> m_filterForms;
+
+	QMap<int, int> m_processingModeIndexMap;
+	QMap<int, int> m_filterFormIndexMap;
+};
+
+
+} // namespace iipr
+
+
+
