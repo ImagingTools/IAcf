@@ -18,7 +18,14 @@ COcvImage::COcvImage(const IplImage& image)
 
 
 template <class PixelType>
-bool ConvertGrayBitmap(const cv::Mat& image, iimg::IBitmap::PixelFormat pixelFormat, iimg::IBitmap& outputBitmap)
+bool ConvertFromGrayBitmap(const iimg::IBitmap& bitmap, int valueType, cv::Mat& outputImage)
+{
+	return false;
+}
+
+
+template <class PixelType>
+bool ConvertToGrayBitmap(const cv::Mat& image, iimg::IBitmap::PixelFormat pixelFormat, iimg::IBitmap& outputBitmap)
 {
 	if (outputBitmap.CreateBitmap(pixelFormat, istd::CIndex2d(image.cols, image.rows))) {
 		for (int y = 0; y < image.rows; ++y) {
@@ -84,14 +91,29 @@ bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitm
 }
 
 
+bool COcvImage::ConvertFromBitmap(const iimg::IBitmap& bitmap, cv::Mat& outputImage)
+{
+	switch (bitmap.GetPixelFormat()){
+	case iimg::IBitmap::PF_FLOAT32:
+		return ConvertFromGrayBitmap<float>(bitmap, CV_32FC1, outputImage);
+
+	case iimg::IBitmap::PF_FLOAT64:
+		return ConvertFromGrayBitmap<double>(bitmap, CV_64FC1, outputImage);
+
+	default:
+		return false;
+	}
+}
+
+
 bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitmap)
 {
 	switch (image.type()) {
 	case CV_32FC1:
-		return ConvertGrayBitmap<float>(image, iimg::IBitmap::PF_FLOAT32, outputBitmap);
+		return ConvertToGrayBitmap<float>(image, iimg::IBitmap::PF_FLOAT32, outputBitmap);
 
 	case CV_64FC1:
-		return ConvertGrayBitmap<double>(image, iimg::IBitmap::PF_FLOAT64, outputBitmap);
+		return ConvertToGrayBitmap<double>(image, iimg::IBitmap::PF_FLOAT64, outputBitmap);
 
 	default:
 		break;
