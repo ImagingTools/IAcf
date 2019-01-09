@@ -20,7 +20,18 @@ COcvImage::COcvImage(const IplImage& image)
 template <class PixelType>
 bool ConvertFromGrayBitmap(const iimg::IBitmap& bitmap, int valueType, cv::Mat& outputImage)
 {
-	return false;
+	istd::CIndex2d imageSize = bitmap.GetImageSize();
+
+	outputImage = cv::Mat(imageSize.GetY(), imageSize.GetX(), valueType);
+
+	for (int y = 0; y < imageSize.GetY(); ++y){
+		const PixelType* inputBitmapLinePtr = (const PixelType*)bitmap.GetLinePtr(y);
+		PixelType* outputBitmapLinePtr = (PixelType*)outputImage.ptr(y);
+
+		std::memcpy(outputBitmapLinePtr, inputBitmapLinePtr, sizeof(PixelType) * imageSize.GetX());
+	}
+
+	return true;
 }
 
 
