@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4688" Description="ACF"/>
+            <Version Id="1" Number="1978" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330498" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>General morphological task</Description>
+    <Keywords>Morphology Filter Task</Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="FilterFormType" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor/FilterForms"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="DefaultKernelType">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="NumericConstraints"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterValues">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>1</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="MorphologicalProcessor" PackageId="OpenCvPck" ComponentId="OpenCvMorphologicalProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowEmptyAoi" Type="Boolean" ExportId="AllowEmptyAoi">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AoiParamId" Type="Id" ExportId="AoiParamId">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BlackTopEnable" Type="Boolean" ExportId="BlackTopEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CircleFormEnable" Type="Boolean" ExportId="CircleFormEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ClosingEnable" Type="Boolean" ExportId="ClosingEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CrossFormEnable" Type="Boolean" ExportId="CrossFormEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultAoi" Type="Reference" ExportId="DefaultAoi">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DilatationEnable" Type="Boolean" ExportId="DilatationEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ErosionEnable" Type="Boolean" ExportId="ErosionEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterFormType" Type="Integer" ExportId="FilterFormType">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterFormTypeParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterFormType"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterSize"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MorthoGradientEnable" Type="Boolean" ExportId="MorthoGradientEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OpeningEnable" Type="Boolean" ExportId="OpeningEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingMode" Type="Integer" ExportId="ProcessingMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingModeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingMode"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RectangleFormEnable" Type="Boolean" ExportId="RectangleFormEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WhiteTopEnable" Type="Boolean" ExportId="WhiteTopEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="NumericConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="MaxFilterSize">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="MinFilterSize">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter Size</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
+                                <Value>TaskEnabled</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
+                                <Value>TaskEnabled</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Morphological"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ProcessingMode" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor/ProcessingModes"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="DefaultProcessingMode">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SupplierActivationProxy" PackageId="InspectionPck" ComponentId="SupplierActivationProxy">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="InputBitmapCalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSupplier" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Task"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SupplierActivator" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="TaskEnabled"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Task" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
+                        <Data IsEnabled="true" Value="Morphological Task"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputBitmapCalibrationProvider" Type="Reference" ExportId="InputBitmapCalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="TaskEnabled" PackageId="BasePck" ComponentId="EnableableParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultEnabled" Type="Boolean" ExportId="DefaultEnabled">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="iinsp::IEnableableSupplier" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="SupplierActivationProxy"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="SupplierActivationProxy"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Params" ComponentId="Params"/>
+    </ExportedComponents>
+</Acf>
