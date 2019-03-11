@@ -2,8 +2,8 @@ TARGET = iqwt3d
 
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
+include($(IACFDIR)/Config/QMake/Qwt3d.pri)
 
 INCLUDEPATH += ../..
-INCLUDEPATH += "$(QWT3DDIR_0_3_1)/Include"
 
 FORMS += $$_PRO_FILE_PWD_/../*.ui
