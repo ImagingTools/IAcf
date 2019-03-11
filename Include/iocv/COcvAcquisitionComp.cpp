@@ -122,7 +122,7 @@ void COcvAcquisitionComp::EnumerateCameraDevices()
 				++cameraDriverIter) {
 		int cameraDriverId = cameraDriverIter.key();
 
-		istd::TDelPtr<CameraDevice> devicePtr = new CameraDevice(cameraDriverId, cameraDriverIter.value());
+		devicePtr = new CameraDevice(cameraDriverId, cameraDriverIter.value());
 		if (devicePtr.IsValid() && devicePtr->isOpened()) {
 			m_deviceList.PushBack(devicePtr.PopPtr());
 		}
