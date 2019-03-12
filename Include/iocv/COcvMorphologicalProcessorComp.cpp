@@ -73,7 +73,6 @@ bool COcvMorphologicalProcessorComp::ProcessImageRegion(
 
 	int kernelSize = filterLengths[0];
 
-	int imageWidth = inputBitmapSize.GetX();
 	int imageHeight = inputBitmapSize.GetY();
 	int processingMode = GetProcessingMode(paramsPtr);
 	int kernelType = GetKernelType(paramsPtr);
