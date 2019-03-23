@@ -63,6 +63,26 @@ I_EXPORT_COMPONENT(
 			"Morphological processor based on OpenCV",
 			"Morphology Filter");
 
+I_EXPORT_COMPONENT(
+			OpenCvPointGridExtractor,
+			"Points grid extractor",
+			"Points Extractor" IM_TAG("Processor"));
+
+I_EXPORT_COMPONENT(
+			OpenCvIntrinsicCameraCalibration,
+			"Intrinsic camera calibration",
+			"Calibration");
+
+I_EXPORT_COMPONENT(
+			OpenCvIntrinsicCameraCalibrationSupplier,
+			"Calculates intrinsic camera calibration",
+			"Camera Calibration Distortion" IM_TAG("Supplier"));
+
+I_EXPORT_COMPONENT(
+			OpenCvUndistortImageProcessor,
+			"Makes undistorted image with camera calibration",
+			"Undistort Image" IM_TAG("Processor"));
+
 
 } // namespace OpenCvPck
 

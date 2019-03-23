@@ -17,6 +17,10 @@
 #include <iocv/COcvEdgeExtractorComp.h>
 #include <iocv/COcvAdaptiveBinarizationComp.h>
 #include <iocv/COcvMorphologicalProcessorComp.h>
+#include <iocv/COcvPointGridExtractorComp.h>
+#include <iocv/COcvIntrinsicCameraCalibration.h>
+#include <iocv/COcvIntrinsicCameraCalibrationSupplierComp.h>
+#include <iocv/COcvUndistortImageProcessorComp.h>
 
 
 /**
@@ -36,6 +40,14 @@ typedef iocv::COcvResamplingProcessorComp OpenCvResamplingProcessor;
 typedef iocv::COcvEdgeExtractorComp OpenCvEdgeExtractor;
 typedef iocv::COcvAdaptiveBinarizationComp OpenCvAdaptiveBinarization;
 typedef iocv::COcvMorphologicalProcessorComp OpenCvMorphologicalProcessor;
+typedef iocv::COcvPointGridExtractorComp OpenCvPointGridExtractor;
+typedef icomp::TModelCompWrap<
+			icomp::TMakeComponentWrap<
+						iocv::COcvIntrinsicCameraCalibration,
+						i2d::ICalibration2d,
+						iser::ISerializable>> OpenCvIntrinsicCameraCalibration;
+typedef icomp::TModelCompWrap<iocv::COcvIntrinsicCameraCalibrationSupplierComp> OpenCvIntrinsicCameraCalibrationSupplier;
+typedef iocv::COcvUndistortImageProcessorComp OpenCvUndistortImageProcessor;
 
 
 } // namespace OpenCvPck
