@@ -1,5 +1,6 @@
 #pragma once
 
+
 // ACF-Solutions includes
 #include <iproc/TSyncProcessorCompBase.h>
 #include <iipr/IImageToFeatureProcessor.h>
@@ -16,10 +17,10 @@ public:
 
 	I_BEGIN_COMPONENT(COcvPointGridExtractorComp);
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
-		I_ASSIGN(m_defaultGridSizeCompPtr, "GridSize", "Component that provides of grid size. Two numbers for horizontal (first) and verical (second) directions.", false, "GridSize");
+		I_ASSIGN(m_defaultGridSizeCompPtr, "GridSize", "Component that provides the default grid size. Two numbers for horizontal (first) and verical (second) directions", false, "GridSize");
 		I_ASSIGN(m_defaultPatternTypeAttrPtr, "PatternType", "Type of pattern which uses to look for points.\n0 : Chessboard\n1: Circles grid", false, 0);
-		I_ASSIGN(m_gridSizeParamIdAttrPtr, "GridSizeParamId", "Param id of grid size values in paramset. Two numbers for horizontal (first) and verical (second) directions.", false, "GridSize");
-		I_ASSIGN(m_patternTypeParamIdAttrPtr, "PatternTypeParamId", "Param id of pattern type in paramset.\n0 : Chessboard\n1: Circles grid", false, "PatternType");
+		I_ASSIGN(m_gridSizeParamIdAttrPtr, "GridSizeParamId", "Parameter-ID of the grid size values in the parameter set. Two numbers for horizontal (first) and verical (second) directions", false, "GridSize");
+		I_ASSIGN(m_patternTypeParamIdAttrPtr, "PatternTypeParamId", "Parameter-ID of pattern type in the parameter set.\n0 : Chessboard\n1: Circles grid", false, "PatternType");
 	I_END_COMPONENT;
 
 	enum Pattern
