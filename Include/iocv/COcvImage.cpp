@@ -9,130 +9,100 @@ namespace iocv
 {
 
 
-// public methods
+// public static methods
 
-COcvImage::COcvImage(const IplImage& image)
+bool COcvImage::ConvertFromBitmap(const iimg::IBitmap& bitmap, cv::Mat& outputImage)
 {
-	ConvertToBitmap(image, *this);
-}
+	const istd::CIndex2d imageSize = bitmap.GetImageSize();
+	const int lineBytesCount = bitmap.GetLineBytesCount();
 
+	const iimg::IBitmap::PixelFormat pixelFormat = bitmap.GetPixelFormat();
+	int valueType = 0;
+	switch (pixelFormat)
+	{
+	case iimg::IBitmap::PF_GRAY:
+		valueType = CV_8UC1;
+		break;
+	case iimg::IBitmap::PF_RGB24:
+		valueType = CV_8UC3;
+		break;
+	case iimg::IBitmap::PF_RGB:
+	case iimg::IBitmap::PF_RGBA:
+		valueType = CV_8UC4;
+		break;
+	case iimg::IBitmap::PF_FLOAT32:
+		valueType = CV_32FC1;
+		break;
+	case iimg::IBitmap::PF_FLOAT64:
+		valueType = CV_64FC1;
+		break;
 
-template <class PixelType>
-bool ConvertFromGrayBitmap(const iimg::IBitmap& bitmap, int valueType, cv::Mat& outputImage)
-{
-	istd::CIndex2d imageSize = bitmap.GetImageSize();
+	default:
+		return false;
+	}
 
-	outputImage = cv::Mat(imageSize.GetY(), imageSize.GetX(), valueType);
+	outputImage = cv::Mat(imageSize.GetY(), imageSize.GetX(), valueType, lineBytesCount);
 
-	for (int y = 0; y < imageSize.GetY(); ++y){
-		const PixelType* inputBitmapLinePtr = (const PixelType*)bitmap.GetLinePtr(y);
-		PixelType* outputBitmapLinePtr = (PixelType*)outputImage.ptr(y);
+	for (int y = 0; y < imageSize.GetY(); ++y) {
+		const quint8* inputBitmapLinePtr = (const quint8*)bitmap.GetLinePtr(y);
+		quint8* outputBitmapLinePtr = (quint8*)outputImage.ptr(y);
 
-		std::memcpy(outputBitmapLinePtr, inputBitmapLinePtr, sizeof(PixelType) * imageSize.GetX());
+		std::memcpy(outputBitmapLinePtr, inputBitmapLinePtr, lineBytesCount);
 	}
 
 	return true;
 }
 
 
-template <class PixelType>
-bool ConvertToGrayBitmap(const cv::Mat& image, iimg::IBitmap::PixelFormat pixelFormat, iimg::IBitmap& outputBitmap)
+bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitmap)
 {
-	if (outputBitmap.CreateBitmap(pixelFormat, istd::CIndex2d(image.cols, image.rows))) {
-		for (int y = 0; y < image.rows; ++y) {
-			const PixelType* inputBitmapLinePtr = (const PixelType*)image.ptr(y);
-			PixelType* outputBitmapLinePtr = (PixelType*)outputBitmap.GetLinePtr(y);
+	iimg::IBitmap::PixelFormat pixelFormat;
 
-			std::memcpy(outputBitmapLinePtr, inputBitmapLinePtr, sizeof(PixelType) * image.cols);
-		}
+	switch (image.type()){
+	case CV_8UC1:
+		pixelFormat = PF_GRAY;
+		break;
 
-		return true;
-	}
-	
-	return false;
-}
+	case CV_16UC1:
+		pixelFormat = PF_GRAY16;
+		break;
 
+	case CV_32SC1:
+		pixelFormat = PF_GRAY32;
+		break;
 
-// public static methods
+	case CV_8UC3:
+		pixelFormat = PF_RGB24;
+		break;
 
-bool COcvImage::ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitmap)
-{	
-	switch (image.nChannels){
-		case 1:
-			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, istd::CIndex2d(image.width, image.height))){
-				for (int y = 0; y < image.height; ++y){
-					quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
-					quint8* inputBitmapLinePtr = (quint8*)image.imageData + y * image.widthStep;
+	case CV_8UC4:
+		pixelFormat = PF_RGB;
+		break;
 
-					for (int x = 0; x < image.width; ++x){
-						*outputBitmapLinePtr = *inputBitmapLinePtr;
+	case CV_32FC1:
+		pixelFormat = PF_FLOAT32;
+		break;
 
-						++outputBitmapLinePtr, ++inputBitmapLinePtr;
-					}
-				}
-
-				return true;
-			}
-			break;
-
-		case 3:
-			if (outputBitmap.CreateBitmap(iimg::IBitmap::PF_RGB, istd::CIndex2d(image.width, image.height))){
-				quint8* outputBitmapPtr = (quint8*)outputBitmap.GetLinePtr(0);
-				std::memset(outputBitmapPtr, 255, outputBitmap.GetLineBytesCount() * outputBitmap.GetImageSize().GetY());
-
-				for (int y = 0; y < image.height; y++){
-					quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
-					quint8* inputBitmapLinePtr = (quint8*)image.imageData + y * image.widthStep;
-
-					for (int x = 0; x < outputBitmap.GetLineBytesCount(); x += 4){
-						int ix = (x >> 2) * 3;
-
-						std::memcpy(outputBitmapLinePtr + x,  inputBitmapLinePtr + ix, 3);
-					}
-				}
-
-				return true;
-			}
-			break;
-		default:
-			I_CRITICAL();
-	}
-
-	return false;	
-}
-
-
-bool COcvImage::ConvertFromBitmap(const iimg::IBitmap& bitmap, cv::Mat& outputImage)
-{
-	switch (bitmap.GetPixelFormat()){
-	case iimg::IBitmap::PF_FLOAT32:
-		return ConvertFromGrayBitmap<float>(bitmap, CV_32FC1, outputImage);
-
-	case iimg::IBitmap::PF_FLOAT64:
-		return ConvertFromGrayBitmap<double>(bitmap, CV_64FC1, outputImage);
+	case CV_64FC1:
+		pixelFormat = PF_FLOAT32;
+		break;
 
 	default:
 		return false;
 	}
-}
 
-
-bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitmap)
-{
-	switch (image.type()) {
-	case CV_32FC1:
-		return ConvertToGrayBitmap<float>(image, iimg::IBitmap::PF_FLOAT32, outputBitmap);
-
-	case CV_64FC1:
-		return ConvertToGrayBitmap<double>(image, iimg::IBitmap::PF_FLOAT64, outputBitmap);
-
-	default:
-		break;
+	if (!outputBitmap.CreateBitmap(pixelFormat, istd::CIndex2d(image.cols, image.rows))){
+		return false;
 	}
 
-	const IplImage& iplImage = IplImage(image);
+	for (int y = 0; y < image.rows; ++y) {
+		quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+		const quint8* inputRowPtr = image.data + y * image.step;
 
-	return ConvertToBitmap(iplImage, outputBitmap);
+		std::memcpy(outputBitmapLinePtr, inputRowPtr, image.step);
+	}
+
+	return true;
 }
 
 

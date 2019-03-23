@@ -3,7 +3,7 @@
 
 
 // OpenCV includes
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #include <opencv/highgui.h>
 #undef min
 #undef max
@@ -95,12 +95,7 @@ private:
 	QString m_mediumUrl;
 	bool m_isPlaying;
 
-	struct CaptureAccessor: public istd::DefaultAccessor<CvCapture>
-	{
-		static void Delete(CvCapture* ptr){if (ptr != NULL) cvReleaseCapture(&ptr);}
-	};
-
-	istd::TDelPtr<CvCapture, CaptureAccessor> m_capturePtr;
+	istd::TDelPtr<cv::VideoCapture> m_capturePtr;
 	mutable int m_currentFrameIndex;
 	int m_framesCount;
 };

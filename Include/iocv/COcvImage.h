@@ -23,13 +23,6 @@ namespace iocv
 class COcvImage: virtual iimg::CBitmapBase
 {
 public:
-	COcvImage(const IplImage& image);
-
-	/**
-		Convert OpenCV image to standard ACF bitmap.
-	*/
-	static bool ConvertToBitmap(const IplImage& image, iimg::IBitmap& outputBitmap);
-
 	/**
 		Convert standard ACF bitmap to OpenCV image.
 	*/
