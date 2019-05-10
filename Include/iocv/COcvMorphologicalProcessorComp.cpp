@@ -231,6 +231,6 @@ int COcvMorphologicalProcessorComp::GetKernelType(const iprm::IParamsSet* params
 }
 
 
-} // namespace iipr
+} // namespace iocv
 
 

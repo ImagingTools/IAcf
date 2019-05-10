@@ -27,24 +27,11 @@ bool COcvUndistortImageProcessorComp::ProcessImage(
 			iimg::IBitmap& outputImage) const
 {
 	try{
-		iprm::TParamsPtr<i2d::ICalibration2d> cameraCalibrationParamPtr(paramsPtr, m_cameraCalibrationParamIdArrtPtr, m_defaultCameraCalibrationCompPtr, false);
+		iprm::TParamsPtr<i2d::ICalibration2d> cameraCalibrationParamPtr(paramsPtr, m_cameraCalibrationParamIdAttrPtr, m_defaultCameraCalibrationCompPtr, false);
 		if (!cameraCalibrationParamPtr.IsValid()){
 			outputImage.CopyFrom(inputImage);
 
 			return true;
-		}
-
-		double alfa = 0.0;
-		if (m_alfaScaleArrtPtr.IsValid()){
-			alfa = *m_alfaScaleArrtPtr;
-		}
-
-		if (alfa < 0.0){
-			alfa = 0.0;
-		}
-
-		if (alfa > 1.0){
-			alfa = 1.0;
 		}
 
 		cv::Mat cvInput;
@@ -55,10 +42,8 @@ bool COcvUndistortImageProcessorComp::ProcessImage(
 
 		const iocv::COcvIntrinsicCameraCalibration* calibrationImplPtr = dynamic_cast<const iocv::COcvIntrinsicCameraCalibration*>(cameraCalibrationParamPtr.GetPtr());
 		if (calibrationImplPtr != NULL){
-			cv::Mat newMat = cv::getOptimalNewCameraMatrix(calibrationImplPtr->GetCameraMatrix(), calibrationImplPtr->GetDistorsion(), imageSize, alfa);
-
 			cv::Mat cvOutput;
-			cv::undistort(cvInput, cvOutput, calibrationImplPtr->GetCameraMatrix(), calibrationImplPtr->GetDistorsion(), newMat);
+			cv::undistort(cvInput, cvOutput, calibrationImplPtr->GetCameraMatrix(), calibrationImplPtr->GetDistorsion());
 
 			return COcvImage::ConvertToBitmap(cvOutput, outputImage);
 		}

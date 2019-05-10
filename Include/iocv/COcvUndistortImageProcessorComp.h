@@ -19,8 +19,7 @@ public:
 	typedef iipr::CImageProcessorCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(COcvUndistortImageProcessorComp);
-		I_ASSIGN(m_cameraCalibrationParamIdArrtPtr, "CameraCalibrationParamId", "Parameter-ID of the calibration object in parameter set", false, "CameraCalibration");
-		I_ASSIGN(m_alfaScaleArrtPtr, "AlfaScale", "Free scaling parameter between 0 (when all the pixels in the undistorted image are valid) and 1 (when all the source image pixels are retained in the undistorted image)", false, 0);
+		I_ASSIGN(m_cameraCalibrationParamIdAttrPtr, "CameraCalibrationParamId", "Parameter-ID of the calibration object in parameter set", false, "CameraCalibration");
 		I_ASSIGN(m_defaultCameraCalibrationCompPtr, "DefaultCameraCalibration", "Default camera calibration", false, "DefaultCameraCalibration");
 	I_END_COMPONENT;
 
@@ -33,8 +32,7 @@ protected:
 
 private:
 	I_REF(i2d::ICalibration2d, m_defaultCameraCalibrationCompPtr);
-	I_ATTR(QByteArray, m_cameraCalibrationParamIdArrtPtr);
-	I_ATTR(double, m_alfaScaleArrtPtr);
+	I_ATTR(QByteArray, m_cameraCalibrationParamIdAttrPtr);
 };
 
 

@@ -8,7 +8,8 @@
 
 // ACF includes
 #include <istd/CChangeGroup.h>
-#include <iimg/CBitmapBase.h>
+#include <iimg/CBitmap.h>
+#include <iimg/CScanlineMask.h>
 #include <iprm/TParamsPtr.h>
 #include <ilog/CExtMessage.h>
 #include <iprm/ISelectionParam.h>
@@ -34,6 +35,64 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 {
 	try{
 		results.ResetFeatures();
+
+		iimg::CBitmap aoiBitmap;
+		int regionLeft = 0;
+		int regionTop = 0;
+
+		if (!m_defaultRectangleCompPtr.IsValid()) {
+			aoiBitmap.CopyFrom(image);
+		}
+		else {
+			iimg::CScanlineMask mask;
+			const i2d::CRect inputRect(image.GetBoundingBox());
+			mask.CreateFromRectangle(*m_defaultRectangleCompPtr, &inputRect);
+
+			aoiBitmap.CreateBitmap(image.GetPixelFormat(), mask.GetImageSize());
+
+			const i2d::CRect regionRect = mask.GetBoundingBox();
+
+			regionLeft = qMax(regionRect.GetLeft(), 0);
+			const int regionRight = qMin(regionRect.GetRight(), inputRect.GetWidth());
+			regionTop = qMax(regionRect.GetTop(), 0);
+			const int regionBottom = qMin(regionRect.GetBottom(), inputRect.GetHeight());
+
+			const int pixelBits = aoiBitmap.GetPixelBitsCount();
+			const int pixelBytes = pixelBits / 8;
+
+			for (int y = regionTop; y < regionBottom; y++) {
+				const quint8* inputLinePtr = (quint8*)image.GetLinePtr(y);
+
+				istd::CIntRanges::RangeList rangesList;
+				const istd::CIntRanges* rangesPtr = mask.GetPixelRanges(y);
+				if (rangesPtr == NULL) {
+					continue;
+				}
+
+				rangesPtr->GetAsList(inputRect.GetHorizontalRange(), rangesList);
+
+				quint8* outputImageLinePtr = (quint8*)aoiBitmap.GetLinePtr(y - regionTop);
+
+				for (istd::CIntRanges::RangeList::ConstIterator iter = rangesList.begin();
+					iter != rangesList.end();
+					++iter) {
+					const istd::CIntRange& pixelRange = *iter;
+
+					int rangeStart = qMax(pixelRange.GetMinValue(), 0);
+					Q_ASSERT(rangeStart >= regionLeft);
+					int rangeEnd = qMin(pixelRange.GetMaxValue(), image.GetImageSize().GetX());
+					Q_ASSERT(rangeEnd <= regionRight);
+
+					int bytesToCopy = (rangeEnd - rangeStart) * pixelBytes;
+
+					if (bytesToCopy > 0) {
+						std::memcpy(outputImageLinePtr + (rangeStart - regionLeft) * pixelBytes,
+							inputLinePtr + rangeStart * pixelBytes,
+							bytesToCopy);
+					}
+				}
+			}
+		}
 
 		cv::Size gridSize(6, 6);
 		const imeas::INumericValue* gridValuePtr = NULL; 
@@ -68,7 +127,7 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 		}
 
 		cv::Mat view;
-		if (!COcvImage::ConvertFromBitmap(image, view)){
+		if (!COcvImage::ConvertFromBitmap(aoiBitmap, view)){
 			SendCriticalMessage(0, QObject::tr("Can not read input image"));
 			return TS_INVALID;
 		}
@@ -135,7 +194,7 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 				istd::TIndex<2> ind;
 				ind.SetAt(0, i);
 				ind.SetAt(1, j);
-				pointGridPtr->SetAt(ind, i2d::CVector2d(p.x, p.y));
+				pointGridPtr->SetAt(ind, i2d::CVector2d(p.x + regionLeft + 0.5, p.y + regionTop + 0.5));
 			}
 		}
 
@@ -147,7 +206,7 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 
 			for (const cv::Point2f& p : pointBuf){
 				imod::TModelWrap<i2d::CPosition2d>* messagePointPtr = new imod::TModelWrap<i2d::CPosition2d>;
-				messagePointPtr->SetPosition(i2d::CVector2d(p.x, p.y));
+				messagePointPtr->SetPosition(i2d::CVector2d(p.x + regionLeft + 0.5, p.y + regionTop + 0.5));
 
 				messagePtr->InsertAttachedObject(messagePointPtr);
 			}
