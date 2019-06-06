@@ -56,30 +56,32 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 			return false;
 		}
 
-		mask.Invert(clipArea);
-
 		iimg::CBitmap maskedBitmap;
-		maskedBitmap.CopyFrom(image);
+		maskedBitmap.CreateBitmap(image.GetPixelFormat(), image.GetImageSize(), image.GetPixelBitsCount(), image.GetComponentsCount());
+		maskedBitmap.ClearImage();
 
 		istd::CIntRange lineRange(0, size.GetX());
+
+		int bytesPerPixel = image.GetPixelBitsCount() / 8;
 
 		for (int y = 0; y < size.GetY(); ++y){
 			const istd::CIntRanges* outputRangesPtr = mask.GetPixelRanges(y);
 			if (outputRangesPtr != NULL){
-				quint8* inputLinePtr = static_cast<quint8*>(maskedBitmap.GetLinePtr(y));
+				const quint8* inputLinePtr = (const quint8*)image.GetLinePtr(y);
+				quint8* outputLinePtr = (quint8*)maskedBitmap.GetLinePtr(y);
 
 				istd::CIntRanges::RangeList rangeList;
 				outputRangesPtr->GetAsList(lineRange, rangeList);
-				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-					iter != rangeList.constEnd();
-					++iter){
+				for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+							iter != rangeList.constEnd();
+							++iter){
 					const istd::CIntRange& rangeH = *iter;
 					Q_ASSERT(rangeH.GetMinValue() >= 0);
 					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
 
-					for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
-						inputLinePtr[x] = 0;
-					}
+					int copyPixelsCount = rangeH.GetLength();
+
+					memcpy(outputLinePtr + rangeH.GetMinValue(), inputLinePtr + rangeH.GetMinValue(), copyPixelsCount * bytesPerPixel);
 				}
 			}
 		}
