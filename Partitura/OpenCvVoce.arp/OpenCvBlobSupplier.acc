@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4783" Description="ACF"/>
+            <Version Id="1" Number="2068" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330496" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Supplier of the blobs found in a binary image</Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="BlobsSupplier" PackageId="IprPck" ComponentId="SearchBasedFeaturesSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
+                        <Data IsEnabled="true" Value="Blob Search"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Processor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OpenCvBlobExtractor"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Calibration2dProxy" PackageId="CalibrationPck" ComponentId="Calibration2dProxy">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="FilterParams" PackageId="BlobPck" ComponentId="BlobFilterParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SupportedProperties" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OpenCvBlobExtractor/FilterFeatureList"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="OpenCvBlobExtractor" PackageId="OpenCvPck" ComponentId="OpenCvBlobExtractor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Region"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParams"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterParams</Value>
+                                <Value>Region</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterParams</Value>
+                                <Value>Region</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Region" PackageId="BasePck" ComponentId="Polygon">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="X" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0</Value>
+                                <Value>200</Value>
+                                <Value>200</Value>
+                                <Value>0</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Y" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0</Value>
+                                <Value>0</Value>
+                                <Value>200</Value>
+                                <Value>200</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::IMultiCalibrationProvider" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="iipr::IFeaturesProvider" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="istd::IInformationProvider" ComponentId="BlobsSupplier"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="BlobsSupplier"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

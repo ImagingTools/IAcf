@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4783" Description="ACF"/>
+            <Version Id="1" Number="2068" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330496" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>GUI for edge extraction task</Description>
+    <Keywords>&quot;Supplier Edge Contour Extraction Processing Task GUI&quot;</Keywords>
+    <ElementsList>
+        <Element Id="FilterParams" PackageId="BlobPck" ComponentId="BlobFilterParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterParams</Value>
+                                <Value>Region</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterParams</Value>
+                                <Value>Region</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter</Value>
+                                <Value>Region</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Region" PackageId="QtViewPck" ComponentId="PolygonParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="SearchBasedFeaturesSupplierGui" PackageId="QtIprPck" ComponentId="SearchBasedFeaturesSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="SearchBasedFeaturesSupplierGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="SearchBasedFeaturesSupplierGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="SearchBasedFeaturesSupplierGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="SearchBasedFeaturesSupplierGui"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="SearchBasedFeaturesSupplierGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="VisualStatus" ComponentId="SearchBasedFeaturesSupplierGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

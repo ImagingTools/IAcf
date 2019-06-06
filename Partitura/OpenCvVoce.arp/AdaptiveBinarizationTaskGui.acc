@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4783" Description="ACF"/>
+            <Version Id="1" Number="2068" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330496" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Task UI for adaptive binarization based on OpenCV</Description>
+    <Keywords>Segmentation</Keywords>
+    <ElementsList>
+        <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>SegmentationOffset</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>SegmentationOffset</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter Size</Value>
+                                <Value>Segmentation Offset</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SegmentationOffset" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Task" PackageId="SupplierVoce" ComponentId="SnapTaskGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="Task"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="Task"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="Task"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="Task"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="VisualStatus" ComponentId="Task/VisualStatus"/>
+    </ExportedComponents>
+</Acf>
