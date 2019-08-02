@@ -106,8 +106,8 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		cv::Moments moms = cv::moments(points);
 
 		const double orientedArea = cv::contourArea(points, true);
-		const double area = qAbs(orientedArea);
-		if (qFuzzyCompare(area, 0.0)){
+		const double areaPixels = qAbs(orientedArea);
+		if (qFuzzyCompare(areaPixels, 0.0)){
 			continue;
 		}
 
@@ -120,13 +120,13 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		double circularity = 0.0;
 		
 		if (perimeter > 0){
-			circularity = 4 * I_PI * area / (perimeter * perimeter);
+			circularity = 4 * I_PI * areaPixels / (perimeter * perimeter);
 		}
 
 		bool passedByFilter = true;
 
 		if (filterParamsPtr != NULL){
-			passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, area, perimeter, circularity);
+			passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, areaPixels, perimeter, circularity);
 		}
 
 		if (m_getNegativeBlobsPolygonCompPtr.IsValid()){
@@ -155,15 +155,14 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 				polygon.InsertNode(v);
 			}
 
-			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, position, polygon, angle, polygon.GetBoundingBox().GetSize());
+			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(areaPixels, perimeter, position, angle, i2d::CVector2d(1, 1), polygon);
 			result.AddFeature(blobFeaturePtr);
 
 			blobFeaturePtr->SetObjectId(QByteArray::number(contourIndex));
-
-			double metricArea = blobFeaturePtr->GetArea();
-			blobFeaturePtr->SetWeight(area);
+			blobFeaturePtr->SetWeight(1.0);
 
 			if (blobMessagePtr.IsValid()){
+				double metricArea = blobFeaturePtr->GetArea();
 				i2d::CPolygon* blobMessagePolygonPtr = new imod::TModelWrap<i2d::CPolygon>();
 				blobMessagePolygonPtr->CopyFrom(polygon, istd::IChangeable::CM_CONVERT);
 				blobMessagePtr->InsertAttachedObject(
@@ -171,7 +170,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 							QObject::tr("Blob %1, Position: (%2, %3), Area: %4 px (%5 mm)")
 										.arg(blobsCount)
 										.arg(position.GetX()).arg(position.GetY())
-										.arg(area)
+										.arg(areaPixels)
 										.arg(metricArea)
 				);
 			}
