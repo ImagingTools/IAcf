@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4783" Description="ACF"/>
-            <Version Id="1" Number="2068" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="330496" Description="Qt Framework"/>
+            <Version Id="0" Number="4790" Description="ACF"/>
+            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Supplier of the blobs found in a binary image</Description>
@@ -52,11 +52,23 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
+        <Element Id="GetBlackBlobs" PackageId="BasePck" ComponentId="EnableableParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultEnabled" Type="Boolean" ExportId="GetBlackBlobs">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="OpenCvBlobExtractor" PackageId="OpenCvPck" ComponentId="OpenCvBlobExtractor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="Region"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
@@ -64,7 +76,13 @@
                     <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="FilterParams"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="GetNegativeBlobsPolygon" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GetBlackBlobs"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ResultConsumer" Type="Reference" ExportId="BlobsPolygonsResultConsumer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -95,6 +113,9 @@
         <Element Id="Region" PackageId="BasePck" ComponentId="Polygon">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="Calibration" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Calibration2dProxy"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="X" Type="Real[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
@@ -129,5 +150,8 @@
         <Interface InterfaceId="istd::IInformationProvider" ComponentId="BlobsSupplier"/>
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="BlobsSupplier"/>
     </ExportedInterfaces>
-    <ExportedComponents/>
+    <ExportedComponents>
+        <Component ExportedId="Region" ComponentId="Region"/>
+        <Component ExportedId="TaskLog" ComponentId="BlobsSupplier/TaskLog"/>
+    </ExportedComponents>
 </Acf>

@@ -207,8 +207,8 @@ bool COcvIntrinsicCameraCalibration::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	static const iser::CArchiveTag s_cameraMatrixTag("CameraMatrix", "Camera matrix coefficients", iser::CArchiveTag::TT_LEAF);
-	static const iser::CArchiveTag s_distosionCoeffTag("DistorsionCoeff", "Lense distorsion coefficients", iser::CArchiveTag::TT_LEAF);
+	static const iser::CArchiveTag s_cameraMatrixTag("CameraMatrix", "Camera matrix coefficients", iser::CArchiveTag::TT_GROUP);
+	static const iser::CArchiveTag s_distosionCoeffTag("DistorsionCoeff", "Lense distorsion coefficients", iser::CArchiveTag::TT_GROUP);
 
 	imath::TMatrix<3, 3> cameraMatrix;
 	imath::TVector<8> distorsionCoeff;

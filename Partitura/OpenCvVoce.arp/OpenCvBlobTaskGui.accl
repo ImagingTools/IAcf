@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4783" Description="ACF"/>
-            <Version Id="1" Number="2068" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="330496" Description="Qt Framework"/>
+            <Version Id="0" Number="4688" Description="ACF"/>
+            <Version Id="1" Number="1978" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330755" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
         <Element ComponentName="FilterParams" X="300" Y="525" Note=""/>
         <Element ComponentName="Params" X="550" Y="400" Note=""/>
         <Element ComponentName="Region" X="825" Y="525" Note=""/>
-        <Element ComponentName="SearchBasedFeaturesSupplierGui" X="525" Y="200" Note=""/>
+        <Element ComponentName="SearchBasedFeaturesSupplierGui" X="550" Y="200" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

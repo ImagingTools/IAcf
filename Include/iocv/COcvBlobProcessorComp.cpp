@@ -1,12 +1,6 @@
 #include <iocv/COcvBlobProcessorComp.h>
 
 
-// OpenCV includes
-#include <opencv2/features2d/features2d.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/imgproc/types_c.h>
-#include <opencv2/opencv.hpp>
-
 // ACF includes
 #include <istd/CChangeGroup.h>
 #include <iimg/CBitmapBase.h>
@@ -15,8 +9,6 @@
 #include <i2d/CPolygon.h>
 #include <ilog/CExtMessage.h>
 #include <iimg/CBitmap.h>
-
-// ACF-Solutions includes
 #include <iblob/CBlobFeature.h>
 
 
@@ -41,65 +33,59 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 	ibase::CSize size = image.GetImageSize();
 
-	// Initialize input bitmap:
-	cv::Mat tmpBinaryImage;
-
 	// Filter out masked points:
 	if (aoiPtr != NULL){
-		iimg::CScanlineMask mask;
-		mask.SetCalibration(image.GetCalibration());
+		iimg::CScanlineMask invertedMask;
+		invertedMask.SetCalibration(image.GetCalibration());
 
 		i2d::CRect clipArea(size);
-		if (!mask.CreateFromGeometry(*aoiPtr, &clipArea)){
+		if (!invertedMask.CreateFromGeometry(*aoiPtr, &clipArea)){
 			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
 
 			return false;
 		}
 
+		iimg::CScanlineMask mask;
+		invertedMask.GetInverted(clipArea, mask);
+
 		iimg::CBitmap maskedBitmap;
-		maskedBitmap.CreateBitmap(image.GetPixelFormat(), image.GetImageSize(), image.GetPixelBitsCount(), image.GetComponentsCount());
-		maskedBitmap.ClearImage();
+		maskedBitmap.CopyFrom(image);
 
 		istd::CIntRange lineRange(0, size.GetX());
 
-		int bytesPerPixel = image.GetPixelBitsCount() / 8;
+		const unsigned char value = m_getNegativeBlobsPolygonCompPtr.IsValid() && m_getNegativeBlobsPolygonCompPtr->IsEnabled() ? 255 : 0;
 
 		for (int y = 0; y < size.GetY(); ++y){
 			const istd::CIntRanges* outputRangesPtr = mask.GetPixelRanges(y);
 			if (outputRangesPtr != NULL){
-				const quint8* inputLinePtr = (const quint8*)image.GetLinePtr(y);
-				quint8* outputLinePtr = (quint8*)maskedBitmap.GetLinePtr(y);
+				quint8* inputLinePtr = static_cast<quint8*>(maskedBitmap.GetLinePtr(y));
 
 				istd::CIntRanges::RangeList rangeList;
 				outputRangesPtr->GetAsList(lineRange, rangeList);
-				for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-							iter != rangeList.constEnd();
-							++iter){
+				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+					iter != rangeList.constEnd();
+					++iter)
+				{
 					const istd::CIntRange& rangeH = *iter;
 					Q_ASSERT(rangeH.GetMinValue() >= 0);
 					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
 
-					int copyPixelsCount = rangeH.GetLength();
-
-					memcpy(outputLinePtr + rangeH.GetMinValue(), inputLinePtr + rangeH.GetMinValue(), copyPixelsCount * bytesPerPixel);
+					for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
+						inputLinePtr[x] = value;
+					}
 				}
 			}
 		}
 
 		void* imageDataBufferPtr = const_cast<void*>(maskedBitmap.GetLinePtr(0));
 		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, maskedBitmap.GetLineBytesCount());
-		tmpBinaryImage = inputBitmap.clone();
+		cv::findContours(inputBitmap, m_contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
 	}
 	else{
 		void* imageDataBufferPtr = const_cast<void*>(image.GetLinePtr(0));
 		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, image.GetLineBytesCount());
-
-		tmpBinaryImage = inputBitmap.clone();
+		cv::findContours(inputBitmap, m_contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
 	}
-
-	// Get contours from the binary image:
-	std::vector<std::vector<cv::Point> > contours;
-	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
 	// Get found blobs:
 	int blobsCount = 0;
@@ -107,21 +93,28 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 	istd::TDelPtr<ilog::CExtMessage> blobMessagePtr;
 	if (m_resultConsumerCompPtr.IsValid()){
 		blobMessagePtr.SetPtr(new ilog::CExtMessage(
-			istd::IInformationProvider::IC_INFO,
-			MI_FOUND_BLOB,
-			"",
-			"OpenCV Blob Detector"));
+					istd::IInformationProvider::IC_INFO,
+					MI_FOUND_BLOB,
+					"",
+					"OpenCV Blob Detector"));
 	}
 
-	for (int contourIndex = 0; contourIndex < int(contours.size()); contourIndex++){
-		cv::Moments moms = cv::moments(cv::Mat(contours[contourIndex]));
+	const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr.IsValid() ? m_calibrationProviderCompPtr->GetCalibration() : NULL;
 
-		double area = moms.m00;
+	for (int contourIndex = 0; contourIndex < int(m_contours.size()); contourIndex++){
+		cv::Mat points(m_contours[contourIndex]);
+		cv::Moments moms = cv::moments(points);
+
+		const double orientedArea = cv::contourArea(points, true);
+		const double area = qAbs(orientedArea);
 		if (qFuzzyCompare(area, 0.0)){
 			continue;
 		}
 
-		double perimeter = cv::arcLength(cv::Mat(contours[contourIndex]), true);
+		cv::RotatedRect rotatedRect = cv::minAreaRect(points);
+		float angle = qDegreesToRadians(rotatedRect.angle);
+
+		double perimeter = cv::arcLength(points, true);
 
 		cv::Point2d location = cv::Point2d(moms.m10 / moms.m00, moms.m01 / moms.m00);
 		double circularity = 0.0;
@@ -136,19 +129,51 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 			passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, area, perimeter, circularity);
 		}
 
+		if (m_getNegativeBlobsPolygonCompPtr.IsValid()){
+			const bool isNegative = m_getNegativeBlobsPolygonCompPtr->IsEnabled();
+
+			passedByFilter = passedByFilter && isNegative == (orientedArea > 0);
+		}
+
 		if (passedByFilter){
 			blobsCount++;
 
-			i2d::CVector2d position = i2d::CVector2d(location.x, location.y);
+			i2d::CVector2d position(location.x, location.y);
+			i2d::CPolygon polygon;
+			polygon.SetCalibration(calibrationPtr);
 
-			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, position);
+			for (const cv::Point2f& p : m_contours[contourIndex]){
+				i2d::CVector2d v(p.x, p.y);
+
+				if (calibrationPtr != NULL){
+					i2d::CVector2d mm;
+					if (calibrationPtr->GetInvPositionAt(v, mm)){
+						v = mm;
+					}
+				}
+
+				polygon.InsertNode(v);
+			}
+
+			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, position, polygon, angle, polygon.GetBoundingBox().GetSize());
 			result.AddFeature(blobFeaturePtr);
 
+			blobFeaturePtr->SetObjectId(QByteArray::number(contourIndex));
+
+			double metricArea = blobFeaturePtr->GetArea();
+			blobFeaturePtr->SetWeight(area);
+
 			if (blobMessagePtr.IsValid()){
-				i2d::CCircle* blobMessageCirclePtr = new imod::TModelWrap<i2d::CCircle>();
-				blobMessageCirclePtr->SetPosition(position);
-				blobMessageCirclePtr->SetRadius(qSqrt(area / I_PI));
-				blobMessagePtr->InsertAttachedObject(blobMessageCirclePtr, QObject::tr("Blob %1, Pos.: (%2; %3), Area: %4").arg(blobsCount).arg(position.GetX()).arg(position.GetY()).arg(area));
+				i2d::CPolygon* blobMessagePolygonPtr = new imod::TModelWrap<i2d::CPolygon>();
+				blobMessagePolygonPtr->CopyFrom(polygon, istd::IChangeable::CM_CONVERT);
+				blobMessagePtr->InsertAttachedObject(
+							blobMessagePolygonPtr,
+							QObject::tr("Blob %1, Position: (%2, %3), Area: %4 px (%5 mm)")
+										.arg(blobsCount)
+										.arg(position.GetX()).arg(position.GetY())
+										.arg(area)
+										.arg(metricArea)
+				);
 			}
 		}
 	}

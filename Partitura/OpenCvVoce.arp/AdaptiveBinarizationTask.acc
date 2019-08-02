@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4663" Description="ACF"/>
-            <Version Id="1" Number="1960" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4790" Description="ACF"/>
+            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -101,6 +101,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
+        <Element Id="Invert" PackageId="BasePck" ComponentId="EnableableParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
         <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -109,6 +114,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>SegmentationOffset</Value>
+                                <Value>Invert</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -117,6 +123,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>SegmentationOffset</Value>
+                                <Value>Invert</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
