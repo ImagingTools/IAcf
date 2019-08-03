@@ -33,59 +33,65 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 	ibase::CSize size = image.GetImageSize();
 
+	// Initialize input bitmap:
+	cv::Mat tmpBinaryImage;
+
 	// Filter out masked points:
 	if (aoiPtr != NULL){
-		iimg::CScanlineMask invertedMask;
-		invertedMask.SetCalibration(image.GetCalibration());
+		iimg::CScanlineMask mask;
+		mask.SetCalibration(image.GetCalibration());
 
 		i2d::CRect clipArea(size);
-		if (!invertedMask.CreateFromGeometry(*aoiPtr, &clipArea)){
+		if (!mask.CreateFromGeometry(*aoiPtr, &clipArea)){
 			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
 
 			return false;
 		}
 
-		iimg::CScanlineMask mask;
-		invertedMask.GetInverted(clipArea, mask);
-
 		iimg::CBitmap maskedBitmap;
-		maskedBitmap.CopyFrom(image);
+		maskedBitmap.CreateBitmap(image.GetPixelFormat(), image.GetImageSize(), image.GetPixelBitsCount(), image.GetComponentsCount());
+		maskedBitmap.ClearImage();
 
 		istd::CIntRange lineRange(0, size.GetX());
 
-		const unsigned char value = m_getNegativeBlobsPolygonCompPtr.IsValid() && m_getNegativeBlobsPolygonCompPtr->IsEnabled() ? 255 : 0;
+		int bytesPerPixel = image.GetPixelBitsCount() / 8;
 
 		for (int y = 0; y < size.GetY(); ++y){
 			const istd::CIntRanges* outputRangesPtr = mask.GetPixelRanges(y);
 			if (outputRangesPtr != NULL){
-				quint8* inputLinePtr = static_cast<quint8*>(maskedBitmap.GetLinePtr(y));
+				const quint8* inputLinePtr = (const quint8*)image.GetLinePtr(y);
+				quint8* outputLinePtr = (quint8*)maskedBitmap.GetLinePtr(y);
 
 				istd::CIntRanges::RangeList rangeList;
 				outputRangesPtr->GetAsList(lineRange, rangeList);
-				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-					iter != rangeList.constEnd();
-					++iter)
-				{
+				for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+							iter != rangeList.constEnd();
+							++iter){
 					const istd::CIntRange& rangeH = *iter;
 					Q_ASSERT(rangeH.GetMinValue() >= 0);
 					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
 
-					for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
-						inputLinePtr[x] = value;
-					}
+					int copyPixelsCount = rangeH.GetLength();
+
+					memcpy(outputLinePtr + rangeH.GetMinValue(), inputLinePtr + rangeH.GetMinValue(), copyPixelsCount * bytesPerPixel);
 				}
 			}
 		}
 
 		void* imageDataBufferPtr = const_cast<void*>(maskedBitmap.GetLinePtr(0));
 		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, maskedBitmap.GetLineBytesCount());
-		cv::findContours(inputBitmap, m_contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
+		tmpBinaryImage = inputBitmap.clone();
 	}
 	else{
 		void* imageDataBufferPtr = const_cast<void*>(image.GetLinePtr(0));
 		cv::Mat inputBitmap(size.GetY(), size.GetX(), CV_8UC1, imageDataBufferPtr, image.GetLineBytesCount());
-		cv::findContours(inputBitmap, m_contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
+
+		tmpBinaryImage = inputBitmap.clone();
 	}
+
+	// Get contours from the binary image:
+	std::vector<std::vector<cv::Point> > contours;
+	findContours(tmpBinaryImage, contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
 
 	// Get found blobs:
 	int blobsCount = 0;
@@ -101,8 +107,8 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 	const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr.IsValid() ? m_calibrationProviderCompPtr->GetCalibration() : NULL;
 
-	for (int contourIndex = 0; contourIndex < int(m_contours.size()); contourIndex++){
-		cv::Mat points(m_contours[contourIndex]);
+	for (int contourIndex = 0; contourIndex < int(contours.size()); contourIndex++){
+		cv::Mat points(contours[contourIndex]);
 		cv::Moments moms = cv::moments(points);
 
 		const double orientedArea = cv::contourArea(points, true);
@@ -142,7 +148,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 			i2d::CPolygon polygon;
 			polygon.SetCalibration(calibrationPtr);
 
-			for (const cv::Point2f& p : m_contours[contourIndex]){
+			for (const cv::Point2f& p : contours[contourIndex]){
 				i2d::CVector2d v(p.x, p.y);
 
 				if (calibrationPtr != NULL){

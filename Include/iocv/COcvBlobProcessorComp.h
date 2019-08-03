@@ -51,9 +51,6 @@ private:
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 	I_REF(iprm::IEnableableParam, m_getNegativeBlobsPolygonCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
-
-	// this guy is too fat to be allocated on the heap (crashed on large images)
-	std::vector<std::vector<cv::Point> > m_contours;
 };
 
 
