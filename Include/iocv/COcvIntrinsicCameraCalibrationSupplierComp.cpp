@@ -146,15 +146,15 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 
 		int flags = CV_CALIB_FIX_ASPECT_RATIO;
 
-		if (m_fixK2AttrPtr.IsValid() && *m_fixK2AttrPtr) {
+		if (m_fixK2AttrPtr.IsValid() && *m_fixK2AttrPtr){
 			flags |= CV_CALIB_FIX_K2;
 		}
 
-		if (m_fixK3AttrPtr.IsValid() && *m_fixK3AttrPtr) {
+		if (m_fixK3AttrPtr.IsValid() && *m_fixK3AttrPtr){
 			flags |= CV_CALIB_FIX_K3;
 		}
 
-		if (m_fixPrincipalPointAttrPtr.IsValid() && *m_fixPrincipalPointAttrPtr) {
+		if (m_fixPrincipalPointAttrPtr.IsValid() && *m_fixPrincipalPointAttrPtr){
 			flags |= CV_CALIB_FIX_PRINCIPAL_POINT;
 		}
 

@@ -6,7 +6,6 @@
 #include <iimg/IBitmapProvider.h>
 #include <iipr/IImageToFeatureProcessor.h>
 
-
 // IACF includes
 #include <iocv/COcvIntrinsicCameraCalibration.h>
 
@@ -49,7 +48,6 @@ protected:
 	{
 		return parent.m_productPtr.IsValid() ? parent.m_productPtr.GetPtr() : NULL;
 	}
-
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
