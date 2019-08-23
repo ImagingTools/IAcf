@@ -27,7 +27,7 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, COcvIntrinsicCameraCalibration, ExtractCalibration);
 		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, i2d::ICalibration2d, ExtractCalibration);
 		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, iser::ISerializable, ExtractCalibration);
-		I_REGISTER_INTERFACE(i2d::ICalibration2d);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN(m_pointGridExtractorCompPtr, "PointGridExtractor", "Extractor of the point grid on image", true, "PointGridExtractor");
 		I_ASSIGN(m_cellSizeParamId, "CellSizeParamsId", "ID of point grid cell size in parameter set (type imeas::INumericValue): cell size in logical units", false, "CellSize");
@@ -35,7 +35,6 @@ public:
 		I_ASSIGN(m_fixK2AttrPtr, "FixK2", "K2 radial distortion coefficient is not changed during the optimization", false, false);
 		I_ASSIGN(m_fixK3AttrPtr, "FixK3", "K3 radial distortion coefficient is not changed during the optimization", false, false);
 		I_ASSIGN(m_fixPrincipalPointAttrPtr, "FixPrincipalPoint", "The principal point is not changed during the global optimization", false, false);
-		I_ASSIGN(m_outputCalibrationObjectCompPtr, "OutputCalibrationObject", "Optional copy of result calibration to external object", false, "OutputCalibrationObject");
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -60,7 +59,6 @@ private:
 	I_ATTR(bool, m_fixK2AttrPtr);
 	I_ATTR(bool, m_fixK3AttrPtr);
 	I_ATTR(bool, m_fixPrincipalPointAttrPtr);
-	I_REF(i2d::ICalibration2d, m_outputCalibrationObjectCompPtr);
 };
 
 

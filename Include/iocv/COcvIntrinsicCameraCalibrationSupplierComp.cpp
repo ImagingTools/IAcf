@@ -178,12 +178,6 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 		result.SetCameraMatrix(cameraMatrix);
 		result.SetDistorsion(distorsionCoeffs);
 
-		if (m_outputCalibrationObjectCompPtr.IsValid()){
-			if (!m_outputCalibrationObjectCompPtr->CopyFrom(result)){
-				SendInfoMessage(0, QObject::tr("Unable to copy result calibration to output object"), "OcvIntrinsicCalibrationSupplier");
-			}
-		}
-
 		return WS_OK;
 	}
 	catch (const cv::Exception& e){
