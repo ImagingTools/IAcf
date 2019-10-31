@@ -13,7 +13,7 @@ win32{
 	}
 
 	!isEmpty(MSVC_VER){
-		contains(MSVC_VER, "14.0") | contains(MSVC_VER, "15.0"){
+		contains(MSVC_VER, "14.0") | contains(MSVC_VER, "15.0") | contains(MSVC_VER, "16.0"){
 			SUBDIRS += iocv
 			iocv.file = ../../Include/iocv/QMake/iocv.pro
 		}
@@ -66,7 +66,7 @@ win32{
 	}
 	
 	!isEmpty(MSVC_VER){
-		contains(MSVC_VER, "14.0") | contains(MSVC_VER, "15.0"){
+		contains(MSVC_VER, "14.0") | contains(MSVC_VER, "15.0") | contains(MSVC_VER, "16.0"){
 			SUBDIRS += OpenCvPck
 			OpenCvPck.file = ../../Impl/OpenCvPck/QMake/OpenCvPck.pro
 		}
