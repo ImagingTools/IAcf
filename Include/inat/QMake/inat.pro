@@ -1,6 +1,6 @@
-include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
-
 TARGET = inat
+
+include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
 INCLUDEPATH += ../..
 

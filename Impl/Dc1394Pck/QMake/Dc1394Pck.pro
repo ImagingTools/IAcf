@@ -1,7 +1,7 @@
+TARGET = Dc1394Pck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
-
-TARGET = Dc1394Pck
 
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += $(ACFSLNDIR)/Include
@@ -13,3 +13,4 @@ macx{
 	LIBS += -L$(ACFSLNDIR)/Lib/$$COMPILER_DIR -licam
 	LIBS += -L$(LIBDC1394_2_2_0)/lib -ldc1394
 }
+

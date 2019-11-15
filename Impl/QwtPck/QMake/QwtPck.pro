@@ -1,6 +1,5 @@
 TARGET = QwtPck
 
-
 include(../../../../Acf/Config/QMake/ComponentConfig.pri)
 include(../../../../Acf/Config/QMake/QtBaseConfig.pri)
 include(../../../../Acf/Config/QMake/AcfStd.pri)
@@ -20,3 +19,4 @@ LIBS += -L$(ACFDIR)/Lib/$$COMPILER_DIR -liprm
 win32{
 	LIBS += -lopengl32 -lglu32
 }
+

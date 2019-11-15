@@ -1,6 +1,7 @@
+TARGET = iqaxmm
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
-TARGET = iqaxmm
 QT += multimedia axcontainer
 
 INCLUDEPATH += $(ACFSLNDIR)/Include
