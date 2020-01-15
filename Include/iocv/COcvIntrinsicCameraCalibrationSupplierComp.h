@@ -5,6 +5,7 @@
 #include <iinsp/TSupplierCompWrap.h>
 #include <iimg/IBitmapProvider.h>
 #include <iipr/IImageToFeatureProcessor.h>
+#include <icalib/CAffineCalibration2d.h>
 
 
 // IACF includes
@@ -24,7 +25,6 @@ public:
 	
 	I_BEGIN_COMPONENT(COcvIntrinsicCameraCalibrationSupplierComp);
 		I_REGISTER_SUBELEMENT(ResultCalibration);
-		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, COcvIntrinsicCameraCalibration, ExtractCalibration);
 		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, i2d::ICalibration2d, ExtractCalibration);
 		I_REGISTER_SUBELEMENT_INTERFACE(ResultCalibration, iser::ISerializable, ExtractCalibration);
 		I_REGISTER_INTERFACE(i2d::ICalibration2d);
@@ -38,6 +38,8 @@ public:
 		I_ASSIGN(m_fixPrincipalPointAttrPtr, "FixPrincipalPoint", "The principal point is not changed during the global optimization", false, false);
 	I_END_COMPONENT;
 
+	COcvIntrinsicCameraCalibrationSupplierComp();
+
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ICalibration2d* GetCalibration() const override;
 
@@ -48,9 +50,8 @@ protected:
 	template <class InteraceType>
 	static InteraceType* ExtractCalibration(COcvIntrinsicCameraCalibrationSupplierComp& parent)
 	{
-		return parent.m_productPtr.IsValid() ? parent.m_productPtr.GetPtr() : NULL;
+		return parent.m_productPtr.IsValid() ? parent.m_productPtr.GetPtr() : static_cast<InteraceType*>(&parent.m_emptyCalibration);
 	}
-
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
@@ -60,6 +61,9 @@ private:
 	I_ATTR(bool, m_fixK2AttrPtr);
 	I_ATTR(bool, m_fixK3AttrPtr);
 	I_ATTR(bool, m_fixPrincipalPointAttrPtr);
+
+private:
+	icalib::CAffineCalibration2d m_emptyCalibration;
 };
 
 

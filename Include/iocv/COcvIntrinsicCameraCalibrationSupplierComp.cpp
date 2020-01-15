@@ -82,6 +82,12 @@ namespace iocv
 
 // reimplemented (i2d::ICalibrationProvider)
 
+COcvIntrinsicCameraCalibrationSupplierComp::COcvIntrinsicCameraCalibrationSupplierComp()
+{
+	m_emptyCalibration.SetTransformation(i2d::CAffine2d::GetIdentity());
+}
+
+
 const i2d::ICalibration2d* COcvIntrinsicCameraCalibrationSupplierComp::GetCalibration() const
 {
 	return GetWorkProduct();
@@ -94,6 +100,8 @@ const i2d::ICalibration2d* COcvIntrinsicCameraCalibrationSupplierComp::GetCalibr
 
 int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& result) const
 {
+	result.ResetData();
+
 	try {
 		if (!m_bitmapProviderCompPtr.IsValid()){
 			SendErrorMessage(0, "Bitmap provider is undefined");

@@ -125,7 +125,7 @@ bool COcvIntrinsicCameraCalibration::GetPositionAt(
 bool COcvIntrinsicCameraCalibration::GetInvPositionAt(
 			const i2d::CVector2d& transfPosition,
 			i2d::CVector2d& result,
-			ExactnessMode /*mode*/) const
+			ExactnessMode mode) const
 {
 	std::vector<cv::Point2f> input(1);
 	input[0].x = transfPosition.GetX();
@@ -134,7 +134,13 @@ bool COcvIntrinsicCameraCalibration::GetInvPositionAt(
 
 	cv::undistortPoints(input, output, m_cameraMatrix, m_distorsionCoeff);
 
-	const cv::Point2f& out = output[0];
+	cv::Point2f out = output[0];
+
+	if (mode == ExactnessMode::EM_VISUAL) {
+		out.x = out.x * m_cameraMatrix(0, 0) + m_cameraMatrix(0, 2);// OpencCV bug? cv::undistortPoints(input, output, m_cameraMatrix, m_distorsionCoeff); m_cameraMatrix was not used!
+		out.y = out.y * m_cameraMatrix(1, 1) + m_cameraMatrix(1, 2);
+	}
+
 	result.SetX(out.x);
 	result.SetY(out.y);
 
