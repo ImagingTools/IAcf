@@ -1,7 +1,7 @@
 
 INCLUDEPATH += $(OPENCVDIR_3_3_1)/include
 
-LIBS += -L$(OPENCVDIR_3_3_1)/Lib/$$COMPILER_DIR
+LIBS += -L$(OPENCVDIR_3_3_1)/lib/$$COMPILER_DIR
 
 unix{
 	LIBS += -lopencv_highgui -lopencv_core -lopencv_features2d -lopencv_objdetect -lopencv_imgproc -lopencv_videoio -lopencv_imgcodecs -lopencv_calib3d -lopencv_photo331
