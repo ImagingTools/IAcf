@@ -186,19 +186,24 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 		result.SetCameraMatrix(cameraMatrix);
 		result.SetDistorsion(distorsionCoeffs);
 
+		m_lastCalibration = result;
+
 		return WS_OK;
 	}
 	catch (const cv::Exception& e){
 		SendCriticalMessage(0, e.what());
 
+		m_lastCalibration.ResetData();
 		return WS_FAILED;
 	}
 	catch (...){
 		SendCriticalMessage(0, QObject::tr("Unknown exception"));
 
+		m_lastCalibration.ResetData();
 		return WS_FAILED;
 	}
 
+	m_lastCalibration.ResetData();
 	return WS_FAILED;
 }
 
