@@ -40,13 +40,25 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 		int regionLeft = 0;
 		int regionTop = 0;
 
-		if (!m_defaultRectangleCompPtr.IsValid()) {
+		i2d::CRectangle aoi;
+
+		if (m_defaultRectangleCompPtr.IsValid()) {
+			aoi.CopyFrom(*m_defaultRectangleCompPtr);
+		}
+		else if (m_aoiRecangleParamIdAttrPtr.IsValid()) {
+			iprm::TParamsPtr<i2d::CRectangle> rectParamPtr(paramsPtr, *m_aoiRecangleParamIdAttrPtr);
+			if (rectParamPtr.IsValid()) {
+				aoi.CopyFrom(*rectParamPtr);
+			}
+		}
+
+		if (aoi.IsEmpty()) {
 			aoiBitmap.CopyFrom(image);
 		}
 		else {
 			iimg::CScanlineMask mask;
 			const i2d::CRect inputRect(image.GetBoundingBox());
-			mask.CreateFromRectangle(*m_defaultRectangleCompPtr, &inputRect);
+			mask.CreateFromRectangle(aoi, &inputRect);
 
 			aoiBitmap.CreateBitmap(image.GetPixelFormat(), mask.GetImageSize());
 
