@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl_PL">
+<TS version="2.1" language="jp_JP">
 <context>
     <name>Attribute</name>
     <message>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/IacfLoc/CIacfLoc.cpp" line="+29"/>
         <source>IACF</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <location line="+12"/>
-        <location line="+16"/>
-        <source>Filter Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-34"/>
+        <location line="+2"/>
         <source>Image Binarization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location line="+4"/>
-        <source>pix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-12"/>
+        <location line="+2"/>
         <location line="+10"/>
         <source>%</source>
         <translation type="unfinished"></translation>
@@ -38,12 +25,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+2"/>
+        <location line="+12"/>
+        <location line="+16"/>
+        <source>Filter Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-26"/>
         <source>Invert Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+2"/>
+        <location line="+4"/>
+        <source>pix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Median</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63,23 +63,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>GrayImage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+2"/>
-        <source>Morphological Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-6"/>
         <source>EdgeExtractor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>SmoothedImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>GrayImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Morphological Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -89,7 +89,7 @@
         <location filename="../../../Include/iqwt/CHistogramViewComp.ui" line="+78"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqwt/ui_CHistogramViewComp.h" line="+95"/>
         <source>Statistics</source>
-        <translation>Statystyka</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -98,13 +98,13 @@
         <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.ui" line="+41"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+81"/>
         <source>-</source>
-        <translation>-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h" line="+1"/>
         <source>Cancel</source>
-        <translation>Przerwij</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -113,82 +113,82 @@
         <location filename="../../../Include/idc1394/CSimpleCameraComp.cpp" line="+121"/>
         <location line="+40"/>
         <source>Cannot create image in frame format (Gray)</source>
-        <translation>Nie mogę stworzyć obrazu w formacie klatki (Gray)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-20"/>
         <source>Cannot create image in frame format (RGB)</source>
-        <translation>Nie mogę stworzyć obrazu w formacie klatki (RGB)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+34"/>
         <source>Cannot create image in frame format (Gray16)</source>
-        <translation>Nie mogę stworzyć obrazu w formacie klatki (Gray16)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Camera image format is not supported</source>
-        <translation>Format obrazu z kamery nie jest wspierany</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+97"/>
         <source>Could not initialize library</source>
-        <translation>Nie mogę zainicjować biblioteki</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
         <source>Could not set ISO speed</source>
-        <translation>Nie można ustawić prędkości transferu ISO</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Could not start camera ISO transmission</source>
-        <translation>Nie można wystartować transmisji ISO</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Failed to initialize camera with guid %1</source>
-        <translation>Inicjacja kamery z GUID %1 nie powiodła się</translation>
-    </message>
-    <message>
-        <location line="-30"/>
+        <location line="+5"/>
         <source>Could not set video mode</source>
-        <translation>Nie mogę ustawić trybu video</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Could not set frame rate</source>
-        <translation>Nie mogę ustawić częstości klatek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Could not setup camera</source>
-        <translation>Nie mogę zainicjować pobierania z kamery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Using camera with GUID %1</source>
-        <translation>Używana kamera z GUID %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+5"/>
+        <source>Could not start camera ISO transmission</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Failed to initialize camera with guid %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>No cameras found</source>
-        <translation>Nie znaleziono kamer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Failed to enumerate cameras</source>
-        <translation>Nie można wyliczyć kamer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../Include/iocv/CCorrSearchProcessorComp.cpp" line="+220"/>
         <source>Found model, %1% score</source>
-        <translation>Znaleziono model, zgodność %1%</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Model search took %1 ms</source>
-        <translation>Szukanie modelu trwało %1 ms</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../Include/iocv/CHoughBasedSearchProcessorComp.cpp" line="+307"/>
@@ -210,11 +210,6 @@
         <location line="+11"/>
         <source>Found %1 blob(s)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+62"/>
-        <source>Channel %1</source>
-        <translation type="unfinished">Kanał %1</translation>
     </message>
     <message>
         <location filename="../../../Include/iocv/COcvIntrinsicCameraCalibrationSupplierComp.cpp" line="+222"/>
@@ -293,98 +288,103 @@
         <source>Input image is not defined</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+62"/>
+        <source>Channel %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>iqsci::CTextEditor</name>
     <message>
         <location filename="../../../Include/iqsci/CTextEditor.cpp" line="+122"/>
         <source>To &amp;Lowercase</source>
-        <translation>Do &amp;małych liter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Lowercase</source>
-        <translation>Małe litery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Convert selected block to lowercase characters</source>
-        <translation>Zmienia zaznaczony blok na małe litery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>To &amp;Uppercase</source>
-        <translation>Do &amp;wielkich liter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Uppercase</source>
-        <translation>Wielkie litery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Convert selected block to uppercase characters</source>
-        <translation>Zmienia zaznaczony blok na wielkie litery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>&amp;Language</source>
-        <translation>&amp;Język</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Language</source>
-        <translation>Język</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Select language for syntax highlighting</source>
-        <translation>Wybierz język używany do poświetlania składni</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show &amp;Indentation Guides</source>
-        <translation>Pokaż &amp;Wcięcia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show Indentation Guides</source>
-        <translation>Pokaż Wcięcia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show indentation guides</source>
-        <translation>Pokaż wcięcia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Use &amp;Folding</source>
-        <translation>Użyj &amp;zwijania</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Use Folding</source>
-        <translation>Używaj zwijania</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Use folding</source>
-        <translation>Użyj zwijania</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show &amp;Line Number</source>
-        <translation>Pokaż &amp;numery linii</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show Line Number</source>
-        <translation>Pokaż numery linii</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show current line number</source>
-        <translation>Pokaż numery linii</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -392,72 +392,72 @@
     <message>
         <location filename="../../../Include/iqwt3d/CSurfaceViewComp.cpp" line="+55"/>
         <source>&amp;View</source>
-        <translation>&amp;Widok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>3D-plot menu</source>
-        <translation>Menu wykresu 3D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Enable Lighting</source>
-        <translation>Włącz podświetlenie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Enable lighting effects in the 3D-plot</source>
-        <translation>Włącza podświetlenie wykresu 3D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enable Orthogonal View</source>
-        <translation>Włącz rzut ortogonalny</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Enable orthogonal view in the 3D-plot</source>
-        <translation>Włącza rzut ortogonalny dla wykresu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enable Auto Scale</source>
-        <translation>Włącz automatyczną skalę</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Enable auto scale of the plot</source>
-        <translation>Włącza automatyczne skalowanie wykresu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show Mesh</source>
-        <translation>Pokaż szkielet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Enable mesh drawing on the plot</source>
-        <translation>Włącz szkielet wykresu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enable Shader</source>
-        <translation>Włącza shader dla wykresu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Enable shader</source>
-        <translation>Włącz shader</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show Legend</source>
-        <translation>Pokaż legendę</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Show plot legend</source>
-        <translation>Pokazuje legendę wykresu</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -465,12 +465,12 @@
     <message>
         <location filename="../../../Include/iqwt/CProgressHistoryGuiComp.cpp" line="+175"/>
         <source>Finished</source>
-        <translation>Skończone</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
         <source>%1 Sessions</source>
-        <translation>Liczba sesji: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -478,12 +478,12 @@
     <message>
         <location filename="../../../Include/iqwt/CQwtDataSequenceViewComp.cpp" line="+66"/>
         <source>Channel %1</source>
-        <translation>Kanał %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
         <source>All Channels</source>
-        <translation>Wszystkie kanały</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
