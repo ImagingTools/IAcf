@@ -35,11 +35,20 @@ include_directories("${ACFDIR}/Impl")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
+#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
 set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}/GeneratedFiles")
+#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}/GeneratedFiles")
 message("IACF AUX_INCLUDE_DIR " "${AUX_INCLUDE_DIR}")
+
 
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
+
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
+
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${AUX_INCLUDE_DIR}/../")
 
@@ -61,7 +70,7 @@ endif()
 add_subdirectory("${IMPL_DIR}/IacfLoc/CMake" "${AUX_INCLUDE_DIR}/IacfLoc")
 add_subdirectory("${IMPL_DIR}/OpenCvPck/CMake" "${AUX_INCLUDE_DIR}/OpenCvPck")
 add_subdirectory("${IMPL_DIR}/QwtPck/CMake" "${AUX_INCLUDE_DIR}/QwtPck")
-add_subdirectory("${IMPL_DIR}/WinPck/CMake" "${AUX_INCLUDE_DIR}/WinPck")
+#add_subdirectory("${IMPL_DIR}/WinPck/CMake" "${AUX_INCLUDE_DIR}/WinPck")
 #add_subdirectory("${IMPL_DIR}/FfMpegPck/CMake" "${AUX_INCLUDE_DIR}/FfMpegPck")
 #add_subdirectory("${IMPL_DIR}/QaxPck/CMake" "${AUX_INCLUDE_DIR}/QaxPck")
 #add_subdirectory("${IMPL_DIR}/QsciPck/CMake" "${AUX_INCLUDE_DIR}/QsciPck")

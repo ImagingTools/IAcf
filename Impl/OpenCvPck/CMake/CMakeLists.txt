@@ -1,6 +1,7 @@
 project(OpenCvPck LANGUAGES CXX)
 
-link_directories($ENV{OPENCVDIR_3_3_1}/lib/${TARGETNAME})
+link_directories($ENV{OPENCVDIR_3_3_1}/lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
+#link_directories($ENV{OPENCVDIR_3_3_1}/lib/${TARGETNAME})
 message("LIB_OPENCVDIR_3_3_1 " $ENV{OPENCVDIR_3_3_1}/lib/${TARGETNAME})
 
 include(${ACFDIR}/Config/CMake/ComponentConfig.cmake)
