@@ -8,6 +8,6 @@ QT += xml
 INCLUDEPATH += $(QSCINTILLA)/Include
 INCLUDEPATH += $(QSCINTILLA)/Qt4Qt5
 
-FORMS += $$_PRO_FILE_PWD_/../*.ui
+FORMS += $$files($$_PRO_FILE_PWD_/../*.ui, true)
 UI_DIR = ../../GeneratedFiles/iqsci
 
