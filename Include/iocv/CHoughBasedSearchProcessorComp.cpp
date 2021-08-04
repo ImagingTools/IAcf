@@ -13,8 +13,7 @@
 #include <iipr/CSearchFeature.h>
 
 // OpenCV includes
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
+#include "opencv2/opencv.hpp"
 
 
 namespace iocv
@@ -254,17 +253,15 @@ int CHoughBasedSearchProcessorComp::DoCircleSearch(
 	result.ResetFeatures();
 
 	cv::Mat cvImage(aoi.GetHeight(), aoi.GetWidth(), CV_8UC1, (quint8*)image.GetLinePtr(aoi.GetTop()) + aoi.GetLeft(), image.GetLineBytesCount());
-	IplImage inputImage(cvImage);
 
 	i2d::CVector2d regionOffset(aoi.GetLeft(), aoi.GetTop());
 
 	int foundModelsCount = 0;
-	CvMemStorage* storagePtr = cvCreateMemStorage(0);
-	CvSeq* circles = cvHoughCircles(&inputImage, storagePtr, CV_HOUGH_GRADIENT, scale, minDistance, edgeThreshold, houghThreshold, minRadius, maxRadius);
+	std::vector<cv::Vec3f> circles;
+	cv::HoughCircles(cvImage, circles, cv::HOUGH_GRADIENT, scale, minDistance, edgeThreshold, houghThreshold, minRadius, maxRadius);
 
-	foundModelsCount = circles->total;
-	for (int circleIndex = 0; circleIndex < circles->total; circleIndex++){
-		cv::Vec3f circle = *((cv::Vec3f*)cvGetSeqElem(circles, circleIndex));
+	for (size_t circleIndex = 0; circleIndex < circles.size(); circleIndex++){
+		const cv::Vec3f& circle = circles[circleIndex];
 
 		CircleFeature* circleFeaturePtr = new CircleFeature(1.0);
 
@@ -278,8 +275,6 @@ int CHoughBasedSearchProcessorComp::DoCircleSearch(
 
 		result.AddFeature(circleFeaturePtr);
 	}
-
-	cvReleaseMemStorage(&storagePtr);
 
 	if (IsVerboseEnabled()){
 		SendVerboseMessage(QObject::tr("Circle search took %1 ms").arg(timer.elapsed()));

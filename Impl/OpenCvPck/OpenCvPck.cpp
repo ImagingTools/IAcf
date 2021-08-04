@@ -84,9 +84,10 @@ I_EXPORT_COMPONENT(
 			"Undistort Image" IM_TAG("Processor"));
 
 I_EXPORT_COMPONENT(
-			LensDistorsionCalibrationProvider,
-			"Gets lens distorsion part from intrinsic camera calibration",
-			"Calibration Distortion" IM_TAG("Supplier"));
+			OpenCvDenoisingProcessor,
+			"Non-local Means Denoising processor",
+			"Denoising Processor");
+
 
 } // namespace OpenCvPck
 

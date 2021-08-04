@@ -15,24 +15,22 @@ namespace iocv
 
 COcvAcquisitionComp::COcvAcquisitionComp()
 {
-	m_supportedCameraDriversMap[CV_CAP_MIL] = "Matrox Image Library";
-	m_supportedCameraDriversMap[CV_CAP_VFW] = "Video for Windows";
-	m_supportedCameraDriversMap[CV_CAP_IEEE1394] = "FireWire (IEEE 1394)";
-	m_supportedCameraDriversMap[CV_CAP_TYZX] = "TYZX (Stereo)";
-	m_supportedCameraDriversMap[CV_CAP_QT] = "Quick Time";
-	m_supportedCameraDriversMap[CV_CAP_UNICAP] = "Unicap";
-	m_supportedCameraDriversMap[CV_CAP_DSHOW] = "DirectShow";
-	m_supportedCameraDriversMap[CV_CAP_MSMF] = "Microsoft Media Foundation";
-	m_supportedCameraDriversMap[CV_CAP_PVAPI] = "Prosilica GigE SDK";
-	m_supportedCameraDriversMap[CV_CAP_OPENNI] = "OpenNI (Kinect)";
-	m_supportedCameraDriversMap[CV_CAP_ANDROID] = "Android Capture";
-	m_supportedCameraDriversMap[CV_CAP_XIAPI] = "XIMEA";
-	m_supportedCameraDriversMap[CV_CAP_AVFOUNDATION] = "AVFoundation Framework for iOS";
-	m_supportedCameraDriversMap[CV_CAP_GIGANETIX] = "Smartek Giganetix";
-	m_supportedCameraDriversMap[CV_CAP_INTELPERC] = "Intel Perceptual Computing";
-	m_supportedCameraDriversMap[CV_CAP_ARAVIS] = "Aravis GigE";
-	m_supportedCameraDriversMap[CV_CAP_OPENNI2] = "Open NI2";
-	m_supportedCameraDriversMap[CV_CAP_FFMPEG] = "FFMPEG";
+	m_supportedCameraDriversMap[cv::CAP_VFW] = "Video for Windows";
+	m_supportedCameraDriversMap[cv::CAP_IEEE1394] = "FireWire (IEEE 1394)";
+	m_supportedCameraDriversMap[cv::CAP_QT] = "Quick Time";
+	m_supportedCameraDriversMap[cv::CAP_UNICAP] = "Unicap";
+	m_supportedCameraDriversMap[cv::CAP_DSHOW] = "DirectShow";
+	m_supportedCameraDriversMap[cv::CAP_MSMF] = "Microsoft Media Foundation";
+	m_supportedCameraDriversMap[cv::CAP_PVAPI] = "Prosilica GigE SDK";
+	m_supportedCameraDriversMap[cv::CAP_OPENNI] = "OpenNI (Kinect)";
+	m_supportedCameraDriversMap[cv::CAP_ANDROID] = "Android Capture";
+	m_supportedCameraDriversMap[cv::CAP_XIAPI] = "XIMEA";
+	m_supportedCameraDriversMap[cv::CAP_AVFOUNDATION] = "AVFoundation Framework for iOS";
+	m_supportedCameraDriversMap[cv::CAP_GIGANETIX] = "Smartek Giganetix";
+	m_supportedCameraDriversMap[cv::CAP_INTELPERC] = "Intel Perceptual Computing";
+	m_supportedCameraDriversMap[cv::CAP_ARAVIS] = "Aravis GigE";
+	m_supportedCameraDriversMap[cv::CAP_OPENNI2] = "Open NI2";
+	m_supportedCameraDriversMap[cv::CAP_FFMPEG] = "FFMPEG";
 
 	m_deviceInfoList.SetParent(this);
 }
@@ -78,8 +76,8 @@ istd::CIndex2d COcvAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* params
 {
 	CameraDevice* selectedDevicePtr = GetSelectedCameraDevice(paramsPtr);
 	if (selectedDevicePtr != NULL){
-		int imageWidth = (int)selectedDevicePtr->get(CV_CAP_PROP_FRAME_WIDTH);
-		int imageHeight = (int)(int)selectedDevicePtr->get(CV_CAP_PROP_FRAME_HEIGHT);
+		int imageWidth = (int)selectedDevicePtr->get(cv::CAP_PROP_FRAME_WIDTH);
+		int imageHeight = (int)(int)selectedDevicePtr->get(cv::CAP_PROP_FRAME_HEIGHT);
 	
 		return istd::CIndex2d(imageWidth, imageHeight);
 	}

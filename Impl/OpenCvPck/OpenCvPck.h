@@ -21,7 +21,7 @@
 #include <iocv/COcvIntrinsicCameraCalibration.h>
 #include <iocv/COcvIntrinsicCameraCalibrationSupplierComp.h>
 #include <iocv/COcvUndistortImageProcessorComp.h>
-#include <iocv/CLensDistorsionCalibrationProviderComp.h>
+#include <iocv/COcvDenoisingProcessorComp.h>
 
 
 /**
@@ -49,7 +49,7 @@ typedef icomp::TModelCompWrap<
 						iser::ISerializable>> OpenCvIntrinsicCameraCalibration;
 typedef icomp::TModelCompWrap<iocv::COcvIntrinsicCameraCalibrationSupplierComp> OpenCvIntrinsicCameraCalibrationSupplier;
 typedef iocv::COcvUndistortImageProcessorComp OpenCvUndistortImageProcessor;
-typedef icomp::TModelCompWrap<iocv::CLensDistorsionCalibrationProviderComp> LensDistorsionCalibrationProvider;
+typedef iocv::COcvDenoisingProcessorComp OpenCvDenoisingProcessor;
 
 
 } // namespace OpenCvPck

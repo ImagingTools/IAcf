@@ -3,7 +3,6 @@
 
 // OpenCV includes
 #include "opencv2/opencv.hpp"
-#include <opencv/highgui.h>
 
 // Qt includes
 #include <QtCore/QElapsedTimer>
@@ -172,7 +171,7 @@ int CCorrSearchProcessorComp::DoModelSearch(
 	cv::Mat cvModel(modelSize.GetX(), modelSize.GetY(), CV_8UC1, (quint8*)modelImage.GetLinePtr(0), modelImage.GetLineBytesCount());
 
 	cv::Mat correlationMap;
-	cv::matchTemplate(cvImage, cvModel, correlationMap, CV_TM_CCOEFF_NORMED);
+	cv::matchTemplate(cvImage, cvModel, correlationMap, cv::TM_CCOEFF_NORMED);
 
 	/// Localizing the best match with minMaxLoc
 	double minVal;

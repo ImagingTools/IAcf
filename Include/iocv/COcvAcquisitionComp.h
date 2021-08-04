@@ -1,12 +1,8 @@
 #ifndef iocv_COcvAcquisitionComp_included
 #define iocv_COcvAcquisitionComp_included
 
-
 // OpenCV includes
 #include <opencv2/opencv.hpp>
-#include <opencv/highgui.h>
-#undef min
-#undef max
 
 // ACF includes
 #include <istd/TPointerVector.h>

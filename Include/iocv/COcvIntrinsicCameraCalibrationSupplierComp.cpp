@@ -152,18 +152,18 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 		std::vector<cv::Mat> rvecs; // extrinsic camera rotation matrix
 		std::vector<cv::Mat> tvecs; // extrinsic camera translation
 
-		int flags = CV_CALIB_FIX_ASPECT_RATIO;
+		int flags = cv::CALIB_FIX_ASPECT_RATIO;
 
 		if (m_fixK2AttrPtr.IsValid() && *m_fixK2AttrPtr){
-			flags |= CV_CALIB_FIX_K2;
+			flags |= cv::CALIB_FIX_K2;
 		}
 
 		if (m_fixK3AttrPtr.IsValid() && *m_fixK3AttrPtr){
-			flags |= CV_CALIB_FIX_K3;
+			flags |= cv::CALIB_FIX_K3;
 		}
 
 		if (m_fixPrincipalPointAttrPtr.IsValid() && *m_fixPrincipalPointAttrPtr){
-			flags |= CV_CALIB_FIX_PRINCIPAL_POINT;
+			flags |= cv::CALIB_FIX_PRINCIPAL_POINT;
 		}
 
 		//Find intrinsic and extrinsic camera parameters

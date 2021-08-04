@@ -127,6 +127,20 @@ bool COcvIntrinsicCameraCalibration::GetInvPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode mode) const
 {
+	bool emptyDistortion = true;
+
+	for (int i = 0; i < m_distorsionCoeff.rows; i++) {
+		if (std::abs(m_distorsionCoeff(i, 0)) > I_EPSILON) {
+			emptyDistortion = false;
+			break;
+		}
+	}
+
+	if (emptyDistortion) {
+		result = transfPosition;
+		return true;
+	}
+
 	std::vector<cv::Point2f> input(1);
 	input[0].x = transfPosition.GetX();
 	input[0].y = transfPosition.GetY();
@@ -316,11 +330,11 @@ bool COcvIntrinsicCameraCalibration::ResetData(CompatibilityMode /*mode*/)
 
 void COcvIntrinsicCameraCalibration::Reset()
 {
-	m_cameraMatrix = 0.0;
+	m_cameraMatrix.all(0.0);
 	m_cameraMatrix(0, 0) = 1.0;
 	m_cameraMatrix(1, 1) = 1.0;
 	m_cameraMatrix(2, 2) = 1.0;
-	m_distorsionCoeff = 0.0;
+	m_distorsionCoeff.all(0.0);
 }
 
 

@@ -83,7 +83,7 @@ private:
 
 	struct OpenCvOption
 	{
-		OpenCvOption(int cvMode = CV_CHAIN_APPROX_NONE, const QString& name = QString(), const QString& description = QString())
+		OpenCvOption(int cvMode = cv::CHAIN_APPROX_NONE, const QString& name = QString(), const QString& description = QString())
 		{
 			this->cvMode = cvMode;
 			this->name = name;

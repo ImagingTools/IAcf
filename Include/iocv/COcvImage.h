@@ -3,8 +3,8 @@
 
 
 // OpenCV includes
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include "opencv2/opencv.hpp"
+
 #undef min
 #undef max
 
