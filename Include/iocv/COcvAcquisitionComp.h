@@ -1,6 +1,7 @@
 #ifndef iocv_COcvAcquisitionComp_included
 #define iocv_COcvAcquisitionComp_included
 
+
 // OpenCV includes
 #include <opencv2/opencv.hpp>
 
