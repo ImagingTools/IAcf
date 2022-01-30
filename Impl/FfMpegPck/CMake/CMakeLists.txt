@@ -7,7 +7,7 @@ include(${ACFDIR}/Config/CMake/AcfStd.cmake)
 
 
 include_directories("$ENV{FFMPEGDIR_20121010}/include" "$ENV{FFMPEGDIR_20121010}/msinttypes")
-include_directories("$ENV{OPENCVDIR_3_3_1}/include")
+include_directories("$ENV{OPENCVDIR_4_5_3}/include")
 
 target_link_directories(${PROJECT_NAME} PUBLIC $ENV{FFMPEGDIR_20121010}/lib/${TARGETNAME})
 

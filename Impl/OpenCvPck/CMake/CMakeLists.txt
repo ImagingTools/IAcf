@@ -1,12 +1,11 @@
 project(OpenCvPck LANGUAGES CXX)
 
-link_directories($ENV{OPENCVDIR_3_3_1}/lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
-#link_directories($ENV{OPENCVDIR_3_3_1}/lib/${TARGETNAME})
-message("LIB_OPENCVDIR_3_3_1 " $ENV{OPENCVDIR_3_3_1}/lib/${TARGETNAME})
+link_directories($ENV{OPENCVDIR_4_5_3}/lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
+message("LIB_OPENCVDIR_4_5_3 " $ENV{OPENCVDIR_4_5_3}/lib/${TARGETNAME})
 
 include(${ACFDIR}/Config/CMake/ComponentConfig.cmake)
 include(${ACFDIR}/Config/CMake/AcfStd.cmake)
-include(../../../Config/CMake/OpenCV_3_3_1.cmake)
+include(../../../Config/CMake/OpenCV_4_5_3.cmake)
 
 target_link_libraries(${PROJECT_NAME} iblob imeas iipr icalib iedge iinsp )
 
