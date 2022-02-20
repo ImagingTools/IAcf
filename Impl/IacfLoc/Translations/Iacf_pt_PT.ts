@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="pt_PT">
 <context>
     <name>Attribute</name>
     <message>
@@ -9,25 +9,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+2"/>
+        <source>Image Binarization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <location line="+16"/>
         <location line="+16"/>
         <source>Filter Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-34"/>
-        <source>Image Binarization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+4"/>
-        <source>pix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-10"/>
+        <location line="-30"/>
         <location line="+8"/>
         <source>%</source>
         <translation type="unfinished"></translation>
@@ -43,7 +37,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+2"/>
+        <location line="+4"/>
+        <source>pix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Median</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63,23 +63,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>GrayImage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location line="+2"/>
-        <source>Morphological Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-6"/>
         <source>EdgeExtractor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>SmoothedImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>GrayImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Morphological Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -222,11 +222,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+62"/>
-        <source>Channel %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../../Include/iocv/COcvIntrinsicCameraCalibrationSupplierComp.cpp" line="+222"/>
         <location filename="../../../Include/iocv/COcvPointGridExtractorComp.cpp" line="+261"/>
         <location filename="../../../Include/iocv/COcvUndistortImageProcessorComp.cpp" line="+79"/>
@@ -301,6 +296,11 @@
     <message>
         <location line="+40"/>
         <source>Input image is not defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqwt/CHistogramViewComp.cpp" line="+62"/>
+        <source>Channel %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

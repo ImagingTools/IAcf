@@ -9,8 +9,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
-        <location line="+12"/>
+        <location line="+4"/>
+        <location line="+16"/>
         <location line="+16"/>
         <source>Filter Size</source>
         <translation type="unfinished"></translation>
@@ -27,18 +27,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-12"/>
-        <location line="+10"/>
+        <location line="-10"/>
+        <location line="+8"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-6"/>
         <source>Contrast Offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+2"/>
         <source>Invert Content</source>
         <translation type="unfinished"></translation>
     </message>
@@ -181,7 +181,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iocv/CCorrSearchProcessorComp.cpp" line="+220"/>
+        <location filename="../../../Include/iocv/CCorrSearchProcessorComp.cpp" line="+219"/>
         <source>Found model, %1% score</source>
         <translation type="unfinished"></translation>
     </message>
@@ -191,7 +191,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iocv/CHoughBasedSearchProcessorComp.cpp" line="+307"/>
+        <location filename="../../../Include/iocv/CHoughBasedSearchProcessorComp.cpp" line="+302"/>
         <source>Circle search took %1 ms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -202,12 +202,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+131"/>
-        <source>Blob %1, Position: (%2, %3), Area: %4 px (%5 mm)</source>
+        <location line="+125"/>
+        <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+1"/>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Blob %1, Position: (%2, %3), Area: %4 %5 (%6 %7)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>Found %1 blob(s)</source>
         <translation type="unfinished"></translation>
     </message>
