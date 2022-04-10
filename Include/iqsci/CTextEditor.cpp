@@ -42,7 +42,7 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 		editorLayout = new QVBoxLayout(EditorFrame);
 
 		editorLayout->addWidget(m_scintilla);
-		editorLayout->setMargin(0);
+		editorLayout->setContentsMargins(0,0,0,0);
 		m_scintilla->setFrameStyle(QFrame::NoFrame);
 	}
 

@@ -141,7 +141,7 @@ void CHistogramViewComp::OnGuiCreated()
 	QLayout* layoutPtr = PlotFrame->layout();
 	if (layoutPtr == NULL){
 		layoutPtr = new QVBoxLayout(PlotFrame);
-		layoutPtr->setMargin(0);
+		layoutPtr->setContentsMargins(0,0,0,0);
 	}
 
 	layoutPtr->addWidget(m_plotPtr.GetPtr());
