@@ -1,7 +1,7 @@
 
 INCLUDEPATH += $(OPENCVDIR_4_5_3)/include
 
-LIBS += -L$(OPENCVDIR_4_5_3)/lib/$$COMPILER_DIR
+LIBS += -L$(OPENCVDIR_4_5_3)/lib/$$CONFIGURATION_NAME_$$COMPILER_CODE
 
 win32{
 	CONFIG(release, debug|release){
