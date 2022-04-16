@@ -33,45 +33,39 @@ include_directories("${ACFDIR}/Impl")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
-#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
-set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
-#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
+set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
 message("IACF AUX_INCLUDE_DIR " "${AUX_INCLUDE_DIR}")
 
 
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
 
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
-
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${AUX_INCLUDE_DIR}/../")
 
 # Include
 
-add_subdirectory("${INCLUDE_DIR}/iocv/CMake" "${AUX_INCLUDE_DIR}/iocv")
-add_subdirectory("${INCLUDE_DIR}/iqaxmm/CMake" "${AUX_INCLUDE_DIR}/iqaxmm")
-add_subdirectory("${INCLUDE_DIR}/iqwt/CMake" "${AUX_INCLUDE_DIR}/iqwt")
-add_subdirectory("${INCLUDE_DIR}/iqwt3d/CMake" "${AUX_INCLUDE_DIR}/iqwt3d")
-add_subdirectory("${INCLUDE_DIR}/iwin/CMake" "${AUX_INCLUDE_DIR}/iwin")
+#add_subdirectory("${INCLUDE_DIR}/iocv/CMake" "${AUX_INCLUDE_DIR}/iocv")
+#add_subdirectory("${INCLUDE_DIR}/iqaxmm/CMake" "${AUX_INCLUDE_DIR}/iqaxmm")
+#add_subdirectory("${INCLUDE_DIR}/iqwt/CMake" "${AUX_INCLUDE_DIR}/iqwt")
+#add_subdirectory("${INCLUDE_DIR}/iqwt3d/CMake" "${AUX_INCLUDE_DIR}/iqwt3d")
+#add_subdirectory("${INCLUDE_DIR}/iwin/CMake" "${AUX_INCLUDE_DIR}/iwin")
 #add_subdirectory("${INCLUDE_DIR}/ilibav/CMake" "${AUX_INCLUDE_DIR}/ilibav")
 #add_subdirectory("${INCLUDE_DIR}/iqsci/CMake" "${AUX_INCLUDE_DIR}/iqsci")
 if(APPLE)
-	add_subdirectory("${INCLUDE_DIR}/idc1394/CMake" "${AUX_INCLUDE_DIR}/idc1394")
+#	add_subdirectory("${INCLUDE_DIR}/idc1394/CMake" "${AUX_INCLUDE_DIR}/idc1394")
 endif()
 
 # Impl
 
 add_subdirectory("${IMPL_DIR}/IacfLoc/CMake" "${AUX_INCLUDE_DIR}/IacfLoc")
-add_subdirectory("${IMPL_DIR}/OpenCvPck/CMake" "${AUX_INCLUDE_DIR}/OpenCvPck")
-add_subdirectory("${IMPL_DIR}/QwtPck/CMake" "${AUX_INCLUDE_DIR}/QwtPck")
+#add_subdirectory("${IMPL_DIR}/IacfLoc/CMake" "${AUX_INCLUDE_DIR}/AcfLoc")
+#add_subdirectory("${IMPL_DIR}/OpenCvPck/CMake" "${AUX_INCLUDE_DIR}/OpenCvPck")
+#add_subdirectory("${IMPL_DIR}/QwtPck/CMake" "${AUX_INCLUDE_DIR}/QwtPck")
 #add_subdirectory("${IMPL_DIR}/WinPck/CMake" "${AUX_INCLUDE_DIR}/WinPck")
 #add_subdirectory("${IMPL_DIR}/FfMpegPck/CMake" "${AUX_INCLUDE_DIR}/FfMpegPck")
 #add_subdirectory("${IMPL_DIR}/QaxPck/CMake" "${AUX_INCLUDE_DIR}/QaxPck")
 #add_subdirectory("${IMPL_DIR}/QsciPck/CMake" "${AUX_INCLUDE_DIR}/QsciPck")
 if(APPLE)
-	add_subdirectory("${IMPL_DIR}/Dc1394Pck/CMake" "${AUX_INCLUDE_DIR}/Dc1394Pck")
+#	add_subdirectory("${IMPL_DIR}/Dc1394Pck/CMake" "${AUX_INCLUDE_DIR}/Dc1394Pck")
 endif()
