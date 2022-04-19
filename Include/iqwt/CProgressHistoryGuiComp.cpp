@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QCoreApplication>
+#include <QtGui/QPen>
 
 // Qwt includes
 #include <qwt_plot_layout.h>
