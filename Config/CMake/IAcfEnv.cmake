@@ -10,7 +10,7 @@ endif()
 
 
 if(NOT DEFINED OPENCVDIR_4_5_3)
-	set(OPENCVDIR_4_5_3 "${ACFDIR}/../3rdParty/OpenCV/4.5.3")
+	set(OPENCVDIR_4_5_3 "${ACFPUBLICDIR}/3rdParty/OpenCV/4.5.3")
 endif()
 
 include_directories("${IACFDIR}/AuxInclude/${TARGETNAME}")

@@ -1,8 +1,12 @@
 #include <iqwt/CHistogramViewComp.h>
 
 
+// Qt includes
+#include <QtGui/QPen>
+
 // Qwt includes
 #include <qwt_plot_grid.h>
+#include <qwt_text.h>
 #include <qwt_scale_draw.h>
 
 // ACF-Solutions includes
