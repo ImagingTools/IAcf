@@ -1,4 +1,4 @@
-project(IAcfLoc LANGUAGES CXX)
+project(IacfLoc LANGUAGES CXX)
 
 set(ARXC_CONFIG "${ACFDIR}/Config/AcfConfig.awc")
 set(ARXC_FILES "${PROJECT_SOURCE_DIR}/../${PROJECT_NAME}.acc")
