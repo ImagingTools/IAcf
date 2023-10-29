@@ -1,5 +1,7 @@
 TARGET = QwtPck
 
+greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
 include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
