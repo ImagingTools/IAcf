@@ -20,6 +20,9 @@ endif()
 
 set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
 
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
+find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core Widgets Core Gui Xml Network Svg Concurrent REQUIRED)
+
 include(${ACFDIR}/Config/CMake/ProjectRoot.cmake)
 
 
