@@ -6,10 +6,11 @@
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles>
-        <FilePath>$(ACFSLNDIR)/Config/AcfSlnConfig.awc</FilePath>
+        <FilePath>../../AcfSln/Config/AcfSlnConfig.awc</FilePath>
     </ConfigFiles>
     <PackageDirs>
         <Dir>../Bin/$(ConfigurationName)</Dir>
+ 	<Dir>$(IACFDIR_BUILD)/Bin/$(ConfigurationDir)</Dir>
         <Dir>../Partitura</Dir>
     </PackageDirs>
     <PackageFiles/>
