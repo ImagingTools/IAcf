@@ -7,7 +7,7 @@
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles>
-        <FilePath>../../AcfSln/Config/BaseOnly.awc</FilePath>
+        <FilePath>$(ACFSLNDIR)/Config/BaseOnly.awc</FilePath>
     </ConfigFiles>
     <PackageDirs/>
     <PackageFiles>
