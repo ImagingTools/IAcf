@@ -169,8 +169,6 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 		// improve the found corners' coordinate accuracy for chessboard
 		if (pattern == PT_CHESSBOARD){
 			cv::Mat& viewGray = view;
-			const iimg::IBitmap::PixelFormat pixelFormat = image.GetPixelFormat();
-
 			switch (view.type())
 			{
 			case CV_8UC4:
