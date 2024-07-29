@@ -14,84 +14,59 @@ namespace iqwt
 
 
 CProgressHistoryGuiComp::CProgressHistoryGuiComp()
-:	m_currentId(0),
-	m_cancelsCount(0)
 {
 }
 
 
-// reimplemented (ibase::IProgressManager)
+// reimplemented (ibase::CCumulatedProgressManagerBase)
 
-int CProgressHistoryGuiComp::BeginProgressSession(
-			const QByteArray& progressId,
-			const QString& description,
-			bool isCancelable)
+void CProgressHistoryGuiComp::OpenTask(TaskBase* taskPtr, const TaskInfo& taskInfo, double weight, bool isCancelable)
 {
-	if (m_idToSessionMap.isEmpty()){
-		m_currentId = 0;
-	}
+	BaseClass2::OpenTask(taskPtr, taskInfo, weight, isCancelable);
 
-	int sessionId = m_currentId;
-
-	SessionPtr& sessionPtr = m_idToSessionMap[sessionId];
-	if (sessionPtr.IsValid()){
-		return -1;	// we cannot create new session, ID is used yet
-	}
-
-	m_currentId = (m_currentId + 1) & 0x7fffffff;
+	SessionPtr& sessionPtr = m_idToSessionMap[taskPtr];
 
 	sessionPtr.SetPtr(new Session);
 
 	// setup current plot curve:
 	sessionPtr->axisY.clear();
 	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
-	sessionPtr->curve.setTitle(description);
+	sessionPtr->curve.setTitle(taskInfo.description);
 	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
-	if (m_plotPtr.IsValid()){
+	if (m_plotPtr.IsValid()) {
 		sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	}
 
-	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId)) % (Qt::transparent - Qt::red));
+	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(taskPtr)) % (Qt::transparent - Qt::red));
 
 	int colorsCount = qMin(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
-	for (int i = 0; i < colorsCount; ++i){
-		if (m_progressIdsAttrPtr[i] == progressId){
+	for (int i = 0; i < colorsCount; ++i) {
+		if (m_progressIdsAttrPtr[i] == taskInfo.id) {
 			lineColor = QColor(m_progressColorsAttrPtr[i]);
 		}
 	}
 
 	sessionPtr->curve.setPen(QPen(lineColor, 2));
 	sessionPtr->isCancelable = isCancelable;
-	sessionPtr->description = description;
-
-	if (sessionPtr->isCancelable){
-		++m_cancelsCount;
-	}
+	sessionPtr->taskInfo = taskInfo;
 
 	UpdateState();
-
-	return sessionId;
 }
 
 
-void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
+void CProgressHistoryGuiComp::CloseTask(TaskBase* taskPtr)
 {
-	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(sessionId);
-	if (foundIter == m_idToSessionMap.end()){
+	BaseClass2::CloseTask(taskPtr);
+
+	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(taskPtr);
+	if (foundIter == m_idToSessionMap.end()) {
 		return;
 	}
 
 	SessionPtr& sessionPtr = foundIter.value();
 	Q_ASSERT(sessionPtr.IsValid());
 
-	sessionPtr->curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 0.5));
-
-	if (sessionPtr->isCancelable){
-		--m_cancelsCount;
-		Q_ASSERT(m_cancelsCount >= 0);	// number of all cancelable sessions cannot be negative
-	}
-
-	if (m_plotPtr.IsValid()){
+	if (m_plotPtr.IsValid()) {
 		sessionPtr->curve.detach();
 	}
 
@@ -101,34 +76,30 @@ void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
 }
 
 
-void CProgressHistoryGuiComp::OnProgress(int sessionId, double currentProgress)
+void CProgressHistoryGuiComp::ReportTaskProgress(TaskBase* taskPtr, double progress)
 {
-	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(sessionId);
-	if (foundIter == m_idToSessionMap.end()){
+	BaseClass2::ReportTaskProgress(taskPtr, progress);
+
+	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(taskPtr);
+	if (foundIter == m_idToSessionMap.end()) {
 		return;
 	}
 
 	SessionPtr& sessionPtr = foundIter.value();
 
-	sessionPtr->axisY.insert(sessionPtr->axisY.begin(), currentProgress * 100);
-	while (sessionPtr->axisY.size() > m_axisXData.size()){
+	sessionPtr->axisY.insert(sessionPtr->axisY.begin(), progress * 100);
+	while (sessionPtr->axisY.size() > m_axisXData.size()) {
 		sessionPtr->axisY.pop_back();
 	}
 
 	Q_ASSERT(sessionPtr->axisY.size() <= m_axisXData.size());
 	sessionPtr->curve.setSamples(&m_axisXData[0], &sessionPtr->axisY[0], int(sessionPtr->axisY.size()));
 
-	if (m_plotPtr.IsValid()){
+	if (m_plotPtr.IsValid()) {
 		emit m_plotPtr->update();
 
 		QCoreApplication::processEvents();
 	}
-}
-
-
-bool CProgressHistoryGuiComp::IsCanceled(int /*sessionId*/) const
-{
-	return IsGuiCreated() && CancelButton->isChecked();
 }
 
 
@@ -140,7 +111,7 @@ void CProgressHistoryGuiComp::UpdateState()
 		return;
 	}
 
-	if (m_cancelsCount > 0){
+	if (IsCancelable()){
 		CancelButton->setEnabled(true);
 	}
 	else{
@@ -157,7 +128,7 @@ void CProgressHistoryGuiComp::UpdateState()
 		SessionPtr& sessionPtr = m_idToSessionMap.begin().value();
 		Q_ASSERT(sessionPtr.IsValid());
 
-		DescriptionLabel->setText(sessionPtr->description);
+		DescriptionLabel->setText(sessionPtr->taskInfo.description);
 	}
 	else{
 		DescriptionLabel->setText(tr("%1 Sessions").arg(sessionsCount));
@@ -254,6 +225,14 @@ void CProgressHistoryGuiComp::OnComponentCreated()
 	for (int i = 0; i <= stepsCount; ++i){
 		m_axisXData.push_back(i);
 	}
+}
+
+
+// protected slots
+
+void CProgressHistoryGuiComp::on_CancelButton_clicked()
+{
+	SetCanceled();
 }
 
 

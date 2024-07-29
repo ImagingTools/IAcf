@@ -10,7 +10,7 @@
 #include <qwt_plot_grid.h>
 
 // ACF includes
-#include <ibase/IProgressManager.h>
+#include <ibase/CCumulatedProgressManagerBase.h>
 #include <iqtgui/TDesignerGuiCompBase.h>
 
 #include <GeneratedFiles/iqwt/ui_CProgressHistoryGuiComp.h>
@@ -26,10 +26,11 @@ namespace iqwt
 */
 class CProgressHistoryGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp>,
-			public ibase::IProgressManager
+			public ibase::CCumulatedProgressManagerBase
 {
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp> BaseClass;
+	typedef ibase::CCumulatedProgressManagerBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CProgressHistoryGuiComp);
 		I_REGISTER_INTERFACE(ibase::IProgressManager);
@@ -42,14 +43,10 @@ public:
 
 	CProgressHistoryGuiComp();
 
-	// reimplemented (ibase::IProgressManager)
-	virtual int BeginProgressSession(
-				const QByteArray& progressId,
-				const QString& description,
-				bool isCancelable = false);
-	virtual void EndProgressSession(int sessionId);
-	virtual void OnProgress(int sessionId, double currentProgress);
-	virtual bool IsCanceled(int sessionId) const;
+	// reimplemented (ibase::CCumulatedProgressManagerBase)
+	virtual void OpenTask(TaskBase* taskPtr, const TaskInfo& taskInfo, double weight, bool isCancelable);
+	virtual void CloseTask(TaskBase* taskPtr);
+	virtual void ReportTaskProgress(TaskBase* taskPtr, double progress);
 
 protected:
 	void UpdateState();
@@ -60,6 +57,9 @@ protected:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+
+protected Q_SLOTS:
+	void on_CancelButton_clicked();
 
 private:
 	I_ATTR(int, m_historyStepsCountAttrPtr);
@@ -79,18 +79,15 @@ private:
 		SingleData axisY;
 		QwtPlotCurve curve;
 		bool isCancelable;
-		QString description;
+		TaskInfo taskInfo;
 	};
 
 	typedef istd::TDelPtr<Session> SessionPtr;
 
-	typedef QMap<int, SessionPtr> IdToSessionMap;
+	typedef QMap<TaskBase*, SessionPtr> IdToSessionMap;
 	IdToSessionMap m_idToSessionMap;
 
 	SingleData m_axisXData;
-
-	int m_currentId;
-	int m_cancelsCount;
 };
 
 
