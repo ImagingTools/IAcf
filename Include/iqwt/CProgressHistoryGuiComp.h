@@ -28,6 +28,7 @@ class CProgressHistoryGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp>,
 			public ibase::CCumulatedProgressManagerBase
 {
+	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CProgressHistoryGuiComp> BaseClass;
 	typedef ibase::CCumulatedProgressManagerBase BaseClass2;
