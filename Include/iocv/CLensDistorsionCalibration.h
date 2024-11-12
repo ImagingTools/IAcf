@@ -15,7 +15,7 @@ namespace iocv
 class CLensDistorsionCalibration: virtual public i2d::ICalibration2d
 {
 public:
-	CLensDistorsionCalibration() {}
+	CLensDistorsionCalibration(){}
 	CLensDistorsionCalibration(const COcvIntrinsicCameraCalibration& calibration);
 
 	// reimplemented (i2d::ICalibration2d)

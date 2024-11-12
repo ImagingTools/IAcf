@@ -33,15 +33,15 @@ void CProgressHistoryGuiComp::OpenTask(TaskBase* taskPtr, const TaskInfo& taskIn
 	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
 	sessionPtr->curve.setTitle(taskInfo.description);
 	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
-	if (m_plotPtr.IsValid()) {
+	if (m_plotPtr.IsValid()){
 		sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	}
 
 	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(taskPtr)) % (Qt::transparent - Qt::red));
 
 	int colorsCount = qMin(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
-	for (int i = 0; i < colorsCount; ++i) {
-		if (m_progressIdsAttrPtr[i] == taskInfo.id) {
+	for (int i = 0; i < colorsCount; ++i){
+		if (m_progressIdsAttrPtr[i] == taskInfo.id){
 			lineColor = QColor(m_progressColorsAttrPtr[i]);
 		}
 	}
@@ -59,14 +59,14 @@ void CProgressHistoryGuiComp::CloseTask(TaskBase* taskPtr)
 	BaseClass2::CloseTask(taskPtr);
 
 	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(taskPtr);
-	if (foundIter == m_idToSessionMap.end()) {
+	if (foundIter == m_idToSessionMap.end()){
 		return;
 	}
 
 	SessionPtr& sessionPtr = foundIter.value();
 	Q_ASSERT(sessionPtr.IsValid());
 
-	if (m_plotPtr.IsValid()) {
+	if (m_plotPtr.IsValid()){
 		sessionPtr->curve.detach();
 	}
 
@@ -81,21 +81,21 @@ void CProgressHistoryGuiComp::ReportTaskProgress(TaskBase* taskPtr, double progr
 	BaseClass2::ReportTaskProgress(taskPtr, progress);
 
 	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(taskPtr);
-	if (foundIter == m_idToSessionMap.end()) {
+	if (foundIter == m_idToSessionMap.end()){
 		return;
 	}
 
 	SessionPtr& sessionPtr = foundIter.value();
 
 	sessionPtr->axisY.insert(sessionPtr->axisY.begin(), progress * 100);
-	while (sessionPtr->axisY.size() > m_axisXData.size()) {
+	while (sessionPtr->axisY.size() > m_axisXData.size()){
 		sessionPtr->axisY.pop_back();
 	}
 
 	Q_ASSERT(sessionPtr->axisY.size() <= m_axisXData.size());
 	sessionPtr->curve.setSamples(&m_axisXData[0], &sessionPtr->axisY[0], int(sessionPtr->axisY.size()));
 
-	if (m_plotPtr.IsValid()) {
+	if (m_plotPtr.IsValid()){
 		emit m_plotPtr->update();
 
 		QCoreApplication::processEvents();

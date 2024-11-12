@@ -129,14 +129,14 @@ bool COcvIntrinsicCameraCalibration::GetInvPositionAt(
 {
 	bool emptyDistortion = true;
 
-	for (int i = 0; i < m_distorsionCoeff.rows; i++) {
-		if (std::abs(m_distorsionCoeff(i, 0)) > I_EPSILON) {
+	for (int i = 0; i < m_distorsionCoeff.rows; i++){
+		if (std::abs(m_distorsionCoeff(i, 0)) > I_EPSILON){
 			emptyDistortion = false;
 			break;
 		}
 	}
 
-	if (emptyDistortion) {
+	if (emptyDistortion){
 		result = transfPosition;
 		return true;
 	}
@@ -150,7 +150,7 @@ bool COcvIntrinsicCameraCalibration::GetInvPositionAt(
 
 	cv::Point2f out = output[0];
 
-	if (mode == ExactnessMode::EM_VISUAL) {
+	if (mode == ExactnessMode::EM_VISUAL){
 		out.x = out.x * m_cameraMatrix(0, 0) + m_cameraMatrix(0, 2);// OpencCV bug? cv::undistortPoints(input, output, m_cameraMatrix, m_distorsionCoeff); m_cameraMatrix was not used!
 		out.y = out.y * m_cameraMatrix(1, 1) + m_cameraMatrix(1, 2);
 	}
@@ -240,7 +240,7 @@ bool COcvIntrinsicCameraCalibration::Serialize(iser::IArchive& archive)
 			}
 		}
 
-		for (int i = 0; i < m_distorsionCoeff.rows; i++) {
+		for (int i = 0; i < m_distorsionCoeff.rows; i++){
 			distorsionCoeff.GetElementRef(i) = m_distorsionCoeff(i, 0);
 		}
 	}
@@ -254,13 +254,13 @@ bool COcvIntrinsicCameraCalibration::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(s_distosionCoeffTag);
 
 	if (!isStoring){
-		for (int i = 0; i < m_cameraMatrix.cols; ++i) {
-			for (int j = 0; j < m_cameraMatrix.rows; ++j) {
+		for (int i = 0; i < m_cameraMatrix.cols; ++i){
+			for (int j = 0; j < m_cameraMatrix.rows; ++j){
 				m_cameraMatrix(i, j) = cameraMatrix.GetAt(i, j);
 			}
 		}
 
-		for (int i = 0; i < m_distorsionCoeff.rows; i++) {
+		for (int i = 0; i < m_distorsionCoeff.rows; i++){
 			m_distorsionCoeff(i, 0) = distorsionCoeff.GetElement(i);
 		}
 	}

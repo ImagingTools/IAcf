@@ -17,7 +17,7 @@ const i2d::ICalibration2d * CLensDistorsionCalibrationProviderComp::GetCalibrati
 
 int CLensDistorsionCalibrationProviderComp::ProduceObject(ProductType & result) const
 {
-	if (!m_ocvCalibrationCompPtr.IsValid()) {
+	if (!m_ocvCalibrationCompPtr.IsValid()){
 		return WS_FAILED;
 	}
 

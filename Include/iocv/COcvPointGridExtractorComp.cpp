@@ -42,17 +42,17 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 
 		i2d::CRectangle aoi;
 
-		if (m_defaultRectangleCompPtr.IsValid()) {
+		if (m_defaultRectangleCompPtr.IsValid()){
 			aoi.CopyFrom(*m_defaultRectangleCompPtr);
 		}
-		else if (m_aoiRecangleParamIdAttrPtr.IsValid()) {
+		else if (m_aoiRecangleParamIdAttrPtr.IsValid()){
 			iprm::TParamsPtr<i2d::CRectangle> rectParamPtr(paramsPtr, *m_aoiRecangleParamIdAttrPtr);
-			if (rectParamPtr.IsValid()) {
+			if (rectParamPtr.IsValid()){
 				aoi.CopyFrom(*rectParamPtr);
 			}
 		}
 
-		if (aoi.IsEmpty()) {
+		if (aoi.IsEmpty()){
 			aoiBitmap.CopyFrom(image);
 		}
 		else {
@@ -72,12 +72,12 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 			const int pixelBits = aoiBitmap.GetPixelBitsCount();
 			const int pixelBytes = pixelBits / 8;
 
-			for (int y = regionTop; y < regionBottom; y++) {
+			for (int y = regionTop; y < regionBottom; y++){
 				const quint8* inputLinePtr = (quint8*)image.GetLinePtr(y);
 
 				istd::CIntRanges::RangeList rangesList;
 				const istd::CIntRanges* rangesPtr = mask.GetPixelRanges(y);
-				if (rangesPtr == NULL) {
+				if (rangesPtr == NULL){
 					continue;
 				}
 
@@ -87,7 +87,7 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 
 				for (istd::CIntRanges::RangeList::ConstIterator iter = rangesList.begin();
 					iter != rangesList.end();
-					++iter) {
+					++iter){
 					const istd::CIntRange& pixelRange = *iter;
 
 					int rangeStart = qMax(pixelRange.GetMinValue(), 0);
@@ -97,7 +97,7 @@ int COcvPointGridExtractorComp::DoExtractFeatures(
 
 					int bytesToCopy = (rangeEnd - rangeStart) * pixelBytes;
 
-					if (bytesToCopy > 0) {
+					if (bytesToCopy > 0){
 						std::memcpy(outputImageLinePtr + (rangeStart - regionLeft) * pixelBytes,
 							inputLinePtr + rangeStart * pixelBytes,
 							bytesToCopy);

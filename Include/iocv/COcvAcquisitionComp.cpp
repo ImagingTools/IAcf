@@ -117,11 +117,11 @@ void COcvAcquisitionComp::EnumerateCameraDevices()
 
 	for (		CameraDriversMap::ConstIterator cameraDriverIter = m_supportedCameraDriversMap.constBegin();
 				cameraDriverIter != m_supportedCameraDriversMap.constEnd();
-				++cameraDriverIter) {
+				++cameraDriverIter){
 		int cameraDriverId = cameraDriverIter.key();
 
 		devicePtr = new CameraDevice(cameraDriverId, cameraDriverIter.value());
-		if (devicePtr.IsValid() && devicePtr->isOpened()) {
+		if (devicePtr.IsValid() && devicePtr->isOpened()){
 			m_deviceList.PushBack(devicePtr.PopPtr());
 		}
 	}

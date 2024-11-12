@@ -214,12 +214,12 @@ void CQwtDataSequenceViewComp::MakeHorizontalAxisLimits(double& minValue, double
 		imath::CVarVector verticalLinesValues = m_verticalLinesCompPtr->GetValues();
 		const int verticalCount = verticalLinesValues.GetElementsCount();
 
-		if (verticalCount > 1) {
+		if (verticalCount > 1){
 			int valuesCount = verticalLinesValues.GetElementsCount();
 			minValue = verticalLinesValues.GetElement(0);
 			maxValue = verticalLinesValues.GetElement(valuesCount - 1);
 
-			if (minValue > maxValue) {//swap
+			if (minValue > maxValue){//swap
 				double temp = minValue;
 				minValue = maxValue;
 				maxValue = temp;
@@ -295,7 +295,7 @@ void CQwtDataSequenceViewComp::FillChannelData(
 
 		const double sampleStep = (hMaxValue - hMinValue) / (samplesCount - 1);
 
-		if (m_verticalLinesCompPtr.IsValid()) {
+		if (m_verticalLinesCompPtr.IsValid()){
 			verticalCount = m_verticalLinesCompPtr->GetValues().GetElementsCount();
 			verticalLinesValues = m_verticalLinesCompPtr->GetValues();
 			isEquidistant = (samplesCount != verticalCount);
@@ -332,7 +332,7 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	// HORIzONTAL axis
 	double hMin = hMinValue;
 	double hMax = hMaxValue;
-	if (m_horizontalAxisStartAttrPtr.IsValid()) {
+	if (m_horizontalAxisStartAttrPtr.IsValid()){
 		const double hStartValue = *m_horizontalAxisStartAttrPtr;
 		hMin = (hStartValue < hMinValue) ? hStartValue : hMinValue;
 	}
@@ -356,7 +356,7 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	if (m_verticalAxisEndAttrPtr.IsValid()){
 		userMax = *m_verticalAxisEndAttrPtr;
 	}
-	if (m_verticalAxisStartAttrPtr.IsValid()) {
+	if (m_verticalAxisStartAttrPtr.IsValid()){
 		const double vStartValue = *m_verticalAxisStartAttrPtr;
 		vMin = (vMinValue < vStartValue) ? vMinValue : vStartValue;
 		const double delta = qAbs(vMin - vMinValue);
@@ -470,13 +470,13 @@ QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoi
 	int currentCurveIndex = m_parent.ChannelCombo->currentIndex();
 	double sample = 0.0;
 
-	if (currentCurveIndex <= 0) {
+	if (currentCurveIndex <= 0){
 		double distance = DBL_MAX;
 		int channelsCount = objectPtr->GetChannelsCount();
-		for (int channelsIndex = 0;channelsIndex < channelsCount; ++channelsIndex) {
+		for (int channelsIndex = 0;channelsIndex < channelsCount; ++channelsIndex){
 			double currentSample = objectPtr->GetSample(sampleIndex, channelsIndex);
 			double diff = fabs(currentSample-positionY);
-			if (diff < distance) {
+			if (diff < distance){
 				distance = diff;
 				sample = currentSample;
 			}

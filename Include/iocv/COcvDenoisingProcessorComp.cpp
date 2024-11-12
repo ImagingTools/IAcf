@@ -55,7 +55,7 @@ int COcvDenoisingProcessorComp::DoProcessing(
 
 	cv::Mat inputMatrix;
 	
-	if (!COcvImage::ConvertFromBitmap(*inputBitmapPtr, inputMatrix)) {
+	if (!COcvImage::ConvertFromBitmap(*inputBitmapPtr, inputMatrix)){
 		return TS_INVALID;
 	}
 

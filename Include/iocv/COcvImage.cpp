@@ -39,7 +39,7 @@ bool COcvImage::ConvertFromBitmap(const iimg::IBitmap& bitmap, cv::Mat& outputIm
 
 	outputImage = cv::Mat(imageSize.GetY(), imageSize.GetX(), valueType, lineBytesCount);
 
-	for (int y = 0; y < imageSize.GetY(); ++y) {
+	for (int y = 0; y < imageSize.GetY(); ++y){
 		const quint8* inputBitmapLinePtr = (const quint8*)bitmap.GetLinePtr(y);
 		quint8* outputBitmapLinePtr = (quint8*)outputImage.ptr(y);
 
@@ -91,7 +91,7 @@ bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitma
 		return false;
 	}
 
-	for (int y = 0; y < image.rows; ++y) {
+	for (int y = 0; y < image.rows; ++y){
 		quint8* outputBitmapLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 		const quint8* inputRowPtr = image.data + y * image.step;
 
