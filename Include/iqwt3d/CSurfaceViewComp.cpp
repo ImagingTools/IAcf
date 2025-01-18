@@ -1,6 +1,12 @@
 #include <iqwt3d/CSurfaceViewComp.h>
 
 
+#ifdef Q_OS_WIN
+#ifndef APIENTRY
+	#include <Windows.h>
+#endif
+#endif
+
 // Qwt3d includes
 #include <qwt3d_gridplot.h>
 
