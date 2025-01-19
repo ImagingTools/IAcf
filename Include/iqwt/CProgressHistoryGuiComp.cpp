@@ -76,9 +76,9 @@ void CProgressHistoryGuiComp::CloseTask(TaskBase* taskPtr)
 }
 
 
-void CProgressHistoryGuiComp::ReportTaskProgress(TaskBase* taskPtr, double progress)
+void CProgressHistoryGuiComp::ReportTaskProgress(TaskBase* taskPtr, double progress, TaskStatus taskStatus)
 {
-	BaseClass2::ReportTaskProgress(taskPtr, progress);
+	BaseClass2::ReportTaskProgress(taskPtr, progress, taskStatus);
 
 	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(taskPtr);
 	if (foundIter == m_idToSessionMap.end()){

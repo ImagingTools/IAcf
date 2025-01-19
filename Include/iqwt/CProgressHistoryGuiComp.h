@@ -45,19 +45,19 @@ public:
 	CProgressHistoryGuiComp();
 
 	// reimplemented (ibase::CCumulatedProgressManagerBase)
-	virtual void OpenTask(TaskBase* taskPtr, const TaskInfo& taskInfo, double weight, bool isCancelable);
-	virtual void CloseTask(TaskBase* taskPtr);
-	virtual void ReportTaskProgress(TaskBase* taskPtr, double progress);
+	virtual void OpenTask(TaskBase* taskPtr, const TaskInfo& taskInfo, double weight, bool isCancelable) override;
+	virtual void CloseTask(TaskBase* taskPtr) override;
+	virtual void ReportTaskProgress(TaskBase* taskPtr, double progress, TaskStatus taskStatus) override;
 
 protected:
 	void UpdateState();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected Q_SLOTS:
 	void on_CancelButton_clicked();
