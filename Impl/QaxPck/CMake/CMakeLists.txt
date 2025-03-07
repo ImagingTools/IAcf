@@ -16,5 +16,5 @@ target_link_libraries(${PROJECT_NAME} imm)
 target_link_libraries(${PROJECT_NAME} iqaxmm)
 
 find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS AxContainer REQUIRED)
-target_link_libraries(${PROJECT_NAME}  Qt${QT_VERSION_MAJOR}::AxContainer)
+target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::AxContainer)
 

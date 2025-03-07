@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1.0)
 project(IAcf)
 
 if(NOT DEFINED ${ACFDIR})
-    if(DEFINED ENV{ACFDIR})
+	if(DEFINED ENV{ACFDIR})
 		set(ACFDIR $ENV{ACFDIR})
 	else()
 		set(ACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../Acf")
