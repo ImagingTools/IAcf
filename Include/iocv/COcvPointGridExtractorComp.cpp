@@ -16,31 +16,11 @@
 #include <iipr/CPointGridFeature.h>
 #include <i2d/CPosition2d.h>
 #include <i2d/CPosition2d.h>
-
-// IACF includes
 #include <iocv/COcvImage.h>
-#include <iocv/CCharucoBoard.h>
 
 
 namespace iocv
 {
-
-
-bool COcvPointGridExtractorComp::FindCharucoCorners(cv::Mat& view, std::vector<cv::Point2f>& pointBuf, std::vector<int>& ids) const
-{
-	std::shared_ptr<iocv::CCharucoBoard> quissBoard = iocv::CCharucoBoard::quiss_template(10.5f);
-	iocv::CharucoDetectionConfig configuration{};
-
-	std::shared_ptr<iocv::CharucoDetectData> result = quissBoard->detect(view, configuration);
-	pointBuf.clear();
-	if (result != nullptr){
-		pointBuf = result->pix_corners;
-		//std::copy(result->pix_corners.begin(), result->pix_corners.end(), pointBuf.begin());
-		ids = result->ids;
-	}
-
-	return (!pointBuf.empty());
-}
 
 
 bool COcvPointGridExtractorComp::ChessboardCorners(
@@ -82,21 +62,16 @@ void COcvPointGridExtractorComp::RetrievePatternType(const iprm::IParamsSet* par
 		if (paramTypePtr.IsValid()) {
 			int index = paramTypePtr->GetSelectedOptionIndex();
 			switch (index) {
-			case 0: {
+			case 0:
 				m_patternType = PT_CHESSBOARD;
 				break;
-			}
-			case 1: {
+			case 1:
 				m_patternType = PT_CIRCLES_GRID;
 				break;
 			}
-			case 2: {
-				m_patternType = PT_CHARUCOBOARD;
-			}
-			}
 		}
 	}
-	else if (m_defaultPatternTypeAttrPtr.IsValid()) {
+	else if (m_defaultPatternTypeAttrPtr.IsValid()){
 		m_patternType = (Pattern)(*m_defaultPatternTypeAttrPtr);// == 0 ? PT_CHESSBOARD : PT_CIRCLES_GRID;
 	}
 }
@@ -235,14 +210,6 @@ iproc::IProcessor::TaskState COcvPointGridExtractorComp::DoExtractFeatures(
 		case PT_CIRCLES_GRID:
 			found = findCirclesGrid(view, gridSize, pointBuf);
 			break;
-		case PT_CHARUCOBOARD:
-			found = FindCharucoCorners(view, pointBuf, patternIds);
-			if (patternIds.size() < 81){
-				SendErrorMessage(0, QT_TR_NOOP("Not entire ChArUco board is visible"));
-				return TS_INVALID;
-			}
-			width = 9; height = 9;
-			break;
 		default:
 			found = false;
 			break;
@@ -299,8 +266,7 @@ iproc::IProcessor::TaskState COcvPointGridExtractorComp::DoExtractFeatures(
 		if (m_resultConsumerCompPtr.IsValid()) {
 			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 				istd::IInformationProvider::IC_INFO,
-				0, QT_TR_NOOP(QString("Found %1 point(s)").arg(pointBuf.size())), "OpenCV Point Grid Extractor",
-				"iocv::COcvPointGridExtractorComp"
+				0, QT_TR_NOOP(QString("Found %1 point(s)").arg(pointBuf.size())), "OpenCV Point Grid Extractor"
 			);
 
 			for (const cv::Point2f& p : pointBuf) {
@@ -311,10 +277,6 @@ iproc::IProcessor::TaskState COcvPointGridExtractorComp::DoExtractFeatures(
 			}
 
 			m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(messagePtr));
-		}
-
-		if (m_patternType == PT_CHARUCOBOARD) {
-			pointGridPtr->AddChaurcoIds(patternIds);
 		}
 
 		results.AddFeature(pointGridPtr);

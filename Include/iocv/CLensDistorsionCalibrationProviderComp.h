@@ -33,7 +33,7 @@ public:
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const override;
+	virtual WorkStatus ProduceObject(ProductType& result) const override;
 
 private:
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);

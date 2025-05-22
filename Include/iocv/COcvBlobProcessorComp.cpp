@@ -132,8 +132,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 					istd::IInformationProvider::IC_INFO,
 					MI_FOUND_BLOB,
 					"",
-					"OpenCV Blob Detector",
-					"iocv::COcvBlobProcessorComp"));
+					"OpenCV Blob Detector"));
 	}
 
 	const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr.IsValid() ? m_calibrationProviderCompPtr->GetCalibration() : NULL;

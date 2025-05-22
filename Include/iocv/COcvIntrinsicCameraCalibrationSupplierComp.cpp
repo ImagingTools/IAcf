@@ -8,7 +8,6 @@
 #include <iprm/TParamsPtr.h>
 #include <icalib/CPointGrid.h>
 #include <iipr/CPointGridFeature.h>
-#include <iocv/CCharucoBoard.h>
 #include <iocv/COcvPointGridExtractorComp.h>
 
 
@@ -25,17 +24,6 @@ static std::vector<cv::Point3f> CalcBoardCornerPositions(cv::Size boardSize, flo
 	}
 
 	return corners;
-}
-
-
-static void CorrectCharucoPositions(const std::vector<cv::Point2f>& objectPoints, std::vector<cv::Point3f>& output)
-{
-	output.clear();
-
-	for (auto& onePoint: objectPoints)
-	{
-		output.push_back(cv::Point3f(onePoint.x, onePoint.y, 0));
-	}
 }
 
 
@@ -163,24 +151,18 @@ iinsp::ISupplier::WorkStatus COcvIntrinsicCameraCalibrationSupplierComp::Produce
 
 		std::vector<std::vector<cv::Point3f>> objectPoints(1);
 
-		if (pattern == iocv::COcvPointGridExtractorComp::PT_CHARUCOBOARD){
-			std::shared_ptr<iocv::CCharucoBoard> quissBoardPtr = iocv::CCharucoBoard::quiss_template(10.5f);
-			std::vector<cv::Point2f> charucoBoardPoints = quissBoardPtr->border_corners(imagePoints.m_ids);
-			CorrectCharucoPositions(charucoBoardPoints, objectPoints[0]);
-		}
-		else{
-			double cellSize = *m_defaultCellSizeAttrPtr;
-			if (paramsPtr != NULL && m_cellSizeParamId.IsValid()) {
-				iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsPtr, *m_cellSizeParamId);
-				if (checkboardParamsPtr.IsValid()) {
-					imath::CVarVector params = checkboardParamsPtr->GetValues();
-					if (params.GetElementsCount() >= 1) {
-						cellSize = int(params.GetElement(0));
-					}
+		
+		double cellSize = *m_defaultCellSizeAttrPtr;
+		if (paramsPtr != NULL && m_cellSizeParamId.IsValid()){
+			iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsPtr, *m_cellSizeParamId);
+			if (checkboardParamsPtr.IsValid()) {
+				imath::CVarVector params = checkboardParamsPtr->GetValues();
+				if (params.GetElementsCount() >= 1) {
+					cellSize = int(params.GetElement(0));
 				}
 			}
-			objectPoints[0] = CalcBoardCornerPositions(imagePoints.gridSize, cellSize);
 		}
+		objectPoints[0] = CalcBoardCornerPositions(imagePoints.gridSize, cellSize);
 
 		cv::Size imageSize(bitmapPtr->GetImageSize().GetX(), bitmapPtr->GetImageSize().GetY());
 		cv::Mat cameraMatrix = cv::Mat::eye(3, 3, CV_64F);

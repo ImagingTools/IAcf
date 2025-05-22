@@ -32,8 +32,7 @@ public:
 	enum Pattern
 	{
 		PT_CHESSBOARD = 0,
-		PT_CIRCLES_GRID,
-		PT_CHARUCOBOARD
+		PT_CIRCLES_GRID
 	};
 
 
