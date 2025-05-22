@@ -43,7 +43,7 @@ istd::CIndex2d COcvVideoControllerComp::GetBitmapSize(const iprm::IParamsSet* /*
 
 // reimplemented (iproc::IProcessor)
 
-int COcvVideoControllerComp::DoProcessing(
+iproc::IProcessor::TaskState COcvVideoControllerComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

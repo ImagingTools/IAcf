@@ -2,22 +2,30 @@
 
 
 // ACF-Solutions includes
-#include <iipr/CImageRegionProcessorCompBase.h>
+#include <iocv/COcvProcessorCompBase.h>
 
 
 namespace iocv
 {
 
 
-/**	
-	Non-local Means Denoising algorithm
+/**
+	Universal OpenCV-based binarization processor.
 */
-class COcvDenoisingProcessorComp : public iproc::CSyncProcessorCompBase
+class COcvBinarizationProcessorComp : public iocv::COcvProcessorCompBase
 {
 public:
-	typedef iproc::CSyncProcessorCompBase BaseClass;
+	typedef iocv::COcvProcessorCompBase BaseClass;
+
+	enum OperationMode {
+		BIN_ADAPTIVE = 0,
+		BIN_THRESHOLD = 1,
+		BIN_OTSU = 2,
+		BIN_TRIANGLE = 3,
+		_BIN_LAST
+	};
 	
-	I_BEGIN_COMPONENT(COcvDenoisingProcessorComp);
+	I_BEGIN_COMPONENT(COcvBinarizationProcessorComp);
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
@@ -26,8 +34,6 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL) override;
-
-private:
 };
 
 

@@ -38,7 +38,7 @@ COcvAcquisitionComp::COcvAcquisitionComp()
 
 // reimplemented (iproc::IProcessor)
 
-int COcvAcquisitionComp::DoProcessing(
+iproc::IProcessor::TaskState COcvAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

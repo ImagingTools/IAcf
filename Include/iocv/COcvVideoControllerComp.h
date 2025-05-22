@@ -45,11 +45,11 @@ public:
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (imm::IMediaController)
 	virtual QString GetOpenedMediumUrl() const;

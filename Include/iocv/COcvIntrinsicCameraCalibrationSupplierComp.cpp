@@ -7,6 +7,9 @@
 // ACF includes
 #include <iprm/TParamsPtr.h>
 #include <icalib/CPointGrid.h>
+#include <iipr/CPointGridFeature.h>
+#include <iocv/CCharucoBoard.h>
+#include <iocv/COcvPointGridExtractorComp.h>
 
 
 // internal static methods
@@ -22,6 +25,17 @@ static std::vector<cv::Point3f> CalcBoardCornerPositions(cv::Size boardSize, flo
 	}
 
 	return corners;
+}
+
+
+static void CorrectCharucoPositions(const std::vector<cv::Point2f>& objectPoints, std::vector<cv::Point3f>& output)
+{
+	output.clear();
+
+	for (auto& onePoint: objectPoints)
+	{
+		output.push_back(cv::Point3f(onePoint.x, onePoint.y, 0));
+	}
 }
 
 
@@ -63,6 +77,15 @@ struct PointGridConsumer: public iipr::IFeaturesConsumer
 				}
 			}
 
+			const iipr::CPointGridFeature* gridFeaturePtr = dynamic_cast<const iipr::CPointGridFeature*>(featurePtr);
+			if (gridFeaturePtr) {
+				const std::vector<int>& ids = gridFeaturePtr->GetCharucoIds();
+				if (ids.size() > 0) {
+					m_ids = ids;
+				}
+			}
+
+
 			delete featurePtr;
 		}
 
@@ -71,6 +94,7 @@ struct PointGridConsumer: public iipr::IFeaturesConsumer
 
 	std::vector<std::vector<cv::Point2f>> points;
 	cv::Size gridSize;
+	std::vector<int> m_ids;
 };
 
 
@@ -98,7 +122,7 @@ const i2d::ICalibration2d* COcvIntrinsicCameraCalibrationSupplierComp::GetCalibr
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& result) const
 {
 	result.ResetData();
 
@@ -126,24 +150,37 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 
 		PointGridConsumer imagePoints;
 		if (m_pointGridExtractorCompPtr->DoExtractFeatures(paramsPtr, *bitmapPtr, imagePoints) != iproc::IProcessor::TS_OK){
-			SendErrorMessage(0, "Can not extract of points grid");
+			SendErrorMessage(0, "Point grid cannot be extracted");
 
 			return WS_FAILED;
 		}
 
-		double cellSize = *m_defaultCellSizeAttrPtr;
-		if (paramsPtr != NULL && m_cellSizeParamId.IsValid()){
-			iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsPtr, *m_cellSizeParamId);
-			if (checkboardParamsPtr.IsValid()){
-				imath::CVarVector params = checkboardParamsPtr->GetValues();
-				if (params.GetElementsCount() >= 1){
-					cellSize = int(params.GetElement(0));
-				}
-			}
+		iocv::COcvPointGridExtractorComp::Pattern pattern = iocv::COcvPointGridExtractorComp::PT_CHESSBOARD;
+		const iocv::COcvPointGridExtractorComp* ocvGridExtractorPtr = dynamic_cast<const iocv::COcvPointGridExtractorComp*>(m_pointGridExtractorCompPtr.GetPtr());
+		if (ocvGridExtractorPtr != nullptr) {
+			pattern = ocvGridExtractorPtr->GetPatternType();
 		}
 
 		std::vector<std::vector<cv::Point3f>> objectPoints(1);
-		objectPoints[0] = CalcBoardCornerPositions(imagePoints.gridSize, cellSize);
+
+		if (pattern == iocv::COcvPointGridExtractorComp::PT_CHARUCOBOARD){
+			std::shared_ptr<iocv::CCharucoBoard> quissBoardPtr = iocv::CCharucoBoard::quiss_template(10.5f);
+			std::vector<cv::Point2f> charucoBoardPoints = quissBoardPtr->border_corners(imagePoints.m_ids);
+			CorrectCharucoPositions(charucoBoardPoints, objectPoints[0]);
+		}
+		else{
+			double cellSize = *m_defaultCellSizeAttrPtr;
+			if (paramsPtr != NULL && m_cellSizeParamId.IsValid()) {
+				iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsPtr, *m_cellSizeParamId);
+				if (checkboardParamsPtr.IsValid()) {
+					imath::CVarVector params = checkboardParamsPtr->GetValues();
+					if (params.GetElementsCount() >= 1) {
+						cellSize = int(params.GetElement(0));
+					}
+				}
+			}
+			objectPoints[0] = CalcBoardCornerPositions(imagePoints.gridSize, cellSize);
+		}
 
 		cv::Size imageSize(bitmapPtr->GetImageSize().GetX(), bitmapPtr->GetImageSize().GetY());
 		cv::Mat cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
@@ -197,7 +234,7 @@ int COcvIntrinsicCameraCalibrationSupplierComp::ProduceObject(ProductType& resul
 		return WS_FAILED;
 	}
 	catch (...){
-		SendCriticalMessage(0, QObject::tr("Unknown exception"));
+		SendCriticalMessage(0, QT_TR_NOOP("Unknown exception"));
 
 		m_lastCalibration.ResetData();
 		return WS_FAILED;

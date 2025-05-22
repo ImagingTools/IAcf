@@ -53,15 +53,16 @@ public:
 		I_ASSIGN(m_symbolStyleAttrPtr, "DataSymbolStyle", "Style of the point symbol \n0 - No symbol\n1 - Ellipse\n2 - Rect\n3 - Diamond\n4 - Triangle\n5 - Cross\n6 - XCross\n7 - Star2", true, 0);
 		I_ASSIGN_MULTI_0(m_channelColorIdsAttrPtr, "ChannelColorIds", "List of channel IDs used for curve color assignment", true);
 		I_ASSIGN_MULTI_0(m_channelColorsAttrPtr, "ChannelColors", "List of curve colors assigned to corresponding channel IDs", true);
+		I_ASSIGN(m_xCoordinatesSequenceCompPtr, "XCoordinates", "Sequence contains x coordinates of chart points", false, "XCoordinates");
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private Q_SLOTS:
 	void on_ChannelCombo_currentIndexChanged(int index);
@@ -72,7 +73,7 @@ private:
 
 	void MakeHorizontalAxisLimits(double& minValue, double& maxValue) const;
 	void MakeValueLines(int& linesCount, const bool isVertical, const imeas::INumericValue* linesCompPtr, istd::TPointerVector<QwtPlotMarker>& markers);
-	void FillChannelData(QVector<double>& xData, QVector<double>& yData, double& minValue, double& maxValue, const int channelIndex, const double& hMinValue, const double& hMaxValue, const imeas::IDataSequence* dataSequence) const;
+	void FillChannelData(QVector<double>& xData, QVector<double>& yData, double& minValue, double& maxValue, const int channelIndex, double& hMinValue, double& hMaxValue, const imeas::IDataSequence* yDataSequence, const imeas::IDataSequence* xDataSequence) const;
 	void SetAxisLimits(const double hMinValue, const double hMaxValue, const double vMinValue, const double vMaxValue);
 	QwtPlotCurve::CurveStyle GetQwtPlotStyle() const;
 	QwtSymbol::Style GetQwtSymbolStyle() const;
@@ -108,6 +109,7 @@ private:
 	I_ATTR(int, m_symbolStyleAttrPtr);
 	I_MULTIATTR(QByteArray, m_channelColorIdsAttrPtr);
 	I_MULTIATTR(QString, m_channelColorsAttrPtr);
+	I_REF(imeas::IDataSequence, m_xCoordinatesSequenceCompPtr);
 };
 
 

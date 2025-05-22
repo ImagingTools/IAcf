@@ -22,7 +22,7 @@ namespace iocv
 
 // reimplemented (iproc::IProcessor)
 
-int COcvMedianProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState COcvMedianProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

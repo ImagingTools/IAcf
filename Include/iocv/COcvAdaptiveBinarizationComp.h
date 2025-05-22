@@ -2,7 +2,7 @@
 
 
 // ACF-Solutions includes
-#include <iproc/TSyncProcessorCompBase.h>
+#include <iocv/COcvProcessorCompBase.h>
 
 
 namespace iocv
@@ -12,10 +12,10 @@ namespace iocv
 /**
 	Adaptive binarization processor.
 */
-class COcvAdaptiveBinarizationComp: public iproc::CSyncProcessorCompBase
+class COcvAdaptiveBinarizationComp: public iocv::COcvProcessorCompBase
 {
 public:
-	typedef iproc::CSyncProcessorCompBase BaseClass;
+	typedef iocv::COcvProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(COcvAdaptiveBinarizationComp);
 		I_ASSIGN(m_filterSizeParamsIdAttrPtr, "FilterSizeParamsId", "ID of the filter dimension parameter in the parameter set", true, "FilterSize");
@@ -23,11 +23,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 private:
 	I_ATTR(QByteArray, m_filterSizeParamsIdAttrPtr);

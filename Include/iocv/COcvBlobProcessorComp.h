@@ -25,10 +25,17 @@ class COcvBlobProcessorComp: public iblob::CBlobProcessorCompBase
 public:
 	typedef iblob::CBlobProcessorCompBase BaseClass;
 
+	enum CR_TYPE {
+		CRT_EXTERNAL = 0,
+		CRT_LIST,
+		CRT_TREE
+	};
+
 	I_BEGIN_COMPONENT(COcvBlobProcessorComp);
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
 		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
 		I_ASSIGN(m_getNegativeBlobsPolygonCompPtr, "GetNegativeBlobsPolygon", "If undefined then returns all blobs, if true then returns negative polarity blobs else returns positive polarity blobs", false, "GetNegativeBlobsPolygon");
+		I_ASSIGN(m_contourRetrievalModeAttrPtr, "ContourRetrievalMode", "Retrieval of contours: 0 - external only\n1-all contours as list\n2 - all contours as tree", true, 0);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provides calibration for output blob polygons", false, "CalibrationProvider");
 	I_END_COMPONENT;
 
@@ -50,6 +57,7 @@ private:
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 	I_REF(iprm::IEnableableParam, m_getNegativeBlobsPolygonCompPtr);
+	I_ATTR(int, m_contourRetrievalModeAttrPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 };
 

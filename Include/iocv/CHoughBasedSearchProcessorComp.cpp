@@ -24,7 +24,7 @@ namespace iocv
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CHoughBasedSearchProcessorComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CHoughBasedSearchProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			iipr::IFeaturesConsumer& results,
@@ -150,7 +150,7 @@ int CHoughBasedSearchProcessorComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CHoughBasedSearchProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CHoughBasedSearchProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -274,10 +274,11 @@ int CHoughBasedSearchProcessorComp::DoCircleSearch(
 		}
 
 		result.AddFeature(circleFeaturePtr);
+		foundModelsCount++;
 	}
 
 	if (IsVerboseEnabled()){
-		SendVerboseMessage(QObject::tr("Circle search took %1 ms").arg(timer.elapsed()));
+		SendVerboseMessage(QT_TR_NOOP(QString("Circle search took %1 ms").arg(timer.elapsed())));
 	}
 
 	return foundModelsCount;

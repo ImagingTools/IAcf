@@ -61,8 +61,8 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 		invertedMask.SetCalibration(bitmap.GetCalibration());
 
 		i2d::CRect clipArea(size);
-		if (!invertedMask.CreateFromGeometry(*aoiPtr, &clipArea)){
-			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
+		if (!invertedMask.CreateFromGeometry(*aoiPtr, &clipArea)) {
+			SendErrorMessage(0, QT_TR_NOOP("AOI type is not supported"));
 
 			return false;
 		}
@@ -164,7 +164,7 @@ bool COcvEdgeExtractorComp::DoContourExtraction(
 
 // reimplemented (iproc::IProcessor)
 
-int COcvEdgeExtractorComp::DoProcessing(
+iproc::IProcessor::TaskState COcvEdgeExtractorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* result,

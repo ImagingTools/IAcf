@@ -43,8 +43,12 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 		i2d::CRect clipArea(size);
 		if (!mask.CreateFromGeometry(*aoiPtr, &clipArea)){
-			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
+			SendErrorMessage(0, QString("AOI type is not supported"));
+			return false;
+		}
 
+		if (mask.IsEmpty()) {
+			SendErrorMessage(0, QString("No intersection of AOI with image"));
 			return false;
 		}
 
@@ -54,7 +58,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 
 		istd::CIntRange lineRange(0, size.GetX());
 
-		int bytesPerPixel = image.GetPixelBitsCount() / 8;
+		int bytesPerPixel = image.GetPixelBitsCount() >> 3;
 
 		for (int y = 0; y < size.GetY(); ++y){
 			const istd::CIntRanges* outputRangesPtr = mask.GetPixelRanges(y);
@@ -90,8 +94,34 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 	}
 
 	// Get contours from the binary image:
-	std::vector<std::vector<cv::Point> > contours;
-	findContours(tmpBinaryImage, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+	std::vector<std::vector<cv::Point2f>> contours;
+	{
+		std::vector<std::vector<cv::Point>> contours_int; // integer positions
+		auto contourMode = CV_RETR_EXTERNAL;
+		if (m_contourRetrievalModeAttrPtr.IsValid()){
+			if (*m_contourRetrievalModeAttrPtr == (int)(CRT_LIST))
+				contourMode = CV_RETR_LIST;
+			else if (*m_contourRetrievalModeAttrPtr == (int)(CRT_TREE))
+				contourMode = CV_RETR_TREE;
+			//otherwise default = CV_RETR_EXTERNAL
+		}
+		cv::findContours(tmpBinaryImage, contours_int, contourMode, CV_CHAIN_APPROX_SIMPLE);
+
+		// ocv seemingly defines the contours on the top and left borders of "white" pixels, thus the positions proove to be shifted by max. one pixel
+		// shifting all positions by (0.5, 0.5) makes the systematic error uniform, its value being less or equal to 0.5 pixels
+		contours.reserve(contours.size());
+		std::transform(contours_int.begin(), contours_int.end(), std::back_inserter(contours),
+					   [](const std::vector<cv::Point>& item) {
+						   std::vector<cv::Point2f> result;
+						   result.reserve(item.size());
+
+						   std::transform(item.begin(), item.end(), std::back_inserter(result),
+										  [](const cv::Point& p) { return cv::Point2f(p.x + 0.5f, p.y + 0.5f); });
+						   return result;
+					   }
+		);
+	}
+	
 
 	// Get found blobs:
 	int blobsCount = 0;
@@ -102,7 +132,8 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 					istd::IInformationProvider::IC_INFO,
 					MI_FOUND_BLOB,
 					"",
-					"OpenCV Blob Detector"));
+					"OpenCV Blob Detector",
+					"iocv::COcvBlobProcessorComp"));
 	}
 
 	const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr.IsValid() ? m_calibrationProviderCompPtr->GetCalibration() : NULL;
@@ -111,7 +142,7 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		cv::Mat points(contours[contourIndex]);
 		cv::Moments moms = cv::moments(points);
 
-		const double orientedArea = cv::contourArea(points, true);
+		const double orientedArea = cv::contourArea(points, true);	//isnt equal moms.m00 ?
 		const double areaPixels = qAbs(orientedArea);
 		if (qFuzzyCompare(areaPixels, 0.0)){
 			continue;
@@ -120,19 +151,37 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 		cv::RotatedRect rotatedRect = cv::minAreaRect(points);
 		float angle = qDegreesToRadians(rotatedRect.angle);
 
-		double perimeter = cv::arcLength(points, true);
-
 		cv::Point2d location = cv::Point2d(moms.m10 / moms.m00, moms.m01 / moms.m00);
+
 		double circularity = 0.0;
-		
-		if (perimeter > 0){
-			circularity = 4 * I_PI * areaPixels / (perimeter * perimeter);
+		double perimeterPixels = cv::arcLength(points, true);
+		if (perimeterPixels > 0){
+			circularity = 4 * I_PI * areaPixels / (perimeterPixels * perimeterPixels);
 		}
 
 		bool passedByFilter = true;
 
 		if (filterParamsPtr != NULL){
-			passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, areaPixels, perimeter, circularity);
+			// convert pix to mm to match metric filter
+			if (calibrationPtr) {
+				i2d::CPolygon polygonMM;
+				for (const cv::Point2f& p : contours[contourIndex]) {
+					i2d::CVector2d v(p.x, p.y);
+					i2d::CVector2d mm;
+					if (calibrationPtr->GetInvPositionAt(v, mm)) {
+						v = mm;
+					}
+					polygonMM.InsertNode(v);
+				}
+
+				double areaMM = polygonMM.GetArea();
+				double perimeterMM = polygonMM.GetPerimeter();
+
+				passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, areaMM, perimeterMM, circularity);
+			}
+			else {
+				passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, areaPixels, perimeterPixels, circularity);
+			}
 		}
 
 		if (m_getNegativeBlobsPolygonCompPtr.IsValid()){
@@ -145,6 +194,13 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 			blobsCount++;
 
 			i2d::CVector2d position(location.x, location.y);
+			if (calibrationPtr != nullptr){
+				i2d::CVector2d positionMM;
+				if (calibrationPtr->GetInvPositionAt(position, positionMM)){
+					position = positionMM;
+				}
+			}
+
 			i2d::CPolygon polygon;
 			polygon.SetCalibration(calibrationPtr);
 
@@ -161,23 +217,31 @@ bool COcvBlobProcessorComp::CalculateBlobs(
 				polygon.InsertNode(v);
 			}
 
-			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(areaPixels, perimeter, position, angle, i2d::CVector2d(1, 1), polygon);
+			iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(areaPixels, perimeterPixels, position, angle, i2d::CVector2d(1, 1), polygon);
 			result.AddFeature(blobFeaturePtr);
 
 			blobFeaturePtr->SetObjectId(QByteArray::number(contourIndex));
-			blobFeaturePtr->SetWeight(1.0);
+
+			// weight is diameter
+			double d = (polygon.GetBoundingBox().GetWidth() + polygon.GetBoundingBox().GetHeight()) / 2;
+			blobFeaturePtr->SetWeight(d);
 
 			if (blobMessagePtr.IsValid()){
+				QString px2 = QObject::tr("px") + QCHAR_POW2;
+				QString mm2 = QObject::tr("mm") + QCHAR_POW2;
+
 				double metricArea = blobFeaturePtr->GetArea();
 				i2d::CPolygon* blobMessagePolygonPtr = new imod::TModelWrap<i2d::CPolygon>();
 				blobMessagePolygonPtr->CopyFrom(polygon, istd::IChangeable::CM_CONVERT);
 				blobMessagePtr->InsertAttachedObject(
 							blobMessagePolygonPtr,
-							QObject::tr("Blob %1, Position: (%2, %3), Area: %4 px (%5 mm)")
+							QObject::tr("Blob %1, Position: (%2, %3), Area: %4 %5 (%6 %7)")
 										.arg(blobsCount)
 										.arg(position.GetX()).arg(position.GetY())
 										.arg(areaPixels)
+										.arg(px2)
 										.arg(metricArea)
+										.arg(mm2)
 				);
 			}
 		}

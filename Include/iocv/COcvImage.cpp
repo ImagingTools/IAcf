@@ -1,5 +1,7 @@
 #include <iocv/COcvImage.h>
 
+#include <istd/CChangeNotifier.h>
+
 
 namespace iocv
 {
@@ -86,6 +88,9 @@ bool COcvImage::ConvertToBitmap(const cv::Mat& image, iimg::IBitmap& outputBitma
 	default:
 		return false;
 	}
+
+	istd::CChangeNotifier notifier(&outputBitmap);
+	Q_UNUSED(notifier);
 
 	if (!outputBitmap.CreateBitmap(pixelFormat, istd::CIndex2d(image.cols, image.rows))){
 		return false;

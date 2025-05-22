@@ -95,14 +95,20 @@ void CQwtDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 
 		// Horizontal axis limits:
 		double hMinValue = 0.0;
-		double hMaxValue = samplesCount-1;
+		double hMaxValue = samplesCount - 1;
 		MakeHorizontalAxisLimits(hMinValue, hMaxValue);
+
+		const imeas::IDataSequence* xDataSequencePtr = NULL;
+
+		if (m_xCoordinatesSequenceCompPtr.IsValid()) {
+			xDataSequencePtr = m_xCoordinatesSequenceCompPtr.GetPtr();
+		}
 
 		// Fill data:
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
-			QVector<double> xData(samplesCount);
-			QVector<double> yData(samplesCount);
-			FillChannelData(xData, yData, minValue, maxValue, channelIndex, hMinValue, hMaxValue, objectPtr);
+			QVector<double> xData;
+			QVector<double> yData;
+			FillChannelData(xData, yData, minValue, maxValue, channelIndex, hMinValue, hMaxValue, objectPtr, xDataSequencePtr);
 
 			QwtPlotCurve* curvePtr = m_channelCurves.GetAt(channelIndex);
 			Q_ASSERT(curvePtr != NULL);
@@ -139,6 +145,9 @@ void CQwtDataSequenceViewComp::OnGuiCreated()
 	m_plotPtr->setAxisFont(QwtPlot::xBottom, qApp->font());
 	m_plotPtr->setAxisFont(QwtPlot::yLeft, qApp->font());
 	m_plotPtr->setAutoReplot(true);
+	QBrush brush = m_plotPtr->canvasBackground();
+	brush.setColor(Qt::white);
+	m_plotPtr->setCanvasBackground(brush);
 
 	QwtPlotPicker* plotPickerPtr = new DataSequencePlotPicker(*this, QwtPlot::xBottom, QwtPlot::yLeft, m_plotPtr->canvas());
 	plotPickerPtr->setTrackerMode(QwtPicker::AlwaysOn);
@@ -154,7 +163,7 @@ void CQwtDataSequenceViewComp::OnGuiCreated()
 	QLayout* layoutPtr = PlotFrame->layout();
 	if (layoutPtr == NULL){
 		layoutPtr = new QVBoxLayout(PlotFrame);
-		layoutPtr->setContentsMargins(0,0,0,0);
+		layoutPtr->setContentsMargins(0, 0 ,0, 0);
 	}
 
 	layoutPtr->addWidget(m_plotPtr.GetPtr());
@@ -207,19 +216,18 @@ void CQwtDataSequenceViewComp::ClearMarkers(istd::TPointerVector<QwtPlotMarker>&
 	}
 }
 
-
 void CQwtDataSequenceViewComp::MakeHorizontalAxisLimits(double& minValue, double& maxValue) const
 {
 	if (m_verticalLinesCompPtr.IsValid()){
 		imath::CVarVector verticalLinesValues = m_verticalLinesCompPtr->GetValues();
 		const int verticalCount = verticalLinesValues.GetElementsCount();
 
-		if (verticalCount > 1){
+		if (verticalCount > 1) {
 			int valuesCount = verticalLinesValues.GetElementsCount();
 			minValue = verticalLinesValues.GetElement(0);
 			maxValue = verticalLinesValues.GetElement(valuesCount - 1);
 
-			if (minValue > maxValue){//swap
+			if (minValue > maxValue) {//swap
 				double temp = minValue;
 				minValue = maxValue;
 				maxValue = temp;
@@ -281,44 +289,94 @@ void CQwtDataSequenceViewComp::MakeValueLines(int& linesCount, const bool isVert
 	notice: if there were no lines provided, the range [hMinValue, hMaxValue] is set as [0, samplesCount -1] (see MakeHorizontalAxisLimits)
 */
 void CQwtDataSequenceViewComp::FillChannelData(
-			QVector<double>& xData, QVector<double>& yData,
-			double& minValue, double& maxValue,
-			const int channelIndex, const double& hMinValue, const double& hMaxValue,
-			const imeas::IDataSequence* dataSequencePtr) const
+	QVector<double>& xData, QVector<double>& yData,
+	double& minValue, double& maxValue,
+	const int channelIndex, double& hMinValue, double& hMaxValue,
+	const imeas::IDataSequence* yDataSequencePtr, const imeas::IDataSequence* xDataSequencePtr) const
 {
-	if (dataSequencePtr != NULL){
-		const int samplesCount = dataSequencePtr->GetSamplesCount();
+	if (yDataSequencePtr == NULL) {
+		return;
+	}
+	const int samplesCount = yDataSequencePtr->GetSamplesCount();
 
+	if (xDataSequencePtr == NULL || xDataSequencePtr->IsEmpty()) {
 		imath::CVarVector verticalLinesValues;
 		bool isEquidistant = true;
 		int verticalCount = 0;
 
 		const double sampleStep = (hMaxValue - hMinValue) / (samplesCount - 1);
 
-		if (m_verticalLinesCompPtr.IsValid()){
+		if (m_verticalLinesCompPtr.IsValid()) {
 			verticalCount = m_verticalLinesCompPtr->GetValues().GetElementsCount();
 			verticalLinesValues = m_verticalLinesCompPtr->GetValues();
 			isEquidistant = (samplesCount != verticalCount);
 		}
 
-		for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
-			double sample = dataSequencePtr->GetSample(sampleIndex, channelIndex);
+		for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++) {
+			double sample = yDataSequencePtr->GetSample(sampleIndex, channelIndex);
 
-			if (isEquidistant){
-				xData[sampleIndex] = hMinValue + sampleIndex * sampleStep;
-			}
-			else{
-				xData[sampleIndex] = verticalLinesValues.GetElement(sampleIndex);
+			if (isnan(sample)) {
+				continue;
 			}
 
-			yData[sampleIndex] = sample;
+			if (isEquidistant) {
+				xData.push_back(hMinValue + sampleIndex * sampleStep);
+			}
+			else {
+				xData.push_back(verticalLinesValues.GetElement(sampleIndex));
+			}
 
-			if (sample > maxValue){
+			yData.push_back(sample);
+
+			if (sample > maxValue) {
 				maxValue = sample;
 			}
 
-			if (sample < minValue){
+			if (sample < minValue) {
 				minValue = sample;
+			}
+		}
+
+		maxValue = qCeil(maxValue * 100) / 100.0;
+	}
+	else {
+		hMinValue = std::numeric_limits<double>::max();
+		hMaxValue = std::numeric_limits<double>::lowest();
+
+		minValue = std::numeric_limits<double>::max();
+		maxValue = std::numeric_limits<double>::lowest();
+
+		const int xSamplesCount = yDataSequencePtr->GetSamplesCount();
+
+		if (xSamplesCount != samplesCount) {
+			return;
+		}
+
+		for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++) {
+			double xSample = xDataSequencePtr->GetSample(sampleIndex, channelIndex);
+			double ySample = yDataSequencePtr->GetSample(sampleIndex, channelIndex);
+
+			if (isnan(xSample) || isnan(ySample)) {
+				continue;
+			}
+
+			xData.push_back(xSample);
+			yData.push_back(ySample);
+
+			if (ySample > maxValue) {
+				maxValue = ySample;
+			}
+
+			if (ySample < minValue) {
+				minValue = ySample;
+			}
+
+			if (xSample > hMaxValue) {
+				hMaxValue = xSample;
+			}
+
+			if (xSample < hMinValue) {
+				hMinValue = xSample;
 			}
 		}
 
@@ -332,7 +390,7 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	// HORIzONTAL axis
 	double hMin = hMinValue;
 	double hMax = hMaxValue;
-	if (m_horizontalAxisStartAttrPtr.IsValid()){
+	if (m_horizontalAxisStartAttrPtr.IsValid()) {
 		const double hStartValue = *m_horizontalAxisStartAttrPtr;
 		hMin = (hStartValue < hMinValue) ? hStartValue : hMinValue;
 	}
@@ -356,7 +414,7 @@ void CQwtDataSequenceViewComp::SetAxisLimits(const double hMinValue, const doubl
 	if (m_verticalAxisEndAttrPtr.IsValid()){
 		userMax = *m_verticalAxisEndAttrPtr;
 	}
-	if (m_verticalAxisStartAttrPtr.IsValid()){
+	if (m_verticalAxisStartAttrPtr.IsValid()) {
 		const double vStartValue = *m_verticalAxisStartAttrPtr;
 		vMin = (vMinValue < vStartValue) ? vMinValue : vStartValue;
 		const double delta = qAbs(vMin - vMinValue);
@@ -444,51 +502,8 @@ CQwtDataSequenceViewComp::DataSequencePlotPicker::DataSequencePlotPicker(CQwtDat
 
 QwtText CQwtDataSequenceViewComp::DataSequencePlotPicker::trackerText(const QPoint& position) const
 {
-	imeas::IDataSequence* objectPtr = m_parent.GetObservedObject();
-	if (objectPtr == NULL){
-		return QwtText();
-	}
-
-	if (objectPtr->IsEmpty()){
-		return QwtText();
-	}
-
-	Q_ASSERT(m_parent.IsGuiCreated());
-
-	int sampleIndex = int(invTransform(position).x() + 0.5);
-
-	if (sampleIndex >= objectPtr->GetSamplesCount()){
-		return QwtText();
-	}
-
-	if (sampleIndex < 0){
-		return QwtText();
-	}
-
-	double positionY = (double)position.y();
-
-	int currentCurveIndex = m_parent.ChannelCombo->currentIndex();
-	double sample = 0.0;
-
-	if (currentCurveIndex <= 0){
-		double distance = DBL_MAX;
-		int channelsCount = objectPtr->GetChannelsCount();
-		for (int channelsIndex = 0;channelsIndex < channelsCount; ++channelsIndex){
-			double currentSample = objectPtr->GetSample(sampleIndex, channelsIndex);
-			double diff = fabs(currentSample-positionY);
-			if (diff < distance){
-				distance = diff;
-				sample = currentSample;
-			}
-		}
-	}
-	else{
-		sample = objectPtr->GetSample(sampleIndex, currentCurveIndex - 1);
-	}
-
-	QString text = QString("%1: %2").arg(sampleIndex).arg(sample);
-
-	return text;
+	QPointF pos = invTransform(position);
+	return QString("%1: %2").arg(pos.x()).arg(pos.y());
 }
 
 

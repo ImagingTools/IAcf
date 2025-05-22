@@ -44,14 +44,14 @@ public:
 	COcvAcquisitionComp();
 
 	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (icam::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

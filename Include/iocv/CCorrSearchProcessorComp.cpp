@@ -22,7 +22,7 @@ namespace iocv
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CCorrSearchProcessorComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CCorrSearchProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			iipr::IFeaturesConsumer& results,
@@ -32,7 +32,7 @@ int CCorrSearchProcessorComp::DoExtractFeatures(
 	iprm::TParamsPtr<iimg::IBitmap> modelImagePtr(paramsPtr, m_modelParamIdAttrPtr, m_defaultModelImageCompPtr, true);
 
 	if (!modelImagePtr.IsValid()){
-		return false;
+		return TS_INVALID;
 	}
 
 	istd::TDelPtr<i2d::IObject2d> usedAoiPtr;
@@ -83,7 +83,7 @@ int CCorrSearchProcessorComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CCorrSearchProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CCorrSearchProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -194,13 +194,13 @@ int CCorrSearchProcessorComp::DoModelSearch(
 		// return results
 		result.AddFeature(new iipr::CSearchFeature(maxVal, regionOffset + position, 0, i2d::CVector2d(1, 1)));
 
-		SendInfoMessage(0, QObject::tr("Found model, %1% score").arg(maxVal * 100));
+		SendInfoMessage(0, QT_TR_NOOP(QString("Found model, %1% score").arg(maxVal * 100)));
 
 		return 1;
 	}
 
 	if (IsVerboseEnabled()){
-		SendVerboseMessage(QObject::tr("Model search took %1 ms").arg(timer.elapsed()));
+		SendVerboseMessage(QT_TR_NOOP(QString("Model search took %1 ms").arg(timer.elapsed())));
 	}
 
 	return 0;

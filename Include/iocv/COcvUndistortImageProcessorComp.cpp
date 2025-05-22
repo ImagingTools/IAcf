@@ -27,8 +27,25 @@ bool COcvUndistortImageProcessorComp::ProcessImage(
 			iimg::IBitmap& outputImage) const
 {
 	try{
+
 		iprm::TParamsPtr<i2d::ICalibration2d> cameraCalibrationParamPtr(paramsPtr, m_cameraCalibrationParamIdAttrPtr, m_defaultCameraCalibrationCompPtr, false);
 		if (!cameraCalibrationParamPtr.IsValid()){
+			if (m_selectionParamIdAttrPtr.IsValid() && m_paramsManagerCompPtr.IsValid()) {
+				iprm::TParamsPtr<iprm::ISelectionParam> cameraParamSelectionPtr(paramsPtr, *m_selectionParamIdAttrPtr);
+				if (cameraParamSelectionPtr.IsValid()) {
+					const iprm::IParamsSet* oneParamsSetPtr = m_paramsManagerCompPtr->GetParamsSet(cameraParamSelectionPtr->GetSelectedOptionIndex());
+					if (oneParamsSetPtr != nullptr) {
+						iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(oneParamsSetPtr, *m_cameraCalibrationParamIdAttrPtr);
+						if (calibrationPtr.IsValid())
+							cameraCalibrationParamPtr.SetPtr(calibrationPtr.GetPtr());
+					}
+				}
+
+			}
+		}
+
+		if (!cameraCalibrationParamPtr.IsValid()){
+
 			outputImage.CopyFrom(inputImage);
 
 			return true;
@@ -44,8 +61,9 @@ bool COcvUndistortImageProcessorComp::ProcessImage(
 		if (calibrationImplPtr != NULL){
 			cv::Mat cvOutput;
 			cv::undistort(cvInput, cvOutput, calibrationImplPtr->GetCameraMatrix(), calibrationImplPtr->GetDistorsion());
+			bool retVal = COcvImage::ConvertToBitmap(cvOutput, outputImage);
 
-			return COcvImage::ConvertToBitmap(cvOutput, outputImage);
+			return retVal;
 		}
 	}
 	catch (const cv::Exception& e){
@@ -54,7 +72,7 @@ bool COcvUndistortImageProcessorComp::ProcessImage(
 		return false;
 	}
 	catch (...){
-		SendCriticalMessage(0, QObject::tr("Unknown exception"));
+		SendCriticalMessage(0, QString("Unknown exception"));
 
 		return false;
 	}

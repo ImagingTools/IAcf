@@ -45,7 +45,7 @@ public:
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const override;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const override;
 
 	template <class InteraceType>
 	static InteraceType* ExtractCalibration(COcvIntrinsicCameraCalibrationSupplierComp& parent)

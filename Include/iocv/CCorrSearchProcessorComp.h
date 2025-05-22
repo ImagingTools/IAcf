@@ -38,24 +38,24 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
-	virtual int DoExtractFeatures(
+	virtual iproc::IProcessor::TaskState DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& image,
 				iipr::IFeaturesConsumer& results,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (iipr::ISearchConstraints)
-	virtual int GetSearchSupportedFlags() const;
-	virtual const istd::CRange& GetRotationRangeConstraints() const;
-	virtual const istd::CRange& GetScaleRangeConstraints() const;
-	virtual const istd::CIntRange& GetResultsCountConstraints() const;
+	virtual int GetSearchSupportedFlags() const override;
+	virtual const istd::CRange& GetRotationRangeConstraints() const override;
+	virtual const istd::CRange& GetScaleRangeConstraints() const override;
+	virtual const istd::CIntRange& GetResultsCountConstraints() const override;
 
 protected:
 	/**

@@ -1,18 +1,19 @@
 #include <iocv/COcvDenoisingProcessorComp.h>
 
+#include <iocv/COcvImage.h>
 
-// OpenCV includes
-#include <opencv2/photo.hpp>
-
-// ACF includes
+ // ACF includes
 #include <istd/CIndex2d.h>
 #include <ibase/CSize.h>
 #include <iprm/TParamsPtr.h>
 #include <iimg/IBitmap.h>
 #include <iimg/CBitmap.h>
-#include <imeas/INumericValue.h>
-#include <iocv/COcvImage.h>
 
+// ACF-Solitions includes
+#include <imeas/INumericValue.h>
+
+// OpenCV includes
+#include <opencv2/photo.hpp>
 
 namespace iocv
 {
@@ -22,7 +23,7 @@ namespace iocv
 
 // reimplemented (iproc::IProcessor)
 
-int COcvDenoisingProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState COcvDenoisingProcessorComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -55,7 +56,7 @@ int COcvDenoisingProcessorComp::DoProcessing(
 
 	cv::Mat inputMatrix;
 	
-	if (!COcvImage::ConvertFromBitmap(*inputBitmapPtr, inputMatrix)){
+	if (!COcvImage::ConvertFromBitmap(*inputBitmapPtr, inputMatrix)) {
 		return TS_INVALID;
 	}
 

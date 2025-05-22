@@ -8,6 +8,8 @@
 #include <iimg/IBitmap.h>
 #include <iprm/IEnableableParam.h>
 #include <imeas/INumericValue.h>
+#include <iimg/CScanlineMask.h>
+#include <i2d/IObject2d.h>
 
 // OpenCV includes
 #include <opencv2/imgproc/imgproc.hpp>
@@ -21,43 +23,23 @@ namespace iocv
 
 // reimplemented (iproc::IProcessor)
 
-int COcvAdaptiveBinarizationComp::DoProcessing(
+iproc::IProcessor::TaskState COcvAdaptiveBinarizationComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		SendWarningMessage(0, "Input bitmap is not set");
-
+	// IO
+	const iimg::IBitmap* inputBitmapPtr = nullptr;
+	iimg::IBitmap* outputBitmapPtr = nullptr;
+	if (!GetBitmaps(inputPtr, outputPtr, inputBitmapPtr, outputBitmapPtr)) {
 		return TS_INVALID;
 	}
 
-	if (inputBitmapPtr->IsEmpty()){
-		SendWarningMessage(0, "Input bitmap is empty.");
-
-		return TS_INVALID;
-	}
-
-	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
-	if (outputBitmapPtr == NULL){
-		SendWarningMessage(0, "Output bitmap is not set");
-
-		return TS_INVALID;
-	}
-
-	istd::CIndex2d inputBitmapSize = inputBitmapPtr->GetImageSize();
-
-	if (!outputBitmapPtr->CopyFrom(*inputBitmapPtr)){
-		SendErrorMessage(0, "Data could not be copied from input bitmap to the output");
-
-		return TS_INVALID;
-	}
-
+	// Parameters
 	iprm::TParamsPtr<imeas::INumericValue> filterSizeParamPtr(paramsPtr, *m_filterSizeParamsIdAttrPtr);
 	if (!filterSizeParamPtr.IsValid()){
-		SendErrorMessage(0, "No fiter dimension was set, processing failed");
+		SendErrorMessage(0, "No filter dimension was set, processing failed");
 
 		return TS_INVALID;
 	}
@@ -75,6 +57,13 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 	if (invertPrm.IsValid())
 		invert = invertPrm->IsEnabled();
 
+	int segmentationOffset = 0;
+	iprm::TParamsPtr<imeas::INumericValue> segmentationOffsetParamPtr(paramsPtr, *m_segmentationOffsetIdAttrPtr);
+	if (segmentationOffsetParamPtr.IsValid()) {
+		segmentationOffset = 255 * segmentationOffsetParamPtr->GetValues()[0];
+	}
+
+	istd::CIndex2d inputBitmapSize = inputBitmapPtr->GetImageSize();
 	int imageWidth = inputBitmapSize.GetX();
 	int imageHeight = inputBitmapSize.GetY();
 
@@ -88,17 +77,19 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 		++kernelSize;
 	}
 
-	cv::Mat inputMatrix(inputBitmapPtr->GetImageSize().GetY(), inputBitmapPtr->GetImageSize().GetX(), CV_8UC1, (qint8*)inputBitmapPtr->GetLinePtr(0));
-	cv::Mat outputMatrix(outputBitmapPtr->GetImageSize().GetY(), outputBitmapPtr->GetImageSize().GetX(), CV_8UC1, (qint8*)outputBitmapPtr->GetLinePtr(0));
+	// AOI
+	cv::Mat inputMatrix, outputMatrix;
 
+	MakeProcessedRegionMatrices(inputBitmapPtr, outputBitmapPtr, paramsPtr, inputMatrix, outputMatrix);
+
+	if (inputMatrix.empty() || outputMatrix.empty()){
+		SendInfoMessage(0, "Empty image region for processing. Exit routine", "OcvAdaptiveBinarization");
+		return TS_OK;
+	}
+
+	// Process
 	cv::_InputArray input(inputMatrix);
 	cv::_OutputArray output(outputMatrix);
-
-	int segmentationOffset = 0;
-	iprm::TParamsPtr<imeas::INumericValue> segmentationOffsetParamPtr(paramsPtr, *m_segmentationOffsetIdAttrPtr);
-	if (segmentationOffsetParamPtr.IsValid()){
-		segmentationOffset = 255 * segmentationOffsetParamPtr->GetValues()[0];
-	}
 
 	cv::adaptiveThreshold(input, output, 
 				255, 
@@ -106,6 +97,9 @@ int COcvAdaptiveBinarizationComp::DoProcessing(
 				invert ? cv::THRESH_BINARY_INV : cv::THRESH_BINARY,
 				kernelSize, 
 				segmentationOffset);
+
+	// Output
+	EmplaceProcessedRegionBack(outputBitmapPtr, paramsPtr, outputMatrix);
 
 	return TS_OK;
 }

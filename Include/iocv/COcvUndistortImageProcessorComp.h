@@ -4,7 +4,7 @@
 // ACF includes
 #include <i2d/ICalibration2d.h>
 #include <iipr/CImageProcessorCompBase.h>
-
+#include <iprm/IParamsManager.h>
 
 namespace iocv
 {
@@ -21,6 +21,9 @@ public:
 	I_BEGIN_COMPONENT(COcvUndistortImageProcessorComp);
 		I_ASSIGN(m_cameraCalibrationParamIdAttrPtr, "CameraCalibrationParamId", "Parameter-ID of the calibration object in parameter set", false, "CameraCalibration");
 		I_ASSIGN(m_defaultCameraCalibrationCompPtr, "DefaultCameraCalibration", "Default camera calibration", false, "DefaultCameraCalibration");
+		//special case
+		I_ASSIGN(m_selectionParamIdAttrPtr, "SelectionId", "Id of the selection parameter, which defines paramsSet from Manager", false, "Index");
+		I_ASSIGN(m_paramsManagerCompPtr, "ManagerToSelectFrom", "ParamsManager from which through SelectionId a paramsSet will be extracted", false, "Manager");
 	I_END_COMPONENT;
 
 protected:
@@ -33,6 +36,8 @@ protected:
 private:
 	I_REF(i2d::ICalibration2d, m_defaultCameraCalibrationCompPtr);
 	I_ATTR(QByteArray, m_cameraCalibrationParamIdAttrPtr);
+	I_ATTR(QByteArray, m_selectionParamIdAttrPtr);
+	I_REF(iprm::IParamsManager, m_paramsManagerCompPtr);
 };
 
 

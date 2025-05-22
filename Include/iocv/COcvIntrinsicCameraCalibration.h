@@ -17,8 +17,8 @@ class COcvIntrinsicCameraCalibration: virtual public i2d::ICalibration2d
 public:
 	COcvIntrinsicCameraCalibration();
 
-	typedef cv::Matx33d CameraMatrix;
-	typedef cv::Matx<double, 5, 1> DistorsionCoeff;
+	typedef cv::Matx33f CameraMatrix;
+	typedef cv::Matx<float, 5, 1> DistorsionCoeff;
 
 	const CameraMatrix& GetCameraMatrix() const;
 	void SetCameraMatrix(const CameraMatrix& cameraMatrix);
