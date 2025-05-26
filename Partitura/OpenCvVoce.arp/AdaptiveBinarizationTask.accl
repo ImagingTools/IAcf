@@ -2,21 +2,45 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4790" Description="ACF"/>
-            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5010" Description="ACF"/>
+            <Version Id="1" Number="2177" Description="ACF-Solutions"/>
             <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="BinaryImageSupplier" X="500" Y="425" Note=""/>
-        <Element ComponentName="Bitmap" X="825" Y="425" Note=""/>
-        <Element ComponentName="FilterSize" X="150" Y="150" Note=""/>
-        <Element ComponentName="FilterSizeConstraints" X="125" Y="50" Note=""/>
-        <Element ComponentName="ImageBinarizeProcessor" X="150" Y="600" Note=""/>
-        <Element ComponentName="Invert" X="825" Y="150" Note=""/>
-        <Element ComponentName="Params" X="500" Y="250" Note=""/>
-        <Element ComponentName="SegmentationOffset" X="500" Y="150" Note=""/>
-        <Element ComponentName="SegmentationOffsetConstraints" X="500" Y="50" Note=""/>
+        <Element ComponentName="BinarizationParameters" X="750" Y="250" Note=""/>
+        <Element ComponentName="BinarizationRegions" X="1000" Y="400" Note=""/>
+        <Element ComponentName="BinaryImageSupplier" X="500" Y="100" Note="Decisive parameter ist ParamsManagerId: if it is set and found - the processing is made regionwise, wrt params in the ParamsManager&#10;If not set, the DefaultGlobalParams are  used and applied to entire image"/>
+        <Element ComponentName="Bitmap" X="975" Y="100" Note=""/>
+        <Element ComponentName="Calibration2dProxy" X="1000" Y="700" Note=""/>
+        <Element ComponentName="DefaultGlobalParams" X="600" Y="400" Note=""/>
+        <Element ComponentName="ImageCopyProcessor" X="1000" Y="200" Note=""/>
+        <Element ComponentName="OneParamsSet" X="1000" Y="550" Note=""/>
+        <Element ComponentName="OpenCvAdaptiveBinarization" X="225" Y="250" Note=""/>
     </PositionMap>
-    <EmbeddedRegistries/>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="ParamsWithoutRegion">
+            <PositionMap>
+                <Element ComponentName="FilterSize" X="225" Y="375" Note=""/>
+                <Element ComponentName="FilterSizeConstraints" X="200" Y="525" Note=""/>
+                <Element ComponentName="Invert" X="550" Y="375" Note=""/>
+                <Element ComponentName="Params" X="550" Y="225" Note=""/>
+                <Element ComponentName="SegmentationOffset" X="850" Y="375" Note=""/>
+                <Element ComponentName="SegmentationOffsetConstraints" X="850" Y="525" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="OneParamsSet">
+            <PositionMap>
+                <Element ComponentName="FilterSize" X="175" Y="375" Note=""/>
+                <Element ComponentName="FilterSizeConstraints" X="175" Y="550" Note=""/>
+                <Element ComponentName="Invert" X="775" Y="375" Note=""/>
+                <Element ComponentName="Params" X="475" Y="200" Note=""/>
+                <Element ComponentName="Region" X="1000" Y="375" Note=""/>
+                <Element ComponentName="SegmentationOffset" X="475" Y="375" Note=""/>
+                <Element ComponentName="SegmentationOffsetConstraints" X="475" Y="550" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
 </Acf>

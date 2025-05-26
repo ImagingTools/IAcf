@@ -2,14 +2,51 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4790" Description="ACF"/>
-            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5010" Description="ACF"/>
+            <Version Id="1" Number="2177" Description="ACF-Solutions"/>
             <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
-    <Description></Description>
+    <Description>Binarization Task wrt Params is global or regionwise</Description>
     <Keywords></Keywords>
     <ElementsList>
+        <Element Id="BinarizationParameters" PackageId="BasePck" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>BinarizationRegions</Value>
+                                <Value>DefaultGlobalParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>BinarizationRegions</Value>
+                                <Value>GlobalParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="BinarizationRegions" PackageId="BasePck" ComponentId="ParamsManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultSelection" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultSetName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Region %1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="OneParamsSet"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="BinaryImageSupplier" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -17,10 +54,16 @@
                         <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
                     <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ImageBinarizeProcessor"/>
+                        <Data IsEnabled="true" Value="OpenCvAdaptiveBinarization"/>
                     </AttributeInfo>
                     <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                         <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CopyProcessorMultiRegion" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageCopyProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="GlobalParams"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
                         <Data IsEnabled="true" Value="Image Binarization"/>
@@ -28,11 +71,17 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="InputBitmapCalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="ParamsManagerId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="BinarizationRegions"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="Params"/>
+                        <Data IsEnabled="true" Value="BinarizationParameters"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -42,144 +91,361 @@
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+        <Element Id="Calibration2dProxy" PackageId="CalibrationPck" ComponentId="Calibration2dProxy">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="FilterSizeConstraints"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterSize">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>15</Value>
-                            </Values>
-                        </Data>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="FilterSizeConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="500"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="3"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="0"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="2"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>Filter Size</Value>
-                            </Values>
-                        </Data>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="ImageBinarizeProcessor" PackageId="OpenCvPck" ComponentId="OpenCvAdaptiveBinarization">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
-                        <Data IsEnabled="true" Value="FilterSize"/>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="DefaultGlobalParams" PackageId="" ComponentId="ParamsWithoutRegion">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultFilterSize" Type="Real[]" ExportId="DefaultFilterSize">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ImageCopyProcessor" PackageId="IprPck" ComponentId="ImageCopyProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Region"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="BinaryImageSupplier/TaskLog"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SegmentationOffsetParamsId" Type="Id" ExportId="">
-                        <Data IsEnabled="true" Value="SegmentationOffset"/>
+                    <AttributeInfo Id="OutputPixelType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Invert" PackageId="BasePck" ComponentId="EnableableParam">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap/>
-            </Data>
-        </Element>
-        <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
-            <Data IsEnabled="true" Flags="0">
+        <Element Id="OneParamsSet" PackageId="" ComponentId="OneParamsSet">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>FilterSize</Value>
-                                <Value>SegmentationOffset</Value>
-                                <Value>Invert</Value>
-                            </Values>
-                        </Data>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>FilterSize</Value>
-                                <Value>SegmentationOffset</Value>
-                                <Value>Invert</Value>
-                            </Values>
-                        </Data>
+                    <AttributeInfo Id="Calibration" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Calibration2dProxy"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SegmentationOffset" PackageId="MeasPck" ComponentId="NumericParams">
+        <Element Id="OpenCvAdaptiveBinarization" PackageId="OpenCvPck" ComponentId="OpenCvAdaptiveBinarization">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="SegmentationOffsetConstraints"/>
+                    <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Region"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Values" Type="Real[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>0</Value>
-                            </Values>
-                        </Data>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="SegmentationOffsetConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="100"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="0.5"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
-                        <Data IsEnabled="true" Value="-0.5"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="0"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="UnitName" Type="Text" ExportId="">
-                        <Data IsEnabled="true" Value="%"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="3"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>Segmentation Offset</Value>
-                            </Values>
-                        </Data>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BinaryImageSupplier/TaskLog"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
     </ElementsList>
-    <EmbeddedRegistriesList/>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="OneParamsSet">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="FilterSizeConstraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterSize">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>15</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="FilterSizeConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="500"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="3"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Filter Size</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Invert" PackageId="BasePck" ComponentId="EnableableParam">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                            <Value>Region</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                            <Value>Region</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Region" PackageId="BasePck" ComponentId="Polygon">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Calibration" Type="Reference" ExportId="Calibration">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MinimumNodesAllowed" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="3"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>0</Value>
+                                            <Value>200</Value>
+                                            <Value>200</Value>
+                                            <Value>0</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>0</Value>
+                                            <Value>0</Value>
+                                            <Value>100</Value>
+                                            <Value>100</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffset" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SegmentationOffsetConstraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>0</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffsetConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="0.5"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="-0.5"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="1"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Contrast Offset</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModel" ComponentId="Params"/>
+                    <Interface InterfaceId="iprm::IParamsSet" ComponentId="Params"/>
+                    <Interface InterfaceId="iser::ISerializable" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic&gt;" ComponentId="Params"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="ParamsWithoutRegion">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="FilterSizeConstraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterSize">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>15</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="FilterSizeConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="500"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="3"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Filter Size</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Invert" PackageId="BasePck" ComponentId="EnableableParam">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                            <Value></Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffset" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SegmentationOffsetConstraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>0</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffsetConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="0.5"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="-0.5"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="1"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Contrast Offset</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModel" ComponentId="Params"/>
+                    <Interface InterfaceId="iprm::IParamsSet" ComponentId="Params"/>
+                    <Interface InterfaceId="iser::ISerializable" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic&gt;" ComponentId="Params"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
     <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="icam::ICameraAcquisition" ComponentId="BinaryImageSupplier"/>
         <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="BinaryImageSupplier"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="BinaryImageSupplier"/>
         <Interface InterfaceId="imod::IModel" ComponentId="BinaryImageSupplier"/>

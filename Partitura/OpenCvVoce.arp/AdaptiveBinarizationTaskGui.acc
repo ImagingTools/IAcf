@@ -2,90 +2,342 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4790" Description="ACF"/>
-            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="331008" Description="Qt Framework"/>
+            <Version Id="0" Number="5002" Description="ACF"/>
+            <Version Id="1" Number="2174" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Task UI for adaptive binarization based on OpenCV</Description>
     <Keywords>Segmentation</Keywords>
     <ElementsList>
-        <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+        <Element Id="BinarizationRegions" PackageId="QtGuiPck" ComponentId="ParamsManagerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo Id="CompactView" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OneParamsSet"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Invert" PackageId="QtGuiPck" ComponentId="EnableableParamGui">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="Label" Type="Text" ExportId="">
-                        <Data IsEnabled="true" Value="Invert Content"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="Params" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+        <Element Id="ComposedParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>FilterSize</Value>
-                                <Value>SegmentationOffset</Value>
-                                <Value>Invert</Value>
+                                <Value>BinarizationRegions</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
                     <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>FilterSize</Value>
-                                <Value>SegmentationOffset</Value>
-                                <Value>Invert</Value>
+                                <Value>BinarizationRegions</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SegmentationOffset" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+        <Element Id="DefaultGlobalParams" PackageId="" ComponentId="ParamsWithoutRegion">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="MultiObserverBinder" PackageId="BasePck" ComponentId="MultiObserverBinder">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo Id="SlaveObservers" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>TaskGui</Value>
+                                <Value>SnapBitmapSupplierGui</Value>
+                            </Values>
+                        </Data>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Task" PackageId="SupplierVoce" ComponentId="SnapTaskGui">
+        <Element Id="OneParamsSet" PackageId="" ComponentId="OneParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="Params"/>
+                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="ShapeColorSchema">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SnapBitmapSupplierGui" PackageId="QtCameraPck" ComponentId="SnapBitmapSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="TaskGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="ParamsLoader">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ComposedParamsSetGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ComposedParamsSetGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowResultStatusFrame" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapBitmapSupplierGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewCalibrationMode" Type="Integer" ExportId="ViewCalibrationMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewExtenderMode" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
     </ElementsList>
-    <EmbeddedRegistriesList/>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="OneParamsSet">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="ComposedParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="InputSizePolicy" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SingleRow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Invert" PackageId="QtGuiPck" ComponentId="EnableableParamGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Label" Type="Text" ExportId="">
+                                    <Data IsEnabled="true" Value="Invert Content"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Params" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>ComposedParamsSetGui</Value>
+                                            <Value>Region</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>*</Value>
+                                            <Value>Region</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Processing</Value>
+                                            <Value>Area</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ShowAllShapes" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Region" PackageId="QtViewPck" ComponentId="PolygonParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="ShapeColorSchema">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffset" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="InputSizePolicy" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SingleRow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModelEditor" ComponentId="Params"/>
+                    <Interface InterfaceId="imod::IObserver" ComponentId="Params"/>
+                    <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="Params"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="Params"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="ParamsWithoutRegion">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="InputSizePolicy" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SingleRow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Invert" PackageId="QtGuiPck" ComponentId="EnableableParamGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Label" Type="Text" ExportId="">
+                                    <Data IsEnabled="true" Value="Invert Content"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Params" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterSize</Value>
+                                            <Value>SegmentationOffset</Value>
+                                            <Value>Invert</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SegmentationOffset" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="InputSizePolicy" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SingleRow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModelEditor" ComponentId="Params"/>
+                    <Interface InterfaceId="imod::IObserver" ComponentId="Params"/>
+                    <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="Params"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="Params"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="Params"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
     <ExportedInterfaces>
-        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
-        <Interface InterfaceId="imod::IModelEditor" ComponentId="Task"/>
-        <Interface InterfaceId="imod::IObserver" ComponentId="Task"/>
-        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="Task"/>
-        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="Task"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="SnapBitmapSupplierGui"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="TaskGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="TaskGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="VisualStatus" ComponentId="Task/VisualStatus"/>
+        <Component ExportedId="BinarzationRegions" ComponentId="BinarizationRegions"/>
+        <Component ExportedId="DefaultGlobalParams" ComponentId="DefaultGlobalParams"/>
+        <Component ExportedId="VisualStatus" ComponentId="TaskGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>

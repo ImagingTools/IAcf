@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4881" Description="ACF"/>
+            <Version Id="1" Number="2123" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
@@ -16,7 +16,9 @@
         <Element ComponentName="MinDistanceConstraints" X="450" Y="750" Note=""/>
         <Element ComponentName="ModelImagePath" X="1050" Y="625" Note=""/>
         <Element ComponentName="OpenCvHoughBasedSearchProcessor" X="200" Y="250" Note=""/>
-        <Element ComponentName="Params" X="800" Y="500" Note=""/>
+        <Element ComponentName="Params" X="775" Y="425" Note=""/>
+        <Element ComponentName="RadiusRange" X="625" Y="625" Note=""/>
+        <Element ComponentName="RadiusRangeConstraints" X="650" Y="750" Note=""/>
         <Element ComponentName="SearchBasedFeaturesSupplier" X="525" Y="75" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>

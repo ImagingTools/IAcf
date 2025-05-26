@@ -2,17 +2,40 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4790" Description="ACF"/>
-            <Version Id="1" Number="2079" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="331008" Description="Qt Framework"/>
+            <Version Id="0" Number="5002" Description="ACF"/>
+            <Version Id="1" Number="2174" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="FilterSize" X="325" Y="575" Note=""/>
-        <Element ComponentName="Invert" X="975" Y="575" Note=""/>
-        <Element ComponentName="Params" X="650" Y="425" Note=""/>
-        <Element ComponentName="SegmentationOffset" X="650" Y="575" Note=""/>
-        <Element ComponentName="Task" X="650" Y="275" Note=""/>
+        <Element ComponentName="BinarizationRegions" X="875" Y="350" Note=""/>
+        <Element ComponentName="ComposedParamsSetGui" X="875" Y="200" Note=""/>
+        <Element ComponentName="DefaultGlobalParams" X="525" Y="500" Note=""/>
+        <Element ComponentName="MultiObserverBinder" X="525" Y="200" Note=""/>
+        <Element ComponentName="OneParamsSet" X="875" Y="500" Note=""/>
+        <Element ComponentName="SnapBitmapSupplierGui" X="200" Y="200" Note=""/>
+        <Element ComponentName="TaskGui" X="525" Y="50" Note=""/>
     </PositionMap>
-    <EmbeddedRegistries/>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="OneParamsSet">
+            <PositionMap>
+                <Element ComponentName="ComposedParamsSetGui" X="250" Y="300" Note=""/>
+                <Element ComponentName="FilterSize" X="125" Y="475" Note=""/>
+                <Element ComponentName="Invert" X="600" Y="475" Note=""/>
+                <Element ComponentName="Params" X="600" Y="125" Note=""/>
+                <Element ComponentName="Region" X="1050" Y="475" Note=""/>
+                <Element ComponentName="SegmentationOffset" X="350" Y="475" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="ParamsWithoutRegion">
+            <PositionMap>
+                <Element ComponentName="FilterSize" X="225" Y="450" Note=""/>
+                <Element ComponentName="Invert" X="825" Y="450" Note=""/>
+                <Element ComponentName="Params" X="525" Y="200" Note=""/>
+                <Element ComponentName="SegmentationOffset" X="525" Y="450" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
 </Acf>
