@@ -39,17 +39,17 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiModelDetached();
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnGuiModelDetached() override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiRetranslate() override;
 
 protected Q_SLOTS:
 	virtual void OnTextChanged();

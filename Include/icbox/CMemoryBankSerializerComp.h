@@ -65,8 +65,8 @@ protected:
 	bool WriteToMem(int offset, const void* bufferPtr, int size) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

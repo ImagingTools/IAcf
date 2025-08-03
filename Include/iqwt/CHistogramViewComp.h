@@ -43,12 +43,12 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private Q_SLOTS:
 	void on_ChannelCombo_currentIndexChanged(int index);

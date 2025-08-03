@@ -54,16 +54,16 @@ public:
 
 	CSurfaceViewComp();
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 protected:
 	virtual void SetupLighting();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 protected Q_SLOTS:
 	void OnParamsChanged(double value);

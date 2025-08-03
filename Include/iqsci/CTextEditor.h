@@ -37,7 +37,7 @@ public:
 	virtual void OnRetranslate();
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 public Q_SLOTS:
 	void SetFoldingEnabled(bool useFoldingEnabled);

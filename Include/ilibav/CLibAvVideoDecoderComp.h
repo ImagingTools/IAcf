@@ -69,7 +69,7 @@ public:
 	virtual ~CLibAvVideoDecoderComp();
 
 	// reimplemented (icam::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (imeas::ISampleAcquisition)
 	virtual double GetSamplingRate(const iprm::IParamsSet* paramsPtr) const;

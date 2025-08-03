@@ -62,8 +62,8 @@ protected:
 	void EnsureSync() const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private:
 	QMediaPlayer m_mediaPlayer;

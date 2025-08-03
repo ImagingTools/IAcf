@@ -66,7 +66,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
 	// reimplemented (icam::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
@@ -81,8 +81,8 @@ protected:
 	bool SetAbsoluteFeatureValue(dc1394camera_t& camera, dc1394feature_t feature, double value);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	class AdjustConstraints: public imeas::ILinearAdjustConstraints
