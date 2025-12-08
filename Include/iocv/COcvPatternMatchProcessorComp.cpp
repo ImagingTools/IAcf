@@ -97,8 +97,8 @@ iproc::IProcessor::TaskState COcvPatternMatchProcessorComp::DoProcessing(
 	if (m_aoiIdAttrPtr.IsValid()) {
 		iprm::TParamsPtr<i2d::IObject2d> aoiParamPtr(paramsPtr, *m_aoiIdAttrPtr);
 		if (aoiParamPtr.IsValid()) {
-			istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
-			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiParamPtr->CloneMe());
+			istd::TUniqueInterfacePtr<i2d::IObject2d> transformedRegionPtr;
+			transformedRegionPtr.MoveCastedPtr<istd::IChangeable>(aoiParamPtr->CloneMe());
 			if (transformedRegionPtr.IsValid()) {
 				const i2d::ICalibration2d* calibrationPtr = transformedRegionPtr->GetCalibration();
 				if (calibrationPtr != NULL) {

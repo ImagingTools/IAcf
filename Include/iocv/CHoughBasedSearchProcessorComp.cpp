@@ -30,7 +30,7 @@ iproc::IProcessor::TaskState CHoughBasedSearchProcessorComp::DoExtractFeatures(
 			iipr::IFeaturesConsumer& results,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
-	istd::TDelPtr<i2d::IObject2d> usedAoiPtr;
+	istd::TUniqueInterfacePtr<i2d::IObject2d> usedAoiPtr;
 
 	istd::CIndex2d imageSize = image.GetImageSize();
 	i2d::CRect aoiRect = i2d::CRect(0, 0, imageSize.GetX(), imageSize.GetY());
@@ -38,7 +38,7 @@ iproc::IProcessor::TaskState CHoughBasedSearchProcessorComp::DoExtractFeatures(
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiPtr.IsValid()){
 		// Clone calibration to calculate image aoi in image coordinates
-		usedAoiPtr.SetCastedOrRemove(aoiPtr->CloneMe(istd::IChangeable::CM_WITHOUT_REFS));
+		usedAoiPtr.MoveCastedPtr(aoiPtr->CloneMe(istd::IChangeable::CM_WITHOUT_REFS));
 		if (!usedAoiPtr.IsValid()){
 			SendErrorMessage(0, "Recalibration of the region failed");
 
