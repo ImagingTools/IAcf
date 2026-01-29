@@ -79,9 +79,9 @@ The workflow passes the following information to TeamCity:
   - For pull requests: `<pr-branch-name>` (e.g., `feature-branch`)
   - For push events: `<branch-name>` (e.g., `main`)
   - This tells TeamCity which branch to check out and build
-- `env.GIT_BRANCH`: The full Git branch reference (as a build property)
-  - For pull requests: `refs/heads/<pr-branch-name>` (e.g., `refs/heads/feature-branch`)
-  - For push events: The pushed ref (e.g., `refs/heads/main`)
+- `env.GIT_BRANCH`: The Git branch name (as a build property)
+  - For pull requests: `<pr-branch-name>` (e.g., `feature-branch`)
+  - For push events: `<branch-name>` (e.g., `main`)
 - `env.GIT_COMMIT`: The Git commit SHA
 
 The branch name is the primary mechanism that tells TeamCity which branch to build. The `env.GIT_BRANCH` and `env.GIT_COMMIT` properties are available as environment variables in your TeamCity build configuration if needed.
@@ -90,7 +90,7 @@ The branch name is the primary mechanism that tells TeamCity which branch to bui
 
 The workflow will wait up to 1 hour (3600 seconds) for the TeamCity build to complete. If the build takes longer, the workflow will timeout and fail.
 
-You can adjust this by modifying the `MAX_WAIT` variable in the workflow file.
+You can adjust this by modifying the `MAX_QUEUED_SECONDS` and `MAX_RUNNING_SECONDS` variables in the "Wait for TeamCity Build" step of the workflow file.
 
 ## Troubleshooting
 
@@ -105,7 +105,7 @@ You can adjust this by modifying the `MAX_WAIT` variable in the workflow file.
 
 ### "Timeout waiting for TeamCity build to complete"
 - The build is taking longer than 1 hour
-- Increase the `MAX_WAIT` value in the workflow file
+- Increase the `MAX_QUEUED_SECONDS` and/or `MAX_RUNNING_SECONDS` values in the workflow file
 - Or optimize your TeamCity build to complete faster
 
 ### "TeamCity build failed"
