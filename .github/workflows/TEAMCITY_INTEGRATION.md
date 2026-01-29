@@ -16,16 +16,23 @@ The `teamcity-trigger.yml` workflow:
 1. A TeamCity server with a configured build configuration for this project
 2. A TeamCity access token with permissions to trigger builds and query build status
 
-### Required GitHub Repository Variables
+### Required GitHub Repository Variables and Secrets
 
-Configure the following variables in your GitHub repository settings (Settings → Secrets and variables → Actions → Variables tab):
+Configure the following in your GitHub repository settings (Settings → Secrets and variables → Actions):
+
+**Variables** (Variables tab):
 
 | Variable Name | Description | Example |
 |------------|-------------|---------|
 | `TEAMCITY_URL` | Your TeamCity server URL (without trailing slash) | `https://teamcity.example.com` |
-| `TEAMCITY_TOKEN` | TeamCity access token with build trigger permissions | `eyJ0eXAiOiJKV1Q...` |
 | `TEAMCITY_BUILD_TYPE_WINDOWS` | TeamCity build configuration ID for Windows builds | `IAcf_Build_Windows` or `ProjectId_BuildConfigId_Windows` |
 | `TEAMCITY_BUILD_TYPE_LINUX` | TeamCity build configuration ID for Linux builds | `IAcf_Build_Linux` or `ProjectId_BuildConfigId_Linux` |
+
+**Secrets** (Secrets tab):
+
+| Secret Name | Description | Example |
+|------------|-------------|---------|
+| `TEAMCITY_TOKEN` | TeamCity access token with build trigger permissions | `eyJ0eXAiOiJKV1Q...` |
 
 ### How to Get TeamCity Configuration Values
 
@@ -52,17 +59,16 @@ For each build configuration:
    - Windows: `IAcf_CMakeBuild_Windows` or `ImagingTools_IAcf_Build_Windows`
    - Linux: `IAcf_CMakeBuild_Linux` or `ImagingTools_IAcf_Build_Linux`
 
-## Setting Up GitHub Repository Variables
+## Setting Up GitHub Repository Variables and Secrets
 
 1. Go to your repository on GitHub
 2. Click **Settings** → **Secrets and variables** → **Actions**
-3. Click on the **Variables** tab
-4. Click **New repository variable**
-5. Add each of the four variables listed above:
+3. Add the three variables (Variables tab):
    - `TEAMCITY_URL`
-   - `TEAMCITY_TOKEN`
    - `TEAMCITY_BUILD_TYPE_WINDOWS`
    - `TEAMCITY_BUILD_TYPE_LINUX`
+4. Add the secret (Secrets tab):
+   - `TEAMCITY_TOKEN`
 
 ## Workflow Triggers
 
@@ -88,14 +94,20 @@ The branch name is the primary mechanism that tells TeamCity which branch to bui
 
 ## Timeout
 
-The workflow will wait up to 1 hour (3600 seconds) for the TeamCity build to complete. If the build takes longer, the workflow will timeout and fail.
+The workflow will wait up to 90 minutes for the TeamCity build to complete. If the build takes longer, the workflow will timeout and fail.
 
-You can adjust this by modifying the `MAX_QUEUED_SECONDS` and `MAX_RUNNING_SECONDS` variables in the "Wait for TeamCity Build" step of the workflow file.
+The workflow has the following timeout settings:
+- Maximum time in queue: 30 minutes (`MAX_QUEUED_SECONDS=1800`)
+- Maximum time running: 60 minutes (`MAX_RUNNING_SECONDS=3600`)
+- Overall job timeout: 90 minutes (`timeout-minutes: 90`)
+
+You can adjust these by modifying the `MAX_QUEUED_SECONDS`, `MAX_RUNNING_SECONDS`, and `timeout-minutes` values in the workflow file.
 
 ## Troubleshooting
 
 ### "TeamCity configuration not found in repository variables"
-- Ensure all four required variables (TEAMCITY_URL, TEAMCITY_TOKEN, TEAMCITY_BUILD_TYPE_WINDOWS, TEAMCITY_BUILD_TYPE_LINUX) are configured in your repository settings under the Variables tab
+- Ensure all three required variables (TEAMCITY_URL, TEAMCITY_BUILD_TYPE_WINDOWS, TEAMCITY_BUILD_TYPE_LINUX) are configured in your repository settings under the Variables tab
+- Ensure the required secret (TEAMCITY_TOKEN) is configured under the Secrets tab
 
 ### "Failed to trigger TeamCity build"
 - Verify the TeamCity URL is correct and accessible
@@ -104,8 +116,8 @@ You can adjust this by modifying the `MAX_QUEUED_SECONDS` and `MAX_RUNNING_SECON
 - Ensure the TeamCity server accepts REST API requests from GitHub Actions runners
 
 ### "Timeout waiting for TeamCity build to complete"
-- The build is taking longer than 1 hour
-- Increase the `MAX_QUEUED_SECONDS` and/or `MAX_RUNNING_SECONDS` values in the workflow file
+- The build is taking longer than the configured timeout (90 minutes by default)
+- Increase the `timeout-minutes`, `MAX_QUEUED_SECONDS` and/or `MAX_RUNNING_SECONDS` values in the workflow file
 - Or optimize your TeamCity build to complete faster
 
 ### "TeamCity build failed"
@@ -136,11 +148,11 @@ Both configurations:
 
 ## Security Notes
 
-- Store your TeamCity token securely in GitHub repository variables
-- Consider using GitHub Secrets instead of Variables if you need additional security for the token (the workflow supports both)
+- **Always** store your TeamCity token securely in GitHub Secrets (not Variables)
 - Use a dedicated service account or token with minimal required permissions
 - Consider using TeamCity's token expiration features
 - Regularly rotate access tokens
+- Never commit tokens or other credentials to the repository
 
 ## Support
 

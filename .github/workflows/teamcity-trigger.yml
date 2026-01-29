@@ -66,7 +66,7 @@ jobs:
         id: teamcity
         env:
           TEAMCITY_URL: ${{ vars.TEAMCITY_URL }}
-          TEAMCITY_TOKEN: ${{ vars.TEAMCITY_TOKEN }}
+          TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
           TEAMCITY_BUILD_TYPE: ${{ matrix.build_type }}
           TEAMCITY_BRANCH: ${{ env.TEAMCITY_BRANCH }}
           COMMIT_SHA: ${{ env.COMMIT_SHA }}
@@ -78,7 +78,7 @@ jobs:
           echo "TeamCity branchName: $TEAMCITY_BRANCH"
           echo "Commit: $COMMIT_SHA"
 
-          # Формируем JSON корректно через jq, чтобы не было проблем с экранированием
+          # Format JSON payload correctly using jq to avoid escaping issues
           JSON_PAYLOAD=$(jq -n \
             --arg bt "$TEAMCITY_BUILD_TYPE" \
             --arg br "$TEAMCITY_BRANCH" \
@@ -124,7 +124,7 @@ jobs:
         timeout-minutes: 90
         env:
           TEAMCITY_URL: ${{ vars.TEAMCITY_URL }}
-          TEAMCITY_TOKEN: ${{ vars.TEAMCITY_TOKEN }}
+          TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
           BUILD_ID: ${{ steps.teamcity.outputs.build_id }}
           TRIGGERED_WEB_URL: ${{ steps.teamcity.outputs.web_url }}
         shell: bash
