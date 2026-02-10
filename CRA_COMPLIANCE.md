@@ -6,7 +6,7 @@ This document describes how the IAcf project complies with the EU Cyber Resilien
 
 ## Product Information
 
-**Product Name**: ACF - Application Component Framework  
+**Product Name**: IAcf - Imaging Application Component Framework  
 **Product Type**: Software library/framework (open-source)  
 **License**: GNU Lesser General Public License v2.1 (LGPL-2.1)  
 **Manufacturer**: ImagingTools GmbH  
