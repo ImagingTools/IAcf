@@ -127,6 +127,13 @@ class IAcfConan(ConanFile):
         with open(presetsPath, 'w') as f:
             json.dump(data, f, indent=2)
 
+    def _update_version(self):
+        script_name = "UpdateVersion.bat" if self.settings.os == "Windows" else "UpdateVersion.sh"
+        script_path = os.path.join(self.source_folder, "Build", "Git", script_name)
+        template = os.path.join(self.source_folder, "Partitura", "IacfVoce.arp", "VersionInfo.acc.xtrsvn")
+
+        self.run(f"{script_path} {template}", cwd=self.source_folder)
+
     def generate(self):
         # HACK: the IAcf build is disabled for now, we only need its environment for ImtCore
         self.output.info("Skipping IAcf generate")
@@ -162,6 +169,8 @@ class IAcfConan(ConanFile):
         self._write_env_to_presets({
             var: val for var, val in env.items()
             if var.startswith('IACF')})
+
+        self._update_version()
 
     def build(self):
         # HACK: the IAcf build is disabled for now, we only need its environment for ImtCore
