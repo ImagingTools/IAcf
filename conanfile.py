@@ -135,6 +135,8 @@ class IAcfConan(ConanFile):
         self.run(f"{script_path} {template}", cwd=self.source_folder)
 
     def generate(self):
+        self._update_version()
+
         # HACK: the IAcf build is disabled for now, we only need its environment for ImtCore
         self.output.info("Skipping IAcf generate")
         return
@@ -169,8 +171,6 @@ class IAcfConan(ConanFile):
         self._write_env_to_presets({
             var: val for var, val in env.items()
             if var.startswith('IACF')})
-
-        self._update_version()
 
     def build(self):
         # HACK: the IAcf build is disabled for now, we only need its environment for ImtCore
