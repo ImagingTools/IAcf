@@ -49,3 +49,4 @@ if exist "%OUT%" (
     echo Wrote %OUT% with WCREV=%REV% and WCMODS=%DIRTY%
 )
 endlocal
+exit /b 0
