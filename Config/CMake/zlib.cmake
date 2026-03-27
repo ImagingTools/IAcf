@@ -1,10 +1,16 @@
-include_directories(${ZLIBDIR}/include)
+if (USE_FIND_PACKAGE)
+	find_package(ZLIB)
+	target_link_libraries(${PROJECT_NAME} ZLIB::ZLIB)
+else()
 
-if(WIN32)
-	target_link_libraries(${PROJECT_NAME} ${ZLIBDIR}/lib/${CMAKE_BUILD_TYPE}_${COMPILER_CODE}/zlib.lib)
+	include_directories(${ZLIBDIR}/include)
+
+	if(WIN32)
+		target_link_libraries(${PROJECT_NAME} ${ZLIBDIR}/lib/${CMAKE_BUILD_TYPE}_${COMPILER_CODE}/zlib.lib)
+	endif()
+
+	if(UNIX)
+		target_link_libraries(${PROJECT_NAME} -lz)
+	endif()
+
 endif()
-
-if(UNIX)
-	target_link_libraries(${PROJECT_NAME} -lz)
-endif()
-
