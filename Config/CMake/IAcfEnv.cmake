@@ -10,7 +10,11 @@ endif()
 
 
 if(NOT DEFINED OPENCVDIR_4_5_3)
-	set(OPENCVDIR_4_5_3 "${ACFPUBLICDIR}/3rdParty/OpenCV/4.5.3")
+	if(DEFINED ACFDIR)
+		set(OPENCVDIR_4_5_3 "${ACFDIR}/../3rdParty/OpenCV/4.5.3")
+	else()
+		set(OPENCVDIR_4_5_3 "${ACFPUBLICDIR}/3rdParty/OpenCV/4.5.3")
+	endif()
 endif()
 
 include_directories("${BUILDDIR}/IAcf/AuxInclude/${TARGETNAME}")
@@ -20,6 +24,5 @@ include_directories("${IACFDIR}/Impl")
 link_directories(${BUILDDIR}/IAcf/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 
 message("IAcf link_directories ${BUILDDIR}/IAcf/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
-
 
 
