@@ -47,14 +47,16 @@ public:
 	virtual bool DoContourExtraction(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& bitmap,
-				iedge::CEdgeLineContainer& result) const override;
+				iedge::CEdgeLineContainer& result,
+				istd::IChangeable* processingReportPtr = NULL) const override;
 
 	// reimplemented (iproc::IProcessor)
 	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL) override;
+				ibase::IProgressManager* progressManagerPtr = NULL,
+				istd::IChangeable* processingReportPtr = NULL) override;
 
 private:
 	template <class InterfaceType>

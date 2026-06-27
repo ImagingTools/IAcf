@@ -30,7 +30,8 @@ namespace iocv
 bool COcvEdgeExtractorComp::DoContourExtraction(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& bitmap,
-			iedge::CEdgeLineContainer& result) const
+			iedge::CEdgeLineContainer& result,
+			istd::IChangeable* /*processingReportPtr*/) const
 {
 	if (bitmap.GetPixelFormat() != iimg::IBitmap::PF_GRAY){
 		SendErrorMessage(0, "Invalid input image format. Expected is a 8-bit-grayscale image");
@@ -169,7 +170,8 @@ iproc::IProcessor::TaskState COcvEdgeExtractorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* result,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/,
+			istd::IChangeable* /*processingReportPtr*/)
 {
 	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	if (inputBitmapPtr == NULL){
