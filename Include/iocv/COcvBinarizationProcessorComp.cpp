@@ -118,7 +118,8 @@ iproc::IProcessor::TaskState COcvBinarizationProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/,
+			istd::IChangeable* /*processingReportPtr*/)
 {
 	// IO
 	const iimg::IBitmap* inputBitmapPtr = nullptr;

@@ -56,7 +56,8 @@ iproc::IProcessor::TaskState COcvPatternMatchProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/,
+			istd::IChangeable* /*processingReportPtr*/)
 {
 	imeas::INumericValue* outputResultPtr = dynamic_cast<imeas::INumericValue*>(outputPtr);
 	if (outputResultPtr == nullptr){
