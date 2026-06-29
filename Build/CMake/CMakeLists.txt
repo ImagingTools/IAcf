@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.16)
 
 project(IAcf)
 
-if(NOT DEFINED ${ACFDIR})
+if(NOT DEFINED ACFDIR)
 	if(DEFINED ENV{ACFDIR})
 		set(ACFDIR $ENV{ACFDIR})
 	else()
@@ -10,7 +10,7 @@ if(NOT DEFINED ${ACFDIR})
 	endif()
 endif()
 
-if(NOT DEFINED ${ACFSLNDIR})
+if(NOT DEFINED ACFSLNDIR)
 	if(DEFINED ENV{ACFSLNDIR})
 		set(ACFSLNDIR $ENV{ACFSLNDIR})
 	else()
