@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(IAcf)
 
-if(NOT DEFINED ${ACFDIR})
+if(NOT DEFINED ACFDIR)
 	if(DEFINED ENV{ACFDIR})
 		set(ACFDIR $ENV{ACFDIR})
 	else()
@@ -10,7 +10,7 @@ if(NOT DEFINED ${ACFDIR})
 	endif()
 endif()
 
-if(NOT DEFINED ${ACFSLNDIR})
+if(NOT DEFINED ACFSLNDIR)
 	if(DEFINED ENV{ACFSLNDIR})
 		set(ACFSLNDIR $ENV{ACFSLNDIR})
 	else()
@@ -22,6 +22,15 @@ set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
 
 if(NOT DEFINED BUILDDIR)
 	set(BUILDDIR "${CMAKE_CURRENT_LIST_DIR}/../../../")
+endif()
+
+if(NOT DEFINED QTDIR)
+	set(QTDIR "$ENV{QTDIR}")
+endif()
+
+if(NOT DEFINED CMAKE_PREFIX_PATH)
+	set(CMAKE_PREFIX_PATH "${QTDIR}")
+	message("set CMAKE_PREFIX_PATH " ${CMAKE_PREFIX_PATH})
 endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
