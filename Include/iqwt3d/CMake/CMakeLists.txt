@@ -1,6 +1,6 @@
 project(iqwt3d LANGUAGES CXX)
 
-s
+
 find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS OpenGL REQUIRED)
 
 include(${ACFDIR}/Config/CMake/StaticConfig.cmake)
