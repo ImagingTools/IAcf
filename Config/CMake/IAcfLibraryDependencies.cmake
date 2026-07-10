@@ -46,39 +46,39 @@ function(iacf_declare_library_dependencies target)
 endfunction()
 
 # --- Image processing / OpenCV ----------------------------------------------
-iacf_declare_library_dependencies(iocv
-	Acf::i2d Acf::ibase Acf::icomp Acf::ifile Acf::iimg Acf::ilog Acf::imod Acf::iprm Acf::istd
-	AcfSln::iblob AcfSln::icalib AcfSln::icam AcfSln::iedge AcfSln::iinsp AcfSln::iipr AcfSln::imeas AcfSln::imm AcfSln::iproc)
+iacf_declare_library_dependencies(iocv		Acf::iimg AcfSln::iblob AcfSln::imm AcfSln::iedge)
 
 # --- Qwt plotting -----------------------------------------------------------
-iacf_declare_library_dependencies(iqwt		Acf::iqtgui Acf::imath Acf::imod Acf::iqt AcfSln::imeas)
-iacf_declare_library_dependencies(iqwt3d	Acf::iqtgui Acf::imath Acf::iqt)
+iacf_declare_library_dependencies(iqwt		Acf::iqtgui AcfSln::imeas Qt${QT_VERSION_MAJOR}::Svg)
+
+iacf_declare_library_dependencies(iqwt3d	Acf::iqtgui)
+if(QT_VERSION_MAJOR EQUAL 6)
+	iacf_declare_library_dependencies(iqwt3d Qt${QT_VERSION_MAJOR}::OpenGLWidgets)
+endif()
 
 # --- Windows integration ----------------------------------------------------
-iacf_declare_library_dependencies(iwin		Acf::icomp AcfSln::iinsp)
+iacf_declare_library_dependencies(iwin		AcfSln::iinsp)
 
 # --- CardBox ----------------------------------------------------------------
-iacf_declare_library_dependencies(icbox		Acf::icomp Acf::ifile Acf::ilog Acf::iser)
+iacf_declare_library_dependencies(icbox		Acf::ifile)
 
 # --- IEEE1394 / firewire cameras --------------------------------------------
-iacf_declare_library_dependencies(idc1394	Acf::i2d Acf::icomp Acf::iimg Acf::ilog Acf::iprm
-	AcfSln::icam AcfSln::imeas AcfSln::iproc)
+iacf_declare_library_dependencies(idc1394	Acf::iimg AcfSln::icam)
 
 # --- FFmpeg / libav ---------------------------------------------------------
-iacf_declare_library_dependencies(ilibav	Acf::ifile Acf::iimg Acf::ilog
-	AcfSln::icam AcfSln::imeas AcfSln::imm AcfSln::iqtmm)
+iacf_declare_library_dependencies(ilibav	Acf::iimg AcfSln::icam AcfSln::iqtmm)
 
 # --- Native / Windows helper ------------------------------------------------
 iacf_declare_library_dependencies(inat		Acf::iqt iwin)
 
 # --- Phonon multimedia ------------------------------------------------------
-iacf_declare_library_dependencies(iphonon	Acf::ibase Acf::iqt Acf::iqtgui AcfSln::imm)
+iacf_declare_library_dependencies(iphonon	Acf::iqtgui AcfSln::imm)
 
 # --- ActiveX multimedia -----------------------------------------------------
-iacf_declare_library_dependencies(iqaxmm	Acf::iqtgui AcfSln::imm AcfSln::iqtmm)
+iacf_declare_library_dependencies(iqaxmm	Acf::iqtgui AcfSln::iqtmm)
 
 # --- QScintilla editor ------------------------------------------------------
-iacf_declare_library_dependencies(iqsci	Acf::ibase Acf::idoc Acf::imod Acf::iqtgui)
+iacf_declare_library_dependencies(iqsci		Acf::iqtgui)
 
 # --- Arxc-generated static libraries ----------------------------------------
 iacf_declare_library_dependencies(IacfLoc	Acf::icomp)

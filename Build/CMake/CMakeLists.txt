@@ -21,14 +21,16 @@ if(NOT DEFINED ACFSLNDIR)
 	endif()
 endif()
 
-set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
-
-if(NOT DEFINED BUILDDIR)
-	set(BUILDDIR "${CMAKE_CURRENT_LIST_DIR}/../../../")
+if(NOT DEFINED IACFDIR)
+	if(DEFINED ENV{IACFDIR})
+		file(TO_CMAKE_PATH "$ENV{IACFDIR}" IACFDIR)
+	else()
+		set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
+	endif()
 endif()
 
 if(NOT DEFINED QTDIR)
-	set(QTDIR "$ENV{QTDIR}")
+	file(TO_CMAKE_PATH "$ENV{QTDIR}" QTDIR)
 endif()
 
 if(NOT DEFINED CMAKE_PREFIX_PATH)
@@ -38,14 +40,14 @@ endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
 
-set(ACF_QT_COMPONENTS Core Widgets Gui Xml Network Svg Concurrent PrintSupport)
+set(ACF_QT_COMPONENTS Core Widgets Gui Xml Network Svg Concurrent PrintSupport OpenGL)
 
 if(QT_VERSION_MAJOR EQUAL 5)
 	list(APPEND ACF_QT_COMPONENTS XmlPatterns)
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
-	list(APPEND ACF_QT_COMPONENTS SvgWidgets)
+	list(APPEND ACF_QT_COMPONENTS SvgWidgets OpenGLWidgets)
 endif()
 
 if(BUILD_TESTING)
@@ -95,21 +97,22 @@ endif()
 
 set(INCLUDE_DIR "${IACFDIR_BUILD}/Include")
 set(IMPL_DIR "${IACFDIR_BUILD}/Impl")
-
-set(AUX_INCLUDE_DIR "${BUILDDIR}/IAcf/AuxInclude/${TARGETNAME}/GeneratedFiles")
-message("IACF AUX_INCLUDE_DIR " "${AUX_INCLUDE_DIR}")
+set(AUX_INCLUDE_DIR "${IACFDIR_BUILD}/AuxInclude/${TARGETNAME}/GeneratedFiles")
 
 # Include
 if(WIN32)
 	add_subdirectory("${INCLUDE_DIR}/iocv/CMake" "${AUX_INCLUDE_DIR}/iocv")
-	#add_subdirectory("${INCLUDE_DIR}/iqaxmm/CMake" "${AUX_INCLUDE_DIR}/iqaxmm")
 	add_subdirectory("${INCLUDE_DIR}/iqwt/CMake" "${AUX_INCLUDE_DIR}/iqwt")
 	add_subdirectory("${INCLUDE_DIR}/iqwt3d/CMake" "${AUX_INCLUDE_DIR}/iqwt3d")
 	add_subdirectory("${INCLUDE_DIR}/iwin/CMake" "${AUX_INCLUDE_DIR}/iwin")
+
+	# ---------- no longer used, but kept for reference ----------
+	#add_subdirectory("${INCLUDE_DIR}/iqaxmm/CMake" "${AUX_INCLUDE_DIR}/iqaxmm")
 	#add_subdirectory("${INCLUDE_DIR}/ilibav/CMake" "${AUX_INCLUDE_DIR}/ilibav")
 	#add_subdirectory("${INCLUDE_DIR}/iqsci/CMake" "${AUX_INCLUDE_DIR}/iqsci")
 endif()
 if(APPLE)
+	# ---------- no longer used, but kept for reference ----------
 #	add_subdirectory("${INCLUDE_DIR}/idc1394/CMake" "${AUX_INCLUDE_DIR}/idc1394")
 endif()
 
@@ -120,6 +123,8 @@ if(WIN32)
 	add_subdirectory("${IMPL_DIR}/OpenCvPck/CMake" "${AUX_INCLUDE_DIR}/OpenCvPck")
 	add_subdirectory("${IMPL_DIR}/QwtPck/CMake" "${AUX_INCLUDE_DIR}/QwtPck")
 	add_subdirectory("${IMPL_DIR}/WinPck/CMake" "${AUX_INCLUDE_DIR}/WinPck")
+
+	# ---------- no longer used, but kept for reference ----------
 	#add_subdirectory("${IMPL_DIR}/FfMpegPck/CMake" "${AUX_INCLUDE_DIR}/FfMpegPck")
 	#add_subdirectory("${IMPL_DIR}/QaxPck/CMake" "${AUX_INCLUDE_DIR}/QaxPck")
 	#add_subdirectory("${IMPL_DIR}/QsciPck/CMake" "${AUX_INCLUDE_DIR}/QsciPck")
