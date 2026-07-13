@@ -1,0 +1,42 @@
+@PACKAGE_INIT@
+
+# ---------------------------------------------------------------------------
+# CMake package configuration for the IAcf module.
+#
+# Usage in a consuming project:
+#
+#     find_package(IAcf REQUIRED)
+#     target_link_libraries(myTarget PUBLIC IAcf::iocv IAcf::iqwt)
+#
+# All IAcf libraries are exposed as imported targets under the "IAcf::"
+# namespace and carry their include directories and inter-library dependencies
+# (including the dependencies onto the underlying Acf:: and AcfSln:: libraries)
+# as transitive usage requirements.
+# ---------------------------------------------------------------------------
+
+include(CMakeFindDependencyMacro)
+
+# IAcf is built on top of the ACF and ACF-Solutions foundations; pull in their
+# packages so the Acf::<lib> / AcfSln::<lib> imported targets referenced by the
+# exported IAcf targets resolve.
+find_dependency(Acf)
+find_dependency(AcfSln)
+
+# IAcf was built against a specific Qt major version; pin the very same one so
+# the Qt imported targets referenced by the exported IAcf targets
+# (Qt@IACF_QT_VERSION_MAJOR@::*) resolve to a compatible Qt installation.
+set(IACF_QT_VERSION_MAJOR "@IACF_QT_VERSION_MAJOR@")
+
+set(_iacf_qt_components Core Gui Widgets Xml Network Svg Concurrent PrintSupport)
+if(IACF_QT_VERSION_MAJOR EQUAL 5)
+	list(APPEND _iacf_qt_components XmlPatterns)
+endif()
+if(IACF_QT_VERSION_MAJOR EQUAL 6)
+	list(APPEND _iacf_qt_components SvgWidgets)
+endif()
+
+find_dependency(Qt${IACF_QT_VERSION_MAJOR}
+	COMPONENTS ${_iacf_qt_components})
+include("${CMAKE_CURRENT_LIST_DIR}/IAcfTargets.cmake")
+
+check_required_components(IAcf)
