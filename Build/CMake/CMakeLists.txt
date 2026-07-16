@@ -5,22 +5,6 @@ project(IAcf)
 
 set(BUILD_TESTING ON CACHE BOOL "Configures projects for testing")
 
-if(NOT DEFINED ACFDIR)
-	if(DEFINED ENV{ACFDIR})
-		file(TO_CMAKE_PATH "$ENV{ACFDIR}" ACFDIR)
-	else()
-		set(ACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../Acf")
-	endif()
-endif()
-
-if(NOT DEFINED ACFSLNDIR)
-	if(DEFINED ENV{ACFSLNDIR})
-		file(TO_CMAKE_PATH "$ENV{ACFSLNDIR}" ACFSLNDIR)
-	else()
-		set(ACFSLNDIR "${CMAKE_CURRENT_LIST_DIR}/../../../AcfSln")
-	endif()
-endif()
-
 if(NOT DEFINED IACFDIR)
 	if(DEFINED ENV{IACFDIR})
 		file(TO_CMAKE_PATH "$ENV{IACFDIR}" IACFDIR)
@@ -79,20 +63,6 @@ if(ACF_MODERN_CMAKE)
 	acf_define_link_scope_var(ACF_LIBRARY_LINK_SCOPE "PUBLIC" "Link scope used by IAcf inter-library dependencies")
 	acf_define_link_scope_var(ACF_PACKAGE_LINK_SCOPE "PRIVATE" "Link scope used by package (Pck) libraries linking their dependencies")
 	acf_define_link_scope_var(ACF_APPLICATION_LINK_SCOPE "PRIVATE" "Link scope used by executables linking their dependencies")
-endif()
-
-# Discover the Acf and AcfSln packages published by their build trees.
-# In a composite build (Acf, AcfSln and IAcf in the same CMake tree) their alias
-# targets are already visible - skip find_package to avoid requiring the
-# not-yet-generated *Targets.cmake export files.
-if(NOT TARGET Acf::istd)
-	set(Acf_DIR "${ACFDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}/cmake" CACHE PATH "Path to the Acf build-tree CMake package")
-	find_package(Acf REQUIRED GLOBAL)
-endif()
-
-if(NOT TARGET AcfSln::iproc)
-	set(AcfSln_DIR "${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}/cmake" CACHE PATH "Path to the AcfSln build-tree CMake package")
-	find_package(AcfSln REQUIRED GLOBAL)
 endif()
 
 set(INCLUDE_DIR "${IACFDIR_BUILD}/Include")

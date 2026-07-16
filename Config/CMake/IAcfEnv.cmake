@@ -24,15 +24,24 @@ endif()
 # carried by imported targets).
 include_directories("${IACFDIR_BUILD}/AuxInclude/${TARGETNAME}")
 
-# Legacy mode: global include/link dirs for repos that haven't migrated to
-# find_package(IAcf) + target-based deps yet. Skipped when ACF_MODERN_CMAKE is ON.
 if(NOT ACF_MODERN_CMAKE)
+	# Legacy mode: global include/link dirs for repos that haven't migrated to
+	# find_package(IAcf) + target-based deps yet. Skipped when ACF_MODERN_CMAKE is ON.
 	include_directories("${IACFDIR}/Include")
 	include_directories("${IACFDIR}/Impl")
 	link_directories(${IACFDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
+
+	message(VERBOSE "IAcf link_directories ${IACFDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
+elseif(NOT TARGET AcfSln::iproc)
+	if(NOT DEFINED ACFSLNDIR_BUILD)
+		set(ACFSLNDIR_BUILD "${ACFSLNDIR}")
+	endif()
+
+	# Discover the Acf and AcfSln packages published by their build trees.
+	# In a composite build (Acf, AcfSln and IAcf in the same CMake tree) their alias
+	# targets are already visible - skip find_package to avoid requiring the
+	# not-yet-generated *Targets.cmake export files.
+	set(AcfSln_DIR "${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}/cmake" CACHE PATH "Path to the AcfSln build-tree CMake package")
+	find_package(AcfSln REQUIRED GLOBAL)
 endif()
-
-message(VERBOSE "IAcf link_directories ${IACFDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
-
-
 

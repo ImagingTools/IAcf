@@ -12,5 +12,4 @@ else()
 	if(UNIX)
 		target_link_libraries(${PROJECT_NAME} ${ACF_LIBRARY_LINK_SCOPE} -lz)
 	endif()
-
 endif()
