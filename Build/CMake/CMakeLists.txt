@@ -6,11 +6,7 @@ project(IAcf)
 set(BUILD_TESTING ON CACHE BOOL "Configures projects for testing")
 
 if(NOT DEFINED IACFDIR)
-	if(DEFINED ENV{IACFDIR})
-		file(TO_CMAKE_PATH "$ENV{IACFDIR}" IACFDIR)
-	else()
-		set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
-	endif()
+	set(IACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../IAcf")
 endif()
 
 if(NOT DEFINED QTDIR)
@@ -53,6 +49,8 @@ include(${IACFDIR}/Config/CMake/IAcfEnv.cmake)
 if(NOT DEFINED IACFDIR_BUILD)
 	set(IACFDIR_BUILD "${IACFDIR}")
 endif()
+
+file(TO_CMAKE_PATH "${IACFDIR_BUILD}" IACFDIR_BUILD)
 
 # Collect IAcf libraries in their own export set so they are published as the
 # IAcf:: package. Read by StaticConfig.cmake / acf_register_library().
