@@ -41,7 +41,9 @@ elseif(NOT TARGET AcfSln::iproc)
 	# In a composite build (Acf, AcfSln and IAcf in the same CMake tree) their alias
 	# targets are already visible - skip find_package to avoid requiring the
 	# not-yet-generated *Targets.cmake export files.
-	set(AcfSln_DIR "${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}/cmake" CACHE PATH "Path to the AcfSln build-tree CMake package")
+	set(AcfSln_DIR "${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}/cmake")
+	message(VERBOSE "IAcf find_package(AcfSln) from ${AcfSln_DIR}")
+
 	find_package(AcfSln REQUIRED GLOBAL)
 endif()
 
